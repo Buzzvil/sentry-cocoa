@@ -1,9 +1,9 @@
 import XCTest
 
-class SentryCrashIntegrationTests: NotificationCenterTestCase {
+class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryCrashIntegrationTests")
-    private static let dsn = TestConstants.dsn(username: "SentryCrashIntegrationTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryCrashIntegrationTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryCrashIntegrationTests")
     
     private class Fixture {
         
@@ -19,7 +19,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
             sentryCrash.internalCrashedLastLaunch = true
             
             options = Options()
-            options.dsn = SentryCrashIntegrationTests.dsnAsString
+            options.dsn = BuzzSentryCrashIntegrationTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
             let client = Client(options: options, permissionsObserver: TestSentryPermissionsObserver())
@@ -37,18 +37,18 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
             return try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         }
         
-        func getSut() -> SentryCrashIntegration {
+        func getSut() -> BuzzSentryCrashIntegration {
             return getSut(crashWrapper: sentryCrash)
         }
         
-        func getSut(crashWrapper: SentryCrashWrapper) -> SentryCrashIntegration {
-            return SentryCrashIntegration(crashAdapter: crashWrapper, andDispatchQueueWrapper: dispatchQueueWrapper)
+        func getSut(crashWrapper: SentryCrashWrapper) -> BuzzSentryCrashIntegration {
+            return BuzzSentryCrashIntegration(crashAdapter: crashWrapper, andDispatchQueueWrapper: dispatchQueueWrapper)
         }
         
-        var sutWithoutCrash: SentryCrashIntegration {
+        var sutWithoutCrash: BuzzSentryCrashIntegration {
             let crash = sentryCrash
             crash.internalCrashedLastLaunch = false
-            return SentryCrashIntegration(crashAdapter: crash, andDispatchQueueWrapper: dispatchQueueWrapper)
+            return BuzzSentryCrashIntegration(crashAdapter: crash, andDispatchQueueWrapper: dispatchQueueWrapper)
         }
     }
     
@@ -77,12 +77,12 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         let releaseName = "1.0.0"
         let dist = "14G60"
         // The start of the SDK installs all integrations
-        SentrySDK.start(options: ["dsn": SentryCrashIntegrationTests.dsnAsString,
+        SentrySDK.start(options: ["dsn": BuzzSentryCrashIntegrationTests.dsnAsString,
                                   "release": releaseName,
                                   "dist": dist]
         )
         
-        // To test this properly we need SentryCrash and SentryCrashIntegration installed and registered on the current hub of the SDK.
+        // To test this properly we need SentryCrash and BuzzSentryCrashIntegration installed and registered on the current hub of the SDK.
         
         let instance = SentryCrash.sharedInstance()
         let userInfo = (instance?.userInfo ?? ["": ""]) as Dictionary
@@ -92,7 +92,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     
     func testContext_IsPassedToSentryCrash() {
         SentrySDK.start { options in
-            options.dsn = SentryCrashIntegrationTests.dsnAsString
+            options.dsn = BuzzSentryCrashIntegrationTests.dsnAsString
         }
         
         let instance = SentryCrash.sharedInstance()
@@ -104,11 +104,11 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     
     func testSystemInfoIsEmpty() {
         let scope = Scope()
-        SentryCrashIntegration.enrichScope(scope, crashWrapper: TestSentryCrashWrapper.sharedInstance())
+        BuzzSentryCrashIntegration.enrichScope(scope, crashWrapper: TestSentryCrashWrapper.sharedInstance())
         
         // We don't worry about the actual values
         // This is an edge case where the user doesn't use the
-        // SentryCrashIntegration. Just make sure to not crash.
+        // BuzzSentryCrashIntegration. Just make sure to not crash.
         XCTAssertFalse(scope.contextDictionary.allValues.isEmpty)
     }
     
@@ -172,7 +172,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         
         let sentryCrash = fixture.sentryCrash
         sentryCrash.internalCrashedLastLaunch = false
-        let sut = SentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: fixture.dispatchQueueWrapper)
+        let sut = BuzzSentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: fixture.dispatchQueueWrapper)
         sut.install(with: Options())
         
         let fileManager = fixture.fileManager
@@ -291,7 +291,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         // Force reloading of crash state
         sentrycrashstate_initialize(sentrycrashstate_filePath())
         // Force sending all reports, because the crash reports are only sent once after first init.
-        SentryCrashIntegration.sendAllSentryCrashReports()
+        BuzzSentryCrashIntegration.sendAllSentryCrashReports()
         
         XCTAssertEqual(1, transport.flushInvocations.count)
         XCTAssertEqual(5.0, transport.flushInvocations.first)
@@ -324,7 +324,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     }
     #endif
     
-    private func givenSutWithGlobalHub() -> (SentryCrashIntegration, SentryHub) {
+    private func givenSutWithGlobalHub() -> (BuzzSentryCrashIntegration, SentryHub) {
         let sut = fixture.getSut()
         let hub = fixture.hub
         SentrySDK.setCurrentHub(hub)
@@ -332,7 +332,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         return (sut, hub)
     }
     
-    private func givenSutWithGlobalHubAndCrashWrapper() -> (SentryCrashIntegration, SentryHub) {
+    private func givenSutWithGlobalHubAndCrashWrapper() -> (BuzzSentryCrashIntegration, SentryHub) {
         let sut = fixture.getSut(crashWrapper: SentryCrashWrapper.sharedInstance())
         let hub = fixture.hub
         SentrySDK.setCurrentHub(hub)

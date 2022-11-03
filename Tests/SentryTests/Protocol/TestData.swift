@@ -180,7 +180,7 @@ class TestData {
         return event
     }
     
-    static func scopeWith(observer: SentryScopeObserver) -> Scope {
+    static func scopeWith(observer: BuzzSentryScopeObserver) -> Scope {
         let scope = Scope()
         scope.add(observer)
         

@@ -1,4 +1,4 @@
-#import "SentryCrashIntegration.h"
+#import "BuzzSentryCrashIntegration.h"
 #import "SentryCrashInstallationReporter.h"
 #import "SentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
@@ -11,7 +11,7 @@
 #import "BuzzSentrySessionCrashedHandler.h"
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
-#import <SentryCrashScopeObserver.h>
+#import <BuzzSentryCrashScopeObserver.h>
 #import <SentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentrySDK+Private.h>
@@ -28,17 +28,17 @@ static NSString *const DEVICE_KEY = @"device";
 static NSString *const LOCALE_KEY = @"locale";
 
 @interface
-SentryCrashIntegration ()
+BuzzSentryCrashIntegration ()
 
 @property (nonatomic, weak) BuzzSentryOptions *options;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
 @property (nonatomic, strong) BuzzSentrySessionCrashedHandler *crashedSessionHandler;
-@property (nonatomic, strong) SentryCrashScopeObserver *scopeObserver;
+@property (nonatomic, strong) BuzzSentryCrashScopeObserver *scopeObserver;
 
 @end
 
-@implementation SentryCrashIntegration
+@implementation BuzzSentryCrashIntegration
 
 - (instancetype)init
 {
@@ -79,7 +79,7 @@ SentryCrashIntegration ()
                                                  outOfMemoryLogic:logic];
 
     self.scopeObserver =
-        [[SentryCrashScopeObserver alloc] initWithMaxBreadcrumbs:options.maxBreadcrumbs];
+        [[BuzzSentryCrashScopeObserver alloc] initWithMaxBreadcrumbs:options.maxBreadcrumbs];
 
     [self startCrashHandler];
 
@@ -122,7 +122,7 @@ SentryCrashIntegration ()
         // SentryCrashReportSink and then passed to the SDK on a background thread. This process is
         // started with installing this integration. We need to end and delete the previous session
         // before being able to start a new session for the AutoSessionTrackingIntegration. The
-        // SentryCrashIntegration is installed before the AutoSessionTrackingIntegration so there is
+        // BuzzSentryCrashIntegration is installed before the AutoSessionTrackingIntegration so there is
         // no guarantee if the crashed event is created before or after the
         // AutoSessionTrackingIntegration. By ending the previous session and storing it as crashed
         // in here we have the guarantee once the crashed event is sent to the hub it is already
@@ -140,7 +140,7 @@ SentryCrashIntegration ()
         // just not call sendAllReports as it doesn't make sense to call it twice as described
         // above.
         if (canSendReports) {
-            [SentryCrashIntegration sendAllSentryCrashReports];
+            [BuzzSentryCrashIntegration sendAllSentryCrashReports];
         }
     };
     [self.dispatchQueueWrapper dispatchOnce:&installationToken block:block];
@@ -171,14 +171,14 @@ SentryCrashIntegration ()
     // We need to make sure to set always the scope to KSCrash so we have it in
     // case of a crash
     [SentrySDK.currentHub configureScope:^(SentryScope *_Nonnull outerScope) {
-        [SentryCrashIntegration enrichScope:outerScope crashWrapper:self.crashAdapter];
+        [BuzzSentryCrashIntegration enrichScope:outerScope crashWrapper:self.crashAdapter];
 
         NSMutableDictionary<NSString *, id> *userInfo =
             [[NSMutableDictionary alloc] initWithDictionary:[outerScope serialize]];
-        // SentryCrashReportConverter.convertReportToEvent needs the release name and
+        // BuzzSentryCrashReportConverter.convertReportToEvent needs the release name and
         // the dist of the BuzzSentryOptions in the UserInfo. When SentryCrash records a
         // crash it writes the UserInfo into SentryCrashField_User of the report.
-        // SentryCrashReportConverter.initWithReport loads the contents of
+        // BuzzSentryCrashReportConverter.initWithReport loads the contents of
         // SentryCrashField_User into self.userContext and convertReportToEvent can map
         // the release name and dist to the BuzzSentryEvent. Fixes GH-581
         userInfo[@"release"] = self.options.releaseName;

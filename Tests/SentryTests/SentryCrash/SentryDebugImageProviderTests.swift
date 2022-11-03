@@ -3,7 +3,7 @@ import XCTest
 
 /**
  * Some of the test parameters are copied from debugging
- * SentryCrashReportConverter.convertDebugMeta.
+ * BuzzSentryCrashReportConverter.convertDebugMeta.
  */
 class SentryDebugImageProviderTests: XCTestCase {
     

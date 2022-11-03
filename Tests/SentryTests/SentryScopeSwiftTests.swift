@@ -268,7 +268,7 @@ class SentryScopeSwiftTests: XCTestCase {
     
     func testPeformanceOfSyncToSentryCrash() {
         let scope = fixture.scope
-        scope.add(SentryCrashScopeObserver(maxBreadcrumbs: 100))
+        scope.add(BuzzSentryCrashScopeObserver(maxBreadcrumbs: 100))
         
         self.measure {
             modifyScope(scope: scope)
@@ -277,7 +277,7 @@ class SentryScopeSwiftTests: XCTestCase {
     
     func testPeformanceOfSyncToSentryCrash_OneCrumb() {
         let scope = fixture.scope
-        scope.add(SentryCrashScopeObserver(maxBreadcrumbs: 100))
+        scope.add(BuzzSentryCrashScopeObserver(maxBreadcrumbs: 100))
         
         modifyScope(scope: scope)
         
@@ -480,7 +480,7 @@ class SentryScopeSwiftTests: XCTestCase {
         XCTAssertEqual(2, observer.clearInvocations)
     }
     
-    class TestScopeObserver: NSObject, SentryScopeObserver {
+    class TestScopeObserver: NSObject, BuzzSentryScopeObserver {
         var tags: [String: String]?
         func setTags(_ tags: [String: String]?) {
             self.tags = tags

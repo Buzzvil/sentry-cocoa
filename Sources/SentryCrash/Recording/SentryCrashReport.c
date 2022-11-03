@@ -45,7 +45,7 @@
 #include "SentryCrashSystemCapabilities.h"
 #include "SentryCrashThread.h"
 #include "SentryCrashUUIDConversion.h"
-#include "SentryScopeSyncC.h"
+#include "BuzzSentryScopeSyncC.h"
 
 //#define SentryCrashLogger_LocalLevel TRACE
 #include "SentryCrashLogger.h"
@@ -1660,7 +1660,7 @@ writeDebugInfo(const SentryCrashReportWriter *const writer, const char *const ke
 static void
 writeScopeJson(const SentryCrashReportWriter *const writer)
 {
-    SentryCrashScope *scope = sentrycrash_scopesync_getScope();
+    BuzzSentryCrashScope *scope = sentrycrash_scopesync_getScope();
     writer->beginObject(writer, SentryCrashField_Scope);
     {
         if (scope->user) {

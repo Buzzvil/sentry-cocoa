@@ -1,4 +1,4 @@
-#include "SentryScopeSyncC.h"
+#include "BuzzSentryScopeSyncC.h"
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,9 +6,9 @@
 
 #define NUMBER_OF_FIELDS 9
 
-static SentryCrashScope scope = { 0 };
+static BuzzSentryCrashScope scope = { 0 };
 
-SentryCrashScope *
+BuzzSentryCrashScope *
 sentrycrash_scopesync_getScope(void)
 {
     return &scope;

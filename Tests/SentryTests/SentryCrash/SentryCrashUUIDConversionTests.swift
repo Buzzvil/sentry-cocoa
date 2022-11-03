@@ -5,8 +5,8 @@ class SentryCrashUUIDConversionTests: XCTestCase {
 
     /**
     * The test parameters are copied from real values during debugging
-    * SentryCrashReportConverter.convertDebugMeta. We know that
-    * SentryCrashReportConverter is working properly.
+    * BuzzSentryCrashReportConverter.convertDebugMeta. We know that
+    * BuzzSentryCrashReportConverter is working properly.
     */
     func testConvertBinaryImageUUID() {
         testWith(expected: "84BAEBDA-AD1A-33F4-B35D-8A45F5DAF322",

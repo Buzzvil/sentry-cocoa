@@ -108,7 +108,7 @@ class SentrySDKTests: XCTestCase {
         XCTAssertEqual(true, options?.enableAutoSessionTracking)
 
         assertIntegrationsInstalled(integrations: [
-            "SentryCrashIntegration",
+            "BuzzSentryCrashIntegration",
             "BuzzSentryAutoBreadcrumbTrackingIntegration",
             "BuzzSentryAutoSessionTrackingIntegration",
             "BuzzSentryNetworkTrackingIntegration"

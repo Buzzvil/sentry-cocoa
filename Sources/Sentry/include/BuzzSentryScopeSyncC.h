@@ -1,5 +1,5 @@
-#ifndef SentryScopeSyncC_h
-#define SentryScopeSyncC_h
+#ifndef BuzzSentryScopeSyncC_h
+#define BuzzSentryScopeSyncC_h
 
 typedef struct {
     char *user;
@@ -13,9 +13,9 @@ typedef struct {
     char **breadcrumbs; // dynamic array of char arrays
     long maxCrumbs;
     long currentCrumb;
-} SentryCrashScope;
+} BuzzSentryCrashScope;
 
-SentryCrashScope *sentrycrash_scopesync_getScope(void);
+BuzzSentryCrashScope *sentrycrash_scopesync_getScope(void);
 
 /**
  * Needs to be called before adding or clearing breadcrumbs to initialize the storage of the
@@ -50,4 +50,4 @@ void sentrycrash_scopesync_clear(void);
  */
 void sentrycrash_scopesync_reset(void);
 
-#endif /* SentryScopeSyncC_h */
+#endif /* BuzzSentryScopeSyncC_h */

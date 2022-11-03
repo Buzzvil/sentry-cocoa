@@ -4,17 +4,17 @@
 #import <BuzzSentryBreadcrumb.h>
 #import <SentryCrashJSONCodec.h>
 #import <SentryCrashJSONCodecObjC.h>
-#import <SentryCrashScopeObserver.h>
+#import <BuzzSentryCrashScopeObserver.h>
 #import <SentryLog.h>
-#import <SentryScopeSyncC.h>
+#import <BuzzSentryScopeSyncC.h>
 #import <BuzzSentryUser.h>
 
 @interface
-SentryCrashScopeObserver ()
+BuzzSentryCrashScopeObserver ()
 
 @end
 
-@implementation SentryCrashScopeObserver
+@implementation BuzzSentryCrashScopeObserver
 
 - (instancetype)initWithMaxBreadcrumbs:(NSInteger)maxBreadcrumbs
 {

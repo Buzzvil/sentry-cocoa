@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryCrashScopeObserverTests: XCTestCase {
+class BuzzSentryCrashScopeObserverTests: XCTestCase {
     
     private class Fixture {
         let dist = "dist"
@@ -10,8 +10,8 @@ class SentryCrashScopeObserverTests: XCTestCase {
         let fingerprint = ["a", "b", "c"]
         let maxBreadcrumbs = 10
         
-        var sut: SentryCrashScopeObserver {
-            return SentryCrashScopeObserver(maxBreadcrumbs: maxBreadcrumbs)
+        var sut: BuzzSentryCrashScopeObserver {
+            return BuzzSentryCrashScopeObserver(maxBreadcrumbs: maxBreadcrumbs)
         }
     }
     
@@ -292,12 +292,12 @@ class SentryCrashScopeObserverTests: XCTestCase {
         return String(data: serialized, encoding: .utf8) ?? ""
     }
     
-    private func getCrashScope() -> SentryCrashScope {
+    private func getCrashScope() -> BuzzSentryCrashScope {
         let jsonPointer = sentrycrash_scopesync_getScope()
         return jsonPointer!.pointee
     }
     
-    private func getScopeJson(getField: (SentryCrashScope)-> UnsafeMutablePointer<CChar>?) -> String? {
+    private func getScopeJson(getField: (BuzzSentryCrashScope)-> UnsafeMutablePointer<CChar>?) -> String? {
         guard let scopePointer = sentrycrash_scopesync_getScope() else {
             return nil
         }

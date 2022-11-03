@@ -73,7 +73,7 @@ index b8eb37f0..046e7851 100644
 -            ])
 -
 -            let crashesIntegrations = Set([
--                "SentryCrashIntegration",
+-                "BuzzSentryCrashIntegration",
 -            ])
 -
 -            if !Current.settingsStore.privacy.crashes {

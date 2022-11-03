@@ -3,7 +3,7 @@
 #import "BuzzSentryClient.h"
 #import "SentryCrash.h"
 #include "SentryCrashMonitor_AppState.h"
-#import "SentryCrashReportConverter.h"
+#import "BuzzSentryCrashReportConverter.h"
 #import "SentryCrashWrapper.h"
 #import "SentryDefines.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
@@ -65,8 +65,8 @@ SentryCrashReportSink ()
 {
     NSMutableArray *sentReports = [NSMutableArray new];
     for (NSDictionary *report in reports) {
-        SentryCrashReportConverter *reportConverter =
-            [[SentryCrashReportConverter alloc] initWithReport:report inAppLogic:self.inAppLogic];
+        BuzzSentryCrashReportConverter *reportConverter =
+            [[BuzzSentryCrashReportConverter alloc] initWithReport:report inAppLogic:self.inAppLogic];
         if (nil != [SentrySDK.currentHub getClient]) {
             BuzzSentryEvent *event = [reportConverter convertReportToEvent];
             if (nil != event) {

@@ -27,7 +27,7 @@ BuzzSentryOptions ()
 + (NSArray<NSString *> *)defaultIntegrations
 {
     return @[
-        @"SentryCrashIntegration",
+        @"BuzzSentryCrashIntegration",
 #if SENTRY_HAS_UIKIT
         @"BuzzSentryANRTrackingIntegration", @"BuzzSentryScreenshotIntegration",
         @"BuzzSentryUIEventTrackingIntegration", @"BuzzSentryViewHierarchyIntegration",

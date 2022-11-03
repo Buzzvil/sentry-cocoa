@@ -1,4 +1,4 @@
-#import "SentryCrashReportConverter.h"
+#import "BuzzSentryCrashReportConverter.h"
 #import "NSDate+SentryExtras.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "SentryCrashStackCursor.h"
@@ -16,7 +16,7 @@
 #import "BuzzSentryUser.h"
 
 @interface
-SentryCrashReportConverter ()
+BuzzSentryCrashReportConverter ()
 
 @property (nonatomic, strong) NSDictionary *report;
 @property (nonatomic, assign) NSInteger crashedThreadIndex;
@@ -29,7 +29,7 @@ SentryCrashReportConverter ()
 
 @end
 
-@implementation SentryCrashReportConverter
+@implementation BuzzSentryCrashReportConverter
 
 - (instancetype)initWithReport:(NSDictionary *)report inAppLogic:(SentryInAppLogic *)inAppLogic
 {
@@ -44,10 +44,10 @@ SentryCrashReportConverter ()
             userContextUnMerged = [NSDictionary new];
         }
 
-        // The SentryCrashIntegration used userInfo to put in scope data. This had a few downsides.
+        // The BuzzSentryCrashIntegration used userInfo to put in scope data. This had a few downsides.
         // Now sentry_sdk_scope contains scope data. To be backwards compatible, to still support
         // data from userInfo, and to not have to do many changes in here we merge both dictionaries
-        // here. For more details please check out SentryCrashScopeObserver.
+        // here. For more details please check out BuzzSentryCrashScopeObserver.
         NSMutableDictionary *userContextMerged =
             [[NSMutableDictionary alloc] initWithDictionary:userContextUnMerged];
         [userContextMerged addEntriesFromDictionary:report[@"sentry_sdk_scope"]];

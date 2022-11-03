@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryCrashReportConverter : NSObject
+@interface BuzzSentryCrashReportConverter : NSObject
 
 @property (nonatomic, strong) NSDictionary *userContext;
 

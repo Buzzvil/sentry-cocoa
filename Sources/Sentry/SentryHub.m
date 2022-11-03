@@ -157,7 +157,7 @@ SentryHub ()
         return;
     }
 
-    // The crashed session is handled in SentryCrashIntegration. Checkout the comments there to find
+    // The crashed session is handled in BuzzSentryCrashIntegration. Checkout the comments there to find
     // out more.
     if (!self.crashWrapper.crashedLastLaunch) {
         if (nil == timestamp) {

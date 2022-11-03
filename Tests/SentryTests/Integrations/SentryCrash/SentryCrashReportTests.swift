@@ -10,8 +10,8 @@ class SentryCrashReportTests: XCTestCase {
             reportPath = NSString.path(withComponents: [testPath, "SentryCrashReport.json"])
         }
         
-        var sut: SentryCrashScopeObserver {
-            return SentryCrashScopeObserver(maxBreadcrumbs: 10)
+        var sut: BuzzSentryCrashScopeObserver {
+            return BuzzSentryCrashScopeObserver(maxBreadcrumbs: 10)
         }
         
         var scope: Scope {

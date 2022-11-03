@@ -6,7 +6,7 @@
 #import "SentryGlobalEventProcessor.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
-#import "SentryScopeObserver.h"
+#import "BuzzSentryScopeObserver.h"
 #import "BuzzSentrySession.h"
 #import "BuzzSentrySpan.h"
 #import "BuzzSentryTracer.h"
@@ -68,7 +68,7 @@ SentryScope ()
 
 @property (atomic, strong) NSMutableArray<BuzzSentryAttachment *> *attachmentArray;
 
-@property (nonatomic, retain) NSMutableArray<id<SentryScopeObserver>> *observers;
+@property (nonatomic, retain) NSMutableArray<id<BuzzSentryScopeObserver>> *observers;
 
 @end
 
@@ -132,7 +132,7 @@ SentryScope ()
             [_breadcrumbArray removeObjectAtIndex:0];
         }
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer addBreadcrumb:crumb];
         }
     }
@@ -183,7 +183,7 @@ SentryScope ()
     self.environmentString = nil;
     self.levelEnum = kSentryLevelNone;
 
-    for (id<SentryScopeObserver> observer in self.observers) {
+    for (id<BuzzSentryScopeObserver> observer in self.observers) {
         [observer clear];
     }
 }
@@ -193,7 +193,7 @@ SentryScope ()
     @synchronized(_breadcrumbArray) {
         [_breadcrumbArray removeAllObjects];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer clearBreadcrumbs];
         }
     }
@@ -211,7 +211,7 @@ SentryScope ()
     @synchronized(_contextDictionary) {
         [_contextDictionary setValue:value forKey:key];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setContext:_contextDictionary];
         }
     }
@@ -222,7 +222,7 @@ SentryScope ()
     @synchronized(_contextDictionary) {
         [_contextDictionary removeObjectForKey:key];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setExtras:_contextDictionary];
         }
     }
@@ -240,7 +240,7 @@ SentryScope ()
     @synchronized(_extraDictionary) {
         [_extraDictionary setValue:value forKey:key];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setExtras:_extraDictionary];
         }
     }
@@ -251,7 +251,7 @@ SentryScope ()
     @synchronized(_extraDictionary) {
         [_extraDictionary removeObjectForKey:key];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setExtras:_extraDictionary];
         }
     }
@@ -265,7 +265,7 @@ SentryScope ()
     @synchronized(_extraDictionary) {
         [_extraDictionary addEntriesFromDictionary:extras];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setExtras:_extraDictionary];
         }
     }
@@ -283,7 +283,7 @@ SentryScope ()
     @synchronized(_tagDictionary) {
         _tagDictionary[key] = value;
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setTags:_tagDictionary];
         }
     }
@@ -294,7 +294,7 @@ SentryScope ()
     @synchronized(_tagDictionary) {
         [_tagDictionary removeObjectForKey:key];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setTags:_tagDictionary];
         }
     }
@@ -308,7 +308,7 @@ SentryScope ()
     @synchronized(_tagDictionary) {
         [_tagDictionary addEntriesFromDictionary:tags];
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setTags:_tagDictionary];
         }
     }
@@ -325,7 +325,7 @@ SentryScope ()
 {
     self.userObject = user;
 
-    for (id<SentryScopeObserver> observer in self.observers) {
+    for (id<BuzzSentryScopeObserver> observer in self.observers) {
         [observer setUser:user];
     }
 }
@@ -334,7 +334,7 @@ SentryScope ()
 {
     self.distString = dist;
 
-    for (id<SentryScopeObserver> observer in self.observers) {
+    for (id<BuzzSentryScopeObserver> observer in self.observers) {
         [observer setDist:dist];
     }
 }
@@ -343,7 +343,7 @@ SentryScope ()
 {
     self.environmentString = environment;
 
-    for (id<SentryScopeObserver> observer in self.observers) {
+    for (id<BuzzSentryScopeObserver> observer in self.observers) {
         [observer setEnvironment:environment];
     }
 }
@@ -356,7 +356,7 @@ SentryScope ()
             [_fingerprintArray addObjectsFromArray:fingerprint];
         }
 
-        for (id<SentryScopeObserver> observer in self.observers) {
+        for (id<BuzzSentryScopeObserver> observer in self.observers) {
             [observer setFingerprint:_fingerprintArray];
         }
     }
@@ -373,7 +373,7 @@ SentryScope ()
 {
     self.levelEnum = level;
 
-    for (id<SentryScopeObserver> observer in self.observers) {
+    for (id<BuzzSentryScopeObserver> observer in self.observers) {
         [observer setLevel:level];
     }
 }
@@ -541,7 +541,7 @@ SentryScope ()
     return event;
 }
 
-- (void)addObserver:(id<SentryScopeObserver>)observer
+- (void)addObserver:(id<BuzzSentryScopeObserver>)observer
 {
     [self.observers addObject:observer];
 }

@@ -17,7 +17,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
     
     private var sentryCrash: TestSentryCrashWrapper!
     private var autoSessionTrackingIntegration: BuzzSentryAutoSessionTrackingIntegration!
-    private var crashIntegration: SentryCrashIntegration!
+    private var crashIntegration: BuzzSentryCrashIntegration!
     private var options: Options!
     private var fileManager: SentryFileManager!
     
@@ -99,7 +99,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
             goToForeground()
             
             // Almost always the AutoSessionTrackingIntegration is faster
-            // than the SentryCrashIntegration creating the event from the
+            // than the BuzzSentryCrashIntegration creating the event from the
             // crash report on a background thread.
             let crashEvent = Event()
             crashEvent.level = SentryLevel.fatal
@@ -148,7 +148,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
         SentrySDK.setCurrentHub(hub)
         
-        crashIntegration = SentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
+        crashIntegration = BuzzSentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
         crashIntegration.install(with: options)
         
         autoSessionTrackingIntegration = BuzzSentryAutoSessionTrackingIntegration()

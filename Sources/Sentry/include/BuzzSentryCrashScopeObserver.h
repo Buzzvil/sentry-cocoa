@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentryScopeObserver.h"
+#import "BuzzSentryScopeObserver.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * the downside of the scope not being 100% up to date when a crash happens and, of course, lots of
  * CPU overhead.
  */
-@interface SentryCrashScopeObserver : NSObject <SentryScopeObserver>
+@interface BuzzSentryCrashScopeObserver : NSObject <BuzzSentryScopeObserver>
 SENTRY_NO_INIT
 
 - (instancetype)initWithMaxBreadcrumbs:(NSInteger)maxBreadcrumbs;

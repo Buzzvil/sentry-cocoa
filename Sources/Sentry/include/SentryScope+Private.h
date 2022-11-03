@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 #import "SentryScope.h"
-#import "SentryScopeObserver.h"
+#import "BuzzSentryScopeObserver.h"
 
 @class BuzzSentryAttachment;
 
@@ -19,7 +19,7 @@ SentryScope (Private)
 @property (atomic, strong)
     NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *contextDictionary;
 
-- (void)addObserver:(id<SentryScopeObserver>)observer;
+- (void)addObserver:(id<BuzzSentryScopeObserver>)observer;
 
 @end
 

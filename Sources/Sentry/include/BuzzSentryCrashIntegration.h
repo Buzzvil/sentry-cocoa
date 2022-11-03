@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *const SentryDeviceContextFreeMemoryKey = @"free_memory";
 static NSString *const SentryDeviceContextAppMemoryKey = @"app_memory";
 
-@interface SentryCrashIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryCrashIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 + (void)enrichScope:(SentryScope *)scope crashWrapper:(SentryCrashWrapper *)crashWrapper;
 

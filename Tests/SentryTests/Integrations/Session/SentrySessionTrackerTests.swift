@@ -540,7 +540,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         sut = fixture.getSut()
         let sessionStartTime = fixture.currentDateProvider.date()
         
-        // SentryCrashIntegration stores the crashed session to the disk. We emulate
+        // BuzzSentryCrashIntegration stores the crashed session to the disk. We emulate
         // the result here.
         let crashedSession = BuzzSentrySession(releaseName: "1.0.0")
         crashedSession.environment = fixture.options.environment

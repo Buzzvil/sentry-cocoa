@@ -4,7 +4,7 @@
 #import "BuzzSentryAttachment.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrashDefaultMachineContextWrapper.h"
-#import "SentryCrashIntegration.h"
+#import "BuzzSentryCrashIntegration.h"
 #import "SentryCrashStackEntryMapper.h"
 #import "SentryCrashWrapper.h"
 #import "SentryDebugImageProvider.h"

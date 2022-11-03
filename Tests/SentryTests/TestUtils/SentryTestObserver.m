@@ -1,7 +1,7 @@
 #import "SentryTestObserver.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
-#import "SentryCrashIntegration.h"
+#import "BuzzSentryCrashIntegration.h"
 #import "SentryCrashWrapper.h"
 #import "SentryCurrentDate.h"
 #import "SentryDefaultCurrentDateProvider.h"
@@ -46,12 +46,12 @@ SentryTestObserver ()
         options.enableAutoSessionTracking = NO;
         options.maxBreadcrumbs = 5000;
 
-        // The SentryCrashIntegration enriches the scope. We need to install the integration
+        // The BuzzSentryCrashIntegration enriches the scope. We need to install the integration
         // once to get the scope data.
         [SentrySDK startWithOptionsObject:options];
 
         self.scope = [[SentryScope alloc] init];
-        [SentryCrashIntegration enrichScope:self.scope
+        [BuzzSentryCrashIntegration enrichScope:self.scope
                                crashWrapper:[SentryCrashWrapper sharedInstance]];
 
         self.options = options;
