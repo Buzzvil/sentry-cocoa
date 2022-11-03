@@ -2,7 +2,7 @@
 #import "BuzzSentryAttachment.h"
 #import "SentryBreadcrumb.h"
 #import "BuzzSentryEnvelopeItemType.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryGlobalEventProcessor.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
@@ -456,7 +456,7 @@ SentryScope ()
     }
 }
 
-- (SentryEvent *__nullable)applyToEvent:(SentryEvent *)event
+- (BuzzSentryEvent *__nullable)applyToEvent:(BuzzSentryEvent *)event
                           maxBreadcrumb:(NSUInteger)maxBreadcrumbs
 {
     if (nil == event.tags) {

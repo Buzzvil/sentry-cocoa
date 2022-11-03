@@ -1,4 +1,4 @@
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * For more info checkout: https://develop.sentry.dev/sdk/event-payloads/sdk/
  */
-@interface SentrySdkInfo : NSObject <SentrySerializable>
+@interface SentrySdkInfo : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**

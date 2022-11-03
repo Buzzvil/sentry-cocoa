@@ -2,12 +2,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryDsn, SentryEvent;
+@class BuzzSentryDsn, BuzzSentryEvent;
 
 @interface BuzzSentryNSURLRequest : NSMutableURLRequest
 
 - (_Nullable instancetype)initStoreRequestWithDsn:(BuzzSentryDsn *)dsn
-                                         andEvent:(SentryEvent *)event
+                                         andEvent:(BuzzSentryEvent *)event
                                  didFailWithError:(NSError *_Nullable *_Nullable)error;
 
 - (_Nullable instancetype)initStoreRequestWithDsn:(BuzzSentryDsn *)dsn

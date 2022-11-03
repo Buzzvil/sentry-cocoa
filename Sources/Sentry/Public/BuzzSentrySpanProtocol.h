@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import "BuzzSentrySpanContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class BuzzSentrySpanId, SentryId, BuzzSentryTraceHeader, BuzzSentryMeasurementUnit;
 
 NS_SWIFT_NAME(Span)
-@protocol BuzzSentrySpan <SentrySerializable>
+@protocol BuzzSentrySpan <BuzzSentrySerializable>
 
 /**
  * The context information of the span.

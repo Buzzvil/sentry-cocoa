@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol SentryFileManagerDelegate;
 
-@class SentryEvent, BuzzSentryOptions, BuzzSentryEnvelope, SentryFileContents, SentryAppState,
+@class BuzzSentryEvent, BuzzSentryOptions, BuzzSentryEnvelope, SentryFileContents, SentryAppState,
     BuzzSentryDispatchQueueWrapper;
 
 NS_SWIFT_NAME(SentryFileManager)

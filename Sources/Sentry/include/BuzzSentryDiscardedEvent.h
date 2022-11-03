@@ -1,10 +1,10 @@
 #import "BuzzSentryDataCategory.h"
 #import "BuzzSentryDiscardReason.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BuzzSentryDiscardedEvent : NSObject <SentrySerializable>
+@interface BuzzSentryDiscardedEvent : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 - (instancetype)initWithReason:(BuzzSentryDiscardReason)reason

@@ -1,14 +1,14 @@
 #import <Foundation/Foundation.h>
 
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class SentryFrame;
 
 NS_SWIFT_NAME(Stacktrace)
-@interface SentryStacktrace : NSObject <SentrySerializable>
+@interface SentryStacktrace : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**

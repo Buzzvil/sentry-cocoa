@@ -1,10 +1,10 @@
 #import "SentryDefines.h"
 #import "BuzzSentryMeasurementUnit.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BuzzSentryMeasurementValue : NSObject <SentrySerializable>
+@interface BuzzSentryMeasurementValue : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 - (instancetype)initWithValue:(NSNumber *)value;

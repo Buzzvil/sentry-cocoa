@@ -2,7 +2,7 @@
 
 @protocol BuzzSentrySpan;
 
-@class BuzzSentryOptions, SentryEvent, SentryBreadcrumb, SentryScope, BuzzSentryUser, SentryId,
+@class BuzzSentryOptions, BuzzSentryEvent, SentryBreadcrumb, SentryScope, BuzzSentryUser, SentryId,
     BuzzSentryUserFeedback, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -49,7 +49,7 @@ SENTRY_NO_INIT
  *
  * @return The SentryId of the event or SentryId.empty if the event is not sent.
  */
-+ (SentryId *)captureEvent:(SentryEvent *)event NS_SWIFT_NAME(capture(event:));
++ (SentryId *)captureEvent:(BuzzSentryEvent *)event NS_SWIFT_NAME(capture(event:));
 
 /**
  * Captures a manually created event and sends it to Sentry. Only the data in this scope object will
@@ -60,7 +60,7 @@ SENTRY_NO_INIT
  *
  * @return The SentryId of the event or SentryId.empty if the event is not sent.
  */
-+ (SentryId *)captureEvent:(SentryEvent *)event
++ (SentryId *)captureEvent:(BuzzSentryEvent *)event
                  withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(event:scope:));
 
 /**
@@ -72,7 +72,7 @@ SENTRY_NO_INIT
  *
  * @return The SentryId of the event or SentryId.empty if the event is not sent.
  */
-+ (SentryId *)captureEvent:(SentryEvent *)event
++ (SentryId *)captureEvent:(BuzzSentryEvent *)event
             withScopeBlock:(void (^)(SentryScope *scope))block NS_SWIFT_NAME(capture(event:block:));
 
 /**

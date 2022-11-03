@@ -2,7 +2,7 @@
 #import "BuzzSentryAttachment.h"
 #import "SentryCrashC.h"
 #import "SentryDependencyContainer.h"
-#import "SentryEvent+Private.h"
+#import "BuzzSentryEvent+Private.h"
 #import "SentryHub+Private.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryViewHierarchy.h"
@@ -46,7 +46,7 @@ saveViewHierarchy(const char *path)
 }
 
 - (NSArray<BuzzSentryAttachment *> *)processAttachments:(NSArray<BuzzSentryAttachment *> *)attachments
-                                           forEvent:(nonnull SentryEvent *)event
+                                           forEvent:(nonnull BuzzSentryEvent *)event
 {
     // We don't attach the view hierarchy if there is no exception/error.
     // We dont attach the view hierarchy if the event is a crash event.

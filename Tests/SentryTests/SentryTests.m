@@ -81,7 +81,7 @@ SentryBreadcrumbTracker (Private)
 {
     [SentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
 
-    SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelFatal];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
 
     event.timestamp = [NSDate date];
     event.message = [[SentryMessage alloc] initWithFormatted:@"testy test"];

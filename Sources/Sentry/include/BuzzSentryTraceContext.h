@@ -1,11 +1,11 @@
 #import "SentryId.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class SentryScope, BuzzSentryOptions, BuzzSentryTracer, BuzzSentryUser, BuzzSentryBaggage;
 
-@interface BuzzSentryTraceContext : NSObject <SentrySerializable>
+@interface BuzzSentryTraceContext : NSObject <BuzzSentrySerializable>
 
 /**
  * UUID V4 encoded as a hexadecimal sequence with no dashes (e.g. 771a43a4192642f0b136d5159a501700)

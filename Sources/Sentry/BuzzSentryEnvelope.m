@@ -3,7 +3,7 @@
 #import "SentryBreadcrumb.h"
 #import "BuzzSentryClientReport.h"
 #import "BuzzSentryEnvelopeItemType.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryLog.h"
 #import "SentryMessage.h"
 #import "BuzzSentryMeta.h"
@@ -84,14 +84,14 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (instancetype)initWithEvent:(SentryEvent *)event
+- (instancetype)initWithEvent:(BuzzSentryEvent *)event
 {
     NSError *error;
     NSData *json = [SentrySerialization dataWithJSONObject:[event serialize] error:&error];
 
     if (nil != error) {
         // We don't know what caused the serialization to fail.
-        SentryEvent *errorEvent = [[SentryEvent alloc] initWithLevel:kSentryLevelWarning];
+        BuzzSentryEvent *errorEvent = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelWarning];
 
         // Add some context to the event. We can only set simple properties otherwise we
         // risk that the conversion fails again.
@@ -245,7 +245,7 @@ NS_ASSUME_NONNULL_BEGIN
     return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:nil] items:envelopeItems];
 }
 
-- (instancetype)initWithEvent:(SentryEvent *)event
+- (instancetype)initWithEvent:(BuzzSentryEvent *)event
 {
     BuzzSentryEnvelopeItem *item = [[BuzzSentryEnvelopeItem alloc] initWithEvent:event];
     return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:event.eventId]

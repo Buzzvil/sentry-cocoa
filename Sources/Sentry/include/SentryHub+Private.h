@@ -14,9 +14,9 @@ SentryHub (Private)
 
 - (BuzzSentryClient *_Nullable)client;
 
-- (void)captureCrashEvent:(SentryEvent *)event;
+- (void)captureCrashEvent:(BuzzSentryEvent *)event;
 
-- (void)captureCrashEvent:(SentryEvent *)event withScope:(SentryScope *)scope;
+- (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
 
 - (void)setSampleRandomValue:(NSNumber *)value;
 
@@ -42,7 +42,7 @@ SentryHub (Private)
                                   idleTimeout:(NSTimeInterval)idleTimeout
                          dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
-- (SentryId *)captureEvent:(SentryEvent *)event
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event
                   withScope:(SentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(capture(event:scope:additionalEnvelopeItems:));

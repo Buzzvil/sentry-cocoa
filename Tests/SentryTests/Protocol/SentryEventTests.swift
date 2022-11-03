@@ -1,7 +1,7 @@
 import Sentry
 import XCTest
 
-class SentryEventTests: XCTestCase {
+class BuzzSentryEventTests: XCTestCase {
 
     func testInitWithLevel() {
         let dateProvider = TestCurrentDateProvider()

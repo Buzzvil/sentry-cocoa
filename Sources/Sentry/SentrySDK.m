@@ -164,29 +164,29 @@ static NSUInteger startInvocations;
     [SentrySDK startWithOptionsObject:options];
 }
 
-+ (void)captureCrashEvent:(SentryEvent *)event
++ (void)captureCrashEvent:(BuzzSentryEvent *)event
 {
     [SentrySDK.currentHub captureCrashEvent:event];
 }
 
-+ (void)captureCrashEvent:(SentryEvent *)event withScope:(SentryScope *)scope
++ (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
 {
     [SentrySDK.currentHub captureCrashEvent:event withScope:scope];
 }
 
-+ (SentryId *)captureEvent:(SentryEvent *)event
++ (SentryId *)captureEvent:(BuzzSentryEvent *)event
 {
     return [SentrySDK captureEvent:event withScope:SentrySDK.currentHub.scope];
 }
 
-+ (SentryId *)captureEvent:(SentryEvent *)event withScopeBlock:(void (^)(SentryScope *))block
++ (SentryId *)captureEvent:(BuzzSentryEvent *)event withScopeBlock:(void (^)(SentryScope *))block
 {
     SentryScope *scope = [[SentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
     block(scope);
     return [SentrySDK captureEvent:event withScope:scope];
 }
 
-+ (SentryId *)captureEvent:(SentryEvent *)event withScope:(SentryScope *)scope
++ (SentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
 {
     return [SentrySDK.currentHub captureEvent:event withScope:scope];
 }

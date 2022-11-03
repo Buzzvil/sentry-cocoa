@@ -232,7 +232,7 @@
 
 - (void)testBeforeSend
 {
-    SentryBeforeSendEventCallback callback = ^(SentryEvent *event) { return event; };
+    SentryBeforeSendEventCallback callback = ^(BuzzSentryEvent *event) { return event; };
     BuzzSentryOptions *options = [self getValidOptions:@{ @"beforeSend" : callback }];
 
     XCTAssertEqual(callback, options.beforeSend);
@@ -302,13 +302,13 @@
 - (void)testOnCrashedLastRun
 {
     __block BOOL onCrashedLastRunCalled = NO;
-    SentryOnCrashedLastRunCallback callback = ^(SentryEvent *event) {
+    SentryOnCrashedLastRunCallback callback = ^(BuzzSentryEvent *event) {
         onCrashedLastRunCalled = YES;
         XCTAssertNotNil(event);
     };
     BuzzSentryOptions *options = [self getValidOptions:@{ @"onCrashedLastRun" : callback }];
 
-    options.onCrashedLastRun([[SentryEvent alloc] init]);
+    options.onCrashedLastRun([[BuzzSentryEvent alloc] init]);
 
     XCTAssertEqual(callback, options.onCrashedLastRun);
     XCTAssertTrue(onCrashedLastRunCalled);

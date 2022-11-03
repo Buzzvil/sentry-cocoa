@@ -5,7 +5,7 @@
 #import "SentryCrashWrapper.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryException.h"
 #import "SentryHub+Private.h"
 #import "SentryMechanism.h"
@@ -62,7 +62,7 @@ SentryANRTrackingIntegration ()
 
     NSArray<SentryThread *> *threads = [threadInspector getCurrentThreadsWithStackTrace];
 
-    SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelError];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelError];
     SentryException *sentryException = [[SentryException alloc] initWithValue:message
                                                                          type:@"App Hanging"];
     sentryException.mechanism = [[SentryMechanism alloc] initWithType:@"AppHang"];

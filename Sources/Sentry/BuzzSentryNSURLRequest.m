@@ -3,7 +3,7 @@
 #import "BuzzSentryClient.h"
 #import "BuzzSentryDsn.h"
 #import "SentryError.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryHub.h"
 #import "SentryLog.h"
 #import "BuzzSentryMeta.h"
@@ -25,7 +25,7 @@ BuzzSentryNSURLRequest ()
 @implementation BuzzSentryNSURLRequest
 
 - (_Nullable instancetype)initStoreRequestWithDsn:(BuzzSentryDsn *)dsn
-                                         andEvent:(SentryEvent *)event
+                                         andEvent:(BuzzSentryEvent *)event
                                  didFailWithError:(NSError *_Nullable *_Nullable)error
 {
     NSDictionary *serialized = [event serialize];

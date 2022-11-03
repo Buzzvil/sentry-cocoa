@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import "BuzzSentrySpanProtocol.h"
 
 @class BuzzSentryUser, SentrySession, BuzzSentryOptions, SentryBreadcrumb, BuzzSentryAttachment;
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  * https://docs.sentry.io/platforms/apple/enriching-events/scopes/#whats-a-scope-whats-a-hub
  */
 NS_SWIFT_NAME(Scope)
-@interface SentryScope : NSObject <SentrySerializable>
+@interface SentryScope : NSObject <BuzzSentrySerializable>
 
 /**
  * Returns current Span or Transaction.
@@ -103,13 +103,13 @@ NS_SWIFT_NAME(Scope)
 /**
  * Adds the Scope to the event
  */
-- (SentryEvent *__nullable)applyToEvent:(SentryEvent *)event
+- (BuzzSentryEvent *__nullable)applyToEvent:(BuzzSentryEvent *)event
                           maxBreadcrumb:(NSUInteger)maxBreadcrumbs;
 
 - (void)applyToSession:(SentrySession *)session;
 
 /**
- * Sets context values which will overwrite SentryEvent.context when event is
+ * Sets context values which will overwrite BuzzSentryEvent.context when event is
  * "enriched" with scope before sending event.
  */
 - (void)setContextValue:(NSDictionary<NSString *, id> *)value

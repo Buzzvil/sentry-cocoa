@@ -1,11 +1,11 @@
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import "BuzzSentrySpanContext.h"
 #import "BuzzSentrySpanProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BuzzSentryNoOpSpan : NSObject <BuzzSentrySpan, SentrySerializable>
+@interface BuzzSentryNoOpSpan : NSObject <BuzzSentrySpan, BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 + (instancetype)shared;

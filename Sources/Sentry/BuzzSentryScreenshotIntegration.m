@@ -2,7 +2,7 @@
 #import "BuzzSentryAttachment.h"
 #import "SentryCrashC.h"
 #import "SentryDependencyContainer.h"
-#import "SentryEvent+Private.h"
+#import "BuzzSentryEvent+Private.h"
 #import "SentryHub+Private.h"
 #import "BuzzSentrySDK+Private.h"
 
@@ -45,7 +45,7 @@ saveScreenShot(const char *path)
 }
 
 - (NSArray<BuzzSentryAttachment *> *)processAttachments:(NSArray<BuzzSentryAttachment *> *)attachments
-                                           forEvent:(nonnull SentryEvent *)event
+                                           forEvent:(nonnull BuzzSentryEvent *)event
 {
 
     // We don't take screenshots if there is no exception/error.

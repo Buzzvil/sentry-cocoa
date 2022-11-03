@@ -2,7 +2,7 @@
 #import "SentryCrashInstallationReporter.h"
 #import "SentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryHub.h"
 #import "SentryInAppLogic.h"
 #import "SentryOutOfMemoryLogic.h"
@@ -180,7 +180,7 @@ SentryCrashIntegration ()
         // crash it writes the UserInfo into SentryCrashField_User of the report.
         // SentryCrashReportConverter.initWithReport loads the contents of
         // SentryCrashField_User into self.userContext and convertReportToEvent can map
-        // the release name and dist to the SentryEvent. Fixes GH-581
+        // the release name and dist to the BuzzSentryEvent. Fixes GH-581
         userInfo[@"release"] = self.options.releaseName;
         userInfo[@"dist"] = self.options.dist;
 

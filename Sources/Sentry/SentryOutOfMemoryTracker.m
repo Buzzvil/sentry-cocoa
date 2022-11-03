@@ -4,7 +4,7 @@
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
-#import <SentryEvent.h>
+#import <BuzzSentryEvent.h>
 #import <SentryException.h>
 #import <SentryHub.h>
 #import <SentryLog.h>
@@ -55,7 +55,7 @@ SentryOutOfMemoryTracker ()
 
     [self.dispatchQueue dispatchAsyncWithBlock:^{
         if ([self.outOfMemoryLogic isOOM]) {
-            SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelFatal];
+            BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
             // Set to empty list so no breadcrumbs of the current scope are added
             event.breadcrumbs = @[];
 

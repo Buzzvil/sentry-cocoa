@@ -1,8 +1,8 @@
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import <Foundation/Foundation.h>
 
 @interface
-SentryEvent (Private)
+BuzzSentryEvent (Private)
 
 /**
  * This indicates whether this event is a result of a crash.

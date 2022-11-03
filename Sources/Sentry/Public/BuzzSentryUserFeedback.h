@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Adds additional information about what happened to an event.
  */
 NS_SWIFT_NAME(UserFeedback)
-@interface BuzzSentryUserFeedback : NSObject <SentrySerializable>
+@interface BuzzSentryUserFeedback : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**

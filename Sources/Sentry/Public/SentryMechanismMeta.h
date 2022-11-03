@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import <Foundation/Foundation.h>
 
 @class SentryNSError;
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * See https://develop.sentry.dev/sdk/event-payloads/exception/#meta-information.
  */
 NS_SWIFT_NAME(MechanismMeta)
-@interface SentryMechanismMeta : NSObject <SentrySerializable>
+@interface SentryMechanismMeta : NSObject <BuzzSentrySerializable>
 
 - (instancetype)init;
 

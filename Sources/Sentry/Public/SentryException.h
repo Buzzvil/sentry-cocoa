@@ -1,14 +1,14 @@
 #import <Foundation/Foundation.h>
 
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class SentryStacktrace, SentryMechanism;
 
 NS_SWIFT_NAME(Exception)
-@interface SentryException : NSObject <SentrySerializable>
+@interface SentryException : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**
@@ -32,7 +32,7 @@ SENTRY_NO_INIT
 @property (nonatomic, copy) NSString *_Nullable module;
 
 /**
- * An optional value which refers to a thread in `SentryEvent.threads`.
+ * An optional value which refers to a thread in `BuzzSentryEvent.threads`.
  */
 @property (nonatomic, copy) NSNumber *_Nullable threadId;
 

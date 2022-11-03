@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SentrySerializable <NSObject>
+@protocol BuzzSentrySerializable <NSObject>
 SENTRY_NO_INIT
 
 /**

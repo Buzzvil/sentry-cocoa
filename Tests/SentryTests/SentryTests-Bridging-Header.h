@@ -70,7 +70,7 @@
 #import "BuzzSentryEnvelope+Private.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEnvelopeRateLimit.h"
-#import "SentryEvent+Private.h"
+#import "BuzzSentryEvent+Private.h"
 #import "SentryFileContents.h"
 #import "SentryFileIOTrackingIntegration.h"
 #import "SentryFileManager+TestProperties.h"

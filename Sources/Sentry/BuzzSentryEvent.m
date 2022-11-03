@@ -1,4 +1,4 @@
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "NSDate+SentryExtras.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryBreadcrumb.h"
@@ -17,13 +17,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryEvent ()
+BuzzSentryEvent ()
 
 @property (nonatomic) BOOL isCrashEvent;
 
 @end
 
-@implementation SentryEvent
+@implementation BuzzSentryEvent
 
 - (instancetype)init
 {

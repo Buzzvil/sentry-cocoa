@@ -78,7 +78,7 @@
 - (void)testEvent
 {
     NSDate *date = [NSDate date];
-    SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event.timestamp = date;
     event.environment = @"bla";
     event.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
@@ -94,7 +94,7 @@
     };
     XCTAssertEqualObjects([event serialize], serialized);
 
-    SentryEvent *event2 = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event2 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event2.timestamp = date;
     event2.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     NSDictionary *serialized2 = @{
@@ -106,7 +106,7 @@
     };
     XCTAssertEqualObjects([event2 serialize], serialized2);
 
-    SentryEvent *event3 = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event3 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event3.timestamp = date;
     event3.sdk = @{
         @"version" : @"0.15.2",
@@ -126,7 +126,7 @@
     };
     XCTAssertEqualObjects([event3 serialize], serialized3);
 
-    SentryEvent *event4 = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event4 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event4.timestamp = date;
     event4.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     event4.extra =
@@ -146,7 +146,7 @@
 {
     NSDate *date = [NSDate date];
 
-    SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event.timestamp = date;
     event.extra = @{ @"__sentry_transaction" : @"yoyoyo" };
     event.sdk = @{
@@ -169,7 +169,7 @@
     };
     XCTAssertEqualObjects([event serialize], serialized);
 
-    SentryEvent *event3 = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event3 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event3.timestamp = date;
     event3.transaction = @"UIViewControllerTest";
     event3.sdk = @{
@@ -190,7 +190,7 @@
         @"timestamp" : @(date.timeIntervalSince1970)
     };
     XCTAssertEqualObjects([event3 serialize], serialized3);
-    SentryEvent *event4 = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event4 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event4.timestamp = date;
     NSDate *testDate = [NSDate dateWithTimeIntervalSince1970:1582803326];
     NSURL *testURL = [NSURL URLWithString:@"https://sentry.io"];
@@ -230,7 +230,7 @@
 
 - (void)testSetDistToNil
 {
-    SentryEvent *eventEmptyDist = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *eventEmptyDist = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     eventEmptyDist.releaseName = @"abc";
     XCTAssertNil([[eventEmptyDist serialize] objectForKey:@"dist"]);
     XCTAssertEqualObjects([[eventEmptyDist serialize] objectForKey:@"release"], @"abc");

@@ -6,7 +6,7 @@
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
-#import "SentryEvent+Private.h"
+#import "BuzzSentryEvent+Private.h"
 #import "SentryFileManager.h"
 #import "SentryId.h"
 #import "SentryLog.h"
@@ -209,7 +209,7 @@ SentryHub ()
     return sessionCopy;
 }
 
-- (void)captureCrashEvent:(SentryEvent *)event
+- (void)captureCrashEvent:(BuzzSentryEvent *)event
 {
     [self captureCrashEvent:event withScope:self.scope];
 }
@@ -220,7 +220,7 @@ SentryHub ()
  * of the SDK there is currently no way to know which one belongs to the crashed session so we just
  * send the session with the first crashed event we receive.
  */
-- (void)captureCrashEvent:(SentryEvent *)event withScope:(SentryScope *)scope
+- (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
 {
     event.isCrashEvent = YES;
 
@@ -267,17 +267,17 @@ SentryHub ()
         additionalEnvelopeItems:additionalEnvelopeItems];
 }
 
-- (SentryId *)captureEvent:(SentryEvent *)event
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event
 {
     return [self captureEvent:event withScope:self.scope];
 }
 
-- (SentryId *)captureEvent:(SentryEvent *)event withScope:(SentryScope *)scope
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
 {
     return [self captureEvent:event withScope:scope additionalEnvelopeItems:@[]];
 }
 
-- (SentryId *)captureEvent:(SentryEvent *)event
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event
                   withScope:(SentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {

@@ -2,7 +2,7 @@
 
 #import "SentryDefines.h"
 
-@class SentryEvent, SentrySession, SentrySdkInfo, SentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
+@class BuzzSentryEvent, SentrySession, SentrySdkInfo, SentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
     BuzzSentryTransaction, BuzzSentryTraceContext, BuzzSentryClientReport;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -81,7 +81,7 @@ SENTRY_NO_INIT
 @interface BuzzSentryEnvelopeItem : NSObject
 SENTRY_NO_INIT
 
-- (instancetype)initWithEvent:(SentryEvent *)event;
+- (instancetype)initWithEvent:(BuzzSentryEvent *)event;
 - (instancetype)initWithSession:(SentrySession *)session;
 - (instancetype)initWithUserFeedback:(BuzzSentryUserFeedback *)userFeedback;
 - (_Nullable instancetype)initWithAttachment:(BuzzSentryAttachment *)attachment
@@ -132,7 +132,7 @@ SENTRY_NO_INIT
                          items:(NSArray<BuzzSentryEnvelopeItem *> *)items NS_DESIGNATED_INITIALIZER;
 
 // Convenience init for a single event
-- (instancetype)initWithEvent:(SentryEvent *)event;
+- (instancetype)initWithEvent:(BuzzSentryEvent *)event;
 
 - (instancetype)initWithUserFeedback:(BuzzSentryUserFeedback *)userFeedback;
 

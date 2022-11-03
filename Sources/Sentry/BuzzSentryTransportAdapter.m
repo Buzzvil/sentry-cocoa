@@ -1,6 +1,6 @@
 #import "BuzzSentryTransportAdapter.h"
 #import "BuzzSentryEnvelope.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentryUserFeedback.h"
 #import <Foundation/Foundation.h>
@@ -27,19 +27,19 @@ BuzzSentryTransportAdapter ()
     return self;
 }
 
-- (void)sendEvent:(SentryEvent *)event attachments:(NSArray<BuzzSentryAttachment *> *)attachments
+- (void)sendEvent:(BuzzSentryEvent *)event attachments:(NSArray<BuzzSentryAttachment *> *)attachments
 {
     [self sendEvent:event traceContext:nil attachments:attachments];
 }
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
           session:(SentrySession *)session
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
 {
     [self sendEvent:event withSession:session traceContext:nil attachments:attachments];
 }
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
 {
@@ -49,7 +49,7 @@ BuzzSentryTransportAdapter ()
         additionalEnvelopeItems:@[]];
 }
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
                traceContext:(nullable BuzzSentryTraceContext *)traceContext
                 attachments:(NSArray<BuzzSentryAttachment *> *)attachments
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
@@ -65,7 +65,7 @@ BuzzSentryTransportAdapter ()
     [self sendEnvelope:envelope];
 }
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
       withSession:(SentrySession *)session
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
@@ -107,7 +107,7 @@ BuzzSentryTransportAdapter ()
     [self.transport flush:timeout];
 }
 
-- (NSMutableArray<BuzzSentryEnvelopeItem *> *)buildEnvelopeItems:(SentryEvent *)event
+- (NSMutableArray<BuzzSentryEnvelopeItem *> *)buildEnvelopeItems:(BuzzSentryEvent *)event
                                                  attachments:
                                                      (NSArray<BuzzSentryAttachment *> *)attachments
 {

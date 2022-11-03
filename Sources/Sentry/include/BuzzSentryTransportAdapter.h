@@ -3,7 +3,7 @@
 #import "BuzzSentryDiscardReason.h"
 #import "BuzzSentryTransport.h"
 
-@class BuzzSentryEnvelope, BuzzSentryEnvelopeItem, SentryEvent, SentrySession, BuzzSentryUserFeedback,
+@class BuzzSentryEnvelope, BuzzSentryEnvelopeItem, BuzzSentryEvent, SentrySession, BuzzSentryUserFeedback,
     BuzzSentryAttachment, BuzzSentryTraceContext, BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,26 +18,26 @@ SENTRY_NO_INIT
 
 - (instancetype)initWithTransport:(id<BuzzSentryTransport>)transport options:(BuzzSentryOptions *)options;
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
     NS_SWIFT_NAME(send(event:attachments:));
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
           session:(SentrySession *)session
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments;
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
     NS_SWIFT_NAME(send(event:traceContext:attachments:));
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
                traceContext:(nullable BuzzSentryTraceContext *)traceContext
                 attachments:(NSArray<BuzzSentryAttachment *> *)attachments
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(send(event:traceContext:attachments:additionalEnvelopeItems:));
 
-- (void)sendEvent:(SentryEvent *)event
+- (void)sendEvent:(BuzzSentryEvent *)event
       withSession:(SentrySession *)session
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments;

@@ -1,10 +1,10 @@
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(User)
-@interface BuzzSentryUser : NSObject <SentrySerializable, NSCopying>
+@interface BuzzSentryUser : NSObject <BuzzSentrySerializable, NSCopying>
 
 /**
  * Optional: Id of the user

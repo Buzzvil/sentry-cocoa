@@ -1,11 +1,11 @@
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import <Foundation/Foundation.h>
 
 @class BuzzSentryDiscardedEvent;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BuzzSentryClientReport : NSObject <SentrySerializable>
+@interface BuzzSentryClientReport : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 - (instancetype)initWithDiscardedEvents:(NSArray<BuzzSentryDiscardedEvent *> *)discardedEvents;

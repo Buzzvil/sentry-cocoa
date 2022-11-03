@@ -2,7 +2,7 @@
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class SentryEvent, BuzzSentryOptions, SentryCurrentDateProvider, SentryNSNotificationCenterWrapper;
+@class BuzzSentryEvent, BuzzSentryOptions, SentryCurrentDateProvider, SentryNSNotificationCenterWrapper;
 
 /**
  * Tracks sessions for release health. For more info see:

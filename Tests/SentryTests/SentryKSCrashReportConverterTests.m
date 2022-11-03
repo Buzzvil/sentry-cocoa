@@ -30,7 +30,7 @@
 
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:report inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     XCTAssertNotNil(event);
     XCTAssertEqualObjects(
         [NSDate dateWithTimeIntervalSince1970:@(1491210797).integerValue], event.timestamp);
@@ -102,7 +102,7 @@
 
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:report inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
 
     // Do only a few basic assertions here. RecrashReport is tested with testUnknownTypeException
     XCTAssertEqual(1, event.exceptions.count);
@@ -123,7 +123,7 @@
     NSDictionary *rawCrash = [self getCrashReport:@"Resources/raw-crash"];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     NSDictionary *serializedEvent = [event serialize];
 
     NSDictionary *eventJson = [self getCrashReport:@"Resources/converted-event"];
@@ -155,7 +155,7 @@
     NSDictionary *rawCrash = [self getCrashReport:@"Resources/Crash-faulty-report"];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
 
     XCTAssertNil(
         event, "The event should be nil, because the report conversion should have failed.");
@@ -217,7 +217,7 @@
     NSDictionary *rawCrash = [self getCrashReport:@"Resources/NX-Page"];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     SentryException *exception = event.exceptions.firstObject;
     XCTAssertEqualObjects(exception.stacktrace.frames.lastObject.function, @"<redacted>");
 }
@@ -227,7 +227,7 @@
     NSDictionary *rawCrash = [self getCrashReport:@"Resources/ReactNative"];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     //    Error: BuzzSentryClient: Test throw error
     XCTAssertEqualObjects(event.exceptions.firstObject.type, @"Error");
     XCTAssertEqualObjects(event.exceptions.firstObject.value, @"BuzzSentryClient: Test throw error");
@@ -246,7 +246,7 @@
     NSDictionary *rawCrash = [self getCrashReport:@"Resources/dup-frame"];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     SentryException *exception = event.exceptions.firstObject;
     XCTAssertEqual(exception.stacktrace.frames.count, (unsigned long)22);
     XCTAssertEqualObjects(exception.value,
@@ -261,7 +261,7 @@
         [self getCrashReport:@"Resources/sentry-ios-cocoapods-report-0000000053800000"];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     SentryException *exception = event.exceptions.firstObject;
     XCTAssertEqualObjects(exception.value, @"this is the reason");
 }
@@ -272,7 +272,7 @@
     NSDictionary *rawCrash = [self getCrashReport:@"Resources/fatal-error-notable-adresses"];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     XCTAssertEqualObjects(
         event.exceptions.firstObject.value, @"crash: > fatal error > hello my crash is here");
 }
@@ -307,7 +307,7 @@
     NSDictionary *rawCrash = [self getCrashReport:reportPath];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     XCTAssertEqualObjects(event.exceptions.firstObject.value, expectedValue);
 }
 
@@ -327,7 +327,7 @@
             @"username" : @"username"
         }
     };
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     NSDictionary *serializedUser = @{
         @"email" : @"john@apple.com",
         @"data" : @ { @"is_admin" : @(NO) },
@@ -376,7 +376,7 @@
     NSDictionary *report = [self getCrashReport:path];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:report inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     XCTAssertTrue([NSJSONSerialization isValidJSONObject:[event serialize]]);
 }
 
@@ -412,7 +412,7 @@
     return [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
 }
 
-- (void)printJson:(SentryEvent *)event
+- (void)printJson:(BuzzSentryEvent *)event
 {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[event serialize]
                                                        options:NSJSONWritingPrettyPrinted
@@ -429,7 +429,7 @@
     NSDictionary *rawCrash = [self getCrashReport:reportPath];
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
-    SentryEvent *event = [reportConverter convertReportToEvent];
+    BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     XCTAssertEqualObjects(event.breadcrumbs.firstObject.category, @"ui.lifecycle");
     XCTAssertEqualObjects(event.breadcrumbs.firstObject.type, @"navigation");
     XCTAssertEqual(event.breadcrumbs.firstObject.level, kSentryLevelInfo);

@@ -7,9 +7,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 SentrySDK (Private)
 
-+ (void)captureCrashEvent:(SentryEvent *)event;
++ (void)captureCrashEvent:(BuzzSentryEvent *)event;
 
-+ (void)captureCrashEvent:(SentryEvent *)event withScope:(SentryScope *)scope;
++ (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
 
 /**
  * SDK private field to store the state if onCrashedLastRun was called.

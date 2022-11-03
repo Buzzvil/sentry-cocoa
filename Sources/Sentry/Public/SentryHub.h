@@ -2,7 +2,7 @@
 #import "SentryIntegrationProtocol.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class SentryEvent, BuzzSentryClient, SentryScope, SentrySession, BuzzSentryUser, SentryBreadcrumb,
+@class BuzzSentryEvent, BuzzSentryClient, SentryScope, SentrySession, BuzzSentryUser, SentryBreadcrumb,
     SentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -45,7 +45,7 @@ SENTRY_NO_INIT
  *
  * @return The SentryId of the event or SentryId.empty if the event is not sent.
  */
-- (SentryId *)captureEvent:(SentryEvent *)event NS_SWIFT_NAME(capture(event:));
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event NS_SWIFT_NAME(capture(event:));
 
 /**
  * Captures a manually created event and sends it to Sentry.
@@ -55,7 +55,7 @@ SENTRY_NO_INIT
  *
  * @return The SentryId of the event or SentryId.empty if the event is not sent.
  */
-- (SentryId *)captureEvent:(SentryEvent *)event
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event
                  withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(event:scope:));
 
 /**

@@ -3,7 +3,7 @@
 #import "SentryBreadcrumb.h"
 #import "SentryCrashStackCursor.h"
 #import "SentryDebugMeta.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryException.h"
 #import "SentryFrame.h"
 #import "SentryHexAddressFormatter.h"
@@ -95,10 +95,10 @@ SentryCrashReportConverter ()
     }
 }
 
-- (SentryEvent *_Nullable)convertReportToEvent
+- (BuzzSentryEvent *_Nullable)convertReportToEvent
 {
     @try {
-        SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelFatal];
+        BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
         if ([self.report[@"report"][@"timestamp"] isKindOfClass:NSNumber.class]) {
             event.timestamp = [NSDate
                 dateWithTimeIntervalSince1970:[self.report[@"report"][@"timestamp"] integerValue]];

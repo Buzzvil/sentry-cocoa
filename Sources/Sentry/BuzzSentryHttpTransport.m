@@ -10,7 +10,7 @@
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEnvelopeRateLimit.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryFileContents.h"
 #import "SentryFileManager.h"
 #import "SentryLog.h"

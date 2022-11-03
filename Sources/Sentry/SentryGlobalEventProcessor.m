@@ -19,7 +19,7 @@
     return self;
 }
 
-- (void)addEventProcessor:(SentryEventProcessor)newProcessor
+- (void)addEventProcessor:(BuzzSentryEventProcessor)newProcessor
 {
     [self.processors addObject:newProcessor];
 }

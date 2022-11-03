@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 #import "BuzzSentrySampleDecision.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import "BuzzSentrySpanStatus.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class SentryId, BuzzSentrySpanId;
 
 NS_SWIFT_NAME(SpanContext)
-@interface BuzzSentrySpanContext : NSObject <SentrySerializable>
+@interface BuzzSentrySpanContext : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**

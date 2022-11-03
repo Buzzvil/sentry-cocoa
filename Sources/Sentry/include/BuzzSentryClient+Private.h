@@ -12,7 +12,7 @@ FOUNDATION_EXPORT NSString *const kSentryDefaultEnvironment;
 
 - (nullable NSArray<BuzzSentryAttachment *> *)processAttachments:
                                               (nullable NSArray<BuzzSentryAttachment *> *)attachments
-                                                    forEvent:(SentryEvent *)event;
+                                                    forEvent:(BuzzSentryEvent *)event;
 
 @end
 
@@ -33,13 +33,13 @@ BuzzSentryClient (Private)
                    withSession:(SentrySession *)session
                      withScope:(SentryScope *)scope;
 
-- (SentryId *)captureCrashEvent:(SentryEvent *)event withScope:(SentryScope *)scope;
+- (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
 
-- (SentryId *)captureCrashEvent:(SentryEvent *)event
+- (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event
                     withSession:(SentrySession *)session
                       withScope:(SentryScope *)scope;
 
-- (SentryId *)captureEvent:(SentryEvent *)event
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event
                   withScope:(SentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(capture(event:scope:additionalEnvelopeItems:));

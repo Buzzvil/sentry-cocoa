@@ -6,7 +6,7 @@
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryFileContents.h"
 #import "SentryLog.h"
 #import "SentryMigrateSessionInit.h"

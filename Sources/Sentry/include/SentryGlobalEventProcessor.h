@@ -1,19 +1,19 @@
 #import "SentryDefines.h"
 
-@class SentryEvent;
+@class BuzzSentryEvent;
 
-typedef SentryEvent *__nullable (^SentryEventProcessor)(SentryEvent *_Nonnull event);
+typedef BuzzSentryEvent *__nullable (^BuzzSentryEventProcessor)(BuzzSentryEvent *_Nonnull event);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SentryGlobalEventProcessor : NSObject
 SENTRY_NO_INIT
 
-@property (nonatomic, strong) NSMutableArray<SentryEventProcessor> *processors;
+@property (nonatomic, strong) NSMutableArray<BuzzSentryEventProcessor> *processors;
 
 + (instancetype)shared;
 
-- (void)addEventProcessor:(SentryEventProcessor)newProcessor;
+- (void)addEventProcessor:(BuzzSentryEventProcessor)newProcessor;
 
 @end
 

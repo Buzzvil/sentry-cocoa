@@ -22,7 +22,7 @@
     -(instancetype)init NS_UNAVAILABLE;                                                            \
     +(instancetype) new NS_UNAVAILABLE;
 
-@class SentryEvent, SentryBreadcrumb, BuzzSentrySamplingContext;
+@class BuzzSentryEvent, SentryBreadcrumb, BuzzSentrySamplingContext;
 @protocol BuzzSentrySpan;
 
 /**
@@ -47,12 +47,12 @@ typedef SentryBreadcrumb *_Nullable (^SentryBeforeBreadcrumbCallback)(
  * Block can be used to mutate event before its send.
  * To avoid sending the event altogether, return nil instead.
  */
-typedef SentryEvent *_Nullable (^SentryBeforeSendEventCallback)(SentryEvent *_Nonnull event);
+typedef BuzzSentryEvent *_Nullable (^SentryBeforeSendEventCallback)(BuzzSentryEvent *_Nonnull event);
 
 /**
  * A callback to be notified when the last program execution terminated with a crash.
  */
-typedef void (^SentryOnCrashedLastRunCallback)(SentryEvent *_Nonnull event);
+typedef void (^SentryOnCrashedLastRunCallback)(BuzzSentryEvent *_Nonnull event);
 
 /**
  * Block can be used to determine if an event should be queued and stored

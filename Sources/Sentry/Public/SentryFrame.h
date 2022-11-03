@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(Frame)
-@interface SentryFrame : NSObject <SentrySerializable>
+@interface SentryFrame : NSObject <BuzzSentrySerializable>
 
 /**
  * SymbolAddress of the frame

@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Sentry representation of an NSError to send to Sentry.
  */
-@interface SentryNSError : NSObject <SentrySerializable>
+@interface SentryNSError : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**

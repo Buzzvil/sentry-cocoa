@@ -13,7 +13,7 @@
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
-#import "SentryEvent.h"
+#import "BuzzSentryEvent.h"
 #import "SentryException.h"
 #import "SentryFileManager.h"
 #import "SentryGlobalEventProcessor.h"
@@ -167,7 +167,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
 - (SentryId *)captureMessage:(NSString *)message withScope:(SentryScope *)scope
 {
-    SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event.message = [[SentryMessage alloc] initWithFormatted:message];
     return [self sendEvent:event withScope:scope alwaysAttachStacktrace:NO];
 }
@@ -179,7 +179,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
 - (SentryId *)captureException:(NSException *)exception withScope:(SentryScope *)scope
 {
-    SentryEvent *event = [self buildExceptionEvent:exception];
+    BuzzSentryEvent *event = [self buildExceptionEvent:exception];
     return [self sendEvent:event withScope:scope alwaysAttachStacktrace:YES];
 }
 
@@ -187,14 +187,14 @@ NSString *const kSentryDefaultEnvironment = @"production";
                    withSession:(SentrySession *)session
                      withScope:(SentryScope *)scope
 {
-    SentryEvent *event = [self buildExceptionEvent:exception];
+    BuzzSentryEvent *event = [self buildExceptionEvent:exception];
     event = [self prepareEvent:event withScope:scope alwaysAttachStacktrace:YES];
     return [self sendEvent:event withSession:session withScope:scope];
 }
 
-- (SentryEvent *)buildExceptionEvent:(NSException *)exception
+- (BuzzSentryEvent *)buildExceptionEvent:(NSException *)exception
 {
-    SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelError];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelError];
     SentryException *sentryException = [[SentryException alloc] initWithValue:exception.reason
                                                                          type:exception.name];
 
@@ -210,7 +210,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
 - (SentryId *)captureError:(NSError *)error withScope:(SentryScope *)scope
 {
-    SentryEvent *event = [self buildErrorEvent:error];
+    BuzzSentryEvent *event = [self buildErrorEvent:error];
     return [self sendEvent:event withScope:scope alwaysAttachStacktrace:YES];
 }
 
@@ -218,14 +218,14 @@ NSString *const kSentryDefaultEnvironment = @"production";
                withSession:(SentrySession *)session
                  withScope:(SentryScope *)scope
 {
-    SentryEvent *event = [self buildErrorEvent:error];
+    BuzzSentryEvent *event = [self buildErrorEvent:error];
     event = [self prepareEvent:event withScope:scope alwaysAttachStacktrace:YES];
     return [self sendEvent:event withSession:session withScope:scope];
 }
 
-- (SentryEvent *)buildErrorEvent:(NSError *)error
+- (BuzzSentryEvent *)buildErrorEvent:(NSError *)error
 {
-    SentryEvent *event = [[SentryEvent alloc] initWithError:error];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithError:error];
 
     NSString *exceptionValue;
 
@@ -260,33 +260,33 @@ NSString *const kSentryDefaultEnvironment = @"production";
     return event;
 }
 
-- (SentryId *)captureCrashEvent:(SentryEvent *)event withScope:(SentryScope *)scope
+- (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
 {
     return [self sendEvent:event withScope:scope alwaysAttachStacktrace:NO isCrashEvent:YES];
 }
 
-- (SentryId *)captureCrashEvent:(SentryEvent *)event
+- (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event
                     withSession:(SentrySession *)session
                       withScope:(SentryScope *)scope
 {
-    SentryEvent *preparedEvent = [self prepareEvent:event
+    BuzzSentryEvent *preparedEvent = [self prepareEvent:event
                                           withScope:scope
                              alwaysAttachStacktrace:NO
                                        isCrashEvent:YES];
     return [self sendEvent:preparedEvent withSession:session withScope:scope];
 }
 
-- (SentryId *)captureEvent:(SentryEvent *)event
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event
 {
     return [self captureEvent:event withScope:[[SentryScope alloc] init]];
 }
 
-- (SentryId *)captureEvent:(SentryEvent *)event withScope:(SentryScope *)scope
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
 {
     return [self sendEvent:event withScope:scope alwaysAttachStacktrace:NO];
 }
 
-- (SentryId *)captureEvent:(SentryEvent *)event
+- (SentryId *)captureEvent:(BuzzSentryEvent *)event
                   withScope:(SentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
@@ -297,7 +297,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         additionalEnvelopeItems:additionalEnvelopeItems];
 }
 
-- (SentryId *)sendEvent:(SentryEvent *)event
+- (SentryId *)sendEvent:(BuzzSentryEvent *)event
                  withScope:(SentryScope *)scope
     alwaysAttachStacktrace:(BOOL)alwaysAttachStacktrace
 {
@@ -307,7 +307,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                   isCrashEvent:NO];
 }
 
-- (nullable BuzzSentryTraceContext *)getTraceStateWithEvent:(SentryEvent *)event
+- (nullable BuzzSentryTraceContext *)getTraceStateWithEvent:(BuzzSentryEvent *)event
                                               withScope:(SentryScope *)scope
 {
     id<BuzzSentrySpan> span;
@@ -326,7 +326,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     return [[BuzzSentryTraceContext alloc] initWithTracer:tracer scope:scope options:_options];
 }
 
-- (SentryId *)sendEvent:(SentryEvent *)event
+- (SentryId *)sendEvent:(BuzzSentryEvent *)event
                  withScope:(SentryScope *)scope
     alwaysAttachStacktrace:(BOOL)alwaysAttachStacktrace
               isCrashEvent:(BOOL)isCrashEvent
@@ -338,13 +338,13 @@ NSString *const kSentryDefaultEnvironment = @"production";
         additionalEnvelopeItems:@[]];
 }
 
-- (SentryId *)sendEvent:(SentryEvent *)event
+- (SentryId *)sendEvent:(BuzzSentryEvent *)event
                   withScope:(SentryScope *)scope
      alwaysAttachStacktrace:(BOOL)alwaysAttachStacktrace
                isCrashEvent:(BOOL)isCrashEvent
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
-    SentryEvent *preparedEvent = [self prepareEvent:event
+    BuzzSentryEvent *preparedEvent = [self prepareEvent:event
                                           withScope:scope
                              alwaysAttachStacktrace:alwaysAttachStacktrace
                                        isCrashEvent:isCrashEvent];
@@ -372,7 +372,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     return SentryId.empty;
 }
 
-- (SentryId *)sendEvent:(SentryEvent *)event
+- (SentryId *)sendEvent:(BuzzSentryEvent *)event
             withSession:(SentrySession *)session
               withScope:(SentryScope *)scope
 {
@@ -457,7 +457,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self.transportAdapter recordLostEvent:category reason:reason];
 }
 
-- (SentryEvent *_Nullable)prepareEvent:(SentryEvent *)event
+- (BuzzSentryEvent *_Nullable)prepareEvent:(BuzzSentryEvent *)event
                              withScope:(SentryScope *)scope
                 alwaysAttachStacktrace:(BOOL)alwaysAttachStacktrace
 {
@@ -472,7 +472,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self.transportAdapter flush:timeout];
 }
 
-- (SentryEvent *_Nullable)prepareEvent:(SentryEvent *)event
+- (BuzzSentryEvent *_Nullable)prepareEvent:(BuzzSentryEvent *)event
                              withScope:(SentryScope *)scope
                 alwaysAttachStacktrace:(BOOL)alwaysAttachStacktrace
                           isCrashEvent:(BOOL)isCrashEvent
@@ -617,11 +617,11 @@ NSString *const kSentryDefaultEnvironment = @"production";
     SENTRY_LOG_DEBUG(@"SDK disabled or no DSN set. Won't do anyting.");
 }
 
-- (SentryEvent *_Nullable)callEventProcessors:(SentryEvent *)event
+- (BuzzSentryEvent *_Nullable)callEventProcessors:(BuzzSentryEvent *)event
 {
-    SentryEvent *newEvent = event;
+    BuzzSentryEvent *newEvent = event;
 
-    for (SentryEventProcessor processor in SentryGlobalEventProcessor.shared.processors) {
+    for (BuzzSentryEventProcessor processor in SentryGlobalEventProcessor.shared.processors) {
         newEvent = processor(newEvent);
         if (nil == newEvent) {
             SENTRY_LOG_DEBUG(@"SentryScope callEventProcessors: An event processor decided to "
@@ -632,7 +632,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     return newEvent;
 }
 
-- (void)setSdk:(SentryEvent *)event
+- (void)setSdk:(BuzzSentryEvent *)event
 {
     if (event.sdk) {
         return;
@@ -663,7 +663,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     };
 }
 
-- (void)setUserInfo:(NSDictionary *)userInfo withEvent:(SentryEvent *)event
+- (void)setUserInfo:(NSDictionary *)userInfo withEvent:(BuzzSentryEvent *)event
 {
     if (nil != event && nil != userInfo && userInfo.count > 0) {
         NSMutableDictionary *context;
@@ -678,7 +678,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 }
 
-- (void)setUserIdIfNoUserSet:(SentryEvent *)event
+- (void)setUserIdIfNoUserSet:(BuzzSentryEvent *)event
 {
     // We only want to set the id if the customer didn't set a user so we at least set something to
     // identify the user.
@@ -689,7 +689,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 }
 
-- (BOOL)isOOM:(SentryEvent *)event isCrashEvent:(BOOL)isCrashEvent
+- (BOOL)isOOM:(BuzzSentryEvent *)event isCrashEvent:(BOOL)isCrashEvent
 {
     if (!isCrashEvent) {
         return NO;
@@ -704,7 +704,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         [exception.mechanism.type isEqualToString:SentryOutOfMemoryMechanismType];
 }
 
-- (void)applyPermissionsToEvent:(SentryEvent *)event
+- (void)applyPermissionsToEvent:(BuzzSentryEvent *)event
 {
     [self modifyContext:event
                     key:@"app"
@@ -744,7 +744,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 }
 
-- (void)applyCultureContextToEvent:(SentryEvent *)event
+- (void)applyCultureContextToEvent:(BuzzSentryEvent *)event
 {
     [self modifyContext:event
                     key:@"culture"
@@ -770,7 +770,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                   }];
 }
 
-- (void)applyExtraDeviceContextToEvent:(SentryEvent *)event
+- (void)applyExtraDeviceContextToEvent:(BuzzSentryEvent *)event
 {
     [self
         modifyContext:event
@@ -804,7 +804,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                   }];
 }
 
-- (void)removeExtraDeviceContextFromEvent:(SentryEvent *)event
+- (void)removeExtraDeviceContextFromEvent:(BuzzSentryEvent *)event
 {
     [self modifyContext:event
                     key:@"device"
@@ -823,7 +823,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                   }];
 }
 
-- (void)modifyContext:(SentryEvent *)event
+- (void)modifyContext:(BuzzSentryEvent *)event
                   key:(NSString *)key
                 block:(void (^)(NSMutableDictionary *))block
 {

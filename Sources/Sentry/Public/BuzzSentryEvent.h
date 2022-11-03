@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 #import "SentryDefines.h"
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
     SentryBreadcrumb, SentryId, SentryMessage;
 
 NS_SWIFT_NAME(Event)
-@interface SentryEvent : NSObject <SentrySerializable>
+@interface BuzzSentryEvent : NSObject <BuzzSentrySerializable>
 
 /**
  * This will be set by the initializer.
@@ -160,24 +160,24 @@ NS_SWIFT_NAME(Event)
 @property (nonatomic, strong) NSArray<SentryBreadcrumb *> *_Nullable breadcrumbs;
 
 /**
- * Init an SentryEvent will set all needed fields by default
- * @return SentryEvent
+ * Init an BuzzSentryEvent will set all needed fields by default
+ * @return BuzzSentryEvent
  */
 - (instancetype)init;
 
 /**
- * Init an SentryEvent will set all needed fields by default
+ * Init an BuzzSentryEvent will set all needed fields by default
  * @param level SentryLevel
- * @return SentryEvent
+ * @return BuzzSentryEvent
  */
 - (instancetype)initWithLevel:(enum SentryLevel)level NS_DESIGNATED_INITIALIZER;
 
 /**
- * Initializes a SentryEvent with an NSError and sets the level to SentryLevelError.
+ * Initializes a BuzzSentryEvent with an NSError and sets the level to SentryLevelError.
  *
  * @param error The error of the event.
  *
- * @return The initialized SentryEvent.
+ * @return The initialized BuzzSentryEvent.
  */
 - (instancetype)initWithError:(NSError *)error;
 

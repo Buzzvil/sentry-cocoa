@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-#import "SentrySerializable.h"
+#import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Contains information about a loaded library in the process and the memory address.
  */
 NS_SWIFT_NAME(DebugMeta)
-@interface SentryDebugMeta : NSObject <SentrySerializable>
+@interface SentryDebugMeta : NSObject <BuzzSentrySerializable>
 
 /**
  * UUID of image
