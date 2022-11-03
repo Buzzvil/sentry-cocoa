@@ -1,4 +1,4 @@
-#import "SentryANRTracker.h"
+#import "BuzzSentryANRTracker.h"
 #import "SentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryLog.h"
@@ -7,20 +7,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryANRTracker ()
+BuzzSentryANRTracker ()
 
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryThreadWrapper *threadWrapper;
-@property (nonatomic, strong) NSMutableSet<id<SentryANRTrackerDelegate>> *listeners;
+@property (nonatomic, strong) NSMutableSet<id<BuzzSentryANRTrackerDelegate>> *listeners;
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 
 @property (weak, nonatomic) NSThread *thread;
 
 @end
 
-@implementation SentryANRTracker {
+@implementation BuzzSentryANRTracker {
     NSObject *threadLock;
     BOOL running;
 }
@@ -107,7 +107,7 @@ SentryANRTracker ()
         localListeners = [self.listeners allObjects];
     }
 
-    for (id<SentryANRTrackerDelegate> target in localListeners) {
+    for (id<BuzzSentryANRTrackerDelegate> target in localListeners) {
         [target anrDetected];
     }
 }
@@ -119,12 +119,12 @@ SentryANRTracker ()
         targets = [self.listeners allObjects];
     }
 
-    for (id<SentryANRTrackerDelegate> target in targets) {
+    for (id<BuzzSentryANRTrackerDelegate> target in targets) {
         [target anrStopped];
     }
 }
 
-- (void)addListener:(id<SentryANRTrackerDelegate>)listener
+- (void)addListener:(id<BuzzSentryANRTrackerDelegate>)listener
 {
     @synchronized(self.listeners) {
         [self.listeners addObject:listener];
@@ -139,7 +139,7 @@ SentryANRTracker ()
     }
 }
 
-- (void)removeListener:(id<SentryANRTrackerDelegate>)listener
+- (void)removeListener:(id<BuzzSentryANRTrackerDelegate>)listener
 {
     @synchronized(self.listeners) {
         [self.listeners removeObject:listener];

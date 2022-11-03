@@ -1,5 +1,5 @@
 #import "BuzzSentryOptions.h"
-#import "SentryANRTracker.h"
+#import "BuzzSentryANRTracker.h"
 #import "BuzzSentryDsn.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
@@ -29,7 +29,7 @@ BuzzSentryOptions ()
     return @[
         @"SentryCrashIntegration",
 #if SENTRY_HAS_UIKIT
-        @"SentryANRTrackingIntegration", @"BuzzSentryScreenshotIntegration",
+        @"BuzzSentryANRTrackingIntegration", @"BuzzSentryScreenshotIntegration",
         @"SentryUIEventTrackingIntegration", @"BuzzSentryViewHierarchyIntegration",
 #endif
         @"BuzzSentryFramesTrackingIntegration", @"BuzzSentryAutoBreadcrumbTrackingIntegration",

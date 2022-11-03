@@ -1,5 +1,5 @@
-#import "SentryANRTrackingIntegration.h"
-#import "SentryANRTracker.h"
+#import "BuzzSentryANRTrackingIntegration.h"
+#import "BuzzSentryANRTracker.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrashMachineContext.h"
 #import "SentryCrashWrapper.h"
@@ -19,14 +19,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryANRTrackingIntegration ()
+BuzzSentryANRTrackingIntegration ()
 
-@property (nonatomic, strong) SentryANRTracker *tracker;
+@property (nonatomic, strong) BuzzSentryANRTracker *tracker;
 @property (nonatomic, strong) BuzzSentryOptions *options;
 
 @end
 
-@implementation SentryANRTrackingIntegration
+@implementation BuzzSentryANRTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {

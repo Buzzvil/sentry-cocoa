@@ -3,7 +3,7 @@
 #import "BuzzSentryRandom.h"
 
 @class SentryAppStateManager, SentryCrashWrapper, SentryThreadWrapper, SentrySwizzleWrapper,
-    BuzzSentryDispatchQueueWrapper, SentryDebugImageProvider, SentryANRTracker,
+    BuzzSentryDispatchQueueWrapper, SentryDebugImageProvider, BuzzSentryANRTracker,
     SentryNSNotificationCenterWrapper;
 
 #if SENTRY_HAS_UIKIT
@@ -31,7 +31,7 @@ SENTRY_NO_INIT
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryNSNotificationCenterWrapper *notificationCenterWrapper;
 @property (nonatomic, strong) SentryDebugImageProvider *debugImageProvider;
-@property (nonatomic, strong) SentryANRTracker *anrTracker;
+@property (nonatomic, strong) BuzzSentryANRTracker *anrTracker;
 
 #if SENTRY_HAS_UIKIT
 @property (nonatomic, strong) BuzzSentryScreenshot *screenshot;
@@ -39,7 +39,7 @@ SENTRY_NO_INIT
 @property (nonatomic, strong) BuzzSentryUIApplication *application;
 #endif
 
-- (SentryANRTracker *)getANRTracker:(NSTimeInterval)timeout;
+- (BuzzSentryANRTracker *)getANRTracker:(NSTimeInterval)timeout;
 
 @end
 

@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
+class BuzzSentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
     
     private class Fixture {
         let options: Options
@@ -15,7 +15,7 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
     }
     
     private var fixture: Fixture!
-    private var sut: SentryANRTrackingIntegration!
+    private var sut: BuzzSentryANRTrackingIntegration!
     
     override var options: Options {
         self.fixture.options
@@ -46,7 +46,7 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
         let options = Options()
         options.enableAppHangTracking = false
         
-        sut = SentryANRTrackingIntegration()
+        sut = BuzzSentryANRTrackingIntegration()
         let result = sut.install(with: options)
 
         XCTAssertFalse(result)
@@ -57,7 +57,7 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
         options.enableAppHangTracking = true
         options.appHangTimeoutInterval = 0
         
-        sut = SentryANRTrackingIntegration()
+        sut = BuzzSentryANRTrackingIntegration()
         let result = sut.install(with: options)
         
         XCTAssertFalse(result)
@@ -101,7 +101,7 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
     private func givenInitializedTracker(isBeingTraced: Bool = false) {
         givenSdkWithHub()
         self.crashWrapper.internalIsBeingTraced = isBeingTraced
-        sut = SentryANRTrackingIntegration()
+        sut = BuzzSentryANRTrackingIntegration()
         sut.install(with: self.options)
     }
     

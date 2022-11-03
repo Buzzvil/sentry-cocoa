@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SentryANRTrackerDelegate;
+@protocol BuzzSentryANRTrackerDelegate;
 
 /**
  * This class detects ANRs with a dedicated watchdog thread. The thread schedules a simple block to
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  * and it executes all events in time. Instead, what matters is how long the main thread needs to
  * execute a newly added event to the run loop.
  */
-@interface SentryANRTracker : NSObject
+@interface BuzzSentryANRTracker : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithTimeoutInterval:(NSTimeInterval)timeoutInterval
@@ -30,16 +30,16 @@ SENTRY_NO_INIT
                    dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                           threadWrapper:(SentryThreadWrapper *)threadWrapper;
 
-- (void)addListener:(id<SentryANRTrackerDelegate>)listener;
+- (void)addListener:(id<BuzzSentryANRTrackerDelegate>)listener;
 
-- (void)removeListener:(id<SentryANRTrackerDelegate>)listener;
+- (void)removeListener:(id<BuzzSentryANRTrackerDelegate>)listener;
 
 // Function used for tests
 - (void)clear;
 
 @end
 
-@protocol SentryANRTrackerDelegate <NSObject>
+@protocol BuzzSentryANRTrackerDelegate <NSObject>
 
 - (void)anrDetected;
 

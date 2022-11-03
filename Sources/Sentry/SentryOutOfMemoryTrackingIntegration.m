@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 SentryOutOfMemoryTrackingIntegration ()
 
 @property (nonatomic, strong) SentryOutOfMemoryTracker *tracker;
-@property (nonatomic, strong) SentryANRTracker *anrTracker;
+@property (nonatomic, strong) BuzzSentryANRTracker *anrTracker;
 @property (nullable, nonatomic, copy) NSString *testConfigurationFilePath;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
 

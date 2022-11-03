@@ -1,4 +1,4 @@
-#import "SentryANRTracker.h"
+#import "BuzzSentryANRTracker.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryUIApplication.h"
@@ -193,12 +193,12 @@ static NSObject *sentryDependencyContainerLock;
     return _debugImageProvider;
 }
 
-- (SentryANRTracker *)getANRTracker:(NSTimeInterval)timeout
+- (BuzzSentryANRTracker *)getANRTracker:(NSTimeInterval)timeout
 {
     if (_anrTracker == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_anrTracker == nil) {
-                _anrTracker = [[SentryANRTracker alloc]
+                _anrTracker = [[BuzzSentryANRTracker alloc]
                     initWithTimeoutInterval:timeout
                         currentDateProvider:[SentryDefaultCurrentDateProvider sharedInstance]
                                crashWrapper:self.crashWrapper

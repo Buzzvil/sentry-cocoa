@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryOutOfMemoryTrackingIntegration
+@interface BuzzSentryANRTrackingIntegration
     : SentryBaseIntegration <BuzzSentryIntegrationProtocol, BuzzSentryANRTrackerDelegate>
 
 @end
