@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (instancetype)initWithValue:(NSNumber *)value unit:(SentryMeasurementUnit *)unit
+- (instancetype)initWithValue:(NSNumber *)value unit:(BuzzSentryMeasurementUnit *)unit
 {
     if (self = [super init]) {
         _value = value;

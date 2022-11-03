@@ -35,7 +35,7 @@ class SentryHttpTransportTests: XCTestCase {
         let userFeedback: UserFeedback
         let userFeedbackRequest: SentryNSURLRequest
         
-        let clientReport: SentryClientReport
+        let clientReport: BuzzSentryClientReport
         let clientReportEnvelope: SentryEnvelope
         let clientReportRequest: SentryNSURLRequest
         
@@ -77,7 +77,7 @@ class SentryHttpTransportTests: XCTestCase {
             let sampleRateTransaction = SentryDiscardedEvent(reason: .sampleRate, category: .transaction, quantity: 1)
             let rateLimitBackoffError = SentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
             
-            clientReport = SentryClientReport(discardedEvents: [
+            clientReport = BuzzSentryClientReport(discardedEvents: [
                 beforeSendTransaction,
                 sampleRateTransaction,
                 rateLimitBackoffError
@@ -204,7 +204,7 @@ class SentryHttpTransportTests: XCTestCase {
 
         // Envelope with only session and client report is sent
         let discardedError = SentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
-        let clientReport = SentryClientReport(discardedEvents: [discardedError])
+        let clientReport = BuzzSentryClientReport(discardedEvents: [discardedError])
         let envelopeItems = [
             SentryEnvelopeItem(session: fixture.session),
             SentryEnvelopeItem(clientReport: clientReport)
@@ -473,7 +473,7 @@ class SentryHttpTransportTests: XCTestCase {
     
     func testEventRateLimited_RecordsLostEvent() {
         let rateLimitBackoffError = SentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
-        let clientReport = SentryClientReport(discardedEvents: [rateLimitBackoffError])
+        let clientReport = BuzzSentryClientReport(discardedEvents: [rateLimitBackoffError])
         
         let clientReportEnvelopeItems = [
             fixture.attachmentEnvelopeItem,

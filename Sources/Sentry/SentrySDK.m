@@ -326,7 +326,7 @@ static NSUInteger startInvocations;
     }
 }
 
-+ (void)captureUserFeedback:(SentryUserFeedback *)userFeedback
++ (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
     [SentrySDK.currentHub captureUserFeedback:userFeedback];
 }

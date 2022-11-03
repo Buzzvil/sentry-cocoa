@@ -24,11 +24,11 @@ ViewController ()
         [scope setUser:user];
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Tongariro" ofType:@"jpg"];
-        [scope addAttachment:[[SentryAttachment alloc] initWithPath:path
+        [scope addAttachment:[[BuzzSentryAttachment alloc] initWithPath:path
                                                            filename:@"Tongariro.jpg"
                                                         contentType:@"image/jpeg"]];
 
-        [scope addAttachment:[[SentryAttachment alloc]
+        [scope addAttachment:[[BuzzSentryAttachment alloc]
                                  initWithData:[@"hello" dataUsingEncoding:NSUTF8StringEncoding]
                                      filename:@"log.txt"]];
     }];
@@ -71,7 +71,7 @@ ViewController ()
           captureError:error
         withScopeBlock:^(SentryScope *_Nonnull scope) { [scope setLevel:kSentryLevelFatal]; }];
 
-    SentryUserFeedback *userFeedback = [[SentryUserFeedback alloc] initWithEventId:eventId];
+    BuzzSentryUserFeedback *userFeedback = [[BuzzSentryUserFeedback alloc] initWithEventId:eventId];
     userFeedback.comments = @"It broke on iOS-ObjectiveC. I don't know why, but this happens.";
     userFeedback.email = @"john@me.com";
     userFeedback.name = @"John Me";

@@ -1,7 +1,7 @@
 #import "SentryEnvelope.h"
-#import "SentryAttachment.h"
+#import "BuzzSentryAttachment.h"
 #import "SentryBreadcrumb.h"
-#import "SentryClientReport.h"
+#import "BuzzSentryClientReport.h"
 #import "SentryEnvelopeItemType.h"
 #import "SentryEvent.h"
 #import "SentryLog.h"
@@ -11,7 +11,7 @@
 #import "SentrySerialization.h"
 #import "SentrySession.h"
 #import "BuzzSentryTransaction.h"
-#import "SentryUserFeedback.h"
+#import "BuzzSentryUserFeedback.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
                   data:json];
 }
 
-- (instancetype)initWithUserFeedback:(SentryUserFeedback *)userFeedback
+- (instancetype)initWithUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
     NSError *error = nil;
     NSData *json = [NSJSONSerialization dataWithJSONObject:[userFeedback serialize]
@@ -150,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
                            data:json];
 }
 
-- (instancetype)initWithClientReport:(SentryClientReport *)clientReport
+- (instancetype)initWithClientReport:(BuzzSentryClientReport *)clientReport
 {
     NSError *error = nil;
     NSData *json = [NSJSONSerialization dataWithJSONObject:[clientReport serialize]
@@ -168,7 +168,7 @@ NS_ASSUME_NONNULL_BEGIN
                            data:json];
 }
 
-- (_Nullable instancetype)initWithAttachment:(SentryAttachment *)attachment
+- (_Nullable instancetype)initWithAttachment:(BuzzSentryAttachment *)attachment
                            maxAttachmentSize:(NSUInteger)maxAttachmentSize
 {
     NSData *data = nil;
@@ -252,7 +252,7 @@ NS_ASSUME_NONNULL_BEGIN
                      singleItem:item];
 }
 
-- (instancetype)initWithUserFeedback:(SentryUserFeedback *)userFeedback
+- (instancetype)initWithUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
     SentryEnvelopeItem *item = [[SentryEnvelopeItem alloc] initWithUserFeedback:userFeedback];
 

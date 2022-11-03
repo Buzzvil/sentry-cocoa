@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryUserFeedbackTests: XCTestCase {
+class BuzzSentryUserFeedbackTests: XCTestCase {
     
     func testPropertiesAreSetToEmptyString() {
         let userFeedback = UserFeedback(eventId: SentryId())

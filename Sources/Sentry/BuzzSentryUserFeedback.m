@@ -1,8 +1,8 @@
-#import "SentryUserFeedback.h"
+#import "BuzzSentryUserFeedback.h"
 #import "SentryId.h"
 #import <Foundation/Foundation.h>
 
-@implementation SentryUserFeedback
+@implementation BuzzSentryUserFeedback
 
 - (instancetype)initWithEventId:(SentryId *)eventId
 {

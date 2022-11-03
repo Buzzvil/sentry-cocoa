@@ -3,11 +3,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryAttachment (Equality)
+BuzzSentryAttachment (Equality)
 
 - (BOOL)isEqual:(id _Nullable)other;
 
-- (BOOL)isEqualToAttachment:(SentryAttachment *)attachment;
+- (BOOL)isEqualToAttachment:(BuzzSentryAttachment *)attachment;
 
 - (NSUInteger)hash;
 

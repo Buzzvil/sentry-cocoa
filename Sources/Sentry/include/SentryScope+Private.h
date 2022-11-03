@@ -3,7 +3,7 @@
 #import "SentryScope.h"
 #import "SentryScopeObserver.h"
 
-@class SentryAttachment;
+@class BuzzSentryAttachment;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -12,7 +12,7 @@ SentryScope (Private)
 
 @property (atomic, copy, readonly, nullable) NSString *environmentString;
 
-@property (atomic, strong, readonly) NSArray<SentryAttachment *> *attachments;
+@property (atomic, strong, readonly) NSArray<BuzzSentryAttachment *> *attachments;
 
 @property (atomic, strong) SentryUser *_Nullable userObject;
 

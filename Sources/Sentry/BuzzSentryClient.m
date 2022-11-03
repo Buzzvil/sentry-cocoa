@@ -1,7 +1,7 @@
 #import "BuzzSentryClient.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "NSLocale+Sentry.h"
-#import "SentryAttachment.h"
+#import "BuzzSentryAttachment.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrashDefaultMachineContextWrapper.h"
 #import "SentryCrashIntegration.h"
@@ -44,7 +44,7 @@
 #import "SentryTransportFactory.h"
 #import "SentryUIDeviceWrapper.h"
 #import "SentryUser.h"
-#import "SentryUserFeedback.h"
+#import "BuzzSentryUserFeedback.h"
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>
@@ -432,7 +432,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self.transportAdapter sendEnvelope:envelope];
 }
 
-- (void)captureUserFeedback:(SentryUserFeedback *)userFeedback
+- (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
     if ([self isDisabled]) {
         [self logDisabledMessage];

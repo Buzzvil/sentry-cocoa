@@ -3,7 +3,7 @@
 @protocol BuzzSentrySpan;
 
 @class BuzzSentryOptions, SentryEvent, SentryBreadcrumb, SentryScope, SentryUser, SentryId,
-    SentryUserFeedback, BuzzSentryTransactionContext;
+    BuzzSentryUserFeedback, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -255,7 +255,7 @@ SENTRY_NO_INIT
  *
  * @param userFeedback The user feedback to send to Sentry.
  */
-+ (void)captureUserFeedback:(SentryUserFeedback *)userFeedback
++ (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
     NS_SWIFT_NAME(capture(userFeedback:));
 
 /**

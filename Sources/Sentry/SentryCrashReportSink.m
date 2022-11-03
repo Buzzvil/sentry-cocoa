@@ -1,5 +1,5 @@
 #import "SentryCrashReportSink.h"
-#import "SentryAttachment.h"
+#import "BuzzSentryAttachment.h"
 #import "BuzzSentryClient.h"
 #import "SentryCrash.h"
 #include "SentryCrashMonitor_AppState.h"
@@ -94,7 +94,7 @@ SentryCrashReportSink ()
 
     if (report[SENTRYCRASH_REPORT_ATTACHMENTS_ITEM]) {
         for (NSString *ssPath in report[SENTRYCRASH_REPORT_ATTACHMENTS_ITEM]) {
-            [scope addAttachment:[[SentryAttachment alloc] initWithPath:ssPath]];
+            [scope addAttachment:[[BuzzSentryAttachment alloc] initWithPath:ssPath]];
         }
     }
 

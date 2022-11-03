@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentrySpanId, SentryId, BuzzSentryTraceHeader, SentryMeasurementUnit;
+@class BuzzSentrySpanId, SentryId, BuzzSentryTraceHeader, BuzzSentryMeasurementUnit;
 
 NS_SWIFT_NAME(Span)
 @protocol BuzzSentrySpan <SentrySerializable>
@@ -113,7 +113,7 @@ NS_SWIFT_NAME(Span)
  */
 - (void)setMeasurement:(NSString *)name
                  value:(NSNumber *)value
-                  unit:(SentryMeasurementUnit *)unit
+                  unit:(BuzzSentryMeasurementUnit *)unit
     NS_SWIFT_NAME(setMeasurement(name:value:unit:));
 
 /**

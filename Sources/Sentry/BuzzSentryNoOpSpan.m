@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
 }
 
-- (void)setMeasurement:(NSString *)name value:(NSNumber *)value unit:(SentryMeasurementUnit *)unit
+- (void)setMeasurement:(NSString *)name value:(NSNumber *)value unit:(BuzzSentryMeasurementUnit *)unit
 {
 }
 

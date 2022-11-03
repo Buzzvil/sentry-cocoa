@@ -1,7 +1,7 @@
-#import "SentryAttachment+Equality.h"
+#import "BuzzSentryAttachment+Equality.h"
 
 @implementation
-SentryAttachment (Equality)
+BuzzSentryAttachment (Equality)
 
 - (BOOL)isEqual:(id _Nullable)other
 {
@@ -13,7 +13,7 @@ SentryAttachment (Equality)
     return [self isEqualToAttachment:other];
 }
 
-- (BOOL)isEqualToAttachment:(SentryAttachment *)attachment
+- (BOOL)isEqualToAttachment:(BuzzSentryAttachment *)attachment
 {
     if (self == attachment)
         return YES;

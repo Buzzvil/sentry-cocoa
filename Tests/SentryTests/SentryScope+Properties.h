@@ -17,7 +17,7 @@ SentryScope (Properties)
 @property (atomic, strong) NSArray<NSString *> *_Nullable fingerprintArray;
 @property (atomic) enum SentryLevel levelEnum;
 @property (atomic) NSInteger maxBreadcrumbs;
-@property (atomic, strong) NSMutableArray<SentryAttachment *> *attachmentArray;
+@property (atomic, strong) NSMutableArray<BuzzSentryAttachment *> *attachmentArray;
 
 @end
 

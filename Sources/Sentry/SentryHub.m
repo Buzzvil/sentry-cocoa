@@ -470,7 +470,7 @@ SentryHub ()
     return SentryId.empty;
 }
 
-- (void)captureUserFeedback:(SentryUserFeedback *)userFeedback
+- (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
     BuzzSentryClient *client = _client;
     if (nil != client) {

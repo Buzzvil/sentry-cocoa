@@ -3,8 +3,8 @@
 #import "SentryDiscardReason.h"
 #import "SentryTransport.h"
 
-@class SentryEnvelope, SentryEnvelopeItem, SentryEvent, SentrySession, SentryUserFeedback,
-    SentryAttachment, BuzzSentryTraceContext, BuzzSentryOptions;
+@class SentryEnvelope, SentryEnvelopeItem, SentryEvent, SentrySession, BuzzSentryUserFeedback,
+    BuzzSentryAttachment, BuzzSentryTraceContext, BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,30 +19,30 @@ SENTRY_NO_INIT
 - (instancetype)initWithTransport:(id<SentryTransport>)transport options:(BuzzSentryOptions *)options;
 
 - (void)sendEvent:(SentryEvent *)event
-      attachments:(NSArray<SentryAttachment *> *)attachments
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments
     NS_SWIFT_NAME(send(event:attachments:));
 
 - (void)sendEvent:(SentryEvent *)event
           session:(SentrySession *)session
-      attachments:(NSArray<SentryAttachment *> *)attachments;
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments;
 
 - (void)sendEvent:(SentryEvent *)event
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
-      attachments:(NSArray<SentryAttachment *> *)attachments
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments
     NS_SWIFT_NAME(send(event:traceContext:attachments:));
 
 - (void)sendEvent:(SentryEvent *)event
                traceContext:(nullable BuzzSentryTraceContext *)traceContext
-                attachments:(NSArray<SentryAttachment *> *)attachments
+                attachments:(NSArray<BuzzSentryAttachment *> *)attachments
     additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(send(event:traceContext:attachments:additionalEnvelopeItems:));
 
 - (void)sendEvent:(SentryEvent *)event
       withSession:(SentrySession *)session
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
-      attachments:(NSArray<SentryAttachment *> *)attachments;
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments;
 
-- (void)sendUserFeedback:(SentryUserFeedback *)userFeedback NS_SWIFT_NAME(send(userFeedback:));
+- (void)sendUserFeedback:(BuzzSentryUserFeedback *)userFeedback NS_SWIFT_NAME(send(userFeedback:));
 
 - (void)sendEnvelope:(SentryEnvelope *)envelope NS_SWIFT_NAME(send(envelope:));
 

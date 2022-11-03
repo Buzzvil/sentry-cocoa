@@ -2,7 +2,7 @@
 #import "SentrySerializable.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class SentryUser, SentrySession, BuzzSentryOptions, SentryBreadcrumb, SentryAttachment;
+@class SentryUser, SentrySession, BuzzSentryOptions, SentryBreadcrumb, BuzzSentryAttachment;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -126,7 +126,7 @@ NS_SWIFT_NAME(Scope)
  *
  * @param attachment The attachment to add to the Scope's list of attachments.
  */
-- (void)addAttachment:(SentryAttachment *)attachment;
+- (void)addAttachment:(BuzzSentryAttachment *)attachment;
 
 /**
  * Clears all attachments in the scope.

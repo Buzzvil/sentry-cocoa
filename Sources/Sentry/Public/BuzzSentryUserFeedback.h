@@ -9,11 +9,11 @@ NS_ASSUME_NONNULL_BEGIN
  * Adds additional information about what happened to an event.
  */
 NS_SWIFT_NAME(UserFeedback)
-@interface SentryUserFeedback : NSObject <SentrySerializable>
+@interface BuzzSentryUserFeedback : NSObject <SentrySerializable>
 SENTRY_NO_INIT
 
 /**
- * Initializes SentryUserFeedback and sets the required eventId.
+ * Initializes BuzzSentryUserFeedback and sets the required eventId.
  *
  * @param eventId The eventId of the event to which the user feedback is associated.
  */

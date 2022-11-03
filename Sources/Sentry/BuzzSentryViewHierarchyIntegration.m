@@ -1,5 +1,5 @@
 #import "BuzzSentryViewHierarchyIntegration.h"
-#import "SentryAttachment.h"
+#import "BuzzSentryAttachment.h"
 #import "SentryCrashC.h"
 #import "SentryDependencyContainer.h"
 #import "SentryEvent+Private.h"
@@ -45,7 +45,7 @@ saveViewHierarchy(const char *path)
     [client removeAttachmentProcessor:self];
 }
 
-- (NSArray<SentryAttachment *> *)processAttachments:(NSArray<SentryAttachment *> *)attachments
+- (NSArray<BuzzSentryAttachment *> *)processAttachments:(NSArray<BuzzSentryAttachment *> *)attachments
                                            forEvent:(nonnull SentryEvent *)event
 {
     // We don't attach the view hierarchy if there is no exception/error.
@@ -61,7 +61,7 @@ saveViewHierarchy(const char *path)
     [result addObjectsFromArray:attachments];
 
     [decriptions enumerateObjectsUsingBlock:^(NSString *decription, NSUInteger idx, BOOL *stop) {
-        SentryAttachment *attachment = [[SentryAttachment alloc]
+        BuzzSentryAttachment *attachment = [[BuzzSentryAttachment alloc]
             initWithData:[decription dataUsingEncoding:NSUTF8StringEncoding]
                 filename:[NSString stringWithFormat:@"view-hierarchy-%lu.txt", (unsigned long)idx]
              contentType:@"text/plain"];

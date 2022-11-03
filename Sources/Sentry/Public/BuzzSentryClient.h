@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 
 @class BuzzSentryOptions, SentrySession, SentryEvent, SentryEnvelope, SentryScope, SentryFileManager,
-    SentryId, SentryUserFeedback, BuzzSentryTransaction;
+    SentryId, BuzzSentryUserFeedback, BuzzSentryTransaction;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -104,7 +104,7 @@ SENTRY_NO_INIT
  *
  * @param userFeedback The user feedback to send to Sentry.
  */
-- (void)captureUserFeedback:(SentryUserFeedback *)userFeedback
+- (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
     NS_SWIFT_NAME(capture(userFeedback:));
 
 - (void)captureSession:(SentrySession *)session NS_SWIFT_NAME(capture(session:));

@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentryMeasurementUnit.h"
+#import "BuzzSentryMeasurementUnit.h"
 #import "SentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -9,10 +9,10 @@ SENTRY_NO_INIT
 
 - (instancetype)initWithValue:(NSNumber *)value;
 
-- (instancetype)initWithValue:(NSNumber *)value unit:(SentryMeasurementUnit *)unit;
+- (instancetype)initWithValue:(NSNumber *)value unit:(BuzzSentryMeasurementUnit *)unit;
 
 @property (nonatomic, copy, readonly) NSNumber *value;
-@property (nullable, readonly, copy) SentryMeasurementUnit *unit;
+@property (nullable, readonly, copy) BuzzSentryMeasurementUnit *unit;
 
 @end
 

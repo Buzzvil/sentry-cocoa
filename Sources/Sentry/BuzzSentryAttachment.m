@@ -1,11 +1,11 @@
-#import "SentryAttachment.h"
+#import "BuzzSentryAttachment.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 NSString *const DefaultContentType = @"application/octet-stream";
 
-@implementation SentryAttachment
+@implementation BuzzSentryAttachment
 
 - (instancetype)initWithData:(NSData *)data filename:(NSString *)filename
 {

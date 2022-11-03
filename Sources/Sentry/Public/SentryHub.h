@@ -3,7 +3,7 @@
 #import "BuzzSentrySpanProtocol.h"
 
 @class SentryEvent, BuzzSentryClient, SentryScope, SentrySession, SentryUser, SentryBreadcrumb,
-    SentryId, SentryUserFeedback, SentryEnvelope, BuzzSentryTransactionContext;
+    SentryId, BuzzSentryUserFeedback, SentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface SentryHub : NSObject
@@ -197,7 +197,7 @@ SENTRY_NO_INIT
  *
  * @param userFeedback The user feedback to send to Sentry.
  */
-- (void)captureUserFeedback:(SentryUserFeedback *)userFeedback
+- (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
     NS_SWIFT_NAME(capture(userFeedback:));
 
 /**

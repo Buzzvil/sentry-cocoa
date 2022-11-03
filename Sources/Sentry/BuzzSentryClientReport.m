@@ -1,11 +1,11 @@
-#import "SentryClientReport.h"
+#import "BuzzSentryClientReport.h"
 #import "SentryCurrentDate.h"
 #import <Foundation/Foundation.h>
 #import <SentryDiscardedEvent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryClientReport
+@implementation BuzzSentryClientReport
 
 - (instancetype)initWithDiscardedEvents:(NSArray<SentryDiscardedEvent *> *)discardedEvents
 {

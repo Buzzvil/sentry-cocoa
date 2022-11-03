@@ -100,7 +100,7 @@ BuzzSentrySpan ()
     [self.tracer setMeasurement:name value:value];
 }
 
-- (void)setMeasurement:(NSString *)name value:(NSNumber *)value unit:(SentryMeasurementUnit *)unit
+- (void)setMeasurement:(NSString *)name value:(NSNumber *)value unit:(BuzzSentryMeasurementUnit *)unit
 {
     [self.tracer setMeasurement:name value:value unit:unit];
 }

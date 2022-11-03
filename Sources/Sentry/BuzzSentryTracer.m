@@ -385,7 +385,7 @@ static BOOL appStartMeasurementRead;
     _measurements[name] = measurement;
 }
 
-- (void)setMeasurement:(NSString *)name value:(NSNumber *)value unit:(SentryMeasurementUnit *)unit
+- (void)setMeasurement:(NSString *)name value:(NSNumber *)value unit:(BuzzSentryMeasurementUnit *)unit
 {
     BuzzSentryMeasurementValue *measurement = [[BuzzSentryMeasurementValue alloc] initWithValue:value
                                                                                    unit:unit];

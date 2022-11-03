@@ -1,5 +1,5 @@
 #import "BuzzSentryScreenshotIntegration.h"
-#import "SentryAttachment.h"
+#import "BuzzSentryAttachment.h"
 #import "SentryCrashC.h"
 #import "SentryDependencyContainer.h"
 #import "SentryEvent+Private.h"
@@ -44,7 +44,7 @@ saveScreenShot(const char *path)
     [client removeAttachmentProcessor:self];
 }
 
-- (NSArray<SentryAttachment *> *)processAttachments:(NSArray<SentryAttachment *> *)attachments
+- (NSArray<BuzzSentryAttachment *> *)processAttachments:(NSArray<BuzzSentryAttachment *> *)attachments
                                            forEvent:(nonnull SentryEvent *)event
 {
 
@@ -64,7 +64,7 @@ saveScreenShot(const char *path)
         NSString *name
             = i == 0 ? @"screenshot.png" : [NSString stringWithFormat:@"screenshot-%i.png", i + 1];
 
-        SentryAttachment *att = [[SentryAttachment alloc] initWithData:screenshot[i]
+        BuzzSentryAttachment *att = [[BuzzSentryAttachment alloc] initWithData:screenshot[i]
                                                               filename:name
                                                            contentType:@"image/png"];
         [result addObject:att];

@@ -2,7 +2,7 @@
 #import "SentryDataCategory.h"
 #import "SentryDiscardReason.h"
 
-@class SentryEnvelopeItem, SentryId, SentryAttachment, SentryThreadInspector;
+@class SentryEnvelopeItem, SentryId, BuzzSentryAttachment, SentryThreadInspector;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -10,8 +10,8 @@ FOUNDATION_EXPORT NSString *const kSentryDefaultEnvironment;
 
 @protocol BuzzSentryClientAttachmentProcessor <NSObject>
 
-- (nullable NSArray<SentryAttachment *> *)processAttachments:
-                                              (nullable NSArray<SentryAttachment *> *)attachments
+- (nullable NSArray<BuzzSentryAttachment *> *)processAttachments:
+                                              (nullable NSArray<BuzzSentryAttachment *> *)attachments
                                                     forEvent:(SentryEvent *)event;
 
 @end

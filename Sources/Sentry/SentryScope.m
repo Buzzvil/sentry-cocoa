@@ -1,5 +1,5 @@
 #import "SentryScope.h"
-#import "SentryAttachment.h"
+#import "BuzzSentryAttachment.h"
 #import "SentryBreadcrumb.h"
 #import "SentryEnvelopeItemType.h"
 #import "SentryEvent.h"
@@ -66,7 +66,7 @@ SentryScope ()
 
 @property (atomic) NSInteger maxBreadcrumbs;
 
-@property (atomic, strong) NSMutableArray<SentryAttachment *> *attachmentArray;
+@property (atomic, strong) NSMutableArray<BuzzSentryAttachment *> *attachmentArray;
 
 @property (nonatomic, retain) NSMutableArray<id<SentryScopeObserver>> *observers;
 
@@ -378,7 +378,7 @@ SentryScope ()
     }
 }
 
-- (void)addAttachment:(SentryAttachment *)attachment
+- (void)addAttachment:(BuzzSentryAttachment *)attachment
 {
     @synchronized(_attachmentArray) {
         [_attachmentArray addObject:attachment];
@@ -392,7 +392,7 @@ SentryScope ()
     }
 }
 
-- (NSArray<SentryAttachment *> *)attachments
+- (NSArray<BuzzSentryAttachment *> *)attachments
 {
     @synchronized(_attachmentArray) {
         return _attachmentArray.copy;

@@ -1,5 +1,5 @@
 #import "SentryHttpTransport.h"
-#import "SentryClientReport.h"
+#import "BuzzSentryClientReport.h"
 #import "SentryCurrentDate.h"
 #import "SentryDataCategoryMapper.h"
 #import "SentryDiscardReasonMapper.h"
@@ -224,7 +224,7 @@ SentryHttpTransport ()
         [self.discardedEvents removeAllObjects];
     }
 
-    SentryClientReport *clientReport = [[SentryClientReport alloc] initWithDiscardedEvents:events];
+    BuzzSentryClientReport *clientReport = [[BuzzSentryClientReport alloc] initWithDiscardedEvents:events];
 
     SentryEnvelopeItem *clientReportEnvelopeItem =
         [[SentryEnvelopeItem alloc] initWithClientReport:clientReport];
