@@ -1,18 +1,18 @@
 Pod::Spec.new do |s|
-  s.name         = "Sentry"
-  s.version      = "7.29.0"
-  s.summary      = "Sentry client for cocoa"
-  s.homepage     = "https://github.com/getsentry/sentry-cocoa"
+  s.name         = "BuzzSentry"
+  s.version      = "0.0.1"
+  s.summary      = "Buzzvil Sentry client for cocoa"
+  s.homepage     = "https://github.com/Buzzvil/sentry-cocoa"
   s.license      = "mit"
-  s.authors      = "Sentry"
-  s.source       = { :git => "https://github.com/getsentry/sentry-cocoa.git",
+  s.authors      = "Buzzvil"
+  s.source       = { :git => "https://github.com/Buzzvil/sentry-cocoa.git",
                      :tag => s.version.to_s }
 
   s.ios.deployment_target = "9.0"
   s.osx.deployment_target = "10.10"
   s.tvos.deployment_target = "9.0"
   s.watchos.deployment_target = "2.0"
-  s.module_name  = "Sentry"
+  s.module_name  = "BuzzSentry"
   s.requires_arc = true
   s.frameworks = 'Foundation'
   s.libraries = 'z', 'c++'

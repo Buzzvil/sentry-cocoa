@@ -2,10 +2,10 @@ import Foundation
 import Regex
 import SwiftShell
 
-let fromVersionFile = "./Sentry.podspec"
+let fromVersionFile = "./BuzzSentry.podspec"
 
 let files = [
-    "./Sentry.podspec",
+    "./BuzzSentry.podspec",
     "./Sources/Sentry/BuzzSentryMeta.m",
     "./Sources/Configuration/Sentry.xcconfig",
     "./Samples/iOS-Swift/iOS-Swift.xcodeproj/project.pbxproj"
