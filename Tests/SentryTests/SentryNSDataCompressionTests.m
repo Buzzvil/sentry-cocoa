@@ -1,4 +1,4 @@
-#import "NSData+SentryCompression.h"
+#import "NSData+BuzzSentryCompression.h"
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
 

@@ -6,7 +6,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-UIViewController (Sentry)
+UIViewController (BuzzSentry)
 
 /**
  * An array of view controllers that are descendants, meaning children, grandchildren, ... , of the

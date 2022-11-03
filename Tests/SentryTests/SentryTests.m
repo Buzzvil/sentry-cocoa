@@ -1,4 +1,4 @@
-#import "NSDate+SentryExtras.h"
+#import "NSDate+BuzzSentryExtras.h"
 #import "BuzzSentryBreadcrumbTracker.h"
 #import "SentryLevelMapper.h"
 #import "BuzzSentryMessage.h"

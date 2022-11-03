@@ -1,5 +1,5 @@
 #import "BuzzSentrySession.h"
-#import "NSDate+SentryExtras.h"
+#import "NSDate+BuzzSentryExtras.h"
 #import "SentryCurrentDate.h"
 #import "BuzzSentryInstallation.h"
 #import "SentryLog.h"

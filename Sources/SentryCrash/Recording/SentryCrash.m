@@ -36,7 +36,7 @@
 #import "SentryCrashReportFields.h"
 #import "SentryCrashReportStore.h"
 #import "SentryCrashSystemCapabilities.h"
-#import <NSData+Sentry.h>
+#import <NSData+BuzzSentry.h>
 
 //#define SentryCrashLogger_LocalLevel TRACE
 #import "SentryCrashLogger.h"

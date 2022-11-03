@@ -1,5 +1,5 @@
 #import "BuzzSentryTracer.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryClient.h"

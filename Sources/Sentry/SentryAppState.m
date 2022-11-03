@@ -1,4 +1,4 @@
-#import <NSDate+SentryExtras.h>
+#import <NSDate+BuzzSentryExtras.h>
 #import <SentryAppState.h>
 
 NS_ASSUME_NONNULL_BEGIN

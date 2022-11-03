@@ -1,6 +1,6 @@
-#import "NSArray+SentrySanitize.h"
-#import "NSDate+SentryExtras.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSArray+BuzzSentrySanitize.h"
+#import "NSDate+BuzzSentryExtras.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 
 @implementation
 NSDictionary (SentrySanitize)

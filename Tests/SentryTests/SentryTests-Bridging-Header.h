@@ -2,9 +2,9 @@
 //  Use this file to import your target's public headers that you would like to
 //  expose to Swift.
 //
-#import "NSData+Sentry.h"
-#import "NSData+SentryCompression.h"
-#import "NSDate+SentryExtras.h"
+#import "NSData+BuzzSentry.h"
+#import "NSData+BuzzSentryCompression.h"
+#import "NSDate+BuzzSentryExtras.h"
 #import "NSURLProtocolSwizzle.h"
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "BuzzSentryANRTracker.h"
@@ -169,7 +169,7 @@
 #import "TestBuzzSentryCrashWrapper.h"
 #import "TestBuzzSentrySpan.h"
 #import "TestUrlSession.h"
-#import "UIView+Sentry.h"
+#import "UIView+BuzzSentry.h"
 #import "UIViewController+Sentry.h"
 #import "URLSessionTaskMock.h"
 

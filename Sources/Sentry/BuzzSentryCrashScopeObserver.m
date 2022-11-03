@@ -1,6 +1,6 @@
 #import "SentryLevelMapper.h"
 #import <Foundation/Foundation.h>
-#import <NSData+Sentry.h>
+#import <NSData+BuzzSentry.h>
 #import <BuzzSentryBreadcrumb.h>
 #import <SentryCrashJSONCodec.h>
 #import <SentryCrashJSONCodecObjC.h>

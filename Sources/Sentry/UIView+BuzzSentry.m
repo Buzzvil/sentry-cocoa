@@ -1,9 +1,9 @@
-#import "UIView+Sentry.h"
+#import "UIView+BuzzSentry.h"
 
 #if SENTRY_HAS_UIKIT
 
 @implementation
-UIView (Sentry)
+UIView (BuzzSentry)
 
 - (NSString *)sentry_recursiveViewHierarchyDescription
 {

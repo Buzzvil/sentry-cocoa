@@ -1,5 +1,5 @@
 #import "BuzzSentryAppStartMeasurement.h"
-#import "NSDate+SentryExtras.h"
+#import "NSDate+BuzzSentryExtras.h"
 #import <Foundation/Foundation.h>
 
 @implementation BuzzSentryAppStartMeasurement

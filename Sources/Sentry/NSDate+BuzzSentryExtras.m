@@ -1,9 +1,9 @@
-#import "NSDate+SentryExtras.h"
+#import "NSDate+BuzzSentryExtras.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation
-NSDate (SentryExtras)
+NSDate (BuzzSentryExtras)
 
 + (NSDateFormatter *)getIso8601Formatter
 {

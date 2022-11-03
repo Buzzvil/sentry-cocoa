@@ -1,5 +1,5 @@
 #import "BuzzSentryTransaction.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryMeasurementValue.h"
 #import "BuzzSentryTransactionContext.h"

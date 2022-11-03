@@ -6,7 +6,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-UIView (Sentry)
+UIView (BuzzSentry)
 
 - (NSString *)sentry_recursiveViewHierarchyDescription;
 

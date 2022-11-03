@@ -1,7 +1,7 @@
 #import "BuzzSentryViewHierarchy.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryUIApplication.h"
-#import "UIView+Sentry.h"
+#import "UIView+BuzzSentry.h"
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>

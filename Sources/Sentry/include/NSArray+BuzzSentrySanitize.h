@@ -3,7 +3,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-NSArray (SentrySanitize)
+NSArray (BuzzSentrySanitize)
 
 - (NSArray *)sentry_sanitize;
 

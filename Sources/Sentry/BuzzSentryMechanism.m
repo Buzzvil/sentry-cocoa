@@ -1,5 +1,5 @@
 #import "BuzzSentryMechanism.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 #import "BuzzSentryMechanismMeta.h"
 #import "BuzzSentryNSError.h"
 

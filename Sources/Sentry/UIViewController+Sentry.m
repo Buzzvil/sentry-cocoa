@@ -3,7 +3,7 @@
 #if SENTRY_HAS_UIKIT
 
 @implementation
-UIViewController (Sentry)
+UIViewController (BuzzSentry)
 
 - (NSArray<UIViewController *> *)sentry_descendantViewControllers
 {

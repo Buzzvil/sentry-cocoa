@@ -1,5 +1,5 @@
 #import "BuzzSentryNSURLRequest.h"
-#import "NSData+SentryCompression.h"
+#import "NSData+BuzzSentryCompression.h"
 #import "BuzzSentryClient.h"
 #import "BuzzSentryDsn.h"
 #import "SentryError.h"

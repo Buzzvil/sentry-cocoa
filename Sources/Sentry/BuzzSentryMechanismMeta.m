@@ -1,5 +1,5 @@
 #import "BuzzSentryMechanismMeta.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 #import "BuzzSentryNSError.h"
 
 NS_ASSUME_NONNULL_BEGIN

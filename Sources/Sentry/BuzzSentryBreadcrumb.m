@@ -1,6 +1,6 @@
 #import "BuzzSentryBreadcrumb.h"
-#import "NSDate+SentryExtras.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSDate+BuzzSentryExtras.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 #import "SentryLevelMapper.h"
 
 @implementation BuzzSentryBreadcrumb

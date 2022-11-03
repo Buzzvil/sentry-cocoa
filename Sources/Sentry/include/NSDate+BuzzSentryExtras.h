@@ -3,7 +3,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-NSDate (SentryExtras)
+NSDate (BuzzSentryExtras)
 
 + (NSDate *)sentry_fromIso8601String:(NSString *)string NS_SWIFT_NAME(sentry_from(iso8601String:));
 

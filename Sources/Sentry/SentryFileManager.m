@@ -1,5 +1,5 @@
 #import "SentryFileManager.h"
-#import "NSDate+SentryExtras.h"
+#import "NSDate+BuzzSentryExtras.h"
 #import "SentryAppState.h"
 #import "BuzzSentryDataCategoryMapper.h"
 #import "SentryDependencyContainer.h"

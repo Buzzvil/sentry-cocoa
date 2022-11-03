@@ -1,6 +1,6 @@
 #import "BuzzSentryEvent.h"
-#import "NSDate+SentryExtras.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSDate+BuzzSentryExtras.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "SentryCurrentDate.h"

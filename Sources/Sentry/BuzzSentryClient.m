@@ -1,5 +1,5 @@
 #import "BuzzSentryClient.h"
-#import "NSDictionary+SentrySanitize.h"
+#import "NSDictionary+BuzzSentrySanitize.h"
 #import "NSLocale+Sentry.h"
 #import "BuzzSentryAttachment.h"
 #import "BuzzSentryClient+Private.h"

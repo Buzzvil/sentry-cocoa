@@ -1,7 +1,7 @@
-#import "NSData+Sentry.h"
+#import "NSData+BuzzSentry.h"
 
 @implementation
-NSData (Sentry)
+NSData (BuzzSentry)
 
 - (NSData *)sentry_nullTerminated
 {

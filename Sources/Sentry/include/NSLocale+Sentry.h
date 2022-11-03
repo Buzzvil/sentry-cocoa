@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 @interface
-NSLocale (Sentry)
+NSLocale (BuzzSentry)
 
 - (BOOL)sentry_timeIs24HourFormat;
 

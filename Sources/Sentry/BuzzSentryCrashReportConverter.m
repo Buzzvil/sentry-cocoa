@@ -1,5 +1,5 @@
 #import "BuzzSentryCrashReportConverter.h"
-#import "NSDate+SentryExtras.h"
+#import "NSDate+BuzzSentryExtras.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "SentryCrashStackCursor.h"
 #import "BuzzSentryDebugMeta.h"

@@ -1,7 +1,7 @@
 #import "NSLocale+Sentry.h"
 
 @implementation
-NSLocale (Sentry)
+NSLocale (BuzzSentry)
 
 - (BOOL)sentry_timeIs24HourFormat
 {
