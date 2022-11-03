@@ -57,7 +57,7 @@
     XCTAssertEqual(event.threads.count, (unsigned long)9);
 
     XCTAssertEqual(event.exceptions.count, (unsigned long)1);
-    SentryThread *firstThread = event.threads.firstObject;
+    BuzzSentryThread *firstThread = event.threads.firstObject;
     XCTAssertEqualObjects(exception.threadId, firstThread.threadId);
     NSString *code = [NSString
         stringWithFormat:@"%@", [exception.mechanism.meta.signal valueForKeyPath:@"code"]];
@@ -111,7 +111,7 @@
     XCTAssertEqualObjects(@"Exception 1, Code 3657279596, Subcode 8", exception.value);
 
     XCTAssertEqual(1, event.threads.count);
-    SentryThread *thread = event.threads.firstObject;
+    BuzzSentryThread *thread = event.threads.firstObject;
     XCTAssertFalse(thread.crashed);
     XCTAssertFalse(thread.current);
     XCTAssertEqual(1, thread.stacktrace.frames.count);

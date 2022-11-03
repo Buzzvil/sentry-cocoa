@@ -1,9 +1,9 @@
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import "BuzzSentryStacktrace.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryThread
+@implementation BuzzSentryThread
 
 - (instancetype)initWithThreadId:(NSNumber *)threadId
 {

@@ -6,7 +6,7 @@
 
 #    import "SentryBacktrace.hpp"
 #    import "SentrySamplingProfiler.hpp"
-#    import "SentryThreadMetadataCache.hpp"
+#    import "BuzzSentryThreadMetadataCache.hpp"
 #    import "SentryTime.h"
 
 #    import <chrono>

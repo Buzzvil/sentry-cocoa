@@ -9,7 +9,7 @@
 #import "BuzzSentryHexAddressFormatter.h"
 #import "BuzzSentryStacktrace.h"
 #import "BuzzSentryStacktraceBuilder.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import <Foundation/Foundation.h>
 #include <execinfo.h>
 #include <pthread.h>

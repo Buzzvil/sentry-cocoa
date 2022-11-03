@@ -12,7 +12,7 @@
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentryMechanismMeta.h"
 #import "BuzzSentryStacktrace.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import "BuzzSentryUser.h"
 
 @interface
@@ -227,14 +227,14 @@ BuzzSentryCrashReportConverter ()
     return result;
 }
 
-- (SentryThread *_Nullable)threadAtIndex:(NSInteger)threadIndex
+- (BuzzSentryThread *_Nullable)threadAtIndex:(NSInteger)threadIndex
 {
     if (threadIndex >= [self.threads count]) {
         return nil;
     }
     NSDictionary *threadDictionary = self.threads[threadIndex];
 
-    SentryThread *thread = [[SentryThread alloc] initWithThreadId:threadDictionary[@"index"]];
+    BuzzSentryThread *thread = [[BuzzSentryThread alloc] initWithThreadId:threadDictionary[@"index"]];
     // We only want to add the stacktrace if this thread hasn't crashed
     thread.stacktrace = [self stackTraceForThreadIndex:threadIndex];
     if (thread.stacktrace.frames.count == 0) {
@@ -308,7 +308,7 @@ BuzzSentryCrashReportConverter ()
     return stacktrace;
 }
 
-- (SentryThread *_Nullable)crashedThread
+- (BuzzSentryThread *_Nullable)crashedThread
 {
     return [self threadAtIndex:self.crashedThreadIndex];
 }
@@ -328,11 +328,11 @@ BuzzSentryCrashReportConverter ()
     return debugMeta;
 }
 
-- (NSArray<BuzzSentryDebugMeta *> *)debugMetaForThreads:(NSArray<SentryThread *> *)threads
+- (NSArray<BuzzSentryDebugMeta *> *)debugMetaForThreads:(NSArray<BuzzSentryThread *> *)threads
 {
     NSMutableSet<NSString *> *imageNames = [[NSMutableSet alloc] init];
 
-    for (SentryThread *thread in threads) {
+    for (BuzzSentryThread *thread in threads) {
         for (BuzzSentryFrame *frame in thread.stacktrace.frames) {
             if (frame.imageAddress && ![imageNames containsObject:frame.imageAddress]) {
                 [imageNames addObject:frame.imageAddress];
@@ -403,7 +403,7 @@ BuzzSentryCrashReportConverter ()
     [self enhanceValueFromCrashInfoMessage:exception];
     exception.mechanism = [self extractMechanismOfType:exceptionType];
 
-    SentryThread *crashedThread = [self crashedThread];
+    BuzzSentryThread *crashedThread = [self crashedThread];
     exception.threadId = crashedThread.threadId;
     exception.stacktrace = crashedThread.stacktrace;
 
@@ -550,7 +550,7 @@ BuzzSentryCrashReportConverter ()
 {
     NSMutableArray *result = [NSMutableArray new];
     for (NSInteger threadIndex = 0; threadIndex < (NSInteger)self.threads.count; threadIndex++) {
-        SentryThread *thread = [self threadAtIndex:threadIndex];
+        BuzzSentryThread *thread = [self threadAtIndex:threadIndex];
         if (thread && nil != thread.stacktrace) {
             [result addObject:thread];
         }

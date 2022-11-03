@@ -10,7 +10,7 @@
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import "BuzzSentryThreadInspector.h"
 #import "BuzzSentryThreadWrapper.h"
 #import <BuzzSentryDependencyContainer.h>
@@ -60,14 +60,14 @@ BuzzSentryANRTrackingIntegration ()
     NSString *message = [NSString stringWithFormat:@"App hanging for at least %li ms.",
                                   (long)(self.options.appHangTimeoutInterval * 1000)];
 
-    NSArray<SentryThread *> *threads = [threadInspector getCurrentThreadsWithStackTrace];
+    NSArray<BuzzSentryThread *> *threads = [threadInspector getCurrentThreadsWithStackTrace];
 
     BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelError];
     BuzzSentryException *sentryException = [[BuzzSentryException alloc] initWithValue:message
                                                                          type:@"App Hanging"];
     sentryException.mechanism = [[BuzzSentryMechanism alloc] initWithType:@"AppHang"];
     sentryException.stacktrace = [threads[0] stacktrace];
-    [threads enumerateObjectsUsingBlock:^(SentryThread *_Nonnull obj, NSUInteger idx,
+    [threads enumerateObjectsUsingBlock:^(BuzzSentryThread *_Nonnull obj, NSUInteger idx,
         BOOL *_Nonnull stop) { obj.current = [NSNumber numberWithBool:idx == 0]; }];
 
     event.exceptions = @[ sentryException ];

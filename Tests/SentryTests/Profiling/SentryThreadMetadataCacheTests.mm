@@ -5,14 +5,14 @@
 #    import <XCTest/XCTest.h>
 
 #    import "SentryMachLogging.hpp"
-#    import "SentryThreadMetadataCache.hpp"
+#    import "BuzzSentryThreadMetadataCache.hpp"
 
 #    import <pthread.h>
 #    import <thread>
 
 using namespace sentry::profiling;
 
-@interface SentryThreadMetadataCacheTests : XCTestCase
+@interface BuzzSentryThreadMetadataCacheTests : XCTestCase
 @end
 
 namespace {
@@ -33,12 +33,12 @@ threadSpin(void *name)
 }
 } // namespace
 
-@implementation SentryThreadMetadataCacheTests
+@implementation BuzzSentryThreadMetadataCacheTests
 
 - (void)testRetrievesThreadMetadata
 {
     pthread_t thread;
-    char name[] = "SentryThreadMetadataCacheTests";
+    char name[] = "BuzzSentryThreadMetadataCacheTests";
     XCTAssertEqual(pthread_create(&thread, nullptr, threadSpin, reinterpret_cast<void *>(name)), 0);
     int policy;
     sched_param param;
@@ -63,7 +63,7 @@ threadSpin(void *name)
 - (void)testReturnsCachedThreadMetadata
 {
     pthread_t thread;
-    char name[] = "SentryThreadMetadataCacheTests";
+    char name[] = "BuzzSentryThreadMetadataCacheTests";
     XCTAssertEqual(pthread_create(&thread, nullptr, threadSpin, reinterpret_cast<void *>(name)), 0);
     int policy;
     sched_param param;
@@ -91,7 +91,7 @@ threadSpin(void *name)
 - (void)testIgnoresSentryOwnedThreads
 {
     pthread_t thread;
-    char name[] = "io.sentry.SentryThreadMetadataCacheTests";
+    char name[] = "io.sentry.BuzzSentryThreadMetadataCacheTests";
     XCTAssertEqual(pthread_create(&thread, nullptr, threadSpin, reinterpret_cast<void *>(name)), 0);
 
     std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -106,7 +106,7 @@ threadSpin(void *name)
 
 - (void)testRetrievesQueueMetadata
 {
-    const auto label = "io.sentry.SentryThreadMetadataCacheTests.testQueue";
+    const auto label = "io.sentry.BuzzSentryThreadMetadataCacheTests.testQueue";
     const auto queue = dispatch_queue_create(label, DISPATCH_QUEUE_SERIAL);
     const auto cache = std::make_shared<ThreadMetadataCache>();
 

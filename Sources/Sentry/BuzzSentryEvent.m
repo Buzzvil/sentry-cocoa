@@ -11,7 +11,7 @@
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryStacktrace.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import "BuzzSentryUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -109,7 +109,7 @@ BuzzSentryEvent ()
 - (void)addThreads:(NSMutableDictionary *)serializedData
 {
     NSMutableArray *threads = [NSMutableArray new];
-    for (SentryThread *thread in self.threads) {
+    for (BuzzSentryThread *thread in self.threads) {
         [threads addObject:[thread serialize]];
     }
     if (threads.count > 0) {

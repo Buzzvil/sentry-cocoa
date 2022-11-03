@@ -1,4 +1,4 @@
-#include "SentryThreadMetadataCache.hpp"
+#include "BuzzSentryThreadMetadataCache.hpp"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 

@@ -2,7 +2,7 @@
 #import "BuzzSentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class SentryThread, BuzzSentryStacktraceBuilder;
+@class BuzzSentryThread, BuzzSentryStacktraceBuilder;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ SENTRY_NO_INIT
  * are not included. For more details checkout BuzzSentryStacktraceBuilder.
  * The first thread in the result is always the main thread.
  */
-- (NSArray<SentryThread *> *)getCurrentThreads;
+- (NSArray<BuzzSentryThread *> *)getCurrentThreads;
 
 /**
  * Gets current threads with stacktrace,
@@ -25,7 +25,7 @@ SENTRY_NO_INIT
  * Frames from the BuzzSentrySDK are not included. For more details checkout BuzzSentryStacktraceBuilder.
  * The first thread in the result is always the main thread.
  */
-- (NSArray<SentryThread *> *)getCurrentThreadsWithStackTrace;
+- (NSArray<BuzzSentryThread *> *)getCurrentThreadsWithStackTrace;
 
 @end
 

@@ -6,7 +6,7 @@
 
 #    include "SentryStackBounds.hpp"
 #    include "BuzzSentryThreadHandle.hpp"
-#    include "SentryThreadMetadataCache.hpp"
+#    include "BuzzSentryThreadMetadataCache.hpp"
 
 #    include <cstddef>
 #    include <cstdint>

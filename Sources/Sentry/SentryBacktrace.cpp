@@ -8,7 +8,7 @@
 #    include "SentryStackBounds.hpp"
 #    include "SentryStackFrame.hpp"
 #    include "BuzzSentryThreadHandle.hpp"
-#    include "SentryThreadMetadataCache.hpp"
+#    include "BuzzSentryThreadMetadataCache.hpp"
 #    include "BuzzSentryThreadState.hpp"
 #    include "SentryTime.h"
 

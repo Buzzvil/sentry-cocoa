@@ -14,7 +14,7 @@
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentrySDK.h"
 #import "BuzzSentryScope.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 
 static const NSTimeInterval SENTRY_APP_START_CRASH_DURATION_THRESHOLD = 2.0;
 static const NSTimeInterval SENTRY_APP_START_CRASH_FLUSH_DURATION = 5.0;

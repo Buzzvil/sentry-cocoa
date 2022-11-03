@@ -254,12 +254,12 @@
 
 - (void)testThread
 {
-    SentryThread *thread = [[SentryThread alloc] initWithThreadId:@(1)];
+    BuzzSentryThread *thread = [[BuzzSentryThread alloc] initWithThreadId:@(1)];
     XCTAssertNotNil(thread.threadId);
     NSDictionary *serialized = @{ @"id" : @(1) };
     XCTAssertEqualObjects([thread serialize], serialized);
 
-    SentryThread *thread2 = [[SentryThread alloc] initWithThreadId:@(2)];
+    BuzzSentryThread *thread2 = [[BuzzSentryThread alloc] initWithThreadId:@(2)];
     XCTAssertNotNil(thread2.threadId);
     thread2.crashed = @(YES);
     thread2.current = @(NO);
@@ -347,7 +347,7 @@
     XCTAssertNotNil(exception2.value);
     XCTAssertNotNil(exception2.type);
 
-    SentryThread *thread2 = [[SentryThread alloc] initWithThreadId:@(2)];
+    BuzzSentryThread *thread2 = [[BuzzSentryThread alloc] initWithThreadId:@(2)];
     XCTAssertNotNil(thread2.threadId);
     thread2.crashed = @(YES);
     thread2.current = @(NO);

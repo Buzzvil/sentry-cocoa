@@ -44,7 +44,7 @@ FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 #import "BuzzSentrySpanProtocol.h"
 #import "BuzzSentrySpanStatus.h"
 #import "BuzzSentryStacktrace.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import "BuzzSentryTraceHeader.h"
 #import "BuzzSentryTransactionContext.h"
 #import "BuzzSentryUser.h"

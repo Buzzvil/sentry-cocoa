@@ -5,7 +5,7 @@
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryStacktrace.h"
 #import "BuzzSentryStacktraceBuilder.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #include <pthread.h>
 
 @interface
@@ -20,7 +20,7 @@ typedef struct {
     SentryCrashThread thread;
     SentryCrashStackEntry stackEntries[MAX_STACKTRACE_LENGTH];
     int stackLength;
-} SentryThreadInfo;
+} BuzzSentryThreadInfo;
 
 // We need a C function to retrieve information from the stack trace in order to avoid
 // calling into not async-signal-safe code while there are suspended threads.
@@ -58,9 +58,9 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
     return self;
 }
 
-- (NSArray<SentryThread *> *)getCurrentThreads
+- (NSArray<BuzzSentryThread *> *)getCurrentThreads
 {
-    NSMutableArray<SentryThread *> *threads = [NSMutableArray new];
+    NSMutableArray<BuzzSentryThread *> *threads = [NSMutableArray new];
 
     SentryCrashMC_NEW_CONTEXT(context);
     SentryCrashThread currentThread = sentrycrashthread_self();
@@ -70,7 +70,7 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
 
     for (int i = 0; i < threadCount; i++) {
         SentryCrashThread thread = [self.machineContextWrapper getThread:context withIndex:i];
-        SentryThread *sentryThread = [[SentryThread alloc] initWithThreadId:@(i)];
+        BuzzSentryThread *sentryThread = [[BuzzSentryThread alloc] initWithThreadId:@(i)];
 
         sentryThread.name = [self getThreadName:thread];
 
@@ -100,9 +100,9 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
  * threads, and while there is suspended threads we can't call into obj-c, so the previous approach
  * wont work for retrieving stacktrace information for every thread.
  */
-- (NSArray<SentryThread *> *)getCurrentThreadsWithStackTrace
+- (NSArray<BuzzSentryThread *> *)getCurrentThreadsWithStackTrace
 {
-    NSMutableArray<SentryThread *> *threads = [NSMutableArray new];
+    NSMutableArray<BuzzSentryThread *> *threads = [NSMutableArray new];
 
     @synchronized(self) {
         SentryCrashMC_NEW_CONTEXT(context);
@@ -115,7 +115,7 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
         // DANGER: Do not try to allocate memory in the heap or call Objective-C code in this
         // section Doing so when the threads are suspended may lead to deadlocks or crashes.
 
-        SentryThreadInfo threadsInfos[numSuspendedThreads];
+        BuzzSentryThreadInfo threadsInfos[numSuspendedThreads];
 
         for (int i = 0; i < numSuspendedThreads; i++) {
             if (suspendedThreads[i] != currentThread) {
@@ -135,7 +135,7 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
         // DANGER END: You may call Objective-C code again or allocate memory.
 
         for (int i = 0; i < numSuspendedThreads; i++) {
-            SentryThread *sentryThread = [[SentryThread alloc] initWithThreadId:@(i)];
+            BuzzSentryThread *sentryThread = [[BuzzSentryThread alloc] initWithThreadId:@(i)];
 
             sentryThread.name = [self getThreadName:threadsInfos[i].thread];
 

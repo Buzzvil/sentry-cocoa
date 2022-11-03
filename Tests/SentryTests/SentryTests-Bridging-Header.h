@@ -144,7 +144,7 @@
 #import "BuzzSentrySystemEventBreadcrumbs.h"
 #import "SentryTestIntegration.h"
 #import "SentryTestObjCRuntimeWrapper.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import "BuzzSentryThreadInspector.h"
 #import "BuzzSentryThreadWrapper.h"
 #import "SentryTime.h"

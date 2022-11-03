@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryThread, BuzzSentryException, BuzzSentryStacktrace, BuzzSentryUser, BuzzSentryDebugMeta,
+@class BuzzSentryThread, BuzzSentryException, BuzzSentryStacktrace, BuzzSentryUser, BuzzSentryDebugMeta,
     BuzzSentryBreadcrumb, BuzzSentryId, BuzzSentryMessage;
 
 NS_SWIFT_NAME(Event)
@@ -133,9 +133,9 @@ NS_SWIFT_NAME(Event)
     NSDictionary<NSString *, NSDictionary<NSString *, id> *> *_Nullable context;
 
 /**
- * Contains SentryThread if an crash occurred of it's an user reported exception
+ * Contains BuzzSentryThread if an crash occurred of it's an user reported exception
  */
-@property (nonatomic, strong) NSArray<SentryThread *> *_Nullable threads;
+@property (nonatomic, strong) NSArray<BuzzSentryThread *> *_Nullable threads;
 
 /**
  * General information about the BuzzSentryException, usually there is only one

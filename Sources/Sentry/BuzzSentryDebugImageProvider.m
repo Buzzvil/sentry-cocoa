@@ -7,7 +7,7 @@
 #import "BuzzSentryHexAddressFormatter.h"
 #import "BuzzSentryLog.h"
 #import "BuzzSentryStacktrace.h"
-#import "SentryThread.h"
+#import "BuzzSentryThread.h"
 #import <Foundation/Foundation.h>
 
 @interface
@@ -39,11 +39,11 @@ BuzzSentryDebugImageProvider ()
     return self;
 }
 
-- (NSArray<BuzzSentryDebugMeta *> *)getDebugImagesForThreads:(NSArray<SentryThread *> *)threads
+- (NSArray<BuzzSentryDebugMeta *> *)getDebugImagesForThreads:(NSArray<BuzzSentryThread *> *)threads
 {
     NSMutableSet<NSString *> *imageAdresses = [[NSMutableSet alloc] init];
 
-    for (SentryThread *thread in threads) {
+    for (BuzzSentryThread *thread in threads) {
         for (BuzzSentryFrame *frame in thread.stacktrace.frames) {
             if (frame.imageAddress && ![imageAdresses containsObject:frame.imageAddress]) {
                 [imageAdresses addObject:frame.imageAddress];
