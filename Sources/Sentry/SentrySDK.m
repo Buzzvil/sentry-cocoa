@@ -384,7 +384,7 @@ static NSUInteger startInvocations;
                 integrationName);
             continue;
         }
-        id<SentryIntegrationProtocol> integrationInstance = [[integrationClass alloc] init];
+        id<BuzzSentryIntegrationProtocol> integrationInstance = [[integrationClass alloc] init];
         BOOL shouldInstall = [integrationInstance installWithOptions:options];
         if (shouldInstall) {
             SENTRY_LOG_DEBUG(@"Integration installed: %@", integrationName);
@@ -409,7 +409,7 @@ static NSUInteger startInvocations;
     [SentrySDK setCurrentHub:nil];
 
     // uninstall all the integrations
-    for (NSObject<SentryIntegrationProtocol> *integration in hub.installedIntegrations) {
+    for (NSObject<BuzzSentryIntegrationProtocol> *integration in hub.installedIntegrations) {
         if ([integration respondsToSelector:@selector(uninstall)]) {
             [integration uninstall];
         }

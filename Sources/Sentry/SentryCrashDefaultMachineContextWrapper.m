@@ -7,8 +7,8 @@
 #import "SentryCrashThread.h"
 #import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
-#import "SentryStacktrace.h"
-#import "SentryStacktraceBuilder.h"
+#import "BuzzSentryStacktrace.h"
+#import "BuzzSentryStacktraceBuilder.h"
 #import "SentryThread.h"
 #import <Foundation/Foundation.h>
 #include <execinfo.h>

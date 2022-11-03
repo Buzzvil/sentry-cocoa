@@ -1,12 +1,12 @@
 #import "SentryANRTracker.h"
 #import "SentryBaseIntegration.h"
-#import "SentryIntegrationProtocol.h"
+#import "BuzzSentryIntegrationProtocol.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SentryANRTrackingIntegration
-    : SentryBaseIntegration <SentryIntegrationProtocol, SentryANRTrackerDelegate>
+    : SentryBaseIntegration <BuzzSentryIntegrationProtocol, SentryANRTrackerDelegate>
 
 @end
 

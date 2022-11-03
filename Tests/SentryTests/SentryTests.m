@@ -1,7 +1,7 @@
 #import "NSDate+SentryExtras.h"
 #import "SentryBreadcrumbTracker.h"
 #import "SentryLevelMapper.h"
-#import "SentryMessage.h"
+#import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK+Private.h"
 #import <Sentry/Sentry.h>
@@ -84,7 +84,7 @@ SentryBreadcrumbTracker (Private)
     BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
 
     event.timestamp = [NSDate date];
-    event.message = [[SentryMessage alloc] initWithFormatted:@"testy test"];
+    event.message = [[BuzzSentryMessage alloc] initWithFormatted:@"testy test"];
 
     [SentrySDK captureEvent:event];
 }

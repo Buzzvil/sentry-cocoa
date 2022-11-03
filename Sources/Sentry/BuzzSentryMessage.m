@@ -1,11 +1,11 @@
-#import "SentryMessage.h"
+#import "BuzzSentryMessage.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 const NSUInteger MAX_STRING_LENGTH = 8192;
 
-@implementation SentryMessage
+@implementation BuzzSentryMessage
 
 - (instancetype)initWithFormatted:(NSString *)formatted
 {

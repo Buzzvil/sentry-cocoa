@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * For more info checkout: https://develop.sentry.dev/sdk/event-payloads/message/
  */
-@interface SentryMessage : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryMessage : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**

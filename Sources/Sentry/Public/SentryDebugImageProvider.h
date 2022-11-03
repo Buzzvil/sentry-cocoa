@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class SentryDebugMeta, SentryThread;
+@class BuzzSentryDebugMeta, SentryThread;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,13 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param threads A list of SentryThread that may or may not contains a stacktrace.
  */
-- (NSArray<SentryDebugMeta *> *)getDebugImagesForThreads:(NSArray<SentryThread *> *)threads;
+- (NSArray<BuzzSentryDebugMeta *> *)getDebugImagesForThreads:(NSArray<SentryThread *> *)threads;
 
 /**
- * Returns the current list of debug images. Be aware that the SentryDebugMeta is actually
+ * Returns the current list of debug images. Be aware that the BuzzSentryDebugMeta is actually
  * describing a debug image. This class should be renamed to SentryDebugImage in a future version.
  */
-- (NSArray<SentryDebugMeta *> *)getDebugImages;
+- (NSArray<BuzzSentryDebugMeta *> *)getDebugImages;
 
 @end
 

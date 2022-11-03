@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SentryIntegrationProtocol <NSObject>
+@protocol BuzzSentryIntegrationProtocol <NSObject>
 
 /**
  * Installs the integration and returns YES if successful.

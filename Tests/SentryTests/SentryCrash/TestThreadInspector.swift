@@ -8,7 +8,7 @@ class TestThreadInspector: SentryThreadInspector {
         // We need something to pass to the super initializer, because the empty initializer has been marked unavailable.
         let inAppLogic = SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])
         let crashStackEntryMapper = SentryCrashStackEntryMapper(inAppLogic: inAppLogic)
-        let stacktraceBuilder = SentryStacktraceBuilder(crashStackEntryMapper: crashStackEntryMapper)
+        let stacktraceBuilder = BuzzSentryStacktraceBuilder(crashStackEntryMapper: crashStackEntryMapper)
         return TestThreadInspector(stacktraceBuilder: stacktraceBuilder, andMachineContextWrapper: SentryCrashDefaultMachineContextWrapper())
     }
     

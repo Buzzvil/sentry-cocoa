@@ -25,7 +25,7 @@
 #import "SentryLog.h"
 #import "SentryMechanism.h"
 #import "SentryMechanismMeta.h"
-#import "SentryMessage.h"
+#import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryNSError.h"
 #import "BuzzSentryOptions+Private.h"
@@ -34,7 +34,7 @@
 #import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySdkInfo.h"
-#import "SentryStacktraceBuilder.h"
+#import "BuzzSentryStacktraceBuilder.h"
 #import "SentryThreadInspector.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTracer.h"
@@ -106,8 +106,8 @@ NSString *const kSentryDefaultEnvironment = @"production";
                                           inAppExcludes:options.inAppExcludes];
     SentryCrashStackEntryMapper *crashStackEntryMapper =
         [[SentryCrashStackEntryMapper alloc] initWithInAppLogic:inAppLogic];
-    SentryStacktraceBuilder *stacktraceBuilder =
-        [[SentryStacktraceBuilder alloc] initWithCrashStackEntryMapper:crashStackEntryMapper];
+    BuzzSentryStacktraceBuilder *stacktraceBuilder =
+        [[BuzzSentryStacktraceBuilder alloc] initWithCrashStackEntryMapper:crashStackEntryMapper];
     id<SentryCrashMachineContextWrapper> machineContextWrapper =
         [[SentryCrashDefaultMachineContextWrapper alloc] init];
     SentryThreadInspector *threadInspector =
@@ -168,7 +168,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 - (SentryId *)captureMessage:(NSString *)message withScope:(SentryScope *)scope
 {
     BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
-    event.message = [[SentryMessage alloc] initWithFormatted:message];
+    event.message = [[BuzzSentryMessage alloc] initWithFormatted:message];
     return [self sendEvent:event withScope:scope alwaysAttachStacktrace:NO];
 }
 

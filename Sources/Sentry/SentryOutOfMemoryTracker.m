@@ -9,7 +9,7 @@
 #import <SentryHub.h>
 #import <SentryLog.h>
 #import <SentryMechanism.h>
-#import <SentryMessage.h>
+#import <BuzzSentryMessage.h>
 #import <BuzzSentryOptions.h>
 #import <SentryOutOfMemoryLogic.h>
 #import <SentryOutOfMemoryTracker.h>

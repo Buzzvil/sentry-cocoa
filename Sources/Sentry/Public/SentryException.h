@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryStacktrace, SentryMechanism;
+@class BuzzSentryStacktrace, SentryMechanism;
 
 NS_SWIFT_NAME(Exception)
 @interface SentryException : NSObject <BuzzSentrySerializable>
@@ -39,7 +39,7 @@ SENTRY_NO_INIT
 /**
  * Stacktrace containing frames of this exception.
  */
-@property (nonatomic, strong) SentryStacktrace *_Nullable stacktrace;
+@property (nonatomic, strong) BuzzSentryStacktrace *_Nullable stacktrace;
 
 /**
  * Initialize an SentryException with value and type

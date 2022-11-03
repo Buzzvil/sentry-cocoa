@@ -1,13 +1,13 @@
-#import "SentryMessage.h"
+#import "BuzzSentryMessage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryMessage (Equality)
+BuzzSentryMessage (Equality)
 
 - (BOOL)isEqual:(id _Nullable)object;
 
-- (BOOL)isEqualToMessage:(SentryMessage *)message;
+- (BOOL)isEqualToMessage:(BuzzSentryMessage *)message;
 
 - (NSUInteger)hash;
 

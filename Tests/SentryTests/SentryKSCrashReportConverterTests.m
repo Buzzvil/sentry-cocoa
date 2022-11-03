@@ -35,7 +35,7 @@
     XCTAssertEqualObjects(
         [NSDate dateWithTimeIntervalSince1970:@(1491210797).integerValue], event.timestamp);
     XCTAssertEqual(event.debugMeta.count, (unsigned long)13);
-    SentryDebugMeta *firstDebugImage = event.debugMeta.firstObject;
+    BuzzSentryDebugMeta *firstDebugImage = event.debugMeta.firstObject;
     XCTAssertTrue([firstDebugImage.name isEqualToString:@"/var/containers/Bundle/Application/"
                                                         @"94765405-4249-4E20-B1E7-9801C14D5645/"
                                                         @"CrashProbeiOS.app/CrashProbeiOS"]);

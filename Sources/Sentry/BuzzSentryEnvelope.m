@@ -5,7 +5,7 @@
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent.h"
 #import "SentryLog.h"
-#import "SentryMessage.h"
+#import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "SentrySdkInfo.h"
 #import "SentrySerialization.h"
@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
         NSString *message = [NSString
             stringWithFormat:@"JSON conversion error for event with message: '%@'", event.message];
 
-        errorEvent.message = [[SentryMessage alloc] initWithFormatted:message];
+        errorEvent.message = [[BuzzSentryMessage alloc] initWithFormatted:message];
         errorEvent.releaseName = event.releaseName;
         errorEvent.environment = event.environment;
         errorEvent.platform = event.platform;

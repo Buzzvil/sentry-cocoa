@@ -1,5 +1,5 @@
 #import "SentryThread.h"
-#import "SentryStacktrace.h"
+#import "BuzzSentryStacktrace.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

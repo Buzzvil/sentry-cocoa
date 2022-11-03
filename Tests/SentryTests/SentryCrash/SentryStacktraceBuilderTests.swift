@@ -1,13 +1,13 @@
 @testable import Sentry
 import XCTest
 
-class SentryStacktraceBuilderTests: XCTestCase {
+class BuzzSentryStacktraceBuilderTests: XCTestCase {
     
     private class Fixture {
-        let queue = DispatchQueue(label: "SentryStacktraceBuilderTests")
+        let queue = DispatchQueue(label: "BuzzSentryStacktraceBuilderTests")
 
-        var sut: SentryStacktraceBuilder {
-            return SentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
+        var sut: BuzzSentryStacktraceBuilder {
+            return BuzzSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
         }
     }
 
@@ -69,7 +69,7 @@ class SentryStacktraceBuilderTests: XCTestCase {
     
     func testAsyncStacktraces_disabled() throws {
         SentrySDK.start { options in
-            options.dsn = TestConstants.dsnAsString(username: "SentryStacktraceBuilderTests")
+            options.dsn = TestConstants.dsnAsString(username: "BuzzSentryStacktraceBuilderTests")
             options.stitchAsyncCode = true
         }
         

@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentryIntegrationProtocol.h"
+#import "BuzzSentryIntegrationProtocol.h"
 #import "BuzzSentrySpanProtocol.h"
 
 @class BuzzSentryEvent, BuzzSentryClient, SentryScope, BuzzSentrySession, BuzzSentryUser, SentryBreadcrumb,

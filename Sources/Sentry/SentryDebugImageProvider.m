@@ -2,11 +2,11 @@
 #import "SentryCrashDefaultBinaryImageProvider.h"
 #import "SentryCrashDynamicLinker.h"
 #import "SentryCrashUUIDConversion.h"
-#import "SentryDebugMeta.h"
+#import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
 #import "SentryLog.h"
-#import "SentryStacktrace.h"
+#import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 #import <Foundation/Foundation.h>
 
@@ -39,7 +39,7 @@ SentryDebugImageProvider ()
     return self;
 }
 
-- (NSArray<SentryDebugMeta *> *)getDebugImagesForThreads:(NSArray<SentryThread *> *)threads
+- (NSArray<BuzzSentryDebugMeta *> *)getDebugImagesForThreads:(NSArray<SentryThread *> *)threads
 {
     NSMutableSet<NSString *> *imageAdresses = [[NSMutableSet alloc] init];
 
@@ -51,11 +51,11 @@ SentryDebugImageProvider ()
         }
     }
 
-    NSMutableArray<SentryDebugMeta *> *result = [NSMutableArray new];
+    NSMutableArray<BuzzSentryDebugMeta *> *result = [NSMutableArray new];
 
-    NSArray<SentryDebugMeta *> *binaryImages = [self getDebugImages];
+    NSArray<BuzzSentryDebugMeta *> *binaryImages = [self getDebugImages];
 
-    for (SentryDebugMeta *sourceImage in binaryImages) {
+    for (BuzzSentryDebugMeta *sourceImage in binaryImages) {
         if ([imageAdresses containsObject:sourceImage.imageAddress]) {
             [result addObject:sourceImage];
         }
@@ -64,23 +64,23 @@ SentryDebugImageProvider ()
     return result;
 }
 
-- (NSArray<SentryDebugMeta *> *)getDebugImages
+- (NSArray<BuzzSentryDebugMeta *> *)getDebugImages
 {
-    NSMutableArray<SentryDebugMeta *> *debugMetaArray = [NSMutableArray new];
+    NSMutableArray<BuzzSentryDebugMeta *> *debugMetaArray = [NSMutableArray new];
 
     NSInteger imageCount = [self.binaryImageProvider getImageCount];
     for (NSInteger i = 0; i < imageCount; i++) {
         SentryCrashBinaryImage image = [self.binaryImageProvider getBinaryImage:i];
-        SentryDebugMeta *debugMeta = [self fillDebugMetaFrom:image];
+        BuzzSentryDebugMeta *debugMeta = [self fillDebugMetaFrom:image];
         [debugMetaArray addObject:debugMeta];
     }
 
     return debugMetaArray;
 }
 
-- (SentryDebugMeta *)fillDebugMetaFrom:(SentryCrashBinaryImage)image
+- (BuzzSentryDebugMeta *)fillDebugMetaFrom:(SentryCrashBinaryImage)image
 {
-    SentryDebugMeta *debugMeta = [[SentryDebugMeta alloc] init];
+    BuzzSentryDebugMeta *debugMeta = [[BuzzSentryDebugMeta alloc] init];
     debugMeta.uuid = [SentryDebugImageProvider convertUUID:image.uuid];
     debugMeta.type = @"apple";
 

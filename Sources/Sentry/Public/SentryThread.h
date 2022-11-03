@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryStacktrace;
+@class BuzzSentryStacktrace;
 
 NS_SWIFT_NAME(Thread)
 @interface SentryThread : NSObject <BuzzSentrySerializable>
@@ -20,9 +20,9 @@ SENTRY_NO_INIT
 @property (nonatomic, copy) NSString *_Nullable name;
 
 /**
- * SentryStacktrace of the SentryThread
+ * BuzzSentryStacktrace of the SentryThread
  */
-@property (nonatomic, strong) SentryStacktrace *_Nullable stacktrace;
+@property (nonatomic, strong) BuzzSentryStacktrace *_Nullable stacktrace;
 
 /**
  * Did this thread crash?

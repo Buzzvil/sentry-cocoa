@@ -6,7 +6,7 @@
 #    import "BuzzSentryClient+Private.h"
 #    import "SentryCurrentDate.h"
 #    import "SentryDebugImageProvider.h"
-#    import "SentryDebugMeta.h"
+#    import "BuzzSentryDebugMeta.h"
 #    import "SentryDefines.h"
 #    import "SentryDependencyContainer.h"
 #    import "SentryDevice.h"
@@ -488,7 +488,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     profile[@"version"] = @"1";
     const auto debugImages = [NSMutableArray<NSDictionary<NSString *, id> *> new];
     const auto debugMeta = [_debugImageProvider getDebugImages];
-    for (SentryDebugMeta *debugImage in debugMeta) {
+    for (BuzzSentryDebugMeta *debugImage in debugMeta) {
         const auto debugImageDict = [NSMutableDictionary<NSString *, id> dictionary];
         debugImageDict[@"type"] = @"macho";
         debugImageDict[@"debug_id"] = debugImage.uuid;

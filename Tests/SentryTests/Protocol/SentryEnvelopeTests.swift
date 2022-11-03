@@ -33,7 +33,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
         var event: Event {
             let event = Event()
             event.level = SentryLevel.info
-            event.message = SentryMessage(formatted: "Don't do this")
+            event.message = BuzzSentryMessage(formatted: "Don't do this")
             event.releaseName = "releaseName1.0.0"
             event.environment = "save the environment"
             event.sdk = ["version": sdkVersion, "date": Date()]
@@ -42,7 +42,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
 
         var eventWithContinousSerializationFailure: Event {
             let event = EventSerializationFailure()
-            event.message = SentryMessage(formatted: "Failure")
+            event.message = BuzzSentryMessage(formatted: "Failure")
             event.releaseName = "release"
             event.environment = "environment"
             event.platform = "platform"
@@ -197,8 +197,8 @@ class BuzzSentryEnvelopeTests: XCTestCase {
             // Asserting the description of the message doesn't work properly, because
             // the serialization adds \n. Therefore, we only check for bits of the
             // the description. The actual description is tested in the tests for the
-            // SentryMessage
-            json.assertContains("JSON conversion error for event with message: '<SentryMessage: ", "message")
+            // BuzzSentryMessage
+            json.assertContains("JSON conversion error for event with message: '<BuzzSentryMessage: ", "message")
             json.assertContains("formatted = \(event.message?.formatted ?? "")", "message")
             
             json.assertContains("warning", "level")

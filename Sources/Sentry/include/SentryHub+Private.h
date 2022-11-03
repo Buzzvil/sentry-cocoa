@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 SentryHub (Private)
 
 @property (nonatomic, strong)
-    NSMutableArray<NSObject<SentryIntegrationProtocol> *> *installedIntegrations;
+    NSMutableArray<NSObject<BuzzSentryIntegrationProtocol> *> *installedIntegrations;
 @property (nonatomic, strong) NSMutableArray<NSString *> *installedIntegrationNames;
 
 - (BuzzSentryClient *_Nullable)client;

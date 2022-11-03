@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Contains information about a loaded library in the process and the memory address.
  */
 NS_SWIFT_NAME(DebugMeta)
-@interface SentryDebugMeta : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryDebugMeta : NSObject <BuzzSentrySerializable>
 
 /**
  * UUID of image

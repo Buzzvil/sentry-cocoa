@@ -19,7 +19,7 @@ class BuzzSentryClientTest: XCTestCase {
         let event: Event
         let environment = "Environment"
         let messageAsString = "message"
-        let message: SentryMessage
+        let message: BuzzSentryMessage
         
         let user: User
         let fileManager: SentryFileManager
@@ -37,7 +37,7 @@ class BuzzSentryClientTest: XCTestCase {
             session = BuzzSentrySession(releaseName: "release")
             session.incrementErrors()
 
-            message = SentryMessage(formatted: messageAsString)
+            message = BuzzSentryMessage(formatted: messageAsString)
 
             event = Event()
             event.message = message

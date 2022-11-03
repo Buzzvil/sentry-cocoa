@@ -5,8 +5,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryThread, SentryException, SentryStacktrace, BuzzSentryUser, SentryDebugMeta,
-    SentryBreadcrumb, SentryId, SentryMessage;
+@class SentryThread, SentryException, BuzzSentryStacktrace, BuzzSentryUser, BuzzSentryDebugMeta,
+    SentryBreadcrumb, SentryId, BuzzSentryMessage;
 
 NS_SWIFT_NAME(Event)
 @interface BuzzSentryEvent : NSObject <BuzzSentrySerializable>
@@ -19,7 +19,7 @@ NS_SWIFT_NAME(Event)
 /**
  * Message of the event.
  */
-@property (nonatomic, strong) SentryMessage *_Nullable message;
+@property (nonatomic, strong) BuzzSentryMessage *_Nullable message;
 
 /**
  * The error of the event. This property adds convenience to access the error directly in
@@ -144,14 +144,14 @@ NS_SWIFT_NAME(Event)
 @property (nonatomic, strong) NSArray<SentryException *> *_Nullable exceptions;
 
 /**
- * Separate SentryStacktrace that can be sent with the event, besides threads
+ * Separate BuzzSentryStacktrace that can be sent with the event, besides threads
  */
-@property (nonatomic, strong) SentryStacktrace *_Nullable stacktrace;
+@property (nonatomic, strong) BuzzSentryStacktrace *_Nullable stacktrace;
 
 /**
  * Containing images loaded during runtime
  */
-@property (nonatomic, strong) NSArray<SentryDebugMeta *> *_Nullable debugMeta;
+@property (nonatomic, strong) NSArray<BuzzSentryDebugMeta *> *_Nullable debugMeta;
 
 /**
  * This contains all breadcrumbs available at the time when the event

@@ -1,10 +1,10 @@
-#import "SentryStacktrace.h"
+#import "BuzzSentryStacktrace.h"
 #import "BuzzSentryFrame.h"
 #import "SentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryStacktrace
+@implementation BuzzSentryStacktrace
 
 - (instancetype)initWithFrames:(NSArray<BuzzSentryFrame *> *)frames
                      registers:(NSDictionary<NSString *, NSString *> *)registers

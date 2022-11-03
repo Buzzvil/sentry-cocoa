@@ -32,7 +32,7 @@ SentryHub ()
 @property (nonatomic, strong) SentryProfilesSampler *profilesSampler;
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDateProvider;
 @property (nonatomic, strong)
-    NSMutableArray<NSObject<SentryIntegrationProtocol> *> *installedIntegrations;
+    NSMutableArray<NSObject<BuzzSentryIntegrationProtocol> *> *installedIntegrations;
 @property (nonatomic, strong) NSMutableArray<NSString *> *installedIntegrationNames;
 
 @end
@@ -536,7 +536,7 @@ SentryHub ()
  */
 - (BOOL)isIntegrationInstalled:(Class)integrationClass
 {
-    for (id<SentryIntegrationProtocol> item in self.installedIntegrations) {
+    for (id<BuzzSentryIntegrationProtocol> item in self.installedIntegrations) {
         if ([item isKindOfClass:integrationClass]) {
             return YES;
         }

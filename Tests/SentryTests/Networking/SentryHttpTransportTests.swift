@@ -46,7 +46,7 @@ class BuzzSentryHttpTransportTests: XCTestCase {
             CurrentDate.setCurrentDateProvider(currentDateProvider)
 
             event = Event()
-            event.message = SentryMessage(formatted: "Some message")
+            event.message = BuzzSentryMessage(formatted: "Some message")
 
             eventRequest = buildRequest(BuzzSentryEnvelope(event: event))
             

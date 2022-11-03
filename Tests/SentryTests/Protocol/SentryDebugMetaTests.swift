@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryDebugMetaTests: XCTestCase {
+class BuzzSentryDebugMetaTests: XCTestCase {
 
     func testSerialize() {
         let debugMeta = TestData.debugMeta

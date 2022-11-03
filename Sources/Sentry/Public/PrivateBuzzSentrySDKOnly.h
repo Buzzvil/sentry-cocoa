@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class BuzzSentryEnvelope, SentryDebugMeta, SentryAppStartMeasurement, SentryScreenFrames,
+@class BuzzSentryEnvelope, BuzzSentryDebugMeta, SentryAppStartMeasurement, SentryScreenFrames,
     BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -35,10 +35,10 @@ typedef void (^SentryOnAppStartMeasurementAvailable)(
 + (nullable BuzzSentryEnvelope *)envelopeWithData:(NSData *)data;
 
 /**
- * Returns the current list of debug images. Be aware that the SentryDebugMeta is actually
+ * Returns the current list of debug images. Be aware that the BuzzSentryDebugMeta is actually
  * describing a debug image. This class should be renamed to SentryDebugImage in a future version.
  */
-+ (NSArray<SentryDebugMeta *> *)getDebugImages;
++ (NSArray<BuzzSentryDebugMeta *> *)getDebugImages;
 
 /**
  * Override SDK information.

@@ -1,22 +1,22 @@
-#import "SentryStacktraceBuilder.h"
+#import "BuzzSentryStacktraceBuilder.h"
 #import "SentryCrashStackCursor.h"
 #import "SentryCrashStackCursor_MachineContext.h"
 #import "SentryCrashStackCursor_SelfThread.h"
 #import "SentryCrashStackEntryMapper.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryFrameRemover.h"
-#import "SentryStacktrace.h"
+#import "BuzzSentryStacktrace.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryStacktraceBuilder ()
+BuzzSentryStacktraceBuilder ()
 
 @property (nonatomic, strong) SentryCrashStackEntryMapper *crashStackEntryMapper;
 
 @end
 
-@implementation SentryStacktraceBuilder
+@implementation BuzzSentryStacktraceBuilder
 
 - (id)initWithCrashStackEntryMapper:(SentryCrashStackEntryMapper *)crashStackEntryMapper
 {
@@ -26,7 +26,7 @@ SentryStacktraceBuilder ()
     return self;
 }
 
-- (SentryStacktrace *)retrieveStacktraceFromCursor:(SentryCrashStackCursor)stackCursor
+- (BuzzSentryStacktrace *)retrieveStacktraceFromCursor:(SentryCrashStackCursor)stackCursor
 {
     NSMutableArray<BuzzSentryFrame *> *frames = [NSMutableArray new];
     BuzzSentryFrame *frame = nil;
@@ -50,13 +50,13 @@ SentryStacktraceBuilder ()
     // The frames must be ordered from caller to callee, or oldest to youngest
     NSArray<BuzzSentryFrame *> *framesReversed = [[framesCleared reverseObjectEnumerator] allObjects];
 
-    SentryStacktrace *stacktrace = [[SentryStacktrace alloc] initWithFrames:framesReversed
+    BuzzSentryStacktrace *stacktrace = [[BuzzSentryStacktrace alloc] initWithFrames:framesReversed
                                                                   registers:@{}];
 
     return stacktrace;
 }
 
-- (SentryStacktrace *)buildStackTraceFromStackEntries:(SentryCrashStackEntry *)entries
+- (BuzzSentryStacktrace *)buildStackTraceFromStackEntries:(SentryCrashStackEntry *)entries
                                                amount:(unsigned int)amount
 {
     NSMutableArray<BuzzSentryFrame *> *frames = [[NSMutableArray alloc] initWithCapacity:amount];
@@ -79,10 +79,10 @@ SentryStacktraceBuilder ()
     // The frames must be ordered from caller to callee, or oldest to youngest
     NSArray<BuzzSentryFrame *> *framesReversed = [[framesCleared reverseObjectEnumerator] allObjects];
 
-    return [[SentryStacktrace alloc] initWithFrames:framesReversed registers:@{}];
+    return [[BuzzSentryStacktrace alloc] initWithFrames:framesReversed registers:@{}];
 }
 
-- (SentryStacktrace *)buildStacktraceForThread:(SentryCrashThread)thread
+- (BuzzSentryStacktrace *)buildStacktraceForThread:(SentryCrashThread)thread
                                        context:(struct SentryCrashMachineContext *)context
 {
     sentrycrashmc_getContextForThread(thread, context, false);
@@ -92,7 +92,7 @@ SentryStacktraceBuilder ()
     return [self retrieveStacktraceFromCursor:stackCursor];
 }
 
-- (SentryStacktrace *)buildStacktraceForCurrentThread
+- (BuzzSentryStacktrace *)buildStacktraceForCurrentThread
 {
     SentryCrashStackCursor stackCursor;
     // We don't need to skip any frames, because we filter out non sentry frames below.

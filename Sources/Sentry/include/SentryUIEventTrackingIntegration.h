@@ -1,10 +1,10 @@
 #import "SentryBaseIntegration.h"
-#import "SentryIntegrationProtocol.h"
+#import "BuzzSentryIntegrationProtocol.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 #if SENTRY_HAS_UIKIT
-@interface SentryUIEventTrackingIntegration : SentryBaseIntegration <SentryIntegrationProtocol>
+@interface SentryUIEventTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 @end
 #endif

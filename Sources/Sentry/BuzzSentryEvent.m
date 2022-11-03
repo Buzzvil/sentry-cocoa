@@ -4,13 +4,13 @@
 #import "SentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "SentryCurrentDate.h"
-#import "SentryDebugMeta.h"
+#import "BuzzSentryDebugMeta.h"
 #import "SentryException.h"
 #import "SentryId.h"
 #import "SentryLevelMapper.h"
-#import "SentryMessage.h"
+#import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
-#import "SentryStacktrace.h"
+#import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 #import "BuzzSentryUser.h"
 
@@ -87,7 +87,7 @@ BuzzSentryEvent ()
 - (void)addDebugImages:(NSMutableDictionary *)serializedData
 {
     NSMutableArray *debugImages = [NSMutableArray new];
-    for (SentryDebugMeta *debugImage in self.debugMeta) {
+    for (BuzzSentryDebugMeta *debugImage in self.debugMeta) {
         [debugImages addObject:[debugImage serialize]];
     }
     if (debugImages.count > 0) {

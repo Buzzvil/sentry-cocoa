@@ -36,7 +36,7 @@ class TestData {
         event.extra = ["some": "extra"]
         event.fingerprint = ["fingerprint"]
         event.logger = "logger"
-        event.message = SentryMessage(formatted: "message")
+        event.message = BuzzSentryMessage(formatted: "message")
         event.modules = ["module": "1"]
         event.platform = "Apple"
         event.releaseName = BuzzSentryMeta.versionString

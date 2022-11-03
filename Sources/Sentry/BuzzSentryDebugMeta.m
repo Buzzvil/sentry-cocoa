@@ -1,8 +1,8 @@
-#import "SentryDebugMeta.h"
+#import "BuzzSentryDebugMeta.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryDebugMeta
+@implementation BuzzSentryDebugMeta
 
 - (instancetype)init
 {

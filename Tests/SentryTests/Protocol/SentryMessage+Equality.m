@@ -1,7 +1,7 @@
-#import "SentryMessage+Equality.h"
+#import "BuzzSentryMessage+Equality.h"
 
 @implementation
-SentryMessage (Equality)
+BuzzSentryMessage (Equality)
 
 - (BOOL)isEqual:(id)other
 {
@@ -13,7 +13,7 @@ SentryMessage (Equality)
     return [self isEqualToMessage:other];
 }
 
-- (BOOL)isEqualToMessage:(SentryMessage *)message
+- (BOOL)isEqualToMessage:(BuzzSentryMessage *)message
 {
     if (self == message)
         return YES;

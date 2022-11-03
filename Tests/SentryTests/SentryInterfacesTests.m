@@ -16,13 +16,13 @@
 
 - (void)testDebugMeta
 {
-    SentryDebugMeta *debugMeta = [[SentryDebugMeta alloc] init];
+    BuzzSentryDebugMeta *debugMeta = [[BuzzSentryDebugMeta alloc] init];
     debugMeta.uuid = @"abcd";
     XCTAssertNotNil(debugMeta.uuid);
     NSDictionary *serialized = @{ @"uuid" : @"abcd" };
     XCTAssertEqualObjects([debugMeta serialize], serialized);
 
-    SentryDebugMeta *debugMeta2 = [[SentryDebugMeta alloc] init];
+    BuzzSentryDebugMeta *debugMeta2 = [[BuzzSentryDebugMeta alloc] init];
     debugMeta2.uuid = @"abcde";
     debugMeta2.imageAddress = @"0x0000000100034000";
     debugMeta2.type = @"1";
@@ -240,7 +240,7 @@
 {
     BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = @"0x01";
-    SentryStacktrace *stacktrace = [[SentryStacktrace alloc] initWithFrames:@[ frame ]
+    BuzzSentryStacktrace *stacktrace = [[BuzzSentryStacktrace alloc] initWithFrames:@[ frame ]
                                                                   registers:@{ @"a" : @"1" }];
     XCTAssertNotNil(stacktrace.frames);
     XCTAssertNotNil(stacktrace.registers);
@@ -266,7 +266,7 @@
     thread2.name = @"name";
     BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = @"0x01";
-    thread2.stacktrace = [[SentryStacktrace alloc] initWithFrames:@[ frame ]
+    thread2.stacktrace = [[BuzzSentryStacktrace alloc] initWithFrames:@[ frame ]
                                                         registers:@{ @"a" : @"1" }];
     NSDictionary *serialized2 = @{
         @"id" : @(2),
@@ -354,7 +354,7 @@
     thread2.name = @"name";
     BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = @"0x01";
-    thread2.stacktrace = [[SentryStacktrace alloc] initWithFrames:@[ frame ]
+    thread2.stacktrace = [[BuzzSentryStacktrace alloc] initWithFrames:@[ frame ]
                                                         registers:@{ @"a" : @"1" }];
 
     exception2.threadId = thread2.threadId;

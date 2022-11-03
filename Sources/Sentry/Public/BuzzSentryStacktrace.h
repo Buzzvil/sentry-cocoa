@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class BuzzSentryFrame;
 
 NS_SWIFT_NAME(Stacktrace)
-@interface SentryStacktrace : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryStacktrace : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**
@@ -22,10 +22,10 @@ SENTRY_NO_INIT
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> *registers;
 
 /**
- * Initialize a SentryStacktrace with frames and registers
+ * Initialize a BuzzSentryStacktrace with frames and registers
  * @param frames NSArray
  * @param registers NSArray
- * @return SentryStacktrace
+ * @return BuzzSentryStacktrace
  */
 - (instancetype)initWithFrames:(NSArray<BuzzSentryFrame *> *)frames
                      registers:(NSDictionary<NSString *, NSString *> *)registers;

@@ -3,15 +3,15 @@
 #include "SentryCrashStackCursor_MachineContext.h"
 #include "SentryCrashSymbolicator.h"
 #import "BuzzSentryFrame.h"
-#import "SentryStacktrace.h"
-#import "SentryStacktraceBuilder.h"
+#import "BuzzSentryStacktrace.h"
+#import "BuzzSentryStacktraceBuilder.h"
 #import "SentryThread.h"
 #include <pthread.h>
 
 @interface
 SentryThreadInspector ()
 
-@property (nonatomic, strong) SentryStacktraceBuilder *stacktraceBuilder;
+@property (nonatomic, strong) BuzzSentryStacktraceBuilder *stacktraceBuilder;
 @property (nonatomic, strong) id<SentryCrashMachineContextWrapper> machineContextWrapper;
 
 @end
@@ -48,7 +48,7 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
 
 @implementation SentryThreadInspector
 
-- (id)initWithStacktraceBuilder:(SentryStacktraceBuilder *)stacktraceBuilder
+- (id)initWithStacktraceBuilder:(BuzzSentryStacktraceBuilder *)stacktraceBuilder
        andMachineContextWrapper:(id<SentryCrashMachineContextWrapper>)machineContextWrapper
 {
     if (self = [super init]) {

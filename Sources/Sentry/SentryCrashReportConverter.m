@@ -2,7 +2,7 @@
 #import "NSDate+SentryExtras.h"
 #import "SentryBreadcrumb.h"
 #import "SentryCrashStackCursor.h"
-#import "SentryDebugMeta.h"
+#import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
 #import "BuzzSentryFrame.h"
@@ -11,7 +11,7 @@
 #import "SentryLog.h"
 #import "SentryMechanism.h"
 #import "SentryMechanismMeta.h"
-#import "SentryStacktrace.h"
+#import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 #import "BuzzSentryUser.h"
 
@@ -298,11 +298,11 @@ SentryCrashReportConverter ()
     return [[frames reverseObjectEnumerator] allObjects];
 }
 
-- (SentryStacktrace *)stackTraceForThreadIndex:(NSInteger)threadIndex
+- (BuzzSentryStacktrace *)stackTraceForThreadIndex:(NSInteger)threadIndex
 {
     NSArray<BuzzSentryFrame *> *frames = [self stackFramesForThreadIndex:threadIndex];
-    SentryStacktrace *stacktrace =
-        [[SentryStacktrace alloc] initWithFrames:frames
+    BuzzSentryStacktrace *stacktrace =
+        [[BuzzSentryStacktrace alloc] initWithFrames:frames
                                        registers:[self registersForThreadIndex:threadIndex]];
     [stacktrace fixDuplicateFrames];
     return stacktrace;
@@ -313,9 +313,9 @@ SentryCrashReportConverter ()
     return [self threadAtIndex:self.crashedThreadIndex];
 }
 
-- (SentryDebugMeta *)debugMetaFromBinaryImageDictionary:(NSDictionary *)sourceImage
+- (BuzzSentryDebugMeta *)debugMetaFromBinaryImageDictionary:(NSDictionary *)sourceImage
 {
-    SentryDebugMeta *debugMeta = [[SentryDebugMeta alloc] init];
+    BuzzSentryDebugMeta *debugMeta = [[BuzzSentryDebugMeta alloc] init];
     debugMeta.uuid = sourceImage[@"uuid"];
     debugMeta.type = @"apple";
     // We default to 0 on the server if not sent
@@ -328,7 +328,7 @@ SentryCrashReportConverter ()
     return debugMeta;
 }
 
-- (NSArray<SentryDebugMeta *> *)debugMetaForThreads:(NSArray<SentryThread *> *)threads
+- (NSArray<BuzzSentryDebugMeta *> *)debugMetaForThreads:(NSArray<SentryThread *> *)threads
 {
     NSMutableSet<NSString *> *imageNames = [[NSMutableSet alloc] init];
 
@@ -340,7 +340,7 @@ SentryCrashReportConverter ()
         }
     }
 
-    NSMutableArray<SentryDebugMeta *> *result = [NSMutableArray new];
+    NSMutableArray<BuzzSentryDebugMeta *> *result = [NSMutableArray new];
 
     for (NSDictionary *sourceImage in self.binaryImages) {
         if ([imageNames containsObject:sentry_formatHexAddress(sourceImage[@"image_addr"])]) {

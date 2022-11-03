@@ -4,13 +4,13 @@
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class SentryStacktrace, BuzzSentryFrameRemover, SentryCrashStackEntryMapper;
+@class BuzzSentryStacktrace, BuzzSentryFrameRemover, SentryCrashStackEntryMapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /** Uses SentryCrash internally to retrieve the stacktrace.
  */
-@interface SentryStacktraceBuilder : NSObject
+@interface BuzzSentryStacktraceBuilder : NSObject
 SENTRY_NO_INIT
 
 - (id)initWithCrashStackEntryMapper:(SentryCrashStackEntryMapper *)crashStackEntryMapper;
@@ -21,7 +21,7 @@ SENTRY_NO_INIT
  * the same as the application that includes Sentry. In this case the full stacktrace is returned
  * without skipping frames.
  */
-- (SentryStacktrace *)buildStacktraceForCurrentThread;
+- (BuzzSentryStacktrace *)buildStacktraceForCurrentThread;
 
 /**
  * Builds the stacktrace for given thread removing frames from the SentrySDK until frames from
@@ -29,10 +29,10 @@ SENTRY_NO_INIT
  * the same as the application that includes Sentry. In this case the full stacktrace is returned
  * without skipping frames.
  */
-- (SentryStacktrace *)buildStacktraceForThread:(SentryCrashThread)thread
+- (BuzzSentryStacktrace *)buildStacktraceForThread:(SentryCrashThread)thread
                                        context:(struct SentryCrashMachineContext *)context;
 
-- (SentryStacktrace *)buildStackTraceFromStackEntries:(SentryCrashStackEntry *)entries
+- (BuzzSentryStacktrace *)buildStackTraceFromStackEntries:(SentryCrashStackEntry *)entries
                                                amount:(unsigned int)amount;
 @end
 

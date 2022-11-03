@@ -4,12 +4,12 @@ import XCTest
     
     private class Fixture {
         var testMachineContextWrapper = TestMachineContextWrapper()
-        var stacktraceBuilder = TestSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
+        var stacktraceBuilder = TestBuzzSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
         
         func getSut(testWithRealMachineConextWrapper: Bool = false) -> SentryThreadInspector {
             
             let machineContextWrapper = testWithRealMachineConextWrapper ? SentryCrashDefaultMachineContextWrapper() : testMachineContextWrapper as SentryCrashMachineContextWrapper
-            let stacktraceBuilder = testWithRealMachineConextWrapper ? SentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: []))) : self.stacktraceBuilder
+            let stacktraceBuilder = testWithRealMachineConextWrapper ? BuzzSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: []))) : self.stacktraceBuilder
             
             return SentryThreadInspector(
                 stacktraceBuilder: stacktraceBuilder,
@@ -171,7 +171,7 @@ import XCTest
     }
 }
 
-private class TestSentryStacktraceBuilder: SentryStacktraceBuilder {
+private class TestBuzzSentryStacktraceBuilder: BuzzSentryStacktraceBuilder {
     
     var stackTraces = [SentryCrashThread: Stacktrace]()
     override func buildStacktrace(forThread thread: SentryCrashThread, context: OpaquePointer) -> Stacktrace {

@@ -1,6 +1,6 @@
 #import "SentryException.h"
 #import "SentryMechanism.h"
-#import "SentryStacktrace.h"
+#import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 
 NS_ASSUME_NONNULL_BEGIN

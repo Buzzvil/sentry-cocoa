@@ -54,7 +54,7 @@ class SentryScopeSwiftTests: XCTestCase {
             scope.add(TestData.fileAttachment)
             
             event = Event()
-            event.message = SentryMessage(formatted: "message")
+            event.message = BuzzSentryMessage(formatted: "message")
             
             transaction = BuzzSentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
         }

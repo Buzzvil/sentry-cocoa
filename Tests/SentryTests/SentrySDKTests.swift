@@ -36,7 +36,7 @@ class SentrySDKTests: XCTestCase {
             CurrentDate.setCurrentDateProvider(currentDate)
             
             event = Event()
-            event.message = SentryMessage(formatted: message)
+            event.message = BuzzSentryMessage(formatted: message)
             
             scope = Scope()
             scope.setTag(value: "value", key: "key")
