@@ -5,7 +5,7 @@
 #import <SentryCrashJSONCodec.h>
 #import <SentryCrashJSONCodecObjC.h>
 #import <BuzzSentryCrashScopeObserver.h>
-#import <SentryLog.h>
+#import <BuzzSentryLog.h>
 #import <BuzzSentryScopeSyncC.h>
 #import <BuzzSentryUser.h>
 

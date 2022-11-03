@@ -7,7 +7,7 @@
 #import <BuzzSentryEvent.h>
 #import <SentryException.h>
 #import <BuzzSentryHub.h>
-#import <SentryLog.h>
+#import <BuzzSentryLog.h>
 #import <BuzzSentryMechanism.h>
 #import <BuzzSentryMessage.h>
 #import <BuzzSentryOptions.h>

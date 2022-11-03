@@ -1,7 +1,7 @@
 #import "BuzzSentryPerformanceTrackingIntegration.h"
 #import "BuzzSentryDefaultObjCRuntimeWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySubClassFinder.h"
 #import "BuzzSentryUIViewControllerSwizzling.h"
 

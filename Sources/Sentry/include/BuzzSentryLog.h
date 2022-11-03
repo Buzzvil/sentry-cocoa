@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryLog : NSObject
+@interface BuzzSentryLog : NSObject
 SENTRY_NO_INIT
 
 + (void)configure:(BOOL)debug diagnosticLevel:(SentryLevel)level;
@@ -15,7 +15,7 @@ SENTRY_NO_INIT
 
 NS_ASSUME_NONNULL_END
 #define SENTRY_LOG(_SENTRY_LOG_LEVEL, ...)                                                         \
-    [SentryLog logWithMessage:[NSString stringWithFormat:@"[%@:%d] %@",                            \
+    [BuzzSentryLog logWithMessage:[NSString stringWithFormat:@"[%@:%d] %@",                            \
                                         [[[NSString stringWithUTF8String:__FILE__]                 \
                                             lastPathComponent] stringByDeletingPathExtension],     \
                                         __LINE__, [NSString stringWithFormat:__VA_ARGS__]]         \

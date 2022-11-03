@@ -2,7 +2,7 @@
 #import "BuzzSentryANRTracker.h"
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryLevelMapper.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK.h"
 #import "BuzzSentrySDKInfo.h"
@@ -126,7 +126,7 @@ BuzzSentryOptions ()
 {
     if (self = [self init]) {
         if (![self validateOptions:options didFailWithError:error]) {
-            [SentryLog
+            [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"Failed to initialize: %@", *error]
                       andLevel:kSentryLevelError];
             return nil;

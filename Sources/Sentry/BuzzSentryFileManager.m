@@ -8,7 +8,7 @@
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEvent.h"
 #import "BuzzSentryFileContents.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryMigrateSessionInit.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentrySerialization.h"
@@ -354,7 +354,7 @@ BuzzSentryFileManager ()
 
 - (nullable BuzzSentrySession *)readSession:(NSString *)sessionFilePath
 {
-    [SentryLog
+    [BuzzSentryLog
         logWithMessage:[NSString stringWithFormat:@"Reading from session: %@", sessionFilePath]
               andLevel:kSentryLevelDebug];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -445,7 +445,7 @@ BuzzSentryFileManager ()
     @synchronized(self.appStateFilePath) {
         [data writeToFile:self.appStateFilePath options:NSDataWritingAtomic error:&error];
         if (nil != error) {
-            [SentryLog
+            [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"Failed to store app state %@", error]
                       andLevel:kSentryLevelError];
         }
@@ -468,7 +468,7 @@ BuzzSentryFileManager ()
 
         // We don't want to log an error if the file doesn't exist.
         if (nil != error && error.code != NSFileNoSuchFileError) {
-            [SentryLog
+            [BuzzSentryLog
                 logWithMessage:[NSString
                                    stringWithFormat:
                                        @"Failed to move app state to previous app state: %@", error]
@@ -518,7 +518,7 @@ BuzzSentryFileManager ()
 
     // We don't want to log an error if the file doesn't exist.
     if (nil != error && error.code != NSFileNoSuchFileError) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:[NSString stringWithFormat:@"Failed to delete app state from %@: %@",
                                      path, error]
                   andLevel:kSentryLevelError];
@@ -572,7 +572,7 @@ BuzzSentryFileManager ()
 
         // We don't want to log an error if the file doesn't exist.
         if (nil != error && error.code != NSFileNoSuchFileError) {
-            [SentryLog
+            [BuzzSentryLog
                 logWithMessage:[NSString
                                    stringWithFormat:@"Failed to delete timezone offset %@", error]
                       andLevel:kSentryLevelError];

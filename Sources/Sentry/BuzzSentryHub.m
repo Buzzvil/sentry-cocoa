@@ -9,7 +9,7 @@
 #import "BuzzSentryEvent+Private.h"
 #import "BuzzSentryFileManager.h"
 #import "BuzzSentryId.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "SentryProfilesSampler.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentrySamplingContext.h"
@@ -81,7 +81,7 @@ BuzzSentryHub ()
     BuzzSentryScope *scope = self.scope;
     BuzzSentryOptions *options = [_client options];
     if (nil == options || nil == options.releaseName) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:[NSString stringWithFormat:@"No option or release to start a session."]
                   andLevel:kSentryLevelError];
         return;
@@ -186,7 +186,7 @@ BuzzSentryHub ()
                                                                     error:nil];
             NSString *sessionString = [[NSString alloc] initWithData:sessionData
                                                             encoding:NSUTF8StringEncoding];
-            [SentryLog
+            [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"Capturing session with status: %@",
                                          sessionString]
                       andLevel:kSentryLevelDebug];

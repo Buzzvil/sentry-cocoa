@@ -1,6 +1,6 @@
 #import "BuzzSentryBaseIntegration.h"
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import <Foundation/Foundation.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryOptions+Private.h>

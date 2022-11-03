@@ -1,7 +1,7 @@
 #import "BuzzSentryANRTracker.h"
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "SentryThreadWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN

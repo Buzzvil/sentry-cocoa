@@ -5,7 +5,7 @@
 #import "SentryError.h"
 #import "BuzzSentryId.h"
 #import "BuzzSentryLevelMapper.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySDKInfo.h"
 #import "BuzzSentrySession.h"
 #import "BuzzSentryTraceContext.h"
@@ -228,7 +228,7 @@ NS_ASSUME_NONNULL_BEGIN
 #ifdef DEBUG
             NSString *itemHeaderString = [[NSString alloc] initWithData:itemHeaderData
                                                                encoding:NSUTF8StringEncoding];
-            [SentryLog
+            [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"Item Header %@", itemHeaderString]
                       andLevel:kSentryLevelDebug];
 #endif
@@ -237,7 +237,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                                              options:0
                                                                                error:&error];
             if (nil != error) {
-                [SentryLog
+                [BuzzSentryLog
                     logWithMessage:[NSString
                                        stringWithFormat:@"Failed to parse envelope item header %@",
                                        error]
@@ -246,7 +246,7 @@ NS_ASSUME_NONNULL_BEGIN
             }
             NSString *_Nullable type = [headerDictionary valueForKey:@"type"];
             if (nil == type) {
-                [SentryLog
+                [BuzzSentryLog
                     logWithMessage:[NSString stringWithFormat:@"Envelope item type is required."]
                           andLevel:kSentryLevelError];
                 break;
@@ -254,7 +254,7 @@ NS_ASSUME_NONNULL_BEGIN
             NSNumber *bodyLengthNumber = [headerDictionary valueForKey:@"length"];
             NSUInteger bodyLength = [bodyLengthNumber unsignedIntegerValue];
             if (endOfEnvelope == i && bodyLength != 0) {
-                [SentryLog
+                [BuzzSentryLog
                     logWithMessage:[NSString
                                        stringWithFormat:@"Envelope item has no data but header "
                                                         @"indicates it's length is %d.",
@@ -314,7 +314,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                                       options:0
                                                                         error:&error];
     if (nil != error) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:[NSString
                                stringWithFormat:@"Failed to deserialize session data %@", error]
                   andLevel:kSentryLevelError];
@@ -328,7 +328,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     if (nil == session.releaseName || [session.releaseName isEqualToString:@""]) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:@"Deserialized session doesn't contain a release name. Dropping it."
                   andLevel:kSentryLevelError];
         return nil;
@@ -344,7 +344,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                                       options:0
                                                                         error:&error];
     if (nil != error) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:[NSString
                                stringWithFormat:@"Failed to deserialize app state data %@", error]
                   andLevel:kSentryLevelError];
@@ -361,7 +361,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                                     options:0
                                                                       error:&error];
     if (nil != error) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:
                 [NSString
                     stringWithFormat:@"Failed to retrieve event level from envelope item data: %@",

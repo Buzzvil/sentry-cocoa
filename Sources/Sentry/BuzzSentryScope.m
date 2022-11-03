@@ -5,7 +5,7 @@
 #import "BuzzSentryEvent.h"
 #import "BuzzSentryGlobalEventProcessor.h"
 #import "BuzzSentryLevelMapper.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryScopeObserver.h"
 #import "BuzzSentrySession.h"
 #import "BuzzSentrySpan.h"

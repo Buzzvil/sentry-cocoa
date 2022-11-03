@@ -1,7 +1,7 @@
 #import "BuzzSentryFramesTrackingIntegration.h"
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "BuzzSentryFramesTracker.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ BuzzSentryFramesTrackingIntegration ()
 
     return YES;
 #else
-    [SentryLog
+    [BuzzSentryLog
         logWithMessage:
             @"NO UIKit -> BuzzSentryFramesTrackingIntegration will not track slow and frozen frames."
               andLevel:kSentryLevelInfo];

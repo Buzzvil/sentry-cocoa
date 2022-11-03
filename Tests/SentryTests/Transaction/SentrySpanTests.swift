@@ -38,8 +38,8 @@ class BuzzSentrySpanTests: XCTestCase {
         super.setUp()
 
         logOutput = TestLogOutput()
-        SentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
-        SentryLog.setLogOutput(logOutput)
+        BuzzSentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
+        BuzzSentryLog.setLogOutput(logOutput)
 
         fixture = Fixture()
         CurrentDate.setCurrentDateProvider(fixture.currentDateProvider)

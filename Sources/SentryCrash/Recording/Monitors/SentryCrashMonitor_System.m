@@ -115,7 +115,7 @@ nsstringSysctl(NSString *name)
  *
  * @return The result of the sysctl call.
  *
- * @todo Combine into SentryDevice?
+ * @todo Combine into BuzzSentryDevice?
  */
 static const char *
 stringSysctl(const char *name)
@@ -403,7 +403,7 @@ getDeviceAndAppHash()
         sentrycrashsysctl_getMacAddress("en0", [data mutableBytes]);
     }
 
-    // Append some device-specific data. TODO: use SentryDevice API here now?
+    // Append some device-specific data. TODO: use BuzzSentryDevice API here now?
     [data appendData:(NSData *_Nonnull)[nsstringSysctl(@"hw.machine")
                          dataUsingEncoding:NSUTF8StringEncoding]];
     [data appendData:(NSData *_Nonnull)[nsstringSysctl(@"hw.model")
@@ -557,7 +557,7 @@ initialize()
                 = cString([NSProcessInfo processInfo].environment[@"SIMULATOR_MODEL_IDENTIFIER"]);
             g_systemData.model = "simulator";
         } else {
-            // TODO: combine this into SentryDevice?
+            // TODO: combine this into BuzzSentryDevice?
 #if SentryCrashCRASH_HOST_MAC
             // MacOS has the machine in the model field, and no model
             g_systemData.machine = stringSysctl("hw.model");

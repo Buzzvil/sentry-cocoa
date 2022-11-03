@@ -55,7 +55,7 @@ index b8eb37f0..046e7851 100644
 --- a/Sources/Shared/Environment/CrashReporter.swift
 +++ b/Sources/Shared/Environment/CrashReporter.swift
 @@ -20,34 +20,6 @@ public class CrashReporterImpl: CrashReporter {
-         Current.Log.add(destination: with(SentryLogDestination()) {
+         Current.Log.add(destination: with(BuzzSentryLogDestination()) {
              $0.outputLevel = .warning
          })
 -

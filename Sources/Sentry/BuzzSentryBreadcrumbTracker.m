@@ -3,7 +3,7 @@
 #import "BuzzSentryClient.h"
 #import "SentryDefines.h"
 #import "BuzzSentryHub.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope.h"
 #import "BuzzSentrySwizzle.h"

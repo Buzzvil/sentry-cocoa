@@ -6,15 +6,15 @@
 #    define SENTRY_HAS_UIKIT (TARGET_OS_IOS || TARGET_OS_TV)
 #endif
 
-#if __has_include("SentryLog.h")
-#    import "SentryLog.h"
+#if __has_include("BuzzSentryLog.h")
+#    import "BuzzSentryLog.h"
 #else
 #    define SENTRY_LOG_ERRNO(statement) statement
 #    define SENTRY_LOG_DEBUG(...) NSLog(__VA_ARGS__)
 #endif
 // </polyfills>
 
-#import "SentryDevice.h"
+#import "BuzzSentryDevice.h"
 #import <sys/sysctl.h>
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>

@@ -1,6 +1,6 @@
 #import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryAppStateManager.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySysctl.h"
 #import <Foundation/Foundation.h>
 #import <PrivateBuzzSentrySDKOnly.h>
@@ -9,7 +9,7 @@
 #import <BuzzSentryCurrentDateProvider.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryInternalNotificationNames.h>
-#import <SentryLog.h>
+#import <BuzzSentryLog.h>
 #import <BuzzSentrySDK+Private.h>
 
 #if SENTRY_HAS_UIKIT

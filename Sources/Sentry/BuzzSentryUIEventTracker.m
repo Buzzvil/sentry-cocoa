@@ -1,6 +1,6 @@
 #import "BuzzSentrySwizzleWrapper.h"
 #import <BuzzSentryHub+Private.h>
-#import <SentryLog.h>
+#import <BuzzSentryLog.h>
 #import <BuzzSentrySDK+Private.h>
 #import <BuzzSentrySDK.h>
 #import <BuzzSentryScope.h>
@@ -86,7 +86,7 @@ BuzzSentryUIEventTracker ()
             [currentActiveTransaction finish];
 
             if (currentActiveTransaction) {
-                [SentryLog
+                [BuzzSentryLog
                     logWithMessage:
                         [NSString stringWithFormat:@"BuzzSentryUIEventTracker finished transaction %@",
                                   currentActiveTransaction.transactionContext.name]
@@ -116,7 +116,7 @@ BuzzSentryUIEventTracker ()
                                                           idleTimeout:self.idleTimeout
                                                  dispatchQueueWrapper:self.dispatchQueueWrapper];
 
-                [SentryLog
+                [BuzzSentryLog
                     logWithMessage:[NSString stringWithFormat:@"BuzzSentryUIEventTracker automatically "
                                                               @"started a new transaction with "
                                                               @"name: %@, bindToScope: %@",

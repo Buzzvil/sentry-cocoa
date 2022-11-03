@@ -2,7 +2,7 @@
 #import "BuzzSentryBaggage.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryHub+Private.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope+Private.h"
 #import "BuzzSentrySerialization.h"

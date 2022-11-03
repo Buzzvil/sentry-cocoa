@@ -1,5 +1,5 @@
 #import "BuzzSentryFileIOTrackingIntegration.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryNSDataSwizzling.h"
 #import "BuzzSentryOptions.h"
 

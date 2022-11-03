@@ -6,8 +6,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class BuzzSentryScope, BuzzSentryCrashWrapper;
 
-static NSString *const SentryDeviceContextFreeMemoryKey = @"free_memory";
-static NSString *const SentryDeviceContextAppMemoryKey = @"app_memory";
+static NSString *const BuzzSentryDeviceContextFreeMemoryKey = @"free_memory";
+static NSString *const BuzzSentryDeviceContextAppMemoryKey = @"app_memory";
 
 @interface BuzzSentryCrashIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
 

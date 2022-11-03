@@ -1,7 +1,7 @@
 #import "BuzzSentryAutoSessionTrackingIntegration.h"
 #import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentrySDK.h"
 #import "BuzzSentrySessionTracker.h"

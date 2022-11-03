@@ -84,11 +84,11 @@ typedef void (^BuzzSentrySpanCallback)(id<BuzzSentrySpan> _Nullable span);
 /**
  * Loglevel
  */
-typedef NS_ENUM(NSInteger, SentryLogLevel) {
-    kSentryLogLevelNone = 1,
-    kSentryLogLevelError,
-    kSentryLogLevelDebug,
-    kSentryLogLevelVerbose
+typedef NS_ENUM(NSInteger, BuzzSentryLogLevel) {
+    kBuzzSentryLogLevelNone = 1,
+    kBuzzSentryLogLevelError,
+    kBuzzSentryLogLevelDebug,
+    kBuzzSentryLogLevelVerbose
 };
 
 /**

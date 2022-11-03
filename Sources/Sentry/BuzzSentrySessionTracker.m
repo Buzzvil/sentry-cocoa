@@ -4,7 +4,7 @@
 #import "BuzzSentryFileManager.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryInternalNotificationNames.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryNSNotificationCenterWrapper.h"
 #import "BuzzSentrySDK+Private.h"
 

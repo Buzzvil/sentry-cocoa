@@ -13,7 +13,7 @@
 #import "BuzzSentryEvent.h"
 #import "BuzzSentryFileContents.h"
 #import "BuzzSentryFileManager.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryNSURLRequest.h"
 #import "BuzzSentryNSURLRequestBuilder.h"
 #import "BuzzSentryOptions.h"

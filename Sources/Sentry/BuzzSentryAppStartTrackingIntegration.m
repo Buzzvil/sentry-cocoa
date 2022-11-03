@@ -1,7 +1,7 @@
 #import "BuzzSentryAppStartTrackingIntegration.h"
 #import "BuzzSentryAppStartTracker.h"
 #import "BuzzSentryDefaultCurrentDateProvider.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import <Foundation/Foundation.h>
 #import <PrivateBuzzSentrySDKOnly.h>
 #import <BuzzSentryAppStateManager.h>

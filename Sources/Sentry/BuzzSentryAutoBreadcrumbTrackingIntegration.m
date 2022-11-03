@@ -3,7 +3,7 @@
 #import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryFileManager.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentrySystemEventBreadcrumbs.h"
 

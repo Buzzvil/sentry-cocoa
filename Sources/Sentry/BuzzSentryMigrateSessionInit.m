@@ -1,7 +1,7 @@
 #import "BuzzSentryMigrateSessionInit.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySerialization.h"
 #import "BuzzSentrySession+Private.h"
 
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
                                     error:&error];
 
     if (nil != error) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:[NSString stringWithFormat:@"Could not migrate session init, because "
                                                       @"storing the updated envelope failed: %@",
                                      error.description]

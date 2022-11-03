@@ -2,7 +2,7 @@
 #import "NSDate+BuzzSentryExtras.h"
 #import "NSDictionary+BuzzSentrySanitize.h"
 #import "BuzzSentryCurrentDate.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryMeasurementValue.h"
 #import "BuzzSentryNoOpSpan.h"
 #import "BuzzSentrySpanId.h"

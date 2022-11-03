@@ -4,7 +4,7 @@
 #import "BuzzSentryClientReport.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDKInfo.h"

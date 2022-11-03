@@ -1,5 +1,5 @@
 #import "BuzzSentryQueueableRequestManager.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryRequestOperation.h"
 
 NS_ASSUME_NONNULL_BEGIN

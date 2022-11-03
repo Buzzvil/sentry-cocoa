@@ -2,7 +2,7 @@
 #import "NSDate+BuzzSentryExtras.h"
 #import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryInstallation.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

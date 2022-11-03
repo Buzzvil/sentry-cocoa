@@ -1,5 +1,5 @@
 #import "BuzzSentryGlobalEventProcessor.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 
 @implementation BuzzSentryGlobalEventProcessor
 

@@ -1,6 +1,6 @@
 #include "SentryProfilingLogging.hpp"
 
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 
 namespace sentry {
 namespace profiling {
@@ -36,7 +36,7 @@ namespace profiling {
         const auto fmtStr = [[NSString alloc] initWithUTF8String:fmt];
         const auto msgStr = [[NSString alloc] initWithFormat:fmtStr arguments:args];
         va_end(args);
-        [SentryLog logWithMessage:msgStr andLevel:sentryLevelFromLogLevel(level)];
+        [BuzzSentryLog logWithMessage:msgStr andLevel:sentryLevelFromLogLevel(level)];
     }
 
 } // namespace profiling

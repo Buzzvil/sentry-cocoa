@@ -22,7 +22,7 @@
 #import "BuzzSentryId.h"
 #import "BuzzSentryInAppLogic.h"
 #import "BuzzSentryInstallation.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentryMechanismMeta.h"
 #import "BuzzSentryMessage.h"
@@ -776,7 +776,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         modifyContext:event
                   key:@"device"
                 block:^(NSMutableDictionary *device) {
-                    device[SentryDeviceContextFreeMemoryKey] = @(self.crashWrapper.freeMemorySize);
+                    device[BuzzSentryDeviceContextFreeMemoryKey] = @(self.crashWrapper.freeMemorySize);
                     device[@"free_storage"] = @(self.crashWrapper.freeStorageSize);
 
 #if TARGET_OS_IOS
@@ -800,7 +800,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self modifyContext:event
                     key:@"app"
                   block:^(NSMutableDictionary *app) {
-                      app[SentryDeviceContextAppMemoryKey] = @(self.crashWrapper.appMemorySize);
+                      app[BuzzSentryDeviceContextAppMemoryKey] = @(self.crashWrapper.appMemorySize);
                   }];
 }
 
@@ -809,7 +809,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self modifyContext:event
                     key:@"device"
                   block:^(NSMutableDictionary *device) {
-                      [device removeObjectForKey:SentryDeviceContextFreeMemoryKey];
+                      [device removeObjectForKey:BuzzSentryDeviceContextFreeMemoryKey];
                       [device removeObjectForKey:@"free_storage"];
                       [device removeObjectForKey:@"orientation"];
                       [device removeObjectForKey:@"charging"];
@@ -819,7 +819,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self modifyContext:event
                     key:@"app"
                   block:^(NSMutableDictionary *app) {
-                      [app removeObjectForKey:SentryDeviceContextAppMemoryKey];
+                      [app removeObjectForKey:BuzzSentryDeviceContextAppMemoryKey];
                   }];
 }
 

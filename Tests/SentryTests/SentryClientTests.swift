@@ -101,7 +101,7 @@ class BuzzSentryClientTest: XCTestCase {
                 scope.setEnvironment(environment)
                 scope.setTag(value: "value", key: "key")
                 scope.add(TestData.dataAttachment)
-                scope.setContext(value: [SentryDeviceContextFreeMemoryKey: 2_000], key: "device")
+                scope.setContext(value: [BuzzSentryDeviceContextFreeMemoryKey: 2_000], key: "device")
                 return scope
             }
         }

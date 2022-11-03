@@ -10,7 +10,7 @@
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
 #import "BuzzSentryHub.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentrySDK.h"
 #import "BuzzSentryScope.h"

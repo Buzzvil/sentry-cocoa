@@ -1,6 +1,6 @@
 #import "BuzzSentryStacktrace.h"
 #import "BuzzSentryFrame.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

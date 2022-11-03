@@ -15,18 +15,18 @@ class BuzzSentryBaseIntegrationTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        oldDebug = SentryLog.isDebug()
-        oldLevel = SentryLog.diagnosticLevel()
-        oldOutput = SentryLog.logOutput()
-        SentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
+        oldDebug = BuzzSentryLog.isDebug()
+        oldLevel = BuzzSentryLog.diagnosticLevel()
+        oldOutput = BuzzSentryLog.logOutput()
+        BuzzSentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
         logOutput = TestLogOutput()
-        SentryLog.setLogOutput(logOutput)
+        BuzzSentryLog.setLogOutput(logOutput)
     }
 
     override func tearDown() {
         super.tearDown()
-        SentryLog.configure(oldDebug, diagnosticLevel: oldLevel)
-        SentryLog.setLogOutput(oldOutput)
+        BuzzSentryLog.configure(oldDebug, diagnosticLevel: oldLevel)
+        BuzzSentryLog.setLogOutput(oldOutput)
     }
 
     func testIntegrationName() {

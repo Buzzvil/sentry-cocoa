@@ -8,7 +8,7 @@
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryHexAddressFormatter.h"
 #import "BuzzSentryInAppLogic.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentryMechanismMeta.h"
 #import "BuzzSentryStacktrace.h"

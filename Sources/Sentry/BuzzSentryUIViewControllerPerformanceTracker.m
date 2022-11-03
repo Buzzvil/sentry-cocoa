@@ -1,6 +1,6 @@
 #import "BuzzSentryUIViewControllerPerformanceTracker.h"
 #import "BuzzSentryHub.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryPerformanceTracker+Private.h"
 #import "BuzzSentryPerformanceTracker.h"
 #import "BuzzSentrySDK+Private.h"

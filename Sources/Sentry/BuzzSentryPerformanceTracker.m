@@ -1,6 +1,6 @@
 #import "BuzzSentryPerformanceTracker.h"
 #import "BuzzSentryHub+Private.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope.h"
 #import "BuzzSentrySpan.h"

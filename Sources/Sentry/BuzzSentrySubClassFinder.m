@@ -1,6 +1,6 @@
 #import "BuzzSentrySubClassFinder.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryObjCRuntimeWrapper.h"
 #import <objc/runtime.h>
 #import <string.h>
@@ -65,7 +65,7 @@ BuzzSentrySubClassFinder ()
                 block(NSClassFromString(className));
             }
 
-            [SentryLog
+            [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"The following UIViewControllers will "
                                                           @"generate automatic transactions: %@",
                                          [classesToSwizzle componentsJoinedByString:@", "]]

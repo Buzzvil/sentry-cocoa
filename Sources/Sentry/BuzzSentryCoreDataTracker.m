@@ -1,7 +1,7 @@
 
 #import "BuzzSentryCoreDataTracker.h"
 #import "BuzzSentryHub+Private.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryPredicateDescriptor.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope+Private.h"
@@ -31,14 +31,14 @@
     }];
 
     if (fetchSpan) {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:[NSString stringWithFormat:
                                          @"BuzzSentryCoreDataTracker automatically "
                                          @"started a new span with description: %@, operation: %@",
                                      fetchSpan.description, SENTRY_COREDATA_FETCH_OPERATION]
                   andLevel:kSentryLevelDebug];
     } else {
-        [SentryLog
+        [BuzzSentryLog
             logWithMessage:
                 @"managedObjectContext:executeFetchRequest:error:originalImp: fetchSpan is nil."
                   andLevel:kSentryLevelError];
@@ -75,7 +75,7 @@
                                                                            inContext:context]];
 
             if (fetchSpan) {
-                [SentryLog
+                [BuzzSentryLog
                     logWithMessage:[NSString
                                        stringWithFormat:@"BuzzSentryCoreDataTracker automatically "
                                                         @"started a new span with description: %@, "

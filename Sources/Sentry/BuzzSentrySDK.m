@@ -6,7 +6,7 @@
 #import "SentryCrash.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryHub+Private.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryOptions+Private.h"
 #import "BuzzSentryScope.h"
@@ -145,7 +145,7 @@ static NSUInteger startInvocations;
 {
     startInvocations++;
 
-    [SentryLog configure:options.debug diagnosticLevel:options.diagnosticLevel];
+    [BuzzSentryLog configure:options.debug diagnosticLevel:options.diagnosticLevel];
 
     BuzzSentryClient *newClient = [[BuzzSentryClient alloc] initWithOptions:options];
     [newClient.fileManager moveAppStateToPreviousAppState];

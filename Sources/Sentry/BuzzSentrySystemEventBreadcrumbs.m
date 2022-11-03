@@ -2,7 +2,7 @@
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySDK.h"
 
 // all those notifications are not available for tvOS

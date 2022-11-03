@@ -1,7 +1,7 @@
 #import "BuzzSentryUIEventTrackingIntegration.h"
 #import <Foundation/Foundation.h>
 #import <SentryDependencyContainer.h>
-#import <SentryLog.h>
+#import <BuzzSentryLog.h>
 #import <BuzzSentryNSDataSwizzling.h>
 #import <BuzzSentryOptions+Private.h>
 #import <BuzzSentryOptions.h>

@@ -1,4 +1,4 @@
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import <Sentry/Sentry.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class BuzzSentryLogOutput;
 
 @interface
-SentryLog (TestInit)
+BuzzSentryLog (TestInit)
 
 /** Internal and only needed for testing. */
 + (void)setLogOutput:(nullable BuzzSentryLogOutput *)output;

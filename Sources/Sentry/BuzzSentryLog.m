@@ -1,10 +1,10 @@
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryLevelMapper.h"
 #import "BuzzSentryLogOutput.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryLog
+@implementation BuzzSentryLog
 
 /**
  * Enable per default to log initialization errors.

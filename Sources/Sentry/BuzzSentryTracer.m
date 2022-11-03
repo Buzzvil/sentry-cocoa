@@ -6,7 +6,7 @@
 #import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryFramesTracker.h"
 #import "BuzzSentryHub+Private.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryNoOpSpan.h"
 #import "SentryProfiler.h"
 #import "SentryProfilesSampler.h"

@@ -2,7 +2,7 @@
 #import "BuzzSentryClient.h"
 #import "SentryError.h"
 #import "BuzzSentryHub.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 
 NS_ASSUME_NONNULL_BEGIN

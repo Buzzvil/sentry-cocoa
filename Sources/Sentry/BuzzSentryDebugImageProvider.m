@@ -5,7 +5,7 @@
 #import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryHexAddressFormatter.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 #import <Foundation/Foundation.h>

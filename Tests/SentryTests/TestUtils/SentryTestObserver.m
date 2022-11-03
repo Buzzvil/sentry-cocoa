@@ -6,7 +6,7 @@
 #import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryHub.h"
-#import "SentryLog+TestInit.h"
+#import "BuzzSentryLog+TestInit.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentryScope.h"
 #import "BuzzSentrySDK+Private.h"
@@ -33,7 +33,7 @@ SentryTestObserver ()
     [[XCTestObservationCenter sharedTestObservationCenter]
         addTestObserver:[[SentryTestObserver alloc] init]];
 #endif
-    [SentryLog configure:YES diagnosticLevel:kSentryLevelDebug];
+    [BuzzSentryLog configure:YES diagnosticLevel:kSentryLevelDebug];
 }
 
 - (instancetype)init

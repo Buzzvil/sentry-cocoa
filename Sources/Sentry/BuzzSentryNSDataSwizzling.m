@@ -1,7 +1,7 @@
 #import "BuzzSentryNSDataSwizzling.h"
 #import "BuzzSentryNSDataTracker.h"
 #import "BuzzSentrySwizzle.h"
-#import <SentryLog.h>
+#import <BuzzSentryLog.h>
 #import <objc/runtime.h>
 
 @implementation BuzzSentryNSDataSwizzling

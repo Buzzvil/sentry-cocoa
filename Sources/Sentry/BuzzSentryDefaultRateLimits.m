@@ -3,7 +3,7 @@
 #import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryDataCategoryMapper.h"
 #import "BuzzSentryDateUtil.h"
-#import "SentryLog.h"
+#import "BuzzSentryLog.h"
 #import "BuzzSentryRateLimitParser.h"
 #import "BuzzSentryRetryAfterHeaderParser.h"
 #import <Foundation/Foundation.h>
