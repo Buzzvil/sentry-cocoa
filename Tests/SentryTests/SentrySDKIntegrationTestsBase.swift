@@ -24,13 +24,13 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
     
     func givenSdkWithHub(_ options: Options? = nil) {
         let client = TestClient(options: options ?? self.options)!
-        let hub = SentryHub(client: client, andScope: Scope(), andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
+        let hub = BuzzSentryHub(client: client, andScope: Scope(), andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
         
         SentrySDK.setCurrentHub(hub)
     }
     
     func givenSdkWithHubButNoClient() {
-        SentrySDK.setCurrentHub(SentryHub(client: nil, andScope: nil))
+        SentrySDK.setCurrentHub(BuzzSentryHub(client: nil, andScope: nil))
     }
     
     func assertEventCaptured(_ callback: (Event?) -> Void) {

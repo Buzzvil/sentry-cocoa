@@ -7,7 +7,7 @@
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryThread.h"

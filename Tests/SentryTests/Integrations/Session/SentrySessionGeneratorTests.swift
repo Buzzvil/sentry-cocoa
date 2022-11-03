@@ -145,7 +145,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         
         sentryCrash = TestSentryCrashWrapper.sharedInstance()
         let client = SentrySDK.currentHub().getClient()
-        let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
+        let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
         SentrySDK.setCurrentHub(hub)
         
         crashIntegration = BuzzSentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())

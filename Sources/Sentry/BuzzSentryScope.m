@@ -1,4 +1,4 @@
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "BuzzSentryAttachment.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryEnvelopeItemType.h"
@@ -16,7 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryScope ()
+BuzzSentryScope ()
 
 /**
  * Set global user -> thus will be sent with every event
@@ -72,7 +72,7 @@ SentryScope ()
 
 @end
 
-@implementation SentryScope {
+@implementation BuzzSentryScope {
     NSObject *_spanLock;
 }
 
@@ -99,7 +99,7 @@ SentryScope ()
     return [self initWithMaxBreadcrumbs:defaultMaxBreadcrumbs];
 }
 
-- (instancetype)initWithScope:(SentryScope *)scope
+- (instancetype)initWithScope:(BuzzSentryScope *)scope
 {
     if (self = [self init]) {
         [_extraDictionary addEntriesFromDictionary:[scope extras]];

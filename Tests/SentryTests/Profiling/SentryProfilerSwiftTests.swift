@@ -12,8 +12,8 @@ class SentryProfilerSwiftTests: XCTestCase {
             return options
         }()
         lazy var client: TestClient! = TestClient(options: options)
-        lazy var hub: SentryHub = {
-            let hub = SentryHub(client: client, andScope: scope)
+        lazy var hub: BuzzSentryHub = {
+            let hub = BuzzSentryHub(client: client, andScope: scope)
             hub.bindClient(client)
             Dynamic(hub).tracesSampler.random = TestRandom(value: 1.0)
             Dynamic(hub).profilesSampler.random = TestRandom(value: 0.5)

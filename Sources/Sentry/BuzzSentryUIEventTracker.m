@@ -1,9 +1,9 @@
 #import "SentrySwizzleWrapper.h"
-#import <SentryHub+Private.h>
+#import <BuzzSentryHub+Private.h>
 #import <SentryLog.h>
 #import <BuzzSentrySDK+Private.h>
 #import <SentrySDK.h>
-#import <SentryScope.h>
+#import <BuzzSentryScope.h>
 #import <BuzzSentrySpanOperations.h>
 #import <BuzzSentrySpanProtocol.h>
 #import <BuzzSentryTracer.h>

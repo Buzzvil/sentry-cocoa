@@ -3,7 +3,7 @@
 #import "SentryCrashC.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryEvent+Private.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryViewHierarchy.h"
 

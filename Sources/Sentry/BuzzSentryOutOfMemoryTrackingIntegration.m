@@ -5,7 +5,7 @@
 #import <SentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
-#import <SentryHub.h>
+#import <BuzzSentryHub.h>
 #import <BuzzSentryOptions+Private.h>
 #import <BuzzSentryOutOfMemoryLogic.h>
 #import <BuzzSentryOutOfMemoryTracker.h>

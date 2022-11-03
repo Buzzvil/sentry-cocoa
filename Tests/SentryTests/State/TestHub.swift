@@ -1,6 +1,6 @@
 import Foundation
 
-class TestHub: SentryHub {
+class TestHub: BuzzSentryHub {
     
     let group = DispatchGroup()
     let queue = DispatchQueue(label: "TestHub", attributes: .concurrent)

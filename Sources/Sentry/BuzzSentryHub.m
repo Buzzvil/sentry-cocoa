@@ -1,4 +1,4 @@
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrashWrapper.h"
 #import "SentryCurrentDateProvider.h"
@@ -13,7 +13,7 @@
 #import "SentryProfilesSampler.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentrySamplingContext.h"
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "SentrySerialization.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTracesSampler.h"
@@ -23,10 +23,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryHub ()
+BuzzSentryHub ()
 
 @property (nullable, nonatomic, strong) BuzzSentryClient *client;
-@property (nullable, nonatomic, strong) SentryScope *scope;
+@property (nullable, nonatomic, strong) BuzzSentryScope *scope;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryTracesSampler *tracesSampler;
 @property (nonatomic, strong) SentryProfilesSampler *profilesSampler;
@@ -37,12 +37,12 @@ SentryHub ()
 
 @end
 
-@implementation SentryHub {
+@implementation BuzzSentryHub {
     NSObject *_sessionLock;
 }
 
 - (instancetype)initWithClient:(nullable BuzzSentryClient *)client
-                      andScope:(nullable SentryScope *)scope
+                      andScope:(nullable BuzzSentryScope *)scope
 {
     if (self = [super init]) {
         _client = client;
@@ -64,7 +64,7 @@ SentryHub ()
 
 /** Internal constructor for testing */
 - (instancetype)initWithClient:(nullable BuzzSentryClient *)client
-                      andScope:(nullable SentryScope *)scope
+                      andScope:(nullable BuzzSentryScope *)scope
                andCrashWrapper:(SentryCrashWrapper *)crashWrapper
         andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
 {
@@ -78,7 +78,7 @@ SentryHub ()
 - (void)startSession
 {
     BuzzSentrySession *lastSession = nil;
-    SentryScope *scope = self.scope;
+    BuzzSentryScope *scope = self.scope;
     BuzzSentryOptions *options = [_client options];
     if (nil == options || nil == options.releaseName) {
         [SentryLog
@@ -220,7 +220,7 @@ SentryHub ()
  * of the SDK there is currently no way to know which one belongs to the crashed session so we just
  * send the session with the first crashed event we receive.
  */
-- (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
+- (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope
 {
     event.isCrashEvent = YES;
 
@@ -246,13 +246,13 @@ SentryHub ()
     [client captureCrashEvent:event withScope:scope];
 }
 
-- (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(BuzzSentryScope *)scope
 {
     return [self captureTransaction:transaction withScope:scope additionalEnvelopeItems:@[]];
 }
 
 - (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction
-                       withScope:(SentryScope *)scope
+                       withScope:(BuzzSentryScope *)scope
          additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
     BuzzSentrySampleDecision decision = transaction.trace.context.sampled;
@@ -272,13 +272,13 @@ SentryHub ()
     return [self captureEvent:event withScope:self.scope];
 }
 
-- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope
 {
     return [self captureEvent:event withScope:scope additionalEnvelopeItems:@[]];
 }
 
 - (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
-                  withScope:(SentryScope *)scope
+                  withScope:(BuzzSentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
     BuzzSentryClient *client = _client;
@@ -422,7 +422,7 @@ SentryHub ()
     return [self captureMessage:message withScope:self.scope];
 }
 
-- (BuzzSentryId *)captureMessage:(NSString *)message withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureMessage:(NSString *)message withScope:(BuzzSentryScope *)scope
 {
     BuzzSentryClient *client = _client;
     if (nil != client) {
@@ -436,7 +436,7 @@ SentryHub ()
     return [self captureError:error withScope:self.scope];
 }
 
-- (BuzzSentryId *)captureError:(NSError *)error withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureError:(NSError *)error withScope:(BuzzSentryScope *)scope
 {
     BuzzSentrySession *currentSession = [self incrementSessionErrors];
     BuzzSentryClient *client = _client;
@@ -455,7 +455,7 @@ SentryHub ()
     return [self captureException:exception withScope:self.scope];
 }
 
-- (BuzzSentryId *)captureException:(NSException *)exception withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureException:(NSException *)exception withScope:(BuzzSentryScope *)scope
 {
     BuzzSentrySession *currentSession = [self incrementSessionErrors];
 
@@ -505,24 +505,24 @@ SentryHub ()
     self.client = client;
 }
 
-- (SentryScope *)scope
+- (BuzzSentryScope *)scope
 {
     @synchronized(self) {
         if (_scope == nil) {
             BuzzSentryClient *client = _client;
             if (nil != client) {
-                _scope = [[SentryScope alloc] initWithMaxBreadcrumbs:client.options.maxBreadcrumbs];
+                _scope = [[BuzzSentryScope alloc] initWithMaxBreadcrumbs:client.options.maxBreadcrumbs];
             } else {
-                _scope = [[SentryScope alloc] init];
+                _scope = [[BuzzSentryScope alloc] init];
             }
         }
         return _scope;
     }
 }
 
-- (void)configureScope:(void (^)(SentryScope *scope))callback
+- (void)configureScope:(void (^)(BuzzSentryScope *scope))callback
 {
-    SentryScope *scope = self.scope;
+    BuzzSentryScope *scope = self.scope;
     BuzzSentryClient *client = _client;
     if (nil != client && nil != scope) {
         callback(scope);
@@ -532,7 +532,7 @@ SentryHub ()
 /**
  * Checks if a specific Integration (`integrationClass`) has been installed.
  * @return BOOL If instance of `integrationClass` exists within
- * `SentryHub.installedIntegrations`.
+ * `BuzzSentryHub.installedIntegrations`.
  */
 - (BOOL)isIntegrationInstalled:(Class)integrationClass
 {
@@ -551,7 +551,7 @@ SentryHub ()
 
 - (void)setUser:(nullable BuzzSentryUser *)user
 {
-    SentryScope *scope = self.scope;
+    BuzzSentryScope *scope = self.scope;
     if (nil != scope) {
         [scope setUser:user];
     }

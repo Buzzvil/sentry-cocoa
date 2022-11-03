@@ -14,7 +14,7 @@ ViewController ()
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    [SentrySDK configureScope:^(SentryScope *_Nonnull scope) {
+    [SentrySDK configureScope:^(BuzzSentryScope *_Nonnull scope) {
         [scope setEnvironment:@"debug"];
         [scope setTagValue:@"objc" forKey:@"language"];
         [scope setExtraValue:[NSString stringWithFormat:@"%@", self]
@@ -69,7 +69,7 @@ ViewController ()
                                userInfo:@{ NSLocalizedDescriptionKey : @"This never happens." }];
     BuzzSentryId *eventId = [SentrySDK
           captureError:error
-        withScopeBlock:^(SentryScope *_Nonnull scope) { [scope setLevel:kSentryLevelFatal]; }];
+        withScopeBlock:^(BuzzSentryScope *_Nonnull scope) { [scope setLevel:kSentryLevelFatal]; }];
 
     BuzzSentryUserFeedback *userFeedback = [[BuzzSentryUserFeedback alloc] initWithEventId:eventId];
     userFeedback.comments = @"It broke on iOS-ObjectiveC. I don't know why, but this happens.";
@@ -85,7 +85,7 @@ ViewController ()
                                    code:0
                                userInfo:@{ NSLocalizedDescriptionKey : @"Object does not exist" }];
     [SentrySDK captureError:error
-             withScopeBlock:^(SentryScope *_Nonnull scope) {
+             withScopeBlock:^(BuzzSentryScope *_Nonnull scope) {
                  // Changes in here will only be captured for this event
                  // The scope in this callback is a clone of the current scope
                  // It contains all data but mutations only influence the event
@@ -100,7 +100,7 @@ ViewController ()
                                                         reason:@"User clicked the button"
                                                       userInfo:nil];
 
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setLevel:kSentryLevelFatal];
     // !!!: By explicity just passing the scope, only the data in this scope object will be added to
     // the event; the global scope (calls to configureScope) will be ignored. If you do that, be

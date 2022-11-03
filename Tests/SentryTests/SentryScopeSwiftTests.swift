@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryScopeSwiftTests: XCTestCase {
+class BuzzSentryScopeSwiftTests: XCTestCase {
 
     private class Fixture {
         let user: User
@@ -293,7 +293,7 @@ class SentryScopeSwiftTests: XCTestCase {
     @available(OSX 10.12, *)
     @available(iOS 10.0, *)
     func testModifyingFromMultipleThreads() {
-        let queue = DispatchQueue(label: "SentryScopeTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentryScopeTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
         
         let scope = fixture.scope

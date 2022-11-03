@@ -9,7 +9,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         
         let currentDateProvider = TestCurrentDateProvider()
         let dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
-        let hub: SentryHub
+        let hub: BuzzSentryHub
         let options: Options
         let sentryCrash: TestSentryCrashWrapper
         
@@ -324,7 +324,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     }
     #endif
     
-    private func givenSutWithGlobalHub() -> (BuzzSentryCrashIntegration, SentryHub) {
+    private func givenSutWithGlobalHub() -> (BuzzSentryCrashIntegration, BuzzSentryHub) {
         let sut = fixture.getSut()
         let hub = fixture.hub
         SentrySDK.setCurrentHub(hub)
@@ -332,7 +332,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         return (sut, hub)
     }
     
-    private func givenSutWithGlobalHubAndCrashWrapper() -> (BuzzSentryCrashIntegration, SentryHub) {
+    private func givenSutWithGlobalHubAndCrashWrapper() -> (BuzzSentryCrashIntegration, BuzzSentryHub) {
         let sut = fixture.getSut(crashWrapper: SentryCrashWrapper.sharedInstance())
         let hub = fixture.hub
         SentrySDK.setCurrentHub(hub)
@@ -397,7 +397,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         XCTAssertEqual(Locale.autoupdatingCurrent.identifier, device["locale"] as? String)
     }
     
-    private func assertLocaleOnHub(locale: String, hub: SentryHub) {
+    private func assertLocaleOnHub(locale: String, hub: BuzzSentryHub) {
         let context = hub.scope.contextDictionary as? [String: Any] ?? ["": ""]
         
         guard let device = context["device"] as? [String: Any] else {

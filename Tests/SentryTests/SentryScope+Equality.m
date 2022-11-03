@@ -1,8 +1,8 @@
 
-#import "SentryScope+Equality.h"
+#import "BuzzSentryScope+Equality.h"
 
 @implementation
-SentryScope (Equality)
+BuzzSentryScope (Equality)
 
 - (BOOL)isEqual:(id _Nullable)other
 {
@@ -14,7 +14,7 @@ SentryScope (Equality)
     return [self isEqualToScope:other];
 }
 
-- (BOOL)isEqualToScope:(SentryScope *)scope
+- (BOOL)isEqualToScope:(BuzzSentryScope *)scope
 {
     if (self == scope)
         return YES;

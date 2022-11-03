@@ -1,7 +1,7 @@
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "BuzzSentryClient.h"
 #import "SentryDebugImageProvider.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "SentryInstallation.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK+Private.h"

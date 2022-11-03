@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 SentrySDK (Tests)
 
-+ (void)setCurrentHub:(nullable SentryHub *)hub;
++ (void)setCurrentHub:(nullable BuzzSentryHub *)hub;
 
 + (void)captureEnvelope:(BuzzSentryEnvelope *)envelope;
 

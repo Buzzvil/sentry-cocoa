@@ -5,23 +5,23 @@
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrash.h"
 #import "SentryDependencyContainer.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryOptions+Private.h"
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 
 @interface
 SentrySDK ()
 
-@property (class) SentryHub *currentHub;
+@property (class) BuzzSentryHub *currentHub;
 
 @end
 
 NS_ASSUME_NONNULL_BEGIN
 @implementation SentrySDK
 
-static SentryHub *_Nullable currentHub;
+static BuzzSentryHub *_Nullable currentHub;
 static BOOL crashedLastRunCalled;
 static BuzzSentryAppStartMeasurement *sentrySDKappStartMeasurement;
 static NSObject *sentrySDKappStartMeasurementLock;
@@ -44,11 +44,11 @@ static NSUInteger startInvocations;
     }
 }
 
-+ (SentryHub *)currentHub
++ (BuzzSentryHub *)currentHub
 {
     @synchronized(self) {
         if (nil == currentHub) {
-            currentHub = [[SentryHub alloc] initWithClient:nil andScope:nil];
+            currentHub = [[BuzzSentryHub alloc] initWithClient:nil andScope:nil];
         }
         return currentHub;
     }
@@ -62,7 +62,7 @@ static NSUInteger startInvocations;
 }
 
 /** Internal, only needed for testing. */
-+ (void)setCurrentHub:(nullable SentryHub *)hub
++ (void)setCurrentHub:(nullable BuzzSentryHub *)hub
 {
     @synchronized(self) {
         currentHub = hub;
@@ -152,7 +152,7 @@ static NSUInteger startInvocations;
 
     // The Hub needs to be initialized with a client so that closing a session
     // can happen.
-    [SentrySDK setCurrentHub:[[SentryHub alloc] initWithClient:newClient andScope:nil]];
+    [SentrySDK setCurrentHub:[[BuzzSentryHub alloc] initWithClient:newClient andScope:nil]];
     SENTRY_LOG_DEBUG(@"SDK initialized! Version: %@", BuzzSentryMeta.versionString);
     [SentrySDK installIntegrations];
 }
@@ -169,7 +169,7 @@ static NSUInteger startInvocations;
     [SentrySDK.currentHub captureCrashEvent:event];
 }
 
-+ (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
++ (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope
 {
     [SentrySDK.currentHub captureCrashEvent:event withScope:scope];
 }
@@ -179,14 +179,14 @@ static NSUInteger startInvocations;
     return [SentrySDK captureEvent:event withScope:SentrySDK.currentHub.scope];
 }
 
-+ (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScopeBlock:(void (^)(SentryScope *))block
++ (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScopeBlock:(void (^)(BuzzSentryScope *))block
 {
-    SentryScope *scope = [[SentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
     block(scope);
     return [SentrySDK captureEvent:event withScope:scope];
 }
 
-+ (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
++ (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope
 {
     return [SentrySDK.currentHub captureEvent:event withScope:scope];
 }
@@ -261,14 +261,14 @@ static NSUInteger startInvocations;
     return [SentrySDK captureError:error withScope:SentrySDK.currentHub.scope];
 }
 
-+ (BuzzSentryId *)captureError:(NSError *)error withScopeBlock:(void (^)(SentryScope *_Nonnull))block
++ (BuzzSentryId *)captureError:(NSError *)error withScopeBlock:(void (^)(BuzzSentryScope *_Nonnull))block
 {
-    SentryScope *scope = [[SentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
     block(scope);
     return [SentrySDK captureError:error withScope:scope];
 }
 
-+ (BuzzSentryId *)captureError:(NSError *)error withScope:(SentryScope *)scope
++ (BuzzSentryId *)captureError:(NSError *)error withScope:(BuzzSentryScope *)scope
 {
     return [SentrySDK.currentHub captureError:error withScope:scope];
 }
@@ -279,14 +279,14 @@ static NSUInteger startInvocations;
 }
 
 + (BuzzSentryId *)captureException:(NSException *)exception
-                withScopeBlock:(void (^)(SentryScope *))block
+                withScopeBlock:(void (^)(BuzzSentryScope *))block
 {
-    SentryScope *scope = [[SentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
     block(scope);
     return [SentrySDK captureException:exception withScope:scope];
 }
 
-+ (BuzzSentryId *)captureException:(NSException *)exception withScope:(SentryScope *)scope
++ (BuzzSentryId *)captureException:(NSException *)exception withScope:(BuzzSentryScope *)scope
 {
     return [SentrySDK.currentHub captureException:exception withScope:scope];
 }
@@ -296,14 +296,14 @@ static NSUInteger startInvocations;
     return [SentrySDK captureMessage:message withScope:SentrySDK.currentHub.scope];
 }
 
-+ (BuzzSentryId *)captureMessage:(NSString *)message withScopeBlock:(void (^)(SentryScope *))block
++ (BuzzSentryId *)captureMessage:(NSString *)message withScopeBlock:(void (^)(BuzzSentryScope *))block
 {
-    SentryScope *scope = [[SentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
     block(scope);
     return [SentrySDK captureMessage:message withScope:scope];
 }
 
-+ (BuzzSentryId *)captureMessage:(NSString *)message withScope:(SentryScope *)scope
++ (BuzzSentryId *)captureMessage:(NSString *)message withScope:(BuzzSentryScope *)scope
 {
     return [SentrySDK.currentHub captureMessage:message withScope:scope];
 }
@@ -336,7 +336,7 @@ static NSUInteger startInvocations;
     [SentrySDK.currentHub addBreadcrumb:crumb];
 }
 
-+ (void)configureScope:(void (^)(SentryScope *scope))callback
++ (void)configureScope:(void (^)(BuzzSentryScope *scope))callback
 {
     [SentrySDK.currentHub configureScope:callback];
 }
@@ -362,7 +362,7 @@ static NSUInteger startInvocations;
 }
 
 /**
- * Install integrations and keeps ref in `SentryHub.integrations`
+ * Install integrations and keeps ref in `BuzzSentryHub.integrations`
  */
 + (void)installIntegrations
 {
@@ -374,13 +374,13 @@ static NSUInteger startInvocations;
     for (NSString *integrationName in [SentrySDK.currentHub getClient].options.integrations) {
         Class integrationClass = NSClassFromString(integrationName);
         if (nil == integrationClass) {
-            SENTRY_LOG_ERROR(@"[SentryHub doInstallIntegrations] "
+            SENTRY_LOG_ERROR(@"[BuzzSentryHub doInstallIntegrations] "
                              @"couldn't find \"%@\" -> skipping.",
                 integrationName);
             continue;
         } else if ([SentrySDK.currentHub isIntegrationInstalled:integrationClass]) {
             SENTRY_LOG_ERROR(
-                @"[SentryHub doInstallIntegrations] already installed \"%@\" -> skipping.",
+                @"[BuzzSentryHub doInstallIntegrations] already installed \"%@\" -> skipping.",
                 integrationName);
             continue;
         }
@@ -405,7 +405,7 @@ static NSUInteger startInvocations;
 + (void)close
 {
     // pop the hub and unset
-    SentryHub *hub = SentrySDK.currentHub;
+    BuzzSentryHub *hub = SentrySDK.currentHub;
     [SentrySDK setCurrentHub:nil];
 
     // uninstall all the integrations

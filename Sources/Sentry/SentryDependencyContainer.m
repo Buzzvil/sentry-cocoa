@@ -9,7 +9,7 @@
 #import <SentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
-#import <SentryHub.h>
+#import <BuzzSentryHub.h>
 #import <SentryNSNotificationCenterWrapper.h>
 #import <BuzzSentrySDK+Private.h>
 #import <BuzzSentryScreenshot.h>

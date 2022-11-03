@@ -1,12 +1,12 @@
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 
-@class BuzzSentryEnvelopeItem, BuzzSentryId, SentryScope, BuzzSentryTransaction, BuzzSentryDispatchQueueWrapper,
+@class BuzzSentryEnvelopeItem, BuzzSentryId, BuzzSentryScope, BuzzSentryTransaction, BuzzSentryDispatchQueueWrapper,
     BuzzSentryTracer;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryHub (Private)
+BuzzSentryHub (Private)
 
 @property (nonatomic, strong)
     NSMutableArray<NSObject<BuzzSentryIntegrationProtocol> *> *installedIntegrations;
@@ -16,7 +16,7 @@ SentryHub (Private)
 
 - (void)captureCrashEvent:(BuzzSentryEvent *)event;
 
-- (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
+- (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope;
 
 - (void)setSampleRandomValue:(NSNumber *)value;
 
@@ -43,14 +43,14 @@ SentryHub (Private)
                          dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
 - (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
-                  withScope:(SentryScope *)scope
+                  withScope:(BuzzSentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(capture(event:scope:additionalEnvelopeItems:));
 
-- (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(SentryScope *)scope;
+- (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(BuzzSentryScope *)scope;
 
 - (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction
-                       withScope:(SentryScope *)scope
+                       withScope:(BuzzSentryScope *)scope
          additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems;
 
 @end

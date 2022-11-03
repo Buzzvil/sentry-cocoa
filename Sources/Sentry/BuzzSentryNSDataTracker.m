@@ -2,10 +2,10 @@
 #import "SentryByteCountFormatter.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryFileManager.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentryScope+Private.h"
+#import "BuzzSentryScope+Private.h"
 #import "BuzzSentrySpanProtocol.h"
 
 const NSString *SENTRY_TRACKING_COUNTER_KEY = @"SENTRY_TRACKING_COUNTER_KEY";

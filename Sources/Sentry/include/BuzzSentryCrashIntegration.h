@@ -4,14 +4,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryScope, SentryCrashWrapper;
+@class BuzzSentryScope, SentryCrashWrapper;
 
 static NSString *const SentryDeviceContextFreeMemoryKey = @"free_memory";
 static NSString *const SentryDeviceContextAppMemoryKey = @"app_memory";
 
 @interface BuzzSentryCrashIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
-+ (void)enrichScope:(SentryScope *)scope crashWrapper:(SentryCrashWrapper *)crashWrapper;
++ (void)enrichScope:(BuzzSentryScope *)scope crashWrapper:(SentryCrashWrapper *)crashWrapper;
 
 /**
  * Needed for testing.

@@ -1,6 +1,6 @@
 #import "SentrySDK.h"
 
-@class SentryHub, BuzzSentryId, BuzzSentryAppStartMeasurement, BuzzSentryEnvelope;
+@class BuzzSentryHub, BuzzSentryId, BuzzSentryAppStartMeasurement, BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -9,7 +9,7 @@ SentrySDK (Private)
 
 + (void)captureCrashEvent:(BuzzSentryEvent *)event;
 
-+ (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
++ (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope;
 
 /**
  * SDK private field to store the state if onCrashedLastRun was called.
@@ -22,7 +22,7 @@ SentrySDK (Private)
 
 @property (nonatomic, class) NSUInteger startInvocations;
 
-+ (SentryHub *)currentHub;
++ (BuzzSentryHub *)currentHub;
 
 @property (nonatomic, nullable, readonly, class) BuzzSentryOptions *options;
 

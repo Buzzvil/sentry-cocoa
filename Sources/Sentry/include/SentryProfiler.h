@@ -6,7 +6,7 @@
 #if SENTRY_HAS_UIKIT
 @class BuzzSentryFramesTracker;
 #endif // SENTRY_HAS_UIKIT
-@class SentryHub;
+@class BuzzSentryHub;
 @class SentryProfilesSamplerDecision;
 @class BuzzSentryScreenFrames;
 @class BuzzSentryEnvelope;
@@ -50,7 +50,7 @@ SENTRY_EXTERN_C_END
  * Start the profiler, if it isn't already running, for the span with the provided ID. If it's
  * already running, it will track the new span as well.
  */
-+ (void)startForSpanID:(BuzzSentrySpanId *)spanID hub:(SentryHub *)hub;
++ (void)startForSpanID:(BuzzSentrySpanId *)spanID hub:(BuzzSentryHub *)hub;
 
 /**
  * Report that a span ended to the profiler so it can update bookkeeping and if it was the last

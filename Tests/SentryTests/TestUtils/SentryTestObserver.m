@@ -5,10 +5,10 @@
 #import "SentryCrashWrapper.h"
 #import "SentryCurrentDate.h"
 #import "SentryDefaultCurrentDateProvider.h"
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "SentryLog+TestInit.h"
 #import "BuzzSentryOptions.h"
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "BuzzSentrySDK+Private.h"
 #import "XCTest/XCTIssue.h"
 #import "XCTest/XCTest.h"
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 SentryTestObserver ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
-@property (nonatomic, strong) SentryScope *scope;
+@property (nonatomic, strong) BuzzSentryScope *scope;
 
 @end
 
@@ -50,7 +50,7 @@ SentryTestObserver ()
         // once to get the scope data.
         [SentrySDK startWithOptionsObject:options];
 
-        self.scope = [[SentryScope alloc] init];
+        self.scope = [[BuzzSentryScope alloc] init];
         [BuzzSentryCrashIntegration enrichScope:self.scope
                                crashWrapper:[SentryCrashWrapper sharedInstance]];
 
@@ -87,7 +87,7 @@ SentryTestObserver ()
     // hub to make sure the sending works.
     BuzzSentryClient *client = [[BuzzSentryClient alloc] initWithOptions:self.options];
     // We create our own hub here, because we don't know the state of the SentrySDK.
-    SentryHub *hub = [[SentryHub alloc] initWithClient:client andScope:self.scope];
+    BuzzSentryHub *hub = [[BuzzSentryHub alloc] initWithClient:client andScope:self.scope];
     NSException *exception = [[NSException alloc] initWithName:testCase.name
                                                         reason:issue.description
                                                       userInfo:nil];

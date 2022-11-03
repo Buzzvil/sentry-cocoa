@@ -5,14 +5,14 @@
 #import "BuzzSentryClient.h"
 #import "SentryCurrentDate.h"
 #import "BuzzSentryFramesTracker.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentryNoOpSpan.h"
 #import "SentryProfiler.h"
 #import "SentryProfilesSampler.h"
 #import "SentryProfilingConditionals.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "BuzzSentrySpan.h"
 #import "BuzzSentrySpanContext.h"
 #import "BuzzSentrySpanId.h"
@@ -41,7 +41,7 @@ static const NSTimeInterval SENTRY_AUTO_TRANSACTION_MAX_DURATION = 500.0;
 BuzzSentryTracer ()
 
 @property (nonatomic, strong) BuzzSentrySpan *rootSpan;
-@property (nonatomic, strong) SentryHub *hub;
+@property (nonatomic, strong) BuzzSentryHub *hub;
 @property (nonatomic) BuzzSentrySpanStatus finishStatus;
 /** This property is different from isFinished. While isFinished states if the tracer is actually
  * finished, this property tells you if finish was called on the tracer. Calling finish doesn't
@@ -85,7 +85,7 @@ static BOOL appStartMeasurementRead;
 }
 
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub
+                                       hub:(nullable BuzzSentryHub *)hub
 {
     return [self initWithTransactionContext:transactionContext
                                         hub:hub
@@ -94,7 +94,7 @@ static BOOL appStartMeasurementRead;
 }
 
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub
+                                       hub:(nullable BuzzSentryHub *)hub
                            waitForChildren:(BOOL)waitForChildren
 {
     return [self initWithTransactionContext:transactionContext
@@ -106,7 +106,7 @@ static BOOL appStartMeasurementRead;
 }
 
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub
+                                       hub:(nullable BuzzSentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                            waitForChildren:(BOOL)waitForChildren
@@ -120,7 +120,7 @@ static BOOL appStartMeasurementRead;
 }
 
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub
+                                       hub:(nullable BuzzSentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                                idleTimeout:(NSTimeInterval)idleTimeout
@@ -136,7 +136,7 @@ static BOOL appStartMeasurementRead;
 
 - (instancetype)
     initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                           hub:(nullable SentryHub *)hub
+                           hub:(nullable BuzzSentryHub *)hub
        profilesSamplerDecision:(nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                waitForChildren:(BOOL)waitForChildren
                    idleTimeout:(NSTimeInterval)idleTimeout

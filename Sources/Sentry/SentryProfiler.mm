@@ -14,11 +14,11 @@
 #    import "BuzzSentryEnvelopeItemType.h"
 #    import "BuzzSentryFramesTracker.h"
 #    import "SentryHexAddressFormatter.h"
-#    import "SentryHub+Private.h"
+#    import "BuzzSentryHub+Private.h"
 #    import "BuzzSentryId.h"
 #    import "SentryLog.h"
 #    import "SentrySamplingProfiler.hpp"
-#    import "SentryScope+Private.h"
+#    import "BuzzSentryScope+Private.h"
 #    import "BuzzSentryScreenFrames.h"
 #    import "SentrySerialization.h"
 #    import "BuzzSentrySpanId.h"
@@ -95,7 +95,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     SentryProfilerTruncationReason _truncationReason;
     BuzzSentryScreenFrames *_frameInfo;
     NSTimer *_timeoutTimer;
-    SentryHub *__weak _hub;
+    BuzzSentryHub *__weak _hub;
 }
 
 + (void)initialize
@@ -125,7 +125,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
 #    pragma mark - Public
 
-+ (void)startForSpanID:(BuzzSentrySpanId *)spanID hub:(SentryHub *)hub
++ (void)startForSpanID:(BuzzSentrySpanId *)spanID hub:(BuzzSentryHub *)hub
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
     NSTimeInterval timeoutInterval = 30;
@@ -137,7 +137,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 }
 
 + (void)startForSpanID:(BuzzSentrySpanId *)spanID
-                   hub:(SentryHub *)hub
+                   hub:(BuzzSentryHub *)hub
        timeoutInterval:(NSTimeInterval)timeoutInterval
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED

@@ -3,11 +3,11 @@
 #import "SentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "SentryInAppLogic.h"
 #import "BuzzSentryOutOfMemoryLogic.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentryScope+Private.h"
+#import "BuzzSentryScope+Private.h"
 #import "BuzzSentrySessionCrashedHandler.h"
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
@@ -170,7 +170,7 @@ BuzzSentryCrashIntegration ()
 {
     // We need to make sure to set always the scope to KSCrash so we have it in
     // case of a crash
-    [SentrySDK.currentHub configureScope:^(SentryScope *_Nonnull outerScope) {
+    [SentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull outerScope) {
         [BuzzSentryCrashIntegration enrichScope:outerScope crashWrapper:self.crashAdapter];
 
         NSMutableDictionary<NSString *, id> *userInfo =
@@ -195,7 +195,7 @@ BuzzSentryCrashIntegration ()
                                              object:nil];
 }
 
-+ (void)enrichScope:(SentryScope *)scope crashWrapper:(SentryCrashWrapper *)crashWrapper
++ (void)enrichScope:(BuzzSentryScope *)scope crashWrapper:(SentryCrashWrapper *)crashWrapper
 {
     // OS
     NSMutableDictionary *osData = [NSMutableDictionary new];
@@ -298,7 +298,7 @@ BuzzSentryCrashIntegration ()
 
 - (void)currentLocaleDidChange
 {
-    [SentrySDK.currentHub configureScope:^(SentryScope *_Nonnull scope) {
+    [SentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull scope) {
         NSMutableDictionary<NSString *, id> *device;
         if (scope.contextDictionary != nil && scope.contextDictionary[DEVICE_KEY] != nil) {
             device = [[NSMutableDictionary alloc]

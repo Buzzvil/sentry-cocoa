@@ -20,7 +20,7 @@ class BuzzSentryTransactionTests: XCTestCase {
             return BuzzSentryTracer(transactionContext: getContext(), hub: nil)
         }
         
-        func getHub() -> SentryHub {
+        func getHub() -> BuzzSentryHub {
             let scope = Scope()
             let client = TestClient(options: Options())!
             client.options.tracesSampleRate = 1

@@ -1,10 +1,10 @@
 
 #import "BuzzSentryCoreDataTracker.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentryPredicateDescriptor.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentryScope+Private.h"
+#import "BuzzSentryScope+Private.h"
 #import "BuzzSentrySpanProtocol.h"
 
 @implementation BuzzSentryCoreDataTracker {

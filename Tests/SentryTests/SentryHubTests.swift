@@ -1,10 +1,10 @@
 import Sentry
 import XCTest
 
-class SentryHubTests: XCTestCase {
+class BuzzSentryHubTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryHubTests")
-    private static let dsn = TestConstants.dsn(username: "SentryHubTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryHubTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryHubTests")
         
     private class Fixture {
         let options: Options
@@ -25,7 +25,7 @@ class SentryHubTests: XCTestCase {
         
         init() {
             options = Options()
-            options.dsn = SentryHubTests.dsnAsString
+            options.dsn = BuzzSentryHubTests.dsnAsString
             
             scope.add(crumb)
             
@@ -41,21 +41,21 @@ class SentryHubTests: XCTestCase {
             crashedSession.environment = options.environment
         }
         
-        func getSut(withMaxBreadcrumbs maxBreadcrumbs: UInt = 100) -> SentryHub {
+        func getSut(withMaxBreadcrumbs maxBreadcrumbs: UInt = 100) -> BuzzSentryHub {
             options.maxBreadcrumbs = maxBreadcrumbs
             return getSut(options)
         }
         
-        func getSut(_ options: Options, _ scope: Scope? = nil) -> SentryHub {
+        func getSut(_ options: Options, _ scope: Scope? = nil) -> BuzzSentryHub {
             client = TestClient(options: options)
-            let hub = SentryHub(client: client, andScope: scope, andCrashWrapper: sentryCrash, andCurrentDateProvider: currentDateProvider)
+            let hub = BuzzSentryHub(client: client, andScope: scope, andCrashWrapper: sentryCrash, andCurrentDateProvider: currentDateProvider)
             hub.bindClient(client)
             return hub
         }
     }
     
     private var fixture: Fixture!
-    private var sut: SentryHub!
+    private var sut: BuzzSentryHub!
     
     override func setUp() {
         super.setUp()
@@ -178,7 +178,7 @@ class SentryHubTests: XCTestCase {
     
     func testAddUserToTheScope() {
         let client = Client(options: fixture.options)
-        let hub = SentryHub(client: client, andScope: Scope())
+        let hub = BuzzSentryHub(client: client, andScope: Scope())
 
         let user = User()
         user.userId = "123"
@@ -624,7 +624,7 @@ class SentryHubTests: XCTestCase {
         XCTAssertEqual(envelope, fixture.client.captureEnvelopeInvocations.first)
     }
 
-    private func addBreadcrumbThroughConfigureScope(_ hub: SentryHub) {
+    private func addBreadcrumbThroughConfigureScope(_ hub: BuzzSentryHub) {
         hub.configureScope({ scope in
             scope.add(self.fixture.crumb)
         })
@@ -635,11 +635,11 @@ class SentryHubTests: XCTestCase {
     @available(tvOS 10.0, *)
     @available(OSX 10.12, *)
     @available(iOS 10.0, *)
-    private func captureConcurrentWithSession(count: Int, _ capture: @escaping (SentryHub) -> Void) {
+    private func captureConcurrentWithSession(count: Int, _ capture: @escaping (BuzzSentryHub) -> Void) {
         let sut = fixture.getSut()
         sut.startSession()
 
-        let queue = DispatchQueue(label: "SentryHubTests", qos: .utility, attributes: [.concurrent])
+        let queue = DispatchQueue(label: "BuzzSentryHubTests", qos: .utility, attributes: [.concurrent])
 
         let group = DispatchGroup()
         for _ in 0..<count {
@@ -687,7 +687,7 @@ class SentryHubTests: XCTestCase {
         fixture.currentDateProvider.setDate(date: fixture.currentDateProvider.date().addingTimeInterval(bySeconds))
     }
 
-    private func assert(withScopeBreadcrumbsCount count: Int, with hub: SentryHub) {
+    private func assert(withScopeBreadcrumbsCount count: Int, with hub: BuzzSentryHub) {
         let scopeBreadcrumbs = hub.scope.serialize()["breadcrumbs"] as? [AnyHashable]
         XCTAssertNotNil(scopeBreadcrumbs)
         XCTAssertEqual(scopeBreadcrumbs?.count, count)

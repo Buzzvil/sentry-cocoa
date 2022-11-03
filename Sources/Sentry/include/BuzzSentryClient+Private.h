@@ -27,20 +27,20 @@ BuzzSentryClient (Private)
 
 - (BuzzSentryId *)captureError:(NSError *)error
                withSession:(BuzzSentrySession *)session
-                 withScope:(SentryScope *)scope;
+                 withScope:(BuzzSentryScope *)scope;
 
 - (BuzzSentryId *)captureException:(NSException *)exception
                    withSession:(BuzzSentrySession *)session
-                     withScope:(SentryScope *)scope;
+                     withScope:(BuzzSentryScope *)scope;
 
-- (BuzzSentryId *)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
+- (BuzzSentryId *)captureCrashEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope;
 
 - (BuzzSentryId *)captureCrashEvent:(BuzzSentryEvent *)event
                     withSession:(BuzzSentrySession *)session
-                      withScope:(SentryScope *)scope;
+                      withScope:(BuzzSentryScope *)scope;
 
 - (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
-                  withScope:(SentryScope *)scope
+                  withScope:(BuzzSentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(capture(event:scope:additionalEnvelopeItems:));
 

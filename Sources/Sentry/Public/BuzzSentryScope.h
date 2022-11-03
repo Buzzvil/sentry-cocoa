@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  * https://docs.sentry.io/platforms/apple/enriching-events/scopes/#whats-a-scope-whats-a-hub
  */
 NS_SWIFT_NAME(Scope)
-@interface SentryScope : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryScope : NSObject <BuzzSentrySerializable>
 
 /**
  * Returns current Span or Transaction.
@@ -25,7 +25,7 @@ NS_SWIFT_NAME(Scope)
 
 - (instancetype)initWithMaxBreadcrumbs:(NSInteger)maxBreadcrumbs NS_DESIGNATED_INITIALIZER;
 - (instancetype)init;
-- (instancetype)initWithScope:(SentryScope *)scope;
+- (instancetype)initWithScope:(BuzzSentryScope *)scope;
 
 /**
  * Set global user -> thus will be sent with every event

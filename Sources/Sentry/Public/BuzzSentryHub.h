@@ -2,15 +2,15 @@
 #import "BuzzSentryIntegrationProtocol.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class BuzzSentryEvent, BuzzSentryClient, SentryScope, BuzzSentrySession, BuzzSentryUser, BuzzSentryBreadcrumb,
+@class BuzzSentryEvent, BuzzSentryClient, BuzzSentryScope, BuzzSentrySession, BuzzSentryUser, BuzzSentryBreadcrumb,
     BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
-@interface SentryHub : NSObject
+@interface BuzzSentryHub : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithClient:(BuzzSentryClient *_Nullable)client
-                      andScope:(SentryScope *_Nullable)scope;
+                      andScope:(BuzzSentryScope *_Nullable)scope;
 
 /**
  * Since there's no scope stack, single hub instance,  we keep the session here.
@@ -56,7 +56,7 @@ SENTRY_NO_INIT
  * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
 - (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
-                 withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(event:scope:));
+                 withScope:(BuzzSentryScope *)scope NS_SWIFT_NAME(capture(event:scope:));
 
 /**
  * Creates a transaction, binds it to the hub and returns the instance.
@@ -150,7 +150,7 @@ SENTRY_NO_INIT
  * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
 - (BuzzSentryId *)captureError:(NSError *)error
-                 withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(error:scope:));
+                 withScope:(BuzzSentryScope *)scope NS_SWIFT_NAME(capture(error:scope:));
 
 /**
  * Captures an exception event and sends it to Sentry.
@@ -170,7 +170,7 @@ SENTRY_NO_INIT
  * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
 - (BuzzSentryId *)captureException:(NSException *)exception
-                     withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(exception:scope:));
+                     withScope:(BuzzSentryScope *)scope NS_SWIFT_NAME(capture(exception:scope:));
 
 /**
  * Captures a message event and sends it to Sentry.
@@ -190,7 +190,7 @@ SENTRY_NO_INIT
  * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
 - (BuzzSentryId *)captureMessage:(NSString *)message
-                   withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(message:scope:));
+                   withScope:(BuzzSentryScope *)scope NS_SWIFT_NAME(capture(message:scope:));
 
 /**
  * Captures a manually created user feedback and sends it to Sentry.
@@ -206,7 +206,7 @@ SENTRY_NO_INIT
  *
  * @param callback The callback for configuring the Scope of the Hub.
  */
-- (void)configureScope:(void (^)(SentryScope *scope))callback;
+- (void)configureScope:(void (^)(BuzzSentryScope *scope))callback;
 
 /**
  * Adds a breadcrumb to the Scope of the Hub.
@@ -223,7 +223,7 @@ SENTRY_NO_INIT
 /**
  * Returns either the current scope and if nil a new one.
  */
-@property (nonatomic, readonly, strong) SentryScope *scope;
+@property (nonatomic, readonly, strong) BuzzSentryScope *scope;
 
 /**
  * Binds a different client to the hub.
@@ -238,7 +238,7 @@ SENTRY_NO_INIT
 /**
  * Checks if a specific Integration (`integrationClass`) has been installed.
  *
- * @return BOOL If instance of `integrationClass` exists within `SentryHub.installedIntegrations`.
+ * @return BOOL If instance of `integrationClass` exists within `BuzzSentryHub.installedIntegrations`.
  */
 - (BOOL)isIntegrationInstalled:(Class)integrationClass;
 

@@ -4,7 +4,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Expose the internal properties for testing. */
 @interface
-SentryScope (Properties)
+BuzzSentryScope (Properties)
 
 @property (atomic, strong) BuzzSentryUser *_Nullable userObject;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *_Nullable tagDictionary;

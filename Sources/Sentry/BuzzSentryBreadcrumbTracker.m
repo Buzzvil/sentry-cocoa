@@ -2,10 +2,10 @@
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "SentryDefines.h"
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "SentrySwizzle.h"
 #import "SentrySwizzleWrapper.h"
 #import "BuzzSentryUIViewControllerSanitizer.h"
@@ -193,7 +193,7 @@ BuzzSentryBreadcrumbTracker ()
 
                 // Adding crumb via the SDK calls SentryBeforeBreadcrumbCallback
                 [SentrySDK addBreadcrumb:crumb];
-                [SentrySDK.currentHub configureScope:^(SentryScope *_Nonnull scope) {
+                [SentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull scope) {
                     [scope setExtraValue:crumb.data[@"screen"] forKey:@"__sentry_transaction"];
                 }];
             }

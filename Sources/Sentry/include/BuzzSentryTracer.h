@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryHub, BuzzSentryTransactionContext, BuzzSentryTraceHeader, BuzzSentryTraceContext,
+@class BuzzSentryHub, BuzzSentryTransactionContext, BuzzSentryTraceHeader, BuzzSentryTraceContext,
     BuzzSentryDispatchQueueWrapper, BuzzSentryTracer, SentryProfilesSamplerDecision, BuzzSentryMeasurementValue;
 
 static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
@@ -82,7 +82,7 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
  * @return BuzzSentryTracer
  */
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub;
+                                       hub:(nullable BuzzSentryHub *)hub;
 
 /**
  * Init a BuzzSentryTracer with given transaction context, hub and whether the tracer should wait
@@ -95,7 +95,7 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
  * @return BuzzSentryTracer
  */
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub
+                                       hub:(nullable BuzzSentryHub *)hub
                            waitForChildren:(BOOL)waitForChildren;
 
 /**
@@ -110,7 +110,7 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
  * @return BuzzSentryTracer
  */
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub
+                                       hub:(nullable BuzzSentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                            waitForChildren:(BOOL)waitForChildren;
@@ -127,7 +127,7 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
  * @return BuzzSentryTracer
  */
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
-                                       hub:(nullable SentryHub *)hub
+                                       hub:(nullable BuzzSentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                                idleTimeout:(NSTimeInterval)idleTimeout

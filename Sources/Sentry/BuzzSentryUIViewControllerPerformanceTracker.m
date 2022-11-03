@@ -1,10 +1,10 @@
 #import "BuzzSentryUIViewControllerPerformanceTracker.h"
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "SentryLog.h"
 #import "BuzzSentryPerformanceTracker+Private.h"
 #import "BuzzSentryPerformanceTracker.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "BuzzSentrySpanId.h"
 #import "BuzzSentryUIViewControllerSanitizer.h"
 #import <SentryInAppLogic.h>

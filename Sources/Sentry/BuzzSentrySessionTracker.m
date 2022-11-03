@@ -2,7 +2,7 @@
 #import "BuzzSentryClient+Private.h"
 #import "BuzzSentryClient.h"
 #import "SentryFileManager.h"
-#import "SentryHub+Private.h"
+#import "BuzzSentryHub+Private.h"
 #import "SentryInternalNotificationNames.h"
 #import "SentryLog.h"
 #import "SentryNSNotificationCenterWrapper.h"
@@ -120,7 +120,7 @@ BuzzSentrySessionTracker ()
  */
 - (void)endCachedSession
 {
-    SentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [SentrySDK currentHub];
     NSDate *_Nullable lastInForeground =
         [[[hub getClient] fileManager] readTimestampLastInForeground];
     if (nil != lastInForeground) {
@@ -155,7 +155,7 @@ BuzzSentrySessionTracker ()
         self.wasDidBecomeActiveCalled = YES;
     }
 
-    SentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [SentrySDK currentHub];
     self.lastInForeground = [[[hub getClient] fileManager] readTimestampLastInForeground];
 
     if (nil == self.lastInForeground) {
@@ -187,7 +187,7 @@ BuzzSentrySessionTracker ()
 - (void)willResignActive
 {
     self.lastInForeground = [self.currentDateProvider date];
-    SentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [SentrySDK currentHub];
     [[[hub getClient] fileManager] storeTimestampLastInForeground:self.lastInForeground];
     self.wasDidBecomeActiveCalled = NO;
 }
@@ -199,7 +199,7 @@ BuzzSentrySessionTracker ()
 {
     NSDate *sessionEnded
         = nil == self.lastInForeground ? [self.currentDateProvider date] : self.lastInForeground;
-    SentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [SentrySDK currentHub];
     [hub endSessionWithTimestamp:sessionEnded];
     [[[hub getClient] fileManager] deleteTimestampLastInForeground];
     self.wasDidBecomeActiveCalled = NO;

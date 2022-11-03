@@ -12,7 +12,7 @@ class SentrySDKTests: XCTestCase {
         let event: Event
         let scope: Scope
         let client: TestClient
-        let hub: SentryHub
+        let hub: BuzzSentryHub
         let error: Error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Object does not exist"])
         let exception = NSException(name: NSExceptionName("My Custom exeption"), reason: "User clicked the button", userInfo: nil)
         let userFeedback: UserFeedback
@@ -45,7 +45,7 @@ class SentrySDKTests: XCTestCase {
             options.dsn = SentrySDKTests.dsnAsString
             options.releaseName = "1.0.0"
             client = TestClient(options: options)!
-            hub = SentryHub(client: client, andScope: scope, andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
+            hub = BuzzSentryHub(client: client, andScope: scope, andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
             
             userFeedback = UserFeedback(eventId: BuzzSentryId())
             userFeedback.comments = "Again really?"
@@ -542,7 +542,7 @@ class SentrySDKTests: XCTestCase {
     }
     
     private func givenSdkWithHubButNoClient() {
-        SentrySDK.setCurrentHub(SentryHub(client: nil, andScope: nil))
+        SentrySDK.setCurrentHub(BuzzSentryHub(client: nil, andScope: nil))
     }
     
     private func assertIntegrationsInstalled(integrations: [String]) {

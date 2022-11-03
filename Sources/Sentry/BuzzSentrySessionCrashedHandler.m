@@ -3,7 +3,7 @@
 #import "SentryCrashWrapper.h"
 #import "SentryCurrentDate.h"
 #import "SentryFileManager.h"
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "BuzzSentryOutOfMemoryLogic.h"
 #import "BuzzSentrySDK+Private.h"
 

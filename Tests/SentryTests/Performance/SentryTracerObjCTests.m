@@ -1,4 +1,4 @@
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "BuzzSentrySpan.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext.h"
@@ -19,7 +19,7 @@
     BuzzSentrySpan *child;
     // To make sure the tracer is deallocated.
     @autoreleasepool {
-        SentryHub *hub = [[SentryHub alloc] initWithClient:nil andScope:nil];
+        BuzzSentryHub *hub = [[BuzzSentryHub alloc] initWithClient:nil andScope:nil];
         BuzzSentryTransactionContext *context =
             [[BuzzSentryTransactionContext alloc] initWithOperation:@""];
         BuzzSentryTracer *tracer = [[BuzzSentryTracer alloc] initWithTransactionContext:context

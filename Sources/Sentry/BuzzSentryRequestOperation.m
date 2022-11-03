@@ -1,7 +1,7 @@
 #import "BuzzSentryRequestOperation.h"
 #import "BuzzSentryClient.h"
 #import "SentryError.h"
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 

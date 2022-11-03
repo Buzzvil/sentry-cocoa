@@ -9,11 +9,11 @@
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
-#import "SentryHub.h"
+#import "BuzzSentryHub.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentrySDK.h"
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "SentryThread.h"
 
 static const NSTimeInterval SENTRY_APP_START_CRASH_DURATION_THRESHOLD = 2.0;
@@ -90,7 +90,7 @@ SentryCrashReportSink ()
                  sentReports:(NSMutableArray *)sentReports
 {
     [sentReports addObject:report];
-    SentryScope *scope = [[SentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
 
     if (report[SENTRYCRASH_REPORT_ATTACHMENTS_ITEM]) {
         for (NSString *ssPath in report[SENTRYCRASH_REPORT_ATTACHMENTS_ITEM]) {

@@ -4,10 +4,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Expose the internal test init for testing. */
 @interface
-SentryHub (TestInit)
+BuzzSentryHub (TestInit)
 
 - (instancetype)initWithClient:(BuzzSentryClient *_Nullable)client
-                      andScope:(SentryScope *_Nullable)scope
+                      andScope:(BuzzSentryScope *_Nullable)scope
                andCrashWrapper:(SentryCrashWrapper *)crashAdapter
         andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider;
 

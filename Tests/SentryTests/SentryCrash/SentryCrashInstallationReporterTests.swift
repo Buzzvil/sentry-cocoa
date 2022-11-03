@@ -47,7 +47,7 @@ class SentryCrashInstallationReporterTests: XCTestCase {
         let options = Options()
         options.dsn = SentryCrashInstallationReporterTests.dsnAsString
         testClient = TestClient(options: options)!
-        let hub = SentryHub(client: testClient, andScope: nil)
+        let hub = BuzzSentryHub(client: testClient, andScope: nil)
         SentrySDK.setCurrentHub(hub)
     }
     

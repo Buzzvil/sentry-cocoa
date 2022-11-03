@@ -32,7 +32,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         }
         
         func setNewHubToSDK() {
-            let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: currentDateProvider)
+            let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: currentDateProvider)
             SentrySDK.setCurrentHub(hub)
         }
     }

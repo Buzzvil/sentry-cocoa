@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-#import "SentryScope.h"
+#import "BuzzSentryScope.h"
 #import "BuzzSentryScopeObserver.h"
 
 @class BuzzSentryAttachment;
@@ -8,7 +8,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryScope (Private)
+BuzzSentryScope (Private)
 
 @property (atomic, copy, readonly, nullable) NSString *environmentString;
 
