@@ -170,7 +170,7 @@
 #import "TestBuzzSentrySpan.h"
 #import "TestUrlSession.h"
 #import "UIView+BuzzSentry.h"
-#import "UIViewController+Sentry.h"
+#import "UIViewController+BuzzSentry.h"
 #import "URLSessionTaskMock.h"
 
 #if SENTRY_HAS_UIKIT

@@ -1,4 +1,4 @@
-#import "UIViewController+Sentry.h"
+#import "UIViewController+BuzzSentry.h"
 
 #if SENTRY_HAS_UIKIT
 

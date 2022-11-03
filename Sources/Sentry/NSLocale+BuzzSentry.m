@@ -1,4 +1,4 @@
-#import "NSLocale+Sentry.h"
+#import "NSLocale+BuzzSentry.h"
 
 @implementation
 NSLocale (BuzzSentry)

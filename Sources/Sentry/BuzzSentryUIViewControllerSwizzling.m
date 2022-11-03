@@ -7,7 +7,7 @@
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryInAppLogic.h>
 #import <BuzzSentryOptions.h>
-#import <UIViewController+Sentry.h>
+#import <UIViewController+BuzzSentry.h>
 #import <objc/runtime.h>
 
 #if SENTRY_HAS_UIKIT
