@@ -133,7 +133,7 @@
 		639FCFAC1EBC811400778193 /* BuzzSentryUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 639FCFAA1EBC811400778193 /* BuzzSentryUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		639FCFAD1EBC811400778193 /* BuzzSentryUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 639FCFAB1EBC811400778193 /* BuzzSentryUser.m */; };
 		63AA75EF1EB8B3C400D153DE /* BuzzSentryClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA75ED1EB8B3C400D153DE /* BuzzSentryClient.m */; };
-		63AA766A1EB8CB2F00D153DE /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AA759B1EB8AEF500D153DE /* Sentry.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		63AA766A1EB8CB2F00D153DE /* BuzzSentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AA759B1EB8AEF500D153DE /* BuzzSentry.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		63AA76701EB8CB4B00D153DE /* SentryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA75951EB8AEDB00D153DE /* SentryTests.m */; };
 		63AA767A1EB8D20500D153DE /* BuzzSentryLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA76781EB8D20500D153DE /* BuzzSentryLog.m */; };
 		63AA76971EB9C1C200D153DE /* BuzzSentry.h in Headers */ = {isa = PBXBuildFile; fileRef = 63AA76931EB9C1C200D153DE /* BuzzSentry.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -859,11 +859,11 @@
 		639FCFAB1EBC811400778193 /* BuzzSentryUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryUser.m; sourceTree = "<group>"; };
 		63AA75941EB8AEDB00D153DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63AA75951EB8AEDB00D153DE /* SentryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryTests.m; sourceTree = "<group>"; };
-		63AA759B1EB8AEF500D153DE /* Sentry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Sentry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63AA759B1EB8AEF500D153DE /* BuzzSentry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BuzzSentry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63AA75C51EB8B00100D153DE /* Sentry.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Sentry.xcconfig; sourceTree = "<group>"; };
 		63AA75C71EB8B06100D153DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63AA75ED1EB8B3C400D153DE /* BuzzSentryClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryClient.m; sourceTree = "<group>"; };
-		63AA76651EB8CB2F00D153DE /* SentryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SentryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		63AA76651EB8CB2F00D153DE /* BuzzSentryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuzzSentryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63AA76781EB8D20500D153DE /* BuzzSentryLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryLog.m; sourceTree = "<group>"; };
 		63AA76931EB9C1C200D153DE /* BuzzSentry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentry.h; path = Public/BuzzSentry.h; sourceTree = "<group>"; };
 		63AA76941EB9C1C200D153DE /* BuzzSentryClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryClient.h; path = Public/BuzzSentryClient.h; sourceTree = "<group>"; };
@@ -1346,7 +1346,7 @@
 		7D9B079F23D1E89800C5FC8E /* BuzzSentryMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryMeta.h; path = include/BuzzSentryMeta.h; sourceTree = "<group>"; };
 		7DAC588E23D8B2E0001CF26B /* BuzzSentryGlobalEventProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryGlobalEventProcessor.m; sourceTree = "<group>"; };
 		7DB3A684238EA75E00A2D442 /* BuzzSentryHttpTransport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryHttpTransport.m; sourceTree = "<group>"; };
-		7DC27E9823995F97006998B5 /* Sentry.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = Sentry.modulemap; sourceTree = "<group>"; };
+		7DC27E9823995F97006998B5 /* BuzzSentry.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = BuzzSentry.modulemap; sourceTree = "<group>"; };
 		7DC27EC323997EB7006998B5 /* BuzzSentryAutoBreadcrumbTrackingIntegration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuzzSentryAutoBreadcrumbTrackingIntegration.h; path = include/BuzzSentryAutoBreadcrumbTrackingIntegration.h; sourceTree = "<group>"; };
 		7DC27EC423997EB7006998B5 /* BuzzSentryAutoBreadcrumbTrackingIntegration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryAutoBreadcrumbTrackingIntegration.m; sourceTree = "<group>"; };
 		7DC830FF239826280043DD9A /* BuzzSentryIntegrationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuzzSentryIntegrationProtocol.h; path = Public/BuzzSentryIntegrationProtocol.h; sourceTree = "<group>"; };
@@ -1513,7 +1513,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63AA766A1EB8CB2F00D153DE /* Sentry.framework in Frameworks */,
+				63AA766A1EB8CB2F00D153DE /* BuzzSentry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1713,8 +1713,8 @@
 		6327C5D41EB8A783004E799B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				63AA759B1EB8AEF500D153DE /* Sentry.framework */,
-				63AA76651EB8CB2F00D153DE /* SentryTests.xctest */,
+				63AA759B1EB8AEF500D153DE /* BuzzSentry.framework */,
+				63AA76651EB8CB2F00D153DE /* BuzzSentryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1966,7 +1966,7 @@
 		63AA769F1EB9C89800D153DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7DC27E9823995F97006998B5 /* Sentry.modulemap */,
+				7DC27E9823995F97006998B5 /* BuzzSentry.modulemap */,
 				63AA75C71EB8B06100D153DE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -3173,9 +3173,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		63AA759A1EB8AEF500D153DE /* Sentry */ = {
+		63AA759A1EB8AEF500D153DE /* BuzzSentry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 63AA75A01EB8AEF500D153DE /* Build configuration list for PBXNativeTarget "Sentry" */;
+			buildConfigurationList = 63AA75A01EB8AEF500D153DE /* Build configuration list for PBXNativeTarget "BuzzSentry" */;
 			buildPhases = (
 				63AA75961EB8AEF500D153DE /* Sources */,
 				63AA75971EB8AEF500D153DE /* Frameworks */,
@@ -3186,14 +3186,14 @@
 			);
 			dependencies = (
 			);
-			name = Sentry;
+			name = BuzzSentry;
 			productName = "Sentry-iOS";
-			productReference = 63AA759B1EB8AEF500D153DE /* Sentry.framework */;
+			productReference = 63AA759B1EB8AEF500D153DE /* BuzzSentry.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		63AA76641EB8CB2F00D153DE /* SentryTests */ = {
+		63AA76641EB8CB2F00D153DE /* BuzzSentryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 63AA766F1EB8CB2F00D153DE /* Build configuration list for PBXNativeTarget "SentryTests" */;
+			buildConfigurationList = 63AA766F1EB8CB2F00D153DE /* Build configuration list for PBXNativeTarget "BuzzSentryTests" */;
 			buildPhases = (
 				63AA76611EB8CB2F00D153DE /* Sources */,
 				63AA76621EB8CB2F00D153DE /* Frameworks */,
@@ -3204,9 +3204,9 @@
 			dependencies = (
 				63AA766C1EB8CB2F00D153DE /* PBXTargetDependency */,
 			);
-			name = SentryTests;
+			name = BuzzSentryTests;
 			productName = "Tests-iOS";
-			productReference = 63AA76651EB8CB2F00D153DE /* SentryTests.xctest */;
+			productReference = 63AA76651EB8CB2F00D153DE /* BuzzSentryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -3217,7 +3217,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = Sentry;
+				ORGANIZATIONNAME = Buzzvil;
 				TargetAttributes = {
 					63AA759A1EB8AEF500D153DE = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -3231,7 +3231,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6327C5CD1EB8A783004E799B /* Build configuration list for PBXProject "Sentry" */;
+			buildConfigurationList = 6327C5CD1EB8A783004E799B /* Build configuration list for PBXProject "BuzzSentry" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -3244,8 +3244,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				63AA759A1EB8AEF500D153DE /* Sentry */,
-				63AA76641EB8CB2F00D153DE /* SentryTests */,
+				63AA759A1EB8AEF500D153DE /* BuzzSentry */,
+				63AA76641EB8CB2F00D153DE /* BuzzSentryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -3731,7 +3731,7 @@
 /* Begin PBXTargetDependency section */
 		63AA766C1EB8CB2F00D153DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 63AA759A1EB8AEF500D153DE /* Sentry */;
+			target = 63AA759A1EB8AEF500D153DE /* BuzzSentry */;
 			targetProxy = 63AA766B1EB8CB2F00D153DE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -3894,8 +3894,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.sentry.Sentry;
-				PRODUCT_NAME = Sentry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Buzzvil.BuzzSentry;
+				PRODUCT_NAME = BuzzSentry;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -3932,8 +3932,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = io.sentry.Sentry;
-				PRODUCT_NAME = Sentry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Buzzvil.BuzzSentry;
+				PRODUCT_NAME = BuzzSentry;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				USE_HEADERMAP = YES;
@@ -4098,8 +4098,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.sentry.Sentry;
-				PRODUCT_NAME = Sentry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Buzzvil.BuzzSentry;
+				PRODUCT_NAME = BuzzSentry;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -4231,8 +4231,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.sentry.Sentry;
-				PRODUCT_NAME = Sentry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Buzzvil.BuzzSentry;
+				PRODUCT_NAME = BuzzSentry;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -4271,7 +4271,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6327C5CD1EB8A783004E799B /* Build configuration list for PBXProject "Sentry" */ = {
+		6327C5CD1EB8A783004E799B /* Build configuration list for PBXProject "BuzzSentry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6327C5E51EB8A783004E799B /* Debug */,
@@ -4282,7 +4282,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		63AA75A01EB8AEF500D153DE /* Build configuration list for PBXNativeTarget "Sentry" */ = {
+		63AA75A01EB8AEF500D153DE /* Build configuration list for PBXNativeTarget "BuzzSentry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63AA75A11EB8AEF500D153DE /* Debug */,
@@ -4293,7 +4293,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		63AA766F1EB8CB2F00D153DE /* Build configuration list for PBXNativeTarget "SentryTests" */ = {
+		63AA766F1EB8CB2F00D153DE /* Build configuration list for PBXNativeTarget "BuzzSentryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63AA766D1EB8CB2F00D153DE /* Debug */,

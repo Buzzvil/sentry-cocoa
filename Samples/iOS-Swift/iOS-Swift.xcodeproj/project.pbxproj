@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0AAAB8572887F7C60011845C /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABE2E928855FF80057ED69 /* PermissionsViewController.swift */; };
 		0AABE2EA28855FF80057ED69 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABE2E928855FF80057ED69 /* PermissionsViewController.swift */; };
-		630853532440C60F00DDE4CE /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 630853322440C44F00DDE4CE /* Sentry.framework */; };
 		637AFDAA243B02760034958B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637AFDA9243B02760034958B /* AppDelegate.swift */; };
 		637AFDAE243B02760034958B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637AFDAD243B02760034958B /* ViewController.swift */; };
 		637AFDB1243B02760034958B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 637AFDAF243B02760034958B /* Main.storyboard */; };
@@ -48,7 +47,6 @@
 		D8269A5A274C100300BD5BD5 /* Sentry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 630853322440C44F00DDE4CE /* Sentry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D83A30C8279EFD6E00372D0A /* ClearTestState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A30C7279EFD6E00372D0A /* ClearTestState.swift */; };
 		D83A30D1279F0A7C00372D0A /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 630853322440C44F00DDE4CE /* Sentry.framework */; };
-		D83A30D8279F159D00372D0A /* Sentry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 630853322440C44F00DDE4CE /* Sentry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D83A30DC279F16BA00372D0A /* Sentry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 630853322440C44F00DDE4CE /* Sentry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D83A30E1279F1F5C00372D0A /* fatal-error-binary-images-message2.json in Resources */ = {isa = PBXBuildFile; fileRef = D83A30DF279F1F5C00372D0A /* fatal-error-binary-images-message2.json */; };
 		D83A30E6279FE21F00372D0A /* SentryFileIOTrackingIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A30E5279FE21F00372D0A /* SentryFileIOTrackingIntegrationTests.swift */; };
@@ -87,6 +85,8 @@
 		D8F3D05F274E6A8B00B56F8C /* AssertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F3D05E274E6A8B00B56F8C /* AssertView.swift */; };
 		D8F3D062274EBD4800B56F8C /* SpanExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F3D061274EBD4800B56F8C /* SpanExtension.swift */; };
 		D8F57BC527BBD787000D09D4 /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F57BC427BBD787000D09D4 /* CoreDataViewController.swift */; };
+		E42FB2462913F13200C379F8 /* BuzzSentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E42FB2452913F13200C379F8 /* BuzzSentry.framework */; };
+		E42FB2472913F13200C379F8 /* BuzzSentry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E42FB2452913F13200C379F8 /* BuzzSentry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,13 +103,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 63AA76651EB8CB2F00D153DE;
 			remoteInfo = SentryTests;
-		};
-		630853512440C60800DDE4CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6308532C2440C44F00DDE4CE /* Sentry.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 63AA759A1EB8AEF500D153DE;
-			remoteInfo = Sentry;
 		};
 		7B64386D26A6C544000D0F65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -156,17 +149,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		630853552440C60F00DDE4CE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D83A30D8279F159D00372D0A /* Sentry.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		630853552440C60F00DDE4CF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,6 +200,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D8B56CF1273A8D97004DF238 /* Sentry.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E42FB2482913F13200C379F8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E42FB2472913F13200C379F8 /* BuzzSentry.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +285,7 @@
 		D8F3D05E274E6A8B00B56F8C /* AssertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertView.swift; sourceTree = "<group>"; };
 		D8F3D061274EBD4800B56F8C /* SpanExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanExtension.swift; sourceTree = "<group>"; };
 		D8F57BC427BBD787000D09D4 /* CoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
+		E42FB2452913F13200C379F8 /* BuzzSentry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuzzSentry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,7 +293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				630853532440C60F00DDE4CE /* Sentry.framework in Frameworks */,
+				E42FB2462913F13200C379F8 /* BuzzSentry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +351,7 @@
 		634C7EC124406A4200AFDE9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E42FB2452913F13200C379F8 /* BuzzSentry.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -535,13 +530,12 @@
 				637AFDA2243B02760034958B /* Sources */,
 				637AFDA3243B02760034958B /* Frameworks */,
 				637AFDA4243B02760034958B /* Resources */,
-				630853552440C60F00DDE4CE /* Embed Frameworks */,
 				D840D535273A07F600CDF142 /* Embed App Clips */,
+				E42FB2482913F13200C379F8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				630853522440C60800DDE4CE /* PBXTargetDependency */,
 				D840D533273A07F600CDF142 /* PBXTargetDependency */,
 			);
 			name = "iOS-Swift";
@@ -882,11 +876,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		630853522440C60800DDE4CE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Sentry;
-			targetProxy = 630853512440C60800DDE4CE /* PBXContainerItemProxy */;
-		};
 		7B64386E26A6C544000D0F65 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 637AFDA5243B02760034958B /* iOS-Swift */;
@@ -1085,11 +1074,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "iOS-Swift/iOS-Swift.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97JCY7859U;
+				DEVELOPMENT_TEAM = 67369282ZY;
 				INFOPLIST_FILE = "iOS-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1097,11 +1085,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 7.29.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.sentry.sample.iOS-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Buzzvil.sample.iOS-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development io.sentry.sample.iOS-Swift";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Swift/Tools/iOS-Swift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1114,11 +1103,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "iOS-Swift/iOS-Swift.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97JCY7859U;
+				DEVELOPMENT_TEAM = 67369282ZY;
 				INFOPLIST_FILE = "iOS-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1126,11 +1114,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 7.29.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.sentry.sample.iOS-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Buzzvil.sample.iOS-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.sentry.sample.iOS-Swift";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Swift/Tools/iOS-Swift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1298,11 +1287,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "iOS-Swift/iOS-Swift.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97JCY7859U;
+				DEVELOPMENT_TEAM = 67369282ZY;
 				INFOPLIST_FILE = "iOS-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1310,11 +1298,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 7.27.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.sentry.sample.iOS-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Buzzvil.sample.iOS-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.sentry.sample.iOS-Swift";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Swift/Tools/iOS-Swift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1521,11 +1510,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "iOS-Swift/iOS-Swift.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97JCY7859U;
+				DEVELOPMENT_TEAM = 67369282ZY;
 				INFOPLIST_FILE = "iOS-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1533,11 +1521,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 7.27.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.sentry.sample.iOS-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Buzzvil.sample.iOS-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore io.sentry.sample.iOS-Swift";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Swift/Tools/iOS-Swift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

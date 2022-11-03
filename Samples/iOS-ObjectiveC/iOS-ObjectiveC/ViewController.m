@@ -1,6 +1,6 @@
 #import "ViewController.h"
 
-@import Sentry;
+@import BuzzSentry;
 
 @interface
 ViewController ()

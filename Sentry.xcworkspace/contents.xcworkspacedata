@@ -8,21 +8,6 @@
          location = "group:Samples/README.md">
       </FileRef>
       <FileRef
-         location = "group:Samples/TrendingMovies/TrendingMovies.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Samples/iOS15-SwiftUI/iOS15-SwiftUI.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Samples/iOS-SwiftUI/iOS-SwiftUI.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Samples/tvOS-Swift/tvOS-Swift.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Samples/macOS-Swift/macOS-Swift.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:Samples/iOS-ObjectiveC/iOS-ObjectiveC.xcodeproj">
       </FileRef>
       <FileRef
@@ -30,6 +15,6 @@
       </FileRef>
    </Group>
    <FileRef
-      location = "group:Sentry.xcodeproj">
+      location = "group:/Users/damon/xcode/sentry-cocoa/BuzzSentry.xcodeproj">
    </FileRef>
 </Workspace>
