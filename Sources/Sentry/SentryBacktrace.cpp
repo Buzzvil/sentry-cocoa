@@ -7,9 +7,9 @@
 #    include "SentryMachLogging.hpp"
 #    include "SentryStackBounds.hpp"
 #    include "SentryStackFrame.hpp"
-#    include "SentryThreadHandle.hpp"
+#    include "BuzzSentryThreadHandle.hpp"
 #    include "SentryThreadMetadataCache.hpp"
-#    include "SentryThreadState.hpp"
+#    include "BuzzSentryThreadState.hpp"
 #    include "SentryTime.h"
 
 #    include <cassert>

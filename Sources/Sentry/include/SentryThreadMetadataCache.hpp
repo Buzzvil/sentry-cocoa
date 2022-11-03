@@ -4,7 +4,7 @@
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
-#    include "SentryThreadHandle.hpp"
+#    include "BuzzSentryThreadHandle.hpp"
 
 #    include <cstdint>
 #    include <memory>

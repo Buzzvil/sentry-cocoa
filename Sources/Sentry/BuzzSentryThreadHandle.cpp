@@ -1,4 +1,4 @@
-#include "SentryThreadHandle.hpp"
+#include "BuzzSentryThreadHandle.hpp"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 

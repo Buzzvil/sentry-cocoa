@@ -4,7 +4,7 @@
 
 #    import <XCTest/XCTest.h>
 
-#    import "SentryThreadHandle.hpp"
+#    import "BuzzSentryThreadHandle.hpp"
 
 #    import <atomic>
 #    import <csignal>
@@ -50,10 +50,10 @@ threadGetName(void *namePtr)
 }
 } // namespace
 
-@interface SentryThreadHandleTests : XCTestCase
+@interface BuzzSentryThreadHandleTests : XCTestCase
 @end
 
-@implementation SentryThreadHandleTests
+@implementation BuzzSentryThreadHandleTests
 
 - (void)testGetNativeHandle
 {
