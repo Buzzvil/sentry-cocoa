@@ -1,5 +1,5 @@
 #import "NSData+BuzzSentryCompression.h"
-#import <BuzzSentry/BuzzSentry.h>
+#import <Sentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 @interface BuzzSentryNSDataCompressionTests : XCTestCase

@@ -1,4 +1,4 @@
-#import <BuzzSentry/BuzzSentry.h>
+#import <Sentry/BuzzSentry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

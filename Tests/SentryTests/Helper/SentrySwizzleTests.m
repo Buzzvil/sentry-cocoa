@@ -1,5 +1,5 @@
 #import "BuzzSentrySwizzle.h"
-#import <BuzzSentry/BuzzSentry.h>
+#import <Sentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 #pragma mark - HELPER CLASSES -

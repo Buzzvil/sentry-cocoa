@@ -4,7 +4,7 @@
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK+Private.h"
-#import <BuzzSentry/BuzzSentry.h>
+#import <Sentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 #import "BuzzSentryDataCategory.h"

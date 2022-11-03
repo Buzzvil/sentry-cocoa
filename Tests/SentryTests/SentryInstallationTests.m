@@ -1,6 +1,6 @@
 #import "BuzzSentryInstallation.h"
 #import <Foundation/Foundation.h>
-#import <BuzzSentry/BuzzSentry.h>
+#import <Sentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 @interface BuzzSentryInstallationTests : XCTestCase

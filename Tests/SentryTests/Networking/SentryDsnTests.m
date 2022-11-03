@@ -2,7 +2,7 @@
 #import "BuzzSentryError.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryNSURLRequest.h"
-#import <BuzzSentry/BuzzSentry.h>
+#import <Sentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 @interface BuzzSentryDsnTests : XCTestCase
