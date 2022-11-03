@@ -3,7 +3,7 @@
 #import "BuzzSentryTransport.h"
 #import <Sentry/Sentry.h>
 
-@class SentryCrashWrapper, SentryThreadInspector, BuzzSentryTransportAdapter, SentryUIDeviceWrapper;
+@class BuzzSentryCrashWrapper, BuzzSentryThreadInspector, BuzzSentryTransportAdapter, SentryUIDeviceWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,9 +17,9 @@ BuzzSentryClient (TestInit)
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                transportAdapter:(BuzzSentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
-                threadInspector:(SentryThreadInspector *)threadInspector
+                threadInspector:(BuzzSentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random
-                   crashWrapper:(SentryCrashWrapper *)crashWrapper
+                   crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
             permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
                   deviceWrapper:(SentryUIDeviceWrapper *)deviceWrapper
                          locale:(NSLocale *)locale

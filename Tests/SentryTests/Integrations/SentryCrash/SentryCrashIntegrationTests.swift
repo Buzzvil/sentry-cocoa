@@ -11,10 +11,10 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         let dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
         let hub: BuzzSentryHub
         let options: Options
-        let sentryCrash: TestSentryCrashWrapper
+        let sentryCrash: TestBuzzSentryCrashWrapper
         
         init() {
-            sentryCrash = TestSentryCrashWrapper.sharedInstance()
+            sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
             sentryCrash.internalActiveDurationSinceLastCrash = 5.0
             sentryCrash.internalCrashedLastLaunch = true
             
@@ -41,7 +41,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
             return getSut(crashWrapper: sentryCrash)
         }
         
-        func getSut(crashWrapper: SentryCrashWrapper) -> BuzzSentryCrashIntegration {
+        func getSut(crashWrapper: BuzzSentryCrashWrapper) -> BuzzSentryCrashIntegration {
             return BuzzSentryCrashIntegration(crashAdapter: crashWrapper, andDispatchQueueWrapper: dispatchQueueWrapper)
         }
         
@@ -104,7 +104,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     
     func testSystemInfoIsEmpty() {
         let scope = Scope()
-        BuzzSentryCrashIntegration.enrichScope(scope, crashWrapper: TestSentryCrashWrapper.sharedInstance())
+        BuzzSentryCrashIntegration.enrichScope(scope, crashWrapper: TestBuzzSentryCrashWrapper.sharedInstance())
         
         // We don't worry about the actual values
         // This is an edge case where the user doesn't use the
@@ -333,7 +333,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     }
     
     private func givenSutWithGlobalHubAndCrashWrapper() -> (BuzzSentryCrashIntegration, BuzzSentryHub) {
-        let sut = fixture.getSut(crashWrapper: SentryCrashWrapper.sharedInstance())
+        let sut = fixture.getSut(crashWrapper: BuzzSentryCrashWrapper.sharedInstance())
         let hub = fixture.hub
         BuzzSentrySDK.setCurrentHub(hub)
 

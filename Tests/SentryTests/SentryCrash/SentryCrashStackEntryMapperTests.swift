@@ -3,14 +3,14 @@ import XCTest
 
 /** Some of the test parameters are copied during debbuging a working implementation.
  */
-class SentryCrashStackEntryMapperTests: XCTestCase {
+class BuzzSentryCrashStackEntryMapperTests: XCTestCase {
     
     private let bundleExecutable: String = "iOS-Swift"
-    private var sut: SentryCrashStackEntryMapper!
+    private var sut: BuzzSentryCrashStackEntryMapper!
     
     override func setUp() {
         super.setUp()
-        sut = SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [bundleExecutable], inAppExcludes: []))
+        sut = BuzzSentryCrashStackEntryMapper(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [bundleExecutable], inAppExcludes: []))
     }
 
     func testSymbolAddress() {

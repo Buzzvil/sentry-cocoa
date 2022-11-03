@@ -11,7 +11,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         let options: Options
         let currentDateProvider = TestCurrentDateProvider()
         let client: TestClient!
-        let sentryCrash: TestSentryCrashWrapper
+        let sentryCrash: TestBuzzSentryCrashWrapper
 
         let notificationCenter = TestNSNotificationCenterWrapper()
         
@@ -24,7 +24,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
             
             client = TestClient(options: options)
             
-            sentryCrash = TestSentryCrashWrapper.sharedInstance()
+            sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
         }
         
         func getSut() -> SessionTracker {

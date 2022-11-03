@@ -9,7 +9,7 @@ class BuzzSentryOutOfMemoryLogicTests: XCTestCase {
         
         let options: Options
         let client: TestClient!
-        let crashWrapper: TestSentryCrashWrapper
+        let crashWrapper: TestBuzzSentryCrashWrapper
         let fileManager: SentryFileManager
         let currentDate = TestCurrentDateProvider()
         let sysctl = TestSysctl()
@@ -22,7 +22,7 @@ class BuzzSentryOutOfMemoryLogicTests: XCTestCase {
             
             client = TestClient(options: options)
             
-            crashWrapper = TestSentryCrashWrapper.sharedInstance()
+            crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
             
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }

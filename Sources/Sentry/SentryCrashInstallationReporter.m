@@ -10,16 +10,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 SentryCrashInstallationReporter ()
 
-@property (nonatomic, strong) SentryInAppLogic *inAppLogic;
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 
 @end
 
 @implementation SentryCrashInstallationReporter
 
-- (instancetype)initWithInAppLogic:(SentryInAppLogic *)inAppLogic
-                      crashWrapper:(SentryCrashWrapper *)crashWrapper
+- (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic
+                      crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                      dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
 {
     if (self = [super initWithRequiredProperties:[NSArray new]]) {

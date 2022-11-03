@@ -2,7 +2,7 @@
 #import "BuzzSentryDataCategory.h"
 #import "BuzzSentryDiscardReason.h"
 
-@class BuzzSentryEnvelopeItem, BuzzSentryId, BuzzSentryAttachment, SentryThreadInspector;
+@class BuzzSentryEnvelopeItem, BuzzSentryId, BuzzSentryAttachment, BuzzSentryThreadInspector;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +21,7 @@ BuzzSentryClient (Private)
 
 @property (nonatomic, strong)
     NSMutableArray<id<BuzzSentryClientAttachmentProcessor>> *attachmentProcessors;
-@property (nonatomic, strong) SentryThreadInspector *threadInspector;
+@property (nonatomic, strong) BuzzSentryThreadInspector *threadInspector;
 
 - (SentryFileManager *)fileManager;
 

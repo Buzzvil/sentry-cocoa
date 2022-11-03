@@ -45,7 +45,7 @@ class BuzzSentrySDKTests: XCTestCase {
             options.dsn = BuzzSentrySDKTests.dsnAsString
             options.releaseName = "1.0.0"
             client = TestClient(options: options)!
-            hub = BuzzSentryHub(client: client, andScope: scope, andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
+            hub = BuzzSentryHub(client: client, andScope: scope, andCrashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
             
             userFeedback = UserFeedback(eventId: BuzzSentryId())
             userFeedback.comments = "Again really?"

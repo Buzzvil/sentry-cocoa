@@ -3,10 +3,10 @@
 #import "NSLocale+Sentry.h"
 #import "BuzzSentryAttachment.h"
 #import "BuzzSentryClient+Private.h"
-#import "SentryCrashDefaultMachineContextWrapper.h"
+#import "BuzzSentryCrashDefaultMachineContextWrapper.h"
 #import "BuzzSentryCrashIntegration.h"
-#import "SentryCrashStackEntryMapper.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashStackEntryMapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryDebugImageProvider.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
@@ -20,7 +20,7 @@
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryHub.h"
 #import "BuzzSentryId.h"
-#import "SentryInAppLogic.h"
+#import "BuzzSentryInAppLogic.h"
 #import "BuzzSentryInstallation.h"
 #import "SentryLog.h"
 #import "BuzzSentryMechanism.h"
@@ -35,7 +35,7 @@
 #import "BuzzSentryScope+Private.h"
 #import "BuzzSentrySDKInfo.h"
 #import "BuzzSentryStacktraceBuilder.h"
-#import "SentryThreadInspector.h"
+#import "BuzzSentryThreadInspector.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransaction.h"
@@ -58,11 +58,11 @@ BuzzSentryClient ()
 @property (nonatomic, strong) BuzzSentryTransportAdapter *transportAdapter;
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) SentryDebugImageProvider *debugImageProvider;
-@property (nonatomic, strong) SentryThreadInspector *threadInspector;
+@property (nonatomic, strong) BuzzSentryThreadInspector *threadInspector;
 @property (nonatomic, strong) id<BuzzSentryRandom> random;
 @property (nonatomic, strong)
     NSMutableArray<id<BuzzSentryClientAttachmentProcessor>> *attachmentProcessors;
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) SentryPermissionsObserver *permissionsObserver;
 @property (nonatomic, strong) SentryUIDeviceWrapper *deviceWrapper;
 @property (nonatomic, strong) NSLocale *locale;
@@ -101,17 +101,17 @@ NSString *const kSentryDefaultEnvironment = @"production";
     BuzzSentryTransportAdapter *transportAdapter =
         [[BuzzSentryTransportAdapter alloc] initWithTransport:transport options:options];
 
-    SentryInAppLogic *inAppLogic =
-        [[SentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
+    BuzzSentryInAppLogic *inAppLogic =
+        [[BuzzSentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
                                           inAppExcludes:options.inAppExcludes];
-    SentryCrashStackEntryMapper *crashStackEntryMapper =
-        [[SentryCrashStackEntryMapper alloc] initWithInAppLogic:inAppLogic];
+    BuzzSentryCrashStackEntryMapper *crashStackEntryMapper =
+        [[BuzzSentryCrashStackEntryMapper alloc] initWithInAppLogic:inAppLogic];
     BuzzSentryStacktraceBuilder *stacktraceBuilder =
         [[BuzzSentryStacktraceBuilder alloc] initWithCrashStackEntryMapper:crashStackEntryMapper];
-    id<SentryCrashMachineContextWrapper> machineContextWrapper =
-        [[SentryCrashDefaultMachineContextWrapper alloc] init];
-    SentryThreadInspector *threadInspector =
-        [[SentryThreadInspector alloc] initWithStacktraceBuilder:stacktraceBuilder
+    id<BuzzSentryCrashMachineContextWrapper> machineContextWrapper =
+        [[BuzzSentryCrashDefaultMachineContextWrapper alloc] init];
+    BuzzSentryThreadInspector *threadInspector =
+        [[BuzzSentryThreadInspector alloc] initWithStacktraceBuilder:stacktraceBuilder
                                         andMachineContextWrapper:machineContextWrapper];
     SentryUIDeviceWrapper *deviceWrapper = [[SentryUIDeviceWrapper alloc] init];
 
@@ -120,7 +120,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                      fileManager:fileManager
                  threadInspector:threadInspector
                           random:[SentryDependencyContainer sharedInstance].random
-                    crashWrapper:[SentryCrashWrapper sharedInstance]
+                    crashWrapper:[BuzzSentryCrashWrapper sharedInstance]
              permissionsObserver:permissionsObserver
                    deviceWrapper:deviceWrapper
                           locale:[NSLocale autoupdatingCurrentLocale]
@@ -130,9 +130,9 @@ NSString *const kSentryDefaultEnvironment = @"production";
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                transportAdapter:(BuzzSentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
-                threadInspector:(SentryThreadInspector *)threadInspector
+                threadInspector:(BuzzSentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random
-                   crashWrapper:(SentryCrashWrapper *)crashWrapper
+                   crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
             permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
                   deviceWrapper:(SentryUIDeviceWrapper *)deviceWrapper
                          locale:(NSLocale *)locale

@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 BuzzSentryCrashIntegration (TestInit)
 
-- (instancetype)initWithCrashAdapter:(SentryCrashWrapper *)crashWrapper
+- (instancetype)initWithCrashAdapter:(BuzzSentryCrashWrapper *)crashWrapper
              andDispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
 @end

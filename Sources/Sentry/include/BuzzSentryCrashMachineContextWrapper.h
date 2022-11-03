@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** A wrapper around SentryCrashMachineContext for testability.
  */
-@protocol SentryCrashMachineContextWrapper <NSObject>
+@protocol BuzzSentryCrashMachineContextWrapper <NSObject>
 
 - (void)fillContextForCurrentThread:(struct SentryCrashMachineContext *)context;
 

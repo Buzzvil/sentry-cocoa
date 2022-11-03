@@ -1,7 +1,7 @@
 #import "SentryCurrentDateProvider.h"
 #import "SentryDefines.h"
 
-@class BuzzSentryOptions, SentryCrashWrapper, SentryAppState, SentryFileManager, SentrySysctl,
+@class BuzzSentryOptions, BuzzSentryCrashWrapper, SentryAppState, SentryFileManager, SentrySysctl,
     BuzzSentryDispatchQueueWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-                   crashWrapper:(SentryCrashWrapper *)crashWrapper
+                   crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                     fileManager:(SentryFileManager *)fileManager
             currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                          sysctl:(SentrySysctl *)sysctl

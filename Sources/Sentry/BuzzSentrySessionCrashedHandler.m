@@ -1,6 +1,6 @@
 #import "BuzzSentrySessionCrashedHandler.h"
 #import "BuzzSentryClient+Private.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryCurrentDate.h"
 #import "SentryFileManager.h"
 #import "BuzzSentryHub.h"
@@ -10,14 +10,14 @@
 @interface
 BuzzSentrySessionCrashedHandler ()
 
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryOutOfMemoryLogic *outOfMemoryLogic;
 
 @end
 
 @implementation BuzzSentrySessionCrashedHandler
 
-- (instancetype)initWithCrashWrapper:(SentryCrashWrapper *)crashWrapper
+- (instancetype)initWithCrashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                     outOfMemoryLogic:(BuzzSentryOutOfMemoryLogic *)outOfMemoryLogic;
 {
     self = [self init];

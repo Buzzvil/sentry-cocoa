@@ -84,7 +84,7 @@ BuzzSentryOptions ()
         _enableSwizzling = YES;
         self.sendClientReports = YES;
 
-        // Use the name of the bundle’s executable file as inAppInclude, so SentryInAppLogic
+        // Use the name of the bundle’s executable file as inAppInclude, so BuzzSentryInAppLogic
         // marks frames coming from there as inApp. With this approach, the SDK marks public
         // frameworks such as UIKitCore, CoreFoundation, GraphicsServices, and so forth, as not
         // inApp. For private frameworks, such as Sentry, dynamic and static frameworks differ.

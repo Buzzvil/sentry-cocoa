@@ -4,7 +4,7 @@ import XCTest
 class BuzzSentrySDKIntegrationTestsBase: XCTestCase {
     
     var currentDate = TestCurrentDateProvider()
-    var crashWrapper: TestSentryCrashWrapper!
+    var crashWrapper: TestBuzzSentryCrashWrapper!
     
     var options: Options {
         Options()
@@ -12,7 +12,7 @@ class BuzzSentrySDKIntegrationTestsBase: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        crashWrapper = TestSentryCrashWrapper.sharedInstance()
+        crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
         SentryDependencyContainer.sharedInstance().crashWrapper = crashWrapper
         currentDate = TestCurrentDateProvider()
     }
@@ -24,7 +24,7 @@ class BuzzSentrySDKIntegrationTestsBase: XCTestCase {
     
     func givenSdkWithHub(_ options: Options? = nil) {
         let client = TestClient(options: options ?? self.options)!
-        let hub = BuzzSentryHub(client: client, andScope: Scope(), andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
+        let hub = BuzzSentryHub(client: client, andScope: Scope(), andCrashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
         
         BuzzSentrySDK.setCurrentHub(hub)
     }

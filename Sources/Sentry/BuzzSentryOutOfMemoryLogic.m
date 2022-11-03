@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <SentryAppState.h>
 #import <SentryAppStateManager.h>
-#import <SentryCrashWrapper.h>
+#import <BuzzSentryCrashWrapper.h>
 #import <BuzzSentryOptions.h>
 #import <BuzzSentryOutOfMemoryLogic.h>
 #import <BuzzSentrySDK+Private.h>
@@ -14,7 +14,7 @@
 BuzzSentryOutOfMemoryLogic ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
-@property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashAdapter;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
 
 @end
@@ -22,7 +22,7 @@ BuzzSentryOutOfMemoryLogic ()
 @implementation BuzzSentryOutOfMemoryLogic
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-                   crashAdapter:(SentryCrashWrapper *)crashAdapter
+                   crashAdapter:(BuzzSentryCrashWrapper *)crashAdapter
                 appStateManager:(SentryAppStateManager *)appStateManager
 {
     if (self = [super init]) {

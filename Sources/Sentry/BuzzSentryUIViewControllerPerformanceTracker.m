@@ -7,7 +7,7 @@
 #import "BuzzSentryScope.h"
 #import "BuzzSentrySpanId.h"
 #import "BuzzSentryUIViewControllerSanitizer.h"
-#import <SentryInAppLogic.h>
+#import <BuzzSentryInAppLogic.h>
 #import <BuzzSentrySpanOperations.h>
 #import <objc/runtime.h>
 
@@ -15,7 +15,7 @@
 BuzzSentryUIViewControllerPerformanceTracker ()
 
 @property (nonatomic, strong) BuzzSentryPerformanceTracker *tracker;
-@property (nonatomic, strong) SentryInAppLogic *inAppLogic;
+@property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
 
 @end
 
@@ -36,7 +36,7 @@ BuzzSentryUIViewControllerPerformanceTracker ()
 
         BuzzSentryOptions *options = [BuzzSentrySDK options];
 
-        self.inAppLogic = [[SentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
+        self.inAppLogic = [[BuzzSentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
                                                             inAppExcludes:options.inAppExcludes];
     }
     return self;

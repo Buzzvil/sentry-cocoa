@@ -4,7 +4,7 @@
 #import "SentryCrash.h"
 #include "SentryCrashMonitor_AppState.h"
 #import "BuzzSentryCrashReportConverter.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryDefines.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
@@ -22,16 +22,16 @@ static const NSTimeInterval SENTRY_APP_START_CRASH_FLUSH_DURATION = 5.0;
 @interface
 SentryCrashReportSink ()
 
-@property (nonatomic, strong) SentryInAppLogic *inAppLogic;
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 
 @end
 
 @implementation SentryCrashReportSink
 
-- (instancetype)initWithInAppLogic:(SentryInAppLogic *)inAppLogic
-                      crashWrapper:(SentryCrashWrapper *)crashWrapper
+- (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic
+                      crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                      dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
 {
     if (self = [super init]) {

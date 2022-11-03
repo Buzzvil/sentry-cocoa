@@ -12,7 +12,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
         let currentDate = TestCurrentDateProvider()
         let sysctl = TestSysctl()
         let fileManager: SentryFileManager
-        let crashWrapper = TestSentryCrashWrapper.sharedInstance()
+        let crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
         let appStateManager: SentryAppStateManager
         let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         

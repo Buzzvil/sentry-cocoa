@@ -4,7 +4,7 @@
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class BuzzSentryStacktrace, BuzzSentryFrameRemover, SentryCrashStackEntryMapper;
+@class BuzzSentryStacktrace, BuzzSentryFrameRemover, BuzzSentryCrashStackEntryMapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BuzzSentryStacktraceBuilder : NSObject
 SENTRY_NO_INIT
 
-- (id)initWithCrashStackEntryMapper:(SentryCrashStackEntryMapper *)crashStackEntryMapper;
+- (id)initWithCrashStackEntryMapper:(BuzzSentryCrashStackEntryMapper *)crashStackEntryMapper;
 
 /**
  * Builds the stacktrace for the current thread removing frames from the BuzzSentrySDK until frames from

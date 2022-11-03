@@ -1,4 +1,4 @@
-#import "SentryCrashMachineContextWrapper.h"
+#import "BuzzSentryCrashMachineContextWrapper.h"
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
@@ -6,11 +6,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryThreadInspector : NSObject
+@interface BuzzSentryThreadInspector : NSObject
 SENTRY_NO_INIT
 
 - (id)initWithStacktraceBuilder:(BuzzSentryStacktraceBuilder *)stacktraceBuilder
-       andMachineContextWrapper:(id<SentryCrashMachineContextWrapper>)machineContextWrapper;
+       andMachineContextWrapper:(id<BuzzSentryCrashMachineContextWrapper>)machineContextWrapper;
 
 /**
  * Gets current threads with the stacktrace only for the current thread. Frames from the BuzzSentrySDK

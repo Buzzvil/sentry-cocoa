@@ -1,6 +1,6 @@
 #import "BuzzSentryHub.h"
 #import "BuzzSentryClient+Private.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryCurrentDateProvider.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
@@ -27,7 +27,7 @@ BuzzSentryHub ()
 
 @property (nullable, nonatomic, strong) BuzzSentryClient *client;
 @property (nullable, nonatomic, strong) BuzzSentryScope *scope;
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryTracesSampler *tracesSampler;
 @property (nonatomic, strong) SentryProfilesSampler *profilesSampler;
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDateProvider;
@@ -50,7 +50,7 @@ BuzzSentryHub ()
         _sessionLock = [[NSObject alloc] init];
         _installedIntegrations = [[NSMutableArray alloc] init];
         _installedIntegrationNames = [[NSMutableArray alloc] init];
-        _crashWrapper = [SentryCrashWrapper sharedInstance];
+        _crashWrapper = [BuzzSentryCrashWrapper sharedInstance];
         _tracesSampler = [[BuzzSentryTracesSampler alloc] initWithOptions:client.options];
 #if SENTRY_TARGET_PROFILING_SUPPORTED
         if (client.options.isProfilingEnabled) {
@@ -65,7 +65,7 @@ BuzzSentryHub ()
 /** Internal constructor for testing */
 - (instancetype)initWithClient:(nullable BuzzSentryClient *)client
                       andScope:(nullable BuzzSentryScope *)scope
-               andCrashWrapper:(SentryCrashWrapper *)crashWrapper
+               andCrashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
         andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
 {
     self = [self initWithClient:client andScope:scope];

@@ -2,7 +2,7 @@
 #import <SentryAppState.h>
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
-#import <SentryCrashWrapper.h>
+#import <BuzzSentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryHub.h>
@@ -54,7 +54,7 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
     SentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
     SentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
-    SentryCrashWrapper *crashWrapper = [SentryDependencyContainer sharedInstance].crashWrapper;
+    BuzzSentryCrashWrapper *crashWrapper = [SentryDependencyContainer sharedInstance].crashWrapper;
     BuzzSentryOutOfMemoryLogic *logic =
         [[BuzzSentryOutOfMemoryLogic alloc] initWithOptions:options
                                            crashAdapter:crashWrapper

@@ -2,7 +2,7 @@
 #import "BuzzSentryANRTracker.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrashMachineContext.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
@@ -11,7 +11,7 @@
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryThread.h"
-#import "SentryThreadInspector.h"
+#import "BuzzSentryThreadInspector.h"
 #import "SentryThreadWrapper.h"
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryOptions+Private.h>
@@ -55,7 +55,7 @@ BuzzSentryANRTrackingIntegration ()
 
 - (void)anrDetected
 {
-    SentryThreadInspector *threadInspector = BuzzSentrySDK.currentHub.getClient.threadInspector;
+    BuzzSentryThreadInspector *threadInspector = BuzzSentrySDK.currentHub.getClient.threadInspector;
 
     NSString *message = [NSString stringWithFormat:@"App hanging for at least %li ms.",
                                   (long)(self.options.appHangTimeoutInterval * 1000)];

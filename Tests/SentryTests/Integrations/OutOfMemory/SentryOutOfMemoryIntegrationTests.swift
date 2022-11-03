@@ -5,7 +5,7 @@ class BuzzSentryOutOfMemoryIntegrationTests: XCTestCase {
     private class Fixture {
         let options: Options
         let client: TestClient!
-        let crashWrapper: TestSentryCrashWrapper
+        let crashWrapper: TestBuzzSentryCrashWrapper
         let currentDate = TestCurrentDateProvider()
         let fileManager: SentryFileManager
         
@@ -14,7 +14,7 @@ class BuzzSentryOutOfMemoryIntegrationTests: XCTestCase {
             
             client = TestClient(options: options)
             
-            crashWrapper = TestSentryCrashWrapper.sharedInstance()
+            crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
             SentryDependencyContainer.sharedInstance().crashWrapper = crashWrapper
 
             let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: crashWrapper, andCurrentDateProvider: currentDate)

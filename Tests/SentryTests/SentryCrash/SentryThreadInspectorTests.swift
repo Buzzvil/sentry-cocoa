@@ -1,17 +1,17 @@
 import XCTest
 
-    class SentryThreadInspectorTests: XCTestCase {
+    class BuzzSentryThreadInspectorTests: XCTestCase {
     
     private class Fixture {
         var testMachineContextWrapper = TestMachineContextWrapper()
-        var stacktraceBuilder = TestBuzzSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
+        var stacktraceBuilder = TestBuzzSentryStacktraceBuilder(crashStackEntryMapper: BuzzSentryCrashStackEntryMapper(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
         
-        func getSut(testWithRealMachineConextWrapper: Bool = false) -> SentryThreadInspector {
+        func getSut(testWithRealMachineConextWrapper: Bool = false) -> BuzzSentryThreadInspector {
             
-            let machineContextWrapper = testWithRealMachineConextWrapper ? SentryCrashDefaultMachineContextWrapper() : testMachineContextWrapper as SentryCrashMachineContextWrapper
-            let stacktraceBuilder = testWithRealMachineConextWrapper ? BuzzSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: []))) : self.stacktraceBuilder
+            let machineContextWrapper = testWithRealMachineConextWrapper ? BuzzSentryCrashDefaultMachineContextWrapper() : testMachineContextWrapper as BuzzSentryCrashMachineContextWrapper
+            let stacktraceBuilder = testWithRealMachineConextWrapper ? BuzzSentryStacktraceBuilder(crashStackEntryMapper: BuzzSentryCrashStackEntryMapper(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []))) : self.stacktraceBuilder
             
-            return SentryThreadInspector(
+            return BuzzSentryThreadInspector(
                 stacktraceBuilder: stacktraceBuilder,
                 andMachineContextWrapper: machineContextWrapper
             )
@@ -185,7 +185,7 @@ private struct ThreadInfo {
     var name: String
 }
 
-private class TestMachineContextWrapper: NSObject, SentryCrashMachineContextWrapper {
+private class TestMachineContextWrapper: NSObject, BuzzSentryCrashMachineContextWrapper {
         
     func fillContext(forCurrentThread context: OpaquePointer) {
         // Do nothing

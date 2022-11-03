@@ -10,7 +10,7 @@ class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         
         let options: Options
         let client: TestClient!
-        let crashWrapper: TestSentryCrashWrapper
+        let crashWrapper: TestBuzzSentryCrashWrapper
         let fileManager: SentryFileManager
         let currentDate = TestCurrentDateProvider()
         let sysctl = TestSysctl()
@@ -23,7 +23,7 @@ class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
             
             client = TestClient(options: options)
             
-            crashWrapper = TestSentryCrashWrapper.sharedInstance()
+            crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
             
             let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: crashWrapper, andCurrentDateProvider: currentDate)
             BuzzSentrySDK.setCurrentHub(hub)

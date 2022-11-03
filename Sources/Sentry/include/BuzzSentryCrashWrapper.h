@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** A wrapper around SentryCrash for testability.
  */
-@interface SentryCrashWrapper : NSObject
+@interface BuzzSentryCrashWrapper : NSObject
 SENTRY_NO_INIT
 
 + (instancetype)sharedInstance;

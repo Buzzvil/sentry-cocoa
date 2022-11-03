@@ -28,7 +28,7 @@ class BuzzSentrySpanTests: XCTestCase {
         }
         
         func getSut(client: Client) -> Span {
-            let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDateProvider)
+            let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDateProvider)
             return hub.startTransaction(name: someTransaction, operation: someOperation)
         }
         

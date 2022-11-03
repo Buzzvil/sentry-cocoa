@@ -1,21 +1,21 @@
-#import "SentryCrashStackEntryMapper.h"
+#import "BuzzSentryCrashStackEntryMapper.h"
 #import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
-#import "SentryInAppLogic.h"
+#import "BuzzSentryInAppLogic.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryCrashStackEntryMapper ()
+BuzzSentryCrashStackEntryMapper ()
 
-@property (nonatomic, strong) SentryInAppLogic *inAppLogic;
+@property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
 
 @end
 
-@implementation SentryCrashStackEntryMapper
+@implementation BuzzSentryCrashStackEntryMapper
 
-- (instancetype)initWithInAppLogic:(SentryInAppLogic *)inAppLogic
+- (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic
 {
     if (self = [super init]) {
         self.inAppLogic = inAppLogic;

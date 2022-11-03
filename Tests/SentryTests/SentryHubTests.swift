@@ -16,7 +16,7 @@ class BuzzSentryHubTests: XCTestCase {
         let message = "some message"
         let event: Event
         let currentDateProvider = TestCurrentDateProvider()
-        let sentryCrash = TestSentryCrashWrapper.sharedInstance()
+        let sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
         let fileManager: SentryFileManager
         let crashedSession: BuzzSentrySession
         let transactionName = "Some Transaction"

@@ -1,18 +1,18 @@
-#import "SentryInAppLogic.h"
+#import "BuzzSentryInAppLogic.h"
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryInAppLogic ()
+BuzzSentryInAppLogic ()
 
 @property (nonatomic, copy, readonly) NSArray<NSString *> *inAppIncludes;
 @property (nonatomic, copy, readonly) NSArray<NSString *> *inAppExcludes;
 
 @end
 
-@implementation SentryInAppLogic
+@implementation BuzzSentryInAppLogic
 
 - (instancetype)initWithInAppIncludes:(NSArray<NSString *> *)inAppIncludes
                         inAppExcludes:(NSArray<NSString *> *)inAppExcludes

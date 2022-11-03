@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 
-@class SentryCrashWrapper, BuzzSentryDispatchQueueWrapper, BuzzSentryOutOfMemoryLogic;
+@class BuzzSentryCrashWrapper, BuzzSentryDispatchQueueWrapper, BuzzSentryOutOfMemoryLogic;
 
 @interface BuzzSentrySessionCrashedHandler : NSObject
 
-- (instancetype)initWithCrashWrapper:(SentryCrashWrapper *)crashWrapper
+- (instancetype)initWithCrashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                     outOfMemoryLogic:(BuzzSentryOutOfMemoryLogic *)outOfMemoryLogic;
 
 /**

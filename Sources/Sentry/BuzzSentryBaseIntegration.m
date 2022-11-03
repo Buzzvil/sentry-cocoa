@@ -1,5 +1,5 @@
 #import "BuzzSentryBaseIntegration.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryLog.h"
 #import <Foundation/Foundation.h>
 #import <SentryDependencyContainer.h>

@@ -1,7 +1,7 @@
-#import "SentryCrashDefaultMachineContextWrapper.h"
+#import "BuzzSentryCrashDefaultMachineContextWrapper.h"
 #import "SentryCrashDynamicLinker.h"
 #import "SentryCrashMachineContext.h"
-#import "SentryCrashMachineContextWrapper.h"
+#import "BuzzSentryCrashMachineContextWrapper.h"
 #import "SentryCrashStackCursor.h"
 #import "SentryCrashStackCursor_SelfThread.h"
 #import "SentryCrashThread.h"
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 SentryCrashThread mainThreadID;
 
-@implementation SentryCrashDefaultMachineContextWrapper
+@implementation BuzzSentryCrashDefaultMachineContextWrapper
 
 + (void)load
 {

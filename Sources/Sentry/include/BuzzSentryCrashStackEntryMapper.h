@@ -3,14 +3,14 @@
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class BuzzSentryFrame, SentryInAppLogic;
+@class BuzzSentryFrame, BuzzSentryInAppLogic;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryCrashStackEntryMapper : NSObject
+@interface BuzzSentryCrashStackEntryMapper : NSObject
 SENTRY_NO_INIT
 
-- (instancetype)initWithInAppLogic:(SentryInAppLogic *)inAppLogic;
+- (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic;
 
 /**
  * Maps the stackEntry of a SentryCrashStackCursor to BuzzSentryFrame.

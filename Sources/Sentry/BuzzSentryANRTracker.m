@@ -1,5 +1,5 @@
 #import "BuzzSentryANRTracker.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryLog.h"
 #import "SentryThreadWrapper.h"
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 BuzzSentryANRTracker ()
 
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryThreadWrapper *threadWrapper;
 @property (nonatomic, strong) NSMutableSet<id<BuzzSentryANRTrackerDelegate>> *listeners;
@@ -27,7 +27,7 @@ BuzzSentryANRTracker ()
 
 - (instancetype)initWithTimeoutInterval:(NSTimeInterval)timeoutInterval
                     currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
-                           crashWrapper:(SentryCrashWrapper *)crashWrapper
+                           crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                    dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                           threadWrapper:(SentryThreadWrapper *)threadWrapper
 {

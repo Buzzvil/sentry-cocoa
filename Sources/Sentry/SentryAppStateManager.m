@@ -3,7 +3,7 @@
 #import <Foundation/Foundation.h>
 #import <SentryAppState.h>
 #import <SentryAppStateManager.h>
-#import <SentryCrashWrapper.h>
+#import <BuzzSentryCrashWrapper.h>
 #import <SentryCurrentDateProvider.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentryFileManager.h>
@@ -19,7 +19,7 @@
 SentryAppStateManager ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) SentrySysctl *sysctl;
@@ -31,7 +31,7 @@ SentryAppStateManager ()
 @implementation SentryAppStateManager
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-                   crashWrapper:(SentryCrashWrapper *)crashWrapper
+                   crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                     fileManager:(SentryFileManager *)fileManager
             currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                          sysctl:(SentrySysctl *)sysctl

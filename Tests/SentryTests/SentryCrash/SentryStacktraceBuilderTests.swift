@@ -7,7 +7,7 @@ class BuzzSentryStacktraceBuilderTests: XCTestCase {
         let queue = DispatchQueue(label: "BuzzSentryStacktraceBuilderTests")
 
         var sut: BuzzSentryStacktraceBuilder {
-            return BuzzSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
+            return BuzzSentryStacktraceBuilder(crashStackEntryMapper: BuzzSentryCrashStackEntryMapper(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
         }
     }
 

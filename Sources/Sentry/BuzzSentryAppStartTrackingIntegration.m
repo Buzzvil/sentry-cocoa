@@ -5,7 +5,7 @@
 #import <Foundation/Foundation.h>
 #import <PrivateBuzzSentrySDKOnly.h>
 #import <SentryAppStateManager.h>
-#import <SentryCrashWrapper.h>
+#import <BuzzSentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentrySysctl.h>

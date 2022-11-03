@@ -5,7 +5,7 @@
 #import "SentrySwizzle.h"
 #import "BuzzSentryUIViewControllerPerformanceTracker.h"
 #import <BuzzSentryDispatchQueueWrapper.h>
-#import <SentryInAppLogic.h>
+#import <BuzzSentryInAppLogic.h>
 #import <BuzzSentryOptions.h>
 #import <UIViewController+Sentry.h>
 #import <objc/runtime.h>
@@ -28,7 +28,7 @@ UIApplication (BuzzSentryUIApplication) <BuzzSentryUIApplication>
 @interface
 BuzzSentryUIViewControllerSwizzling ()
 
-@property (nonatomic, strong) SentryInAppLogic *inAppLogic;
+@property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) id<SentryObjCRuntimeWrapper> objcRuntimeWrapper;
 @property (nonatomic, strong) BuzzSentrySubClassFinder *subClassFinder;
@@ -44,7 +44,7 @@ BuzzSentryUIViewControllerSwizzling ()
                  subClassFinder:(BuzzSentrySubClassFinder *)subClassFinder
 {
     if (self = [super init]) {
-        self.inAppLogic = [[SentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
+        self.inAppLogic = [[BuzzSentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
                                                             inAppExcludes:options.inAppExcludes];
         self.dispatchQueue = dispatchQueue;
         self.objcRuntimeWrapper = objcRuntimeWrapper;

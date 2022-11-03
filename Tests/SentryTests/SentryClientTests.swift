@@ -27,7 +27,7 @@ class BuzzSentryClientTest: XCTestCase {
         
         let trace = BuzzSentryTracer(transactionContext: TransactionContext(name: "SomeTransaction", operation: "SomeOperation"), hub: nil)
         let transaction: Transaction
-        let crashWrapper = TestSentryCrashWrapper.sharedInstance()
+        let crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
         let permissionsObserver = TestSentryPermissionsObserver()
         let deviceWrapper = TestSentryUIDeviceWrapper()
         let locale = Locale(identifier: "en_US")

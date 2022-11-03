@@ -1,4 +1,4 @@
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Written in Objective-C because Swift doesn't allow you to call the constructor of
  * TestSentryCrashAdapter. We override sharedInstance in the implementation file to make it work.
  */
-@interface TestSentryCrashWrapper : SentryCrashWrapper
+@interface TestBuzzSentryCrashWrapper : BuzzSentryCrashWrapper
 SENTRY_NO_INIT
 
 @property (nonatomic, assign) BOOL internalCrashedLastLaunch;

@@ -1,13 +1,13 @@
 #import "NSDate+SentryExtras.h"
 #import "BuzzSentryCrashReportConverter.h"
-#import "SentryInAppLogic.h"
+#import "BuzzSentryInAppLogic.h"
 #import "BuzzSentryMechanismMeta.h"
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
 
 @interface BuzzSentryCrashReportConverterTests : XCTestCase
 
-@property (nonatomic, strong) SentryInAppLogic *inAppLogic;
+@property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
 
 @end
 
@@ -16,7 +16,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.inAppLogic = [[SentryInAppLogic alloc] initWithInAppIncludes:@[] inAppExcludes:@[]];
+    self.inAppLogic = [[BuzzSentryInAppLogic alloc] initWithInAppIncludes:@[] inAppExcludes:@[]];
 }
 
 - (void)tearDown

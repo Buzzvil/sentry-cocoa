@@ -2,7 +2,7 @@
 #import "SentryCrashStackCursor.h"
 #import "SentryCrashStackCursor_MachineContext.h"
 #import "SentryCrashStackCursor_SelfThread.h"
-#import "SentryCrashStackEntryMapper.h"
+#import "BuzzSentryCrashStackEntryMapper.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryFrameRemover.h"
 #import "BuzzSentryStacktrace.h"
@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 BuzzSentryStacktraceBuilder ()
 
-@property (nonatomic, strong) SentryCrashStackEntryMapper *crashStackEntryMapper;
+@property (nonatomic, strong) BuzzSentryCrashStackEntryMapper *crashStackEntryMapper;
 
 @end
 
 @implementation BuzzSentryStacktraceBuilder
 
-- (id)initWithCrashStackEntryMapper:(SentryCrashStackEntryMapper *)crashStackEntryMapper
+- (id)initWithCrashStackEntryMapper:(BuzzSentryCrashStackEntryMapper *)crashStackEntryMapper
 {
     if (self = [super init]) {
         self.crashStackEntryMapper = crashStackEntryMapper;

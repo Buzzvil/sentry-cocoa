@@ -1,4 +1,4 @@
-#import "SentryThreadInspector.h"
+#import "BuzzSentryThreadInspector.h"
 #import "SentryCrashStackCursor.h"
 #include "SentryCrashStackCursor_MachineContext.h"
 #include "SentryCrashSymbolicator.h"
@@ -9,10 +9,10 @@
 #include <pthread.h>
 
 @interface
-SentryThreadInspector ()
+BuzzSentryThreadInspector ()
 
 @property (nonatomic, strong) BuzzSentryStacktraceBuilder *stacktraceBuilder;
-@property (nonatomic, strong) id<SentryCrashMachineContextWrapper> machineContextWrapper;
+@property (nonatomic, strong) id<BuzzSentryCrashMachineContextWrapper> machineContextWrapper;
 
 @end
 
@@ -46,10 +46,10 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
     return entries;
 }
 
-@implementation SentryThreadInspector
+@implementation BuzzSentryThreadInspector
 
 - (id)initWithStacktraceBuilder:(BuzzSentryStacktraceBuilder *)stacktraceBuilder
-       andMachineContextWrapper:(id<SentryCrashMachineContextWrapper>)machineContextWrapper
+       andMachineContextWrapper:(id<BuzzSentryCrashMachineContextWrapper>)machineContextWrapper
 {
     if (self = [super init]) {
         self.stacktraceBuilder = stacktraceBuilder;

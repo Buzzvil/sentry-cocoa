@@ -2,7 +2,7 @@
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "BuzzSentryCrashIntegration.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryCurrentDate.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryHub.h"
@@ -52,7 +52,7 @@ SentryTestObserver ()
 
         self.scope = [[BuzzSentryScope alloc] init];
         [BuzzSentryCrashIntegration enrichScope:self.scope
-                               crashWrapper:[SentryCrashWrapper sharedInstance]];
+                               crashWrapper:[BuzzSentryCrashWrapper sharedInstance]];
 
         self.options = options;
     }

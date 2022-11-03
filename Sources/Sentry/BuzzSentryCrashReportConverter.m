@@ -7,7 +7,7 @@
 #import "SentryException.h"
 #import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
-#import "SentryInAppLogic.h"
+#import "BuzzSentryInAppLogic.h"
 #import "SentryLog.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentryMechanismMeta.h"
@@ -25,13 +25,13 @@ BuzzSentryCrashReportConverter ()
 @property (nonatomic, strong) NSArray *threads;
 @property (nonatomic, strong) NSDictionary *systemContext;
 @property (nonatomic, strong) NSString *diagnosis;
-@property (nonatomic, strong) SentryInAppLogic *inAppLogic;
+@property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
 
 @end
 
 @implementation BuzzSentryCrashReportConverter
 
-- (instancetype)initWithReport:(NSDictionary *)report inAppLogic:(SentryInAppLogic *)inAppLogic
+- (instancetype)initWithReport:(NSDictionary *)report inAppLogic:(BuzzSentryInAppLogic *)inAppLogic
 {
     self = [super init];
     if (self) {

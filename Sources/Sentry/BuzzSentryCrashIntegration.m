@@ -1,10 +1,10 @@
 #import "BuzzSentryCrashIntegration.h"
 #import "SentryCrashInstallationReporter.h"
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
 #import "BuzzSentryHub.h"
-#import "SentryInAppLogic.h"
+#import "BuzzSentryInAppLogic.h"
 #import "BuzzSentryOutOfMemoryLogic.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope+Private.h"
@@ -32,7 +32,7 @@ BuzzSentryCrashIntegration ()
 
 @property (nonatomic, weak) BuzzSentryOptions *options;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
-@property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashAdapter;
 @property (nonatomic, strong) BuzzSentrySessionCrashedHandler *crashedSessionHandler;
 @property (nonatomic, strong) BuzzSentryCrashScopeObserver *scopeObserver;
 
@@ -42,14 +42,14 @@ BuzzSentryCrashIntegration ()
 
 - (instancetype)init
 {
-    self = [self initWithCrashAdapter:[SentryCrashWrapper sharedInstance]
+    self = [self initWithCrashAdapter:[BuzzSentryCrashWrapper sharedInstance]
               andDispatchQueueWrapper:[[BuzzSentryDispatchQueueWrapper alloc] init]];
 
     return self;
 }
 
 /** Internal constructor for testing */
-- (instancetype)initWithCrashAdapter:(SentryCrashWrapper *)crashAdapter
+- (instancetype)initWithCrashAdapter:(BuzzSentryCrashWrapper *)crashAdapter
              andDispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     if (self = [super init]) {
@@ -102,8 +102,8 @@ BuzzSentryCrashIntegration ()
     void (^block)(void) = ^{
         BOOL canSendReports = NO;
         if (installation == nil) {
-            SentryInAppLogic *inAppLogic =
-                [[SentryInAppLogic alloc] initWithInAppIncludes:self.options.inAppIncludes
+            BuzzSentryInAppLogic *inAppLogic =
+                [[BuzzSentryInAppLogic alloc] initWithInAppIncludes:self.options.inAppIncludes
                                                   inAppExcludes:self.options.inAppExcludes];
 
             installation = [[SentryCrashInstallationReporter alloc]
@@ -195,7 +195,7 @@ BuzzSentryCrashIntegration ()
                                              object:nil];
 }
 
-+ (void)enrichScope:(BuzzSentryScope *)scope crashWrapper:(SentryCrashWrapper *)crashWrapper
++ (void)enrichScope:(BuzzSentryScope *)scope crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
 {
     // OS
     NSMutableDictionary *osData = [NSMutableDictionary new];

@@ -1,4 +1,4 @@
-#import "SentryCrashWrapper.h"
+#import "BuzzSentryCrashWrapper.h"
 #import "SentryCrash.h"
 #import "SentryCrashMonitor_AppState.h"
 #import "SentryCrashMonitor_System.h"
@@ -11,11 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryCrashWrapper
+@implementation BuzzSentryCrashWrapper
 
 + (instancetype)sharedInstance
 {
-    static SentryCrashWrapper *instance = nil;
+    static BuzzSentryCrashWrapper *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;

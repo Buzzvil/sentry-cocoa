@@ -2,7 +2,7 @@
 #import "SentryFileManager.h"
 #import "BuzzSentryRandom.h"
 
-@class SentryAppStateManager, SentryCrashWrapper, SentryThreadWrapper, SentrySwizzleWrapper,
+@class SentryAppStateManager, BuzzSentryCrashWrapper, SentryThreadWrapper, SentrySwizzleWrapper,
     BuzzSentryDispatchQueueWrapper, SentryDebugImageProvider, BuzzSentryANRTracker,
     SentryNSNotificationCenterWrapper;
 
@@ -24,7 +24,7 @@ SENTRY_NO_INIT
 
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
-@property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
+@property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) SentryThreadWrapper *threadWrapper;
 @property (nonatomic, strong) id<BuzzSentryRandom> random;
 @property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;

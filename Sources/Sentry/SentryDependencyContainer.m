@@ -4,7 +4,7 @@
 #import "BuzzSentryUIApplication.h"
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
-#import <SentryCrashWrapper.h>
+#import <BuzzSentryCrashWrapper.h>
 #import <SentryDebugImageProvider.h>
 #import <SentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
@@ -74,12 +74,12 @@ static NSObject *sentryDependencyContainerLock;
     }
 }
 
-- (SentryCrashWrapper *)crashWrapper
+- (BuzzSentryCrashWrapper *)crashWrapper
 {
     if (_crashWrapper == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_crashWrapper == nil) {
-                _crashWrapper = [SentryCrashWrapper sharedInstance];
+                _crashWrapper = [BuzzSentryCrashWrapper sharedInstance];
             }
         }
     }

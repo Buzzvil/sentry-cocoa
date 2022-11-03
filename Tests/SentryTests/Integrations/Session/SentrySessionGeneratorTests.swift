@@ -15,7 +15,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         var abnormal = 0
     }
     
-    private var sentryCrash: TestSentryCrashWrapper!
+    private var sentryCrash: TestBuzzSentryCrashWrapper!
     private var autoSessionTrackingIntegration: BuzzSentryAutoSessionTrackingIntegration!
     private var crashIntegration: BuzzSentryCrashIntegration!
     private var options: Options!
@@ -143,7 +143,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         
         BuzzSentrySDK.start(options: options)
         
-        sentryCrash = TestSentryCrashWrapper.sharedInstance()
+        sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
         let client = BuzzSentrySDK.currentHub().getClient()
         let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
         BuzzSentrySDK.setCurrentHub(hub)
