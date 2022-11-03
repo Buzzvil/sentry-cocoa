@@ -147,7 +147,7 @@
 #import "BuzzSentryThread.h"
 #import "BuzzSentryThreadInspector.h"
 #import "BuzzSentryThreadWrapper.h"
-#import "SentryTime.h"
+#import "BuzzSentryTime.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTracer+Test.h"
 #import "BuzzSentryTracer.h"

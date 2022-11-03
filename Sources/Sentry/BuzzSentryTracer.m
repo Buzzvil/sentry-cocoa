@@ -9,14 +9,14 @@
 #import "BuzzSentryLog.h"
 #import "BuzzSentryNoOpSpan.h"
 #import "BuzzSentryProfiler.h"
-#import "SentryProfilesSampler.h"
+#import "BuzzSentryProfilesSampler.h"
 #import "BuzzSentryProfilingConditionals.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope.h"
 #import "BuzzSentrySpan.h"
 #import "BuzzSentrySpanContext.h"
 #import "BuzzSentrySpanId.h"
-#import "SentryTime.h"
+#import "BuzzSentryTime.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTransaction.h"
 #import "BuzzSentryTransactionContext.h"
@@ -108,7 +108,7 @@ static BOOL appStartMeasurementRead;
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable BuzzSentryHub *)hub
                    profilesSamplerDecision:
-                       (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
+                       (nullable BuzzSentryProfilesSamplerDecision *)profilesSamplerDecision
                            waitForChildren:(BOOL)waitForChildren
 {
     return [self initWithTransactionContext:transactionContext
@@ -122,7 +122,7 @@ static BOOL appStartMeasurementRead;
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable BuzzSentryHub *)hub
                    profilesSamplerDecision:
-                       (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
+                       (nullable BuzzSentryProfilesSamplerDecision *)profilesSamplerDecision
                                idleTimeout:(NSTimeInterval)idleTimeout
                       dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
@@ -137,7 +137,7 @@ static BOOL appStartMeasurementRead;
 - (instancetype)
     initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                            hub:(nullable BuzzSentryHub *)hub
-       profilesSamplerDecision:(nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
+       profilesSamplerDecision:(nullable BuzzSentryProfilesSamplerDecision *)profilesSamplerDecision
                waitForChildren:(BOOL)waitForChildren
                    idleTimeout:(NSTimeInterval)idleTimeout
           dispatchQueueWrapper:(nullable BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper

@@ -1,4 +1,4 @@
-#import "SentryTime.h"
+#import "BuzzSentryTime.h"
 
 #import <Foundation/Foundation.h>
 #import <ctime>

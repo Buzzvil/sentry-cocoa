@@ -10,7 +10,7 @@
 #import "BuzzSentryFileManager.h"
 #import "BuzzSentryId.h"
 #import "BuzzSentryLog.h"
-#import "SentryProfilesSampler.h"
+#import "BuzzSentryProfilesSampler.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentrySamplingContext.h"
 #import "BuzzSentryScope.h"
@@ -29,7 +29,7 @@ BuzzSentryHub ()
 @property (nullable, nonatomic, strong) BuzzSentryScope *scope;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryTracesSampler *tracesSampler;
-@property (nonatomic, strong) SentryProfilesSampler *profilesSampler;
+@property (nonatomic, strong) BuzzSentryProfilesSampler *profilesSampler;
 @property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDateProvider;
 @property (nonatomic, strong)
     NSMutableArray<NSObject<BuzzSentryIntegrationProtocol> *> *installedIntegrations;
@@ -54,7 +54,7 @@ BuzzSentryHub ()
         _tracesSampler = [[BuzzSentryTracesSampler alloc] initWithOptions:client.options];
 #if SENTRY_TARGET_PROFILING_SUPPORTED
         if (client.options.isProfilingEnabled) {
-            _profilesSampler = [[SentryProfilesSampler alloc] initWithOptions:client.options];
+            _profilesSampler = [[BuzzSentryProfilesSampler alloc] initWithOptions:client.options];
         }
 #endif
         _currentDateProvider = [BuzzSentryDefaultCurrentDateProvider sharedInstance];
@@ -375,7 +375,7 @@ BuzzSentryHub ()
     transactionContext.sampled = samplerDecision.decision;
     transactionContext.sampleRate = samplerDecision.sampleRate;
 
-    SentryProfilesSamplerDecision *profilesSamplerDecision =
+    BuzzSentryProfilesSamplerDecision *profilesSamplerDecision =
         [_profilesSampler sample:samplingContext tracesSamplerDecision:samplerDecision];
 
     id<BuzzSentrySpan> tracer = [[BuzzSentryTracer alloc] initWithTransactionContext:transactionContext
@@ -403,7 +403,7 @@ BuzzSentryHub ()
     transactionContext.sampled = samplerDecision.decision;
     transactionContext.sampleRate = samplerDecision.sampleRate;
 
-    SentryProfilesSamplerDecision *profilesSamplerDecision =
+    BuzzSentryProfilesSamplerDecision *profilesSamplerDecision =
         [_profilesSampler sample:samplingContext tracesSamplerDecision:samplerDecision];
 
     BuzzSentryTracer *tracer = [[BuzzSentryTracer alloc] initWithTransactionContext:transactionContext

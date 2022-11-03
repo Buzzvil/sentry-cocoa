@@ -10,7 +10,7 @@
 #    include "BuzzSentryThreadHandle.hpp"
 #    include "BuzzSentryThreadMetadataCache.hpp"
 #    include "BuzzSentryThreadState.hpp"
-#    include "SentryTime.h"
+#    include "BuzzSentryTime.h"
 
 #    include <cassert>
 #    include <cstring>

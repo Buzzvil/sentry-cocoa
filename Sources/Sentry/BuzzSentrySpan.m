@@ -6,7 +6,7 @@
 #import "BuzzSentryMeasurementValue.h"
 #import "BuzzSentryNoOpSpan.h"
 #import "BuzzSentrySpanId.h"
-#import "SentryTime.h"
+#import "BuzzSentryTime.h"
 #import "BuzzSentryTraceHeader.h"
 #import "BuzzSentryTracer.h"
 

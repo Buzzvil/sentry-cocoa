@@ -22,7 +22,7 @@
 #    import "BuzzSentryScreenFrames.h"
 #    import "BuzzSentrySerialization.h"
 #    import "BuzzSentrySpanId.h"
-#    import "SentryTime.h"
+#    import "BuzzSentryTime.h"
 #    import "BuzzSentryTransaction.h"
 #    import "BuzzSentryTransactionContext.h"
 

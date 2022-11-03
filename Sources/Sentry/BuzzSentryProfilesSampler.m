@@ -1,11 +1,11 @@
-#import "SentryProfilesSampler.h"
+#import "BuzzSentryProfilesSampler.h"
 #import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryOptions+Private.h"
 #import "BuzzSentryTracesSampler.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryProfilesSamplerDecision
+@implementation BuzzSentryProfilesSamplerDecision
 
 - (instancetype)initWithDecision:(BuzzSentrySampleDecision)decision
                    forSampleRate:(nullable NSNumber *)sampleRate
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@implementation SentryProfilesSampler {
+@implementation BuzzSentryProfilesSampler {
     BuzzSentryOptions *_options;
 }
 
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
     return [self initWithOptions:options random:[BuzzSentryDependencyContainer sharedInstance].random];
 }
 
-- (SentryProfilesSamplerDecision *)sample:(BuzzSentrySamplingContext *)context
+- (BuzzSentryProfilesSamplerDecision *)sample:(BuzzSentrySamplingContext *)context
                     tracesSamplerDecision:(BuzzSentryTracesSamplerDecision *)tracesSamplerDecision
 {
     // Profiles are always undersampled with respect to traces. If the trace is not sampled,
@@ -65,23 +65,23 @@ NS_ASSUME_NONNULL_BEGIN
 #    pragma clang diagnostic push
 #    pragma clang diagnostic ignored "-Wdeprecated-declarations"
         if (_options.enableProfiling) {
-            return [[SentryProfilesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionYes
+            return [[BuzzSentryProfilesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionYes
                                                              forSampleRate:@1.0];
         }
 #    pragma clang diagnostic pop
     }
 #endif
 
-    return [[SentryProfilesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionNo
+    return [[BuzzSentryProfilesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionNo
                                                      forSampleRate:nil];
 }
 
-- (SentryProfilesSamplerDecision *)calcSample:(double)rate
+- (BuzzSentryProfilesSamplerDecision *)calcSample:(double)rate
 {
     double r = [self.random nextNumber];
     BuzzSentrySampleDecision decision = r <= rate ? kBuzzSentrySampleDecisionYes : kBuzzSentrySampleDecisionNo;
     return
-        [[SentryProfilesSamplerDecision alloc] initWithDecision:decision
+        [[BuzzSentryProfilesSamplerDecision alloc] initWithDecision:decision
                                                   forSampleRate:[NSNumber numberWithDouble:rate]];
 }
 

@@ -7,7 +7,7 @@
 @class BuzzSentryFramesTracker;
 #endif // SENTRY_HAS_UIKIT
 @class BuzzSentryHub;
-@class SentryProfilesSamplerDecision;
+@class BuzzSentryProfilesSamplerDecision;
 @class BuzzSentryScreenFrames;
 @class BuzzSentryEnvelope;
 @class BuzzSentrySpanId;

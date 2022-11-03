@@ -7,7 +7,7 @@
 #    import "BuzzSentryBacktrace.hpp"
 #    import "BuzzSentrySamplingProfiler.hpp"
 #    import "BuzzSentryThreadMetadataCache.hpp"
-#    import "SentryTime.h"
+#    import "BuzzSentryTime.h"
 
 #    import <chrono>
 #    import <iostream>
