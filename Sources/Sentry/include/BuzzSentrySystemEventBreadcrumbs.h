@@ -6,7 +6,7 @@
 #    import <UIKit/UIKit.h>
 #endif
 
-@interface SentrySystemEventBreadcrumbs : NSObject
+@interface BuzzSentrySystemEventBreadcrumbs : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithFileManager:(SentryFileManager *)fileManager

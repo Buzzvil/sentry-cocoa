@@ -1,5 +1,5 @@
 #import "SentryTestObserver.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "SentryCrashIntegration.h"
 #import "SentryCrashWrapper.h"
@@ -63,7 +63,7 @@ SentryTestObserver ()
 
 - (void)testCaseWillStart:(XCTestCase *)testCase
 {
-    SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
                                                              category:@"test.started"];
     [crumb setMessage:testCase.name];
     // The tests might have a different time set

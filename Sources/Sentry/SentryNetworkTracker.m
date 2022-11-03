@@ -1,6 +1,6 @@
 #import "SentryNetworkTracker.h"
 #import "BuzzSentryBaggage.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
@@ -272,7 +272,7 @@ SentryNetworkTracker ()
     }
 
     SentryLevel breadcrumbLevel = sessionTask.error != nil ? kSentryLevelError : kSentryLevelInfo;
-    SentryBreadcrumb *breadcrumb = [[SentryBreadcrumb alloc] initWithLevel:breadcrumbLevel
+    BuzzSentryBreadcrumb *breadcrumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:breadcrumbLevel
                                                                   category:@"http"];
     breadcrumb.type = @"http";
     NSMutableDictionary<NSString *, id> *breadcrumbData = [NSMutableDictionary new];

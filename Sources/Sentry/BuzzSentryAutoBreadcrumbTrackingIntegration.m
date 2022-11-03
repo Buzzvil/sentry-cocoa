@@ -1,23 +1,23 @@
-#import "SentryAutoBreadcrumbTrackingIntegration.h"
-#import "SentryBreadcrumbTracker.h"
+#import "BuzzSentryAutoBreadcrumbTrackingIntegration.h"
+#import "BuzzSentryBreadcrumbTracker.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "SentryFileManager.h"
 #import "SentryLog.h"
 #import "BuzzSentryOptions.h"
-#import "SentrySystemEventBreadcrumbs.h"
+#import "BuzzSentrySystemEventBreadcrumbs.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryAutoBreadcrumbTrackingIntegration ()
+BuzzSentryAutoBreadcrumbTrackingIntegration ()
 
-@property (nonatomic, strong) SentryBreadcrumbTracker *breadcrumbTracker;
-@property (nonatomic, strong) SentrySystemEventBreadcrumbs *systemEventBreadcrumbs;
+@property (nonatomic, strong) BuzzSentryBreadcrumbTracker *breadcrumbTracker;
+@property (nonatomic, strong) BuzzSentrySystemEventBreadcrumbs *systemEventBreadcrumbs;
 
 @end
 
-@implementation SentryAutoBreadcrumbTrackingIntegration
+@implementation BuzzSentryAutoBreadcrumbTrackingIntegration
 
 - (BOOL)installWithOptions:(nonnull BuzzSentryOptions *)options
 {
@@ -26,10 +26,10 @@ SentryAutoBreadcrumbTrackingIntegration ()
     }
 
     [self installWithOptions:options
-             breadcrumbTracker:[[SentryBreadcrumbTracker alloc]
+             breadcrumbTracker:[[BuzzSentryBreadcrumbTracker alloc]
                                    initWithSwizzleWrapper:[SentryDependencyContainer sharedInstance]
                                                               .swizzleWrapper]
-        systemEventBreadcrumbs:[[SentrySystemEventBreadcrumbs alloc]
+        systemEventBreadcrumbs:[[BuzzSentrySystemEventBreadcrumbs alloc]
                                       initWithFileManager:[SentryDependencyContainer sharedInstance]
                                                               .fileManager
                                    andCurrentDateProvider:[SentryDefaultCurrentDateProvider
@@ -47,8 +47,8 @@ SentryAutoBreadcrumbTrackingIntegration ()
  * For testing.
  */
 - (void)installWithOptions:(nonnull BuzzSentryOptions *)options
-         breadcrumbTracker:(SentryBreadcrumbTracker *)breadcrumbTracker
-    systemEventBreadcrumbs:(SentrySystemEventBreadcrumbs *)systemEventBreadcrumbs
+         breadcrumbTracker:(BuzzSentryBreadcrumbTracker *)breadcrumbTracker
+    systemEventBreadcrumbs:(BuzzSentrySystemEventBreadcrumbs *)systemEventBreadcrumbs
 {
     self.breadcrumbTracker = breadcrumbTracker;
     [self.breadcrumbTracker start];

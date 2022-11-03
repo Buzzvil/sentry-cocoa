@@ -2,7 +2,7 @@
 #import "BuzzSentrySerializable.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class BuzzSentryUser, BuzzSentrySession, BuzzSentryOptions, SentryBreadcrumb, BuzzSentryAttachment;
+@class BuzzSentryUser, BuzzSentrySession, BuzzSentryOptions, BuzzSentryBreadcrumb, BuzzSentryAttachment;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -88,7 +88,7 @@ NS_SWIFT_NAME(Scope)
 /**
  * Add a breadcrumb to the scope
  */
-- (void)addBreadcrumb:(SentryBreadcrumb *)crumb;
+- (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb;
 
 /**
  * Clears all breadcrumbs in the scope

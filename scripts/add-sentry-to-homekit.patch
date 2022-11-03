@@ -68,7 +68,7 @@ index b8eb37f0..046e7851 100644
 -            var integrations = type(of: options).defaultIntegrations()
 -
 -            let analyticsIntegrations = Set([
--                "SentryAutoBreadcrumbTrackingIntegration",
+-                "BuzzSentryAutoBreadcrumbTrackingIntegration",
 -                "SentryAutoSessionTrackingIntegration",
 -            ])
 -

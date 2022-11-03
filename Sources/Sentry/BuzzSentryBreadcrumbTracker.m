@@ -1,5 +1,5 @@
-#import "SentryBreadcrumbTracker.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumbTracker.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "SentryDefines.h"
 #import "SentryHub.h"
@@ -18,17 +18,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *const SentryBreadcrumbTrackerSwizzleSendAction
-    = @"SentryBreadcrumbTrackerSwizzleSendAction";
+static NSString *const BuzzSentryBreadcrumbTrackerSwizzleSendAction
+    = @"BuzzSentryBreadcrumbTrackerSwizzleSendAction";
 
 @interface
-SentryBreadcrumbTracker ()
+BuzzSentryBreadcrumbTracker ()
 
 @property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;
 
 @end
 
-@implementation SentryBreadcrumbTracker
+@implementation BuzzSentryBreadcrumbTracker
 
 - (instancetype)initWithSwizzleWrapper:(SentrySwizzleWrapper *)swizzleWrapper
 {
@@ -55,7 +55,7 @@ SentryBreadcrumbTracker ()
     // All breadcrumbs are guarded by checking the client of the current hub, which we remove when
     // uninstalling the SDK. Therefore, we don't clean up everything.
 #if SENTRY_HAS_UIKIT
-    [self.swizzleWrapper removeSwizzleSendActionForKey:SentryBreadcrumbTrackerSwizzleSendAction];
+    [self.swizzleWrapper removeSwizzleSendActionForKey:BuzzSentryBreadcrumbTrackerSwizzleSendAction];
 #endif
 }
 
@@ -70,7 +70,7 @@ SentryBreadcrumbTracker ()
     // UIApplicationDidEnterBackgroundNotification
     NSNotificationName backgroundNotificationName = NSApplicationWillResignActiveNotification;
 #else
-    SENTRY_LOG_DEBUG(@"NO UIKit, OSX and Catalyst -> [SentryBreadcrumbTracker "
+    SENTRY_LOG_DEBUG(@"NO UIKit, OSX and Catalyst -> [BuzzSentryBreadcrumbTracker "
                      @"trackApplicationUIKitNotifications] does nothing.");
 #endif
 
@@ -82,8 +82,8 @@ SentryBreadcrumbTracker ()
                      queue:nil
                 usingBlock:^(NSNotification *notification) {
                     if (nil != [SentrySDK.currentHub getClient]) {
-                        SentryBreadcrumb *crumb =
-                            [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelWarning
+                        BuzzSentryBreadcrumb *crumb =
+                            [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelWarning
                                                            category:@"device.event"];
                         crumb.type = @"system";
                         crumb.data = @ { @"action" : @"LOW_MEMORY" };
@@ -125,7 +125,7 @@ SentryBreadcrumbTracker ()
                 withDataValue:(NSString *)value
 {
     if (nil != [SentrySDK.currentHub getClient]) {
-        SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] initWithLevel:level category:category];
+        BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:level category:category];
         crumb.type = type;
         crumb.data = @{ key : value };
         [SentrySDK addBreadcrumb:crumb];
@@ -134,7 +134,7 @@ SentryBreadcrumbTracker ()
 
 - (void)addEnabledCrumb
 {
-    SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                              category:@"started"];
     crumb.type = @"debug";
     crumb.message = @"Breadcrumb Tracking";
@@ -154,21 +154,21 @@ SentryBreadcrumbTracker ()
             NSDictionary *data = nil;
             for (UITouch *touch in event.allTouches) {
                 if (touch.phase == UITouchPhaseCancelled || touch.phase == UITouchPhaseEnded) {
-                    data = [SentryBreadcrumbTracker extractDataFromView:touch.view];
+                    data = [BuzzSentryBreadcrumbTracker extractDataFromView:touch.view];
                 }
             }
 
-            SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+            BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                                      category:@"touch"];
             crumb.type = @"user";
             crumb.message = action;
             crumb.data = data;
             [SentrySDK addBreadcrumb:crumb];
         }
-                   forKey:SentryBreadcrumbTrackerSwizzleSendAction];
+                   forKey:BuzzSentryBreadcrumbTrackerSwizzleSendAction];
 
 #else
-    SENTRY_LOG_DEBUG(@"NO UIKit -> [SentryBreadcrumbTracker swizzleSendAction] does nothing.");
+    SENTRY_LOG_DEBUG(@"NO UIKit -> [BuzzSentryBreadcrumbTracker swizzleSendAction] does nothing.");
 #endif
 }
 
@@ -186,10 +186,10 @@ SentryBreadcrumbTracker ()
     SentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
             if (nil != [SentrySDK.currentHub getClient]) {
-                SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+                BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                                          category:@"ui.lifecycle"];
                 crumb.type = @"navigation";
-                crumb.data = [SentryBreadcrumbTracker fetchInfoAboutViewController:self];
+                crumb.data = [BuzzSentryBreadcrumbTracker fetchInfoAboutViewController:self];
 
                 // Adding crumb via the SDK calls SentryBeforeBreadcrumbCallback
                 [SentrySDK addBreadcrumb:crumb];
@@ -202,7 +202,7 @@ SentryBreadcrumbTracker ()
         SentrySwizzleModeOncePerClassAndSuperclasses, swizzleViewDidAppearKey);
 #    pragma clang diagnostic pop
 #else
-    SENTRY_LOG_DEBUG(@"NO UIKit -> [SentryBreadcrumbTracker swizzleViewDidAppear] does nothing.");
+    SENTRY_LOG_DEBUG(@"NO UIKit -> [BuzzSentryBreadcrumbTracker swizzleViewDidAppear] does nothing.");
 #endif
 }
 

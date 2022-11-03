@@ -11,7 +11,7 @@ SentryScope (Properties)
 @property (nonatomic, strong) NSMutableDictionary<NSString *, id> *_Nullable extraDictionary;
 @property (nonatomic, strong)
     NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *_Nullable contextDictionary;
-@property (nonatomic, strong) NSMutableArray<SentryBreadcrumb *> *breadcrumbArray;
+@property (nonatomic, strong) NSMutableArray<BuzzSentryBreadcrumb *> *breadcrumbArray;
 @property (atomic, copy) NSString *_Nullable distString;
 @property (atomic, copy) NSString *_Nullable environmentString;
 @property (atomic, strong) NSArray<NSString *> *_Nullable fingerprintArray;

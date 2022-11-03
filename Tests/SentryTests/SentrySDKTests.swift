@@ -109,7 +109,7 @@ class SentrySDKTests: XCTestCase {
 
         assertIntegrationsInstalled(integrations: [
             "SentryCrashIntegration",
-            "SentryAutoBreadcrumbTrackingIntegration",
+            "BuzzSentryAutoBreadcrumbTrackingIntegration",
             "SentryAutoSessionTrackingIntegration",
             "SentryNetworkTrackingIntegration"
         ])

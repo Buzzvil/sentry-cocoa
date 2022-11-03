@@ -1,4 +1,4 @@
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryScope+Private.h"
 #import "SentryScope.h"
@@ -11,9 +11,9 @@
 
 @implementation SentryScopeTests
 
-- (SentryBreadcrumb *)getBreadcrumb
+- (BuzzSentryBreadcrumb *)getBreadcrumb
 {
-    return [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug category:@"http"];
+    return [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug category:@"http"];
 }
 
 - (void)testSetExtra
@@ -41,14 +41,14 @@
 {
     NSUInteger expectedMaxBreadcrumb = 1;
     SentryScope *scope = [[SentryScope alloc] initWithMaxBreadcrumbs:expectedMaxBreadcrumb];
-    SentryBreadcrumb *crumb1 = [[SentryBreadcrumb alloc] init];
+    BuzzSentryBreadcrumb *crumb1 = [[BuzzSentryBreadcrumb alloc] init];
     [crumb1 setMessage:@"crumb 1"];
     [scope addBreadcrumb:crumb1];
     NSDictionary<NSString *, id> *scope1 = [scope serialize];
     NSArray *scope1Crumbs = [scope1 objectForKey:@"breadcrumbs"];
     XCTAssertEqual(expectedMaxBreadcrumb, [scope1Crumbs count]);
 
-    SentryBreadcrumb *crumb2 = [[SentryBreadcrumb alloc] init];
+    BuzzSentryBreadcrumb *crumb2 = [[BuzzSentryBreadcrumb alloc] init];
     [crumb2 setMessage:@"crumb 2"];
     [scope addBreadcrumb:crumb2];
     NSDictionary<NSString *, id> *scope2 = [scope serialize];
@@ -60,7 +60,7 @@
 {
     SentryScope *scope = [[SentryScope alloc] init];
     for (int i = 0; i < 2000; ++i) {
-        [scope addBreadcrumb:[[SentryBreadcrumb alloc] init]];
+        [scope addBreadcrumb:[[BuzzSentryBreadcrumb alloc] init]];
     }
 
     NSDictionary<NSString *, id> *scopeSerialized = [scope serialize];
@@ -182,7 +182,7 @@
 
     [cloned setExtras:@{ @"aa" : @"b" }];
     [cloned setTags:@{ @"ab" : @"c" }];
-    [cloned addBreadcrumb:[[SentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
+    [cloned addBreadcrumb:[[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
                                                          category:@"http2"]];
     [cloned setUser:[[BuzzSentryUser alloc] initWithUserId:@"aid"]];
     [cloned setContextValue:@{ @"ae" : @"af" } forKey:@"myContext"];

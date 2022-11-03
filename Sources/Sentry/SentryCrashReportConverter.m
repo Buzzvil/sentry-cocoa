@@ -1,6 +1,6 @@
 #import "SentryCrashReportConverter.h"
 #import "NSDate+SentryExtras.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "SentryCrashStackCursor.h"
 #import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryEvent.h"
@@ -160,13 +160,13 @@ SentryCrashReportConverter ()
     return user;
 }
 
-- (NSMutableArray<SentryBreadcrumb *> *)convertBreadcrumbs
+- (NSMutableArray<BuzzSentryBreadcrumb *> *)convertBreadcrumbs
 {
     NSMutableArray *breadcrumbs = [NSMutableArray new];
     if (nil != self.userContext[@"breadcrumbs"]) {
         NSArray *storedBreadcrumbs = self.userContext[@"breadcrumbs"];
         for (NSDictionary *storedCrumb in storedBreadcrumbs) {
-            SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc]
+            BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc]
                 initWithLevel:[self sentryLevelFromString:storedCrumb[@"level"]]
                      category:storedCrumb[@"category"]];
             crumb.message = storedCrumb[@"message"];

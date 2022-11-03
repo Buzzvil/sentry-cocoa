@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryBreadcrumbTrackerTests: XCTestCase {
+class BuzzSentryBreadcrumbTrackerTests: XCTestCase {
     
     private var scope: Scope!
     
@@ -22,7 +22,7 @@ class SentryBreadcrumbTrackerTests: XCTestCase {
     
     func testStopRemovesSwizzleSendAction() {
         let swizzleWrapper = SentrySwizzleWrapper.sharedInstance
-        let sut = SentryBreadcrumbTracker(swizzleWrapper: swizzleWrapper)
+        let sut = BuzzSentryBreadcrumbTracker(swizzleWrapper: swizzleWrapper)
 
         sut.start()
         sut.startSwizzle()
@@ -33,7 +33,7 @@ class SentryBreadcrumbTrackerTests: XCTestCase {
     }
 
     func testSwizzlingStarted_ViewControllerAppears_AddsUILifeCycleBreadcrumb() {
-        let sut = SentryBreadcrumbTracker(swizzleWrapper: SentrySwizzleWrapper.sharedInstance)
+        let sut = BuzzSentryBreadcrumbTracker(swizzleWrapper: SentrySwizzleWrapper.sharedInstance)
         sut.start()
         sut.startSwizzle()
 
@@ -58,7 +58,7 @@ class SentryBreadcrumbTrackerTests: XCTestCase {
     
     func testExtractDataFrom_View() {
         let view = UIView()
-        let result = Dynamic(SentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
+        let result = Dynamic(BuzzSentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
         
         XCTAssertEqual(result?["view"] as? String, String(describing: view))
         XCTAssertNil(result?["title"] as Any?)
@@ -71,7 +71,7 @@ class SentryBreadcrumbTrackerTests: XCTestCase {
         view.tag = 2
         view.accessibilityIdentifier = "SOME IDENTIFIER"
         
-        let result = Dynamic(SentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
+        let result = Dynamic(BuzzSentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
         
         XCTAssertEqual(result?["view"] as? String, String(describing: view))
         XCTAssertEqual(result?["tag"] as? Int, 2)
@@ -83,7 +83,7 @@ class SentryBreadcrumbTrackerTests: XCTestCase {
         let view = UIButton()
         view.setTitle("BUTTON TITLE", for: .normal)
         
-        let result = Dynamic(SentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
+        let result = Dynamic(BuzzSentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
         
         XCTAssertEqual(result?["view"] as? String, String(describing: view))
         XCTAssertEqual(result?["title"] as? String, "BUTTON TITLE")
@@ -92,7 +92,7 @@ class SentryBreadcrumbTrackerTests: XCTestCase {
     func testExtractDataFrom_ButtonWithout_Title() {
         let view = UIButton()
         
-        let result = Dynamic(SentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
+        let result = Dynamic(BuzzSentryBreadcrumbTracker.self).extractDataFromView(view) as [String: Any?]?
         
         XCTAssertEqual(result?["view"] as? String, String(describing: view))
         XCTAssertNil(result?["title"] as Any?)

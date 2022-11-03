@@ -22,7 +22,7 @@
     -(instancetype)init NS_UNAVAILABLE;                                                            \
     +(instancetype) new NS_UNAVAILABLE;
 
-@class BuzzSentryEvent, SentryBreadcrumb, BuzzSentrySamplingContext;
+@class BuzzSentryEvent, BuzzSentryBreadcrumb, BuzzSentrySamplingContext;
 @protocol BuzzSentrySpan;
 
 /**
@@ -40,8 +40,8 @@ typedef void (^BuzzSentryRequestOperationFinished)(
  * Block can be used to mutate a breadcrumb before it's added to the scope.
  * To avoid adding the breadcrumb altogether, return nil instead.
  */
-typedef SentryBreadcrumb *_Nullable (^SentryBeforeBreadcrumbCallback)(
-    SentryBreadcrumb *_Nonnull breadcrumb);
+typedef BuzzSentryBreadcrumb *_Nullable (^SentryBeforeBreadcrumbCallback)(
+    BuzzSentryBreadcrumb *_Nonnull breadcrumb);
 
 /**
  * Block can be used to mutate event before its send.

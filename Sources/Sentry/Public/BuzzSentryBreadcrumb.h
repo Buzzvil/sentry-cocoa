@@ -6,7 +6,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(Breadcrumb)
-@interface SentryBreadcrumb : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryBreadcrumb : NSObject <BuzzSentrySerializable>
 
 /**
  * Level of breadcrumb
@@ -40,11 +40,11 @@ NS_SWIFT_NAME(Breadcrumb)
 @property (nonatomic, strong) NSDictionary<NSString *, id> *_Nullable data;
 
 /**
- * Initializer for SentryBreadcrumb
+ * Initializer for BuzzSentryBreadcrumb
  *
  * @param level SentryLevel
  * @param category String
- * @return SentryBreadcrumb
+ * @return BuzzSentryBreadcrumb
  */
 - (instancetype)initWithLevel:(SentryLevel)level category:(NSString *)category;
 - (instancetype)init;
@@ -54,7 +54,7 @@ NS_SWIFT_NAME(Breadcrumb)
 
 - (BOOL)isEqual:(id _Nullable)other;
 
-- (BOOL)isEqualToBreadcrumb:(SentryBreadcrumb *)breadcrumb;
+- (BOOL)isEqualToBreadcrumb:(BuzzSentryBreadcrumb *)breadcrumb;
 
 - (NSUInteger)hash;
 

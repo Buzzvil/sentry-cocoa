@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryBreadcrumbTests: XCTestCase {
+class BuzzSentryBreadcrumbTests: XCTestCase {
 
     private class Fixture {
         let breadcrumb: Breadcrumb
@@ -93,7 +93,7 @@ class SentryBreadcrumbTests: XCTestCase {
         let crumb = fixture.breadcrumb
         let actual = crumb.description
         
-        let serialaziedString = NSString(format: "<SentryBreadcrumb: %p, %@>", crumb, crumb.serialize())
+        let serialaziedString = NSString(format: "<BuzzSentryBreadcrumb: %p, %@>", crumb, crumb.serialize())
         
         XCTAssertEqual(serialaziedString, actual as NSString)
     }

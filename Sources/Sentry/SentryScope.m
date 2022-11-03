@@ -1,6 +1,6 @@
 #import "SentryScope.h"
 #import "BuzzSentryAttachment.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent.h"
 #import "SentryGlobalEventProcessor.h"
@@ -42,7 +42,7 @@ SentryScope ()
 /**
  * Contains the breadcrumbs which will be sent with the event
  */
-@property (atomic, strong) NSMutableArray<SentryBreadcrumb *> *breadcrumbArray;
+@property (atomic, strong) NSMutableArray<BuzzSentryBreadcrumb *> *breadcrumbArray;
 
 /**
  * This distribution of the application.
@@ -120,7 +120,7 @@ SentryScope ()
 
 #pragma mark Global properties
 
-- (void)addBreadcrumb:(SentryBreadcrumb *)crumb
+- (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb
 {
     if (self.maxBreadcrumbs < 1) {
         return;
@@ -199,7 +199,7 @@ SentryScope ()
     }
 }
 
-- (NSArray<SentryBreadcrumb *> *)breadcrumbs
+- (NSArray<BuzzSentryBreadcrumb *> *)breadcrumbs
 {
     @synchronized(_breadcrumbArray) {
         return _breadcrumbArray.copy;
@@ -433,8 +433,8 @@ SentryScope ()
 {
     NSMutableArray *serializedCrumbs = [NSMutableArray new];
 
-    NSArray<SentryBreadcrumb *> *crumbs = [self breadcrumbs];
-    for (SentryBreadcrumb *crumb in crumbs) {
+    NSArray<BuzzSentryBreadcrumb *> *crumbs = [self breadcrumbs];
+    for (BuzzSentryBreadcrumb *crumb in crumbs) {
         [serializedCrumbs addObject:[crumb serialize]];
     }
 

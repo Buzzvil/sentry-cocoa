@@ -1,7 +1,7 @@
 #import "BuzzSentryEvent.h"
 #import "NSDate+SentryExtras.h"
 #import "NSDictionary+SentrySanitize.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "SentryCurrentDate.h"
 #import "BuzzSentryDebugMeta.h"
@@ -162,7 +162,7 @@ BuzzSentryEvent ()
 - (NSArray *_Nullable)serializeBreadcrumbs
 {
     NSMutableArray *crumbs = [NSMutableArray new];
-    for (SentryBreadcrumb *crumb in self.breadcrumbs) {
+    for (BuzzSentryBreadcrumb *crumb in self.breadcrumbs) {
         [crumbs addObject:[crumb serialize]];
     }
     if (crumbs.count <= 0) {

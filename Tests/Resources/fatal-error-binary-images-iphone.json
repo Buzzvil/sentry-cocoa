@@ -4733,7 +4733,7 @@
                         {
                             "object_name": "Sentry",
                             "object_addr": 4345757696,
-                            "symbol_name": "__44-[SentryBreadcrumbTracker swizzleSendAction]_block_invoke_2",
+                            "symbol_name": "__44-[BuzzSentryBreadcrumbTracker swizzleSendAction]_block_invoke_2",
                             "symbol_addr": 4346097884,
                             "instruction_addr": 4346098892
                         },

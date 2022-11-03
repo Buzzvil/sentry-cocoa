@@ -1,13 +1,13 @@
 import Sentry
 import XCTest
 
-class SentryAutoBreadcrumbTrackingIntegrationTests: XCTestCase {
+class BuzzSentryAutoBreadcrumbTrackingIntegrationTests: XCTestCase {
     
     private class Fixture {
         let tracker = SentryTestBreadcrumbTracker(swizzleWrapper: SentrySwizzleWrapper.sharedInstance)
         
-        var sut: SentryAutoBreadcrumbTrackingIntegration {
-            return SentryAutoBreadcrumbTrackingIntegration()
+        var sut: BuzzSentryAutoBreadcrumbTrackingIntegration {
+            return BuzzSentryAutoBreadcrumbTrackingIntegration()
         }
     }
     
@@ -26,7 +26,7 @@ class SentryAutoBreadcrumbTrackingIntegrationTests: XCTestCase {
     func testInstallWithSwizzleEnabled_StartSwizzleCalled() {
         let sut = fixture.sut
         
-        sut.install(with: Options(), breadcrumbTracker: fixture.tracker, systemEventBreadcrumbs: SentrySystemEventBreadcrumbs(fileManager: SentryDependencyContainer.sharedInstance().fileManager, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance()))
+        sut.install(with: Options(), breadcrumbTracker: fixture.tracker, systemEventBreadcrumbs: BuzzSentrySystemEventBreadcrumbs(fileManager: SentryDependencyContainer.sharedInstance().fileManager, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance()))
         
         XCTAssertEqual(1, fixture.tracker.startInvocations.count)
         XCTAssertEqual(1, fixture.tracker.startSwizzleInvocations.count)
@@ -37,7 +37,7 @@ class SentryAutoBreadcrumbTrackingIntegrationTests: XCTestCase {
         
         let options = Options()
         options.enableSwizzling = false
-        sut.install(with: options, breadcrumbTracker: fixture.tracker, systemEventBreadcrumbs: SentrySystemEventBreadcrumbs(fileManager: SentryDependencyContainer.sharedInstance().fileManager, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance()))
+        sut.install(with: options, breadcrumbTracker: fixture.tracker, systemEventBreadcrumbs: BuzzSentrySystemEventBreadcrumbs(fileManager: SentryDependencyContainer.sharedInstance().fileManager, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance()))
         
         XCTAssertEqual(1, fixture.tracker.startInvocations.count)
         XCTAssertEqual(0, fixture.tracker.startSwizzleInvocations.count)
@@ -47,14 +47,14 @@ class SentryAutoBreadcrumbTrackingIntegrationTests: XCTestCase {
         let options = Options()
         options.enableAutoBreadcrumbTracking = false
 
-        let sut = SentryAutoBreadcrumbTrackingIntegration()
+        let sut = BuzzSentryAutoBreadcrumbTrackingIntegration()
         let result = sut.install(with: options)
 
         XCTAssertFalse(result)
     }
 }
 
-private class SentryTestBreadcrumbTracker: SentryBreadcrumbTracker {
+private class SentryTestBreadcrumbTracker: BuzzSentryBreadcrumbTracker {
     
     let startInvocations = Invocations<Void>()
     override func start() {

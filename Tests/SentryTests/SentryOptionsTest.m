@@ -262,7 +262,7 @@
 - (void)testBeforeBreadcrumb
 {
     SentryBeforeBreadcrumbCallback callback
-        = ^(SentryBreadcrumb *breadcrumb) { return breadcrumb; };
+        = ^(BuzzSentryBreadcrumb *breadcrumb) { return breadcrumb; };
     BuzzSentryOptions *options = [self getValidOptions:@{ @"beforeBreadcrumb" : callback }];
 
     XCTAssertEqual(callback, options.beforeBreadcrumb);

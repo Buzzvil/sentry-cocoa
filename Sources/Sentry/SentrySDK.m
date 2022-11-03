@@ -1,7 +1,7 @@
 #import "SentrySDK.h"
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "SentryAppStartMeasurement.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrash.h"
 #import "SentryDependencyContainer.h"
@@ -331,7 +331,7 @@ static NSUInteger startInvocations;
     [SentrySDK.currentHub captureUserFeedback:userFeedback];
 }
 
-+ (void)addBreadcrumb:(SentryBreadcrumb *)crumb
++ (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb
 {
     [SentrySDK.currentHub addBreadcrumb:crumb];
 }

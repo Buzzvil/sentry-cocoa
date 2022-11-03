@@ -1,5 +1,5 @@
 #import "NSDate+SentryExtras.h"
-#import "SentryBreadcrumbTracker.h"
+#import "BuzzSentryBreadcrumbTracker.h"
 #import "SentryLevelMapper.h"
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
@@ -10,7 +10,7 @@
 #import "BuzzSentryDataCategory.h"
 
 @interface
-SentryBreadcrumbTracker (Private)
+BuzzSentryBreadcrumbTracker (Private)
 
 + (NSString *)sanitizeViewControllerName:(NSString *)controller;
 
@@ -68,7 +68,7 @@ SentryBreadcrumbTracker (Private)
 {
     [SentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
 
-    SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                              category:@"testCategory"];
     crumb.type = @"testType";
     crumb.message = @"testMessage";

@@ -1,7 +1,7 @@
 @testable import Sentry
 import XCTest
 
-class SentrySystemEventBreadcrumbsTest: XCTestCase {
+class BuzzSentrySystemEventBreadcrumbsTest: XCTestCase {
     
     // This feature only works on iOS
     #if os(iOS)
@@ -13,7 +13,7 @@ class SentrySystemEventBreadcrumbsTest: XCTestCase {
 
         init() {
             options = Options()
-            options.dsn = TestConstants.dsnAsString(username: "SentrySystemEventBreadcrumbsTest")
+            options.dsn = TestConstants.dsnAsString(username: "BuzzSentrySystemEventBreadcrumbsTest")
             options.releaseName = "BuzzSentrySessionTrackerIntegrationTests"
             options.sessionTrackingIntervalMillis = 10_000
             options.environment = "debug"
@@ -21,19 +21,19 @@ class SentrySystemEventBreadcrumbsTest: XCTestCase {
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
         }
 
-        func getSut(scope: Scope, currentDevice: UIDevice? = UIDevice.current) -> SentrySystemEventBreadcrumbs {
+        func getSut(scope: Scope, currentDevice: UIDevice? = UIDevice.current) -> BuzzSentrySystemEventBreadcrumbs {
             let client = Client(options: self.options)
             let hub = SentryHub(client: client, andScope: scope)
             SentrySDK.setCurrentHub(hub)
 
-            let systemEvents = SentrySystemEventBreadcrumbs(fileManager: fileManager, andCurrentDateProvider: currentDateProvider)!
+            let systemEvents = BuzzSentrySystemEventBreadcrumbs(fileManager: fileManager, andCurrentDateProvider: currentDateProvider)!
             systemEvents.start(currentDevice)
             return systemEvents
         }
     }
 
     private let fixture = Fixture()
-    private var sut: SentrySystemEventBreadcrumbs!
+    private var sut: BuzzSentrySystemEventBreadcrumbs!
     
     internal class MyUIDevice: UIDevice {
         private var _batteryLevel: Float

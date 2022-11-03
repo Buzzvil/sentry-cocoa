@@ -478,7 +478,7 @@ SentryHub ()
     }
 }
 
-- (void)addBreadcrumb:(SentryBreadcrumb *)crumb
+- (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb
 {
     BuzzSentryOptions *options = [[self client] options];
     if (options.maxBreadcrumbs < 1) {

@@ -6,7 +6,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SentryThread, SentryException, BuzzSentryStacktrace, BuzzSentryUser, BuzzSentryDebugMeta,
-    SentryBreadcrumb, BuzzSentryId, BuzzSentryMessage;
+    BuzzSentryBreadcrumb, BuzzSentryId, BuzzSentryMessage;
 
 NS_SWIFT_NAME(Event)
 @interface BuzzSentryEvent : NSObject <BuzzSentrySerializable>
@@ -157,7 +157,7 @@ NS_SWIFT_NAME(Event)
  * This contains all breadcrumbs available at the time when the event
  * occurred/will be sent
  */
-@property (nonatomic, strong) NSArray<SentryBreadcrumb *> *_Nullable breadcrumbs;
+@property (nonatomic, strong) NSArray<BuzzSentryBreadcrumb *> *_Nullable breadcrumbs;
 
 /**
  * Init an BuzzSentryEvent will set all needed fields by default

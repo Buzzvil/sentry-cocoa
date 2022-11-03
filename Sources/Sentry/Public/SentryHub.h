@@ -2,7 +2,7 @@
 #import "BuzzSentryIntegrationProtocol.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class BuzzSentryEvent, BuzzSentryClient, SentryScope, BuzzSentrySession, BuzzSentryUser, SentryBreadcrumb,
+@class BuzzSentryEvent, BuzzSentryClient, SentryScope, BuzzSentrySession, BuzzSentryUser, BuzzSentryBreadcrumb,
     BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -213,7 +213,7 @@ SENTRY_NO_INIT
  *
  * @param crumb The Breadcrumb to add to the Scope of the Hub.
  */
-- (void)addBreadcrumb:(SentryBreadcrumb *)crumb;
+- (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb;
 
 /**
  * Returns a client if there is a bound client on the Hub.

@@ -48,7 +48,7 @@ ViewController ()
 
 - (IBAction)addBreadcrumb:(id)sender
 {
-    SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] init];
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] init];
     crumb.message = @"tapped addBreadcrumb";
     [SentrySDK addBreadcrumb:crumb];
 }

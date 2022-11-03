@@ -1,6 +1,6 @@
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryAttachment.h"
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClientReport.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent.h"

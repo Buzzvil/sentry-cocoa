@@ -2,7 +2,7 @@
 
 @protocol BuzzSentrySpan;
 
-@class BuzzSentryOptions, BuzzSentryEvent, SentryBreadcrumb, SentryScope, BuzzSentryUser, BuzzSentryId,
+@class BuzzSentryOptions, BuzzSentryEvent, BuzzSentryBreadcrumb, SentryScope, BuzzSentryUser, BuzzSentryId,
     BuzzSentryUserFeedback, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -264,7 +264,7 @@ SENTRY_NO_INIT
  *
  * @param crumb The Breadcrumb to add to the current Scope of the current Hub.
  */
-+ (void)addBreadcrumb:(SentryBreadcrumb *)crumb NS_SWIFT_NAME(addBreadcrumb(crumb:));
++ (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb NS_SWIFT_NAME(addBreadcrumb(crumb:));
 
 /**
  * Use this method to modify the current Scope of the current Hub. The SDK uses the Scope to attach

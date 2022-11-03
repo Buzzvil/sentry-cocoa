@@ -379,7 +379,7 @@
 
 - (void)testBreadcrumb
 {
-    SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                              category:@"http"];
     XCTAssertTrue(crumb.level >= 0);
     XCTAssertNotNil(crumb.category);
@@ -392,7 +392,7 @@
     };
     XCTAssertEqualObjects([crumb serialize], serialized);
 
-    SentryBreadcrumb *crumb2 = [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb2 = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                               category:@"http"];
     XCTAssertTrue(crumb2.level >= 0);
     XCTAssertNotNil(crumb2.category);

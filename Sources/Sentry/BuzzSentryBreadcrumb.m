@@ -1,9 +1,9 @@
-#import "SentryBreadcrumb.h"
+#import "BuzzSentryBreadcrumb.h"
 #import "NSDate+SentryExtras.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryLevelMapper.h"
 
-@implementation SentryBreadcrumb
+@implementation BuzzSentryBreadcrumb
 
 - (instancetype)initWithLevel:(enum SentryLevel)level category:(NSString *)category
 {
@@ -45,7 +45,7 @@
     return [self isEqualToBreadcrumb:other];
 }
 
-- (BOOL)isEqualToBreadcrumb:(SentryBreadcrumb *)breadcrumb
+- (BOOL)isEqualToBreadcrumb:(BuzzSentryBreadcrumb *)breadcrumb
 {
     if (self == breadcrumb)
         return YES;

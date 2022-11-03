@@ -1,7 +1,7 @@
 #import "SentryLevelMapper.h"
 #import <Foundation/Foundation.h>
 #import <NSData+Sentry.h>
-#import <SentryBreadcrumb.h>
+#import <BuzzSentryBreadcrumb.h>
 #import <SentryCrashJSONCodec.h>
 #import <SentryCrashJSONCodecObjC.h>
 #import <SentryCrashScopeObserver.h>
@@ -90,7 +90,7 @@ SentryCrashScopeObserver ()
     sentrycrash_scopesync_setLevel([json bytes]);
 }
 
-- (void)addBreadcrumb:(SentryBreadcrumb *)crumb
+- (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb
 {
     NSDictionary *serialized = [crumb serialize];
     NSData *json = [self toJSONEncodedCString:serialized];

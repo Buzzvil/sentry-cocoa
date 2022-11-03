@@ -1,15 +1,15 @@
-#import "SentryAutoBreadcrumbTrackingIntegration.h"
+#import "BuzzSentryAutoBreadcrumbTrackingIntegration.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryOptions, SentryBreadcrumbTracker, SentrySystemEventBreadcrumbs;
+@class BuzzSentryOptions, BuzzSentryBreadcrumbTracker, BuzzSentrySystemEventBreadcrumbs;
 
 @interface
-SentryAutoBreadcrumbTrackingIntegration (Test)
+BuzzSentryAutoBreadcrumbTrackingIntegration (Test)
 
 - (void)installWithOptions:(nonnull BuzzSentryOptions *)options
-         breadcrumbTracker:(SentryBreadcrumbTracker *)breadcrumbTracker
-    systemEventBreadcrumbs:(SentrySystemEventBreadcrumbs *)systemEventBreadcrumbs;
+         breadcrumbTracker:(BuzzSentryBreadcrumbTracker *)breadcrumbTracker
+    systemEventBreadcrumbs:(BuzzSentrySystemEventBreadcrumbs *)systemEventBreadcrumbs;
 
 @end
 

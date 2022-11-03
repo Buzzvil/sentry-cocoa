@@ -32,7 +32,7 @@ BuzzSentryOptions ()
         @"SentryANRTrackingIntegration", @"BuzzSentryScreenshotIntegration",
         @"SentryUIEventTrackingIntegration", @"BuzzSentryViewHierarchyIntegration",
 #endif
-        @"BuzzSentryFramesTrackingIntegration", @"SentryAutoBreadcrumbTrackingIntegration",
+        @"BuzzSentryFramesTrackingIntegration", @"BuzzSentryAutoBreadcrumbTrackingIntegration",
         @"SentryAutoSessionTrackingIntegration", @"SentryAppStartTrackingIntegration",
         @"SentryOutOfMemoryTrackingIntegration", @"SentryPerformanceTrackingIntegration",
         @"SentryNetworkTrackingIntegration", @"SentryFileIOTrackingIntegration",
