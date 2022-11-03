@@ -2,8 +2,8 @@
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
-#    include "SentryMachLogging.hpp"
-#    include "SentryProfilingLogging.hpp"
+#    include "BuzzSentryMachLogging.hpp"
+#    include "BuzzSentryProfilingLogging.hpp"
 
 #    include <cstdint>
 #    include <dispatch/dispatch.h>

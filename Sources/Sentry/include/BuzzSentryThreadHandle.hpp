@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SentryProfilingConditionals.h"
+#include "BuzzSentryProfilingConditionals.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 

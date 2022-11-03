@@ -115,7 +115,7 @@
 #import "BuzzSentryPerformanceTracker.h"
 #import "BuzzSentryPerformanceTrackingIntegration.h"
 #import "BuzzSentryPredicateDescriptor.h"
-#import "SentryProfiler+Test.h"
+#import "BuzzSentryProfiler+Test.h"
 #import "BuzzSentryQueueableRequestManager.h"
 #import "BuzzSentryRandom.h"
 #import "BuzzSentryRateLimitParser.h"

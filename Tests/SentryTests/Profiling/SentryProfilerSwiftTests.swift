@@ -2,13 +2,13 @@ import Sentry
 import XCTest
 
 #if os(iOS) || os(macOS) || targetEnvironment(macCatalyst)
-class SentryProfilerSwiftTests: XCTestCase {
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryProfilerSwiftTests")
+class BuzzSentryProfilerSwiftTests: XCTestCase {
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryProfilerSwiftTests")
 
     private class Fixture {
         lazy var options: Options = {
             let options = Options()
-            options.dsn = SentryProfilerSwiftTests.dsnAsString
+            options.dsn = BuzzSentryProfilerSwiftTests.dsnAsString
             return options
         }()
         lazy var client: TestClient! = TestClient(options: options)
@@ -196,7 +196,7 @@ class SentryProfilerSwiftTests: XCTestCase {
     }
 }
 
-private extension SentryProfilerSwiftTests {
+private extension BuzzSentryProfilerSwiftTests {
     /// Keep a thread busy over a long enough period of time (long enough for 3 samples) for the sampler to pick it up.
     func forceProfilerSample() {
         let str = "a"

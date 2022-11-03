@@ -1,9 +1,9 @@
-#import "SentryProfiler.h"
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfiler.h"
+#import "BuzzSentryProfilingConditionals.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 @interface
-SentryProfiler (SentryTest)
+BuzzSentryProfiler (SentryTest)
 
 + (void)timeoutAbort;
 

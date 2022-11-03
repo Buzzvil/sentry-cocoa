@@ -1,4 +1,4 @@
-#import "SentryProfiler.h"
+#import "BuzzSentryProfiler.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 #    import "NSDate+BuzzSentryExtras.h"
@@ -17,7 +17,7 @@
 #    import "BuzzSentryHub+Private.h"
 #    import "BuzzSentryId.h"
 #    import "BuzzSentryLog.h"
-#    import "SentrySamplingProfiler.hpp"
+#    import "BuzzSentrySamplingProfiler.hpp"
 #    import "BuzzSentryScope+Private.h"
 #    import "BuzzSentryScreenFrames.h"
 #    import "BuzzSentrySerialization.h"
@@ -37,7 +37,7 @@
 #        import <UIKit/UIKit.h>
 #    endif
 
-const int kSentryProfilerFrequencyHz = 101;
+const int kBuzzSentryProfilerFrequencyHz = 101;
 NSString *const kTestStringConst = @"test";
 
 using namespace sentry::profiling;
@@ -64,23 +64,23 @@ parseBacktraceSymbolsFunctionName(const char *symbol)
 }
 
 std::mutex _gProfilerLock;
-NSMutableDictionary<BuzzSentrySpanId *, SentryProfiler *> *_gProfilersPerSpanID;
-SentryProfiler *_Nullable _gCurrentProfiler;
+NSMutableDictionary<BuzzSentrySpanId *, BuzzSentryProfiler *> *_gProfilersPerSpanID;
+BuzzSentryProfiler *_Nullable _gCurrentProfiler;
 
 NSString *
-profilerTruncationReasonName(SentryProfilerTruncationReason reason)
+profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
 {
     switch (reason) {
-    case SentryProfilerTruncationReasonNormal:
+    case BuzzSentryProfilerTruncationReasonNormal:
         return @"normal";
-    case SentryProfilerTruncationReasonAppMovedToBackground:
+    case BuzzSentryProfilerTruncationReasonAppMovedToBackground:
         return @"backgrounded";
-    case SentryProfilerTruncationReasonTimeout:
+    case BuzzSentryProfilerTruncationReasonTimeout:
         return @"timeout";
     }
 }
 
-@implementation SentryProfiler {
+@implementation BuzzSentryProfiler {
     NSMutableDictionary<NSString *, id> *_profile;
     uint64_t _startTimestamp;
     NSDate *_startDate;
@@ -92,7 +92,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
     NSMutableArray<BuzzSentrySpanId *> *_spansInFlight;
     NSMutableArray<BuzzSentryTransaction *> *_transactions;
-    SentryProfilerTruncationReason _truncationReason;
+    BuzzSentryProfilerTruncationReason _truncationReason;
     BuzzSentryScreenFrames *_frameInfo;
     NSTimer *_timeoutTimer;
     BuzzSentryHub *__weak _hub;
@@ -101,8 +101,8 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 + (void)initialize
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
-    if (self == [SentryProfiler class]) {
-        _gProfilersPerSpanID = [NSMutableDictionary<BuzzSentrySpanId *, SentryProfiler *> dictionary];
+    if (self == [BuzzSentryProfiler class]) {
+        _gProfilersPerSpanID = [NSMutableDictionary<BuzzSentrySpanId *, BuzzSentryProfiler *> dictionary];
     }
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
@@ -114,7 +114,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
         return nil;
     }
 
-    SENTRY_LOG_DEBUG(@"Initialized new SentryProfiler %@", self);
+    SENTRY_LOG_DEBUG(@"Initialized new BuzzSentryProfiler %@", self);
     _debugImageProvider = [BuzzSentryDependencyContainer sharedInstance].debugImageProvider;
     _mainThreadID = ThreadHandle::current()->tid();
     _spansInFlight = [NSMutableArray<BuzzSentrySpanId *> array];
@@ -144,7 +144,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     std::lock_guard<std::mutex> l(_gProfilerLock);
 
     if (_gCurrentProfiler == nil) {
-        _gCurrentProfiler = [[SentryProfiler alloc] init];
+        _gCurrentProfiler = [[BuzzSentryProfiler alloc] init];
         if (_gCurrentProfiler == nil) {
             SENTRY_LOG_WARN(@"Profiler was not initialized, will not proceed.");
             return;
@@ -190,7 +190,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     if (_gCurrentProfiler->_spansInFlight.count == 0) {
         SENTRY_LOG_DEBUG(@"Stopping profiler %@ because span with id %@ was last being profiled.",
             _gCurrentProfiler, span.context.spanId.BuzzSentrySpanIdString);
-        [self stopProfilerForReason:SentryProfilerTruncationReasonNormal];
+        [self stopProfilerForReason:BuzzSentryProfilerTruncationReasonNormal];
     }
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
@@ -217,7 +217,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     std::lock_guard<std::mutex> l(_gProfilerLock);
 
     const auto spanID = transaction.trace.context.spanId;
-    SentryProfiler *profiler = _gProfilersPerSpanID[spanID];
+    BuzzSentryProfiler *profiler = _gProfilersPerSpanID[spanID];
     if (profiler == nil) {
         SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.BuzzSentrySpanIdString);
         return;
@@ -241,7 +241,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
 #    pragma mark - Private
 
-+ (void)captureEnvelopeIfFinished:(SentryProfiler *)profiler spanID:(BuzzSentrySpanId *)spanID
++ (void)captureEnvelopeIfFinished:(BuzzSentryProfiler *)profiler spanID:(BuzzSentrySpanId *)spanID
 {
     [_gProfilersPerSpanID removeObjectForKey:spanID];
     [profiler->_spansInFlight removeObject:spanID];
@@ -263,7 +263,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     }
 
     SENTRY_LOG_DEBUG(@"Stopping profiler %@ due to timeout.", _gCurrentProfiler);
-    [self stopProfilerForReason:SentryProfilerTruncationReasonTimeout];
+    [self stopProfilerForReason:BuzzSentryProfilerTruncationReasonTimeout];
 }
 
 + (void)backgroundAbort
@@ -276,10 +276,10 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     }
 
     SENTRY_LOG_DEBUG(@"Stopping profiler %@ due to timeout.", _gCurrentProfiler);
-    [self stopProfilerForReason:SentryProfilerTruncationReasonAppMovedToBackground];
+    [self stopProfilerForReason:BuzzSentryProfilerTruncationReasonAppMovedToBackground];
 }
 
-+ (void)stopProfilerForReason:(SentryProfilerTruncationReason)reason
++ (void)stopProfilerForReason:(BuzzSentryProfilerTruncationReason)reason
 {
     [_gCurrentProfiler->_timeoutTimer invalidate];
     [_gCurrentProfiler stop];
@@ -444,7 +444,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
                 [samples addObject:sample];
             },
-            kSentryProfilerFrequencyHz);
+            kBuzzSentryProfilerFrequencyHz);
         _profiler->startSampling();
     }
 }

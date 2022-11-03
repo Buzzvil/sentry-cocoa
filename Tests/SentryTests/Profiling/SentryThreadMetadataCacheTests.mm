@@ -1,10 +1,10 @@
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
 #    import <XCTest/XCTest.h>
 
-#    import "SentryMachLogging.hpp"
+#    import "BuzzSentryMachLogging.hpp"
 #    import "BuzzSentryThreadMetadataCache.hpp"
 
 #    import <pthread.h>

@@ -4,7 +4,7 @@
 
 #    include "BuzzSentryAsyncSafeLogging.h"
 #    include "BuzzSentryCompiler.h"
-#    include "SentryMachLogging.hpp"
+#    include "BuzzSentryMachLogging.hpp"
 #    include "SentryStackBounds.hpp"
 #    include "SentryStackFrame.hpp"
 #    include "BuzzSentryThreadHandle.hpp"

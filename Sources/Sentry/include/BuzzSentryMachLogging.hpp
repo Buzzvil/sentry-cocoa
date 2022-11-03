@@ -1,7 +1,7 @@
 #pragma once
 
-#include "SentryProfilingConditionals.h"
-#include "SentryProfilingLogging.hpp"
+#include "BuzzSentryProfilingConditionals.h"
+#include "BuzzSentryProfilingLogging.hpp"
 #include <mach/kern_return.h>
 #include <mach/message.h>
 

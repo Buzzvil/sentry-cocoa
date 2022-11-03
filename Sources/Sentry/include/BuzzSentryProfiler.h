@@ -1,5 +1,5 @@
 #import "BuzzSentryCompiler.h"
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 #import "BuzzSentrySpan.h"
 #import <Foundation/Foundation.h>
 
@@ -15,15 +15,15 @@
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
-typedef NS_ENUM(NSUInteger, SentryProfilerTruncationReason) {
-    SentryProfilerTruncationReasonNormal,
-    SentryProfilerTruncationReasonTimeout,
-    SentryProfilerTruncationReasonAppMovedToBackground,
+typedef NS_ENUM(NSUInteger, BuzzSentryProfilerTruncationReason) {
+    BuzzSentryProfilerTruncationReasonNormal,
+    BuzzSentryProfilerTruncationReasonTimeout,
+    BuzzSentryProfilerTruncationReasonAppMovedToBackground,
 };
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT const int kSentryProfilerFrequencyHz;
+FOUNDATION_EXPORT const int kBuzzSentryProfilerFrequencyHz;
 FOUNDATION_EXPORT NSString *const kTestStringConst;
 
 SENTRY_EXTERN_C_BEGIN
@@ -40,11 +40,11 @@ SENTRY_EXTERN_C_BEGIN
  */
 NSString *parseBacktraceSymbolsFunctionName(const char *symbol);
 
-NSString *profilerTruncationReasonName(SentryProfilerTruncationReason reason);
+NSString *profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason);
 
 SENTRY_EXTERN_C_END
 
-@interface SentryProfiler : NSObject
+@interface BuzzSentryProfiler : NSObject
 
 /**
  * Start the profiler, if it isn't already running, for the span with the provided ID. If it's

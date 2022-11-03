@@ -1,5 +1,5 @@
-#ifndef SentryProfilingConditionals_h
-#define SentryProfilingConditionals_h
+#ifndef BuzzSentryProfilingConditionals_h
+#define BuzzSentryProfilingConditionals_h
 
 #include <TargetConditionals.h>
 
@@ -11,4 +11,4 @@
 #    define SENTRY_TARGET_PROFILING_SUPPORTED 1
 #endif
 
-#endif /* SentryProfilingConditionals_h */
+#endif /* BuzzSentryProfilingConditionals_h */

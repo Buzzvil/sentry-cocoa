@@ -1,4 +1,4 @@
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 

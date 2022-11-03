@@ -8,9 +8,9 @@
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryLog.h"
 #import "BuzzSentryNoOpSpan.h"
-#import "SentryProfiler.h"
+#import "BuzzSentryProfiler.h"
 #import "SentryProfilesSampler.h"
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope.h"
 #import "BuzzSentrySpan.h"
@@ -177,7 +177,7 @@ static BOOL appStartMeasurementRead;
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
         if (profilesSamplerDecision.decision == kBuzzSentrySampleDecisionYes) {
-            [SentryProfiler startForSpanID:transactionContext.spanId hub:hub];
+            [BuzzSentryProfiler startForSpanID:transactionContext.spanId hub:hub];
         }
 #endif // SENTRY_TARGET_PROFILING_SUPPORTED
     }
@@ -489,7 +489,7 @@ static BOOL appStartMeasurementRead;
     }
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
-    [SentryProfiler stopProfilingSpan:self.rootSpan];
+    [BuzzSentryProfiler stopProfilingSpan:self.rootSpan];
 #endif // SENTRY_TARGET_PROFILING_SUPPORTED
 
     BuzzSentryTransaction *transaction = [self toTransaction];
@@ -504,7 +504,7 @@ static BOOL appStartMeasurementRead;
                         @"capturing transaction.",
             SENTRY_AUTO_TRANSACTION_MAX_DURATION);
 #if SENTRY_TARGET_PROFILING_SUPPORTED
-        [SentryProfiler dropTransaction:transaction];
+        [BuzzSentryProfiler dropTransaction:transaction];
 #endif // SENTRY_TARGET_PROFILING_SUPPORTED
         return;
     }
@@ -512,7 +512,7 @@ static BOOL appStartMeasurementRead;
     [_hub captureTransaction:transaction withScope:_hub.scope];
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
-    [SentryProfiler linkTransaction:transaction];
+    [BuzzSentryProfiler linkTransaction:transaction];
 #endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
 

@@ -1,11 +1,11 @@
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
 #    import <XCTest/XCTest.h>
 
 #    import "BuzzSentryBacktrace.hpp"
-#    import "SentrySamplingProfiler.hpp"
+#    import "BuzzSentrySamplingProfiler.hpp"
 #    import "BuzzSentryThreadMetadataCache.hpp"
 #    import "SentryTime.h"
 
@@ -16,10 +16,10 @@
 
 using namespace sentry::profiling;
 
-@interface SentrySamplingProfilerTests : XCTestCase
+@interface BuzzSentrySamplingProfilerTests : XCTestCase
 @end
 
-@implementation SentrySamplingProfilerTests
+@implementation BuzzSentrySamplingProfilerTests
 
 - (void)testProfiling
 {

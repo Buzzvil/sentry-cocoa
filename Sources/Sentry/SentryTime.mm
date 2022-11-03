@@ -4,7 +4,7 @@
 #import <ctime>
 #import <mach/mach_time.h>
 
-#import "SentryMachLogging.hpp"
+#import "BuzzSentryMachLogging.hpp"
 
 uint64_t
 getAbsoluteTime(void)

@@ -1,9 +1,9 @@
-#include "SentrySamplingProfiler.hpp"
+#include "BuzzSentrySamplingProfiler.hpp"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
 #    include "BuzzSentryBacktrace.hpp"
-#    include "SentryMachLogging.hpp"
+#    include "BuzzSentryMachLogging.hpp"
 #    include "BuzzSentryThreadMetadataCache.hpp"
 
 #    include <chrono>

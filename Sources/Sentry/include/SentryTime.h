@@ -1,5 +1,5 @@
 #import "BuzzSentryCompiler.h"
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 #import <stdint.h>
 
 SENTRY_EXTERN_C_BEGIN

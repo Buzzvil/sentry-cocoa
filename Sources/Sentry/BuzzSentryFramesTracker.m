@@ -1,8 +1,8 @@
 #import "BuzzSentryFramesTracker.h"
 #import "BuzzSentryCompiler.h"
 #import "BuzzSentryDisplayLinkWrapper.h"
-#import "SentryProfiler.h"
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfiler.h"
+#import "BuzzSentryProfilingConditionals.h"
 #import "BuzzSentryTracer.h"
 #import <BuzzSentryScreenFrames.h>
 #include <stdatomic.h>
@@ -133,7 +133,7 @@ BuzzSentryFramesTracker ()
 #        if defined(TEST) || defined(TESTCI)
     BOOL shouldRecordFrameRates = YES;
 #        else
-    BOOL shouldRecordFrameRates = [SentryProfiler isRunning];
+    BOOL shouldRecordFrameRates = [BuzzSentryProfiler isRunning];
 #        endif // defined(TEST) || defined(TESTCI)
     BOOL hasNoFrameRatesYet = self.frameRateTimestamps.count == 0;
     BOOL frameRateSignificantlyChanged
@@ -176,7 +176,7 @@ BuzzSentryFramesTracker ()
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
 - (void)recordTimestampStart:(NSNumber *)start end:(NSNumber *)end
 {
-    BOOL shouldRecord = [SentryProfiler isRunning];
+    BOOL shouldRecord = [BuzzSentryProfiler isRunning];
 #        if defined(TEST) || defined(TESTCI)
     shouldRecord = YES;
 #        endif
