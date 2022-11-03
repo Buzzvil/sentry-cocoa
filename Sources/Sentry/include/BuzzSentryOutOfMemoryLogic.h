@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryOutOfMemoryLogic : NSObject
+@interface BuzzSentryOutOfMemoryLogic : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options

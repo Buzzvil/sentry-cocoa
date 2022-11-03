@@ -11,8 +11,8 @@
 #import <BuzzSentryMechanism.h>
 #import <BuzzSentryMessage.h>
 #import <BuzzSentryOptions.h>
-#import <SentryOutOfMemoryLogic.h>
-#import <SentryOutOfMemoryTracker.h>
+#import <BuzzSentryOutOfMemoryLogic.h>
+#import <BuzzSentryOutOfMemoryTracker.h>
 #import <BuzzSentrySDK+Private.h>
 
 #if SENTRY_HAS_UIKIT
@@ -20,20 +20,20 @@
 #endif
 
 @interface
-SentryOutOfMemoryTracker ()
+BuzzSentryOutOfMemoryTracker ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
-@property (nonatomic, strong) SentryOutOfMemoryLogic *outOfMemoryLogic;
+@property (nonatomic, strong) BuzzSentryOutOfMemoryLogic *outOfMemoryLogic;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
 @property (nonatomic, strong) SentryFileManager *fileManager;
 
 @end
 
-@implementation SentryOutOfMemoryTracker
+@implementation BuzzSentryOutOfMemoryTracker
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-               outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic
+               outOfMemoryLogic:(BuzzSentryOutOfMemoryLogic *)outOfMemoryLogic
                 appStateManager:(SentryAppStateManager *)appStateManager
            dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                     fileManager:(SentryFileManager *)fileManager
@@ -60,10 +60,10 @@ SentryOutOfMemoryTracker ()
             event.breadcrumbs = @[];
 
             SentryException *exception =
-                [[SentryException alloc] initWithValue:SentryOutOfMemoryExceptionValue
-                                                  type:SentryOutOfMemoryExceptionType];
+                [[SentryException alloc] initWithValue:BuzzSentryOutOfMemoryExceptionValue
+                                                  type:BuzzSentryOutOfMemoryExceptionType];
             BuzzSentryMechanism *mechanism =
-                [[BuzzSentryMechanism alloc] initWithType:SentryOutOfMemoryMechanismType];
+                [[BuzzSentryMechanism alloc] initWithType:BuzzSentryOutOfMemoryMechanismType];
             mechanism.handled = @(NO);
             exception.mechanism = mechanism;
             event.exceptions = @[ exception ];
@@ -74,7 +74,7 @@ SentryOutOfMemoryTracker ()
         }
     }];
 #else
-    SENTRY_LOG_INFO(@"NO UIKit -> SentryOutOfMemoryTracker will not track OOM.");
+    SENTRY_LOG_INFO(@"NO UIKit -> BuzzSentryOutOfMemoryTracker will not track OOM.");
     return;
 #endif
 }

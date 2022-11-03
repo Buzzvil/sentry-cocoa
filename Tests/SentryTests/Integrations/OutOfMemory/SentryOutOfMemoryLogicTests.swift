@@ -1,9 +1,9 @@
 import XCTest
 
-class SentryOutOfMemoryLogicTests: XCTestCase {
+class BuzzSentryOutOfMemoryLogicTests: XCTestCase {
 
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryOutOfMemoryLogicTests")
-    private static let dsn = TestConstants.dsn(username: "SentryOutOfMemoryLogicTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryOutOfMemoryLogicTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryOutOfMemoryLogicTests")
     
     private class Fixture {
         
@@ -17,7 +17,7 @@ class SentryOutOfMemoryLogicTests: XCTestCase {
         
         init() {
             options = Options()
-            options.dsn = SentryOutOfMemoryLogicTests.dsnAsString
+            options.dsn = BuzzSentryOutOfMemoryLogicTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
             client = TestClient(options: options)
@@ -27,14 +27,14 @@ class SentryOutOfMemoryLogicTests: XCTestCase {
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }
         
-        func getSut() -> SentryOutOfMemoryLogic {
+        func getSut() -> BuzzSentryOutOfMemoryLogic {
             let appStateManager = SentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: self.dispatchQueue)
-            return SentryOutOfMemoryLogic(options: options, crashAdapter: crashWrapper, appStateManager: appStateManager)
+            return BuzzSentryOutOfMemoryLogic(options: options, crashAdapter: crashWrapper, appStateManager: appStateManager)
         }
     }
     
     private var fixture: Fixture!
-    private var sut: SentryOutOfMemoryLogic!
+    private var sut: BuzzSentryOutOfMemoryLogic!
     
     override func setUp() {
         super.setUp()

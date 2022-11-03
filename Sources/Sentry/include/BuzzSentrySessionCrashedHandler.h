@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 
-@class SentryCrashWrapper, BuzzSentryDispatchQueueWrapper, SentryOutOfMemoryLogic;
+@class SentryCrashWrapper, BuzzSentryDispatchQueueWrapper, BuzzSentryOutOfMemoryLogic;
 
 @interface BuzzSentrySessionCrashedHandler : NSObject
 
 - (instancetype)initWithCrashWrapper:(SentryCrashWrapper *)crashWrapper
-                    outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic;
+                    outOfMemoryLogic:(BuzzSentryOutOfMemoryLogic *)outOfMemoryLogic;
 
 /**
  * When a crash happened the current session is ended as crashed, stored at a different

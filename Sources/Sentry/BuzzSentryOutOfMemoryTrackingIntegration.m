@@ -7,24 +7,24 @@
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentryHub.h>
 #import <BuzzSentryOptions+Private.h>
-#import <SentryOutOfMemoryLogic.h>
-#import <SentryOutOfMemoryTracker.h>
-#import <SentryOutOfMemoryTrackingIntegration.h>
+#import <BuzzSentryOutOfMemoryLogic.h>
+#import <BuzzSentryOutOfMemoryTracker.h>
+#import <BuzzSentryOutOfMemoryTrackingIntegration.h>
 #import <BuzzSentrySDK+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryOutOfMemoryTrackingIntegration ()
+BuzzSentryOutOfMemoryTrackingIntegration ()
 
-@property (nonatomic, strong) SentryOutOfMemoryTracker *tracker;
+@property (nonatomic, strong) BuzzSentryOutOfMemoryTracker *tracker;
 @property (nonatomic, strong) BuzzSentryANRTracker *anrTracker;
 @property (nullable, nonatomic, copy) NSString *testConfigurationFilePath;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
 
 @end
 
-@implementation SentryOutOfMemoryTrackingIntegration
+@implementation BuzzSentryOutOfMemoryTrackingIntegration
 
 - (instancetype)init
 {
@@ -55,12 +55,12 @@ SentryOutOfMemoryTrackingIntegration ()
     SentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
     SentryCrashWrapper *crashWrapper = [SentryDependencyContainer sharedInstance].crashWrapper;
-    SentryOutOfMemoryLogic *logic =
-        [[SentryOutOfMemoryLogic alloc] initWithOptions:options
+    BuzzSentryOutOfMemoryLogic *logic =
+        [[BuzzSentryOutOfMemoryLogic alloc] initWithOptions:options
                                            crashAdapter:crashWrapper
                                         appStateManager:appStateManager];
 
-    self.tracker = [[SentryOutOfMemoryTracker alloc] initWithOptions:options
+    self.tracker = [[BuzzSentryOutOfMemoryTracker alloc] initWithOptions:options
                                                     outOfMemoryLogic:logic
                                                      appStateManager:appStateManager
                                                 dispatchQueueWrapper:dispatchQueueWrapper

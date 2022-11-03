@@ -1,10 +1,10 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
+class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryOutOfMemoryTrackerTests")
-    private static let dsn = TestConstants.dsn(username: "SentryOutOfMemoryTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryOutOfMemoryTrackerTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryOutOfMemoryTrackerTests")
     
     private class Fixture {
         
@@ -18,7 +18,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         
         init() {
             options = Options()
-            options.dsn = SentryOutOfMemoryTrackerTests.dsnAsString
+            options.dsn = BuzzSentryOutOfMemoryTrackerTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
             client = TestClient(options: options)
@@ -31,19 +31,19 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }
         
-        func getSut() -> SentryOutOfMemoryTracker {
+        func getSut() -> BuzzSentryOutOfMemoryTracker {
             return getSut(fileManager: self.fileManager)
         }
         
-        func getSut(fileManager: SentryFileManager) -> SentryOutOfMemoryTracker {
+        func getSut(fileManager: SentryFileManager) -> BuzzSentryOutOfMemoryTracker {
             let appStateManager = SentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: self.dispatchQueue)
-            let logic = SentryOutOfMemoryLogic(options: options, crashAdapter: crashWrapper, appStateManager: appStateManager)
-            return SentryOutOfMemoryTracker(options: options, outOfMemoryLogic: logic, appStateManager: appStateManager, dispatchQueueWrapper: dispatchQueue, fileManager: fileManager)
+            let logic = BuzzSentryOutOfMemoryLogic(options: options, crashAdapter: crashWrapper, appStateManager: appStateManager)
+            return BuzzSentryOutOfMemoryTracker(options: options, outOfMemoryLogic: logic, appStateManager: appStateManager, dispatchQueueWrapper: dispatchQueue, fileManager: fileManager)
         }
     }
     
     private var fixture: Fixture!
-    private var sut: SentryOutOfMemoryTracker!
+    private var sut: BuzzSentryOutOfMemoryTracker!
     
     override func setUp() {
         super.setUp()

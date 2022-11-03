@@ -3,7 +3,7 @@
 #import <SentryAppStateManager.h>
 #import <SentryCrashWrapper.h>
 #import <BuzzSentryOptions.h>
-#import <SentryOutOfMemoryLogic.h>
+#import <BuzzSentryOutOfMemoryLogic.h>
 #import <BuzzSentrySDK+Private.h>
 
 #if SENTRY_HAS_UIKIT
@@ -11,7 +11,7 @@
 #endif
 
 @interface
-SentryOutOfMemoryLogic ()
+BuzzSentryOutOfMemoryLogic ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
@@ -19,7 +19,7 @@ SentryOutOfMemoryLogic ()
 
 @end
 
-@implementation SentryOutOfMemoryLogic
+@implementation BuzzSentryOutOfMemoryLogic
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                    crashAdapter:(SentryCrashWrapper *)crashAdapter

@@ -4,21 +4,21 @@
 #import "SentryCurrentDate.h"
 #import "SentryFileManager.h"
 #import "SentryHub.h"
-#import "SentryOutOfMemoryLogic.h"
+#import "BuzzSentryOutOfMemoryLogic.h"
 #import "BuzzSentrySDK+Private.h"
 
 @interface
 BuzzSentrySessionCrashedHandler ()
 
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
-@property (nonatomic, strong) SentryOutOfMemoryLogic *outOfMemoryLogic;
+@property (nonatomic, strong) BuzzSentryOutOfMemoryLogic *outOfMemoryLogic;
 
 @end
 
 @implementation BuzzSentrySessionCrashedHandler
 
 - (instancetype)initWithCrashWrapper:(SentryCrashWrapper *)crashWrapper
-                    outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic;
+                    outOfMemoryLogic:(BuzzSentryOutOfMemoryLogic *)outOfMemoryLogic;
 {
     self = [self init];
     self.crashWrapper = crashWrapper;

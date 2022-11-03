@@ -29,7 +29,7 @@
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryNSError.h"
 #import "BuzzSentryOptions+Private.h"
-#import "SentryOutOfMemoryTracker.h"
+#import "BuzzSentryOutOfMemoryTracker.h"
 #import "SentryPermissionsObserver.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
@@ -701,7 +701,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
     SentryException *exception = event.exceptions[0];
     return nil != exception.mechanism &&
-        [exception.mechanism.type isEqualToString:SentryOutOfMemoryMechanismType];
+        [exception.mechanism.type isEqualToString:BuzzSentryOutOfMemoryMechanismType];
 }
 
 - (void)applyPermissionsToEvent:(BuzzSentryEvent *)event

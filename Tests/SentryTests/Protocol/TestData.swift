@@ -174,8 +174,8 @@ class TestData {
     
     static var oomEvent: Event {
         let event = Event(level: SentryLevel.fatal)
-        let exception = Exception(value: SentryOutOfMemoryExceptionValue, type: SentryOutOfMemoryExceptionType)
-        exception.mechanism = Mechanism(type: SentryOutOfMemoryMechanismType)
+        let exception = Exception(value: BuzzSentryOutOfMemoryExceptionValue, type: BuzzSentryOutOfMemoryExceptionType)
+        exception.mechanism = Mechanism(type: BuzzSentryOutOfMemoryMechanismType)
         event.exceptions = [exception]
         return event
     }

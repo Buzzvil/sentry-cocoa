@@ -5,7 +5,7 @@
 #import "BuzzSentryEvent.h"
 #import "SentryHub.h"
 #import "SentryInAppLogic.h"
-#import "SentryOutOfMemoryLogic.h"
+#import "BuzzSentryOutOfMemoryLogic.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
 #import "BuzzSentrySessionCrashedHandler.h"
@@ -70,8 +70,8 @@ SentryCrashIntegration ()
 
     SentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
-    SentryOutOfMemoryLogic *logic =
-        [[SentryOutOfMemoryLogic alloc] initWithOptions:options
+    BuzzSentryOutOfMemoryLogic *logic =
+        [[BuzzSentryOutOfMemoryLogic alloc] initWithOptions:options
                                            crashAdapter:self.crashAdapter
                                         appStateManager:appStateManager];
     self.crashedSessionHandler =

@@ -2,8 +2,8 @@ import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
 class SentryAppStateManagerTests: XCTestCase {
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryOutOfMemoryTrackerTests")
-    private static let dsn = TestConstants.dsn(username: "SentryOutOfMemoryTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryOutOfMemoryTrackerTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryOutOfMemoryTrackerTests")
 
     private class Fixture {
 
