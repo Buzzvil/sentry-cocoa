@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class SentryHttpDateParser;
+@class BuzzSentryHttpDateParser;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_SWIFT_NAME(RetryAfterHeaderParser)
 @interface BuzzSentryRetryAfterHeaderParser : NSObject
 
-- (instancetype)initWithHttpDateParser:(SentryHttpDateParser *)httpDateParser;
+- (instancetype)initWithHttpDateParser:(BuzzSentryHttpDateParser *)httpDateParser;
 
 /** Parses the HTTP header into a NSDate.
 

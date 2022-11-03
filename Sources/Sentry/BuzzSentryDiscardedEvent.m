@@ -1,13 +1,13 @@
 #import "BuzzSentryDiscardedEvent.h"
-#import "SentryDataCategoryMapper.h"
-#import "SentryDiscardReasonMapper.h"
+#import "BuzzSentryDataCategoryMapper.h"
+#import "BuzzSentryDiscardReasonMapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation BuzzSentryDiscardedEvent
 
-- (instancetype)initWithReason:(SentryDiscardReason)reason
-                      category:(SentryDataCategory)category
+- (instancetype)initWithReason:(BuzzSentryDiscardReason)reason
+                      category:(BuzzSentryDataCategory)category
                       quantity:(NSUInteger)quantity
 {
     if (self = [super init]) {
@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary<NSString *, id> *)serialize
 {
     return @{
-        @"reason" : nameForSentryDiscardReason(self.reason),
-        @"category" : nameForSentryDataCategory(self.category),
+        @"reason" : nameForBuzzSentryDiscardReason(self.reason),
+        @"category" : nameForBuzzSentryDataCategory(self.category),
         @"quantity" : @(self.quantity)
     };
 }

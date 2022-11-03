@@ -2,7 +2,7 @@
 #import "SentryDefines.h"
 
 @class BuzzSentryOptions, SentryCrashWrapper, SentryAppState, SentryFileManager, SentrySysctl,
-    SentryDispatchQueueWrapper;
+    BuzzSentryDispatchQueueWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +14,7 @@ SENTRY_NO_INIT
                     fileManager:(SentryFileManager *)fileManager
             currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                          sysctl:(SentrySysctl *)sysctl
-           dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper;
+           dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
 #if SENTRY_HAS_UIKIT
 

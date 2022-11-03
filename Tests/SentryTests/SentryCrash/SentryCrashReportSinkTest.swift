@@ -4,7 +4,7 @@ class SentryCrashReportSinkTests: SentrySDKIntegrationTestsBase {
     
     private class Fixture {
         let crashWrapper = TestSentryCrashWrapper.sharedInstance()
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         
         var sut: SentryCrashReportSink {
             return SentryCrashReportSink(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: crashWrapper, dispatchQueue: dispatchQueue)

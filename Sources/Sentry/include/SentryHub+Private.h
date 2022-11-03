@@ -1,6 +1,6 @@
 #import "SentryHub.h"
 
-@class BuzzSentryEnvelopeItem, SentryId, SentryScope, BuzzSentryTransaction, SentryDispatchQueueWrapper,
+@class BuzzSentryEnvelopeItem, SentryId, SentryScope, BuzzSentryTransaction, BuzzSentryDispatchQueueWrapper,
     BuzzSentryTracer;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,7 +40,7 @@ SentryHub (Private)
                                   bindToScope:(BOOL)bindToScope
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
                                   idleTimeout:(NSTimeInterval)idleTimeout
-                         dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper;
+                         dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
 - (SentryId *)captureEvent:(SentryEvent *)event
                   withScope:(SentryScope *)scope

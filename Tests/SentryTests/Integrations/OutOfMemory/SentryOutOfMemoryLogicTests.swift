@@ -13,7 +13,7 @@ class SentryOutOfMemoryLogicTests: XCTestCase {
         let fileManager: SentryFileManager
         let currentDate = TestCurrentDateProvider()
         let sysctl = TestSysctl()
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         
         init() {
             options = Options()

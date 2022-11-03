@@ -1,5 +1,5 @@
 #import "SentryCurrentDateProvider.h"
-#import "SentryDataCategory.h"
+#import "BuzzSentryDataCategory.h"
 #import "SentryDefines.h"
 #import "SentrySession.h"
 
@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol SentryFileManagerDelegate;
 
 @class SentryEvent, BuzzSentryOptions, BuzzSentryEnvelope, SentryFileContents, SentryAppState,
-    SentryDispatchQueueWrapper;
+    BuzzSentryDispatchQueueWrapper;
 
 NS_SWIFT_NAME(SentryFileManager)
 @interface SentryFileManager : NSObject
@@ -22,7 +22,7 @@ SENTRY_NO_INIT
 
 - (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                   andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
-                    dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+                    dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                                    error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
 - (void)setDelegate:(id<SentryFileManagerDelegate>)delegate;
@@ -78,7 +78,7 @@ SENTRY_NO_INIT
 
 @protocol SentryFileManagerDelegate <NSObject>
 
-- (void)envelopeItemDeleted:(SentryDataCategory)dataCategory;
+- (void)envelopeItemDeleted:(BuzzSentryDataCategory)dataCategory;
 
 @end
 

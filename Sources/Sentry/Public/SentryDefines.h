@@ -34,7 +34,7 @@ typedef void (^SentryRequestFinished)(NSError *_Nullable error);
  * Block used for request operation finished, shouldDiscardEvent is YES if event
  * should be deleted regardless if an error occurred or not
  */
-typedef void (^SentryRequestOperationFinished)(
+typedef void (^BuzzSentryRequestOperationFinished)(
     NSHTTPURLResponse *_Nullable response, NSError *_Nullable error);
 /**
  * Block can be used to mutate a breadcrumb before it's added to the scope.

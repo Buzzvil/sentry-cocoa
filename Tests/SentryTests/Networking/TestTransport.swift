@@ -8,8 +8,8 @@ public class TestTransport: NSObject, Transport {
         sentEnvelopes.record(envelope)
     }
     
-    var recordLostEvents = Invocations<(category: SentryDataCategory, reason: SentryDiscardReason)>()
-    public func recordLostEvent(_ category: SentryDataCategory, reason: SentryDiscardReason) {
+    var recordLostEvents = Invocations<(category: BuzzSentryDataCategory, reason: BuzzSentryDiscardReason)>()
+    public func recordLostEvent(_ category: BuzzSentryDataCategory, reason: BuzzSentryDiscardReason) {
         recordLostEvents.record((category, reason))
     }
     

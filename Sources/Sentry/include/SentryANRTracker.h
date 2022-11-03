@@ -1,7 +1,7 @@
 #import "SentryCurrentDateProvider.h"
 #import "SentryDefines.h"
 
-@class BuzzSentryOptions, SentryCrashWrapper, SentryDispatchQueueWrapper, SentryThreadWrapper;
+@class BuzzSentryOptions, SentryCrashWrapper, BuzzSentryDispatchQueueWrapper, SentryThreadWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +27,7 @@ SENTRY_NO_INIT
 - (instancetype)initWithTimeoutInterval:(NSTimeInterval)timeoutInterval
                     currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                            crashWrapper:(SentryCrashWrapper *)crashWrapper
-                   dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+                   dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                           threadWrapper:(SentryThreadWrapper *)threadWrapper;
 
 - (void)addListener:(id<SentryANRTrackerDelegate>)listener;

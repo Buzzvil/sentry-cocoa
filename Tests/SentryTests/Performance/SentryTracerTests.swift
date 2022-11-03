@@ -15,7 +15,7 @@ class BuzzSentryTracerTests: XCTestCase {
         let client: TestClient
         let hub: TestHub
         let scope: Scope
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         
         let transactionName = "Some Transaction"
         let transactionOperation = "ui.load"
@@ -73,7 +73,7 @@ class BuzzSentryTracerTests: XCTestCase {
             return hub.startTransaction(with: transactionContext, bindToScope: false, waitForChildren: waitForChildren, customSamplingContext: [:]) as! BuzzSentryTracer
         }
         
-        func getSut(idleTimeout: TimeInterval = 0.0, dispatchQueueWrapper: SentryDispatchQueueWrapper) -> BuzzSentryTracer {
+        func getSut(idleTimeout: TimeInterval = 0.0, dispatchQueueWrapper: BuzzSentryDispatchQueueWrapper) -> BuzzSentryTracer {
             return hub.startTransaction(with: transactionContext, bindToScope: false, customSamplingContext: [:], idleTimeout: idleTimeout, dispatchQueueWrapper: dispatchQueueWrapper)
         }
     }
@@ -223,7 +223,7 @@ class BuzzSentryTracerTests: XCTestCase {
     }
     
     func testIdleTimeoutWithRealDispatchQueue_SpanAdded_IdleTimeoutCancelled() {
-        let sut = fixture.getSut(idleTimeout: 0.1, dispatchQueueWrapper: SentryDispatchQueueWrapper())
+        let sut = fixture.getSut(idleTimeout: 0.1, dispatchQueueWrapper: BuzzSentryDispatchQueueWrapper())
         
         let child = sut.startChild(operation: fixture.transactionOperation)
         let grandChild = child.startChild(operation: fixture.transactionOperation)

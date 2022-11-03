@@ -1,5 +1,5 @@
 #import "SentrySubClassFinder.h"
-#import "SentryDispatchQueueWrapper.h"
+#import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryLog.h"
 #import "SentryObjCRuntimeWrapper.h"
 #import <objc/runtime.h>
@@ -8,14 +8,14 @@
 @interface
 SentrySubClassFinder ()
 
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) id<SentryObjCRuntimeWrapper> objcRuntimeWrapper;
 
 @end
 
 @implementation SentrySubClassFinder
 
-- (instancetype)initWithDispatchQueue:(SentryDispatchQueueWrapper *)dispatchQueue
+- (instancetype)initWithDispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
                    objcRuntimeWrapper:(id<SentryObjCRuntimeWrapper>)objcRuntimeWrapper
 {
     if (self = [super init]) {

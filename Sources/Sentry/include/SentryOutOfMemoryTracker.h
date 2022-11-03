@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class BuzzSentryOptions, SentryOutOfMemoryLogic, SentryDispatchQueueWrapper, SentryAppStateManager,
+@class BuzzSentryOptions, SentryOutOfMemoryLogic, BuzzSentryDispatchQueueWrapper, SentryAppStateManager,
     SentryFileManager;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +21,7 @@ SENTRY_NO_INIT
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic
                 appStateManager:(SentryAppStateManager *)appStateManager
-           dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+           dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                     fileManager:(SentryFileManager *)fileManager;
 
 - (void)start;

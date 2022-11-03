@@ -1,5 +1,5 @@
 #import "BuzzSentryEnvelopeRateLimit.h"
-#import "SentryDataCategoryMapper.h"
+#import "BuzzSentryDataCategoryMapper.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryRateLimits.h"
 #import <Foundation/Foundation.h>
@@ -54,8 +54,8 @@ BuzzSentryEnvelopeRateLimit ()
     NSMutableArray<BuzzSentryEnvelopeItem *> *itemsToDrop = [NSMutableArray new];
 
     for (BuzzSentryEnvelopeItem *item in items) {
-        SentryDataCategory rateLimitCategory
-            = sentryDataCategoryForEnvelopItemType(item.header.type);
+        BuzzSentryDataCategory rateLimitCategory
+            = BuzzSentryDataCategoryForEnvelopItemType(item.header.type);
         if ([self.rateLimits isRateLimitActive:rateLimitCategory]) {
             [itemsToDrop addObject:item];
             [self.delegate envelopeItemDropped:rateLimitCategory];

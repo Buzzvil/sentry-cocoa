@@ -1,7 +1,7 @@
 @testable import Sentry
 import XCTest
 
-class SentryHttpDateParserTests: XCTestCase {
+class BuzzSentryHttpDateParserTests: XCTestCase {
     
     private var currentDateProvider: TestCurrentDateProvider!
     private var sut: HttpDateParser!
@@ -26,8 +26,8 @@ class SentryHttpDateParserTests: XCTestCase {
     @available(tvOS 10.0, *)
     @available(OSX 10.12, *)
     func testWithMultipleWorkItemsInParallel() {
-        let queue1 = DispatchQueue(label: "SentryHttpDateParserTests1", qos: .utility, attributes: [.concurrent, .initiallyInactive])
-        let queue2 = DispatchQueue(label: "SentryHttpDateParserTests2", qos: .utility, attributes: [.concurrent, .initiallyInactive])
+        let queue1 = DispatchQueue(label: "BuzzSentryHttpDateParserTests1", qos: .utility, attributes: [.concurrent, .initiallyInactive])
+        let queue2 = DispatchQueue(label: "BuzzSentryHttpDateParserTests2", qos: .utility, attributes: [.concurrent, .initiallyInactive])
         
         let group = DispatchGroup()
         for i in 0...1_000 {

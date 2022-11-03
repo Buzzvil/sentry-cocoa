@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryDsn, SentrySdkInfo, BuzzSentryMeasurementValue;
+@class BuzzSentryDsn, SentrySdkInfo, BuzzSentryMeasurementValue;
 
 NS_SWIFT_NAME(Options)
 @interface BuzzSentryOptions : NSObject
@@ -25,7 +25,7 @@ NS_SWIFT_NAME(Options)
 /**
  * The parsed internal DSN.
  */
-@property (nullable, nonatomic, strong) SentryDsn *parsedDsn;
+@property (nullable, nonatomic, strong) BuzzSentryDsn *parsedDsn;
 
 /**
  * Turns debug mode on or off. If debug is enabled SDK will attempt to print out useful debugging

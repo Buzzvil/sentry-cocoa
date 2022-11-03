@@ -6,7 +6,7 @@
 #import "SentryCrashReportConverter.h"
 #import "SentryCrashWrapper.h"
 #import "SentryDefines.h"
-#import "SentryDispatchQueueWrapper.h"
+#import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryEvent.h"
 #import "SentryException.h"
 #import "SentryHub.h"
@@ -24,7 +24,7 @@ SentryCrashReportSink ()
 
 @property (nonatomic, strong) SentryInAppLogic *inAppLogic;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 
 @end
 
@@ -32,7 +32,7 @@ SentryCrashReportSink ()
 
 - (instancetype)initWithInAppLogic:(SentryInAppLogic *)inAppLogic
                       crashWrapper:(SentryCrashWrapper *)crashWrapper
-                     dispatchQueue:(SentryDispatchQueueWrapper *)dispatchQueue
+                     dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
 {
     if (self = [super init]) {
         self.inAppLogic = inAppLogic;

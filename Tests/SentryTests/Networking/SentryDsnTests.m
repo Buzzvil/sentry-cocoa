@@ -1,15 +1,15 @@
-#import "SentryDsn.h"
+#import "BuzzSentryDsn.h"
 #import "SentryError.h"
 #import "BuzzSentryMeta.h"
-#import "SentryNSURLRequest.h"
+#import "BuzzSentryNSURLRequest.h"
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
 
-@interface SentryDsnTests : XCTestCase
+@interface BuzzSentryDsnTests : XCTestCase
 
 @end
 
-@implementation SentryDsnTests
+@implementation BuzzSentryDsnTests
 
 - (void)testMissingUsernamePassword
 {
@@ -23,9 +23,9 @@
 - (void)testDsnHeaderUsernameAndPassword
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@sentry.io/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@sentry.io/1"
                                       didFailWithError:&error];
-    SentryNSURLRequest *request = [[SentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
+    BuzzSentryNSURLRequest *request = [[BuzzSentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
                                                                               andData:[NSData data]
                                                                      didFailWithError:&error];
 
@@ -43,9 +43,9 @@
 - (void)testDsnHeaderUsername
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username@sentry.io/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username@sentry.io/1"
                                       didFailWithError:&error];
-    SentryNSURLRequest *request = [[SentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
+    BuzzSentryNSURLRequest *request = [[BuzzSentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
                                                                               andData:[NSData data]
                                                                      didFailWithError:&error];
 
@@ -89,15 +89,15 @@
 - (void)testDsnUrl
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:&error];
 
     XCTAssertEqualObjects(
         [[dsn getStoreEndpoint] absoluteString], @"https://getsentry.net/api/1/store/");
     XCTAssertNil(error);
 
-    SentryDsn *dsn2 =
-        [[SentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
+    BuzzSentryDsn *dsn2 =
+        [[BuzzSentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
                          didFailWithError:&error];
 
     XCTAssertEqualObjects(
@@ -108,15 +108,15 @@
 - (void)testGetEnvelopeUrl
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:&error];
 
     XCTAssertEqualObjects(
         [[dsn getEnvelopeEndpoint] absoluteString], @"https://getsentry.net/api/1/envelope/");
     XCTAssertNil(error);
 
-    SentryDsn *dsn2 =
-        [[SentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
+    BuzzSentryDsn *dsn2 =
+        [[BuzzSentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
                          didFailWithError:&error];
 
     XCTAssertEqualObjects([[dsn2 getEnvelopeEndpoint] absoluteString],
@@ -126,7 +126,7 @@
 
 - (void)testGetStoreDsnCachesResult
 {
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:nil];
 
     XCTAssertNotNil([dsn getStoreEndpoint]);
@@ -136,7 +136,7 @@
 
 - (void)testGetEnvelopeDsnCachesResult
 {
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:nil];
 
     XCTAssertNotNil([dsn getEnvelopeEndpoint]);

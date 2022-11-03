@@ -1,6 +1,6 @@
 #import "BuzzSentryOptions.h"
 #import "SentryANRTracker.h"
-#import "SentryDsn.h"
+#import "BuzzSentryDsn.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
 #import "BuzzSentryMeta.h"
@@ -159,7 +159,7 @@ BuzzSentryOptions ()
 - (void)setDsn:(NSString *)dsn
 {
     NSError *error = nil;
-    self.parsedDsn = [[SentryDsn alloc] initWithString:dsn didFailWithError:&error];
+    self.parsedDsn = [[BuzzSentryDsn alloc] initWithString:dsn didFailWithError:&error];
 
     if (nil == error) {
         _dsn = dsn;
@@ -193,7 +193,7 @@ BuzzSentryOptions ()
         dsn = options[@"dsn"];
     }
 
-    self.parsedDsn = [[SentryDsn alloc] initWithString:dsn didFailWithError:error];
+    self.parsedDsn = [[BuzzSentryDsn alloc] initWithString:dsn didFailWithError:error];
 
     if ([options[@"release"] isKindOfClass:[NSString class]]) {
         self.releaseName = options[@"release"];

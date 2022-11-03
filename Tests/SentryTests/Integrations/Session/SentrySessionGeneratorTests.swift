@@ -148,7 +148,7 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
         let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
         SentrySDK.setCurrentHub(hub)
         
-        crashIntegration = SentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestSentryDispatchQueueWrapper())
+        crashIntegration = SentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
         crashIntegration.install(with: options)
         
         autoSessionTrackingIntegration = SentryAutoSessionTrackingIntegration()

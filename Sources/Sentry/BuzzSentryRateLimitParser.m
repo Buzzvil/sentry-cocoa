@@ -1,6 +1,6 @@
 #import "BuzzSentryRateLimitParser.h"
 #import "SentryCurrentDate.h"
-#import "SentryDataCategoryMapper.h"
+#import "BuzzSentryDataCategoryMapper.h"
 #import "SentryDateUtil.h"
 #import <Foundation/Foundation.h>
 
@@ -64,11 +64,11 @@ BuzzSentryRateLimitParser ()
     // category even if this parameter is empty.
     NSMutableArray<NSNumber *> *categories = [NSMutableArray new];
     for (NSString *categoryAsString in [categoriesAsString componentsSeparatedByString:@";"]) {
-        SentryDataCategory category = sentryDataCategoryForString(categoryAsString);
+        BuzzSentryDataCategory category = BuzzSentryDataCategoryForString(categoryAsString);
 
         // Unknown categories must be ignored. UserFeedback is not listed for rate limits, see
         // https://develop.sentry.dev/sdk/rate-limiting/#definitions
-        if (category != kSentryDataCategoryUnknown && category != kSentryDataCategoryUserFeedback) {
+        if (category != kBuzzSentryDataCategoryUnknown && category != kBuzzSentryDataCategoryUserFeedback) {
             [categories addObject:@(category)];
         }
     }

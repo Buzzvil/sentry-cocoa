@@ -1,7 +1,7 @@
 #import "BuzzSentryDefaultRateLimits.h"
 #import "BuzzSentryConcurrentRateLimitsDictionary.h"
 #import "SentryCurrentDate.h"
-#import "SentryDataCategoryMapper.h"
+#import "BuzzSentryDataCategoryMapper.h"
 #import "SentryDateUtil.h"
 #import "SentryLog.h"
 #import "BuzzSentryRateLimitParser.h"
@@ -33,10 +33,10 @@ BuzzSentryDefaultRateLimits ()
     return self;
 }
 
-- (BOOL)isRateLimitActive:(SentryDataCategory)category
+- (BOOL)isRateLimitActive:(BuzzSentryDataCategory)category
 {
     NSDate *categoryDate = [self.rateLimits getRateLimitForCategory:category];
-    NSDate *allCategoriesDate = [self.rateLimits getRateLimitForCategory:kSentryDataCategoryAll];
+    NSDate *allCategoriesDate = [self.rateLimits getRateLimitForCategory:kBuzzSentryDataCategoryAll];
 
     BOOL isActiveForCategory = [SentryDateUtil isInFuture:categoryDate];
     BOOL isActiveForCategories = [SentryDateUtil isInFuture:allCategoriesDate];
@@ -55,8 +55,8 @@ BuzzSentryDefaultRateLimits ()
         NSDictionary<NSNumber *, NSDate *> *limits = [self.rateLimitParser parse:rateLimitsHeader];
 
         for (NSNumber *categoryAsNumber in limits.allKeys) {
-            SentryDataCategory category
-                = sentryDataCategoryForNSUInteger(categoryAsNumber.unsignedIntegerValue);
+            BuzzSentryDataCategory category
+                = BuzzSentryDataCategoryForNSUInteger(categoryAsNumber.unsignedIntegerValue);
 
             [self updateRateLimit:category withDate:limits[categoryAsNumber]];
         }
@@ -69,11 +69,11 @@ BuzzSentryDefaultRateLimits ()
             retryAfterHeaderDate = [[SentryCurrentDate date] dateByAddingTimeInterval:60];
         }
 
-        [self updateRateLimit:kSentryDataCategoryAll withDate:retryAfterHeaderDate];
+        [self updateRateLimit:kBuzzSentryDataCategoryAll withDate:retryAfterHeaderDate];
     }
 }
 
-- (void)updateRateLimit:(SentryDataCategory)category withDate:(NSDate *)newDate
+- (void)updateRateLimit:(BuzzSentryDataCategory)category withDate:(NSDate *)newDate
 {
     NSDate *existingDate = [self.rateLimits getRateLimitForCategory:category];
     NSDate *longerRateLimitDate = [SentryDateUtil getMaximumDate:existingDate andOther:newDate];

@@ -4,12 +4,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryDispatchQueueWrapper, SentryDefaultObjCRuntimeWrapper;
+@class BuzzSentryDispatchQueueWrapper, SentryDefaultObjCRuntimeWrapper;
 
 @interface SentrySubClassFinder : NSObject
 SENTRY_NO_INIT
 
-- (instancetype)initWithDispatchQueue:(SentryDispatchQueueWrapper *)dispatchQueue
+- (instancetype)initWithDispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
                    objcRuntimeWrapper:(id<SentryObjCRuntimeWrapper>)objcRuntimeWrapper;
 
 /**

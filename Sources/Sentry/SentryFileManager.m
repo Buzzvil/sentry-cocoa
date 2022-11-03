@@ -1,10 +1,10 @@
 #import "SentryFileManager.h"
 #import "NSDate+SentryExtras.h"
 #import "SentryAppState.h"
-#import "SentryDataCategoryMapper.h"
+#import "BuzzSentryDataCategoryMapper.h"
 #import "SentryDependencyContainer.h"
-#import "SentryDispatchQueueWrapper.h"
-#import "SentryDsn.h"
+#import "BuzzSentryDispatchQueueWrapper.h"
+#import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
 #import "SentryEvent.h"
 #import "SentryFileContents.h"
@@ -49,7 +49,7 @@ SentryFileManager ()
 
 - (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                   andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
-                    dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+                    dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                                    error:(NSError **)error
 {
     self = [super init];
@@ -284,13 +284,13 @@ SentryFileManager ()
                                        envelopeFilePaths:envelopePathsCopy];
 
         for (BuzzSentryEnvelopeItem *item in envelope.items) {
-            SentryDataCategory rateLimitCategory
-                = sentryDataCategoryForEnvelopItemType(item.header.type);
+            BuzzSentryDataCategory rateLimitCategory
+                = BuzzSentryDataCategoryForEnvelopItemType(item.header.type);
 
             // When migrating the session init, the envelope to delete still contains the session
             // migrated to another envelope. Therefore, the envelope item is not deleted but
             // migrated.
-            if (didMigrateSessionInit && rateLimitCategory == kSentryDataCategorySession) {
+            if (didMigrateSessionInit && rateLimitCategory == kBuzzSentryDataCategorySession) {
                 continue;
             }
 

@@ -1,6 +1,6 @@
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryBaggage.h"
-#import "SentryDsn.h"
+#import "BuzzSentryDsn.h"
 #import "SentryLog.h"
 #import "BuzzSentryOptions+Private.h"
 #import "SentryScope+Private.h"

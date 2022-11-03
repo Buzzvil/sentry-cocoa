@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SentryHub, BuzzSentryTransactionContext, BuzzSentryTraceHeader, BuzzSentryTraceContext,
-    SentryDispatchQueueWrapper, BuzzSentryTracer, SentryProfilesSamplerDecision, BuzzSentryMeasurementValue;
+    BuzzSentryDispatchQueueWrapper, BuzzSentryTracer, SentryProfilesSamplerDecision, BuzzSentryMeasurementValue;
 
 static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
 
@@ -131,7 +131,7 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                                idleTimeout:(NSTimeInterval)idleTimeout
-                      dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper;
+                      dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
 - (id<BuzzSentrySpan>)startChildWithParentId:(BuzzSentrySpanId *)parentId
                                operation:(NSString *)operation

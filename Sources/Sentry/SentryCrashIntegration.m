@@ -1,7 +1,7 @@
 #import "SentryCrashIntegration.h"
 #import "SentryCrashInstallationReporter.h"
 #import "SentryCrashWrapper.h"
-#import "SentryDispatchQueueWrapper.h"
+#import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryEvent.h"
 #import "SentryHub.h"
 #import "SentryInAppLogic.h"
@@ -31,7 +31,7 @@ static NSString *const LOCALE_KEY = @"locale";
 SentryCrashIntegration ()
 
 @property (nonatomic, weak) BuzzSentryOptions *options;
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueueWrapper;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
 @property (nonatomic, strong) SentrySessionCrashedHandler *crashedSessionHandler;
 @property (nonatomic, strong) SentryCrashScopeObserver *scopeObserver;
@@ -43,14 +43,14 @@ SentryCrashIntegration ()
 - (instancetype)init
 {
     self = [self initWithCrashAdapter:[SentryCrashWrapper sharedInstance]
-              andDispatchQueueWrapper:[[SentryDispatchQueueWrapper alloc] init]];
+              andDispatchQueueWrapper:[[BuzzSentryDispatchQueueWrapper alloc] init]];
 
     return self;
 }
 
 /** Internal constructor for testing */
 - (instancetype)initWithCrashAdapter:(SentryCrashWrapper *)crashAdapter
-             andDispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+             andDispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     if (self = [super init]) {
         self.crashAdapter = crashAdapter;

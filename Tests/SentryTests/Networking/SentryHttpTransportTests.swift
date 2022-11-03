@@ -6,40 +6,40 @@ import XCTest
 @available(tvOS 10.0, *)
 @available(OSX 10.12, *)
 @available(iOS 10.0, *)
-class SentryHttpTransportTests: XCTestCase {
+class BuzzSentryHttpTransportTests: XCTestCase {
 
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryHttpTransportTests")
-    private static let dsn = TestConstants.dsn(username: "SentryHttpTransportTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryHttpTransportTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryHttpTransportTests")
 
     private class Fixture {
         let event: Event
         let eventEnvelope: BuzzSentryEnvelope
-        let eventRequest: SentryNSURLRequest
+        let eventRequest: BuzzSentryNSURLRequest
         let attachmentEnvelopeItem: BuzzSentryEnvelopeItem
-        let eventWithAttachmentRequest: SentryNSURLRequest
+        let eventWithAttachmentRequest: BuzzSentryNSURLRequest
         let eventWithSessionEnvelope: BuzzSentryEnvelope
-        let eventWithSessionRequest: SentryNSURLRequest
+        let eventWithSessionRequest: BuzzSentryNSURLRequest
         let session: SentrySession
         let sessionEnvelope: BuzzSentryEnvelope
-        let sessionRequest: SentryNSURLRequest
+        let sessionRequest: BuzzSentryNSURLRequest
         let currentDateProvider: TestCurrentDateProvider
         let fileManager: SentryFileManager
         let options: Options
         let requestManager: TestRequestManager
         let requestBuilder = TestNSURLRequestBuilder()
         let rateLimits: DefaultRateLimits
-        let dispatchQueueWrapper = TestSentryDispatchQueueWrapper()
-        let reachability = TestSentryReachability()
+        let dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
+        let reachability = TestBuzzSentryReachability()
         let flushTimeout: TimeInterval = 0.5
 
         let userFeedback: UserFeedback
-        let userFeedbackRequest: SentryNSURLRequest
+        let userFeedbackRequest: BuzzSentryNSURLRequest
         
         let clientReport: BuzzSentryClientReport
         let clientReportEnvelope: BuzzSentryEnvelope
-        let clientReportRequest: SentryNSURLRequest
+        let clientReportRequest: BuzzSentryNSURLRequest
         
-        let queue = DispatchQueue(label: "SentryHttpTransportTests", qos: .userInitiated, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentryHttpTransportTests", qos: .userInitiated, attributes: [.concurrent, .initiallyInactive])
 
         init() {
             currentDateProvider = TestCurrentDateProvider()
@@ -64,7 +64,7 @@ class SentryHttpTransportTests: XCTestCase {
             eventWithSessionRequest = buildRequest(eventWithSessionEnvelope)
 
             options = Options()
-            options.dsn = SentryHttpTransportTests.dsnAsString
+            options.dsn = BuzzSentryHttpTransportTests.dsnAsString
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
 
             requestManager = TestRequestManager(session: URLSession(configuration: URLSessionConfiguration.ephemeral))
@@ -94,9 +94,9 @@ class SentryHttpTransportTests: XCTestCase {
             dispatchQueueWrapper.dispatchAfterExecutesBlock = true
         }
 
-        var sut: SentryHttpTransport {
+        var sut: BuzzSentryHttpTransport {
             get {
-                return SentryHttpTransport(
+                return BuzzSentryHttpTransport(
                     options: options,
                     fileManager: fileManager,
                     requestManager: requestManager,
@@ -110,13 +110,13 @@ class SentryHttpTransportTests: XCTestCase {
         }
     }
 
-    class func buildRequest(_ envelope: BuzzSentryEnvelope) -> SentryNSURLRequest {
+    class func buildRequest(_ envelope: BuzzSentryEnvelope) -> BuzzSentryNSURLRequest {
         let envelopeData = try! SentrySerialization.data(with: envelope)
-        return try! SentryNSURLRequest(envelopeRequestWith: SentryHttpTransportTests.dsn, andData: envelopeData)
+        return try! BuzzSentryNSURLRequest(envelopeRequestWith: BuzzSentryHttpTransportTests.dsn, andData: envelopeData)
     }
 
     private var fixture: Fixture!
-    private var sut: SentryHttpTransport!
+    private var sut: BuzzSentryHttpTransport!
 
     override func setUp() {
         super.setUp()
@@ -210,7 +210,7 @@ class SentryHttpTransportTests: XCTestCase {
             BuzzSentryEnvelopeItem(clientReport: clientReport)
         ]
         let envelope = BuzzSentryEnvelope(id: fixture.event.eventId, items: envelopeItems)
-        let request = SentryHttpTransportTests.buildRequest(envelope)
+        let request = BuzzSentryHttpTransportTests.buildRequest(envelope)
         XCTAssertEqual(request.httpBody, fixture.requestManager.requests.last?.httpBody)
     }
     
@@ -410,7 +410,7 @@ class SentryHttpTransportTests: XCTestCase {
         let sessionEnvelope = BuzzSentryEnvelope(id: fixture.event.eventId, singleItem: BuzzSentryEnvelopeItem(session: fixture.session))
 
         let sessionData = try! SentrySerialization.data(with: sessionEnvelope)
-        let sessionRequest = try! SentryNSURLRequest(envelopeRequestWith: SentryHttpTransportTests.dsn, andData: sessionData)
+        let sessionRequest = try! BuzzSentryNSURLRequest(envelopeRequestWith: BuzzSentryHttpTransportTests.dsn, andData: sessionData)
 
         XCTAssertEqual(sessionRequest.httpBody, fixture.requestManager.requests.invocations[3].httpBody, "Envelope with only session item should be sent.")
     }
@@ -480,7 +480,7 @@ class SentryHttpTransportTests: XCTestCase {
             BuzzSentryEnvelopeItem(clientReport: clientReport)
         ]
         let clientReportEnvelope = BuzzSentryEnvelope(id: fixture.event.eventId, items: clientReportEnvelopeItems)
-        let clientReportRequest = SentryHttpTransportTests.buildRequest(clientReportEnvelope)
+        let clientReportRequest = BuzzSentryHttpTransportTests.buildRequest(clientReportEnvelope)
         
         givenRateLimitResponse(forCategory: "error")
         sendEvent()
@@ -830,7 +830,7 @@ class SentryHttpTransportTests: XCTestCase {
 
     private func assertRateLimitUpdated(response: HTTPURLResponse) {
         XCTAssertEqual(1, fixture.requestManager.requests.count)
-        XCTAssertTrue(fixture.rateLimits.isRateLimitActive(SentryDataCategory.session))
+        XCTAssertTrue(fixture.rateLimits.isRateLimitActive(BuzzSentryDataCategory.session))
     }
 
     private func assertRequestsSent(requestCount: Int) {

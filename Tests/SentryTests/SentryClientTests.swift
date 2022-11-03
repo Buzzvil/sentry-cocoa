@@ -1383,7 +1383,7 @@ class BuzzSentryClientTest: XCTestCase {
         XCTAssertEqual(0, fixture.transportAdapter.userFeedbackInvocations.count)
     }
     
-    private func assertLostEventRecorded(category: SentryDataCategory, reason: SentryDiscardReason) {
+    private func assertLostEventRecorded(category: BuzzSentryDataCategory, reason: BuzzSentryDiscardReason) {
         XCTAssertEqual(1, fixture.transport.recordLostEvents.count)
         let lostEvent = fixture.transport.recordLostEvents.first
         XCTAssertEqual(category, lostEvent?.category)

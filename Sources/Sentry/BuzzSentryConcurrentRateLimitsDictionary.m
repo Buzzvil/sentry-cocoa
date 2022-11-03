@@ -19,14 +19,14 @@ BuzzSentryConcurrentRateLimitsDictionary ()
     return self;
 }
 
-- (void)addRateLimit:(SentryDataCategory)category validUntil:(NSDate *)date
+- (void)addRateLimit:(BuzzSentryDataCategory)category validUntil:(NSDate *)date
 {
     @synchronized(self.rateLimits) {
         self.rateLimits[@(category)] = date;
     }
 }
 
-- (NSDate *)getRateLimitForCategory:(SentryDataCategory)category
+- (NSDate *)getRateLimitForCategory:(BuzzSentryDataCategory)category
 {
     @synchronized(self.rateLimits) {
         return self.rateLimits[@(category)];

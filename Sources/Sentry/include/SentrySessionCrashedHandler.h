@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class SentryCrashWrapper, SentryDispatchQueueWrapper, SentryOutOfMemoryLogic;
+@class SentryCrashWrapper, BuzzSentryDispatchQueueWrapper, SentryOutOfMemoryLogic;
 
 @interface SentrySessionCrashedHandler : NSObject
 

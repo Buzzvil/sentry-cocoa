@@ -1,6 +1,6 @@
 #import "SentryANRTracker.h"
 #import "SentryDefaultCurrentDateProvider.h"
-#import "SentryDispatchQueueWrapper.h"
+#import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryUIApplication.h"
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
@@ -8,7 +8,7 @@
 #import <SentryDebugImageProvider.h>
 #import <SentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
-#import <SentryDispatchQueueWrapper.h>
+#import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentryHub.h>
 #import <SentryNSNotificationCenterWrapper.h>
 #import <BuzzSentrySDK+Private.h>
@@ -98,11 +98,11 @@ static NSObject *sentryDependencyContainerLock;
     return _threadWrapper;
 }
 
-- (SentryDispatchQueueWrapper *)dispatchQueueWrapper
+- (BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     @synchronized(sentryDependencyContainerLock) {
         if (_dispatchQueueWrapper == nil) {
-            _dispatchQueueWrapper = [[SentryDispatchQueueWrapper alloc] init];
+            _dispatchQueueWrapper = [[BuzzSentryDispatchQueueWrapper alloc] init];
         }
         return _dispatchQueueWrapper;
     }
@@ -202,7 +202,7 @@ static NSObject *sentryDependencyContainerLock;
                     initWithTimeoutInterval:timeout
                         currentDateProvider:[SentryDefaultCurrentDateProvider sharedInstance]
                                crashWrapper:self.crashWrapper
-                       dispatchQueueWrapper:[[SentryDispatchQueueWrapper alloc] init]
+                       dispatchQueueWrapper:[[BuzzSentryDispatchQueueWrapper alloc] init]
                               threadWrapper:self.threadWrapper];
             }
         }

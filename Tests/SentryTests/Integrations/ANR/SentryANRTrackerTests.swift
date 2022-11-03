@@ -13,7 +13,7 @@ class SentryANRTrackerTests: XCTestCase, SentryANRTrackerDelegate {
         let timeoutInterval: TimeInterval = 5
         let currentDate = TestCurrentDateProvider()
         let crashWrapper: TestSentryCrashWrapper
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         let threadWrapper = SentryTestThreadWrapper()
         
         init() {

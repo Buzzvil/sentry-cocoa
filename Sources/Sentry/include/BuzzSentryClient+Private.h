@@ -1,6 +1,6 @@
 #import "BuzzSentryClient.h"
-#import "SentryDataCategory.h"
-#import "SentryDiscardReason.h"
+#import "BuzzSentryDataCategory.h"
+#import "BuzzSentryDiscardReason.h"
 
 @class BuzzSentryEnvelopeItem, SentryId, BuzzSentryAttachment, SentryThreadInspector;
 
@@ -49,7 +49,7 @@ BuzzSentryClient (Private)
  */
 - (void)storeEnvelope:(BuzzSentryEnvelope *)envelope;
 
-- (void)recordLostEvent:(SentryDataCategory)category reason:(SentryDiscardReason)reason;
+- (void)recordLostEvent:(BuzzSentryDataCategory)category reason:(BuzzSentryDiscardReason)reason;
 
 - (void)addAttachmentProcessor:(id<BuzzSentryClientAttachmentProcessor>)attachmentProcessor;
 - (void)removeAttachmentProcessor:(id<BuzzSentryClientAttachmentProcessor>)attachmentProcessor;

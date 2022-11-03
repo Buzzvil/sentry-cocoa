@@ -5,7 +5,7 @@ import XCTest
 class SentryUIViewControllerSwizzlingTests: XCTestCase {
     
     private class Fixture {
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         let objcRuntimeWrapper = SentryTestObjCRuntimeWrapper()
         let subClassFinder: TestSubClassFinder
         

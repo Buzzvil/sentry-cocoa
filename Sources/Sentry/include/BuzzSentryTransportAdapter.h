@@ -1,0 +1,55 @@
+#import "BuzzSentryDataCategory.h"
+#import "SentryDefines.h"
+#import "BuzzSentryDiscardReason.h"
+#import "BuzzSentryTransport.h"
+
+@class BuzzSentryEnvelope, BuzzSentryEnvelopeItem, SentryEvent, SentrySession, BuzzSentryUserFeedback,
+    BuzzSentryAttachment, BuzzSentryTraceContext, BuzzSentryOptions;
+
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+ * This class converts data objects to a BuzzSentryEnvelope and passes the BuzzSentryEnvelope to the
+ * BuzzSentryTransport. It is a layer between the BuzzSentryClient and the transport to keep the
+ * BuzzSentryClient small and make testing easier for the BuzzSentryClient.
+ */
+@interface BuzzSentryTransportAdapter : NSObject
+SENTRY_NO_INIT
+
+- (instancetype)initWithTransport:(id<BuzzSentryTransport>)transport options:(BuzzSentryOptions *)options;
+
+- (void)sendEvent:(SentryEvent *)event
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments
+    NS_SWIFT_NAME(send(event:attachments:));
+
+- (void)sendEvent:(SentryEvent *)event
+          session:(SentrySession *)session
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments;
+
+- (void)sendEvent:(SentryEvent *)event
+     traceContext:(nullable BuzzSentryTraceContext *)traceContext
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments
+    NS_SWIFT_NAME(send(event:traceContext:attachments:));
+
+- (void)sendEvent:(SentryEvent *)event
+               traceContext:(nullable BuzzSentryTraceContext *)traceContext
+                attachments:(NSArray<BuzzSentryAttachment *> *)attachments
+    additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
+    NS_SWIFT_NAME(send(event:traceContext:attachments:additionalEnvelopeItems:));
+
+- (void)sendEvent:(SentryEvent *)event
+      withSession:(SentrySession *)session
+     traceContext:(nullable BuzzSentryTraceContext *)traceContext
+      attachments:(NSArray<BuzzSentryAttachment *> *)attachments;
+
+- (void)sendUserFeedback:(BuzzSentryUserFeedback *)userFeedback NS_SWIFT_NAME(send(userFeedback:));
+
+- (void)sendEnvelope:(BuzzSentryEnvelope *)envelope NS_SWIFT_NAME(send(envelope:));
+
+- (void)recordLostEvent:(BuzzSentryDataCategory)category reason:(BuzzSentryDiscardReason)reason;
+
+- (void)flush:(NSTimeInterval)timeout;
+
+@end
+
+NS_ASSUME_NONNULL_END

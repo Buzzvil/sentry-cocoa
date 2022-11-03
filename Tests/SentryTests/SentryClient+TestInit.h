@@ -1,9 +1,9 @@
 #import "SentryPermissionsObserver.h"
 #import "BuzzSentryRandom.h"
-#import "SentryTransport.h"
+#import "BuzzSentryTransport.h"
 #import <Sentry/Sentry.h>
 
-@class SentryCrashWrapper, SentryThreadInspector, SentryTransportAdapter, SentryUIDeviceWrapper;
+@class SentryCrashWrapper, SentryThreadInspector, BuzzSentryTransportAdapter, SentryUIDeviceWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ BuzzSentryClient (TestInit)
                       permissionsObserver:(SentryPermissionsObserver *)permissionsObserver;
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-               transportAdapter:(SentryTransportAdapter *)transportAdapter
+               transportAdapter:(BuzzSentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
                 threadInspector:(SentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random

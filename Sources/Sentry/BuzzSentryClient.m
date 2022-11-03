@@ -10,7 +10,7 @@
 #import "SentryDebugImageProvider.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
-#import "SentryDsn.h"
+#import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "SentryEvent.h"
@@ -39,9 +39,9 @@
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransaction.h"
-#import "SentryTransport.h"
-#import "SentryTransportAdapter.h"
-#import "SentryTransportFactory.h"
+#import "BuzzSentryTransport.h"
+#import "BuzzSentryTransportAdapter.h"
+#import "BuzzSentryTransportFactory.h"
 #import "SentryUIDeviceWrapper.h"
 #import "SentryUser.h"
 #import "BuzzSentryUserFeedback.h"
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 BuzzSentryClient ()
 
-@property (nonatomic, strong) SentryTransportAdapter *transportAdapter;
+@property (nonatomic, strong) BuzzSentryTransportAdapter *transportAdapter;
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) SentryDebugImageProvider *debugImageProvider;
 @property (nonatomic, strong) SentryThreadInspector *threadInspector;
@@ -95,11 +95,11 @@ NSString *const kSentryDefaultEnvironment = @"production";
         return nil;
     }
 
-    id<SentryTransport> transport = [SentryTransportFactory initTransport:options
+    id<BuzzSentryTransport> transport = [BuzzSentryTransportFactory initTransport:options
                                                         sentryFileManager:fileManager];
 
-    SentryTransportAdapter *transportAdapter =
-        [[SentryTransportAdapter alloc] initWithTransport:transport options:options];
+    BuzzSentryTransportAdapter *transportAdapter =
+        [[BuzzSentryTransportAdapter alloc] initWithTransport:transport options:options];
 
     SentryInAppLogic *inAppLogic =
         [[SentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
@@ -128,7 +128,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 }
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-               transportAdapter:(SentryTransportAdapter *)transportAdapter
+               transportAdapter:(BuzzSentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
                 threadInspector:(SentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random
@@ -452,7 +452,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self.fileManager storeEnvelope:envelope];
 }
 
-- (void)recordLostEvent:(SentryDataCategory)category reason:(SentryDiscardReason)reason
+- (void)recordLostEvent:(BuzzSentryDataCategory)category reason:(BuzzSentryDiscardReason)reason
 {
     [self.transportAdapter recordLostEvent:category reason:reason];
 }
@@ -493,7 +493,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     // Transactions have their own sampleRate
     if (eventIsNotATransaction && [self isSampled:self.options.sampleRate]) {
         SENTRY_LOG_DEBUG(@"Event got sampled, will not send the event");
-        [self recordLostEvent:kSentryDataCategoryError reason:kSentryDiscardReasonSampleRate];
+        [self recordLostEvent:kBuzzSentryDataCategoryError reason:kBuzzSentryDiscardReasonSampleRate];
         return nil;
     }
 
@@ -577,14 +577,14 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
     event = [self callEventProcessors:event];
     if (event == nil) {
-        [self recordLost:eventIsNotATransaction reason:kSentryDiscardReasonEventProcessor];
+        [self recordLost:eventIsNotATransaction reason:kBuzzSentryDiscardReasonEventProcessor];
     }
 
     if (event != nil && nil != self.options.beforeSend) {
         event = self.options.beforeSend(event);
 
         if (event == nil) {
-            [self recordLost:eventIsNotATransaction reason:kSentryDiscardReasonBeforeSend];
+            [self recordLost:eventIsNotATransaction reason:kBuzzSentryDiscardReasonBeforeSend];
         }
     }
 
@@ -840,12 +840,12 @@ NSString *const kSentryDefaultEnvironment = @"production";
     event.context = context;
 }
 
-- (void)recordLost:(BOOL)eventIsNotATransaction reason:(SentryDiscardReason)reason
+- (void)recordLost:(BOOL)eventIsNotATransaction reason:(BuzzSentryDiscardReason)reason
 {
     if (eventIsNotATransaction) {
-        [self recordLostEvent:kSentryDataCategoryError reason:reason];
+        [self recordLostEvent:kBuzzSentryDataCategoryError reason:reason];
     } else {
-        [self recordLostEvent:kSentryDataCategoryTransaction reason:reason];
+        [self recordLostEvent:kBuzzSentryDataCategoryTransaction reason:reason];
     }
 }
 

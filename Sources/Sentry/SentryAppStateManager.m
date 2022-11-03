@@ -5,7 +5,7 @@
 #import <SentryAppStateManager.h>
 #import <SentryCrashWrapper.h>
 #import <SentryCurrentDateProvider.h>
-#import <SentryDispatchQueueWrapper.h>
+#import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentryFileManager.h>
 #import <BuzzSentryOptions.h>
 
@@ -23,7 +23,7 @@ SentryAppStateManager ()
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) SentrySysctl *sysctl;
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic) NSInteger startCount;
 
 @end
@@ -35,7 +35,7 @@ SentryAppStateManager ()
                     fileManager:(SentryFileManager *)fileManager
             currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                          sysctl:(SentrySysctl *)sysctl
-           dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+           dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     if (self = [super init]) {
         self.options = options;

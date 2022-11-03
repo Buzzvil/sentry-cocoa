@@ -23,7 +23,7 @@ NS_SWIFT_NAME(EnvelopeRateLimit)
 
 @protocol BuzzSentryEnvelopeRateLimitDelegate <NSObject>
 
-- (void)envelopeItemDropped:(SentryDataCategory)dataCategory;
+- (void)envelopeItemDropped:(BuzzSentryDataCategory)dataCategory;
 
 @end
 

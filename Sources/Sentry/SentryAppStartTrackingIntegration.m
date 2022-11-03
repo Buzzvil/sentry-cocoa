@@ -7,7 +7,7 @@
 #import <SentryAppStateManager.h>
 #import <SentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
-#import <SentryDispatchQueueWrapper.h>
+#import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentrySysctl.h>
 
 @interface
@@ -38,7 +38,7 @@ SentryAppStartTrackingIntegration ()
 
     self.tracker = [[SentryAppStartTracker alloc]
         initWithCurrentDateProvider:currentDateProvider
-               dispatchQueueWrapper:[[SentryDispatchQueueWrapper alloc] init]
+               dispatchQueueWrapper:[[BuzzSentryDispatchQueueWrapper alloc] init]
                     appStateManager:appStateManager
                              sysctl:sysctl];
     [self.tracker start];

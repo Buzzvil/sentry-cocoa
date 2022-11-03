@@ -1,16 +1,16 @@
-#import "SentryReachability.h"
+#import "BuzzSentryReachability.h"
 #import <XCTest/XCTest.h>
 
 #if !TARGET_OS_WATCH
 @interface SentryConnectivityTest : XCTestCase
-@property (strong, nonatomic) SentryReachability *reachability;
+@property (strong, nonatomic) BuzzSentryReachability *reachability;
 @end
 
 @implementation SentryConnectivityTest
 
 - (void)setUp
 {
-    self.reachability = [[SentryReachability alloc] init];
+    self.reachability = [[BuzzSentryReachability alloc] init];
 }
 
 - (void)tearDown
@@ -40,7 +40,7 @@
 
 - (void)testUniqueKeyForInstances
 {
-    SentryReachability *anotherReachability = [[SentryReachability alloc] init];
+    BuzzSentryReachability *anotherReachability = [[BuzzSentryReachability alloc] init];
     XCTAssertNotEqualObjects(
         [self.reachability keyForInstance], [anotherReachability keyForInstance]);
     XCTAssertEqualObjects([self.reachability keyForInstance], [self.reachability keyForInstance]);

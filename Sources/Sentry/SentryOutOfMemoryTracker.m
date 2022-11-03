@@ -3,7 +3,7 @@
 #import <SentryAppState.h>
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
-#import <SentryDispatchQueueWrapper.h>
+#import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentryEvent.h>
 #import <SentryException.h>
 #import <SentryHub.h>
@@ -24,7 +24,7 @@ SentryOutOfMemoryTracker ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) SentryOutOfMemoryLogic *outOfMemoryLogic;
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
 @property (nonatomic, strong) SentryFileManager *fileManager;
 
@@ -35,7 +35,7 @@ SentryOutOfMemoryTracker ()
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic
                 appStateManager:(SentryAppStateManager *)appStateManager
-           dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+           dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                     fileManager:(SentryFileManager *)fileManager
 {
     if (self = [super init]) {

@@ -21,7 +21,7 @@
 #import "BuzzSentryTransaction.h"
 #import "BuzzSentryTransactionContext.h"
 #import "SentryUIViewControllerPerformanceTracker.h"
-#import <SentryDispatchQueueWrapper.h>
+#import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryMeasurementValue.h>
 #import <SentryScreenFrames.h>
 #import <BuzzSentrySpanOperations.h>
@@ -49,7 +49,7 @@ BuzzSentryTracer ()
  * if waitForChildren is <code>YES</code>. */
 @property (nonatomic) BOOL wasFinishCalled;
 @property (nonatomic) NSTimeInterval idleTimeout;
-@property (nonatomic, nullable, strong) SentryDispatchQueueWrapper *dispatchQueueWrapper;
+@property (nonatomic, nullable, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 
 @end
 
@@ -124,7 +124,7 @@ static BOOL appStartMeasurementRead;
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                                idleTimeout:(NSTimeInterval)idleTimeout
-                      dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+                      dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     return [self initWithTransactionContext:transactionContext
                                         hub:hub
@@ -140,7 +140,7 @@ static BOOL appStartMeasurementRead;
        profilesSamplerDecision:(nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                waitForChildren:(BOOL)waitForChildren
                    idleTimeout:(NSTimeInterval)idleTimeout
-          dispatchQueueWrapper:(nullable SentryDispatchQueueWrapper *)dispatchQueueWrapper
+          dispatchQueueWrapper:(nullable BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     if (self = [super init]) {
         self.rootSpan = [[BuzzSentrySpan alloc] initWithTracer:self context:transactionContext];

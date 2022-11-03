@@ -257,8 +257,8 @@ SentryHub ()
 {
     BuzzSentrySampleDecision decision = transaction.trace.context.sampled;
     if (decision != kBuzzSentrySampleDecisionYes) {
-        [self.client recordLostEvent:kSentryDataCategoryTransaction
-                              reason:kSentryDiscardReasonSampleRate];
+        [self.client recordLostEvent:kBuzzSentryDataCategoryTransaction
+                              reason:kBuzzSentryDiscardReasonSampleRate];
         return SentryId.empty;
     }
 
@@ -393,7 +393,7 @@ SentryHub ()
                                   bindToScope:(BOOL)bindToScope
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
                                   idleTimeout:(NSTimeInterval)idleTimeout
-                         dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+                         dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     BuzzSentrySamplingContext *samplingContext =
         [[BuzzSentrySamplingContext alloc] initWithTransactionContext:transactionContext

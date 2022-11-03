@@ -27,7 +27,7 @@ class SentrySubClassFinderTests: XCTestCase {
         }
         
         var sut: SentrySubClassFinder {
-            return SentrySubClassFinder(dispatchQueue: SentryDispatchQueueWrapper(), objcRuntimeWrapper: runtimeWrapper)
+            return SentrySubClassFinder(dispatchQueue: BuzzSentryDispatchQueueWrapper(), objcRuntimeWrapper: runtimeWrapper)
         }
     }
     
@@ -58,7 +58,7 @@ class SentrySubClassFinderTests: XCTestCase {
     }
   
     func testGettingSublcasses_DoesNotCallInitializer() {
-        let sut = SentrySubClassFinder(dispatchQueue: TestSentryDispatchQueueWrapper(), objcRuntimeWrapper: fixture.runtimeWrapper)
+        let sut = SentrySubClassFinder(dispatchQueue: TestBuzzSentryDispatchQueueWrapper(), objcRuntimeWrapper: fixture.runtimeWrapper)
         
         var actual: [AnyClass] = []
         sut.actOnSubclassesOfViewController(inImage: fixture.imageName) { subClass in

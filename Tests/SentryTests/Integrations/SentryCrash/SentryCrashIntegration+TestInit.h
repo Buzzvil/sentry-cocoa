@@ -1,5 +1,5 @@
 #import "SentryCrashIntegration.h"
-#import "SentryDispatchQueueWrapper.h"
+#import "BuzzSentryDispatchQueueWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 SentryCrashIntegration (TestInit)
 
 - (instancetype)initWithCrashAdapter:(SentryCrashWrapper *)crashWrapper
-             andDispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper;
+             andDispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
 @end
 

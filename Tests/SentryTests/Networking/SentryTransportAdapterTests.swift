@@ -1,7 +1,7 @@
 import Sentry
 import XCTest
 
-class SentryTransportAdapterTests: XCTestCase {
+class BuzzSentryTransportAdapterTests: XCTestCase {
     
     private class Fixture {
 
@@ -10,15 +10,15 @@ class SentryTransportAdapterTests: XCTestCase {
         let faultyAttachment = Attachment(path: "")
         let attachment = Attachment(data: Data(), filename: "test.txt")
         
-        var sut: SentryTransportAdapter {
+        var sut: BuzzSentryTransportAdapter {
             get {
-                return SentryTransportAdapter(transport: transport, options: options)
+                return BuzzSentryTransportAdapter(transport: transport, options: options)
             }
         }
     }
 
     private var fixture: Fixture!
-    private var sut: SentryTransportAdapter!
+    private var sut: BuzzSentryTransportAdapter!
 
     override func setUp() {
         super.setUp()

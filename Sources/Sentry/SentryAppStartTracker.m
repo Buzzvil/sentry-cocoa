@@ -7,7 +7,7 @@
 #import <SentryAppStartTracker.h>
 #import <SentryAppState.h>
 #import <SentryCurrentDateProvider.h>
-#import <SentryDispatchQueueWrapper.h>
+#import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentryInternalNotificationNames.h>
 #import <SentryLog.h>
 #import <BuzzSentrySDK+Private.h>
@@ -29,7 +29,7 @@ SentryAppStartTracker ()
 
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) SentryAppState *previousAppState;
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
 @property (nonatomic, strong) SentrySysctl *sysctl;
 @property (nonatomic, assign) BOOL wasInBackground;
@@ -52,7 +52,7 @@ SentryAppStartTracker ()
 }
 
 - (instancetype)initWithCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
-                       dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+                       dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                             appStateManager:(SentryAppStateManager *)appStateManager
                                      sysctl:(SentrySysctl *)sysctl
 {

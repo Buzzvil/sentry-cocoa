@@ -3,7 +3,7 @@ import XCTest
 class BuzzSentryDiscardedEventTests: XCTestCase {
 
     func testSerialize() {
-        let discardedEvent = BuzzSentryDiscardedEvent(reason: SentryDiscardReason.sampleRate, category: SentryDataCategory.transaction, quantity: 2)
+        let discardedEvent = BuzzSentryDiscardedEvent(reason: BuzzSentryDiscardReason.sampleRate, category: BuzzSentryDataCategory.transaction, quantity: 2)
         
         let actual = discardedEvent.serialize()
         

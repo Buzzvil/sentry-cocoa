@@ -27,7 +27,7 @@ class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
     }
     
     func testLimitForErrorActive() {
-        rateLimits.rateLimits = [SentryDataCategory.error]
+        rateLimits.rateLimits = [BuzzSentryDataCategory.error]
         
         let envelope = getEnvelope()
         let actual = sut.removeRateLimitedItems(envelope)
@@ -39,12 +39,12 @@ class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
         XCTAssertEqual(envelope.header, actual.header)
         
         XCTAssertEqual(3, delegate.envelopeItemsDropped.count)
-        let expected = [SentryDataCategory.error, SentryDataCategory.error, SentryDataCategory.error]
+        let expected = [BuzzSentryDataCategory.error, BuzzSentryDataCategory.error, BuzzSentryDataCategory.error]
         XCTAssertEqual(expected, delegate.envelopeItemsDropped.invocations)
     }
     
     func testLimitForSessionActive() {
-        rateLimits.rateLimits = [SentryDataCategory.session]
+        rateLimits.rateLimits = [BuzzSentryDataCategory.session]
         
         let envelope = getEnvelope()
         let actual = sut.removeRateLimitedItems(envelope)
@@ -56,12 +56,12 @@ class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
         XCTAssertEqual(envelope.header, actual.header)
         
         XCTAssertEqual(3, delegate.envelopeItemsDropped.count)
-        let expected = [SentryDataCategory.session, SentryDataCategory.session, SentryDataCategory.session]
+        let expected = [BuzzSentryDataCategory.session, BuzzSentryDataCategory.session, BuzzSentryDataCategory.session]
         XCTAssertEqual(expected, delegate.envelopeItemsDropped.invocations)
     }
     
     func testLimitForCustomType() {
-        rateLimits.rateLimits = [SentryDataCategory.default]
+        rateLimits.rateLimits = [BuzzSentryDataCategory.default]
         var envelopeItems = [BuzzSentryEnvelopeItem]()
         envelopeItems.append(BuzzSentryEnvelopeItem(event: Event()))
         

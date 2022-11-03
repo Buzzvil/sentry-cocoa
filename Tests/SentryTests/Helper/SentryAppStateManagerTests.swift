@@ -26,7 +26,7 @@ class SentryAppStateManagerTests: XCTestCase {
                 fileManager: fileManager,
                 currentDateProvider: currentDate,
                 sysctl: TestSysctl(),
-                dispatchQueueWrapper: TestSentryDispatchQueueWrapper()
+                dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper()
             )
         }
     }

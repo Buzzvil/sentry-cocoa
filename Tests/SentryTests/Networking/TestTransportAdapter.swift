@@ -1,6 +1,6 @@
 import Foundation
 
-public class TestTransportAdapter: SentryTransportAdapter {
+public class TestTransportAdapter: BuzzSentryTransportAdapter {
     
     public override func send(event: Event, attachments: [Attachment]) {
         self.send(event: event, traceContext: nil, attachments: attachments)

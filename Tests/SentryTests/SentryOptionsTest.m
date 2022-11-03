@@ -559,7 +559,7 @@
     options.dsn = dsnAsString;
     options.enabled = NO;
 
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:dsnAsString didFailWithError:nil];
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:dsnAsString didFailWithError:nil];
 
     XCTAssertEqual(dsnAsString, options.dsn);
     XCTAssertTrue([dsn.url.absoluteString isEqualToString:options.parsedDsn.url.absoluteString]);

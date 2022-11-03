@@ -7,7 +7,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryOptions, SentryDispatchQueueWrapper, SentrySubClassFinder;
+@class BuzzSentryOptions, BuzzSentryDispatchQueueWrapper, SentrySubClassFinder;
 
 /**
  * This is a protocol to define which properties and methods the swizzler required from
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-                  dispatchQueue:(SentryDispatchQueueWrapper *)dispatchQueue
+                  dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
              objcRuntimeWrapper:(id<SentryObjCRuntimeWrapper>)objcRuntimeWrapper
                  subClassFinder:(SentrySubClassFinder *)subClassFinder;
 

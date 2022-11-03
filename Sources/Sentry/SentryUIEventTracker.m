@@ -22,7 +22,7 @@ static NSString *const SentryUIEventTrackerSwizzleSendAction
 SentryUIEventTracker ()
 
 @property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueueWrapper;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, assign) NSTimeInterval idleTimeout;
 @property (nullable, nonatomic, strong) NSMutableArray<BuzzSentryTracer *> *activeTransactions;
 
@@ -35,7 +35,7 @@ SentryUIEventTracker ()
 #if SENTRY_HAS_UIKIT
 
 - (instancetype)initWithSwizzleWrapper:(SentrySwizzleWrapper *)swizzleWrapper
-                  dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
+                  dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                            idleTimeout:(NSTimeInterval)idleTimeout
 {
     if (self = [super init]) {

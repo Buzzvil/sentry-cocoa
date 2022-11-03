@@ -8,7 +8,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     private class Fixture {
         
         let currentDateProvider = TestCurrentDateProvider()
-        let dispatchQueueWrapper = TestSentryDispatchQueueWrapper()
+        let dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
         let hub: SentryHub
         let options: Options
         let sentryCrash: TestSentryCrashWrapper

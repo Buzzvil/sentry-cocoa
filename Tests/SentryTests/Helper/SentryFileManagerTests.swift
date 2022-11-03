@@ -14,7 +14,7 @@ class SentryFileManagerTests: XCTestCase {
         let eventIds: [SentryId]
         
         let currentDateProvider: TestCurrentDateProvider!
-        let dispatchQueueWrapper: TestSentryDispatchQueueWrapper!
+        let dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper!
         
         let options: Options
 
@@ -34,7 +34,7 @@ class SentryFileManagerTests: XCTestCase {
         
         init() {
             currentDateProvider = TestCurrentDateProvider()
-            dispatchQueueWrapper = TestSentryDispatchQueueWrapper()
+            dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
             dispatchQueueWrapper.dispatchAfterExecutesBlock = true
             
             eventIds = (0...(maxCacheItems + 10)).map { _ in SentryId() }
@@ -110,8 +110,8 @@ class SentryFileManagerTests: XCTestCase {
         sut.storeCurrentSession(SentrySession(releaseName: "1.0.0"))
         sut.storeTimestampLast(inForeground: Date())
 
-        _ = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestSentryDispatchQueueWrapper())
-        let fileManager = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestSentryDispatchQueueWrapper())
+        _ = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
+        let fileManager = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
 
         XCTAssertEqual(1, fileManager.getAllEnvelopes().count)
         XCTAssertNotNil(fileManager.readCurrentSession())
@@ -121,7 +121,7 @@ class SentryFileManagerTests: XCTestCase {
     func testInitDeletesEventsFolder() throws {
         storeEvent()
         
-        _ = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestSentryDispatchQueueWrapper())
+        _ = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
         
         assertEventFolderDoesntExist()
     }
@@ -229,7 +229,7 @@ class SentryFileManagerTests: XCTestCase {
         }
         
         XCTAssertEqual(4, fixture.delegate.envelopeItemsDeleted.count)
-        let expected: [SentryDataCategory] = [.error, .attachment, .session, .error]
+        let expected: [BuzzSentryDataCategory] = [.error, .attachment, .session, .error]
         XCTAssertEqual(expected, fixture.delegate.envelopeItemsDeleted.invocations)
     }
 

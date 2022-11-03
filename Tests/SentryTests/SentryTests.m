@@ -7,7 +7,7 @@
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
 
-#import "SentryDataCategory.h"
+#import "BuzzSentryDataCategory.h"
 
 @interface
 SentryBreadcrumbTracker (Private)

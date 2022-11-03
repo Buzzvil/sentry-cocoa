@@ -12,7 +12,7 @@ SentryCrashInstallationReporter ()
 
 @property (nonatomic, strong) SentryInAppLogic *inAppLogic;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
-@property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
+@property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 
 @end
 
@@ -20,7 +20,7 @@ SentryCrashInstallationReporter ()
 
 - (instancetype)initWithInAppLogic:(SentryInAppLogic *)inAppLogic
                       crashWrapper:(SentryCrashWrapper *)crashWrapper
-                     dispatchQueue:(SentryDispatchQueueWrapper *)dispatchQueue
+                     dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
 {
     if (self = [super initWithRequiredProperties:[NSArray new]]) {
         self.inAppLogic = inAppLogic;

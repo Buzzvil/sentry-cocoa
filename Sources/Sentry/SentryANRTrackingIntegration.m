@@ -4,7 +4,7 @@
 #import "SentryCrashMachineContext.h"
 #import "SentryCrashWrapper.h"
 #import "SentryDefaultCurrentDateProvider.h"
-#import "SentryDispatchQueueWrapper.h"
+#import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryEvent.h"
 #import "SentryException.h"
 #import "SentryHub+Private.h"
