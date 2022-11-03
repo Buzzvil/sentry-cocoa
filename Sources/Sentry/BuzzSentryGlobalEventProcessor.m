@@ -1,11 +1,11 @@
-#import "SentryGlobalEventProcessor.h"
+#import "BuzzSentryGlobalEventProcessor.h"
 #import "SentryLog.h"
 
-@implementation SentryGlobalEventProcessor
+@implementation BuzzSentryGlobalEventProcessor
 
 + (instancetype)shared
 {
-    static SentryGlobalEventProcessor *instance = nil;
+    static BuzzSentryGlobalEventProcessor *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] initPrivate]; });
     return instance;

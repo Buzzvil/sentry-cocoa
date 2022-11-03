@@ -16,7 +16,7 @@
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
 #import "SentryFileManager.h"
-#import "SentryGlobalEventProcessor.h"
+#import "BuzzSentryGlobalEventProcessor.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryHub.h"
 #import "BuzzSentryId.h"
@@ -621,7 +621,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 {
     BuzzSentryEvent *newEvent = event;
 
-    for (BuzzSentryEventProcessor processor in SentryGlobalEventProcessor.shared.processors) {
+    for (BuzzSentryEventProcessor processor in BuzzSentryGlobalEventProcessor.shared.processors) {
         newEvent = processor(newEvent);
         if (nil == newEvent) {
             SENTRY_LOG_DEBUG(@"BuzzSentryScope callEventProcessors: An event processor decided to "

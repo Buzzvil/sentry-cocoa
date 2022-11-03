@@ -10,7 +10,7 @@
 #import <BuzzSentryOptions.h>
 
 #if SENTRY_HAS_UIKIT
-#    import <SentryInternalNotificationNames.h>
+#    import <BuzzSentryInternalNotificationNames.h>
 #    import <SentryNSNotificationCenterWrapper.h>
 #    import <UIKit/UIKit.h>
 #endif

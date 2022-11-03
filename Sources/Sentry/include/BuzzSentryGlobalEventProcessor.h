@@ -6,7 +6,7 @@ typedef BuzzSentryEvent *__nullable (^BuzzSentryEventProcessor)(BuzzSentryEvent 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryGlobalEventProcessor : NSObject
+@interface BuzzSentryGlobalEventProcessor : NSObject
 SENTRY_NO_INIT
 
 @property (nonatomic, strong) NSMutableArray<BuzzSentryEventProcessor> *processors;

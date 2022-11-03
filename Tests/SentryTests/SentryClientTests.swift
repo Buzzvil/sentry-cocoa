@@ -922,7 +922,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testEventDroppedByEventProcessor_RecordsLostEvent() {
-        SentryGlobalEventProcessor.shared().add { _ in return nil }
+        BuzzSentryGlobalEventProcessor.shared().add { _ in return nil }
         
         beforeSendReturnsNil { $0.capture(message: fixture.messageAsString) }
         
@@ -930,7 +930,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testTransactionDroppedByEventProcessor_RecordsLostEvent() {
-        SentryGlobalEventProcessor.shared().add { _ in return nil }
+        BuzzSentryGlobalEventProcessor.shared().add { _ in return nil }
         
         beforeSendReturnsNil { $0.capture(event: fixture.transaction) }
         

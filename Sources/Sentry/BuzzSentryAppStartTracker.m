@@ -8,7 +8,7 @@
 #import <SentryAppState.h>
 #import <SentryCurrentDateProvider.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
-#import <SentryInternalNotificationNames.h>
+#import <BuzzSentryInternalNotificationNames.h>
 #import <SentryLog.h>
 #import <BuzzSentrySDK+Private.h>
 
