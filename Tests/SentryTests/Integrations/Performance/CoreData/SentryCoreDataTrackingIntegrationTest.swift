@@ -1,7 +1,7 @@
 import CoreData
 import XCTest
 
-class SentryCoreDataTrackingIntegrationTests: XCTestCase {
+class BuzzSentryCoreDataTrackingIntegrationTests: XCTestCase {
 
     private class Fixture {
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -14,8 +14,8 @@ class SentryCoreDataTrackingIntegrationTests: XCTestCase {
             options.tracesSampleRate = 1
         }
         
-        func getSut() -> SentryCoreDataTrackingIntegration {
-            return SentryCoreDataTrackingIntegration()
+        func getSut() -> BuzzSentryCoreDataTrackingIntegration {
+            return BuzzSentryCoreDataTrackingIntegration()
         }
     }
     
@@ -35,11 +35,11 @@ class SentryCoreDataTrackingIntegrationTests: XCTestCase {
     func test_InstallAndUninstall() {
         let sut = fixture.getSut()
         
-        XCTAssertNil(SentryCoreDataSwizzling.sharedInstance.middleware)
+        XCTAssertNil(BuzzSentryCoreDataSwizzling.sharedInstance.middleware)
         sut.install(with: fixture.options)
-        XCTAssertNotNil(SentryCoreDataSwizzling.sharedInstance.middleware)
+        XCTAssertNotNil(BuzzSentryCoreDataSwizzling.sharedInstance.middleware)
         sut.uninstall()
-        XCTAssertNil(SentryCoreDataSwizzling.sharedInstance.middleware)
+        XCTAssertNil(BuzzSentryCoreDataSwizzling.sharedInstance.middleware)
     }
     
     func test_Install_swizzlingDisabled() {
@@ -90,7 +90,7 @@ class SentryCoreDataTrackingIntegrationTests: XCTestCase {
         let stack = fixture.coreDataStack
         let fetch = NSFetchRequest<TestEntity>(entityName: "TestEntity")
         let transaction = startTransaction()
-        SentryCoreDataSwizzling.sharedInstance.stop()
+        BuzzSentryCoreDataSwizzling.sharedInstance.stop()
         var _ = try? stack.managedObjectContext.fetch(fetch)
         XCTAssertEqual(transaction.children.count, 0)
     }
@@ -101,7 +101,7 @@ class SentryCoreDataTrackingIntegrationTests: XCTestCase {
         let transaction = startTransaction()
         let newEntity: TestEntity = stack.getEntity()
         newEntity.field1 = "Some Update"
-        SentryCoreDataSwizzling.sharedInstance.stop()
+        BuzzSentryCoreDataSwizzling.sharedInstance.stop()
         try? stack.managedObjectContext.save()
         XCTAssertEqual(transaction.children.count, 0)
     }
@@ -109,9 +109,9 @@ class SentryCoreDataTrackingIntegrationTests: XCTestCase {
     private func assert_DontInstall(_ confOptions: ((Options) -> Void)) {
         let sut = fixture.getSut()
         confOptions(fixture.options)
-        XCTAssertNil(SentryCoreDataSwizzling.sharedInstance.middleware)
+        XCTAssertNil(BuzzSentryCoreDataSwizzling.sharedInstance.middleware)
         sut.install(with: fixture.options)
-        XCTAssertNil(SentryCoreDataSwizzling.sharedInstance.middleware)
+        XCTAssertNil(BuzzSentryCoreDataSwizzling.sharedInstance.middleware)
     }
     
     private func startTransaction() -> BuzzSentryTracer {

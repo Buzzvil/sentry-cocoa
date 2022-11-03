@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Automatically tracks session start and end.
  */
-@interface SentryAutoSessionTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryAutoSessionTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 - (void)stop;
 

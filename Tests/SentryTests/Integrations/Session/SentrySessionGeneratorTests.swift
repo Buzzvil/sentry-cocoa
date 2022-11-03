@@ -16,7 +16,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
     }
     
     private var sentryCrash: TestSentryCrashWrapper!
-    private var autoSessionTrackingIntegration: SentryAutoSessionTrackingIntegration!
+    private var autoSessionTrackingIntegration: BuzzSentryAutoSessionTrackingIntegration!
     private var crashIntegration: SentryCrashIntegration!
     private var options: Options!
     private var fileManager: SentryFileManager!
@@ -32,9 +32,9 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         
         options.sessionTrackingIntervalMillis = 1
         
-        // We want to start and stop the SentryAutoSessionTrackingIntegration ourselves so we can send crashed and abnormal sessions.
+        // We want to start and stop the BuzzSentryAutoSessionTrackingIntegration ourselves so we can send crashed and abnormal sessions.
         options.integrations = Options.defaultIntegrations().filter { (name) -> Bool in
-            return name != "SentryAutoSessionTrackingIntegration"
+            return name != "BuzzSentryAutoSessionTrackingIntegration"
         }
         
         do {
@@ -151,7 +151,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         crashIntegration = SentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
         crashIntegration.install(with: options)
         
-        autoSessionTrackingIntegration = SentryAutoSessionTrackingIntegration()
+        autoSessionTrackingIntegration = BuzzSentryAutoSessionTrackingIntegration()
         autoSessionTrackingIntegration.install(with: options)
     }
     

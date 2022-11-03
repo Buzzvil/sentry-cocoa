@@ -1,4 +1,4 @@
-#import "SentryAutoSessionTrackingIntegration.h"
+#import "BuzzSentryAutoSessionTrackingIntegration.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "SentryLog.h"
@@ -9,13 +9,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryAutoSessionTrackingIntegration ()
+BuzzSentryAutoSessionTrackingIntegration ()
 
 @property (nonatomic, strong) BuzzSentrySessionTracker *tracker;
 
 @end
 
-@implementation SentryAutoSessionTrackingIntegration
+@implementation BuzzSentryAutoSessionTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {

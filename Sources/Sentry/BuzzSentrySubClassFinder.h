@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class BuzzSentryDispatchQueueWrapper, SentryDefaultObjCRuntimeWrapper;
 
-@interface SentrySubClassFinder : NSObject
+@interface BuzzSentrySubClassFinder : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithDispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue

@@ -1,5 +1,5 @@
 
-#import "SentryCoreDataTracker.h"
+#import "BuzzSentryCoreDataTracker.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentryPredicateDescriptor.h"
@@ -7,7 +7,7 @@
 #import "SentryScope+Private.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@implementation SentryCoreDataTracker {
+@implementation BuzzSentryCoreDataTracker {
     BuzzSentryPredicateDescriptor *predicateDescriptor;
 }
 
@@ -33,7 +33,7 @@
     if (fetchSpan) {
         [SentryLog
             logWithMessage:[NSString stringWithFormat:
-                                         @"SentryCoreDataTracker automatically "
+                                         @"BuzzSentryCoreDataTracker automatically "
                                          @"started a new span with description: %@, operation: %@",
                                      fetchSpan.description, SENTRY_COREDATA_FETCH_OPERATION]
                   andLevel:kSentryLevelDebug];
@@ -52,7 +52,7 @@
         [fetchSpan
             finishWithStatus:error != nil ? kBuzzSentrySpanStatusInternalError : kBuzzSentrySpanStatusOk];
 
-        SENTRY_LOG_DEBUG(@"SentryCoreDataTracker automatically finished span with status: %@",
+        SENTRY_LOG_DEBUG(@"BuzzSentryCoreDataTracker automatically finished span with status: %@",
             error == nil ? @"ok" : @"error");
     }
 
@@ -77,7 +77,7 @@
             if (fetchSpan) {
                 [SentryLog
                     logWithMessage:[NSString
-                                       stringWithFormat:@"SentryCoreDataTracker automatically "
+                                       stringWithFormat:@"BuzzSentryCoreDataTracker automatically "
                                                         @"started a new span with description: %@, "
                                                         @"operation: %@",
                                        fetchSpan.description, SENTRY_COREDATA_FETCH_OPERATION]
@@ -94,7 +94,7 @@
         [fetchSpan
             finishWithStatus:*error != nil ? kBuzzSentrySpanStatusInternalError : kBuzzSentrySpanStatusOk];
 
-        SENTRY_LOG_DEBUG(@"SentryCoreDataTracker automatically finished span with status: %@",
+        SENTRY_LOG_DEBUG(@"BuzzSentryCoreDataTracker automatically finished span with status: %@",
             *error == nil ? @"ok" : @"error");
     }
 

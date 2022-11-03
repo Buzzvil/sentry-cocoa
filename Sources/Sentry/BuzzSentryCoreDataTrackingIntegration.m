@@ -1,18 +1,18 @@
-#import "SentryCoreDataTrackingIntegration.h"
-#import "SentryCoreDataSwizzling.h"
-#import "SentryCoreDataTracker.h"
+#import "BuzzSentryCoreDataTrackingIntegration.h"
+#import "BuzzSentryCoreDataSwizzling.h"
+#import "BuzzSentryCoreDataTracker.h"
 #import "SentryLog.h"
 #import "SentryNSDataSwizzling.h"
 #import "BuzzSentryOptions.h"
 
 @interface
-SentryCoreDataTrackingIntegration ()
+BuzzSentryCoreDataTrackingIntegration ()
 
-@property (nonatomic, strong) SentryCoreDataTracker *tracker;
+@property (nonatomic, strong) BuzzSentryCoreDataTracker *tracker;
 
 @end
 
-@implementation SentryCoreDataTrackingIntegration
+@implementation BuzzSentryCoreDataTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
@@ -20,8 +20,8 @@ SentryCoreDataTrackingIntegration ()
         return NO;
     }
 
-    self.tracker = [[SentryCoreDataTracker alloc] init];
-    [SentryCoreDataSwizzling.sharedInstance startWithMiddleware:self.tracker];
+    self.tracker = [[BuzzSentryCoreDataTracker alloc] init];
+    [BuzzSentryCoreDataSwizzling.sharedInstance startWithMiddleware:self.tracker];
 
     return YES;
 }
@@ -34,7 +34,7 @@ SentryCoreDataTrackingIntegration ()
 
 - (void)uninstall
 {
-    [SentryCoreDataSwizzling.sharedInstance stop];
+    [BuzzSentryCoreDataSwizzling.sharedInstance stop];
 }
 
 @end

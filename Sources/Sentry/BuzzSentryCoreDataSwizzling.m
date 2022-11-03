@@ -1,25 +1,25 @@
 
-#import "SentryCoreDataSwizzling.h"
+#import "BuzzSentryCoreDataSwizzling.h"
 #import "SentrySwizzle.h"
 
 @interface
-SentryCoreDataSwizzling ()
+BuzzSentryCoreDataSwizzling ()
 
-@property (nonatomic, strong) id<SentryCoreDataMiddleware> middleware;
+@property (nonatomic, strong) id<BuzzSentryCoreDataMiddleware> middleware;
 
 @end
 
-@implementation SentryCoreDataSwizzling
+@implementation BuzzSentryCoreDataSwizzling
 
-+ (SentryCoreDataSwizzling *)sharedInstance
++ (BuzzSentryCoreDataSwizzling *)sharedInstance
 {
-    static SentryCoreDataSwizzling *instance = nil;
+    static BuzzSentryCoreDataSwizzling *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;
 }
 
-- (void)startWithMiddleware:(id<SentryCoreDataMiddleware>)middleware
+- (void)startWithMiddleware:(id<BuzzSentryCoreDataMiddleware>)middleware
 {
     // We just need to swizzle once, than we can control execution with the middleware.
     static dispatch_once_t onceToken;
@@ -47,8 +47,8 @@ SentryCoreDataSwizzling ()
         SentrySWArguments(NSFetchRequest * originalRequest, NSError * *error), SentrySWReplacement({
             NSArray *result;
 
-            id<SentryCoreDataMiddleware> middleware
-                = SentryCoreDataSwizzling.sharedInstance.middleware;
+            id<BuzzSentryCoreDataMiddleware> middleware
+                = BuzzSentryCoreDataSwizzling.sharedInstance.middleware;
 
             if (middleware) {
                 result = [middleware
@@ -70,8 +70,8 @@ SentryCoreDataSwizzling ()
     SentrySwizzleInstanceMethod(NSManagedObjectContext.class, saveSelector,
         SentrySWReturnType(BOOL), SentrySWArguments(NSError * *error), SentrySWReplacement({
             BOOL result;
-            id<SentryCoreDataMiddleware> middleware
-                = SentryCoreDataSwizzling.sharedInstance.middleware;
+            id<BuzzSentryCoreDataMiddleware> middleware
+                = BuzzSentryCoreDataSwizzling.sharedInstance.middleware;
 
             if (middleware) {
                 result = [middleware managedObjectContext:self

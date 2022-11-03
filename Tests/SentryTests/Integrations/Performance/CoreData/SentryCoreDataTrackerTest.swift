@@ -1,13 +1,13 @@
 import CoreData
 import XCTest
 
-class SentryCoreDataTrackerTests: XCTestCase {
+class BuzzSentryCoreDataTrackerTests: XCTestCase {
     
     private class Fixture {
         let context = TestNSManagedObjectContext()
         
-        func getSut() -> SentryCoreDataTracker {
-            return SentryCoreDataTracker()
+        func getSut() -> BuzzSentryCoreDataTracker {
+            return BuzzSentryCoreDataTracker()
         }
 
         func testEntity() -> TestEntity {

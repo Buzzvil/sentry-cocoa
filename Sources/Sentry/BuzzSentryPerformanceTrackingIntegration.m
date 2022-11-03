@@ -1,12 +1,12 @@
-#import "SentryPerformanceTrackingIntegration.h"
+#import "BuzzSentryPerformanceTrackingIntegration.h"
 #import "SentryDefaultObjCRuntimeWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryLog.h"
-#import "SentrySubClassFinder.h"
+#import "BuzzSentrySubClassFinder.h"
 #import "SentryUIViewControllerSwizzling.h"
 
 @interface
-SentryPerformanceTrackingIntegration ()
+BuzzSentryPerformanceTrackingIntegration ()
 
 #if SENTRY_HAS_UIKIT
 @property (nonatomic, strong) SentryUIViewControllerSwizzling *swizzling;
@@ -14,7 +14,7 @@ SentryPerformanceTrackingIntegration ()
 
 @end
 
-@implementation SentryPerformanceTrackingIntegration
+@implementation BuzzSentryPerformanceTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
@@ -29,7 +29,7 @@ SentryPerformanceTrackingIntegration ()
         [[BuzzSentryDispatchQueueWrapper alloc] initWithName:"sentry-ui-view-controller-swizzling"
                                               attributes:attributes];
 
-    SentrySubClassFinder *subClassFinder = [[SentrySubClassFinder alloc]
+    BuzzSentrySubClassFinder *subClassFinder = [[BuzzSentrySubClassFinder alloc]
         initWithDispatchQueue:dispatchQueue
            objcRuntimeWrapper:[SentryDefaultObjCRuntimeWrapper sharedInstance]];
 
@@ -42,7 +42,7 @@ SentryPerformanceTrackingIntegration ()
     [self.swizzling start];
     return YES;
 #else
-    SENTRY_LOG_DEBUG(@"NO UIKit -> [SentryPerformanceTrackingIntegration start] does nothing.");
+    SENTRY_LOG_DEBUG(@"NO UIKit -> [BuzzSentryPerformanceTrackingIntegration start] does nothing.");
     return NO;
 #endif
 }

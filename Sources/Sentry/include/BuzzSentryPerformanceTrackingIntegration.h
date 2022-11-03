@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
  * enableAutoPerformanceTracking to NO
  * in BuzzSentryOptions during SentrySDK initialization.
  */
-@interface SentryPerformanceTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryPerformanceTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 @end
 

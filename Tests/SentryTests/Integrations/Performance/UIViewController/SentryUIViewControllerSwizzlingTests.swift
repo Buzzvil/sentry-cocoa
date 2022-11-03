@@ -306,7 +306,7 @@ class TestSentryUIViewControllerSwizzling: SentryUIViewControllerSwizzling {
     }
 }
 
-class TestSubClassFinder: SentrySubClassFinder {
+class TestSubClassFinder: BuzzSentrySubClassFinder {
     
     var invocations = Invocations<(imageName: String, block: (AnyClass) -> Void)>()
     override func actOnSubclassesOfViewController(inImage imageName: String, block: @escaping (AnyClass) -> Void) {

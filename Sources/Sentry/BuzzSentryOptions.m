@@ -33,10 +33,10 @@ BuzzSentryOptions ()
         @"SentryUIEventTrackingIntegration", @"BuzzSentryViewHierarchyIntegration",
 #endif
         @"BuzzSentryFramesTrackingIntegration", @"BuzzSentryAutoBreadcrumbTrackingIntegration",
-        @"SentryAutoSessionTrackingIntegration", @"SentryAppStartTrackingIntegration",
-        @"BuzzSentryOutOfMemoryTrackingIntegration", @"SentryPerformanceTrackingIntegration",
+        @"BuzzSentryAutoSessionTrackingIntegration", @"SentryAppStartTrackingIntegration",
+        @"BuzzSentryOutOfMemoryTrackingIntegration", @"BuzzSentryPerformanceTrackingIntegration",
         @"SentryNetworkTrackingIntegration", @"SentryFileIOTrackingIntegration",
-        @"SentryCoreDataTrackingIntegration"
+        @"BuzzSentryCoreDataTrackingIntegration"
     ];
 }
 

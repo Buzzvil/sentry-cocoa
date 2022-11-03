@@ -69,7 +69,7 @@ index b8eb37f0..046e7851 100644
 -
 -            let analyticsIntegrations = Set([
 -                "BuzzSentryAutoBreadcrumbTrackingIntegration",
--                "SentryAutoSessionTrackingIntegration",
+-                "BuzzSentryAutoSessionTrackingIntegration",
 -            ])
 -
 -            let crashesIntegrations = Set([

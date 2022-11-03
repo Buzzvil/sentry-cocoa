@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SentryCoreDataMiddleware
+@protocol BuzzSentryCoreDataMiddleware
 
 - (NSArray *)managedObjectContext:(NSManagedObjectContext *)context
               executeFetchRequest:(NSFetchRequest *)request
@@ -20,14 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SentryCoreDataSwizzling : NSObject
+@interface BuzzSentryCoreDataSwizzling : NSObject
 SENTRY_NO_INIT
 
-@property (class, readonly, nonatomic) SentryCoreDataSwizzling *sharedInstance;
+@property (class, readonly, nonatomic) BuzzSentryCoreDataSwizzling *sharedInstance;
 
-@property (nonatomic, readonly, nullable) id<SentryCoreDataMiddleware> middleware;
+@property (nonatomic, readonly, nullable) id<BuzzSentryCoreDataMiddleware> middleware;
 
-- (void)startWithMiddleware:(id<SentryCoreDataMiddleware>)middleware;
+- (void)startWithMiddleware:(id<BuzzSentryCoreDataMiddleware>)middleware;
 
 - (void)stop;
 

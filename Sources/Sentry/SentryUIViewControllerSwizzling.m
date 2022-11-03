@@ -1,7 +1,7 @@
 #import "SentryUIViewControllerSwizzling.h"
 #import "SentryDefaultObjCRuntimeWrapper.h"
 #import "SentryLog.h"
-#import "SentrySubClassFinder.h"
+#import "BuzzSentrySubClassFinder.h"
 #import "SentrySwizzle.h"
 #import "SentryUIViewControllerPerformanceTracker.h"
 #import <BuzzSentryDispatchQueueWrapper.h>
@@ -31,7 +31,7 @@ SentryUIViewControllerSwizzling ()
 @property (nonatomic, strong) SentryInAppLogic *inAppLogic;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) id<SentryObjCRuntimeWrapper> objcRuntimeWrapper;
-@property (nonatomic, strong) SentrySubClassFinder *subClassFinder;
+@property (nonatomic, strong) BuzzSentrySubClassFinder *subClassFinder;
 @property (nonatomic, strong) NSMutableSet<NSString *> *imagesActedOnSubclassesOfUIViewControllers;
 
 @end
@@ -41,7 +41,7 @@ SentryUIViewControllerSwizzling ()
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                   dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
              objcRuntimeWrapper:(id<SentryObjCRuntimeWrapper>)objcRuntimeWrapper
-                 subClassFinder:(SentrySubClassFinder *)subClassFinder
+                 subClassFinder:(BuzzSentrySubClassFinder *)subClassFinder
 {
     if (self = [super init]) {
         self.inAppLogic = [[SentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes

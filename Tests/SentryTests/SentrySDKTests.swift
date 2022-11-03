@@ -67,8 +67,8 @@ class SentrySDKTests: XCTestCase {
         givenSdkWithHubButNoClient()
         
         if let autoSessionTracking = SentrySDK.currentHub().installedIntegrations.first(where: { it in
-            it is SentryAutoSessionTrackingIntegration
-        }) as? SentryAutoSessionTrackingIntegration {
+            it is BuzzSentryAutoSessionTrackingIntegration
+        }) as? BuzzSentryAutoSessionTrackingIntegration {
             autoSessionTracking.stop()
         }
         
@@ -110,7 +110,7 @@ class SentrySDKTests: XCTestCase {
         assertIntegrationsInstalled(integrations: [
             "SentryCrashIntegration",
             "BuzzSentryAutoBreadcrumbTrackingIntegration",
-            "SentryAutoSessionTrackingIntegration",
+            "BuzzSentryAutoSessionTrackingIntegration",
             "SentryNetworkTrackingIntegration"
         ])
     }
