@@ -1,5 +1,5 @@
 #import "BuzzSentrySpanContext.h"
-#import "SentryId.h"
+#import "BuzzSentryId.h"
 #import "BuzzSentrySpanId.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,14 +20,14 @@ BuzzSentrySpanContext () {
 
 - (instancetype)initWithOperation:(NSString *)operation sampled:(BuzzSentrySampleDecision)sampled
 {
-    return [self initWithTraceId:[[SentryId alloc] init]
+    return [self initWithTraceId:[[BuzzSentryId alloc] init]
                           spanId:[[BuzzSentrySpanId alloc] init]
                         parentId:nil
                        operation:operation
                          sampled:sampled];
 }
 
-- (instancetype)initWithTraceId:(SentryId *)traceId
+- (instancetype)initWithTraceId:(BuzzSentryId *)traceId
                          spanId:(BuzzSentrySpanId *)spanId
                        parentId:(nullable BuzzSentrySpanId *)parentId
                       operation:(NSString *)operation
@@ -78,7 +78,7 @@ BuzzSentrySpanContext () {
     NSMutableDictionary *mutabledictionary = @{
         @"type" : BuzzSentrySpanContext.type,
         @"span_id" : self.spanId.BuzzSentrySpanIdString,
-        @"trace_id" : self.traceId.sentryIdString,
+        @"trace_id" : self.traceId.BuzzSentryIdString,
         @"op" : self.operation
     }
                                                  .mutableCopy;

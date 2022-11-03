@@ -1,4 +1,4 @@
-#import "SentryId.h"
+#import "BuzzSentryId.h"
 #import "BuzzSentrySerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
  * UUID V4 encoded as a hexadecimal sequence with no dashes (e.g. 771a43a4192642f0b136d5159a501700)
  * that is a sequence of 32 hexadecimal digits.
  */
-@property (nonatomic, readonly) SentryId *traceId;
+@property (nonatomic, readonly) BuzzSentryId *traceId;
 
 /**
  * Public key from the DSN used by the SDK.
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initializes a BuzzSentryTraceContext with given properties.
  */
-- (instancetype)initWithTraceId:(SentryId *)traceId
+- (instancetype)initWithTraceId:(BuzzSentryId *)traceId
                       publicKey:(NSString *)publicKey
                     releaseName:(nullable NSString *)releaseName
                     environment:(nullable NSString *)environment

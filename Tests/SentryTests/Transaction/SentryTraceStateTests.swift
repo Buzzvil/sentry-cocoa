@@ -13,7 +13,7 @@ class BuzzSentryTraceContextTests: XCTestCase {
         let userId = "SomeUserID"
         let userSegment = "Test Segment"
         let sampleRate = "0.45"
-        let traceId: SentryId
+        let traceId: BuzzSentryId
         let publicKey = "BuzzSentrySessionTrackerTests"
         let releaseName = "BuzzSentrySessionTrackerIntegrationTests"
         let environment = "debug"

@@ -55,7 +55,7 @@ ViewController ()
 
 - (IBAction)captureMessage:(id)sender
 {
-    SentryId *eventId = [SentrySDK captureMessage:@"Yeah captured a message"];
+    BuzzSentryId *eventId = [SentrySDK captureMessage:@"Yeah captured a message"];
     // Returns eventId in case of successful processed event
     // otherwise emptyId
     NSLog(@"%@", eventId);
@@ -67,7 +67,7 @@ ViewController ()
         [[NSError alloc] initWithDomain:@"UserFeedbackErrorDomain"
                                    code:0
                                userInfo:@{ NSLocalizedDescriptionKey : @"This never happens." }];
-    SentryId *eventId = [SentrySDK
+    BuzzSentryId *eventId = [SentrySDK
           captureError:error
         withScopeBlock:^(SentryScope *_Nonnull scope) { [scope setLevel:kSentryLevelFatal]; }];
 

@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryStacktrace, SentryMechanism;
+@class BuzzSentryStacktrace, BuzzSentryMechanism;
 
 NS_SWIFT_NAME(Exception)
 @interface SentryException : NSObject <BuzzSentrySerializable>
@@ -24,7 +24,7 @@ SENTRY_NO_INIT
 /**
  * Additional information about the exception
  */
-@property (nonatomic, strong) SentryMechanism *_Nullable mechanism;
+@property (nonatomic, strong) BuzzSentryMechanism *_Nullable mechanism;
 
 /**
  * Can be set to define the module

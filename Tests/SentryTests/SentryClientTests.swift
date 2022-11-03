@@ -939,19 +939,19 @@ class BuzzSentryClientTest: XCTestCase {
     
     func testNoDsn_UserFeedbackNotSent() {
         let sut = fixture.getSutWithNoDsn()
-        sut.capture(userFeedback: UserFeedback(eventId: SentryId()))
+        sut.capture(userFeedback: UserFeedback(eventId: BuzzSentryId()))
         assertNothingSent()
     }
     
     func testDisabled_UserFeedbackNotSent() {
         let sut = fixture.getSutDisabledSdk()
-        sut.capture(userFeedback: UserFeedback(eventId: SentryId()))
+        sut.capture(userFeedback: UserFeedback(eventId: BuzzSentryId()))
         assertNothingSent()
     }
     
     func testCaptureUserFeedback_WithEmptyEventId() {
         let sut = fixture.getSut()
-        sut.capture(userFeedback: UserFeedback(eventId: SentryId.empty))
+        sut.capture(userFeedback: UserFeedback(eventId: BuzzSentryId.empty))
         assertNothingSent()
     }
 
@@ -1280,7 +1280,7 @@ class BuzzSentryClientTest: XCTestCase {
         XCTAssertEqual(0, fixture.transportAdapter.sendEventWithTraceStateInvocations.count, "No events should have been sent.")
     }
     
-    private func assertEventNotSent(eventId: SentryId?) {
+    private func assertEventNotSent(eventId: BuzzSentryId?) {
         let eventWasSent = fixture.transportAdapter.sendEventWithTraceStateInvocations.invocations.contains { eventArguments in
             eventArguments.event.eventId == eventId
         }

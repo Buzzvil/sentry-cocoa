@@ -1,7 +1,7 @@
 #import "NSDate+SentryExtras.h"
 #import "SentryCrashReportConverter.h"
 #import "SentryInAppLogic.h"
-#import "SentryMechanismMeta.h"
+#import "BuzzSentryMechanismMeta.h"
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
 

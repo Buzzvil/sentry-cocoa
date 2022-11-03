@@ -14,12 +14,12 @@ func assertArrayEquals(expected: [String]?, actual: [String]?) {
     XCTAssertEqual(expected?.sorted(), actual?.sorted())
 }
 
-extension SentryId {
+extension BuzzSentryId {
     func assertIsEmpty() {
-        XCTAssertEqual(SentryId.empty, self)
+        XCTAssertEqual(BuzzSentryId.empty, self)
     }
     
     func assertIsNotEmpty() {
-        XCTAssertNotEqual(SentryId.empty, self)
+        XCTAssertNotEqual(BuzzSentryId.empty, self)
     }
 }

@@ -34,7 +34,7 @@ class TestHub: SentryHub {
     }
     
     var capturedEventsWithScopes: [(event: Event, scope: Scope, additionalEnvelopeItems: [BuzzSentryEnvelopeItem])] = []
-    override func capture(event: Event, scope: Scope, additionalEnvelopeItems: [BuzzSentryEnvelopeItem]) -> SentryId {
+    override func capture(event: Event, scope: Scope, additionalEnvelopeItems: [BuzzSentryEnvelopeItem]) -> BuzzSentryId {
         group.enter()
         queue.async(flags: .barrier) {
             self.capturedEventsWithScopes.append((event, scope, additionalEnvelopeItems))

@@ -1,6 +1,6 @@
 #import "SentrySDK.h"
 
-@class SentryHub, SentryId, SentryAppStartMeasurement, BuzzSentryEnvelope;
+@class SentryHub, BuzzSentryId, SentryAppStartMeasurement, BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 

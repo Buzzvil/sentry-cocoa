@@ -1,7 +1,7 @@
 @testable import Sentry
 import XCTest
 
-class SentryIdTests: XCTestCase {
+class BuzzSentryIdTests: XCTestCase {
     
     private class Fixture {
         let uuid: UUID
@@ -20,64 +20,64 @@ class SentryIdTests: XCTestCase {
     private var fixture = Fixture()
     
     func testInit() {
-        XCTAssertNotEqual(SentryId(), SentryId())
+        XCTAssertNotEqual(BuzzSentryId(), BuzzSentryId())
     }
 
     func testInitWithUUID_ValidIdString() {
-        let sentryId = SentryId(uuid: fixture.uuid)
+        let BuzzSentryId = BuzzSentryId(uuid: fixture.uuid)
         
-        XCTAssertEqual(fixture.expectedUUIDV4String, sentryId.sentryIdString)
+        XCTAssertEqual(fixture.expectedUUIDV4String, BuzzSentryId.BuzzSentryIdString)
     }
     
     func testInitWithUUIDString_ValidIdString() {
-        let sentryIdWithUUIDString = SentryId(uuidString: fixture.uuidString)
-        let sentryIdWithUUID = SentryId(uuid: fixture.uuid)
+        let BuzzSentryIdWithUUIDString = BuzzSentryId(uuidString: fixture.uuidString)
+        let BuzzSentryIdWithUUID = BuzzSentryId(uuid: fixture.uuid)
         
-        XCTAssertEqual(sentryIdWithUUID, sentryIdWithUUIDString)
+        XCTAssertEqual(BuzzSentryIdWithUUID, BuzzSentryIdWithUUIDString)
     }
     
     func testInitWithUUIDV4String_ValidIdString() {
-        let sentryIdWithUUIDString = SentryId(uuidString: fixture.uuidV4String)
-        let sentryIdWithUUID = SentryId(uuid: fixture.uuid)
+        let BuzzSentryIdWithUUIDString = BuzzSentryId(uuidString: fixture.uuidV4String)
+        let BuzzSentryIdWithUUID = BuzzSentryId(uuid: fixture.uuid)
         
-        XCTAssertEqual(sentryIdWithUUID, sentryIdWithUUIDString)
+        XCTAssertEqual(BuzzSentryIdWithUUID, BuzzSentryIdWithUUIDString)
     }
     
     func testInitWithUUIDV4LowercaseString_ValidIdString() {
-        let sentryIdWithUUIDString = SentryId(uuidString: fixture.expectedUUIDV4String)
-        let sentryIdWithUUID = SentryId(uuid: fixture.uuid)
+        let BuzzSentryIdWithUUIDString = BuzzSentryId(uuidString: fixture.expectedUUIDV4String)
+        let BuzzSentryIdWithUUID = BuzzSentryId(uuid: fixture.uuid)
         
-        XCTAssertEqual(sentryIdWithUUID, sentryIdWithUUIDString)
+        XCTAssertEqual(BuzzSentryIdWithUUID, BuzzSentryIdWithUUIDString)
     }
     
     func testInitWithInvalidUUIDString_InvalidIdString() {
-        XCTAssertEqual(SentryId.empty, SentryId(uuidString: "wrong"))
+        XCTAssertEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: "wrong"))
     }
     
     func testInitWithInvalidUUIDString36Chars_InvalidIdString() {
-        XCTAssertEqual(SentryId.empty, SentryId(uuidString: "00000000-0000-0000-0000-0-0000000000"))
+        XCTAssertEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: "00000000-0000-0000-0000-0-0000000000"))
     }
     
     func testInitWithEmptyUUIDString_EmptyIdString() {
-        XCTAssertEqual(SentryId.empty, SentryId(uuidString: ""))
+        XCTAssertEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: ""))
     }
     
     func testIsEqualWithSameObject() {
-        let sentryId = SentryId()
-        XCTAssertEqual(sentryId, sentryId)
+        let BuzzSentryId = BuzzSentryId()
+        XCTAssertEqual(BuzzSentryId, BuzzSentryId)
     }
     
     func testIsNotEqualWithDifferentClass() {
-        let sentryId = SentryId()
-        XCTAssertFalse(sentryId.isEqual(1))
+        let BuzzSentryId = BuzzSentryId()
+        XCTAssertFalse(BuzzSentryId.isEqual(1))
     }
     
     func testHash_IsSameWhenObjectsAreEqual() {
         let uuid = UUID()
-        XCTAssertEqual(SentryId(uuid: uuid).hash, SentryId(uuid: uuid).hash)
+        XCTAssertEqual(BuzzSentryId(uuid: uuid).hash, BuzzSentryId(uuid: uuid).hash)
     }
     
     func testHash_IsDifferentWhenObjectsAreDifferent() {
-        XCTAssertNotEqual(SentryId(uuid: UUID()).hash, SentryId(uuid: fixture.uuid).hash)
+        XCTAssertNotEqual(BuzzSentryId(uuid: UUID()).hash, BuzzSentryId(uuid: fixture.uuid).hash)
     }
 }

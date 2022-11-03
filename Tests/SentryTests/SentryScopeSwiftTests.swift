@@ -178,7 +178,7 @@ class SentryScopeSwiftTests: XCTestCase {
               
         XCTAssertEqual(actual?.transaction, fixture.transactionName)
         XCTAssertEqual(trace?["op"] as? String, fixture.transactionOperation)
-        XCTAssertEqual(trace?["trace_id"] as? String, fixture.transaction.context.traceId.sentryIdString)
+        XCTAssertEqual(trace?["trace_id"] as? String, fixture.transaction.context.traceId.BuzzSentryIdString)
         XCTAssertEqual(trace?["span_id"] as? String, fixture.transaction.context.spanId.BuzzSentrySpanIdString)
     }
     

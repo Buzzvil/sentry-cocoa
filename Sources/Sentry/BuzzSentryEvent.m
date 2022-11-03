@@ -6,7 +6,7 @@
 #import "SentryCurrentDate.h"
 #import "BuzzSentryDebugMeta.h"
 #import "SentryException.h"
-#import "SentryId.h"
+#import "BuzzSentryId.h"
 #import "SentryLevelMapper.h"
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
@@ -34,7 +34,7 @@ BuzzSentryEvent ()
 {
     self = [super init];
     if (self) {
-        self.eventId = [[SentryId alloc] init];
+        self.eventId = [[BuzzSentryId alloc] init];
         self.level = level;
         self.platform = @"cocoa";
         self.timestamp = [SentryCurrentDate date];
@@ -56,7 +56,7 @@ BuzzSentryEvent ()
     }
 
     NSMutableDictionary *serializedData = @{
-        @"event_id" : self.eventId.sentryIdString,
+        @"event_id" : self.eventId.BuzzSentryIdString,
         @"timestamp" : @(self.timestamp.timeIntervalSince1970),
         @"platform" : @"cocoa",
     }

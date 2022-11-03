@@ -1,5 +1,5 @@
 #import "BuzzSentryNoOpSpan.h"
-#import "SentryId.h"
+#import "BuzzSentryId.h"
 #import "BuzzSentrySpanContext.h"
 #import "BuzzSentrySpanId.h"
 #import "BuzzSentryTraceHeader.h"
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init
 {
     if (self = [super init]) {
-        _context = [[BuzzSentrySpanContext alloc] initWithTraceId:SentryId.empty
+        _context = [[BuzzSentrySpanContext alloc] initWithTraceId:BuzzSentryId.empty
                                                        spanId:BuzzSentrySpanId.empty
                                                      parentId:nil
                                                     operation:@""

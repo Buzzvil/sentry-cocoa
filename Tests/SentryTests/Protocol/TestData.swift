@@ -208,7 +208,7 @@ class TestData {
     }
     
     static var userFeedback: UserFeedback {
-        let userFeedback = UserFeedback(eventId: SentryId())
+        let userFeedback = UserFeedback(eventId: BuzzSentryId())
         userFeedback.comments = "It doesn't really"
         userFeedback.email = "john@me.com"
         userFeedback.name = "John Me"

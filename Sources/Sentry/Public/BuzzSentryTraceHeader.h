@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 #import "BuzzSentrySampleDecision.h"
 
-@class SentryId, BuzzSentrySpanId;
+@class BuzzSentryId, BuzzSentrySpanId;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,7 +13,7 @@ SENTRY_NO_INIT
 /**
  * Trace ID.
  */
-@property (nonatomic, readonly) SentryId *traceId;
+@property (nonatomic, readonly) BuzzSentryId *traceId;
 
 /**
  * Span ID.
@@ -34,7 +34,7 @@ SENTRY_NO_INIT
  *
  * @return A BuzzSentryTraceHeader.
  */
-- (instancetype)initWithTraceId:(SentryId *)traceId
+- (instancetype)initWithTraceId:(BuzzSentryId *)traceId
                          spanId:(BuzzSentrySpanId *)spanId
                         sampled:(BuzzSentrySampleDecision)sampled;
 

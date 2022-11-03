@@ -2,7 +2,7 @@
 #import "BuzzSentryDataCategory.h"
 #import "BuzzSentryDiscardReason.h"
 
-@class BuzzSentryEnvelopeItem, SentryId, BuzzSentryAttachment, SentryThreadInspector;
+@class BuzzSentryEnvelopeItem, BuzzSentryId, BuzzSentryAttachment, SentryThreadInspector;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,21 +25,21 @@ BuzzSentryClient (Private)
 
 - (SentryFileManager *)fileManager;
 
-- (SentryId *)captureError:(NSError *)error
+- (BuzzSentryId *)captureError:(NSError *)error
                withSession:(BuzzSentrySession *)session
                  withScope:(SentryScope *)scope;
 
-- (SentryId *)captureException:(NSException *)exception
+- (BuzzSentryId *)captureException:(NSException *)exception
                    withSession:(BuzzSentrySession *)session
                      withScope:(SentryScope *)scope;
 
-- (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
+- (BuzzSentryId *)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
 
-- (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event
+- (BuzzSentryId *)captureCrashEvent:(BuzzSentryEvent *)event
                     withSession:(BuzzSentrySession *)session
                       withScope:(SentryScope *)scope;
 
-- (SentryId *)captureEvent:(BuzzSentryEvent *)event
+- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
                   withScope:(SentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(capture(event:scope:additionalEnvelopeItems:));

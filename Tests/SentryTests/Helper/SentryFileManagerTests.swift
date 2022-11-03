@@ -11,7 +11,7 @@ class SentryFileManagerTests: XCTestCase {
     private class Fixture {
         
         let maxCacheItems = 30
-        let eventIds: [SentryId]
+        let eventIds: [BuzzSentryId]
         
         let currentDateProvider: TestCurrentDateProvider!
         let dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper!
@@ -37,7 +37,7 @@ class SentryFileManagerTests: XCTestCase {
             dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
             dispatchQueueWrapper.dispatchAfterExecutesBlock = true
             
-            eventIds = (0...(maxCacheItems + 10)).map { _ in SentryId() }
+            eventIds = (0...(maxCacheItems + 10)).map { _ in BuzzSentryId() }
             
             options = Options()
             options.dsn = TestConstants.dsnAsString(username: "SentryFileManagerTests")

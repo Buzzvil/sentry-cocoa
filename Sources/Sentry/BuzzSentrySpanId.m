@@ -59,9 +59,9 @@ static BuzzSentrySpanId *_empty = nil;
         return NO;
     }
 
-    BuzzSentrySpanId *otherSentryID = (BuzzSentrySpanId *)object;
+    BuzzSentrySpanId *otherBuzzSentryId = (BuzzSentrySpanId *)object;
 
-    return [self.value isEqual:otherSentryID.value];
+    return [self.value isEqual:otherBuzzSentryId.value];
 }
 
 - (NSUInteger)hash

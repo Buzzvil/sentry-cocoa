@@ -4,7 +4,7 @@ class SentrySerializationTests: XCTestCase {
     
     private class Fixture {
         static var invalidData = "hi".data(using: .utf8)!
-        static var traceContext = BuzzSentryTraceContext(trace: SentryId(), publicKey: "PUBLIC_KEY", releaseName: "RELEASE_NAME", environment: "TEST", transaction: "transaction", userSegment: "some segment", sampleRate: "0.25")
+        static var traceContext = BuzzSentryTraceContext(trace: BuzzSentryId(), publicKey: "PUBLIC_KEY", releaseName: "RELEASE_NAME", environment: "TEST", transaction: "transaction", userSegment: "some segment", sampleRate: "0.25")
     }
 
     func testBuzzSentryEnvelopeSerializer_WithSingleEvent() {
@@ -111,7 +111,7 @@ class SentrySerializationTests: XCTestCase {
     }
     
     func testBuzzSentryEnvelopeSerializer_TraceStateWithoutUser() {
-        let trace = BuzzSentryTraceContext(trace: SentryId(), publicKey: "PUBLIC_KEY", releaseName: "RELEASE_NAME", environment: "TEST", transaction: "transaction", userSegment: nil, sampleRate: nil)
+        let trace = BuzzSentryTraceContext(trace: BuzzSentryId(), publicKey: "PUBLIC_KEY", releaseName: "RELEASE_NAME", environment: "TEST", transaction: "transaction", userSegment: nil, sampleRate: nil)
         
         let envelopeHeader = BuzzSentryEnvelopeHeader(id: nil, traceContext: trace)
         let envelope = BuzzSentryEnvelope(header: envelopeHeader, singleItem: createItemWithEmptyAttachment())
@@ -137,7 +137,7 @@ class SentrySerializationTests: XCTestCase {
     }
 
     func testBuzzSentryEnvelopeSerializer_EnvelopeWithHeaderAndItemWithAttachmet() {
-        let eventId = SentryId(uuidString: "12c2d058-d584-4270-9aa2-eca08bf20986")
+        let eventId = BuzzSentryId(uuidString: "12c2d058-d584-4270-9aa2-eca08bf20986")
         let payloadAsString = "helloworld"
 
         let itemData = """

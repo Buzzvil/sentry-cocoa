@@ -482,19 +482,19 @@ class SentryHubTests: XCTestCase {
         }
     }
     
-    func testCaptureClientIsNil_ReturnsEmptySentryId() {
+    func testCaptureClientIsNil_ReturnsEmptyBuzzSentryId() {
         sut.bindClient(nil)
         
-        XCTAssertEqual(SentryId.empty, sut.capture(error: fixture.error))
+        XCTAssertEqual(BuzzSentryId.empty, sut.capture(error: fixture.error))
         XCTAssertEqual(0, fixture.client.captureErrorWithScopeInvocations.count)
         
-        XCTAssertEqual(SentryId.empty, sut.capture(message: fixture.message, scope: fixture.scope))
+        XCTAssertEqual(BuzzSentryId.empty, sut.capture(message: fixture.message, scope: fixture.scope))
         XCTAssertEqual(0, fixture.client.captureMessageWithScopeInvocations.count)
         
-        XCTAssertEqual(SentryId.empty, sut.capture(event: fixture.event))
+        XCTAssertEqual(BuzzSentryId.empty, sut.capture(event: fixture.event))
         XCTAssertEqual(0, fixture.client.captureEventInvocations.count)
         
-        XCTAssertEqual(SentryId.empty, sut.capture(exception: fixture.exception))
+        XCTAssertEqual(BuzzSentryId.empty, sut.capture(exception: fixture.exception))
         XCTAssertEqual(0, fixture.client.captureExceptionWithScopeInvocations.count)
     }
     

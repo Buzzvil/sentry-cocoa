@@ -274,7 +274,7 @@ private extension SentryProfilerSwiftTests {
         let releaseString = "\(version) (\(build))"
         XCTAssertEqual(profile["release"] as! String, releaseString)
 
-        XCTAssertNotEqual(SentryId.empty, SentryId(uuidString: profile["profile_id"] as! String))
+        XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: profile["profile_id"] as! String))
 
         let images = (profile["debug_meta"] as! [String: Any])["images"] as! [[String: Any]]
         XCTAssertFalse(images.isEmpty)
@@ -319,11 +319,11 @@ private extension SentryProfilerSwiftTests {
             XCTAssertEqual(fixture.transactionName, transaction["name"])
             XCTAssertNotNil(transaction["id"])
             if let idString = transaction["id"] {
-                XCTAssertNotEqual(SentryId.empty, SentryId(uuidString: idString))
+                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: idString))
             }
             XCTAssertNotNil(transaction["trace_id"])
             if let traceIDString = transaction["trace_id"] {
-                XCTAssertNotEqual(SentryId.empty, SentryId(uuidString: traceIDString))
+                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: traceIDString))
             }
             XCTAssertNotNil(transaction["trace_id"])
             XCTAssertNotNil(transaction["relative_start_ns"])

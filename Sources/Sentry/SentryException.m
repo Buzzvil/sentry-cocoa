@@ -1,5 +1,5 @@
 #import "SentryException.h"
-#import "SentryMechanism.h"
+#import "BuzzSentryMechanism.h"
 #import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 

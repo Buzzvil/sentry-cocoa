@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryId, BuzzSentrySpanId;
+@class BuzzSentryId, BuzzSentrySpanId;
 
 NS_SWIFT_NAME(SpanContext)
 @interface BuzzSentrySpanContext : NSObject <BuzzSentrySerializable>
@@ -14,7 +14,7 @@ SENTRY_NO_INIT
 /**
  * Determines which trace the Span belongs to.
  */
-@property (nonatomic, readonly) SentryId *traceId;
+@property (nonatomic, readonly) BuzzSentryId *traceId;
 
 /**
  * Span id.
@@ -84,7 +84,7 @@ SENTRY_NO_INIT
  *
  * @return SentryContext
  */
-- (instancetype)initWithTraceId:(SentryId *)traceId
+- (instancetype)initWithTraceId:(BuzzSentryId *)traceId
                          spanId:(BuzzSentrySpanId *)spanId
                        parentId:(nullable BuzzSentrySpanId *)parentId
                       operation:(NSString *)operation

@@ -3,7 +3,7 @@
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "SentryError.h"
-#import "SentryId.h"
+#import "BuzzSentryId.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
 #import "SentrySdkInfo.h"
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableData *envelopeData = [[NSMutableData alloc] init];
     NSMutableDictionary *serializedData = [NSMutableDictionary new];
     if (nil != envelope.header.eventId) {
-        [serializedData setValue:[envelope.header.eventId sentryIdString] forKey:@"event_id"];
+        [serializedData setValue:[envelope.header.eventId BuzzSentryIdString] forKey:@"event_id"];
     }
 
     SentrySdkInfo *sdkInfo = envelope.header.sdkInfo;
@@ -176,10 +176,10 @@ NS_ASSUME_NONNULL_BEGIN
             if (nil != error) {
                 SENTRY_LOG_ERROR(@"Failed to parse envelope header %@", error);
             } else {
-                SentryId *eventId = nil;
+                BuzzSentryId *eventId = nil;
                 NSString *eventIdAsString = headerDictionary[@"event_id"];
                 if (nil != eventIdAsString) {
-                    eventId = [[SentryId alloc] initWithUUIDString:eventIdAsString];
+                    eventId = [[BuzzSentryId alloc] initWithUUIDString:eventIdAsString];
                 }
 
                 SentrySdkInfo *sdkInfo = nil;

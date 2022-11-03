@@ -56,7 +56,7 @@ class BuzzSentryNoOpSpanTests: XCTestCase {
     func testToTraceHeader() {
         let actual = BuzzSentryNoOpSpan.shared().toTraceHeader()
         
-        XCTAssertEqual(SentryId.empty, actual.traceId)
+        XCTAssertEqual(BuzzSentryId.empty, actual.traceId)
         XCTAssertEqual(SpanId.empty, actual.spanId)
         XCTAssertEqual(BuzzSentrySampleDecision.undecided, actual.sampled)
     }
@@ -64,7 +64,7 @@ class BuzzSentryNoOpSpanTests: XCTestCase {
     func testContext() {
         let actual = BuzzSentryNoOpSpan.shared().context
         
-        XCTAssertEqual(SentryId.empty, actual.traceId)
+        XCTAssertEqual(BuzzSentryId.empty, actual.traceId)
         XCTAssertEqual(SpanId.empty, actual.spanId)
         XCTAssertEqual(BuzzSentrySampleDecision.undecided, actual.sampled)
     }

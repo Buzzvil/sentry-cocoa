@@ -1,11 +1,11 @@
-#import "SentryMechanism.h"
+#import "BuzzSentryMechanism.h"
 #import "NSDictionary+SentrySanitize.h"
-#import "SentryMechanismMeta.h"
+#import "BuzzSentryMechanismMeta.h"
 #import "BuzzSentryNSError.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryMechanism
+@implementation BuzzSentryMechanism
 
 - (instancetype)initWithType:(NSString *)type
 {

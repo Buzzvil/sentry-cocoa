@@ -3,7 +3,7 @@
 #import "BuzzSentrySpanProtocol.h"
 
 @class BuzzSentryEvent, BuzzSentryClient, SentryScope, BuzzSentrySession, BuzzSentryUser, SentryBreadcrumb,
-    SentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
+    BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface SentryHub : NSObject
@@ -43,9 +43,9 @@ SENTRY_NO_INIT
  *
  * @param event The event to send to Sentry.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureEvent:(BuzzSentryEvent *)event NS_SWIFT_NAME(capture(event:));
+- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event NS_SWIFT_NAME(capture(event:));
 
 /**
  * Captures a manually created event and sends it to Sentry.
@@ -53,9 +53,9 @@ SENTRY_NO_INIT
  * @param event The event to send to Sentry.
  * @param scope The scope containing event metadata.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureEvent:(BuzzSentryEvent *)event
+- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
                  withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(event:scope:));
 
 /**
@@ -137,9 +137,9 @@ SENTRY_NO_INIT
  *
  * @param error The error to send to Sentry.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureError:(NSError *)error NS_SWIFT_NAME(capture(error:));
+- (BuzzSentryId *)captureError:(NSError *)error NS_SWIFT_NAME(capture(error:));
 
 /**
  * Captures an error event and sends it to Sentry.
@@ -147,9 +147,9 @@ SENTRY_NO_INIT
  * @param error The error to send to Sentry.
  * @param scope The scope containing event metadata.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureError:(NSError *)error
+- (BuzzSentryId *)captureError:(NSError *)error
                  withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(error:scope:));
 
 /**
@@ -157,9 +157,9 @@ SENTRY_NO_INIT
  *
  * @param exception The exception to send to Sentry.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureException:(NSException *)exception NS_SWIFT_NAME(capture(exception:));
+- (BuzzSentryId *)captureException:(NSException *)exception NS_SWIFT_NAME(capture(exception:));
 
 /**
  * Captures an exception event and sends it to Sentry.
@@ -167,9 +167,9 @@ SENTRY_NO_INIT
  * @param exception The exception to send to Sentry.
  * @param scope The scope containing event metadata.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureException:(NSException *)exception
+- (BuzzSentryId *)captureException:(NSException *)exception
                      withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(exception:scope:));
 
 /**
@@ -177,9 +177,9 @@ SENTRY_NO_INIT
  *
  * @param message The message to send to Sentry.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureMessage:(NSString *)message NS_SWIFT_NAME(capture(message:));
+- (BuzzSentryId *)captureMessage:(NSString *)message NS_SWIFT_NAME(capture(message:));
 
 /**
  * Captures a message event and sends it to Sentry.
@@ -187,9 +187,9 @@ SENTRY_NO_INIT
  * @param message The message to send to Sentry.
  * @param scope The scope containing event metadata.
  *
- * @return The SentryId of the event or SentryId.empty if the event is not sent.
+ * @return The BuzzSentryId of the event or BuzzSentryId.empty if the event is not sent.
  */
-- (SentryId *)captureMessage:(NSString *)message
+- (BuzzSentryId *)captureMessage:(NSString *)message
                    withScope:(SentryScope *)scope NS_SWIFT_NAME(capture(message:scope:));
 
 /**

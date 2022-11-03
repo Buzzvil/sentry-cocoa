@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithName:(NSString *)name
                    operation:(nonnull NSString *)operation
-                     traceId:(SentryId *)traceId
+                     traceId:(BuzzSentryId *)traceId
                       spanId:(BuzzSentrySpanId *)spanId
                 parentSpanId:(nullable BuzzSentrySpanId *)parentSpanId
                parentSampled:(BuzzSentrySampleDecision)parentSampled
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithName:(NSString *)name
                   nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(nonnull NSString *)operation
-                     traceId:(SentryId *)traceId
+                     traceId:(BuzzSentryId *)traceId
                       spanId:(BuzzSentrySpanId *)spanId
                 parentSpanId:(nullable BuzzSentrySpanId *)parentSpanId
                parentSampled:(BuzzSentrySampleDecision)parentSampled

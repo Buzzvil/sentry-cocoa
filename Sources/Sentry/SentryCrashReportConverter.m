@@ -9,8 +9,8 @@
 #import "SentryHexAddressFormatter.h"
 #import "SentryInAppLogic.h"
 #import "SentryLog.h"
-#import "SentryMechanism.h"
-#import "SentryMechanismMeta.h"
+#import "BuzzSentryMechanism.h"
+#import "BuzzSentryMechanismMeta.h"
 #import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 #import "BuzzSentryUser.h"
@@ -510,13 +510,13 @@ SentryCrashReportConverter ()
     }
 }
 
-- (SentryMechanism *_Nullable)extractMechanismOfType:(nonnull NSString *)type
+- (BuzzSentryMechanism *_Nullable)extractMechanismOfType:(nonnull NSString *)type
 {
-    SentryMechanism *mechanism = [[SentryMechanism alloc] initWithType:type];
+    BuzzSentryMechanism *mechanism = [[BuzzSentryMechanism alloc] initWithType:type];
     if (nil != self.exceptionContext[@"mach"]) {
         mechanism.handled = @(NO);
 
-        SentryMechanismMeta *meta = [[SentryMechanismMeta alloc] init];
+        BuzzSentryMechanismMeta *meta = [[BuzzSentryMechanismMeta alloc] init];
 
         NSMutableDictionary *machException = [NSMutableDictionary new];
         [machException setValue:self.exceptionContext[@"mach"][@"exception_name"] forKey:@"name"];

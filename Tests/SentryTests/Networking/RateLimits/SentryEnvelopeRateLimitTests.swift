@@ -69,7 +69,7 @@ class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
         envelopeItems.append(BuzzSentryEnvelopeItem(header: envelopeHeader, data: Data()))
         envelopeItems.append(BuzzSentryEnvelopeItem(header: envelopeHeader, data: Data()))
         
-        let envelope = BuzzSentryEnvelope(id: SentryId(), items: envelopeItems)
+        let envelope = BuzzSentryEnvelope(id: BuzzSentryId(), items: envelopeItems)
         
         let actual = sut.removeRateLimitedItems(envelope)
         
@@ -89,7 +89,7 @@ class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
             envelopeItems.append(BuzzSentryEnvelopeItem(session: session))
         }
         
-        return BuzzSentryEnvelope(id: SentryId(), items: envelopeItems)
+        return BuzzSentryEnvelope(id: BuzzSentryId(), items: envelopeItems)
     }
     
 }

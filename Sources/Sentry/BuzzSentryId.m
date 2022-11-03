@@ -1,4 +1,4 @@
-#import "SentryId.h"
+#import "BuzzSentryId.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -6,15 +6,15 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *const emptyUUIDString = @"00000000-0000-0000-0000-000000000000";
 
 @interface
-SentryId ()
+BuzzSentryId ()
 
 @property (nonatomic, strong) NSUUID *uuid;
 
 @end
 
-@implementation SentryId
+@implementation BuzzSentryId
 
-static SentryId *_empty = nil;
+static BuzzSentryId *_empty = nil;
 
 - (instancetype)init
 {
@@ -51,16 +51,16 @@ static SentryId *_empty = nil;
     }
 }
 
-- (NSString *)sentryIdString;
+- (NSString *)BuzzSentryIdString;
 {
-    NSString *sentryIdString = [self.uuid.UUIDString stringByReplacingOccurrencesOfString:@"-"
+    NSString *BuzzSentryIdString = [self.uuid.UUIDString stringByReplacingOccurrencesOfString:@"-"
                                                                                withString:@""];
-    return [sentryIdString lowercaseString];
+    return [BuzzSentryIdString lowercaseString];
 }
 
 - (NSString *)description
 {
-    return [self sentryIdString];
+    return [self BuzzSentryIdString];
 }
 
 - (BOOL)isEqual:(id _Nullable)object
@@ -72,9 +72,9 @@ static SentryId *_empty = nil;
         return NO;
     }
 
-    SentryId *otherSentryID = (SentryId *)object;
+    BuzzSentryId *otherBuzzSentryId = (BuzzSentryId *)object;
 
-    return [self.uuid isEqual:otherSentryID.uuid];
+    return [self.uuid isEqual:otherBuzzSentryId.uuid];
 }
 
 - (NSUInteger)hash
@@ -82,10 +82,10 @@ static SentryId *_empty = nil;
     return [self.uuid hash];
 }
 
-+ (SentryId *)empty
++ (BuzzSentryId *)empty
 {
     if (nil == _empty) {
-        _empty = [[SentryId alloc] initWithUUIDString:emptyUUIDString];
+        _empty = [[BuzzSentryId alloc] initWithUUIDString:emptyUUIDString];
     }
     return _empty;
 }

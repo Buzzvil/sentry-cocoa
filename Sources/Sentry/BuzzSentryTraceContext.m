@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation BuzzSentryTraceContext
 
-- (instancetype)initWithTraceId:(SentryId *)traceId
+- (instancetype)initWithTraceId:(BuzzSentryId *)traceId
                       publicKey:(NSString *)publicKey
                     releaseName:(nullable NSString *)releaseName
                     environment:(nullable NSString *)environment
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)initWithDict:(NSDictionary<NSString *, id> *)dictionary
 {
-    SentryId *traceId = [[SentryId alloc] initWithUUIDString:dictionary[@"trace_id"]];
+    BuzzSentryId *traceId = [[BuzzSentryId alloc] initWithUUIDString:dictionary[@"trace_id"]];
     NSString *publicKey = dictionary[@"public_key"];
     if (traceId == nil || publicKey == nil)
         return nil;
@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary<NSString *, id> *)serialize
 {
     NSMutableDictionary *result =
-        @{ @"trace_id" : _traceId.sentryIdString, @"public_key" : _publicKey }.mutableCopy;
+        @{ @"trace_id" : _traceId.BuzzSentryIdString, @"public_key" : _publicKey }.mutableCopy;
 
     if (_releaseName != nil) {
         [result setValue:_releaseName forKey:@"release"];

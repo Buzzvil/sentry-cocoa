@@ -6,7 +6,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SentryThread, SentryException, BuzzSentryStacktrace, BuzzSentryUser, BuzzSentryDebugMeta,
-    SentryBreadcrumb, SentryId, BuzzSentryMessage;
+    SentryBreadcrumb, BuzzSentryId, BuzzSentryMessage;
 
 NS_SWIFT_NAME(Event)
 @interface BuzzSentryEvent : NSObject <BuzzSentrySerializable>
@@ -14,7 +14,7 @@ NS_SWIFT_NAME(Event)
 /**
  * This will be set by the initializer.
  */
-@property (nonatomic, strong) SentryId *eventId;
+@property (nonatomic, strong) BuzzSentryId *eventId;
 
 /**
  * Message of the event.

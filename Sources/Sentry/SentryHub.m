@@ -8,7 +8,7 @@
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent+Private.h"
 #import "SentryFileManager.h"
-#import "SentryId.h"
+#import "BuzzSentryId.h"
 #import "SentryLog.h"
 #import "SentryProfilesSampler.h"
 #import "BuzzSentrySDK+Private.h"
@@ -246,12 +246,12 @@ SentryHub ()
     [client captureCrashEvent:event withScope:scope];
 }
 
-- (SentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(SentryScope *)scope
 {
     return [self captureTransaction:transaction withScope:scope additionalEnvelopeItems:@[]];
 }
 
-- (SentryId *)captureTransaction:(BuzzSentryTransaction *)transaction
+- (BuzzSentryId *)captureTransaction:(BuzzSentryTransaction *)transaction
                        withScope:(SentryScope *)scope
          additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
@@ -259,7 +259,7 @@ SentryHub ()
     if (decision != kBuzzSentrySampleDecisionYes) {
         [self.client recordLostEvent:kBuzzSentryDataCategoryTransaction
                               reason:kBuzzSentryDiscardReasonSampleRate];
-        return SentryId.empty;
+        return BuzzSentryId.empty;
     }
 
     return [self captureEvent:transaction
@@ -267,17 +267,17 @@ SentryHub ()
         additionalEnvelopeItems:additionalEnvelopeItems];
 }
 
-- (SentryId *)captureEvent:(BuzzSentryEvent *)event
+- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
 {
     return [self captureEvent:event withScope:self.scope];
 }
 
-- (SentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope
 {
     return [self captureEvent:event withScope:scope additionalEnvelopeItems:@[]];
 }
 
-- (SentryId *)captureEvent:(BuzzSentryEvent *)event
+- (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
                   withScope:(SentryScope *)scope
     additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
@@ -287,7 +287,7 @@ SentryHub ()
                           withScope:scope
             additionalEnvelopeItems:additionalEnvelopeItems];
     }
-    return SentryId.empty;
+    return BuzzSentryId.empty;
 }
 
 - (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name operation:(NSString *)operation
@@ -417,26 +417,26 @@ SentryHub ()
     return tracer;
 }
 
-- (SentryId *)captureMessage:(NSString *)message
+- (BuzzSentryId *)captureMessage:(NSString *)message
 {
     return [self captureMessage:message withScope:self.scope];
 }
 
-- (SentryId *)captureMessage:(NSString *)message withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureMessage:(NSString *)message withScope:(SentryScope *)scope
 {
     BuzzSentryClient *client = _client;
     if (nil != client) {
         return [client captureMessage:message withScope:scope];
     }
-    return SentryId.empty;
+    return BuzzSentryId.empty;
 }
 
-- (SentryId *)captureError:(NSError *)error
+- (BuzzSentryId *)captureError:(NSError *)error
 {
     return [self captureError:error withScope:self.scope];
 }
 
-- (SentryId *)captureError:(NSError *)error withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureError:(NSError *)error withScope:(SentryScope *)scope
 {
     BuzzSentrySession *currentSession = [self incrementSessionErrors];
     BuzzSentryClient *client = _client;
@@ -447,15 +447,15 @@ SentryHub ()
             return [client captureError:error withScope:scope];
         }
     }
-    return SentryId.empty;
+    return BuzzSentryId.empty;
 }
 
-- (SentryId *)captureException:(NSException *)exception
+- (BuzzSentryId *)captureException:(NSException *)exception
 {
     return [self captureException:exception withScope:self.scope];
 }
 
-- (SentryId *)captureException:(NSException *)exception withScope:(SentryScope *)scope
+- (BuzzSentryId *)captureException:(NSException *)exception withScope:(SentryScope *)scope
 {
     BuzzSentrySession *currentSession = [self incrementSessionErrors];
 
@@ -467,7 +467,7 @@ SentryHub ()
             return [client captureException:exception withScope:scope];
         }
     }
-    return SentryId.empty;
+    return BuzzSentryId.empty;
 }
 
 - (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback

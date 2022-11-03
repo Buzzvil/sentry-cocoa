@@ -2,7 +2,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryId;
+@class BuzzSentryId;
 
 static NSString *const SENTRY_BAGGAGE_HEADER = @"baggage";
 
@@ -12,7 +12,7 @@ static NSString *const SENTRY_BAGGAGE_HEADER = @"baggage";
  * UUID V4 encoded as a hexadecimal sequence with no dashes (e.g. 771a43a4192642f0b136d5159a501700)
  * that is a sequence of 32 hexadecimal digits.
  */
-@property (nonatomic, readonly) SentryId *traceId;
+@property (nonatomic, readonly) BuzzSentryId *traceId;
 
 /**
  * Public key from the DSN used by the SDK.
@@ -49,7 +49,7 @@ static NSString *const SENTRY_BAGGAGE_HEADER = @"baggage";
  */
 @property (nullable, nonatomic, readonly) NSString *sampleRate;
 
-- (instancetype)initWithTraceId:(SentryId *)traceId
+- (instancetype)initWithTraceId:(BuzzSentryId *)traceId
                       publicKey:(NSString *)publicKey
                     releaseName:(nullable NSString *)releaseName
                     environment:(nullable NSString *)environment

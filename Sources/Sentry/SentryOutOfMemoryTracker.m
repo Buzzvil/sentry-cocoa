@@ -8,7 +8,7 @@
 #import <SentryException.h>
 #import <SentryHub.h>
 #import <SentryLog.h>
-#import <SentryMechanism.h>
+#import <BuzzSentryMechanism.h>
 #import <BuzzSentryMessage.h>
 #import <BuzzSentryOptions.h>
 #import <SentryOutOfMemoryLogic.h>
@@ -62,8 +62,8 @@ SentryOutOfMemoryTracker ()
             SentryException *exception =
                 [[SentryException alloc] initWithValue:SentryOutOfMemoryExceptionValue
                                                   type:SentryOutOfMemoryExceptionType];
-            SentryMechanism *mechanism =
-                [[SentryMechanism alloc] initWithType:SentryOutOfMemoryMechanismType];
+            BuzzSentryMechanism *mechanism =
+                [[BuzzSentryMechanism alloc] initWithType:SentryOutOfMemoryMechanismType];
             mechanism.handled = @(NO);
             exception.mechanism = mechanism;
             event.exceptions = @[ exception ];

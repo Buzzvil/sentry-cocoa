@@ -5,10 +5,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryNSError, SentryMechanismMeta;
+@class BuzzSentryNSError, BuzzSentryMechanismMeta;
 
 NS_SWIFT_NAME(Mechanism)
-@interface SentryMechanism : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryMechanism : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**
@@ -45,12 +45,12 @@ SENTRY_NO_INIT
  * Information from the operating system or runtime on the exception
  * mechanism.
  */
-@property (nullable, nonatomic, strong) SentryMechanismMeta *meta;
+@property (nullable, nonatomic, strong) BuzzSentryMechanismMeta *meta;
 
 /**
- * Initialize an SentryMechanism with a type
+ * Initialize an BuzzSentryMechanism with a type
  * @param type String
- * @return SentryMechanism
+ * @return BuzzSentryMechanism
  */
 - (instancetype)initWithType:(NSString *)type;
 

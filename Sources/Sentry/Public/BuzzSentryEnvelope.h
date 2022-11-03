@@ -2,7 +2,7 @@
 
 #import "SentryDefines.h"
 
-@class BuzzSentryEvent, BuzzSentrySession, SentrySdkInfo, SentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
+@class BuzzSentryEvent, BuzzSentrySession, SentrySdkInfo, BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
     BuzzSentryTransaction, BuzzSentryTraceContext, BuzzSentryClientReport;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +18,7 @@ SENTRY_NO_INIT
  * @param eventId The identifier of the event. Can be nil if no event in the envelope or attachment
  * related to event.
  */
-- (instancetype)initWithId:(SentryId *_Nullable)eventId;
+- (instancetype)initWithId:(BuzzSentryId *_Nullable)eventId;
 
 /**
  * Initializes an BuzzSentryEnvelopeHeader object with the specified eventId and traceContext.
@@ -27,7 +27,7 @@ SENTRY_NO_INIT
  * related to event.
  * @param traceContext Current trace state.
  */
-- (instancetype)initWithId:(nullable SentryId *)eventId
+- (instancetype)initWithId:(nullable BuzzSentryId *)eventId
               traceContext:(nullable BuzzSentryTraceContext *)traceContext;
 
 /**
@@ -41,7 +41,7 @@ SENTRY_NO_INIT
  * instances should always provide a version.
  * @param traceContext Current trace state.
  */
-- (instancetype)initWithId:(nullable SentryId *)eventId
+- (instancetype)initWithId:(nullable BuzzSentryId *)eventId
                    sdkInfo:(nullable SentrySdkInfo *)sdkInfo
               traceContext:(nullable BuzzSentryTraceContext *)traceContext NS_DESIGNATED_INITIALIZER;
 
@@ -50,7 +50,7 @@ SENTRY_NO_INIT
  * An event id exist if the envelope contains an event of items within it are
  * related. i.e Attachments
  */
-@property (nullable, nonatomic, readonly, copy) SentryId *eventId;
+@property (nullable, nonatomic, readonly, copy) BuzzSentryId *eventId;
 
 @property (nullable, nonatomic, readonly, copy) SentrySdkInfo *sdkInfo;
 
@@ -105,12 +105,12 @@ SENTRY_NO_INIT
 SENTRY_NO_INIT
 
 // If no event, or no data related to event, id will be null
-- (instancetype)initWithId:(SentryId *_Nullable)id singleItem:(BuzzSentryEnvelopeItem *)item;
+- (instancetype)initWithId:(BuzzSentryId *_Nullable)id singleItem:(BuzzSentryEnvelopeItem *)item;
 
 - (instancetype)initWithHeader:(BuzzSentryEnvelopeHeader *)header singleItem:(BuzzSentryEnvelopeItem *)item;
 
 // If no event, or no data related to event, id will be null
-- (instancetype)initWithId:(SentryId *_Nullable)id items:(NSArray<BuzzSentryEnvelopeItem *> *)items;
+- (instancetype)initWithId:(BuzzSentryId *_Nullable)id items:(NSArray<BuzzSentryEnvelopeItem *> *)items;
 
 /**
  * Initializes a BuzzSentryEnvelope with a single session.

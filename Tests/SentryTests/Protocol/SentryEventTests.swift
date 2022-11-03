@@ -24,7 +24,7 @@ class BuzzSentryEventTests: XCTestCase {
         event.breadcrumbs?.append(TestData.crumb)
         event.context?["a"] = ["a": 0]
 
-        XCTAssertEqual(event.eventId.sentryIdString, actual["event_id"] as? String)
+        XCTAssertEqual(event.eventId.BuzzSentryIdString, actual["event_id"] as? String)
         XCTAssertEqual(TestData.timestamp.timeIntervalSince1970, actual["timestamp"] as? TimeInterval)
         XCTAssertEqual("cocoa", actual["platform"] as? String)
         XCTAssertEqual("info", actual["level"] as? String)

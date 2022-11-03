@@ -63,7 +63,7 @@ SENTRY_NO_INIT
  */
 - (instancetype)initWithName:(NSString *)name
                    operation:(NSString *)operation
-                     traceId:(SentryId *)traceId
+                     traceId:(BuzzSentryId *)traceId
                       spanId:(BuzzSentrySpanId *)spanId
                 parentSpanId:(nullable BuzzSentrySpanId *)parentSpanId
                parentSampled:(BuzzSentrySampleDecision)parentSampled;

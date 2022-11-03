@@ -415,7 +415,7 @@ static BOOL appStartMeasurementRead;
 {
     // Transaction already finished and captured.
     // Sending another transaction and spans with
-    // the same SentryId would be an error.
+    // the same BuzzSentryId would be an error.
     if (self.rootSpan.isFinished)
         return;
 

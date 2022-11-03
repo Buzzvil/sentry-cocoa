@@ -13,7 +13,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
         let dataTooBig: Data
         
         init() {
-            userFeedback = UserFeedback(eventId: SentryId())
+            userFeedback = UserFeedback(eventId: BuzzSentryId())
             userFeedback.comments = "It doesn't work!"
             userFeedback.email = "john@me.com"
             userFeedback.name = "John Me"
@@ -93,7 +93,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
         let itemHeader = BuzzSentryEnvelopeItemHeader(type: "attachment", length: UInt(data.count))
         let item = BuzzSentryEnvelopeItem(header: itemHeader, data: data)
         
-        let envelopeId = SentryId()
+        let envelopeId = BuzzSentryId()
         let header = BuzzSentryEnvelopeHeader(id: envelopeId)
         let envelope = BuzzSentryEnvelope(header: header, singleItem: item)
         
@@ -119,7 +119,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
             items.append(item)
         }
 
-        let envelopeId = SentryId()
+        let envelopeId = BuzzSentryId()
         let envelope = BuzzSentryEnvelope(id: envelopeId, items: items)
 
         XCTAssertEqual(envelopeId, envelope.header.eventId)
@@ -149,7 +149,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
     }
     
     func testInitBuzzSentryEnvelopeHeader_SetIdAndSdkInfo() {
-        let eventId = SentryId()
+        let eventId = BuzzSentryId()
         let sdkInfo = SentrySdkInfo(name: "sdk", andVersion: "1.2.3-alpha.0")
         
         let envelopeHeader = BuzzSentryEnvelopeHeader(id: eventId, sdkInfo: sdkInfo, traceContext: nil)
@@ -158,8 +158,8 @@ class BuzzSentryEnvelopeTests: XCTestCase {
     }
     
     func testInitBuzzSentryEnvelopeHeader_SetIdAndTraceState() {
-        let eventId = SentryId()
-        let traceContext = BuzzSentryTraceContext(trace: SentryId(), publicKey: "publicKey", releaseName: "releaseName", environment: "environment", transaction: "transaction", userSegment: nil, sampleRate: nil)
+        let eventId = BuzzSentryId()
+        let traceContext = BuzzSentryTraceContext(trace: BuzzSentryId(), publicKey: "publicKey", releaseName: "releaseName", environment: "environment", transaction: "transaction", userSegment: nil, sampleRate: nil)
         
         let envelopeHeader = BuzzSentryEnvelopeHeader(id: eventId, traceContext: traceContext)
         XCTAssertEqual(eventId, envelopeHeader.eventId)

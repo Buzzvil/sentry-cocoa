@@ -47,7 +47,7 @@ class SentrySDKTests: XCTestCase {
             client = TestClient(options: options)!
             hub = SentryHub(client: client, andScope: scope, andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
             
-            userFeedback = UserFeedback(eventId: SentryId())
+            userFeedback = UserFeedback(eventId: BuzzSentryId())
             userFeedback.comments = "Again really?"
             userFeedback.email = "tim@apple.com"
             userFeedback.name = "Tim Apple"

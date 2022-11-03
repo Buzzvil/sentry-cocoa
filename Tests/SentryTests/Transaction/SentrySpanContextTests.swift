@@ -10,7 +10,7 @@ class BuzzSentrySpanContextTests: XCTestCase {
         XCTAssertEqual(spanContext.operation, someOperation)
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
-        XCTAssertEqual(spanContext.traceId.sentryIdString.count, 32)
+        XCTAssertEqual(spanContext.traceId.BuzzSentryIdString.count, 32)
         XCTAssertEqual(spanContext.spanId.BuzzSentrySpanIdString.count, 16)
     }
     
@@ -21,12 +21,12 @@ class BuzzSentrySpanContextTests: XCTestCase {
         XCTAssertNil(spanContext.parentSpanId)
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
-        XCTAssertEqual(spanContext.traceId.sentryIdString.count, 32)
+        XCTAssertEqual(spanContext.traceId.BuzzSentryIdString.count, 32)
         XCTAssertEqual(spanContext.spanId.BuzzSentrySpanIdString.count, 16)
     }
     
     func testInitWithTraceIdSpanIdParentIdSampled() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         
@@ -42,7 +42,7 @@ class BuzzSentrySpanContextTests: XCTestCase {
     }
     
     func testSerialization() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         
@@ -53,7 +53,7 @@ class BuzzSentrySpanContextTests: XCTestCase {
         let data = spanContext.serialize()
         
         XCTAssertEqual(data["span_id"] as? String, spanId.BuzzSentrySpanIdString)
-        XCTAssertEqual(data["trace_id"] as? String, id.sentryIdString)
+        XCTAssertEqual(data["trace_id"] as? String, id.BuzzSentryIdString)
         XCTAssertEqual(data["type"] as? String, SpanContext.type)
         XCTAssertEqual(data["op"] as? String, someOperation)
         XCTAssertEqual(data["description"] as? String, spanContext.spanDescription)
@@ -81,7 +81,7 @@ class BuzzSentrySpanContextTests: XCTestCase {
     }
     
     func testSampledNoSerialization() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         
@@ -94,7 +94,7 @@ class BuzzSentrySpanContextTests: XCTestCase {
     }
     
     func testSampleUndecidedSerialization() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         

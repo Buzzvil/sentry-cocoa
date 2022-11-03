@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryMechanismMetaTests: XCTestCase {
+class BuzzSentryMechanismMetaTests: XCTestCase {
 
     func testSerialize() {
         let sut = TestData.mechanismMeta

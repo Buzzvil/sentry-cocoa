@@ -18,13 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation BuzzSentryEnvelopeHeader
 
 // id can be null if no event in the envelope or attachment related to event
-- (instancetype)initWithId:(SentryId *_Nullable)eventId
+- (instancetype)initWithId:(BuzzSentryId *_Nullable)eventId
 {
     self = [self initWithId:eventId traceContext:nil];
     return self;
 }
 
-- (instancetype)initWithId:(nullable SentryId *)eventId
+- (instancetype)initWithId:(nullable BuzzSentryId *)eventId
               traceContext:(nullable BuzzSentryTraceContext *)traceContext
 {
     SentrySdkInfo *sdkInfo = [[SentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (instancetype)initWithId:(nullable SentryId *)eventId
+- (instancetype)initWithId:(nullable BuzzSentryId *)eventId
                    sdkInfo:(nullable SentrySdkInfo *)sdkInfo
               traceContext:(nullable BuzzSentryTraceContext *)traceContext
 {
@@ -260,12 +260,12 @@ NS_ASSUME_NONNULL_BEGIN
                      singleItem:item];
 }
 
-- (instancetype)initWithId:(SentryId *_Nullable)id singleItem:(BuzzSentryEnvelopeItem *)item
+- (instancetype)initWithId:(BuzzSentryId *_Nullable)id singleItem:(BuzzSentryEnvelopeItem *)item
 {
     return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:id] singleItem:item];
 }
 
-- (instancetype)initWithId:(SentryId *_Nullable)id items:(NSArray<BuzzSentryEnvelopeItem *> *)items
+- (instancetype)initWithId:(BuzzSentryId *_Nullable)id items:(NSArray<BuzzSentryEnvelopeItem *> *)items
 {
     return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:id] items:items];
 }

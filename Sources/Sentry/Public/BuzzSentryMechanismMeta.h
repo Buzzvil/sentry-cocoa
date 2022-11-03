@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * See https://develop.sentry.dev/sdk/event-payloads/exception/#meta-information.
  */
 NS_SWIFT_NAME(MechanismMeta)
-@interface SentryMechanismMeta : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryMechanismMeta : NSObject <BuzzSentrySerializable>
 
 - (instancetype)init;
 

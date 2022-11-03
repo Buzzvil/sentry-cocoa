@@ -15,7 +15,7 @@
 #    import "BuzzSentryFramesTracker.h"
 #    import "SentryHexAddressFormatter.h"
 #    import "SentryHub+Private.h"
-#    import "SentryId.h"
+#    import "BuzzSentryId.h"
 #    import "SentryLog.h"
 #    import "SentrySamplingProfiler.hpp"
 #    import "SentryScope+Private.h"
@@ -517,8 +517,8 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
         @"model" : isEmulated ? sentry_getSimulatorDeviceModel() : sentry_getDeviceModel()
     };
 
-    const auto profileID = [[SentryId alloc] init];
-    profile[@"profile_id"] = profileID.sentryIdString;
+    const auto profileID = [[BuzzSentryId alloc] init];
+    profile[@"profile_id"] = profileID.BuzzSentryIdString;
     const auto profileDuration = getDurationNs(_startTimestamp, _endTimestamp);
     profile[@"duration_ns"] = [@(profileDuration) stringValue];
     profile[@"truncation_reason"] = profilerTruncationReasonName(_truncationReason);
@@ -588,8 +588,8 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
                           : (unsigned long long)(
                               [transaction.timestamp timeIntervalSinceDate:_startDate] * 1e9)];
         [transactionsInfo addObject:@{
-            @"id" : transaction.eventId.sentryIdString,
-            @"trace_id" : transaction.trace.context.traceId.sentryIdString,
+            @"id" : transaction.eventId.BuzzSentryIdString,
+            @"trace_id" : transaction.trace.context.traceId.BuzzSentryIdString,
             @"name" : transaction.transaction,
             @"relative_start_ns" : relativeStart,
             @"relative_end_ns" : relativeEnd,

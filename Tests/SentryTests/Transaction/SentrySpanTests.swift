@@ -220,7 +220,7 @@ class BuzzSentrySpanTests: XCTestCase {
         
         let serialization = span.serialize()
         XCTAssertEqual(serialization["span_id"] as? String, span.context.spanId.BuzzSentrySpanIdString)
-        XCTAssertEqual(serialization["trace_id"] as? String, span.context.traceId.sentryIdString)
+        XCTAssertEqual(serialization["trace_id"] as? String, span.context.traceId.BuzzSentryIdString)
         XCTAssertEqual(serialization["timestamp"] as? TimeInterval, TestData.timestamp.timeIntervalSince1970)
         XCTAssertEqual(serialization["start_timestamp"] as? TimeInterval, TestData.timestamp.timeIntervalSince1970)
         XCTAssertEqual(serialization["type"] as? String, SpanContext.type)

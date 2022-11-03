@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryId;
+@class BuzzSentryId;
 
 /**
  * Adds additional information about what happened to an event.
@@ -17,12 +17,12 @@ SENTRY_NO_INIT
  *
  * @param eventId The eventId of the event to which the user feedback is associated.
  */
-- (instancetype)initWithEventId:(SentryId *)eventId;
+- (instancetype)initWithEventId:(BuzzSentryId *)eventId;
 
 /**
  * The eventId of the event to which the user feedback is associated.
  */
-@property (readonly, nonatomic, strong) SentryId *eventId;
+@property (readonly, nonatomic, strong) BuzzSentryId *eventId;
 
 /**
  * The name of the user.
