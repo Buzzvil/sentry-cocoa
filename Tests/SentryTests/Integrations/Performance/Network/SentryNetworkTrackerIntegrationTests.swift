@@ -151,7 +151,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
     
     func testGetRequest_SpanCreatedAndBaggageHeaderAdded_disabled() {
         startSDK()
-        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! SentryTracer
+        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
         let expect = expectation(description: "Request completed")
         let session = URLSession(configuration: URLSessionConfiguration.default)
 
@@ -180,7 +180,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
     
     func testGetRequest_CompareBuzzSentryTraceHeader() {
         startSDK()
-        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! SentryTracer
+        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
         let expect = expectation(description: "Request completed")
         let session = URLSession(configuration: URLSessionConfiguration.default)
         var response: String?
@@ -215,8 +215,8 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         SentrySDK.start(options: self.fixture.options)
     }
     
-    private func startTransactionBoundToScope() -> SentryTracer {
-        return SentrySDK.startTransaction(name: "Test", operation: "test", bindToScope: true) as! SentryTracer
+    private func startTransactionBoundToScope() -> BuzzSentryTracer {
+        return SentrySDK.startTransaction(name: "Test", operation: "test", bindToScope: true) as! BuzzSentryTracer
     }
     
     private func assertRemovedIntegration(_ options: Options) {

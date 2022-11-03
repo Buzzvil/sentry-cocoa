@@ -1,9 +1,9 @@
-#import "SentryTransactionContext.h"
+#import "BuzzSentryTransactionContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryTransactionContext (Private)
+BuzzSentryTransactionContext (Private)
 
 - (instancetype)initWithName:(NSString *)name
                   nameSource:(SentryTransactionNameSource)source

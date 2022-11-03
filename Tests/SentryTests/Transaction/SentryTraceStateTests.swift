@@ -9,7 +9,7 @@ class BuzzSentryTraceContextTests: XCTestCase {
         let transactionOperation = "Some Operation"
         let options: Options
         let scope: Scope
-        let tracer: SentryTracer
+        let tracer: BuzzSentryTracer
         let userId = "SomeUserID"
         let userSegment = "Test Segment"
         let sampleRate = "0.45"
@@ -25,7 +25,7 @@ class BuzzSentryTraceContextTests: XCTestCase {
             options.environment = environment
             options.sendDefaultPii = true
             
-            tracer = SentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
+            tracer = BuzzSentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
             
             scope = Scope()
             scope.setUser(User(userId: userId))

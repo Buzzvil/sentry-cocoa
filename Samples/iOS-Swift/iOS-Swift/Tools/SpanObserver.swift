@@ -34,7 +34,7 @@ class SpanObserver: NSObject {
     
     func addSpanObserver(forKeyPath keyPath: String, callback: @escaping (Span) -> Void) {
         callbacks[keyPath] = callback
-        //The given span may be a SentryTracer that wont respond to KVO. We need to get the root Span
+        //The given span may be a BuzzSentryTracer that wont respond to KVO. We need to get the root Span
         let spanToObserve = span.rootSpan() ?? span
         (spanToObserve as? NSObject)?.addObserver(self, forKeyPath: keyPath, options: .new, context: nil)
     }

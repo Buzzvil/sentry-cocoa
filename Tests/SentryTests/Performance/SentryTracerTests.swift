@@ -1,12 +1,12 @@
 import XCTest
 
-class SentryTracerTests: XCTestCase {
+class BuzzSentryTracerTests: XCTestCase {
     
-    private class TracerDelegate: SentryTracerDelegate {
+    private class TracerDelegate: BuzzSentryTracerDelegate {
         
         var activeSpan: Span?
         
-        func activeSpan(for tracer: SentryTracer) -> Span? {
+        func activeSpan(for tracer: BuzzSentryTracer) -> Span? {
             return activeSpan
         }
     }
@@ -69,11 +69,11 @@ class SentryTracerTests: XCTestCase {
             return SentryAppStartMeasurement(type: type, appStartTimestamp: appStart, duration: appStartDuration, runtimeInitTimestamp: runtimeInit, moduleInitializationTimestamp: main, didFinishLaunchingTimestamp: didFinishLaunching)
         }
         
-        func getSut(waitForChildren: Bool = true) -> SentryTracer {
-            return hub.startTransaction(with: transactionContext, bindToScope: false, waitForChildren: waitForChildren, customSamplingContext: [:]) as! SentryTracer
+        func getSut(waitForChildren: Bool = true) -> BuzzSentryTracer {
+            return hub.startTransaction(with: transactionContext, bindToScope: false, waitForChildren: waitForChildren, customSamplingContext: [:]) as! BuzzSentryTracer
         }
         
-        func getSut(idleTimeout: TimeInterval = 0.0, dispatchQueueWrapper: SentryDispatchQueueWrapper) -> SentryTracer {
+        func getSut(idleTimeout: TimeInterval = 0.0, dispatchQueueWrapper: SentryDispatchQueueWrapper) -> BuzzSentryTracer {
             return hub.startTransaction(with: transactionContext, bindToScope: false, customSamplingContext: [:], idleTimeout: idleTimeout, dispatchQueueWrapper: dispatchQueueWrapper)
         }
     }
@@ -83,13 +83,13 @@ class SentryTracerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentryTracer.resetAppStartMeasurementRead()
+        BuzzSentryTracer.resetAppStartMeasurementRead()
     }
     
     override func tearDown() {
         super.tearDown()
         clearTestState()
-        SentryTracer.resetAppStartMeasurementRead()
+        BuzzSentryTracer.resetAppStartMeasurementRead()
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
         SentryFramesTracker.sharedInstance().resetFrames()
         SentryFramesTracker.sharedInstance().stop()
@@ -137,7 +137,7 @@ class SentryTracerTests: XCTestCase {
     }
     
     func testFinish_WithoutHub_DoesntCaptureTransaction() {
-        let sut = SentryTracer(transactionContext: fixture.transactionContext, hub: nil, waitForChildren: false)
+        let sut = BuzzSentryTracer(transactionContext: fixture.transactionContext, hub: nil, waitForChildren: false)
         
         sut.finish()
         
@@ -402,7 +402,7 @@ class SentryTracerTests: XCTestCase {
         let sut = fixture.getSut()
         sut.delegate = delegate
         
-        delegate.activeSpan = SentryTracer(transactionContext: TransactionContext(name: fixture.transactionName, operation: fixture.transactionOperation), hub: nil)
+        delegate.activeSpan = BuzzSentryTracer(transactionContext: TransactionContext(name: fixture.transactionName, operation: fixture.transactionOperation), hub: nil)
         
         let child = sut.startChild(operation: fixture.transactionOperation)
         
@@ -489,7 +489,7 @@ class SentryTracerTests: XCTestCase {
         let appStartMeasurement = fixture.getAppStartMeasurement(type: .warm)
         SentrySDK.setAppStartMeasurement(appStartMeasurement)
         
-        let sut = fixture.hub.startTransaction(transactionContext: TransactionContext(name: "custom", operation: "custom")) as! SentryTracer
+        let sut = fixture.hub.startTransaction(transactionContext: TransactionContext(name: "custom", operation: "custom")) as! BuzzSentryTracer
         sut.finish()
         fixture.hub.group.wait()
         
@@ -580,7 +580,7 @@ class SentryTracerTests: XCTestCase {
         child2.finish()
         
         //Without this sleep sut.timestamp and child2.timestamp sometimes
-        //are equal we need to make sure that SentryTracer is not changing
+        //are equal we need to make sure that BuzzSentryTracer is not changing
         //the timestamp value of proper finished spans.
         Thread.sleep(forTimeInterval: 0.1)
         
@@ -604,7 +604,7 @@ class SentryTracerTests: XCTestCase {
         
         let sut = fixture.getSut(idleTimeout: fixture.idleTimeout, dispatchQueueWrapper: fixture.dispatchQueue)
         
-        let block: (SentryTracer) -> Void = { tracer in
+        let block: (BuzzSentryTracer) -> Void = { tracer in
             XCTAssertEqual(sut, tracer)
             callbackExpectation.fulfill()
         }
@@ -646,7 +646,7 @@ class SentryTracerTests: XCTestCase {
         let child = sut.startChild(operation: fixture.transactionOperation)
         sut.finish()
         
-        let queue = DispatchQueue(label: "SentryTracerTests", attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentryTracerTests", attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
         
         for _ in 0 ..< 5_000 {
@@ -795,12 +795,12 @@ class SentryTracerTests: XCTestCase {
         return transaction.serialize()
     }
     
-    private func assertTransactionNotCaptured(_ tracer: SentryTracer) {
+    private func assertTransactionNotCaptured(_ tracer: BuzzSentryTracer) {
         fixture.hub.group.wait()
         XCTAssertEqual(0, fixture.hub.capturedEventsWithScopes.count)
     }
     
-    private func assertOneTransactionCaptured(_ tracer: SentryTracer) {
+    private func assertOneTransactionCaptured(_ tracer: BuzzSentryTracer) {
         fixture.hub.group.wait()
         XCTAssertTrue(tracer.isFinished)
         XCTAssertEqual(1, fixture.hub.capturedEventsWithScopes.count)
@@ -813,7 +813,7 @@ class SentryTracerTests: XCTestCase {
         let appLaunchSpan = spans?.first { span in
             span.context.spanDescription == startType
         }
-        let trace: SentryTracer? = Dynamic(transaction).trace
+        let trace: BuzzSentryTracer? = Dynamic(transaction).trace
         XCTAssertEqual(operation, appLaunchSpan?.context.operation)
         XCTAssertEqual(trace?.context.spanId, appLaunchSpan?.context.parentSpanId)
         XCTAssertEqual(appStartMeasurement.appStartTimestamp, appLaunchSpan?.startTimestamp)

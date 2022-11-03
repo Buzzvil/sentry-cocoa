@@ -1,6 +1,6 @@
 #import "TestSentrySpan.h"
 #import "SentrySpanProtocol.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 
 @implementation TestSentrySpan
 
@@ -35,7 +35,7 @@
 {
 }
 
-- (void)finishWithStatus:(SentrySpanStatus)status
+- (void)finishWithStatus:(BuzzSentrySpanStatus)status
 {
 }
 

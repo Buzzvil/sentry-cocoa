@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryOptions, SentrySamplingContext, SentryTracesSamplerDecision;
+@class BuzzSentryOptions, BuzzSentrySamplingContext, BuzzSentryTracesSamplerDecision;
 
 @interface SentryProfilesSamplerDecision : NSObject
 
@@ -41,8 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Determines whether a profile should be sampled based on the context, options, and
  * whether the trace corresponding to the profile was sampled.
  */
-- (SentryProfilesSamplerDecision *)sample:(SentrySamplingContext *)context
-                    tracesSamplerDecision:(SentryTracesSamplerDecision *)tracesSamplerDecision;
+- (SentryProfilesSamplerDecision *)sample:(BuzzSentrySamplingContext *)context
+                    tracesSamplerDecision:(BuzzSentryTracesSamplerDecision *)tracesSamplerDecision;
 
 @end
 

@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryScope, BuzzSentryOptions, SentryTracer, SentryUser, BuzzSentryBaggage;
+@class SentryScope, BuzzSentryOptions, BuzzSentryTracer, SentryUser, BuzzSentryBaggage;
 
 @interface BuzzSentryTraceContext : NSObject <SentrySerializable>
 
@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initializes a BuzzSentryTraceContext with data from a trace, scope and options.
  */
-- (nullable instancetype)initWithTracer:(SentryTracer *)tracer
+- (nullable instancetype)initWithTracer:(BuzzSentryTracer *)tracer
                                   scope:(nullable SentryScope *)scope
                                 options:(BuzzSentryOptions *)options;
 

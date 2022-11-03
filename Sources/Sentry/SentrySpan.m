@@ -8,7 +8,7 @@
 #import "SentrySpanId.h"
 #import "SentryTime.h"
 #import "BuzzSentryTraceHeader.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,7 +22,7 @@ SentrySpan ()
     BOOL _isFinished;
 }
 
-- (instancetype)initWithTracer:(SentryTracer *)tracer context:(SentrySpanContext *)context
+- (instancetype)initWithTracer:(BuzzSentryTracer *)tracer context:(SentrySpanContext *)context
 {
     if (self = [super init]) {
         SENTRY_LOG_DEBUG(
@@ -119,10 +119,10 @@ SentrySpan ()
 
 - (void)finish
 {
-    [self finishWithStatus:kSentrySpanStatusOk];
+    [self finishWithStatus:kBuzzSentrySpanStatusOk];
 }
 
-- (void)finishWithStatus:(SentrySpanStatus)status
+- (void)finishWithStatus:(BuzzSentrySpanStatus)status
 {
     self.context.status = status;
     _isFinished = YES;

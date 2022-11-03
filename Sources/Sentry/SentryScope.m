@@ -9,8 +9,8 @@
 #import "SentryScopeObserver.h"
 #import "SentrySession.h"
 #import "SentrySpan.h"
-#import "SentryTracer.h"
-#import "SentryTransactionContext.h"
+#import "BuzzSentryTracer.h"
+#import "BuzzSentryTransactionContext.h"
 #import "SentryUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -531,8 +531,8 @@ SentryScope ()
         // Span could be nil as we do the first check outside the synchronize
         if (span != nil) {
             if (![event.type isEqualToString:SentryEnvelopeItemTypeTransaction] &&
-                [span isKindOfClass:[SentryTracer class]]) {
-                event.transaction = [[(SentryTracer *)span transactionContext] name];
+                [span isKindOfClass:[BuzzSentryTracer class]]) {
+                event.transaction = [[(BuzzSentryTracer *)span transactionContext] name];
             }
             newContext[@"trace"] = [span.context serialize];
         }

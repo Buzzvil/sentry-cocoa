@@ -5,7 +5,7 @@
 #import "SentryScope+Private.h"
 #import "SentrySerialization.h"
 #import "BuzzSentryTraceContext.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 #import "SentryUser.h"
 
 @implementation BuzzSentryBaggage

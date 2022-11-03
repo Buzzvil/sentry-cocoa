@@ -8,7 +8,7 @@
 #import "SentrySerialization.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTraceHeader.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 #import <objc/runtime.h>
 
 @interface
@@ -146,7 +146,7 @@ SentryNetworkTracker ()
             [self addHeadersForRequestWithURL:sessionTask.currentRequest.URL]) {
             NSString *baggageHeader = @"";
 
-            SentryTracer *tracer = [SentryTracer getTracer:span];
+            BuzzSentryTracer *tracer = [BuzzSentryTracer getTracer:span];
             if (tracer != nil) {
                 baggageHeader = [[tracer.traceContext toBaggage]
                     toHTTPHeaderWithOriginalBaggage:
@@ -304,21 +304,21 @@ SentryNetworkTracker ()
     return -1;
 }
 
-- (SentrySpanStatus)statusForSessionTask:(NSURLSessionTask *)task state:(NSURLSessionTaskState)state
+- (BuzzSentrySpanStatus)statusForSessionTask:(NSURLSessionTask *)task state:(NSURLSessionTaskState)state
 {
     switch (state) {
     case NSURLSessionTaskStateSuspended:
-        return kSentrySpanStatusAborted;
+        return kBuzzSentrySpanStatusAborted;
     case NSURLSessionTaskStateCanceling:
-        return kSentrySpanStatusCancelled;
+        return kBuzzSentrySpanStatusCancelled;
     case NSURLSessionTaskStateCompleted:
         return task.error != nil
-            ? kSentrySpanStatusUnknownError
+            ? kBuzzSentrySpanStatusUnknownError
             : [self spanStatusForHttpResponseStatusCode:[self urlResponseStatusCode:task.response]];
     case NSURLSessionTaskStateRunning:
         break;
     }
-    return kSentrySpanStatusUndefined;
+    return kBuzzSentrySpanStatusUndefined;
 }
 
 - (BOOL)isTaskSupported:(NSURLSessionTask *)task
@@ -331,35 +331,35 @@ SentryNetworkTracker ()
 }
 
 // https://develop.sentry.dev/sdk/event-payloads/span/
-- (SentrySpanStatus)spanStatusForHttpResponseStatusCode:(NSInteger)statusCode
+- (BuzzSentrySpanStatus)spanStatusForHttpResponseStatusCode:(NSInteger)statusCode
 {
     if (statusCode >= 200 && statusCode < 300) {
-        return kSentrySpanStatusOk;
+        return kBuzzSentrySpanStatusOk;
     }
 
     switch (statusCode) {
     case 400:
-        return kSentrySpanStatusInvalidArgument;
+        return kBuzzSentrySpanStatusInvalidArgument;
     case 401:
-        return kSentrySpanStatusUnauthenticated;
+        return kBuzzSentrySpanStatusUnauthenticated;
     case 403:
-        return kSentrySpanStatusPermissionDenied;
+        return kBuzzSentrySpanStatusPermissionDenied;
     case 404:
-        return kSentrySpanStatusNotFound;
+        return kBuzzSentrySpanStatusNotFound;
     case 409:
-        return kSentrySpanStatusAborted;
+        return kBuzzSentrySpanStatusAborted;
     case 429:
-        return kSentrySpanStatusResourceExhausted;
+        return kBuzzSentrySpanStatusResourceExhausted;
     case 500:
-        return kSentrySpanStatusInternalError;
+        return kBuzzSentrySpanStatusInternalError;
     case 501:
-        return kSentrySpanStatusUnimplemented;
+        return kBuzzSentrySpanStatusUnimplemented;
     case 503:
-        return kSentrySpanStatusUnavailable;
+        return kBuzzSentrySpanStatusUnavailable;
     case 504:
-        return kSentrySpanStatusDeadlineExceeded;
+        return kBuzzSentrySpanStatusDeadlineExceeded;
     }
-    return kSentrySpanStatusUndefined;
+    return kBuzzSentrySpanStatusUndefined;
 }
 
 @end

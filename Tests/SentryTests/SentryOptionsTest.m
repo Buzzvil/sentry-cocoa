@@ -796,14 +796,14 @@
 
 - (void)testTracesSampler
 {
-    SentryTracesSamplerCallback sampler = ^(SentrySamplingContext *context) {
+    BuzzSentryTracesSamplerCallback sampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @1.0;
     };
 
     BuzzSentryOptions *options = [self getValidOptions:@{ @"tracesSampler" : sampler }];
 
-    SentrySamplingContext *context = [[SentrySamplingContext alloc] init];
+    BuzzSentrySamplingContext *context = [[BuzzSentrySamplingContext alloc] init];
     XCTAssertEqual(options.tracesSampler(context), @1.0);
 }
 
@@ -842,7 +842,7 @@
 - (void)testIsTracingEnabled_TracesSamplerSet_IsEnabled
 {
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
-    options.tracesSampler = ^(SentrySamplingContext *context) {
+    options.tracesSampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @0.0;
     };
@@ -931,7 +931,7 @@
 - (void)testIsProfilingEnabled_ProfilesSamplerSet_IsEnabled
 {
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
-    options.profilesSampler = ^(SentrySamplingContext *context) {
+    options.profilesSampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @0.0;
     };
@@ -955,14 +955,14 @@
 
 - (void)testProfilesSampler
 {
-    SentryTracesSamplerCallback sampler = ^(SentrySamplingContext *context) {
+    BuzzSentryTracesSamplerCallback sampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @1.0;
     };
 
     BuzzSentryOptions *options = [self getValidOptions:@{ @"profilesSampler" : sampler }];
 
-    SentrySamplingContext *context = [[SentrySamplingContext alloc] init];
+    BuzzSentrySamplingContext *context = [[BuzzSentrySamplingContext alloc] init];
     XCTAssertEqual(options.profilesSampler(context), @1.0);
 }
 

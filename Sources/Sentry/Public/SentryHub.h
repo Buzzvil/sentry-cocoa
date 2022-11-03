@@ -3,7 +3,7 @@
 #import "SentrySpanProtocol.h"
 
 @class SentryEvent, BuzzSentryClient, SentryScope, SentrySession, SentryUser, SentryBreadcrumb,
-    SentryId, SentryUserFeedback, SentryEnvelope, SentryTransactionContext;
+    SentryId, SentryUserFeedback, SentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface SentryHub : NSObject
@@ -91,7 +91,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(SentryTransactionContext *)transactionContext
+- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
     NS_SWIFT_NAME(startTransaction(transactionContext:));
 
 /**
@@ -102,7 +102,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(SentryTransactionContext *)transactionContext
+- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
     NS_SWIFT_NAME(startTransaction(transactionContext:bindToScope:));
 
@@ -115,7 +115,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(SentryTransactionContext *)transactionContext
+- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
     NS_SWIFT_NAME(startTransaction(transactionContext:bindToScope:customSamplingContext:));
@@ -128,7 +128,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(SentryTransactionContext *)transactionContext
+- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
     NS_SWIFT_NAME(startTransaction(transactionContext:customSamplingContext:));
 

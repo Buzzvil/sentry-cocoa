@@ -3,7 +3,7 @@
 #import "SentrySDK.h"
 #import "SentrySpan.h"
 #import "SentrySwizzle.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 #import <XCTest/XCTest.h>
 
 @interface SentryFileIOTrackingIntegrationObjCTests : XCTestCase
@@ -200,7 +200,7 @@
 
 - (void)assertTransactionForOperation:(NSString *)operation block:(void (^)(void))block
 {
-    SentryTracer *parentTransaction = [SentrySDK startTransactionWithName:@"Transaction"
+    BuzzSentryTracer *parentTransaction = [SentrySDK startTransactionWithName:@"Transaction"
                                                                 operation:@"Test"
                                                               bindToScope:YES];
 

@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
 }
 
-- (void)finishWithStatus:(SentrySpanStatus)status
+- (void)finishWithStatus:(BuzzSentrySpanStatus)status
 {
 }
 

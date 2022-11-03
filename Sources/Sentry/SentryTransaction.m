@@ -2,7 +2,7 @@
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryEnvelopeItemType.h"
 #import "BuzzSentryMeasurementValue.h"
-#import "SentryTransactionContext.h"
+#import "BuzzSentryTransactionContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ SentryTransaction ()
 
 @implementation SentryTransaction
 
-- (instancetype)initWithTrace:(SentryTracer *)trace children:(NSArray<id<SentrySpan>> *)children
+- (instancetype)initWithTrace:(BuzzSentryTracer *)trace children:(NSArray<id<SentrySpan>> *)children
 {
     if (self = [super init]) {
         self.timestamp = trace.timestamp;

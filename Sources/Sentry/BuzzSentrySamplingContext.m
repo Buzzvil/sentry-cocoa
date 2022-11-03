@@ -1,10 +1,10 @@
-#import "SentrySamplingContext.h"
+#import "BuzzSentrySamplingContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentrySamplingContext
+@implementation BuzzSentrySamplingContext
 
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
 {
     if (self = [super init]) {
         _transactionContext = transactionContext;
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                      customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
 {
     self = [self initWithTransactionContext:transactionContext];

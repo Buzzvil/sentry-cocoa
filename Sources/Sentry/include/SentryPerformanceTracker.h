@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentrySpanStatus.h"
+#import "BuzzSentrySpanStatus.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param spanId Id of the span to finish.
  * @param status Span finish status.
  */
-- (void)finishSpan:(SentrySpanId *)spanId withStatus:(SentrySpanStatus)status;
+- (void)finishSpan:(SentrySpanId *)spanId withStatus:(BuzzSentrySpanStatus)status;
 
 /**
  * Checks if given span is waiting to be finished.

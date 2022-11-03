@@ -270,7 +270,7 @@ NS_SWIFT_NAME(Options)
  * data, 1.0 collects all trace data, 0.01 collects 1% of all trace data. The sample rate needs to
  * be >= 0.0 and <= 1.0 or NIL. When returning a value out of range the SDK uses the default of 0.
  */
-@property (nullable, nonatomic) SentryTracesSamplerCallback tracesSampler;
+@property (nullable, nonatomic) BuzzSentryTracesSamplerCallback tracesSampler;
 
 /**
  * If tracing should be enabled or not. Returns YES if either a tracesSampleRate > 0 and <=1 or a
@@ -351,7 +351,7 @@ NS_SWIFT_NAME(Options)
  * `profilesSampleRate`, but instead of a static value, the callback function will be called to
  * determine the sample rate.
  */
-@property (nullable, nonatomic) SentryTracesSamplerCallback profilesSampler;
+@property (nullable, nonatomic) BuzzSentryTracesSamplerCallback profilesSampler;
 
 /**
  * If profiling should be enabled or not. Returns YES if either a profilesSampleRate > 0 and

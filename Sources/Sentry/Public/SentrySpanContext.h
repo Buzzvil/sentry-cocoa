@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 #import "BuzzSentrySampleDecision.h"
 #import "SentrySerializable.h"
-#import "SentrySpanStatus.h"
+#import "BuzzSentrySpanStatus.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,7 +45,7 @@ SENTRY_NO_INIT
 /**
  * Describes the status of the Transaction.
  */
-@property (nonatomic) SentrySpanStatus status;
+@property (nonatomic) BuzzSentrySpanStatus status;
 
 /**
  * A map or list of tags for this event. Each tag must be less than 200 characters.

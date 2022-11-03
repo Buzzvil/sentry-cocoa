@@ -126,7 +126,7 @@ NS_SWIFT_NAME(Span)
  *
  * @param status The status of this span
  *  */
-- (void)finishWithStatus:(SentrySpanStatus)status NS_SWIFT_NAME(finish(status:));
+- (void)finishWithStatus:(BuzzSentrySpanStatus)status NS_SWIFT_NAME(finish(status:));
 
 /**
  * Returns the trace information that could be sent as a sentry-trace header.

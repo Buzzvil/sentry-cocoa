@@ -45,7 +45,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         let sut = fixture.getSut()
         let spanId = startSpan(tracker: sut)
         
-        let transaction = sut.getSpan(spanId) as! SentryTracer
+        let transaction = sut.getSpan(spanId) as! BuzzSentryTracer
         
         let scopeSpan = fixture.scope.span
         
@@ -225,7 +225,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         }
         
         sut.finishSpan(spanId)
-        let status = Dynamic(span).finishStatus as SentrySpanStatus?
+        let status = Dynamic(span).finishStatus as BuzzSentrySpanStatus?
         
         XCTAssertEqual(status!, .ok)
         XCTAssertTrue(span!.isFinished)
@@ -240,7 +240,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         
         sut.finishSpan(spanId, with: .ok)
         
-        let status = Dynamic(span).finishStatus as SentrySpanStatus?
+        let status = Dynamic(span).finishStatus as BuzzSentrySpanStatus?
         
         XCTAssertEqual(status!, .ok)
         XCTAssertTrue(span!.isFinished)

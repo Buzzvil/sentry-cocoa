@@ -114,7 +114,7 @@ class SentryCoreDataTrackingIntegrationTests: XCTestCase {
         XCTAssertNil(SentryCoreDataSwizzling.sharedInstance.middleware)
     }
     
-    private func startTransaction() -> SentryTracer {
-        return SentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! SentryTracer
+    private func startTransaction() -> BuzzSentryTracer {
+        return SentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! BuzzSentryTracer
     }
 }

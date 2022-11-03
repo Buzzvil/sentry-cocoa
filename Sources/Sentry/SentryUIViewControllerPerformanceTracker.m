@@ -143,7 +143,7 @@ SentryUIViewControllerPerformanceTracker ()
                    callbackToOrigin:(void (^)(void))callbackToOrigin
 {
     [self finishTransaction:controller
-                     status:kSentrySpanStatusOk
+                     status:kBuzzSentrySpanStatusOk
             lifecycleMethod:@"viewDidAppear"
            callbackToOrigin:callbackToOrigin];
 }
@@ -163,13 +163,13 @@ SentryUIViewControllerPerformanceTracker ()
                        callbackToOrigin:(void (^)(void))callbackToOrigin
 {
     [self finishTransaction:controller
-                     status:kSentrySpanStatusCancelled
+                     status:kBuzzSentrySpanStatusCancelled
             lifecycleMethod:@"viewWillDisappear"
            callbackToOrigin:callbackToOrigin];
 }
 
 - (void)finishTransaction:(UIViewController *)controller
-                   status:(SentrySpanStatus)status
+                   status:(BuzzSentrySpanStatus)status
           lifecycleMethod:(NSString *)lifecycleMethod
          callbackToOrigin:(void (^)(void))callbackToOrigin
 {

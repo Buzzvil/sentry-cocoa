@@ -3,9 +3,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryOptions, SentrySamplingContext;
+@class BuzzSentryOptions, BuzzSentrySamplingContext;
 
-@interface SentryTracesSamplerDecision : NSObject
+@interface BuzzSentryTracesSamplerDecision : NSObject
 
 @property (nonatomic, readonly) BuzzSentrySampleDecision decision;
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SentryTracesSampler : NSObject
+@interface BuzzSentryTracesSampler : NSObject
 
 /**
  *  A random number generator
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Determines whether a trace should be sampled based on the context and options.
  */
-- (SentryTracesSamplerDecision *)sample:(SentrySamplingContext *)context;
+- (BuzzSentryTracesSamplerDecision *)sample:(BuzzSentrySamplingContext *)context;
 
 @end
 

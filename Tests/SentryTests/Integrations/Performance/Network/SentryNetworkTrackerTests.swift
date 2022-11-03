@@ -145,7 +145,7 @@ class SentryNetworkTrackerTests: XCTestCase {
     func testCaptureRequestDuration() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let tracer = SentryTracer(transactionContext: TransactionContext(name: SentryNetworkTrackerTests.transactionName,
+        let tracer = BuzzSentryTracer(transactionContext: TransactionContext(name: SentryNetworkTrackerTests.transactionName,
                                                                          operation: SentryNetworkTrackerTests.transactionOperation),
                                   hub: nil,
                                   waitForChildren: true)
@@ -202,7 +202,7 @@ class SentryNetworkTrackerTests: XCTestCase {
     func testStatusForTaskRunning() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let status = Dynamic(sut).statusForSessionTask(task, state: URLSessionTask.State.running) as SentrySpanStatus?
+        let status = Dynamic(sut).statusForSessionTask(task, state: URLSessionTask.State.running) as BuzzSentrySpanStatus?
         XCTAssertEqual(status, .undefined)
     }
     
@@ -513,7 +513,7 @@ class SentryNetworkTrackerTests: XCTestCase {
     func testBaggageHeader() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let transaction = startTransaction() as! SentryTracer
+        let transaction = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
         let expectedBaggageHeader = transaction.traceContext.toBaggage().toHTTPHeader()
@@ -523,7 +523,7 @@ class SentryNetworkTrackerTests: XCTestCase {
     func testTraceHeader() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let transaction = startTransaction() as! SentryTracer
+        let transaction = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
         let children = Dynamic(transaction).children as [SentrySpan]?
@@ -537,7 +537,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         sut.disable()
 
         let task = createDataTask()
-        _ = startTransaction() as! SentryTracer
+        _ = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
         XCTAssertNil(task.currentRequest?.allHTTPHeaderFields?["baggage"])
@@ -558,7 +558,7 @@ class SentryNetworkTrackerTests: XCTestCase {
 
         let sut = fixture.getSut()
         let task = createDataTask()
-        _ = startTransaction() as! SentryTracer
+        _ = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
         XCTAssertNil(task.currentRequest?.allHTTPHeaderFields?["baggage"])
@@ -606,7 +606,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         task.state = state
     }
     
-    func assertStatus(status: SentrySpanStatus, state: URLSessionTask.State, response: URLResponse, configSut: ((SentryNetworkTracker) -> Void)? = nil) {
+    func assertStatus(status: BuzzSentrySpanStatus, state: URLSessionTask.State, response: URLResponse, configSut: ((SentryNetworkTracker) -> Void)? = nil) {
         let sut = fixture.getSut()
         configSut?(sut)
         

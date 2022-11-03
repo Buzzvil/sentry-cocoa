@@ -3,24 +3,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryHub, SentryTransactionContext, BuzzSentryTraceHeader, BuzzSentryTraceContext,
-    SentryDispatchQueueWrapper, SentryTracer, SentryProfilesSamplerDecision, BuzzSentryMeasurementValue;
+@class SentryHub, BuzzSentryTransactionContext, BuzzSentryTraceHeader, BuzzSentryTraceContext,
+    SentryDispatchQueueWrapper, BuzzSentryTracer, SentryProfilesSamplerDecision, BuzzSentryMeasurementValue;
 
-static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
+static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
 
-@protocol SentryTracerDelegate
+@protocol BuzzSentryTracerDelegate
 
 /**
  * Return the active span of given tracer.
  * This function is used to determine which span will be used to create a new child.
  */
-- (nullable id<SentrySpan>)activeSpanForTracer:(SentryTracer *)tracer;
+- (nullable id<SentrySpan>)activeSpanForTracer:(BuzzSentryTracer *)tracer;
 
 @end
 
-@interface SentryTracer : NSObject <SentrySpan>
+@interface BuzzSentryTracer : NSObject <SentrySpan>
 
-@property (nonatomic, strong) SentryTransactionContext *transactionContext;
+@property (nonatomic, strong) BuzzSentryTransactionContext *transactionContext;
 
 /**
  * The context information of the span.
@@ -42,7 +42,7 @@ static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
  */
 @property (readonly) BOOL isFinished;
 
-@property (nullable, nonatomic, copy) void (^finishCallback)(SentryTracer *);
+@property (nullable, nonatomic, copy) void (^finishCallback)(BuzzSentryTracer *);
 
 /**
  * Indicates whether this tracer will be finished only if all children have been finished.
@@ -69,37 +69,37 @@ static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
 /*
  * A delegate that provides extra information for the transaction.
  */
-@property (nullable, nonatomic, weak) id<SentryTracerDelegate> delegate;
+@property (nullable, nonatomic, weak) id<BuzzSentryTracerDelegate> delegate;
 
 @property (nonatomic, readonly) NSDictionary<NSString *, BuzzSentryMeasurementValue *> *measurements;
 
 /**
- * Init a SentryTracer with given transaction context and hub and set other fields by default
+ * Init a BuzzSentryTracer with given transaction context and hub and set other fields by default
  *
  * @param transactionContext Transaction context
  * @param hub A hub to bind this transaction
  *
- * @return SentryTracer
+ * @return BuzzSentryTracer
  */
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub;
 
 /**
- * Init a SentryTracer with given transaction context, hub and whether the tracer should wait
+ * Init a BuzzSentryTracer with given transaction context, hub and whether the tracer should wait
  * for all children to finish before it finishes.
  *
  * @param transactionContext Transaction context
  * @param hub A hub to bind this transaction
  * @param waitForChildren Whether this tracer should wait all children to finish.
  *
- * @return SentryTracer
+ * @return BuzzSentryTracer
  */
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub
                            waitForChildren:(BOOL)waitForChildren;
 
 /**
- * Init a SentryTracer with given transaction context, hub and whether the tracer should wait
+ * Init a BuzzSentryTracer with given transaction context, hub and whether the tracer should wait
  * for all children to finish before it finishes.
  *
  * @param transactionContext Transaction context
@@ -107,16 +107,16 @@ static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
  * @param profilesSamplerDecision Whether to sample a profile corresponding to this transaction
  * @param waitForChildren Whether this tracer should wait all children to finish.
  *
- * @return SentryTracer
+ * @return BuzzSentryTracer
  */
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                            waitForChildren:(BOOL)waitForChildren;
 
 /**
- * Init a SentryTracer with given transaction context, hub and whether the tracer should wait
+ * Init a BuzzSentryTracer with given transaction context, hub and whether the tracer should wait
  * for all children to finish before it finishes.
  *
  * @param transactionContext Transaction context
@@ -124,9 +124,9 @@ static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
  * @param profilesSamplerDecision Whether to sample a profile corresponding to this transaction
  * @param idleTimeout The idle time to wait until to finish the transaction.
  *
- * @return SentryTracer
+ * @return BuzzSentryTracer
  */
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
@@ -146,7 +146,7 @@ static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
 /**
  * Get the tracer from a span.
  */
-+ (nullable SentryTracer *)getTracer:(id<SentrySpan>)span;
++ (nullable BuzzSentryTracer *)getTracer:(id<SentrySpan>)span;
 
 - (void)dispatchIdleTimeout;
 

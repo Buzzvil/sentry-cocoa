@@ -8,7 +8,7 @@ class SentryTransactionTests: XCTestCase {
         let testKey = "extra_key"
         let testValue = "extra_value"
         
-        func getTransaction(trace: SentryTracer = SentryTracer(transactionContext: TransactionContext(operation: "operation"), hub: TestHub(client: nil, andScope: nil))) -> Transaction {
+        func getTransaction(trace: BuzzSentryTracer = BuzzSentryTracer(transactionContext: TransactionContext(operation: "operation"), hub: TestHub(client: nil, andScope: nil))) -> Transaction {
             return Transaction(trace: trace, children: [])
         }
         
@@ -16,8 +16,8 @@ class SentryTransactionTests: XCTestCase {
             return TransactionContext(name: transactionName, nameSource: .component, operation: transactionOperation)
         }
         
-        func getTrace() -> SentryTracer {
-            return SentryTracer(transactionContext: getContext(), hub: nil)
+        func getTrace() -> BuzzSentryTracer {
+            return BuzzSentryTracer(transactionContext: getContext(), hub: nil)
         }
         
         func getHub() -> SentryHub {
@@ -32,7 +32,7 @@ class SentryTransactionTests: XCTestCase {
             client.options.tracesSampleRate = 1
             
             let hub = TestHub(client: client, andScope: scope)
-            let trace = SentryTracer(transactionContext: self.getContext(), hub: hub)
+            let trace = BuzzSentryTracer(transactionContext: self.getContext(), hub: hub)
             let transaction = Transaction(trace: trace, children: [])
             return transaction
         }        
@@ -56,7 +56,7 @@ class SentryTransactionTests: XCTestCase {
         let value: NSNumber = 15_000.0
         let unit = MeasurementUnitDuration.millisecond
         
-        let trace = SentryTracer(transactionContext: TransactionContext(operation: "operation"), hub: TestHub(client: nil, andScope: nil))
+        let trace = BuzzSentryTracer(transactionContext: TransactionContext(operation: "operation"), hub: TestHub(client: nil, andScope: nil))
         trace.setMeasurement(name: name, value: value, unit: unit)
         let transaction = fixture.getTransaction(trace: trace)
 
@@ -78,7 +78,7 @@ class SentryTransactionTests: XCTestCase {
         let customValue: NSNumber = 20.1
         let customUnit = MeasurementUnit(unit: "custom")
         
-        let trace = SentryTracer(transactionContext: TransactionContext(operation: "operation"), hub: TestHub(client: nil, andScope: nil))
+        let trace = BuzzSentryTracer(transactionContext: TransactionContext(operation: "operation"), hub: TestHub(client: nil, andScope: nil))
         trace.setMeasurement(name: frameName, value: frameValue)
         trace.setMeasurement(name: customName, value: customValue, unit: customUnit)
         let transaction = fixture.getTransaction(trace: trace)
@@ -116,7 +116,7 @@ class SentryTransactionTests: XCTestCase {
         // given
         let context = TransactionContext(name: fixture.transactionName, operation: fixture.transactionOperation)
         context.setTag(value: fixture.testValue, key: fixture.testKey)
-        let trace = SentryTracer(transactionContext: context, hub: fixture.getHub())
+        let trace = BuzzSentryTracer(transactionContext: context, hub: fixture.getHub())
         let sut = Transaction(trace: trace, children: [])
         
         // when

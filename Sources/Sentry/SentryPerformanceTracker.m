@@ -6,14 +6,14 @@
 #import "SentrySpan.h"
 #import "SentrySpanId.h"
 #import "SentrySpanProtocol.h"
-#import "SentryTracer.h"
-#import "SentryTransactionContext+Private.h"
+#import "BuzzSentryTracer.h"
+#import "BuzzSentryTransactionContext+Private.h"
 #import "SentryUIEventTracker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryPerformanceTracker () <SentryTracerDelegate>
+SentryPerformanceTracker () <BuzzSentryTracerDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary<SentrySpanId *, id<SentrySpan>> *spans;
 @property (nonatomic, strong) NSMutableArray<id<SentrySpan>> *activeSpanStack;
@@ -59,8 +59,8 @@ SentryPerformanceTracker () <SentryTracerDelegate>
     if (activeSpan != nil) {
         newSpan = [activeSpan startChildWithOperation:operation description:name];
     } else {
-        SentryTransactionContext *context =
-            [[SentryTransactionContext alloc] initWithName:name
+        BuzzSentryTransactionContext *context =
+            [[BuzzSentryTransactionContext alloc] initWithName:name
                                                 nameSource:source
                                                  operation:operation];
 
@@ -68,7 +68,7 @@ SentryPerformanceTracker () <SentryTracerDelegate>
             BOOL bindToScope = true;
             if (span != nil) {
                 if ([SentryUIEventTracker isUIEventOperation:span.context.operation]) {
-                    [span finishWithStatus:kSentrySpanStatusCancelled];
+                    [span finishWithStatus:kBuzzSentrySpanStatusCancelled];
                 } else {
                     bindToScope = false;
                 }
@@ -79,8 +79,8 @@ SentryPerformanceTracker () <SentryTracerDelegate>
                                                         waitForChildren:YES
                                                   customSamplingContext:@ {}];
 
-            if ([newSpan isKindOfClass:[SentryTracer class]]) {
-                [(SentryTracer *)newSpan setDelegate:self];
+            if ([newSpan isKindOfClass:[BuzzSentryTracer class]]) {
+                [(BuzzSentryTracer *)newSpan setDelegate:self];
             }
         }];
     }
@@ -194,10 +194,10 @@ SentryPerformanceTracker () <SentryTracerDelegate>
 
 - (void)finishSpan:(SentrySpanId *)spanId
 {
-    [self finishSpan:spanId withStatus:kSentrySpanStatusOk];
+    [self finishSpan:spanId withStatus:kBuzzSentrySpanStatusOk];
 }
 
-- (void)finishSpan:(SentrySpanId *)spanId withStatus:(SentrySpanStatus)status
+- (void)finishSpan:(SentrySpanId *)spanId withStatus:(BuzzSentrySpanStatus)status
 {
     id<SentrySpan> spanTracker;
     @synchronized(self.spans) {
@@ -222,7 +222,7 @@ SentryPerformanceTracker () <SentryTracerDelegate>
     }
 }
 
-- (nullable id<SentrySpan>)activeSpanForTracer:(SentryTracer *)tracer
+- (nullable id<SentrySpan>)activeSpanForTracer:(BuzzSentryTracer *)tracer
 {
     @synchronized(self.activeSpanStack) {
         return [self.activeSpanStack lastObject];

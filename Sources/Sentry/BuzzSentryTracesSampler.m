@@ -1,13 +1,13 @@
-#import "SentryTracesSampler.h"
+#import "BuzzSentryTracesSampler.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryOptions.h"
-#import "SentrySamplingContext.h"
-#import "SentryTransactionContext.h"
+#import "BuzzSentrySamplingContext.h"
+#import "BuzzSentryTransactionContext.h"
 #import <BuzzSentryOptions+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryTracesSamplerDecision
+@implementation BuzzSentryTracesSamplerDecision
 
 - (instancetype)initWithDecision:(BuzzSentrySampleDecision)decision
                    forSampleRate:(nullable NSNumber *)sampleRate
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@implementation SentryTracesSampler {
+@implementation BuzzSentryTracesSampler {
     BuzzSentryOptions *_options;
 }
 
@@ -39,10 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
     return [self initWithOptions:options random:[SentryDependencyContainer sharedInstance].random];
 }
 
-- (SentryTracesSamplerDecision *)sample:(SentrySamplingContext *)context
+- (BuzzSentryTracesSamplerDecision *)sample:(BuzzSentrySamplingContext *)context
 {
     if (context.transactionContext.sampled != kBuzzSentrySampleDecisionUndecided) {
-        return [[SentryTracesSamplerDecision alloc]
+        return [[BuzzSentryTracesSamplerDecision alloc]
             initWithDecision:context.transactionContext.sampled
                forSampleRate:context.transactionContext.sampleRate];
     }
@@ -60,22 +60,22 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     if (context.transactionContext.parentSampled != kBuzzSentrySampleDecisionUndecided)
-        return [[SentryTracesSamplerDecision alloc]
+        return [[BuzzSentryTracesSamplerDecision alloc]
             initWithDecision:context.transactionContext.parentSampled
                forSampleRate:context.transactionContext.sampleRate];
 
     if (_options.tracesSampleRate != nil)
         return [self calcSample:_options.tracesSampleRate.doubleValue];
 
-    return [[SentryTracesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionNo
+    return [[BuzzSentryTracesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionNo
                                                    forSampleRate:nil];
 }
 
-- (SentryTracesSamplerDecision *)calcSample:(double)rate
+- (BuzzSentryTracesSamplerDecision *)calcSample:(double)rate
 {
     double r = [self.random nextNumber];
     BuzzSentrySampleDecision decision = r <= rate ? kBuzzSentrySampleDecisionYes : kBuzzSentrySampleDecisionNo;
-    return [[SentryTracesSamplerDecision alloc] initWithDecision:decision
+    return [[BuzzSentryTracesSamplerDecision alloc] initWithDecision:decision
                                                    forSampleRate:[NSNumber numberWithDouble:rate]];
 }
 

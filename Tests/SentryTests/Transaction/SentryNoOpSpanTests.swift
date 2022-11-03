@@ -45,7 +45,7 @@ class SentryNoOpSpanTests: XCTestCase {
         
         XCTAssertFalse(sut.isFinished)
         sut.finish()
-        sut.finish(status: SentrySpanStatus.aborted)
+        sut.finish(status: BuzzSentrySpanStatus.aborted)
         XCTAssertFalse(sut.isFinished)
     }
     

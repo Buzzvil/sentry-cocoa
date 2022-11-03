@@ -22,7 +22,7 @@
     -(instancetype)init NS_UNAVAILABLE;                                                            \
     +(instancetype) new NS_UNAVAILABLE;
 
-@class SentryEvent, SentryBreadcrumb, SentrySamplingContext;
+@class SentryEvent, SentryBreadcrumb, BuzzSentrySamplingContext;
 @protocol SentrySpan;
 
 /**
@@ -71,8 +71,8 @@ typedef BOOL (^SentryShouldQueueEvent)(
  * @return A sample rate that is >= 0.0 and <= 1.0 or NIL if no sampling decision has been taken..
  * When returning a value out of range the SDK uses the default of 0.
  */
-typedef NSNumber *_Nullable (^SentryTracesSamplerCallback)(
-    SentrySamplingContext *_Nonnull samplingContext);
+typedef NSNumber *_Nullable (^BuzzSentryTracesSamplerCallback)(
+    BuzzSentrySamplingContext *_Nonnull samplingContext);
 
 /**
  * Function pointer for span manipulation.

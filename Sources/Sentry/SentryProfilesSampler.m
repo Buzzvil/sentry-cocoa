@@ -1,7 +1,7 @@
 #import "SentryProfilesSampler.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryOptions+Private.h"
-#import "SentryTracesSampler.h"
+#import "BuzzSentryTracesSampler.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,8 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
     return [self initWithOptions:options random:[SentryDependencyContainer sharedInstance].random];
 }
 
-- (SentryProfilesSamplerDecision *)sample:(SentrySamplingContext *)context
-                    tracesSamplerDecision:(SentryTracesSamplerDecision *)tracesSamplerDecision
+- (SentryProfilesSamplerDecision *)sample:(BuzzSentrySamplingContext *)context
+                    tracesSamplerDecision:(BuzzSentryTracesSamplerDecision *)tracesSamplerDecision
 {
     // Profiles are always undersampled with respect to traces. If the trace is not sampled,
     // the profile will not be either. If the trace is sampled, we can proceed to checking

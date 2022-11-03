@@ -100,7 +100,7 @@ class SentryUIEventTrackerTests: XCTestCase {
         
         callExecuteAction(action: action, target: fixture.target, sender: button, event: TestUIEvent())
         
-        let span = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let span = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         XCTAssertTrue(span.tags.contains {
             $0.key == "accessibilityIdentifier" && $0.value == accessibilityIdentifier
         })
@@ -144,10 +144,10 @@ class SentryUIEventTrackerTests: XCTestCase {
         let view = fixture.button
         
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
 
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
         assertResetsTimeout(firstTransaction, secondTransaction)
     }
@@ -156,12 +156,12 @@ class SentryUIEventTrackerTests: XCTestCase {
         let view = fixture.button
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
         
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         fixture.dispatchQueue.invokeLastDispatchAfter()
         
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
         
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
         XCTAssertFalse(firstTransaction === secondTransaction)
     }
@@ -170,11 +170,11 @@ class SentryUIEventTrackerTests: XCTestCase {
         let view1 = fixture.button
         callExecuteAction(action: action, target: fixture.target, sender: view1, event: TestUIEvent())
         
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
         let view2 = UIView()
         callExecuteAction(action: action, target: fixture.target, sender: view2, event: TestUIEvent())
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
         assertResetsTimeout(firstTransaction, secondTransaction)
     }
@@ -183,7 +183,7 @@ class SentryUIEventTrackerTests: XCTestCase {
         let view1 = fixture.button
         callExecuteAction(action: "otherAction", target: fixture.target, sender: view1, event: TestUIEvent())
         
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
         let view2 = UIButton()
         callExecuteAction(action: action, target: fixture.target, sender: view2, event: TestUIEvent())
@@ -195,7 +195,7 @@ class SentryUIEventTrackerTests: XCTestCase {
         
         // We want firstTransaction to be deallocated by ARC
         func startChild() -> Span {
-            let firstTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+            let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
             return firstTransaction.startChild(operation: "some")
         }
         
@@ -207,7 +207,7 @@ class SentryUIEventTrackerTests: XCTestCase {
         
         XCTAssertEqual(2, getInternalTransactions().count)
         
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
         XCTAssertTrue(secondTransaction === getInternalTransactions().last)
         
@@ -239,14 +239,14 @@ class SentryUIEventTrackerTests: XCTestCase {
         fixture.swizzleWrapper.execute(action: action, target: target, sender: sender, event: event)
     }
     
-    private func getInternalTransactions() -> [SentryTracer] {
-        return try! XCTUnwrap(Dynamic(sut).activeTransactions.asArray as? [SentryTracer])
+    private func getInternalTransactions() -> [BuzzSentryTracer] {
+        return try! XCTUnwrap(Dynamic(sut).activeTransactions.asArray as? [BuzzSentryTracer])
     }
     
     private func assertTransaction(name: String, operation: String, nameSource: SentryTransactionNameSource = .component) {
-        let span = try! XCTUnwrap(SentrySDK.span as? SentryTracer)
+        let span = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
-        let transactions = try! XCTUnwrap(Dynamic(sut).activeTransactions.asArray as? [SentryTracer])
+        let transactions = try! XCTUnwrap(Dynamic(sut).activeTransactions.asArray as? [BuzzSentryTracer])
         XCTAssertEqual(1, transactions.count)
         XCTAssertTrue(span === transactions.first)
         
@@ -256,16 +256,16 @@ class SentryUIEventTrackerTests: XCTestCase {
     }
     
     private func assertNoTransaction() {
-        XCTAssertNil(SentrySDK.span as? SentryTracer)
+        XCTAssertNil(SentrySDK.span as? BuzzSentryTracer)
     }
     
-    private func assertResetsTimeout(_ firstTransaction: SentryTracer, _ secondTransaction: SentryTracer) {
+    private func assertResetsTimeout(_ firstTransaction: BuzzSentryTracer, _ secondTransaction: BuzzSentryTracer) {
         XCTAssertTrue(firstTransaction === secondTransaction)
         XCTAssertEqual(1, fixture.dispatchQueue.dispatchCancelInvocations.count)
         XCTAssertEqual(2, fixture.dispatchQueue.dispatchAfterInvocations.count)
     }
     
-    private func assertFinishesTransaction(_ transaction: SentryTracer, _ operation: String) {
+    private func assertFinishesTransaction(_ transaction: BuzzSentryTracer, _ operation: String) {
         XCTAssertTrue(transaction.isFinished)
         XCTAssertEqual(.ok, transaction.context.status)
         assertTransaction(name: "SentryTests.FirstViewController.\(expectedAction)", operation: operation)

@@ -56,7 +56,7 @@ class SentryScopeSwiftTests: XCTestCase {
             event = Event()
             event.message = SentryMessage(formatted: "message")
             
-            transaction = SentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
+            transaction = BuzzSentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
         }
         
         var observer: TestScopeObserver {

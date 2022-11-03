@@ -39,7 +39,7 @@ SentrySpanContext () {
         _parentSpanId = parentId;
         self.sampled = sampled;
         self.operation = operation;
-        self.status = kSentrySpanStatusUndefined;
+        self.status = kBuzzSentrySpanStatusUndefined;
         _tags = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -103,8 +103,8 @@ SentrySpanContext () {
         [mutabledictionary setValue:self.parentSpanId.sentrySpanIdString forKey:@"parent_span_id"];
     }
 
-    if (self.status != kSentrySpanStatusUndefined) {
-        [mutabledictionary setValue:nameForSentrySpanStatus(self.status) forKey:@"status"];
+    if (self.status != kBuzzSentrySpanStatusUndefined) {
+        [mutabledictionary setValue:nameForBuzzSentrySpanStatus(self.status) forKey:@"status"];
     }
 
     return mutabledictionary;

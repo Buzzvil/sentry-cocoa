@@ -1,10 +1,10 @@
 
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryTracer (Test)
+BuzzSentryTracer (Test)
 
 + (void)resetAppStartMeasurementRead;
 

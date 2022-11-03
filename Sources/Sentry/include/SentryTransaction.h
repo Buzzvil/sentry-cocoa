@@ -1,18 +1,18 @@
 #import "SentryEvent.h"
 #import "SentrySpanProtocol.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryTracer, SentryTransactionContext;
+@class BuzzSentryTracer, BuzzSentryTransactionContext;
 
 NS_SWIFT_NAME(Transaction)
 @interface SentryTransaction : SentryEvent
 SENTRY_NO_INIT
 
-@property (nonatomic, strong) SentryTracer *trace;
+@property (nonatomic, strong) BuzzSentryTracer *trace;
 
-- (instancetype)initWithTrace:(SentryTracer *)trace children:(NSArray<id<SentrySpan>> *)children;
+- (instancetype)initWithTrace:(BuzzSentryTracer *)trace children:(NSArray<id<SentrySpan>> *)children;
 
 @end
 

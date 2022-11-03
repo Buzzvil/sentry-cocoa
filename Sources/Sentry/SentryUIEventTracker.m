@@ -6,8 +6,8 @@
 #import <SentryScope.h>
 #import <SentrySpanOperations.h>
 #import <SentrySpanProtocol.h>
-#import <SentryTracer.h>
-#import <SentryTransactionContext+Private.h>
+#import <BuzzSentryTracer.h>
+#import <BuzzSentryTransactionContext+Private.h>
 #import <SentryUIEventTracker.h>
 
 #if SENTRY_HAS_UIKIT
@@ -24,7 +24,7 @@ SentryUIEventTracker ()
 @property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;
 @property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, assign) NSTimeInterval idleTimeout;
-@property (nullable, nonatomic, strong) NSMutableArray<SentryTracer *> *activeTransactions;
+@property (nullable, nonatomic, strong) NSMutableArray<BuzzSentryTracer *> *activeTransactions;
 
 @end
 
@@ -71,7 +71,7 @@ SentryUIEventTracker ()
             // There might be more active transactions stored, but only the last one might still be
             // active with a timeout. The others are already waiting for their children to finish
             // without a timeout.
-            SentryTracer *currentActiveTransaction;
+            BuzzSentryTracer *currentActiveTransaction;
             @synchronized(self.activeTransactions) {
                 currentActiveTransaction = self.activeTransactions.lastObject;
             }
@@ -95,12 +95,12 @@ SentryUIEventTracker ()
 
             NSString *operation = [self getOperation:sender];
 
-            SentryTransactionContext *context =
-                [[SentryTransactionContext alloc] initWithName:transactionName
+            BuzzSentryTransactionContext *context =
+                [[BuzzSentryTransactionContext alloc] initWithName:transactionName
                                                     nameSource:kSentryTransactionNameSourceComponent
                                                      operation:operation];
 
-            __block SentryTracer *transaction;
+            __block BuzzSentryTracer *transaction;
             [SentrySDK.currentHub.scope useSpan:^(id<SentrySpan> _Nullable span) {
                 BOOL ongoingScreenLoadTransaction = span != nil &&
                     [span.context.operation isEqualToString:SentrySpanOperationUILoad];
@@ -132,7 +132,7 @@ SentryUIEventTracker ()
                 }
             }
 
-            transaction.finishCallback = ^(SentryTracer *tracer) {
+            transaction.finishCallback = ^(BuzzSentryTracer *tracer) {
                 @synchronized(self.activeTransactions) {
                     [self.activeTransactions removeObject:tracer];
                 }

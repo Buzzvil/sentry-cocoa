@@ -25,7 +25,7 @@ class BuzzSentryClientTest: XCTestCase {
         let fileManager: SentryFileManager
         let random = TestRandom(value: 1.0)
         
-        let trace = SentryTracer(transactionContext: TransactionContext(name: "SomeTransaction", operation: "SomeOperation"), hub: nil)
+        let trace = BuzzSentryTracer(transactionContext: TransactionContext(name: "SomeTransaction", operation: "SomeOperation"), hub: nil)
         let transaction: Transaction
         let crashWrapper = TestSentryCrashWrapper.sharedInstance()
         let permissionsObserver = TestSentryPermissionsObserver()
@@ -1225,7 +1225,7 @@ class BuzzSentryClientTest: XCTestCase {
         let event = Event(level: SentryLevel.warning)
         event.message = fixture.message
         let scope = Scope()
-        scope.span = SentryTracer()
+        scope.span = BuzzSentryTracer()
         
         let client = fixture.getSut()
         client.capture(event: event, scope: scope)

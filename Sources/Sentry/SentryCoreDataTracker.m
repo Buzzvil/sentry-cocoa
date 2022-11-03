@@ -50,7 +50,7 @@
         [fetchSpan setDataValue:[NSNumber numberWithInteger:result.count] forKey:@"read_count"];
 
         [fetchSpan
-            finishWithStatus:error != nil ? kSentrySpanStatusInternalError : kSentrySpanStatusOk];
+            finishWithStatus:error != nil ? kBuzzSentrySpanStatusInternalError : kBuzzSentrySpanStatusOk];
 
         SENTRY_LOG_DEBUG(@"SentryCoreDataTracker automatically finished span with status: %@",
             error == nil ? @"ok" : @"error");
@@ -92,7 +92,7 @@
 
     if (fetchSpan) {
         [fetchSpan
-            finishWithStatus:*error != nil ? kSentrySpanStatusInternalError : kSentrySpanStatusOk];
+            finishWithStatus:*error != nil ? kBuzzSentrySpanStatusInternalError : kBuzzSentrySpanStatusOk];
 
         SENTRY_LOG_DEBUG(@"SentryCoreDataTracker automatically finished span with status: %@",
             *error == nil ? @"ok" : @"error");

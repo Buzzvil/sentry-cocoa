@@ -3,7 +3,7 @@
 #import "SentryDisplayLinkWrapper.h"
 #import "SentryProfiler.h"
 #import "SentryProfilingConditionals.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 #import <SentryScreenFrames.h>
 #include <stdatomic.h>
 

@@ -5,8 +5,8 @@
 #import "BuzzSentryOptions+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySerialization.h"
-#import "SentryTracer.h"
-#import "SentryTransactionContext.h"
+#import "BuzzSentryTracer.h"
+#import "BuzzSentryTransactionContext.h"
 #import "SentryUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)initWithScope:(SentryScope *)scope options:(BuzzSentryOptions *)options
 {
-    SentryTracer *tracer = [SentryTracer getTracer:scope.span];
+    BuzzSentryTracer *tracer = [BuzzSentryTracer getTracer:scope.span];
     if (tracer == nil) {
         return nil;
     } else {
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (nullable instancetype)initWithTracer:(SentryTracer *)tracer
+- (nullable instancetype)initWithTracer:(BuzzSentryTracer *)tracer
                                   scope:(nullable SentryScope *)scope
                                 options:(BuzzSentryOptions *)options
 {
@@ -57,9 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     NSString *sampleRate = nil;
-    if ([tracer.context isKindOfClass:[SentryTransactionContext class]]) {
+    if ([tracer.context isKindOfClass:[BuzzSentryTransactionContext class]]) {
         sampleRate = [NSString
-            stringWithFormat:@"%@", [(SentryTransactionContext *)tracer.context sampleRate]];
+            stringWithFormat:@"%@", [(BuzzSentryTransactionContext *)tracer.context sampleRate]];
     }
 
     return [self initWithTraceId:tracer.context.traceId

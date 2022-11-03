@@ -24,7 +24,7 @@
 #    import "SentrySpanId.h"
 #    import "SentryTime.h"
 #    import "SentryTransaction.h"
-#    import "SentryTransactionContext.h"
+#    import "BuzzSentryTransactionContext.h"
 
 #    if defined(DEBUG)
 #        include <execinfo.h>

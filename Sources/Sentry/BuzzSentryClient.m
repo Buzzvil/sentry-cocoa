@@ -37,7 +37,7 @@
 #import "SentryStacktraceBuilder.h"
 #import "SentryThreadInspector.h"
 #import "BuzzSentryTraceContext.h"
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 #import "SentryTransaction.h"
 #import "SentryTransport.h"
 #import "SentryTransportAdapter.h"
@@ -319,7 +319,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         span = scope.span;
     }
 
-    SentryTracer *tracer = [SentryTracer getTracer:span];
+    BuzzSentryTracer *tracer = [BuzzSentryTracer getTracer:span];
     if (tracer == nil)
         return nil;
 

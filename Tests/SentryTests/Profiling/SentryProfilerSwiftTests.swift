@@ -30,13 +30,13 @@ class SentryProfilerSwiftTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentryTracer.resetAppStartMeasurementRead()
+        BuzzSentryTracer.resetAppStartMeasurementRead()
     }
 
     override func tearDown() {
         super.tearDown()
         clearTestState()
-        SentryTracer.resetAppStartMeasurementRead()
+        BuzzSentryTracer.resetAppStartMeasurementRead()
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
         SentryFramesTracker.sharedInstance().resetFrames()
         SentryFramesTracker.sharedInstance().stop()

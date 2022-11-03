@@ -1,4 +1,4 @@
-#import "SentryTracer.h"
+#import "BuzzSentryTracer.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "SentryAppStartMeasurement.h"
@@ -19,7 +19,7 @@
 #import "SentryTime.h"
 #import "BuzzSentryTraceContext.h"
 #import "SentryTransaction.h"
-#import "SentryTransactionContext.h"
+#import "BuzzSentryTransactionContext.h"
 #import "SentryUIViewControllerPerformanceTracker.h"
 #import <SentryDispatchQueueWrapper.h>
 #import <BuzzSentryMeasurementValue.h>
@@ -38,11 +38,11 @@ static const NSTimeInterval SENTRY_APP_START_MEASUREMENT_DIFFERENCE = 5.0;
 static const NSTimeInterval SENTRY_AUTO_TRANSACTION_MAX_DURATION = 500.0;
 
 @interface
-SentryTracer ()
+BuzzSentryTracer ()
 
 @property (nonatomic, strong) SentrySpan *rootSpan;
 @property (nonatomic, strong) SentryHub *hub;
-@property (nonatomic) SentrySpanStatus finishStatus;
+@property (nonatomic) BuzzSentrySpanStatus finishStatus;
 /** This property is different from isFinished. While isFinished states if the tracer is actually
  * finished, this property tells you if finish was called on the tracer. Calling finish doesn't
  * necessarily lead to finishing the tracer, because it could still wait for child spans to finish
@@ -53,7 +53,7 @@ SentryTracer ()
 
 @end
 
-@implementation SentryTracer {
+@implementation BuzzSentryTracer {
     /** Wether the tracer should wait for child spans to finish before finishing itself. */
     BOOL _waitForChildren;
     BuzzSentryTraceContext *_traceContext;
@@ -78,13 +78,13 @@ static BOOL appStartMeasurementRead;
 
 + (void)initialize
 {
-    if (self == [SentryTracer class]) {
+    if (self == [BuzzSentryTracer class]) {
         appStartMeasurementLock = [[NSObject alloc] init];
         appStartMeasurementRead = NO;
     }
 }
 
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub
 {
     return [self initWithTransactionContext:transactionContext
@@ -93,7 +93,7 @@ static BOOL appStartMeasurementRead;
                             waitForChildren:NO];
 }
 
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub
                            waitForChildren:(BOOL)waitForChildren
 {
@@ -105,7 +105,7 @@ static BOOL appStartMeasurementRead;
                        dispatchQueueWrapper:nil];
 }
 
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
@@ -119,7 +119,7 @@ static BOOL appStartMeasurementRead;
                        dispatchQueueWrapper:nil];
 }
 
-- (instancetype)initWithTransactionContext:(SentryTransactionContext *)transactionContext
+- (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                                        hub:(nullable SentryHub *)hub
                    profilesSamplerDecision:
                        (nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
@@ -135,7 +135,7 @@ static BOOL appStartMeasurementRead;
 }
 
 - (instancetype)
-    initWithTransactionContext:(SentryTransactionContext *)transactionContext
+    initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext
                            hub:(nullable SentryHub *)hub
        profilesSamplerDecision:(nullable SentryProfilesSamplerDecision *)profilesSamplerDecision
                waitForChildren:(BOOL)waitForChildren
@@ -152,7 +152,7 @@ static BOOL appStartMeasurementRead;
         _tags = [[NSMutableDictionary alloc] init];
         _data = [[NSMutableDictionary alloc] init];
         _measurements = [[NSMutableDictionary alloc] init];
-        self.finishStatus = kSentrySpanStatusUndefined;
+        self.finishStatus = kBuzzSentrySpanStatusUndefined;
         self.idleTimeout = idleTimeout;
         self.dispatchQueueWrapper = dispatchQueueWrapper;
         appStartMeasurement = [self getAppStartMeasurement];
@@ -190,7 +190,7 @@ static BOOL appStartMeasurementRead;
     if (_idleTimeoutBlock != nil) {
         [self.dispatchQueueWrapper dispatchCancel:_idleTimeoutBlock];
     }
-    __block SentryTracer *_self = self;
+    __block BuzzSentryTracer *_self = self;
     _idleTimeoutBlock = dispatch_block_create(0, ^{ [_self finishInternal]; });
     [self.dispatchQueueWrapper dispatchAfter:self.idleTimeout block:_idleTimeoutBlock];
 }
@@ -399,10 +399,10 @@ static BOOL appStartMeasurementRead;
 
 - (void)finish
 {
-    [self finishWithStatus:kSentrySpanStatusOk];
+    [self finishWithStatus:kBuzzSentrySpanStatusOk];
 }
 
-- (void)finishWithStatus:(SentrySpanStatus)status
+- (void)finishWithStatus:(BuzzSentrySpanStatus)status
 {
     self.wasFinishCalled = YES;
     _finishStatus = status;
@@ -475,7 +475,7 @@ static BOOL appStartMeasurementRead;
 
         for (id<SentrySpan> span in _children) {
             if (!span.isFinished) {
-                [span finishWithStatus:kSentrySpanStatusDeadlineExceeded];
+                [span finishWithStatus:kBuzzSentrySpanStatusDeadlineExceeded];
 
                 // Unfinished children should have the same
                 // end timestamp as their parent transaction
@@ -754,13 +754,13 @@ static BOOL appStartMeasurementRead;
     }
 }
 
-+ (nullable SentryTracer *)getTracer:(id<SentrySpan>)span
++ (nullable BuzzSentryTracer *)getTracer:(id<SentrySpan>)span
 {
     if (span == nil) {
         return nil;
     }
 
-    if ([span isKindOfClass:[SentryTracer class]]) {
+    if ([span isKindOfClass:[BuzzSentryTracer class]]) {
         return span;
     } else if ([span isKindOfClass:[SentrySpan class]]) {
         return [(SentrySpan *)span tracer];
