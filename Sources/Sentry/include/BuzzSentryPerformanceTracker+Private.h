@@ -1,7 +1,7 @@
-#import "SentryPerformanceTracker.h"
+#import "BuzzSentryPerformanceTracker.h"
 
 @interface
-SentryPerformanceTracker (Private)
+BuzzSentryPerformanceTracker (Private)
 
 - (BuzzSentrySpanId *)startSpanWithName:(NSString *)name
                          nameSource:(BuzzSentryTransactionNameSource)source

@@ -23,9 +23,9 @@ static NSString *const SENTRY_UI_PERFORMANCE_TRACKER_SPANS_IN_EXECUTION_SET
  * Class responsible to track UI performance.
  * This class is intended to be used in a swizzled context.
  */
-@interface SentryUIViewControllerPerformanceTracker : NSObject
+@interface BuzzSentryUIViewControllerPerformanceTracker : NSObject
 #if SENTRY_HAS_UIKIT
-@property (nonatomic, readonly, class) SentryUIViewControllerPerformanceTracker *shared;
+@property (nonatomic, readonly, class) BuzzSentryUIViewControllerPerformanceTracker *shared;
 
 /**
  * Measures viewController`s loadView method.

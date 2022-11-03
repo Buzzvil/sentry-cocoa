@@ -3,13 +3,13 @@
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryLog.h"
 #import "BuzzSentrySubClassFinder.h"
-#import "SentryUIViewControllerSwizzling.h"
+#import "BuzzSentryUIViewControllerSwizzling.h"
 
 @interface
 BuzzSentryPerformanceTrackingIntegration ()
 
 #if SENTRY_HAS_UIKIT
-@property (nonatomic, strong) SentryUIViewControllerSwizzling *swizzling;
+@property (nonatomic, strong) BuzzSentryUIViewControllerSwizzling *swizzling;
 #endif
 
 @end
@@ -33,7 +33,7 @@ BuzzSentryPerformanceTrackingIntegration ()
         initWithDispatchQueue:dispatchQueue
            objcRuntimeWrapper:[SentryDefaultObjCRuntimeWrapper sharedInstance]];
 
-    self.swizzling = [[SentryUIViewControllerSwizzling alloc]
+    self.swizzling = [[BuzzSentryUIViewControllerSwizzling alloc]
            initWithOptions:options
              dispatchQueue:dispatchQueue
         objcRuntimeWrapper:[SentryDefaultObjCRuntimeWrapper sharedInstance]

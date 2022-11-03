@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Class is responsible to swizzle UI key methods
  * so Sentry can track UI performance.
  */
-@interface SentryUIViewControllerSwizzling : NSObject
+@interface BuzzSentryUIViewControllerSwizzling : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options

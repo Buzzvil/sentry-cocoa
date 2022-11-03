@@ -6,7 +6,7 @@ import XCTest
 class TestViewController: UIViewController {
 }
 
-class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
+class BuzzSentryUIViewControllerPerformanceTrackerTests: XCTestCase {
 
     let loadView = "loadView"
     let viewWillLoad = "viewWillLoad"
@@ -26,24 +26,24 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
         var options: Options {
             let options = Options()
             let imageName = String(
-                cString: class_getImageName(SentryUIViewControllerSwizzlingTests.self)!,
+                cString: class_getImageName(BuzzSentryUIViewControllerSwizzlingTests.self)!,
                 encoding: .utf8)! as NSString
             options.add(inAppInclude: imageName.lastPathComponent)
             return options
         }
         
         let viewController = TestViewController()
-        let tracker = SentryPerformanceTracker()
+        let tracker = BuzzSentryPerformanceTracker()
         let dateProvider = TestCurrentDateProvider()
         
         var viewControllerName: String!
                 
-        func getSut() -> SentryUIViewControllerPerformanceTracker {
+        func getSut() -> BuzzSentryUIViewControllerPerformanceTracker {
             CurrentDate.setCurrentDateProvider(dateProvider)
             
             viewControllerName = BuzzSentryUIViewControllerSanitizer.sanitizeViewControllerName(viewController)
         
-            let result = SentryUIViewControllerPerformanceTracker.shared
+            let result = BuzzSentryUIViewControllerPerformanceTracker.shared
             Dynamic(result).tracker = self.tracker
             
             return result
@@ -93,7 +93,7 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
         }
     }
 
-    private func assertUILifeCycle(finishStatus: BuzzSentrySpanStatus, lifecycleEndingMethod: (SentryUIViewControllerPerformanceTracker, UIViewController, SentryPerformanceTracker, XCTestExpectation, Span) -> Void) {
+    private func assertUILifeCycle(finishStatus: BuzzSentrySpanStatus, lifecycleEndingMethod: (BuzzSentryUIViewControllerPerformanceTracker, UIViewController, BuzzSentryPerformanceTracker, XCTestExpectation, Span) -> Void) {
         let sut = fixture.getSut()
         let viewController = fixture.viewController
         let tracker = fixture.tracker
@@ -503,17 +503,17 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
         XCTAssertEqual(duration, expectedDuration)
     }
     
-    private func assertTrackerIsEmpty(_ tracker: SentryPerformanceTracker) {
+    private func assertTrackerIsEmpty(_ tracker: BuzzSentryPerformanceTracker) {
         XCTAssertEqual(0, getStack(tracker).count)
         XCTAssertEqual(0, getSpans(tracker).count)
     }
 
-    private func getStack(_ tracker: SentryPerformanceTracker) -> [Span] {
+    private func getStack(_ tracker: BuzzSentryPerformanceTracker) -> [Span] {
         let result = Dynamic(tracker).activeSpanStack as [Span]?
         return result!
     }
 
-    private func getSpans(_ tracker: SentryPerformanceTracker) -> [SpanId: Span] {
+    private func getSpans(_ tracker: BuzzSentryPerformanceTracker) -> [SpanId: Span] {
         let result = Dynamic(tracker).spans as [SpanId: Span]?
         return result!
     }

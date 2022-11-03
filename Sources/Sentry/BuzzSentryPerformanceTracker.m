@@ -1,4 +1,4 @@
-#import "SentryPerformanceTracker.h"
+#import "BuzzSentryPerformanceTracker.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
@@ -13,18 +13,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryPerformanceTracker () <BuzzSentryTracerDelegate>
+BuzzSentryPerformanceTracker () <BuzzSentryTracerDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary<BuzzSentrySpanId *, id<BuzzSentrySpan>> *spans;
 @property (nonatomic, strong) NSMutableArray<id<BuzzSentrySpan>> *activeSpanStack;
 
 @end
 
-@implementation SentryPerformanceTracker
+@implementation BuzzSentryPerformanceTracker
 
 + (instancetype)shared
 {
-    static SentryPerformanceTracker *instance = nil;
+    static BuzzSentryPerformanceTracker *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;

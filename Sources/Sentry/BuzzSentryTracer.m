@@ -20,7 +20,7 @@
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTransaction.h"
 #import "BuzzSentryTransactionContext.h"
-#import "SentryUIViewControllerPerformanceTracker.h"
+#import "BuzzSentryUIViewControllerPerformanceTracker.h"
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryMeasurementValue.h>
 #import <SentryScreenFrames.h>

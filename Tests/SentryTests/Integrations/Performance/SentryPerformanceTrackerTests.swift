@@ -1,8 +1,8 @@
 import XCTest
 
-class SentryPerformanceTrackerTests: XCTestCase {
+class BuzzSentryPerformanceTrackerTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryPerformanceTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryPerformanceTrackerTests")
     
     private class Fixture {
 
@@ -18,8 +18,8 @@ class SentryPerformanceTrackerTests: XCTestCase {
             hub = TestHub(client: client, andScope: scope)
         }
         
-        func getSut() -> SentryPerformanceTracker {
-            return  SentryPerformanceTracker()
+        func getSut() -> BuzzSentryPerformanceTracker {
+            return  BuzzSentryPerformanceTracker()
         }
     }
     
@@ -38,7 +38,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
     }
     
     func testSingleton() {
-        XCTAssertEqual(SentryPerformanceTracker.shared(), SentryPerformanceTracker.shared())
+        XCTAssertEqual(BuzzSentryPerformanceTracker.shared(), BuzzSentryPerformanceTracker.shared())
     }
    
     func testStartSpan_CheckScopeSpan() {
@@ -285,7 +285,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         let spanId = startSpan(tracker: sut)
         sut.activateSpan(spanId) {
             
-            let queue = DispatchQueue(label: "SentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
+            let queue = DispatchQueue(label: "BuzzSentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
             let group = DispatchGroup()
             
             for _ in 0 ..< 5_000 {
@@ -311,7 +311,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         let spanId = startSpan(tracker: sut)
         sut.activateSpan(spanId) {
             
-            let queue = DispatchQueue(label: "SentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
+            let queue = DispatchQueue(label: "BuzzSentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
             let group = DispatchGroup()
             
             for _ in 0 ..< 50_000 {
@@ -333,17 +333,17 @@ class SentryPerformanceTrackerTests: XCTestCase {
         XCTAssertNil(sut.activeSpanId())
     }
     
-    private func getSpans(tracker: SentryPerformanceTracker) -> [SpanId: Span] {
+    private func getSpans(tracker: BuzzSentryPerformanceTracker) -> [SpanId: Span] {
         let result = Dynamic(tracker).spans as [SpanId: Span]?
         return result!
     }
     
-    private func getStack(tracker: SentryPerformanceTracker) -> [Span] {
+    private func getStack(tracker: BuzzSentryPerformanceTracker) -> [Span] {
         let result = Dynamic(tracker).activeSpanStack as [Span]?
         return result!
     }
     
-    private func startSpan(tracker: SentryPerformanceTracker) -> SpanId {
+    private func startSpan(tracker: BuzzSentryPerformanceTracker) -> SpanId {
         return tracker.startSpan(withName: fixture.someTransaction, operation: fixture.someOperation)
     }
         

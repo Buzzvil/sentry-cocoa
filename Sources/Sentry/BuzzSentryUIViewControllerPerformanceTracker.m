@@ -1,8 +1,8 @@
-#import "SentryUIViewControllerPerformanceTracker.h"
+#import "BuzzSentryUIViewControllerPerformanceTracker.h"
 #import "SentryHub.h"
 #import "SentryLog.h"
-#import "SentryPerformanceTracker+Private.h"
-#import "SentryPerformanceTracker.h"
+#import "BuzzSentryPerformanceTracker+Private.h"
+#import "BuzzSentryPerformanceTracker.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryScope.h"
 #import "BuzzSentrySpanId.h"
@@ -12,18 +12,18 @@
 #import <objc/runtime.h>
 
 @interface
-SentryUIViewControllerPerformanceTracker ()
+BuzzSentryUIViewControllerPerformanceTracker ()
 
-@property (nonatomic, strong) SentryPerformanceTracker *tracker;
+@property (nonatomic, strong) BuzzSentryPerformanceTracker *tracker;
 @property (nonatomic, strong) SentryInAppLogic *inAppLogic;
 
 @end
 
-@implementation SentryUIViewControllerPerformanceTracker
+@implementation BuzzSentryUIViewControllerPerformanceTracker
 
 + (instancetype)shared
 {
-    static SentryUIViewControllerPerformanceTracker *instance = nil;
+    static BuzzSentryUIViewControllerPerformanceTracker *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;
@@ -32,7 +32,7 @@ SentryUIViewControllerPerformanceTracker ()
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.tracker = SentryPerformanceTracker.shared;
+        self.tracker = BuzzSentryPerformanceTracker.shared;
 
         BuzzSentryOptions *options = [SentrySDK options];
 

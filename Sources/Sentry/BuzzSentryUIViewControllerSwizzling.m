@@ -1,9 +1,9 @@
-#import "SentryUIViewControllerSwizzling.h"
+#import "BuzzSentryUIViewControllerSwizzling.h"
 #import "SentryDefaultObjCRuntimeWrapper.h"
 #import "SentryLog.h"
 #import "BuzzSentrySubClassFinder.h"
 #import "SentrySwizzle.h"
-#import "SentryUIViewControllerPerformanceTracker.h"
+#import "BuzzSentryUIViewControllerPerformanceTracker.h"
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <SentryInAppLogic.h>
 #import <BuzzSentryOptions.h>
@@ -19,14 +19,14 @@
  * with a mock class.
  *
  * This category makes UIApplication conform to
- * BuzzSentryUIApplication in order to be used by 'SentryUIViewControllerSwizzling'.
+ * BuzzSentryUIApplication in order to be used by 'BuzzSentryUIViewControllerSwizzling'.
  */
 @interface
 UIApplication (BuzzSentryUIApplication) <BuzzSentryUIApplication>
 @end
 
 @interface
-SentryUIViewControllerSwizzling ()
+BuzzSentryUIViewControllerSwizzling ()
 
 @property (nonatomic, strong) SentryInAppLogic *inAppLogic;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
@@ -36,7 +36,7 @@ SentryUIViewControllerSwizzling ()
 
 @end
 
-@implementation SentryUIViewControllerSwizzling
+@implementation BuzzSentryUIViewControllerSwizzling
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                   dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
@@ -289,7 +289,7 @@ SentryUIViewControllerSwizzling ()
  * We need to swizzle UIViewController 'loadView'
  * because we can`t do it for controllers that use Nib files
  * (see `swizzleLoadView` for more information).
- * SentryUIViewControllerPerformanceTracker makes sure we don't get two spans
+ * BuzzSentryUIViewControllerPerformanceTracker makes sure we don't get two spans
  * if the loadView of an actual UIViewController is swizzled.
  */
 - (void)swizzleUIViewController
@@ -297,7 +297,7 @@ SentryUIViewControllerSwizzling ()
     SEL selector = NSSelectorFromString(@"loadView");
     SentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
         SentrySWArguments(), SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerLoadView:self
                       callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
@@ -343,7 +343,7 @@ SentryUIViewControllerSwizzling ()
 
     SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerLoadView:self
                       callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
@@ -355,7 +355,7 @@ SentryUIViewControllerSwizzling ()
     SEL selector = NSSelectorFromString(@"viewDidLoad");
     SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewDidLoad:self
                          callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
@@ -367,7 +367,7 @@ SentryUIViewControllerSwizzling ()
     SEL selector = NSSelectorFromString(@"viewWillAppear:");
     SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewWillAppear:self
                             callbackToOrigin:^{ SentrySWCallOriginal(animated); }];
         }),
@@ -379,7 +379,7 @@ SentryUIViewControllerSwizzling ()
     SEL selector = NSSelectorFromString(@"viewDidAppear:");
     SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewDidAppear:self
                            callbackToOrigin:^{ SentrySWCallOriginal(animated); }];
         }),
@@ -391,7 +391,7 @@ SentryUIViewControllerSwizzling ()
     SEL selector = NSSelectorFromString(@"viewWillDisappear:");
     SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewWillDisappear:self
                                callbackToOrigin:^{ SentrySWCallOriginal(animated); }];
         }),
@@ -403,7 +403,7 @@ SentryUIViewControllerSwizzling ()
     SEL willSelector = NSSelectorFromString(@"viewWillLayoutSubviews");
     SentrySwizzleInstanceMethod(class, willSelector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewWillLayoutSubViews:self
                                     callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
@@ -412,7 +412,7 @@ SentryUIViewControllerSwizzling ()
     SEL didSelector = NSSelectorFromString(@"viewDidLayoutSubviews");
     SentrySwizzleInstanceMethod(class, didSelector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
-            [SentryUIViewControllerPerformanceTracker.shared
+            [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewDidLayoutSubViews:self
                                    callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),

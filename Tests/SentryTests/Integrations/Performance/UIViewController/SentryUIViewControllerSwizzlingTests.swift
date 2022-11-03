@@ -2,7 +2,7 @@ import Sentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryUIViewControllerSwizzlingTests: XCTestCase {
+class BuzzSentryUIViewControllerSwizzlingTests: XCTestCase {
     
     private class Fixture {
         let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
@@ -16,22 +16,22 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
         var options: Options {
             let options = Options()
             let imageName = String(
-                cString: class_getImageName(SentryUIViewControllerSwizzlingTests.self)!,
+                cString: class_getImageName(BuzzSentryUIViewControllerSwizzlingTests.self)!,
                 encoding: .utf8)! as NSString
             options.add(inAppInclude: imageName.lastPathComponent)
             return options
         }
         
-        var sut: SentryUIViewControllerSwizzling {
-            return SentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
+        var sut: BuzzSentryUIViewControllerSwizzling {
+            return BuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
         }
         
-        var sutWithDefaultObjCRuntimeWrapper: SentryUIViewControllerSwizzling {
-            return SentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: SentryDefaultObjCRuntimeWrapper.sharedInstance(), subClassFinder: subClassFinder)
+        var sutWithDefaultObjCRuntimeWrapper: BuzzSentryUIViewControllerSwizzling {
+            return BuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: SentryDefaultObjCRuntimeWrapper.sharedInstance(), subClassFinder: subClassFinder)
         }
         
-        var testableSut: TestSentryUIViewControllerSwizzling {
-            return TestSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
+        var testableSut: TestBuzzSentryUIViewControllerSwizzling {
+            return TestBuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
         }
         
         var delegate: MockApplication.MockApplicationDelegate {
@@ -297,7 +297,7 @@ class ObjectWithWindowsProperty: NSObject {
     }
 }
 
-class TestSentryUIViewControllerSwizzling: SentryUIViewControllerSwizzling {
+class TestBuzzSentryUIViewControllerSwizzling: BuzzSentryUIViewControllerSwizzling {
     
     var viewControllers = [UIViewController]()
     
