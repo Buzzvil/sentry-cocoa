@@ -29,7 +29,7 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
     override func tearDown() {
         super.tearDown()
         fixture.fileManager.deleteAppState()
-        PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = false
+        PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = false
         SentrySDK.setAppStartMeasurement(nil)
         sut.stop()
     }
@@ -54,7 +54,7 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
     }
     
     func testHybridSDKModeEnabled_DoesUpdatesAppState() {
-        PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = true
+        PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = true
         
         let options = fixture.options
         options.tracesSampleRate = 0.0

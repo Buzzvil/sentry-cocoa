@@ -16,7 +16,7 @@ SentryPerformanceTrackingIntegration ()
 
 @implementation SentryPerformanceTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
 #if SENTRY_HAS_UIKIT
     if (![super installWithOptions:options]) {

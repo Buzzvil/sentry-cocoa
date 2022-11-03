@@ -1,6 +1,6 @@
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 
-@implementation SentryMeta
+@implementation BuzzSentryMeta
 
 // Don't remove the static keyword. If you do the compiler adds the constant name to the global
 // symbol table and it might clash with other constants. When keeping the static keyword the

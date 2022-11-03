@@ -2,13 +2,13 @@
 #import "SentryLog.h"
 #import "SentryNSURLSessionTaskSearch.h"
 #import "SentryNetworkTracker.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentrySwizzle.h"
 #import <objc/runtime.h>
 
 @implementation SentryNetworkTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
     if (!options.enableSwizzling) {
         [self logWithOptionName:@"enableSwizzling"];

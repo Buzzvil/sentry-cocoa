@@ -7,7 +7,7 @@
 #import <SentryCurrentDateProvider.h>
 #import <SentryDispatchQueueWrapper.h>
 #import <SentryFileManager.h>
-#import <SentryOptions.h>
+#import <BuzzSentryOptions.h>
 
 #if SENTRY_HAS_UIKIT
 #    import <SentryInternalNotificationNames.h>
@@ -18,7 +18,7 @@
 @interface
 SentryAppStateManager ()
 
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
@@ -30,7 +30,7 @@ SentryAppStateManager ()
 
 @implementation SentryAppStateManager
 
-- (instancetype)initWithOptions:(SentryOptions *)options
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options
                    crashWrapper:(SentryCrashWrapper *)crashWrapper
                     fileManager:(SentryFileManager *)fileManager
             currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider

@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <SentryAppState.h>
 #import <SentryAppStateManager.h>
-#import <SentryClient+Private.h>
+#import <BuzzSentryClient+Private.h>
 #import <SentryDispatchQueueWrapper.h>
 #import <SentryEvent.h>
 #import <SentryException.h>
@@ -10,7 +10,7 @@
 #import <SentryLog.h>
 #import <SentryMechanism.h>
 #import <SentryMessage.h>
-#import <SentryOptions.h>
+#import <BuzzSentryOptions.h>
 #import <SentryOutOfMemoryLogic.h>
 #import <SentryOutOfMemoryTracker.h>
 #import <SentrySDK+Private.h>
@@ -22,7 +22,7 @@
 @interface
 SentryOutOfMemoryTracker ()
 
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) SentryOutOfMemoryLogic *outOfMemoryLogic;
 @property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
@@ -32,7 +32,7 @@ SentryOutOfMemoryTracker ()
 
 @implementation SentryOutOfMemoryTracker
 
-- (instancetype)initWithOptions:(SentryOptions *)options
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options
                outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic
                 appStateManager:(SentryAppStateManager *)appStateManager
            dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper

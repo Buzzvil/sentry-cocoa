@@ -1,13 +1,13 @@
 #import "SentryTestObserver.h"
 #import "SentryBreadcrumb.h"
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryCrashIntegration.h"
 #import "SentryCrashWrapper.h"
 #import "SentryCurrentDate.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryHub.h"
 #import "SentryLog+TestInit.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentryScope.h"
 #import "SentrySdk+Private.h"
 #import "XCTest/XCTIssue.h"
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 SentryTestObserver ()
 
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) SentryScope *scope;
 
 @end
@@ -39,7 +39,7 @@ SentryTestObserver ()
 - (instancetype)init
 {
     if (self = [super init]) {
-        SentryOptions *options = [[SentryOptions alloc] init];
+        BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
         options.dsn = @"https://6cc9bae94def43cab8444a99e0031c28@o447951.ingest.sentry.io/5428557";
         options.environment = @"unit-tests";
         options.debug = YES;
@@ -85,7 +85,7 @@ SentryTestObserver ()
 
     // The tests might mess up the files or something else. Therefore, we create a fresh client and
     // hub to make sure the sending works.
-    SentryClient *client = [[SentryClient alloc] initWithOptions:self.options];
+    BuzzSentryClient *client = [[BuzzSentryClient alloc] initWithOptions:self.options];
     // We create our own hub here, because we don't know the state of the SentrySDK.
     SentryHub *hub = [[SentryHub alloc] initWithClient:client andScope:self.scope];
     NSException *exception = [[NSException alloc] initWithName:testCase.name

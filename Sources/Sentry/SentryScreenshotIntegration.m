@@ -17,13 +17,13 @@ saveScreenShot(const char *path)
 
 @implementation SentryScreenshotIntegration
 
-- (BOOL)installWithOptions:(nonnull SentryOptions *)options
+- (BOOL)installWithOptions:(nonnull BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;
     }
 
-    SentryClient *client = [SentrySDK.currentHub getClient];
+    BuzzSentryClient *client = [SentrySDK.currentHub getClient];
     [client addAttachmentProcessor:self];
 
     sentrycrash_setSaveScreenshots(&saveScreenShot);
@@ -40,7 +40,7 @@ saveScreenShot(const char *path)
 {
     sentrycrash_setSaveScreenshots(NULL);
 
-    SentryClient *client = [SentrySDK.currentHub getClient];
+    BuzzSentryClient *client = [SentrySDK.currentHub getClient];
     [client removeAttachmentProcessor:self];
 }
 

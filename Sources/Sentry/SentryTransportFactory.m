@@ -5,7 +5,7 @@
 #import "SentryHttpDateParser.h"
 #import "SentryHttpTransport.h"
 #import "SentryNSURLRequestBuilder.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentryQueueableRequestManager.h"
 #import "SentryRateLimitParser.h"
 #import "SentryRateLimits.h"
@@ -23,7 +23,7 @@ SentryTransportFactory ()
 
 @implementation SentryTransportFactory
 
-+ (id<SentryTransport>)initTransport:(SentryOptions *)options
++ (id<SentryTransport>)initTransport:(BuzzSentryOptions *)options
                    sentryFileManager:(SentryFileManager *)sentryFileManager
 {
     NSURLSessionConfiguration *configuration =

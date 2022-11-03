@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 #import "SentryDefines.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Installs the integration and returns YES if successful.
  */
-- (BOOL)installWithOptions:(SentryOptions *)options;
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options;
 
 /**
  * Uninstalls the integration.

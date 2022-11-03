@@ -4,7 +4,7 @@
 #import "NSDate+SentryExtras.h"
 #import "SentryFileManager.h"
 #import "SentryId.h"
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 
 @interface SentryInterfacesTests : XCTestCase
 
@@ -81,7 +81,7 @@
     SentryEvent *event = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event.timestamp = date;
     event.environment = @"bla";
-    event.sdk = @{ @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString };
+    event.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     event.extra = @{ @"__sentry_stacktrace" : @"f", @"date" : date };
     NSDictionary *serialized = @{
         @"event_id" : [event.eventId sentryIdString],
@@ -89,19 +89,19 @@
         @"level" : @"info",
         @"environment" : @"bla",
         @"platform" : @"cocoa",
-        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString },
+        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString },
         @"timestamp" : @(date.timeIntervalSince1970)
     };
     XCTAssertEqualObjects([event serialize], serialized);
 
     SentryEvent *event2 = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event2.timestamp = date;
-    event2.sdk = @{ @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString };
+    event2.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     NSDictionary *serialized2 = @{
         @"event_id" : [event2.eventId sentryIdString],
         @"level" : @"info",
         @"platform" : @"cocoa",
-        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString },
+        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString },
         @"timestamp" : @(date.timeIntervalSince1970)
     };
     XCTAssertEqualObjects([event2 serialize], serialized2);
@@ -128,7 +128,7 @@
 
     SentryEvent *event4 = [[SentryEvent alloc] initWithLevel:kSentryLevelInfo];
     event4.timestamp = date;
-    event4.sdk = @{ @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString };
+    event4.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     event4.extra =
         @{ @"key" : @ { @1 : @"1", @2 : [NSDate dateWithTimeIntervalSince1970:1582803326.1235] } };
     NSDictionary *serialized4 = @{
@@ -136,7 +136,7 @@
         @"extra" : @ { @"key" : @ { @"1" : @"1", @"2" : @"2020-02-27T11:35:26.124Z" } },
         @"level" : @"info",
         @"platform" : @"cocoa",
-        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString },
+        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString },
         @"timestamp" : @(date.timeIntervalSince1970)
     };
     XCTAssertEqualObjects([event4 serialize], serialized4);
@@ -204,7 +204,7 @@
             @6 : testURL
         }
     };
-    event4.sdk = @{ @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString };
+    event4.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     NSDictionary *serialized4 = @{
         @"event_id" : [event4.eventId sentryIdString],
         @"extra" : @ {
@@ -222,7 +222,7 @@
         },
         @"level" : @"info",
         @"platform" : @"cocoa",
-        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : SentryMeta.versionString },
+        @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString },
         @"timestamp" : @(date.timeIntervalSince1970)
     };
     XCTAssertEqualObjects([event4 serialize], serialized4);

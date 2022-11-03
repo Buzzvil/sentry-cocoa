@@ -1,5 +1,5 @@
 #import "SentryHub.h"
-#import "SentryClient+Private.h"
+#import "BuzzSentryClient+Private.h"
 #import "SentryCrashWrapper.h"
 #import "SentryCurrentDateProvider.h"
 #import "SentryDefaultCurrentDateProvider.h"
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 SentryHub ()
 
-@property (nullable, nonatomic, strong) SentryClient *client;
+@property (nullable, nonatomic, strong) BuzzSentryClient *client;
 @property (nullable, nonatomic, strong) SentryScope *scope;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) SentryTracesSampler *tracesSampler;
@@ -41,7 +41,7 @@ SentryHub ()
     NSObject *_sessionLock;
 }
 
-- (instancetype)initWithClient:(nullable SentryClient *)client
+- (instancetype)initWithClient:(nullable BuzzSentryClient *)client
                       andScope:(nullable SentryScope *)scope
 {
     if (self = [super init]) {
@@ -63,7 +63,7 @@ SentryHub ()
 }
 
 /** Internal constructor for testing */
-- (instancetype)initWithClient:(nullable SentryClient *)client
+- (instancetype)initWithClient:(nullable BuzzSentryClient *)client
                       andScope:(nullable SentryScope *)scope
                andCrashWrapper:(SentryCrashWrapper *)crashWrapper
         andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
@@ -79,7 +79,7 @@ SentryHub ()
 {
     SentrySession *lastSession = nil;
     SentryScope *scope = self.scope;
-    SentryOptions *options = [_client options];
+    BuzzSentryOptions *options = [_client options];
     if (nil == options || nil == options.releaseName) {
         [SentryLog
             logWithMessage:[NSString stringWithFormat:@"No option or release to start a session."]
@@ -151,7 +151,7 @@ SentryHub ()
     SENTRY_LOG_DEBUG(@"A cached session was found.");
 
     // Make sure there's a client bound.
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil == client) {
         SENTRY_LOG_DEBUG(@"No client bound.");
         return;
@@ -178,7 +178,7 @@ SentryHub ()
 - (void)captureSession:(nullable SentrySession *)session
 {
     if (nil != session) {
-        SentryClient *client = _client;
+        BuzzSentryClient *client = _client;
 
         if (client.options.diagnosticLevel == kSentryLevelDebug) {
             NSData *sessionData = [NSJSONSerialization dataWithJSONObject:[session serialize]
@@ -224,7 +224,7 @@ SentryHub ()
 {
     event.isCrashEvent = YES;
 
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil == client) {
         return;
     }
@@ -281,7 +281,7 @@ SentryHub ()
                   withScope:(SentryScope *)scope
     additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
 {
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil != client) {
         return [client captureEvent:event
                           withScope:scope
@@ -424,7 +424,7 @@ SentryHub ()
 
 - (SentryId *)captureMessage:(NSString *)message withScope:(SentryScope *)scope
 {
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil != client) {
         return [client captureMessage:message withScope:scope];
     }
@@ -439,7 +439,7 @@ SentryHub ()
 - (SentryId *)captureError:(NSError *)error withScope:(SentryScope *)scope
 {
     SentrySession *currentSession = [self incrementSessionErrors];
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil != client) {
         if (nil != currentSession) {
             return [client captureError:error withSession:currentSession withScope:scope];
@@ -459,7 +459,7 @@ SentryHub ()
 {
     SentrySession *currentSession = [self incrementSessionErrors];
 
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil != client) {
         if (nil != currentSession) {
             return [client captureException:exception withSession:currentSession withScope:scope];
@@ -472,7 +472,7 @@ SentryHub ()
 
 - (void)captureUserFeedback:(SentryUserFeedback *)userFeedback
 {
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil != client) {
         [client captureUserFeedback:userFeedback];
     }
@@ -480,7 +480,7 @@ SentryHub ()
 
 - (void)addBreadcrumb:(SentryBreadcrumb *)crumb
 {
-    SentryOptions *options = [[self client] options];
+    BuzzSentryOptions *options = [[self client] options];
     if (options.maxBreadcrumbs < 1) {
         return;
     }
@@ -495,12 +495,12 @@ SentryHub ()
     [self.scope addBreadcrumb:crumb];
 }
 
-- (nullable SentryClient *)getClient
+- (nullable BuzzSentryClient *)getClient
 {
     return _client;
 }
 
-- (void)bindClient:(nullable SentryClient *)client
+- (void)bindClient:(nullable BuzzSentryClient *)client
 {
     self.client = client;
 }
@@ -509,7 +509,7 @@ SentryHub ()
 {
     @synchronized(self) {
         if (_scope == nil) {
-            SentryClient *client = _client;
+            BuzzSentryClient *client = _client;
             if (nil != client) {
                 _scope = [[SentryScope alloc] initWithMaxBreadcrumbs:client.options.maxBreadcrumbs];
             } else {
@@ -523,7 +523,7 @@ SentryHub ()
 - (void)configureScope:(void (^)(SentryScope *scope))callback
 {
     SentryScope *scope = self.scope;
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil != client && nil != scope) {
         callback(scope);
     }
@@ -559,7 +559,7 @@ SentryHub ()
 
 - (void)captureEnvelope:(SentryEnvelope *)envelope
 {
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil == client) {
         return;
     }
@@ -602,7 +602,7 @@ SentryHub ()
 
 - (void)flush:(NSTimeInterval)timeout
 {
-    SentryClient *client = _client;
+    BuzzSentryClient *client = _client;
     if (nil != client) {
         [client flush:timeout];
     }

@@ -34,7 +34,7 @@ SentryUIViewControllerPerformanceTracker ()
     if (self = [super init]) {
         self.tracker = SentryPerformanceTracker.shared;
 
-        SentryOptions *options = [SentrySDK options];
+        BuzzSentryOptions *options = [SentrySDK options];
 
         self.inAppLogic = [[SentryInAppLogic alloc] initWithInAppIncludes:options.inAppIncludes
                                                             inAppExcludes:options.inAppExcludes];

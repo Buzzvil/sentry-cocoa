@@ -1,5 +1,5 @@
 #import "SentryRequestOperation.h"
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryError.h"
 #import "SentryHub.h"
 #import "SentryLog.h"

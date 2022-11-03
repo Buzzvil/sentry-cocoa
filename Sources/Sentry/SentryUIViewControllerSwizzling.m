@@ -6,7 +6,7 @@
 #import "SentryUIViewControllerPerformanceTracker.h"
 #import <SentryDispatchQueueWrapper.h>
 #import <SentryInAppLogic.h>
-#import <SentryOptions.h>
+#import <BuzzSentryOptions.h>
 #import <UIViewController+Sentry.h>
 #import <objc/runtime.h>
 
@@ -38,7 +38,7 @@ SentryUIViewControllerSwizzling ()
 
 @implementation SentryUIViewControllerSwizzling
 
-- (instancetype)initWithOptions:(SentryOptions *)options
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options
                   dispatchQueue:(SentryDispatchQueueWrapper *)dispatchQueue
              objcRuntimeWrapper:(id<SentryObjCRuntimeWrapper>)objcRuntimeWrapper
                  subClassFinder:(SentrySubClassFinder *)subClassFinder

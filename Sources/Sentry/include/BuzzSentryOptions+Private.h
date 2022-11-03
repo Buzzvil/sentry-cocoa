@@ -1,9 +1,9 @@
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryOptions (Private)
+BuzzSentryOptions (Private)
 
 @property (nullable, nonatomic, copy, readonly) NSNumber *defaultTracesSampleRate;
 

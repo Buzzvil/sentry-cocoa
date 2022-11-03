@@ -18,13 +18,13 @@ saveViewHierarchy(const char *path)
 
 @implementation SentryViewHierarchyIntegration
 
-- (BOOL)installWithOptions:(nonnull SentryOptions *)options
+- (BOOL)installWithOptions:(nonnull BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;
     }
 
-    SentryClient *client = [SentrySDK.currentHub getClient];
+    BuzzSentryClient *client = [SentrySDK.currentHub getClient];
     [client addAttachmentProcessor:self];
 
     sentrycrash_setSaveViewHierarchy(&saveViewHierarchy);
@@ -41,7 +41,7 @@ saveViewHierarchy(const char *path)
 {
     sentrycrash_setSaveViewHierarchy(NULL);
 
-    SentryClient *client = [SentrySDK.currentHub getClient];
+    BuzzSentryClient *client = [SentrySDK.currentHub getClient];
     [client removeAttachmentProcessor:self];
 }
 

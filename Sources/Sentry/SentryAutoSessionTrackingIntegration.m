@@ -2,7 +2,7 @@
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "SentryLog.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentrySDK.h"
 #import "SentrySessionTracker.h"
 
@@ -17,7 +17,7 @@ SentryAutoSessionTrackingIntegration ()
 
 @implementation SentryAutoSessionTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;

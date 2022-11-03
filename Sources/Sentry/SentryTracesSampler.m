@@ -1,9 +1,9 @@
 #import "SentryTracesSampler.h"
 #import "SentryDependencyContainer.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentrySamplingContext.h"
 #import "SentryTransactionContext.h"
-#import <SentryOptions+Private.h>
+#import <BuzzSentryOptions+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,10 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @implementation SentryTracesSampler {
-    SentryOptions *_options;
+    BuzzSentryOptions *_options;
 }
 
-- (instancetype)initWithOptions:(SentryOptions *)options random:(id<SentryRandom>)random
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options random:(id<SentryRandom>)random
 {
     if (self = [super init]) {
         _options = options;
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (instancetype)initWithOptions:(SentryOptions *)options
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options
 {
     return [self initWithOptions:options random:[SentryDependencyContainer sharedInstance].random];
 }

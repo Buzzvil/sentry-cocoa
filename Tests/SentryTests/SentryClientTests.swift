@@ -4,9 +4,9 @@ import XCTest
 // swiftlint:disable file_length
 // We are aware that the client has a lot of logic and we should maybe
 // move some of it to other classes.
-class SentryClientTest: XCTestCase {
+class BuzzSentryClientTest: XCTestCase {
     
-    private static let dsn = TestConstants.dsnAsString(username: "SentryClientTest")
+    private static let dsn = TestConstants.dsnAsString(username: "BuzzSentryClientTest")
 
     private class Fixture {
         let transport: TestTransport
@@ -47,7 +47,7 @@ class SentryClientTest: XCTestCase {
             user.ipAddress = "127.0.0.1"
             
             let options = Options()
-            options.dsn = SentryClientTest.dsn
+            options.dsn = BuzzSentryClientTest.dsn
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
             
             transaction = Transaction(trace: trace, children: [])
@@ -60,7 +60,7 @@ class SentryClientTest: XCTestCase {
             var client: Client!
             do {
                 let options = try Options(dict: [
-                    "dsn": SentryClientTest.dsn
+                    "dsn": BuzzSentryClientTest.dsn
                 ])
                 configureOptions(options)
 
@@ -323,7 +323,7 @@ class SentryClientTest: XCTestCase {
             options.dsn = nil
         })
         
-        sut.options.dsn = SentryClientTest.dsn
+        sut.options.dsn = BuzzSentryClientTest.dsn
         
         let eventId = sut.capture(event: event)
         eventId.assertIsNotEmpty()
@@ -1065,7 +1065,7 @@ class SentryClientTest: XCTestCase {
         SentryFileManager.prepareInitError()
         
         let options = Options()
-        options.dsn = SentryClientTest.dsn
+        options.dsn = BuzzSentryClientTest.dsn
         let client = Client(options: options, permissionsObserver: TestSentryPermissionsObserver())
         
         XCTAssertNil(client)
@@ -1396,7 +1396,7 @@ class SentryClientTest: XCTestCase {
         case somethingElse
     }
     
-    class TestAttachmentProcessor: NSObject, SentryClientAttachmentProcessor {
+    class TestAttachmentProcessor: NSObject, BuzzSentryClientAttachmentProcessor {
         
         var callback: (([Attachment]?, Event) -> [Attachment]?)
         

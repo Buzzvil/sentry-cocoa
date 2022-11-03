@@ -1,6 +1,6 @@
 #import "SentryANRTrackingIntegration.h"
 #import "SentryANRTracker.h"
-#import "SentryClient+Private.h"
+#import "BuzzSentryClient+Private.h"
 #import "SentryCrashMachineContext.h"
 #import "SentryCrashWrapper.h"
 #import "SentryDefaultCurrentDateProvider.h"
@@ -14,7 +14,7 @@
 #import "SentryThreadInspector.h"
 #import "SentryThreadWrapper.h"
 #import <SentryDependencyContainer.h>
-#import <SentryOptions+Private.h>
+#import <BuzzSentryOptions+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,13 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 SentryANRTrackingIntegration ()
 
 @property (nonatomic, strong) SentryANRTracker *tracker;
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 
 @end
 
 @implementation SentryANRTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;

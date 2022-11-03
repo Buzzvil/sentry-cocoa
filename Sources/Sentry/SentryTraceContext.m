@@ -2,7 +2,7 @@
 #import "SentryBaggage.h"
 #import "SentryDsn.h"
 #import "SentryLog.h"
-#import "SentryOptions+Private.h"
+#import "BuzzSentryOptions+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySerialization.h"
 #import "SentryTracer.h"
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (nullable instancetype)initWithScope:(SentryScope *)scope options:(SentryOptions *)options
+- (nullable instancetype)initWithScope:(SentryScope *)scope options:(BuzzSentryOptions *)options
 {
     SentryTracer *tracer = [SentryTracer getTracer:scope.span];
     if (tracer == nil) {
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)initWithTracer:(SentryTracer *)tracer
                                   scope:(nullable SentryScope *)scope
-                                options:(SentryOptions *)options
+                                options:(BuzzSentryOptions *)options
 {
     if (tracer.context.traceId == nil || options.parsedDsn == nil)
         return nil;

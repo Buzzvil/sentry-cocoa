@@ -1,4 +1,4 @@
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryDataCategory.h"
 #import "SentryDiscardReason.h"
 
@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString *const kSentryDefaultEnvironment;
 
-@protocol SentryClientAttachmentProcessor <NSObject>
+@protocol BuzzSentryClientAttachmentProcessor <NSObject>
 
 - (nullable NSArray<SentryAttachment *> *)processAttachments:
                                               (nullable NSArray<SentryAttachment *> *)attachments
@@ -17,10 +17,10 @@ FOUNDATION_EXPORT NSString *const kSentryDefaultEnvironment;
 @end
 
 @interface
-SentryClient (Private)
+BuzzSentryClient (Private)
 
 @property (nonatomic, strong)
-    NSMutableArray<id<SentryClientAttachmentProcessor>> *attachmentProcessors;
+    NSMutableArray<id<BuzzSentryClientAttachmentProcessor>> *attachmentProcessors;
 @property (nonatomic, strong) SentryThreadInspector *threadInspector;
 
 - (SentryFileManager *)fileManager;
@@ -51,8 +51,8 @@ SentryClient (Private)
 
 - (void)recordLostEvent:(SentryDataCategory)category reason:(SentryDiscardReason)reason;
 
-- (void)addAttachmentProcessor:(id<SentryClientAttachmentProcessor>)attachmentProcessor;
-- (void)removeAttachmentProcessor:(id<SentryClientAttachmentProcessor>)attachmentProcessor;
+- (void)addAttachmentProcessor:(id<BuzzSentryClientAttachmentProcessor>)attachmentProcessor;
+- (void)removeAttachmentProcessor:(id<BuzzSentryClientAttachmentProcessor>)attachmentProcessor;
 
 @end
 

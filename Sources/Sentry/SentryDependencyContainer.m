@@ -3,7 +3,7 @@
 #import "SentryDispatchQueueWrapper.h"
 #import "SentryUIApplication.h"
 #import <SentryAppStateManager.h>
-#import <SentryClient+Private.h>
+#import <BuzzSentryClient+Private.h>
 #import <SentryCrashWrapper.h>
 #import <SentryDebugImageProvider.h>
 #import <SentryDefaultCurrentDateProvider.h>
@@ -61,7 +61,7 @@ static NSObject *sentryDependencyContainerLock;
 {
     @synchronized(sentryDependencyContainerLock) {
         if (_appStateManager == nil) {
-            SentryOptions *options = [[[SentrySDK currentHub] getClient] options];
+            BuzzSentryOptions *options = [[[SentrySDK currentHub] getClient] options];
             _appStateManager = [[SentryAppStateManager alloc]
                      initWithOptions:options
                         crashWrapper:self.crashWrapper

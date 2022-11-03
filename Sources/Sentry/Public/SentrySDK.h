@@ -2,7 +2,7 @@
 
 @protocol SentrySpan;
 
-@class SentryOptions, SentryEvent, SentryBreadcrumb, SentryScope, SentryUser, SentryId,
+@class BuzzSentryOptions, SentryEvent, SentryBreadcrumb, SentryScope, SentryUser, SentryId,
     SentryUserFeedback, SentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -26,20 +26,20 @@ SENTRY_NO_INIT
 @property (class, nonatomic, readonly) BOOL isEnabled;
 
 /**
- * Inits and configures Sentry (SentryHub, SentryClient) and sets up all integrations.
+ * Inits and configures Sentry (SentryHub, BuzzSentryClient) and sets up all integrations.
  */
 + (void)startWithOptions:(NSDictionary<NSString *, id> *)optionsDict NS_SWIFT_NAME(start(options:));
 
 /**
- * Inits and configures Sentry (SentryHub, SentryClient) and sets up all integrations.
+ * Inits and configures Sentry (SentryHub, BuzzSentryClient) and sets up all integrations.
  */
-+ (void)startWithOptionsObject:(SentryOptions *)options NS_SWIFT_NAME(start(options:));
++ (void)startWithOptionsObject:(BuzzSentryOptions *)options NS_SWIFT_NAME(start(options:));
 
 /**
- * Inits and configures Sentry (SentryHub, SentryClient) and sets up all integrations. Make sure to
+ * Inits and configures Sentry (SentryHub, BuzzSentryClient) and sets up all integrations. Make sure to
  * set a valid DSN.
  */
-+ (void)startWithConfigureOptions:(void (^)(SentryOptions *options))configureOptions
++ (void)startWithConfigureOptions:(void (^)(BuzzSentryOptions *options))configureOptions
     NS_SWIFT_NAME(start(configureOptions:));
 
 /**
@@ -260,7 +260,7 @@ SENTRY_NO_INIT
 
 /**
  * Adds a Breadcrumb to the current Scope of the current Hub. If the total number of breadcrumbs
- * exceeds the `SentryOptions.maxBreadcrumbs`, the SDK removes the oldest breadcrumb.
+ * exceeds the `BuzzSentryOptions.maxBreadcrumbs`, the SDK removes the oldest breadcrumb.
  *
  * @param crumb The Breadcrumb to add to the current Scope of the current Hub.
  */

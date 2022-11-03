@@ -23,7 +23,7 @@ NS_SWIFT_NAME(Event)
 
 /**
  * The error of the event. This property adds convenience to access the error directly in
- * beforeSend. This property is not serialized. Instead when preparing the event the SentryClient
+ * beforeSend. This property is not serialized. Instead when preparing the event the BuzzSentryClient
  * puts the error into exceptions.
  */
 @property (nonatomic, copy) NSError *_Nullable error;

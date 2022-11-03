@@ -307,7 +307,7 @@ class SentrySerializationTests: XCTestCase {
     }
 
     private func assertDefaultSdkInfoSet(deserializedEnvelope: SentryEnvelope) {
-        let sdkInfo = SentrySdkInfo(name: SentryMeta.sdkName, andVersion: SentryMeta.versionString)
+        let sdkInfo = SentrySdkInfo(name: BuzzSentryMeta.sdkName, andVersion: BuzzSentryMeta.versionString)
         XCTAssertEqual(sdkInfo, deserializedEnvelope.header.sdkInfo)
     }
     

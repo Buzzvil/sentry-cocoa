@@ -1,12 +1,12 @@
 #import "SentryNSURLRequest.h"
 #import "NSData+SentryCompression.h"
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryDsn.h"
 #import "SentryError.h"
 #import "SentryEvent.h"
 #import "SentryHub.h"
 #import "SentryLog.h"
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 #import "SentrySDK+Private.h"
 #import "SentrySerialization.h"
 
@@ -63,7 +63,7 @@ SentryNSURLRequest ()
         self.HTTPMethod = @"POST";
         [self setValue:authHeader forHTTPHeaderField:@"X-Sentry-Auth"];
         [self setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [self setValue:SentryMeta.sdkName forHTTPHeaderField:@"User-Agent"];
+        [self setValue:BuzzSentryMeta.sdkName forHTTPHeaderField:@"User-Agent"];
         [self setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
         self.HTTPBody = [data sentry_gzippedWithCompressionLevel:-1 error:error];
     }
@@ -85,7 +85,7 @@ SentryNSURLRequest ()
         self.HTTPMethod = @"POST";
         [self setValue:authHeader forHTTPHeaderField:@"X-Sentry-Auth"];
         [self setValue:@"application/x-sentry-envelope" forHTTPHeaderField:@"Content-Type"];
-        [self setValue:SentryMeta.sdkName forHTTPHeaderField:@"User-Agent"];
+        [self setValue:BuzzSentryMeta.sdkName forHTTPHeaderField:@"User-Agent"];
         [self setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
         self.HTTPBody = [data sentry_gzippedWithCompressionLevel:-1 error:error];
     }
@@ -107,7 +107,7 @@ newAuthHeader(NSURL *url)
     [string
         appendFormat:@"%@,",
         newHeaderPart(@"sentry_client",
-            [NSString stringWithFormat:@"%@/%@", SentryMeta.sdkName, SentryMeta.versionString])];
+            [NSString stringWithFormat:@"%@/%@", BuzzSentryMeta.sdkName, BuzzSentryMeta.versionString])];
     [string
         appendFormat:@"%@,",
         newHeaderPart(@"sentry_timestamp", @((NSInteger)[[NSDate date] timeIntervalSince1970]))];

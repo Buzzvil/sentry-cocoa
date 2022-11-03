@@ -1,6 +1,6 @@
 #import "SentryDsn.h"
 #import "SentryError.h"
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 #import "SentryNSURLRequest.h"
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
@@ -14,7 +14,7 @@
 - (void)testMissingUsernamePassword
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
                                                 didFailWithError:&error];
     XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
@@ -34,7 +34,7 @@
                        @"sentry_version=7,sentry_client=sentry.cocoa/"
                        @"%@,sentry_timestamp=%@,sentry_key=username,sentry_"
                        @"secret=password",
-        SentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
+        BuzzSentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
 
     XCTAssertEqualObjects(request.allHTTPHeaderFields[@"X-Sentry-Auth"], authHeader);
     XCTAssertNil(error);
@@ -53,7 +53,7 @@
         initWithFormat:@"Sentry "
                        @"sentry_version=7,sentry_client=sentry.cocoa/"
                        @"%@,sentry_timestamp=%@,sentry_key=username",
-        SentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
+        BuzzSentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
 
     XCTAssertEqualObjects(request.allHTTPHeaderFields[@"X-Sentry-Auth"], authHeader);
     XCTAssertNil(error);
@@ -62,7 +62,7 @@
 - (void)testMissingScheme
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"sentry.io" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"sentry.io" }
                                                 didFailWithError:&error];
     XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
@@ -71,7 +71,7 @@
 - (void)testMissingHost
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"http:///1" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"http:///1" }
                                                 didFailWithError:&error];
     XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
@@ -80,7 +80,7 @@
 - (void)testUnsupportedProtocol
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"ftp://sentry.io/1" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"ftp://sentry.io/1" }
                                                 didFailWithError:&error];
     XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);

@@ -1,7 +1,7 @@
 #import "SentryTransportAdapter.h"
 #import "SentryEnvelope.h"
 #import "SentryEvent.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentryUserFeedback.h"
 #import <Foundation/Foundation.h>
 
@@ -11,13 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 SentryTransportAdapter ()
 
 @property (nonatomic, strong) id<SentryTransport> transport;
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 
 @end
 
 @implementation SentryTransportAdapter
 
-- (instancetype)initWithTransport:(id<SentryTransport>)transport options:(SentryOptions *)options
+- (instancetype)initWithTransport:(id<SentryTransport>)transport options:(BuzzSentryOptions *)options
 {
     if (self = [super init]) {
         self.transport = transport;

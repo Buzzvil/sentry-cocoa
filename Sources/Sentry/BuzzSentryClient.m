@@ -1,8 +1,8 @@
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "NSLocale+Sentry.h"
 #import "SentryAttachment.h"
-#import "SentryClient+Private.h"
+#import "BuzzSentryClient+Private.h"
 #import "SentryCrashDefaultMachineContextWrapper.h"
 #import "SentryCrashIntegration.h"
 #import "SentryCrashStackEntryMapper.h"
@@ -26,9 +26,9 @@
 #import "SentryMechanism.h"
 #import "SentryMechanismMeta.h"
 #import "SentryMessage.h"
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 #import "SentryNSError.h"
-#import "SentryOptions+Private.h"
+#import "BuzzSentryOptions+Private.h"
 #import "SentryOutOfMemoryTracker.h"
 #import "SentryPermissionsObserver.h"
 #import "SentrySDK+Private.h"
@@ -53,7 +53,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryClient ()
+BuzzSentryClient ()
 
 @property (nonatomic, strong) SentryTransportAdapter *transportAdapter;
 @property (nonatomic, strong) SentryFileManager *fileManager;
@@ -61,7 +61,7 @@ SentryClient ()
 @property (nonatomic, strong) SentryThreadInspector *threadInspector;
 @property (nonatomic, strong) id<SentryRandom> random;
 @property (nonatomic, strong)
-    NSMutableArray<id<SentryClientAttachmentProcessor>> *attachmentProcessors;
+    NSMutableArray<id<BuzzSentryClientAttachmentProcessor>> *attachmentProcessors;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) SentryPermissionsObserver *permissionsObserver;
 @property (nonatomic, strong) SentryUIDeviceWrapper *deviceWrapper;
@@ -73,16 +73,16 @@ SentryClient ()
 NSString *const DropSessionLogMessage = @"Session has no release name. Won't send it.";
 NSString *const kSentryDefaultEnvironment = @"production";
 
-@implementation SentryClient
+@implementation BuzzSentryClient
 
-- (_Nullable instancetype)initWithOptions:(SentryOptions *)options
+- (_Nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
 {
     return [self initWithOptions:options
              permissionsObserver:[[SentryPermissionsObserver alloc] init]];
 }
 
 /** Internal constructors for testing */
-- (_Nullable instancetype)initWithOptions:(SentryOptions *)options
+- (_Nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                       permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
 {
     NSError *error = nil;
@@ -127,7 +127,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                         timezone:[NSCalendar autoupdatingCurrentCalendar].timeZone];
 }
 
-- (instancetype)initWithOptions:(SentryOptions *)options
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options
                transportAdapter:(SentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
                 threadInspector:(SentryThreadInspector *)threadInspector
@@ -354,7 +354,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
         NSArray *attachments = scope.attachments;
         if (self.attachmentProcessors.count) {
-            for (id<SentryClientAttachmentProcessor> attachmentProcessor in self
+            for (id<BuzzSentryClientAttachmentProcessor> attachmentProcessor in self
                      .attachmentProcessors) {
                 attachments = [attachmentProcessor processAttachments:attachments
                                                              forEvent:preparedEvent];
@@ -379,7 +379,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     if (nil != event) {
         NSArray *attachments = scope.attachments;
         if (self.attachmentProcessors.count) {
-            for (id<SentryClientAttachmentProcessor> attachmentProcessor in self
+            for (id<BuzzSentryClientAttachmentProcessor> attachmentProcessor in self
                      .attachmentProcessors) {
                 attachments = [attachmentProcessor processAttachments:attachments forEvent:event];
             }
@@ -502,7 +502,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         event.dist = infoDict[@"CFBundleVersion"];
     }
 
-    // Use the values from SentryOptions as a fallback,
+    // Use the values from BuzzSentryOptions as a fallback,
     // in case not yet set directly in the event nor in the scope:
     NSString *releaseName = self.options.releaseName;
     if (nil == event.releaseName && nil != releaseName) {
@@ -657,8 +657,8 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 
     event.sdk = @{
-        @"name" : SentryMeta.sdkName,
-        @"version" : SentryMeta.versionString,
+        @"name" : BuzzSentryMeta.sdkName,
+        @"version" : BuzzSentryMeta.versionString,
         @"integrations" : integrations
     };
 }
@@ -849,12 +849,12 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 }
 
-- (void)addAttachmentProcessor:(id<SentryClientAttachmentProcessor>)attachmentProcessor
+- (void)addAttachmentProcessor:(id<BuzzSentryClientAttachmentProcessor>)attachmentProcessor
 {
     [self.attachmentProcessors addObject:attachmentProcessor];
 }
 
-- (void)removeAttachmentProcessor:(id<SentryClientAttachmentProcessor>)attachmentProcessor
+- (void)removeAttachmentProcessor:(id<BuzzSentryClientAttachmentProcessor>)attachmentProcessor
 {
     [self.attachmentProcessors removeObject:attachmentProcessor];
 }

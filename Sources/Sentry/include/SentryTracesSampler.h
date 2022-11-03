@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryOptions, SentrySamplingContext;
+@class BuzzSentryOptions, SentrySamplingContext;
 
 @interface SentryTracesSamplerDecision : NSObject
 
@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
  * @param options Sentry options with sampling configuration
  * @param random A random number generator
  */
-- (instancetype)initWithOptions:(SentryOptions *)options random:(id<SentryRandom>)random;
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options random:(id<SentryRandom>)random;
 
 /**
  * Init a TracesSampler with given options and a default Random generator.
  * @param options Sentry options with sampling configuration
  */
-- (instancetype)initWithOptions:(SentryOptions *)options;
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options;
 
 /**
  * Determines whether a trace should be sampled based on the context and options.

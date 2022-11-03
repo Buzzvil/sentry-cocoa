@@ -10,7 +10,7 @@
 #import "SentryScope+Private.h"
 #import "SentrySessionCrashedHandler.h"
 #import <SentryAppStateManager.h>
-#import <SentryClient+Private.h>
+#import <BuzzSentryClient+Private.h>
 #import <SentryCrashScopeObserver.h>
 #import <SentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
@@ -30,7 +30,7 @@ static NSString *const LOCALE_KEY = @"locale";
 @interface
 SentryCrashIntegration ()
 
-@property (nonatomic, weak) SentryOptions *options;
+@property (nonatomic, weak) BuzzSentryOptions *options;
 @property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
 @property (nonatomic, strong) SentrySessionCrashedHandler *crashedSessionHandler;
@@ -60,7 +60,7 @@ SentryCrashIntegration ()
     return self;
 }
 
-- (BOOL)installWithOptions:(nonnull SentryOptions *)options
+- (BOOL)installWithOptions:(nonnull BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;
@@ -176,7 +176,7 @@ SentryCrashIntegration ()
         NSMutableDictionary<NSString *, id> *userInfo =
             [[NSMutableDictionary alloc] initWithDictionary:[outerScope serialize]];
         // SentryCrashReportConverter.convertReportToEvent needs the release name and
-        // the dist of the SentryOptions in the UserInfo. When SentryCrash records a
+        // the dist of the BuzzSentryOptions in the UserInfo. When SentryCrash records a
         // crash it writes the UserInfo into SentryCrashField_User of the report.
         // SentryCrashReportConverter.initWithReport loads the contents of
         // SentryCrashField_User into self.userContext and convertReportToEvent can map

@@ -16,7 +16,7 @@
 #import "SentryLog.h"
 #import "SentryNSURLRequest.h"
 #import "SentryNSURLRequestBuilder.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentryReachability.h"
 #import "SentrySerialization.h"
 
@@ -28,7 +28,7 @@ SentryHttpTransport ()
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) id<SentryRequestManager> requestManager;
 @property (nonatomic, strong) SentryNSURLRequestBuilder *requestBuilder;
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) id<SentryRateLimits> rateLimits;
 @property (nonatomic, strong) SentryEnvelopeRateLimit *envelopeRateLimit;
 @property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
@@ -56,7 +56,7 @@ SentryHttpTransport ()
 
 @implementation SentryHttpTransport
 
-- (id)initWithOptions:(SentryOptions *)options
+- (id)initWithOptions:(BuzzSentryOptions *)options
              fileManager:(SentryFileManager *)fileManager
           requestManager:(id<SentryRequestManager>)requestManager
           requestBuilder:(SentryNSURLRequestBuilder *)requestBuilder

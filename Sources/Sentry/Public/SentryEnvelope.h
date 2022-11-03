@@ -13,7 +13,7 @@ SENTRY_NO_INIT
 /**
  * Initializes an SentryEnvelopeHeader object with the specified eventId.
  *
- * Sets the sdkInfo from SentryMeta.
+ * Sets the sdkInfo from BuzzSentryMeta.
  *
  * @param eventId The identifier of the event. Can be nil if no event in the envelope or attachment
  * related to event.

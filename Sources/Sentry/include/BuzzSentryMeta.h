@@ -2,7 +2,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryMeta : NSObject
+@interface BuzzSentryMeta : NSObject
 
 /**
  * Return a version string e.g: 1.2.3 (3)

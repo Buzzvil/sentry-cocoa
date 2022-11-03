@@ -3,7 +3,7 @@
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryLog.h"
 #import <Foundation/Foundation.h>
-#import <PrivateSentrySDKOnly.h>
+#import <PrivateBuzzSentrySDKOnly.h>
 #import <SentryAppStateManager.h>
 #import <SentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
@@ -21,10 +21,10 @@ SentryAppStartTrackingIntegration ()
 
 @implementation SentryAppStartTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
 #if SENTRY_HAS_UIKIT
-    if (!PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode
+    if (!PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode
         && ![super installWithOptions:options]) {
         return NO;
     }

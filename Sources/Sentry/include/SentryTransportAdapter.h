@@ -4,19 +4,19 @@
 #import "SentryTransport.h"
 
 @class SentryEnvelope, SentryEnvelopeItem, SentryEvent, SentrySession, SentryUserFeedback,
-    SentryAttachment, SentryTraceContext, SentryOptions;
+    SentryAttachment, SentryTraceContext, BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * This class converts data objects to a SentryEnvelope and passes the SentryEnvelope to the
- * SentryTransport. It is a layer between the SentryClient and the transport to keep the
- * SentryClient small and make testing easier for the SentryClient.
+ * SentryTransport. It is a layer between the BuzzSentryClient and the transport to keep the
+ * BuzzSentryClient small and make testing easier for the BuzzSentryClient.
  */
 @interface SentryTransportAdapter : NSObject
 SENTRY_NO_INIT
 
-- (instancetype)initWithTransport:(id<SentryTransport>)transport options:(SentryOptions *)options;
+- (instancetype)initWithTransport:(id<SentryTransport>)transport options:(BuzzSentryOptions *)options;
 
 - (void)sendEvent:(SentryEvent *)event
       attachments:(NSArray<SentryAttachment *> *)attachments

@@ -9,12 +9,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Expose the internal test init for testing. */
 @interface
-SentryClient (TestInit)
+BuzzSentryClient (TestInit)
 
-- (_Nullable instancetype)initWithOptions:(SentryOptions *)options
+- (_Nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                       permissionsObserver:(SentryPermissionsObserver *)permissionsObserver;
 
-- (instancetype)initWithOptions:(SentryOptions *)options
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options
                transportAdapter:(SentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
                 threadInspector:(SentryThreadInspector *)threadInspector

@@ -6,12 +6,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class SentryDsn, SentrySdkInfo, SentryMeasurementValue;
 
 NS_SWIFT_NAME(Options)
-@interface SentryOptions : NSObject
+@interface BuzzSentryOptions : NSObject
 
 /**
- * Init SentryOptions.
+ * Init BuzzSentryOptions.
  * @param options Options dictionary
- * @return SentryOptions
+ * @return BuzzSentryOptions
  */
 - (_Nullable instancetype)initWithDict:(NSDictionary<NSString *, id> *)options
                       didFailWithError:(NSError *_Nullable *_Nullable)error;

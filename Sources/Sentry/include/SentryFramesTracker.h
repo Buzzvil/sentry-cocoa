@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 #import "SentryProfilingConditionals.h"
 
-@class SentryOptions, SentryDisplayLinkWrapper, SentryScreenFrames;
+@class BuzzSentryOptions, SentryDisplayLinkWrapper, SentryScreenFrames;
 
 NS_ASSUME_NONNULL_BEGIN
 

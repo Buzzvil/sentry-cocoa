@@ -2,7 +2,7 @@
 #import <SentryAppState.h>
 #import <SentryAppStateManager.h>
 #import <SentryCrashWrapper.h>
-#import <SentryOptions.h>
+#import <BuzzSentryOptions.h>
 #import <SentryOutOfMemoryLogic.h>
 #import <SentrySDK+Private.h>
 
@@ -13,7 +13,7 @@
 @interface
 SentryOutOfMemoryLogic ()
 
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
 @property (nonatomic, strong) SentryAppStateManager *appStateManager;
 
@@ -21,7 +21,7 @@ SentryOutOfMemoryLogic ()
 
 @implementation SentryOutOfMemoryLogic
 
-- (instancetype)initWithOptions:(SentryOptions *)options
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options
                    crashAdapter:(SentryCrashWrapper *)crashAdapter
                 appStateManager:(SentryAppStateManager *)appStateManager
 {

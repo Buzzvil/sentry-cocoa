@@ -1,14 +1,14 @@
 #import "SentrySDK.h"
-#import "PrivateSentrySDKOnly.h"
+#import "PrivateBuzzSentrySDKOnly.h"
 #import "SentryAppStartMeasurement.h"
 #import "SentryBreadcrumb.h"
-#import "SentryClient+Private.h"
+#import "BuzzSentryClient+Private.h"
 #import "SentryCrash.h"
 #import "SentryDependencyContainer.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
-#import "SentryMeta.h"
-#import "SentryOptions+Private.h"
+#import "BuzzSentryMeta.h"
+#import "BuzzSentryOptions+Private.h"
 #import "SentryScope.h"
 
 @interface
@@ -54,7 +54,7 @@ static NSUInteger startInvocations;
     }
 }
 
-+ (nullable SentryOptions *)options
++ (nullable BuzzSentryOptions *)options
 {
     @synchronized(self) {
         return [[currentHub getClient] options];
@@ -97,8 +97,8 @@ static NSUInteger startInvocations;
     @synchronized(sentrySDKappStartMeasurementLock) {
         sentrySDKappStartMeasurement = value;
     }
-    if (PrivateSentrySDKOnly.onAppStartMeasurementAvailable) {
-        PrivateSentrySDKOnly.onAppStartMeasurementAvailable(value);
+    if (PrivateBuzzSentrySDKOnly.onAppStartMeasurementAvailable) {
+        PrivateBuzzSentrySDKOnly.onAppStartMeasurementAvailable(value);
     }
 }
 
@@ -131,7 +131,7 @@ static NSUInteger startInvocations;
 + (void)startWithOptions:(NSDictionary<NSString *, id> *)optionsDict
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:optionsDict
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:optionsDict
                                                 didFailWithError:&error];
     if (nil != error) {
         SENTRY_LOG_ERROR(@"Error while initializing the SDK");
@@ -141,25 +141,25 @@ static NSUInteger startInvocations;
     }
 }
 
-+ (void)startWithOptionsObject:(SentryOptions *)options
++ (void)startWithOptionsObject:(BuzzSentryOptions *)options
 {
     startInvocations++;
 
     [SentryLog configure:options.debug diagnosticLevel:options.diagnosticLevel];
 
-    SentryClient *newClient = [[SentryClient alloc] initWithOptions:options];
+    BuzzSentryClient *newClient = [[BuzzSentryClient alloc] initWithOptions:options];
     [newClient.fileManager moveAppStateToPreviousAppState];
 
     // The Hub needs to be initialized with a client so that closing a session
     // can happen.
     [SentrySDK setCurrentHub:[[SentryHub alloc] initWithClient:newClient andScope:nil]];
-    SENTRY_LOG_DEBUG(@"SDK initialized! Version: %@", SentryMeta.versionString);
+    SENTRY_LOG_DEBUG(@"SDK initialized! Version: %@", BuzzSentryMeta.versionString);
     [SentrySDK installIntegrations];
 }
 
-+ (void)startWithConfigureOptions:(void (^)(SentryOptions *options))configureOptions
++ (void)startWithConfigureOptions:(void (^)(BuzzSentryOptions *options))configureOptions
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     configureOptions(options);
     [SentrySDK startWithOptionsObject:options];
 }
@@ -370,7 +370,7 @@ static NSUInteger startInvocations;
         // Gatekeeper
         return;
     }
-    SentryOptions *options = [SentrySDK.currentHub getClient].options;
+    BuzzSentryOptions *options = [SentrySDK.currentHub getClient].options;
     for (NSString *integrationName in [SentrySDK.currentHub getClient].options.integrations) {
         Class integrationClass = NSClassFromString(integrationName);
         if (nil == integrationClass) {
@@ -417,7 +417,7 @@ static NSUInteger startInvocations;
     [hub.installedIntegrations removeAllObjects];
 
     // close the client
-    SentryClient *client = [hub getClient];
+    BuzzSentryClient *client = [hub getClient];
     client.options.enabled = NO;
     [hub bindClient:nil];
 

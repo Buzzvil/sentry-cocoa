@@ -2,14 +2,14 @@
 
 #import "SentryTransport.h"
 
-@class SentryOptions, SentryFileManager;
+@class BuzzSentryOptions, SentryFileManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(TransportInitializer)
 @interface SentryTransportFactory : NSObject
 
-+ (id<SentryTransport>)initTransport:(SentryOptions *)options
++ (id<SentryTransport>)initTransport:(BuzzSentryOptions *)options
                    sentryFileManager:(SentryFileManager *)sentryFileManager;
 
 @end

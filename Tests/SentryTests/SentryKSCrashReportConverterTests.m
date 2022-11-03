@@ -228,9 +228,9 @@
     SentryCrashReportConverter *reportConverter =
         [[SentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
     SentryEvent *event = [reportConverter convertReportToEvent];
-    //    Error: SentryClient: Test throw error
+    //    Error: BuzzSentryClient: Test throw error
     XCTAssertEqualObjects(event.exceptions.firstObject.type, @"Error");
-    XCTAssertEqualObjects(event.exceptions.firstObject.value, @"SentryClient: Test throw error");
+    XCTAssertEqualObjects(event.exceptions.firstObject.value, @"BuzzSentryClient: Test throw error");
     [self isValidReport:@"Resources/ReactNative"];
 }
 

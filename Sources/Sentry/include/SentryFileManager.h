@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol SentryFileManagerDelegate;
 
-@class SentryEvent, SentryOptions, SentryEnvelope, SentryFileContents, SentryAppState,
+@class SentryEvent, BuzzSentryOptions, SentryEnvelope, SentryFileContents, SentryAppState,
     SentryDispatchQueueWrapper;
 
 NS_SWIFT_NAME(SentryFileManager)
@@ -16,11 +16,11 @@ SENTRY_NO_INIT
 
 @property (nonatomic, readonly) NSString *sentryPath;
 
-- (nullable instancetype)initWithOptions:(SentryOptions *)options
+- (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                   andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                                    error:(NSError **)error;
 
-- (nullable instancetype)initWithOptions:(SentryOptions *)options
+- (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                   andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                     dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
                                    error:(NSError **)error NS_DESIGNATED_INITIALIZER;

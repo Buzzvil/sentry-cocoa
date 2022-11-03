@@ -25,7 +25,7 @@ class SentryFramesTrackingIntegrationTests: XCTestCase {
     }
     
     override func tearDown() {
-        PrivateSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = false
+        PrivateBuzzSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = false
         super.tearDown()
     }
     
@@ -63,7 +63,7 @@ class SentryFramesTrackingIntegrationTests: XCTestCase {
     }
     
     func test_HybridSDKEnables_MeasureFrames() {
-        PrivateSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = true
+        PrivateBuzzSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = true
         
         let options = fixture.options
         options.enableAutoPerformanceTracking = false

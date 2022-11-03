@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Automatic UI performance setup can be avoided by setting
  * enableAutoPerformanceTracking to NO
- * in SentryOptions during SentrySDK initialization.
+ * in BuzzSentryOptions during SentrySDK initialization.
  */
 @interface SentryPerformanceTrackingIntegration : SentryBaseIntegration <SentryIntegrationProtocol>
 

@@ -2,7 +2,7 @@
 #import "SentryBreadcrumbTracker.h"
 #import "SentryLevelMapper.h"
 #import "SentryMessage.h"
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 #import "SentrySDK+Private.h"
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
@@ -29,27 +29,27 @@ SentryBreadcrumbTracker (Private)
 
 - (void)testVersion
 {
-    NSDictionary *info = [[NSBundle bundleForClass:[SentryClient class]] infoDictionary];
+    NSDictionary *info = [[NSBundle bundleForClass:[BuzzSentryClient class]] infoDictionary];
     NSString *version = [NSString stringWithFormat:@"%@", info[@"CFBundleShortVersionString"]];
     if ([info[@"CFBundleIdentifier"] isEqualToString:@"io.sentry.Sentry"]) {
         // This test is running on a bundle that is not the SDK
         // (code was loaded inside an app for example)
         // in this case, we don't care about asserting our hard coded value matches
         // since this will be the app version instead of our SDK version.
-        XCTAssert([version isEqualToString:SentryMeta.versionString],
-            @"Version of bundle:%@ not equal to version of SentryMeta:%@", version,
-            SentryMeta.versionString);
+        XCTAssert([version isEqualToString:BuzzSentryMeta.versionString],
+            @"Version of bundle:%@ not equal to version of BuzzSentryMeta:%@", version,
+            BuzzSentryMeta.versionString);
     }
 }
 
 - (void)testSharedClient
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc]
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc]
             initWithDict:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }
         didFailWithError:&error];
 
-    SentryClient *client = [[SentryClient alloc] initWithOptions:options];
+    BuzzSentryClient *client = [[BuzzSentryClient alloc] initWithOptions:options];
     XCTAssertNil(error);
     XCTAssertNil([SentrySDK.currentHub getClient]);
     [SentrySDK.currentHub bindClient:client];

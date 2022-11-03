@@ -1,5 +1,5 @@
 #import "SentryNSDataTracker.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentrySDK.h"
 #import "SentrySpan.h"
 #import "SentrySwizzle.h"
@@ -48,7 +48,7 @@
     someData = [@"SOME DATA" dataUsingEncoding:NSUTF8StringEncoding];
     [someData writeToFile:filePath atomically:true];
 
-    [SentrySDK startWithConfigureOptions:^(SentryOptions *_Nonnull options) {
+    [SentrySDK startWithConfigureOptions:^(BuzzSentryOptions *_Nonnull options) {
         options.enableAutoPerformanceTracking = YES;
         options.enableFileIOTracking = YES;
         options.tracesSampleRate = @1;

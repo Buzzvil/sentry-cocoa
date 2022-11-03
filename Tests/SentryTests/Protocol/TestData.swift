@@ -11,7 +11,7 @@ class TestData {
             (timestamp as NSDate).sentry_toIso8601String()
         }
     }
-    static let sdk = ["name": SentryMeta.sdkName, "version": SentryMeta.versionString]
+    static let sdk = ["name": BuzzSentryMeta.sdkName, "version": BuzzSentryMeta.versionString]
     static let context = ["context": ["c": "a", "date": timestamp]]
     
     static var crumb: Breadcrumb {
@@ -39,7 +39,7 @@ class TestData {
         event.message = SentryMessage(formatted: "message")
         event.modules = ["module": "1"]
         event.platform = "Apple"
-        event.releaseName = SentryMeta.versionString
+        event.releaseName = BuzzSentryMeta.versionString
         event.sdk = sdk
         event.serverName = "serverName"
         event.stacktrace = stacktrace

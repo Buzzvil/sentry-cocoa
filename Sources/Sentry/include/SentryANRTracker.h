@@ -1,7 +1,7 @@
 #import "SentryCurrentDateProvider.h"
 #import "SentryDefines.h"
 
-@class SentryOptions, SentryCrashWrapper, SentryDispatchQueueWrapper, SentryThreadWrapper;
+@class BuzzSentryOptions, SentryCrashWrapper, SentryDispatchQueueWrapper, SentryThreadWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 

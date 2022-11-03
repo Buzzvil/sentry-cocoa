@@ -3,7 +3,7 @@
 #import "SentryLog.h"
 #import <Foundation/Foundation.h>
 #import <SentryDependencyContainer.h>
-#import <SentryOptions+Private.h>
+#import <BuzzSentryOptions+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
     return NSStringFromClass([self classForCoder]);
 }
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
     return [self shouldBeEnabledWithOptions:options];
 }
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
     SENTRY_LOG_DEBUG(@"Not going to enable %@ %@.", self.integrationName, reason);
 }
 
-- (BOOL)shouldBeEnabledWithOptions:(SentryOptions *)options
+- (BOOL)shouldBeEnabledWithOptions:(BuzzSentryOptions *)options
 {
     SentryIntegrationOption integrationOptions = [self integrationOptions];
 

@@ -3,7 +3,7 @@
 #import "SentryLog.h"
 #import "SentrySysctl.h"
 #import <Foundation/Foundation.h>
-#import <PrivateSentrySDKOnly.h>
+#import <PrivateBuzzSentrySDKOnly.h>
 #import <SentryAppStartTracker.h>
 #import <SentryAppState.h>
 #import <SentryCurrentDateProvider.h>
@@ -106,7 +106,7 @@ SentryAppStartTracker ()
                                                name:UIApplicationDidEnterBackgroundNotification
                                              object:nil];
 
-    if (PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode) {
+    if (PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode) {
         [self buildAppStartMeasurement];
     }
 
@@ -168,7 +168,7 @@ SentryAppStartTracker ()
         // didBecomeVisibleNotification. Therefore, we can't set the
         // didFinishLaunchingTimestamp, and we can't calculate the appStartDuration. Instead,
         // the SDK provides the information we know and leaves the rest to the HybridSDKs.
-        if (PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode) {
+        if (PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode) {
             self.didFinishLaunchingTimestamp =
                 [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:0];
 

@@ -1,13 +1,13 @@
 #import "SentryIntegrationProtocol.h"
 #import <Foundation/Foundation.h>
 
-@class SentryOptions;
+@class BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SentryTestIntegration : NSObject <SentryIntegrationProtocol>
 
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 
 @end
 

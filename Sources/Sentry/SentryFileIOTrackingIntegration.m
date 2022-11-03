@@ -1,11 +1,11 @@
 #import "SentryFileIOTrackingIntegration.h"
 #import "SentryLog.h"
 #import "SentryNSDataSwizzling.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 
 @implementation SentryFileIOTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;

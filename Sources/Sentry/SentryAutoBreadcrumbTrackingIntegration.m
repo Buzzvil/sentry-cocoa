@@ -4,7 +4,7 @@
 #import "SentryDependencyContainer.h"
 #import "SentryFileManager.h"
 #import "SentryLog.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentrySystemEventBreadcrumbs.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,7 +19,7 @@ SentryAutoBreadcrumbTrackingIntegration ()
 
 @implementation SentryAutoBreadcrumbTrackingIntegration
 
-- (BOOL)installWithOptions:(nonnull SentryOptions *)options
+- (BOOL)installWithOptions:(nonnull BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;
@@ -46,7 +46,7 @@ SentryAutoBreadcrumbTrackingIntegration ()
 /**
  * For testing.
  */
-- (void)installWithOptions:(nonnull SentryOptions *)options
+- (void)installWithOptions:(nonnull BuzzSentryOptions *)options
          breadcrumbTracker:(SentryBreadcrumbTracker *)breadcrumbTracker
     systemEventBreadcrumbs:(SentrySystemEventBreadcrumbs *)systemEventBreadcrumbs
 {

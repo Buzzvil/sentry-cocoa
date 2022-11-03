@@ -69,7 +69,7 @@ class SentryEnvelopeTests: XCTestCase {
         }
     }
 
-    private let defaultSdkInfo = SentrySdkInfo(name: SentryMeta.sdkName, andVersion: SentryMeta.versionString)
+    private let defaultSdkInfo = SentrySdkInfo(name: BuzzSentryMeta.sdkName, andVersion: BuzzSentryMeta.versionString)
     
     func testSentryEnvelopeFromEvent() {
         let event = Event()

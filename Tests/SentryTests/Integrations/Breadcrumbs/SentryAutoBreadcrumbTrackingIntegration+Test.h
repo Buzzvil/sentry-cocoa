@@ -2,12 +2,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryOptions, SentryBreadcrumbTracker, SentrySystemEventBreadcrumbs;
+@class BuzzSentryOptions, SentryBreadcrumbTracker, SentrySystemEventBreadcrumbs;
 
 @interface
 SentryAutoBreadcrumbTrackingIntegration (Test)
 
-- (void)installWithOptions:(nonnull SentryOptions *)options
+- (void)installWithOptions:(nonnull BuzzSentryOptions *)options
          breadcrumbTracker:(SentryBreadcrumbTracker *)breadcrumbTracker
     systemEventBreadcrumbs:(SentrySystemEventBreadcrumbs *)systemEventBreadcrumbs;
 

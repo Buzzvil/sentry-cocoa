@@ -3,8 +3,8 @@
 #import <SentryDependencyContainer.h>
 #import <SentryLog.h>
 #import <SentryNSDataSwizzling.h>
-#import <SentryOptions+Private.h>
-#import <SentryOptions.h>
+#import <BuzzSentryOptions+Private.h>
+#import <BuzzSentryOptions.h>
 #import <SentryUIEventTracker.h>
 
 #if SENTRY_HAS_UIKIT
@@ -17,7 +17,7 @@ SentryUIEventTrackingIntegration ()
 
 @implementation SentryUIEventTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
     if (![super installWithOptions:options]) {
         return NO;

@@ -1,15 +1,15 @@
-#import "PrivateSentrySDKOnly.h"
-#import "SentryClient.h"
+#import "PrivateBuzzSentrySDKOnly.h"
+#import "BuzzSentryClient.h"
 #import "SentryDebugImageProvider.h"
 #import "SentryHub+Private.h"
 #import "SentryInstallation.h"
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 #import "SentrySDK+Private.h"
 #import "SentrySerialization.h"
 #import <SentryDependencyContainer.h>
 #import <SentryFramesTracker.h>
 
-@implementation PrivateSentrySDKOnly
+@implementation PrivateBuzzSentrySDKOnly
 
 static SentryOnAppStartMeasurementAvailable _onAppStartMeasurementAvailable;
 static BOOL _appStartMeasurementHybridSDKMode = NO;
@@ -47,13 +47,13 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
     return [SentryInstallation id];
 }
 
-+ (SentryOptions *)options
++ (BuzzSentryOptions *)options
 {
-    SentryOptions *options = [[SentrySDK currentHub] client].options;
+    BuzzSentryOptions *options = [[SentrySDK currentHub] client].options;
     if (options != nil) {
         return options;
     }
-    return [[SentryOptions alloc] init];
+    return [[BuzzSentryOptions alloc] init];
 }
 
 + (SentryOnAppStartMeasurementAvailable)onAppStartMeasurementAvailable
@@ -79,23 +79,23 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (void)setSdkName:(NSString *)sdkName andVersionString:(NSString *)versionString
 {
-    SentryMeta.sdkName = sdkName;
-    SentryMeta.versionString = versionString;
+    BuzzSentryMeta.sdkName = sdkName;
+    BuzzSentryMeta.versionString = versionString;
 }
 
 + (void)setSdkName:(NSString *)sdkName
 {
-    SentryMeta.sdkName = sdkName;
+    BuzzSentryMeta.sdkName = sdkName;
 }
 
 + (NSString *)getSdkName
 {
-    return SentryMeta.sdkName;
+    return BuzzSentryMeta.sdkName;
 }
 
 + (NSString *)getSdkVersionString
 {
-    return SentryMeta.versionString;
+    return BuzzSentryMeta.versionString;
 }
 
 #if SENTRY_HAS_UIKIT

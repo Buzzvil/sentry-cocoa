@@ -1,4 +1,4 @@
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,10 +27,10 @@ typedef NS_OPTIONS(NSUInteger, SentryIntegrationOption) {
 @interface SentryBaseIntegration : NSObject
 
 - (NSString *)integrationName;
-- (BOOL)installWithOptions:(SentryOptions *)options;
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options;
 - (void)logWithOptionName:(NSString *)optionName;
 - (void)logWithReason:(NSString *)reason;
-- (BOOL)shouldBeEnabledWithOptions:(SentryOptions *)options;
+- (BOOL)shouldBeEnabledWithOptions:(BuzzSentryOptions *)options;
 - (SentryIntegrationOption)integrationOptions;
 
 @end

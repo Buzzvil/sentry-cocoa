@@ -13,7 +13,7 @@ class SentryUIViewControllerSanitizerTests: XCTestCase {
         let object = Options()
         let name = sanitize(object)
         
-        XCTAssertEqual(name, "SentryOptions")
+        XCTAssertEqual(name, "BuzzSentryOptions")
     }
     
     func testSanitizeViewControllerNameWithStrings() {

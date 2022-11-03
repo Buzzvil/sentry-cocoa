@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         
         if #available(iOS 10.0, *) {
             Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                self.framesLabel?.text = "Frames Total:\(PrivateSentrySDKOnly.currentScreenFrames.total) Slow:\(PrivateSentrySDKOnly.currentScreenFrames.slow) Frozen:\(PrivateSentrySDKOnly.currentScreenFrames.frozen)"
+                self.framesLabel?.text = "Frames Total:\(PrivateBuzzSentrySDKOnly.currentScreenFrames.total) Slow:\(PrivateBuzzSentrySDKOnly.currentScreenFrames.slow) Frozen:\(PrivateBuzzSentrySDKOnly.currentScreenFrames.frozen)"
             }
         }
 

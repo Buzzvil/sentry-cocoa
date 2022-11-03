@@ -1,14 +1,14 @@
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentryANRTracker.h"
 #import "SentryDsn.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
-#import "SentryMeta.h"
+#import "BuzzSentryMeta.h"
 #import "SentrySDK.h"
 #import "SentrySdkInfo.h"
 
 @interface
-SentryOptions ()
+BuzzSentryOptions ()
 
 @property (nullable, nonatomic, copy, readonly) NSNumber *defaultSampleRate;
 @property (nullable, nonatomic, copy, readonly) NSNumber *defaultTracesSampleRate;
@@ -18,7 +18,7 @@ SentryOptions ()
 #endif
 @end
 
-@implementation SentryOptions
+@implementation BuzzSentryOptions
 
 - (void)setMeasurement:(SentryMeasurementValue *)measurement
 {
@@ -49,7 +49,7 @@ SentryOptions ()
         self.debug = NO;
         self.maxBreadcrumbs = defaultMaxBreadcrumbs;
         self.maxCacheItems = 30;
-        _integrations = SentryOptions.defaultIntegrations;
+        _integrations = BuzzSentryOptions.defaultIntegrations;
         _defaultSampleRate = @1;
         self.sampleRate = _defaultSampleRate;
         self.enableAutoSessionTracking = YES;
@@ -151,8 +151,8 @@ SentryOptions ()
 - (void)setIntegrations:(NSArray<NSString *> *)integrations
 {
     SENTRY_LOG_WARN(
-        @"Setting `SentryOptions.integrations` is deprecated. Integrations should be enabled or "
-        @"disabled using their respective `SentryOptions.enable*` property.");
+        @"Setting `BuzzSentryOptions.integrations` is deprecated. Integrations should be enabled or "
+        @"disabled using their respective `BuzzSentryOptions.enable*` property.");
     _integrations = integrations;
 }
 
@@ -169,7 +169,7 @@ SentryOptions ()
 }
 
 /**
- * Populates all `SentryOptions` values from `options` dict using fallbacks/defaults if needed.
+ * Populates all `BuzzSentryOptions` values from `options` dict using fallbacks/defaults if needed.
  */
 - (BOOL)validateOptions:(NSDictionary<NSString *, id> *)options
        didFailWithError:(NSError *_Nullable *_Nullable)error
@@ -355,13 +355,13 @@ SentryOptions ()
     // SentrySdkInfo already expects a dictionary with {"sdk": {"name": ..., "value": ...}}
     // so we're passing the whole options object.
     // Note: we should remove this code once the hybrid SDKs move over to the new
-    // PrivateSentrySDKOnly setter functions.
+    // PrivateBuzzSentrySDKOnly setter functions.
     if ([options[@"sdk"] isKindOfClass:[NSDictionary class]]) {
-        SentrySdkInfo *defaults = [[SentrySdkInfo alloc] initWithName:SentryMeta.sdkName
-                                                           andVersion:SentryMeta.versionString];
+        SentrySdkInfo *defaults = [[SentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
+                                                           andVersion:BuzzSentryMeta.versionString];
         SentrySdkInfo *sdkInfo = [[SentrySdkInfo alloc] initWithDict:options orDefaults:defaults];
-        SentryMeta.versionString = sdkInfo.version;
-        SentryMeta.sdkName = sdkInfo.name;
+        BuzzSentryMeta.versionString = sdkInfo.version;
+        BuzzSentryMeta.sdkName = sdkInfo.name;
     }
 
     if (nil != error && nil != *error) {
@@ -373,8 +373,8 @@ SentryOptions ()
 
 - (SentrySdkInfo *)sdkInfo
 {
-    return [[SentrySdkInfo alloc] initWithName:SentryMeta.sdkName
-                                    andVersion:SentryMeta.versionString];
+    return [[SentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
+                                    andVersion:BuzzSentryMeta.versionString];
 }
 
 - (void)setBool:(id)value block:(void (^)(BOOL))block

@@ -1,23 +1,23 @@
 #import "SentryDefines.h"
 
-@class SentryOptions, SentrySession, SentryEvent, SentryEnvelope, SentryScope, SentryFileManager,
+@class BuzzSentryOptions, SentrySession, SentryEvent, SentryEnvelope, SentryScope, SentryFileManager,
     SentryId, SentryUserFeedback, SentryTransaction;
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(Client)
-@interface SentryClient : NSObject
+@interface BuzzSentryClient : NSObject
 SENTRY_NO_INIT
 
-@property (nonatomic, strong) SentryOptions *options;
+@property (nonatomic, strong) BuzzSentryOptions *options;
 
 /**
- * Initializes a SentryClient. Pass in an dictionary of options.
+ * Initializes a BuzzSentryClient. Pass in an dictionary of options.
  *
  * @param options Options dictionary
- * @return SentryClient
+ * @return BuzzSentryClient
  */
-- (_Nullable instancetype)initWithOptions:(SentryOptions *)options;
+- (_Nullable instancetype)initWithOptions:(BuzzSentryOptions *)options;
 
 /**
  * Captures a manually created event and sends it to Sentry.

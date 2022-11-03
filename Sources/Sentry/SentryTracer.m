@@ -1,8 +1,8 @@
 #import "SentryTracer.h"
 #import "NSDictionary+SentrySanitize.h"
-#import "PrivateSentrySDKOnly.h"
+#import "PrivateBuzzSentrySDKOnly.h"
 #import "SentryAppStartMeasurement.h"
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryCurrentDate.h"
 #import "SentryFramesTracker.h"
 #import "SentryHub+Private.h"
@@ -560,7 +560,7 @@ static BOOL appStartMeasurementRead;
     }
 
     // Hybrid SDKs send the app start measurement themselves.
-    if (PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode) {
+    if (PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode) {
         return nil;
     }
 

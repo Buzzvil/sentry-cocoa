@@ -1,6 +1,6 @@
 #import "SentryBreadcrumbTracker.h"
 #import "SentryBreadcrumb.h"
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryDefines.h"
 #import "SentryHub.h"
 #import "SentryLog.h"

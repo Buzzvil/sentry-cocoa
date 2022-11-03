@@ -1,6 +1,6 @@
 #import "SentryCrashReportSink.h"
 #import "SentryAttachment.h"
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryCrash.h"
 #include "SentryCrashMonitor_AppState.h"
 #import "SentryCrashReportConverter.h"

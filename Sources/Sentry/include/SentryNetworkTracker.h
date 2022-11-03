@@ -2,7 +2,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryOptions;
+@class BuzzSentryOptions;
 
 static NSString *const SENTRY_NETWORK_REQUEST_OPERATION = @"http.client";
 static NSString *const SENTRY_NETWORK_REQUEST_TRACKER_SPAN = @"SENTRY_NETWORK_REQUEST_TRACKER_SPAN";

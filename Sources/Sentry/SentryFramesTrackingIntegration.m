@@ -1,5 +1,5 @@
 #import "SentryFramesTrackingIntegration.h"
-#import "PrivateSentrySDKOnly.h"
+#import "PrivateBuzzSentrySDKOnly.h"
 #import "SentryFramesTracker.h"
 #import "SentryLog.h"
 
@@ -16,10 +16,10 @@ SentryFramesTrackingIntegration ()
 
 @implementation SentryFramesTrackingIntegration
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
 #if SENTRY_HAS_UIKIT
-    if (!PrivateSentrySDKOnly.framesTrackingMeasurementHybridSDKMode
+    if (!PrivateBuzzSentrySDKOnly.framesTrackingMeasurementHybridSDKMode
         && ![super installWithOptions:options]) {
         return NO;
     }

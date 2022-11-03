@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 SentryHub (TestInit)
 
-- (instancetype)initWithClient:(SentryClient *_Nullable)client
+- (instancetype)initWithClient:(BuzzSentryClient *_Nullable)client
                       andScope:(SentryScope *_Nullable)scope
                andCrashWrapper:(SentryCrashWrapper *)crashAdapter
         andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider;

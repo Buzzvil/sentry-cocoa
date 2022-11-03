@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 
 @class SentryEnvelope, SentryDebugMeta, SentryAppStartMeasurement, SentryScreenFrames,
-    SentryOptions;
+    BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +20,7 @@ typedef void (^SentryOnAppStartMeasurementAvailable)(
  * purpose so users don't see it in code completion when typing Sentry. We also add only at the end
  * to make it more obvious you shouldn't use it.
  */
-@interface PrivateSentrySDKOnly : NSObject
+@interface PrivateBuzzSentrySDKOnly : NSObject
 
 /**
  * For storing an envelope synchronously to disk.
@@ -67,7 +67,7 @@ typedef void (^SentryOnAppStartMeasurementAvailable)(
 
 @property (class, nonatomic, readonly, copy) NSString *installationID;
 
-@property (class, nonatomic, readonly, copy) SentryOptions *options;
+@property (class, nonatomic, readonly, copy) BuzzSentryOptions *options;
 
 /**
  * If enabled, the SDK won't send the app start measurement with the first transaction. Instead, if

@@ -537,7 +537,7 @@ class SentryTracerTests: XCTestCase {
     func testAppStartMeasurementHybridSDKModeEnabled_NotPutOnTransaction() {
         let appStartMeasurement = fixture.getAppStartMeasurement(type: .warm)
         SentrySDK.setAppStartMeasurement(appStartMeasurement)
-        PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = true
+        PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = true
         
         let sut = fixture.getSut()
         sut.finish()

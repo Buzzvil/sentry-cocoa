@@ -6,7 +6,7 @@
 #import "SentryTransport.h"
 #import <Foundation/Foundation.h>
 
-@class SentryOptions, SentryDispatchQueueWrapper, SentryNSURLRequestBuilder, SentryReachability;
+@class BuzzSentryOptions, SentryDispatchQueueWrapper, SentryNSURLRequestBuilder, SentryReachability;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
     : NSObject <SentryTransport, SentryEnvelopeRateLimitDelegate, SentryFileManagerDelegate>
 SENTRY_NO_INIT
 
-- (id)initWithOptions:(SentryOptions *)options
+- (id)initWithOptions:(BuzzSentryOptions *)options
              fileManager:(SentryFileManager *)fileManager
           requestManager:(id<SentryRequestManager>)requestManager
           requestBuilder:(SentryNSURLRequestBuilder *)requestBuilder

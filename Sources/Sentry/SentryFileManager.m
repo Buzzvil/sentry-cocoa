@@ -10,7 +10,7 @@
 #import "SentryFileContents.h"
 #import "SentryLog.h"
 #import "SentryMigrateSessionInit.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentrySerialization.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -37,7 +37,7 @@ SentryFileManager ()
 
 @implementation SentryFileManager
 
-- (nullable instancetype)initWithOptions:(SentryOptions *)options
+- (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                   andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                                    error:(NSError **)error
 {
@@ -47,7 +47,7 @@ SentryFileManager ()
                            error:error];
 }
 
-- (nullable instancetype)initWithOptions:(SentryOptions *)options
+- (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
                   andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
                     dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
                                    error:(NSError **)error

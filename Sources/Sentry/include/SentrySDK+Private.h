@@ -24,7 +24,7 @@ SentrySDK (Private)
 
 + (SentryHub *)currentHub;
 
-@property (nonatomic, nullable, readonly, class) SentryOptions *options;
+@property (nonatomic, nullable, readonly, class) BuzzSentryOptions *options;
 
 /**
  * Needed by hybrid SDKs as react-native to synchronously store an envelope to disk.

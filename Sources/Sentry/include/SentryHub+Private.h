@@ -12,7 +12,7 @@ SentryHub (Private)
     NSMutableArray<NSObject<SentryIntegrationProtocol> *> *installedIntegrations;
 @property (nonatomic, strong) NSMutableArray<NSString *> *installedIntegrationNames;
 
-- (SentryClient *_Nullable)client;
+- (BuzzSentryClient *_Nullable)client;
 
 - (void)captureCrashEvent:(SentryEvent *)event;
 

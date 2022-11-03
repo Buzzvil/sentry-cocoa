@@ -1,12 +1,12 @@
 #import "SentryDefines.h"
 #import <SentryAppState.h>
 #import <SentryAppStateManager.h>
-#import <SentryClient+Private.h>
+#import <BuzzSentryClient+Private.h>
 #import <SentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
 #import <SentryDispatchQueueWrapper.h>
 #import <SentryHub.h>
-#import <SentryOptions+Private.h>
+#import <BuzzSentryOptions+Private.h>
 #import <SentryOutOfMemoryLogic.h>
 #import <SentryOutOfMemoryTracker.h>
 #import <SentryOutOfMemoryTrackingIntegration.h>
@@ -35,7 +35,7 @@ SentryOutOfMemoryTrackingIntegration ()
     return self;
 }
 
-- (BOOL)installWithOptions:(SentryOptions *)options
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
     if (self.testConfigurationFilePath) {
         return NO;

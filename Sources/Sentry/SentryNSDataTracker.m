@@ -1,6 +1,6 @@
 #import "SentryNSDataTracker.h"
 #import "SentryByteCountFormatter.h"
-#import "SentryClient+Private.h"
+#import "BuzzSentryClient+Private.h"
 #import "SentryFileManager.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"

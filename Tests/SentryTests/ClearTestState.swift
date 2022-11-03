@@ -7,8 +7,8 @@ func clearTestState() {
     SentrySDK.crashedLastRunCalled = false
     SentrySDK.startInvocations = 0
     
-    PrivateSentrySDKOnly.onAppStartMeasurementAvailable = nil
-    PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = false
+    PrivateBuzzSentrySDKOnly.onAppStartMeasurementAvailable = nil
+    PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = false
     SentrySDK.setAppStartMeasurement(nil)
     CurrentDate.setCurrentDateProvider(nil)
     SentryNetworkTracker.sharedInstance.disable()

@@ -6,11 +6,11 @@ FOUNDATION_EXPORT double SentryVersionNumber;
 //! Project version string for Sentry.
 FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 
-#import "PrivateSentrySDKOnly.h"
+#import "PrivateBuzzSentrySDKOnly.h"
 #import "SentryAppStartMeasurement.h"
 #import "SentryAttachment.h"
 #import "SentryBreadcrumb.h"
-#import "SentryClient.h"
+#import "BuzzSentryClient.h"
 #import "SentryCrashExceptionApplication.h"
 #import "SentryDebugImageProvider.h"
 #import "SentryDebugMeta.h"
@@ -30,7 +30,7 @@ FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 #import "SentryMechanismMeta.h"
 #import "SentryMessage.h"
 #import "SentryNSError.h"
-#import "SentryOptions.h"
+#import "BuzzSentryOptions.h"
 #import "SentrySDK.h"
 #import "SentrySampleDecision.h"
 #import "SentrySamplingContext.h"
