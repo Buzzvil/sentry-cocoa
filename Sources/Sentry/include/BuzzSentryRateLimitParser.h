@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
  applies to all categories. scope: This can be ignored by SDKs.
  */
 NS_SWIFT_NAME(RateLimitParser)
-@interface SentryRateLimitParser : NSObject
+@interface BuzzSentryRateLimitParser : NSObject
 
 - (NSDictionary<NSNumber *, NSDate *> *)parse:(NSString *)header;
 

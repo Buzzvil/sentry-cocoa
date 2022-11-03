@@ -1,7 +1,7 @@
 @testable import Sentry
 import XCTest
 
-class SentryRetryAfterHeaderParserTests: XCTestCase {
+class BuzzSentryRetryAfterHeaderParserTests: XCTestCase {
 
     private var currentDateProvider: TestCurrentDateProvider!
     private var sut: RetryAfterHeaderParser!

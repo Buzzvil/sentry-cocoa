@@ -1,8 +1,8 @@
-#import "SentryRateLimits.h"
+#import "BuzzSentryRateLimits.h"
 #import <Foundation/Foundation.h>
 
-@class SentryRetryAfterHeaderParser;
-@class SentryRateLimitParser;
+@class BuzzSentryRetryAfterHeaderParser;
+@class BuzzSentryRateLimitParser;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
  "X-Sentry-Rate-Limits" header. This class is thread safe.
 */
 NS_SWIFT_NAME(DefaultRateLimits)
-@interface SentryDefaultRateLimits : NSObject <SentryRateLimits>
+@interface BuzzSentryDefaultRateLimits : NSObject <BuzzSentryRateLimits>
 
 - (instancetype)initWithRetryAfterHeaderParser:
-                    (SentryRetryAfterHeaderParser *)retryAfterHeaderParser
-                            andRateLimitParser:(SentryRateLimitParser *)rateLimitParser;
+                    (BuzzSentryRetryAfterHeaderParser *)retryAfterHeaderParser
+                            andRateLimitParser:(BuzzSentryRateLimitParser *)rateLimitParser;
 
 @end
 

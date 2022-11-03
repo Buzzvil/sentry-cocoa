@@ -29,7 +29,7 @@ SentryHttpTransport ()
 @property (nonatomic, strong) id<SentryRequestManager> requestManager;
 @property (nonatomic, strong) SentryNSURLRequestBuilder *requestBuilder;
 @property (nonatomic, strong) BuzzSentryOptions *options;
-@property (nonatomic, strong) id<SentryRateLimits> rateLimits;
+@property (nonatomic, strong) id<BuzzSentryRateLimits> rateLimits;
 @property (nonatomic, strong) BuzzSentryEnvelopeRateLimit *envelopeRateLimit;
 @property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) dispatch_group_t dispatchGroup;
@@ -60,7 +60,7 @@ SentryHttpTransport ()
              fileManager:(SentryFileManager *)fileManager
           requestManager:(id<SentryRequestManager>)requestManager
           requestBuilder:(SentryNSURLRequestBuilder *)requestBuilder
-              rateLimits:(id<SentryRateLimits>)rateLimits
+              rateLimits:(id<BuzzSentryRateLimits>)rateLimits
        envelopeRateLimit:(BuzzSentryEnvelopeRateLimit *)envelopeRateLimit
     dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
             reachability:(SentryReachability *)reachability

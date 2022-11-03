@@ -1,5 +1,5 @@
 #import "SentryTransportFactory.h"
-#import "SentryDefaultRateLimits.h"
+#import "BuzzSentryDefaultRateLimits.h"
 #import "SentryDispatchQueueWrapper.h"
 #import "BuzzSentryEnvelopeRateLimit.h"
 #import "SentryHttpDateParser.h"
@@ -7,10 +7,10 @@
 #import "SentryNSURLRequestBuilder.h"
 #import "BuzzSentryOptions.h"
 #import "SentryQueueableRequestManager.h"
-#import "SentryRateLimitParser.h"
-#import "SentryRateLimits.h"
+#import "BuzzSentryRateLimitParser.h"
+#import "BuzzSentryRateLimits.h"
 #import "SentryReachability.h"
-#import "SentryRetryAfterHeaderParser.h"
+#import "BuzzSentryRetryAfterHeaderParser.h"
 #import "SentryTransport.h"
 #import <Foundation/Foundation.h>
 
@@ -35,11 +35,11 @@ SentryTransportFactory ()
         [[SentryQueueableRequestManager alloc] initWithSession:session];
 
     SentryHttpDateParser *httpDateParser = [[SentryHttpDateParser alloc] init];
-    SentryRetryAfterHeaderParser *retryAfterHeaderParser =
-        [[SentryRetryAfterHeaderParser alloc] initWithHttpDateParser:httpDateParser];
-    SentryRateLimitParser *rateLimitParser = [[SentryRateLimitParser alloc] init];
-    id<SentryRateLimits> rateLimits =
-        [[SentryDefaultRateLimits alloc] initWithRetryAfterHeaderParser:retryAfterHeaderParser
+    BuzzSentryRetryAfterHeaderParser *retryAfterHeaderParser =
+        [[BuzzSentryRetryAfterHeaderParser alloc] initWithHttpDateParser:httpDateParser];
+    BuzzSentryRateLimitParser *rateLimitParser = [[BuzzSentryRateLimitParser alloc] init];
+    id<BuzzSentryRateLimits> rateLimits =
+        [[BuzzSentryDefaultRateLimits alloc] initWithRetryAfterHeaderParser:retryAfterHeaderParser
                                                      andRateLimitParser:rateLimitParser];
 
     BuzzSentryEnvelopeRateLimit *envelopeRateLimit =

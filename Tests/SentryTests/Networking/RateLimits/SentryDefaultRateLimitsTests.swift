@@ -1,7 +1,7 @@
 @testable import Sentry
 import XCTest
 
-class SentryDefaultRateLimitsTests: XCTestCase {
+class BuzzSentryDefaultRateLimitsTests: XCTestCase {
     
     private let defaultRetryAfterInSeconds = 60.0
 

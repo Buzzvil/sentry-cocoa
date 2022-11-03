@@ -1,4 +1,4 @@
-#import "SentryRateLimits.h"
+#import "BuzzSentryRateLimits.h"
 #import <Foundation/Foundation.h>
 
 @protocol BuzzSentryEnvelopeRateLimitDelegate;
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_SWIFT_NAME(EnvelopeRateLimit)
 @interface BuzzSentryEnvelopeRateLimit : NSObject
 
-- (instancetype)initWithRateLimits:(id<SentryRateLimits>)sentryRateLimits;
+- (instancetype)initWithRateLimits:(id<BuzzSentryRateLimits>)sentryRateLimits;
 
 /**
  * Removes SentryEnvelopItems for which a rate limit is active.

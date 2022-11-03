@@ -1,4 +1,4 @@
-#import "SentryRateLimitParser.h"
+#import "BuzzSentryRateLimitParser.h"
 #import "SentryCurrentDate.h"
 #import "SentryDataCategoryMapper.h"
 #import "SentryDateUtil.h"
@@ -7,11 +7,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryRateLimitParser ()
+BuzzSentryRateLimitParser ()
 
 @end
 
-@implementation SentryRateLimitParser
+@implementation BuzzSentryRateLimitParser
 
 - (NSDictionary<NSNumber *, NSDate *> *)parse:(NSString *)header
 {

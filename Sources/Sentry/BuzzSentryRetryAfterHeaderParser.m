@@ -1,4 +1,4 @@
-#import "SentryRetryAfterHeaderParser.h"
+#import "BuzzSentryRetryAfterHeaderParser.h"
 #import "SentryCurrentDate.h"
 #import "SentryHttpDateParser.h"
 #import <Foundation/Foundation.h>
@@ -6,13 +6,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryRetryAfterHeaderParser ()
+BuzzSentryRetryAfterHeaderParser ()
 
 @property (nonatomic, strong) SentryHttpDateParser *httpDateParser;
 
 @end
 
-@implementation SentryRetryAfterHeaderParser
+@implementation BuzzSentryRetryAfterHeaderParser
 
 - (instancetype)initWithHttpDateParser:(SentryHttpDateParser *)httpDateParser
 {

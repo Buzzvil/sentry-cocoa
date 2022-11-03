@@ -1,15 +1,15 @@
-#import "SentryConcurrentRateLimitsDictionary.h"
+#import "BuzzSentryConcurrentRateLimitsDictionary.h"
 #import <Foundation/Foundation.h>
 
 @interface
-SentryConcurrentRateLimitsDictionary ()
+BuzzSentryConcurrentRateLimitsDictionary ()
 
 /* Key is the type and value is valid until date */
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSDate *> *rateLimits;
 
 @end
 
-@implementation SentryConcurrentRateLimitsDictionary
+@implementation BuzzSentryConcurrentRateLimitsDictionary
 
 - (instancetype)init
 {

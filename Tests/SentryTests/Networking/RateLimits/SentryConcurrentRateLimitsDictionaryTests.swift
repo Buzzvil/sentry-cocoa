@@ -1,14 +1,14 @@
 import XCTest
 
-class SentryConcurrentRateLimitsDictionaryTests: XCTestCase {
+class BuzzSentryConcurrentRateLimitsDictionaryTests: XCTestCase {
     
     private var currentDateProvider: TestCurrentDateProvider!
-    private var sut: SentryConcurrentRateLimitsDictionary!
+    private var sut: BuzzSentryConcurrentRateLimitsDictionary!
     
     override func setUp() {
         super.setUp()
         currentDateProvider = TestCurrentDateProvider()
-        sut = SentryConcurrentRateLimitsDictionary()
+        sut = BuzzSentryConcurrentRateLimitsDictionary()
     }
     
     func testTwoRateLimit() {

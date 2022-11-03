@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
  until the rate limit has expired.
 */
 NS_SWIFT_NAME(RateLimits)
-@protocol SentryRateLimits <NSObject>
+@protocol BuzzSentryRateLimits <NSObject>
 
 /**
 Check if a data category has reached a rate limit.

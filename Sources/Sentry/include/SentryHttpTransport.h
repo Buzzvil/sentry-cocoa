@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 #import "BuzzSentryEnvelopeRateLimit.h"
 #import "SentryFileManager.h"
-#import "SentryRateLimits.h"
+#import "BuzzSentryRateLimits.h"
 #import "SentryRequestManager.h"
 #import "SentryTransport.h"
 #import <Foundation/Foundation.h>
@@ -18,7 +18,7 @@ SENTRY_NO_INIT
              fileManager:(SentryFileManager *)fileManager
           requestManager:(id<SentryRequestManager>)requestManager
           requestBuilder:(SentryNSURLRequestBuilder *)requestBuilder
-              rateLimits:(id<SentryRateLimits>)rateLimits
+              rateLimits:(id<BuzzSentryRateLimits>)rateLimits
        envelopeRateLimit:(BuzzSentryEnvelopeRateLimit *)envelopeRateLimit
     dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
             reachability:(SentryReachability *)reachability;

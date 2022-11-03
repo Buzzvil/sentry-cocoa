@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
  https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.37
 */
 NS_SWIFT_NAME(RetryAfterHeaderParser)
-@interface SentryRetryAfterHeaderParser : NSObject
+@interface BuzzSentryRetryAfterHeaderParser : NSObject
 
 - (instancetype)initWithHttpDateParser:(SentryHttpDateParser *)httpDateParser;
 

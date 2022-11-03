@@ -1,32 +1,32 @@
-#import "SentryDefaultRateLimits.h"
-#import "SentryConcurrentRateLimitsDictionary.h"
+#import "BuzzSentryDefaultRateLimits.h"
+#import "BuzzSentryConcurrentRateLimitsDictionary.h"
 #import "SentryCurrentDate.h"
 #import "SentryDataCategoryMapper.h"
 #import "SentryDateUtil.h"
 #import "SentryLog.h"
-#import "SentryRateLimitParser.h"
-#import "SentryRetryAfterHeaderParser.h"
+#import "BuzzSentryRateLimitParser.h"
+#import "BuzzSentryRetryAfterHeaderParser.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryDefaultRateLimits ()
+BuzzSentryDefaultRateLimits ()
 
-@property (nonatomic, strong) SentryConcurrentRateLimitsDictionary *rateLimits;
-@property (nonatomic, strong) SentryRetryAfterHeaderParser *retryAfterHeaderParser;
-@property (nonatomic, strong) SentryRateLimitParser *rateLimitParser;
+@property (nonatomic, strong) BuzzSentryConcurrentRateLimitsDictionary *rateLimits;
+@property (nonatomic, strong) BuzzSentryRetryAfterHeaderParser *retryAfterHeaderParser;
+@property (nonatomic, strong) BuzzSentryRateLimitParser *rateLimitParser;
 
 @end
 
-@implementation SentryDefaultRateLimits
+@implementation BuzzSentryDefaultRateLimits
 
 - (instancetype)initWithRetryAfterHeaderParser:
-                    (SentryRetryAfterHeaderParser *)retryAfterHeaderParser
-                            andRateLimitParser:(SentryRateLimitParser *)rateLimitParser
+                    (BuzzSentryRetryAfterHeaderParser *)retryAfterHeaderParser
+                            andRateLimitParser:(BuzzSentryRateLimitParser *)rateLimitParser
 {
     if (self = [super init]) {
-        self.rateLimits = [[SentryConcurrentRateLimitsDictionary alloc] init];
+        self.rateLimits = [[BuzzSentryConcurrentRateLimitsDictionary alloc] init];
         self.retryAfterHeaderParser = retryAfterHeaderParser;
         self.rateLimitParser = rateLimitParser;
     }
