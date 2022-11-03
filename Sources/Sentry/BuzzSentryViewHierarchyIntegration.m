@@ -1,11 +1,11 @@
-#import "SentryViewHierarchyIntegration.h"
+#import "BuzzSentryViewHierarchyIntegration.h"
 #import "SentryAttachment.h"
 #import "SentryCrashC.h"
 #import "SentryDependencyContainer.h"
 #import "SentryEvent+Private.h"
 #import "SentryHub+Private.h"
 #import "SentrySDK+Private.h"
-#import "SentryViewHierarchy.h"
+#import "BuzzSentryViewHierarchy.h"
 
 #if SENTRY_HAS_UIKIT
 
@@ -16,7 +16,7 @@ saveViewHierarchy(const char *path)
     [SentryDependencyContainer.sharedInstance.viewHierarchy saveViewHierarchy:reportPath];
 }
 
-@implementation SentryViewHierarchyIntegration
+@implementation BuzzSentryViewHierarchyIntegration
 
 - (BOOL)installWithOptions:(nonnull BuzzSentryOptions *)options
 {

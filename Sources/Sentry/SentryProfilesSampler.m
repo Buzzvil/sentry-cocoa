@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
     BuzzSentryOptions *_options;
 }
 
-- (instancetype)initWithOptions:(BuzzSentryOptions *)options random:(id<SentryRandom>)random
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options random:(id<BuzzSentryRandom>)random
 {
     if (self = [super init]) {
         _options = options;

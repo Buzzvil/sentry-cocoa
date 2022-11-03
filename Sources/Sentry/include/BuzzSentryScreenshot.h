@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryScreenshot : NSObject
+@interface BuzzSentryScreenshot : NSObject
 
 /**
  * Get a screenshot of every open window in the app.

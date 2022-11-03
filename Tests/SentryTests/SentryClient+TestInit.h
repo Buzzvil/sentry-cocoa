@@ -1,5 +1,5 @@
 #import "SentryPermissionsObserver.h"
-#import "SentryRandom.h"
+#import "BuzzSentryRandom.h"
 #import "SentryTransport.h"
 #import <Sentry/Sentry.h>
 
@@ -18,7 +18,7 @@ BuzzSentryClient (TestInit)
                transportAdapter:(SentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
                 threadInspector:(SentryThreadInspector *)threadInspector
-                         random:(id<SentryRandom>)random
+                         random:(id<BuzzSentryRandom>)random
                    crashWrapper:(SentryCrashWrapper *)crashWrapper
             permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
                   deviceWrapper:(SentryUIDeviceWrapper *)deviceWrapper

@@ -2,19 +2,19 @@ import Sentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryScreenshotIntegrationTests: XCTestCase {
+class BuzzSentryScreenshotIntegrationTests: XCTestCase {
     
     private class Fixture {
-        let screenshot: TestSentryScreenshot
+        let screenshot: TestBuzzSentryScreenshot
         
         init() {
-            let testScreenShot = TestSentryScreenshot()
+            let testScreenShot = TestBuzzSentryScreenshot()
             testScreenShot.result = [Data(count: 10)]
             screenshot = testScreenShot
         }
         
-        func getSut() -> SentryScreenshotIntegration {
-            let result = SentryScreenshotIntegration()
+        func getSut() -> BuzzSentryScreenshotIntegration {
+            let result = BuzzSentryScreenshotIntegration()
             return result
         }
     }

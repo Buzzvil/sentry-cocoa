@@ -29,8 +29,8 @@ BuzzSentryOptions ()
     return @[
         @"SentryCrashIntegration",
 #if SENTRY_HAS_UIKIT
-        @"SentryANRTrackingIntegration", @"SentryScreenshotIntegration",
-        @"SentryUIEventTrackingIntegration", @"SentryViewHierarchyIntegration",
+        @"SentryANRTrackingIntegration", @"BuzzSentryScreenshotIntegration",
+        @"SentryUIEventTrackingIntegration", @"BuzzSentryViewHierarchyIntegration",
 #endif
         @"SentryFramesTrackingIntegration", @"SentryAutoBreadcrumbTrackingIntegration",
         @"SentryAutoSessionTrackingIntegration", @"SentryAppStartTrackingIntegration",

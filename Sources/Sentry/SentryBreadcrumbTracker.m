@@ -8,7 +8,7 @@
 #import "SentryScope.h"
 #import "SentrySwizzle.h"
 #import "SentrySwizzleWrapper.h"
-#import "SentryUIViewControllerSanitizer.h"
+#import "BuzzSentryUIViewControllerSanitizer.h"
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>
@@ -234,7 +234,7 @@ SentryBreadcrumbTracker ()
 {
     NSMutableDictionary *info = @{}.mutableCopy;
 
-    info[@"screen"] = [SentryUIViewControllerSanitizer
+    info[@"screen"] = [BuzzSentryUIViewControllerSanitizer
         sanitizeViewControllerName:[NSString stringWithFormat:@"%@", controller]];
 
     if ([controller.navigationItem.title length] != 0) {
@@ -246,12 +246,12 @@ SentryBreadcrumbTracker ()
     info[@"beingPresented"] = controller.beingPresented ? @"true" : @"false";
 
     if (controller.presentingViewController != nil) {
-        info[@"presentingViewController"] = [SentryUIViewControllerSanitizer
+        info[@"presentingViewController"] = [BuzzSentryUIViewControllerSanitizer
             sanitizeViewControllerName:controller.presentingViewController];
     }
 
     if (controller.parentViewController != nil) {
-        info[@"parentViewController"] = [SentryUIViewControllerSanitizer
+        info[@"parentViewController"] = [BuzzSentryUIViewControllerSanitizer
             sanitizeViewControllerName:controller.parentViewController];
     }
 

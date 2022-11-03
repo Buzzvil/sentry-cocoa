@@ -2,19 +2,19 @@
 #import "SentryCoreDataTracker.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
-#import "SentryPredicateDescriptor.h"
+#import "BuzzSentryPredicateDescriptor.h"
 #import "SentrySDK+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySpanProtocol.h"
 
 @implementation SentryCoreDataTracker {
-    SentryPredicateDescriptor *predicateDescriptor;
+    BuzzSentryPredicateDescriptor *predicateDescriptor;
 }
 
 - (instancetype)init
 {
     if (self = [super init]) {
-        predicateDescriptor = [[SentryPredicateDescriptor alloc] init];
+        predicateDescriptor = [[BuzzSentryPredicateDescriptor alloc] init];
     }
     return self;
 }

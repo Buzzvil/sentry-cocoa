@@ -59,7 +59,7 @@ BuzzSentryClient ()
 @property (nonatomic, strong) SentryFileManager *fileManager;
 @property (nonatomic, strong) SentryDebugImageProvider *debugImageProvider;
 @property (nonatomic, strong) SentryThreadInspector *threadInspector;
-@property (nonatomic, strong) id<SentryRandom> random;
+@property (nonatomic, strong) id<BuzzSentryRandom> random;
 @property (nonatomic, strong)
     NSMutableArray<id<BuzzSentryClientAttachmentProcessor>> *attachmentProcessors;
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
@@ -131,7 +131,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                transportAdapter:(SentryTransportAdapter *)transportAdapter
                     fileManager:(SentryFileManager *)fileManager
                 threadInspector:(SentryThreadInspector *)threadInspector
-                         random:(id<SentryRandom>)random
+                         random:(id<BuzzSentryRandom>)random
                    crashWrapper:(SentryCrashWrapper *)crashWrapper
             permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
                   deviceWrapper:(SentryUIDeviceWrapper *)deviceWrapper

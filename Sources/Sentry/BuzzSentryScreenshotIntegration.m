@@ -1,4 +1,4 @@
-#import "SentryScreenshotIntegration.h"
+#import "BuzzSentryScreenshotIntegration.h"
 #import "SentryAttachment.h"
 #import "SentryCrashC.h"
 #import "SentryDependencyContainer.h"
@@ -15,7 +15,7 @@ saveScreenShot(const char *path)
     [SentryDependencyContainer.sharedInstance.screenshot saveScreenShots:reportPath];
 }
 
-@implementation SentryScreenshotIntegration
+@implementation BuzzSentryScreenshotIntegration
 
 - (BOOL)installWithOptions:(nonnull BuzzSentryOptions *)options
 {

@@ -1,6 +1,6 @@
 import Foundation
 
-class TestRandom: SentryRandomProtocol {
+class TestRandom: BuzzSentryRandomProtocol {
 
     var value: Double
     

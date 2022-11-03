@@ -1,7 +1,7 @@
 import Foundation
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class TestSentryViewHierarchy: SentryViewHierarchy {
+class TestBuzzSentryViewHierarchy: BuzzSentryViewHierarchy {
 
     var result: [String] = []
 

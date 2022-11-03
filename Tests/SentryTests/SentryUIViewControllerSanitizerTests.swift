@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryUIViewControllerSanitizerTests: XCTestCase {
+class BuzzSentryUIViewControllerSanitizerTests: XCTestCase {
     
     func testSanitizeViewControllerNameWithBaseObject() {
         let object = NSObject()
@@ -32,6 +32,6 @@ class SentryUIViewControllerSanitizerTests: XCTestCase {
     }
     
     private func sanitize(_ name: Any) -> String {
-        return SentryUIViewControllerSanitizer.sanitizeViewControllerName(name)
+        return BuzzSentryUIViewControllerSanitizer.sanitizeViewControllerName(name)
     }
 }

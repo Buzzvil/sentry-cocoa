@@ -1,11 +1,11 @@
-#import "SentryScreenshot.h"
+#import "BuzzSentryScreenshot.h"
 #import "SentryDependencyContainer.h"
-#import "SentryUIApplication.h"
+#import "BuzzSentryUIApplication.h"
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>
 
-@implementation SentryScreenshot
+@implementation BuzzSentryScreenshot
 
 - (NSArray<NSData *> *)appScreenshots
 {

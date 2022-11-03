@@ -1,6 +1,6 @@
-#import "SentryRandom.h"
+#import "BuzzSentryRandom.h"
 
-@implementation SentryRandom
+@implementation BuzzSentryRandom
 
 - (instancetype)init
 {

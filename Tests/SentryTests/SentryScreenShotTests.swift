@@ -1,13 +1,13 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryScreenShotTests: XCTestCase {
+class BuzzSentryScreenshotTests: XCTestCase {
     private class Fixture {
         
-        let uiApplication = TestSentryUIApplication()
+        let uiApplication = TestBuzzSentryUIApplication()
         
-        var sut: SentryScreenshot {
-            return SentryScreenshot()
+        var sut: BuzzSentryScreenshot {
+            return BuzzSentryScreenshot()
         }
     }
     
@@ -83,7 +83,7 @@ class SentryScreenShotTests: XCTestCase {
         
     }
     
-    class TestSentryUIApplication: SentryUIApplication {
+    class TestBuzzSentryUIApplication: BuzzSentryUIApplication {
         private var _windows: [UIWindow]?
         
         override var windows: [UIWindow]? {

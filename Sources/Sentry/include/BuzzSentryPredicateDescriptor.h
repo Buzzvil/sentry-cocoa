@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This class is used for CoreData and omits variable values
  * and doesn't convert CoreData unsupported instructions.
  */
-@interface SentryPredicateDescriptor : NSObject
+@interface BuzzSentryPredicateDescriptor : NSObject
 
 - (NSString *)predicateDescription:(NSPredicate *)predicate;
 

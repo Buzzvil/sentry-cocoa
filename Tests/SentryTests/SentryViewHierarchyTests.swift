@@ -1,13 +1,13 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryViewHierarchyTests: XCTestCase {
+class BuzzSentryViewHierarchyTests: XCTestCase {
     private class Fixture {
 
-        let uiApplication = TestSentryUIApplication()
+        let uiApplication = TestBuzzSentryUIApplication()
 
-        var sut: SentryViewHierarchy {
-            return SentryViewHierarchy()
+        var sut: BuzzSentryViewHierarchy {
+            return BuzzSentryViewHierarchy()
         }
     }
 
@@ -45,7 +45,7 @@ class SentryViewHierarchyTests: XCTestCase {
         XCTAssertTrue(descriptions[0].starts(with: "<UIWindow: "))
     }
 
-    class TestSentryUIApplication: SentryUIApplication {
+    class TestBuzzSentryUIApplication: BuzzSentryUIApplication {
         private var _windows: [UIWindow]?
 
         override var windows: [UIWindow]? {

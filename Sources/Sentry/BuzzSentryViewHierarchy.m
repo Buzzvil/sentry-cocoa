@@ -1,12 +1,12 @@
-#import "SentryViewHierarchy.h"
+#import "BuzzSentryViewHierarchy.h"
 #import "SentryDependencyContainer.h"
-#import "SentryUIApplication.h"
+#import "BuzzSentryUIApplication.h"
 #import "UIView+Sentry.h"
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>
 
-@implementation SentryViewHierarchy
+@implementation BuzzSentryViewHierarchy
 
 - (NSArray<NSString *> *)fetchViewHierarchy
 {

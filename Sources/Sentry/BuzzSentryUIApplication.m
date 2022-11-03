@@ -1,8 +1,8 @@
-#import "SentryUIApplication.h"
+#import "BuzzSentryUIApplication.h"
 
 #if SENTRY_HAS_UIKIT
 
-@implementation SentryUIApplication
+@implementation BuzzSentryUIApplication
 
 - (UIApplication *)sharedApplication
 {

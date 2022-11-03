@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * An auxiliary class to extract information from UIViewController.
  */
-@interface SentryUIViewControllerSanitizer : NSObject
+@interface BuzzSentryUIViewControllerSanitizer : NSObject
 
 /**
  * Retrieve the view controller class name

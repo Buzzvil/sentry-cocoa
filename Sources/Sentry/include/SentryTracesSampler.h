@@ -1,4 +1,4 @@
-#import "SentryRandom.h"
+#import "BuzzSentryRandom.h"
 #import "SentrySampleDecision.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,14 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  A random number generator
  */
-@property (nonatomic, strong) id<SentryRandom> random;
+@property (nonatomic, strong) id<BuzzSentryRandom> random;
 
 /**
  * Init a TracesSampler with given options and random generator.
  * @param options Sentry options with sampling configuration
  * @param random A random number generator
  */
-- (instancetype)initWithOptions:(BuzzSentryOptions *)options random:(id<SentryRandom>)random;
+- (instancetype)initWithOptions:(BuzzSentryOptions *)options random:(id<BuzzSentryRandom>)random;
 
 /**
  * Init a TracesSampler with given options and a default Random generator.

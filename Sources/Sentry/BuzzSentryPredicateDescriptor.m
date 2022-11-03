@@ -1,6 +1,6 @@
-#import "SentryPredicateDescriptor.h"
+#import "BuzzSentryPredicateDescriptor.h"
 
-@implementation SentryPredicateDescriptor
+@implementation BuzzSentryPredicateDescriptor
 
 - (NSString *)predicateDescription:(NSPredicate *)predicate
 {

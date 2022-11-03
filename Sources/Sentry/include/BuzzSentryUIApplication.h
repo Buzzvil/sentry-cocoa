@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A helper tool to retrieve informations from the application instance.
  */
-@interface SentryUIApplication : NSObject
+@interface BuzzSentryUIApplication : NSObject
 
 /**
  * Application shared UIApplication instance.

@@ -2,19 +2,19 @@ import Sentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryViewHierarchyIntegrationTests: XCTestCase {
+class BuzzSentryViewHierarchyIntegrationTests: XCTestCase {
 
     private class Fixture {
-        let viewHierarchy: TestSentryViewHierarchy
+        let viewHierarchy: TestBuzzSentryViewHierarchy
 
         init() {
-            let testViewHierarchy = TestSentryViewHierarchy()
+            let testViewHierarchy = TestBuzzSentryViewHierarchy()
             testViewHierarchy.result = ["view hierarchy"]
             viewHierarchy = testViewHierarchy
         }
 
-        func getSut() -> SentryViewHierarchyIntegration {
-            let result = SentryViewHierarchyIntegration()
+        func getSut() -> BuzzSentryViewHierarchyIntegration {
+            let result = BuzzSentryViewHierarchyIntegration()
             return result
         }
     }

@@ -15,14 +15,14 @@
 
 /**
  * 'swizzleRootViewControllerFromUIApplication:' requires an object that conforms to
- * 'SentryUIApplication' to swizzle it, this way, instead of relying on UIApplication, we can test
+ * 'BuzzSentryUIApplication' to swizzle it, this way, instead of relying on UIApplication, we can test
  * with a mock class.
  *
  * This category makes UIApplication conform to
- * SentryUIApplication in order to be used by 'SentryUIViewControllerSwizzling'.
+ * BuzzSentryUIApplication in order to be used by 'SentryUIViewControllerSwizzling'.
  */
 @interface
-UIApplication (SentryUIApplication) <SentryUIApplication>
+UIApplication (BuzzSentryUIApplication) <BuzzSentryUIApplication>
 @end
 
 @interface
@@ -62,7 +62,7 @@ SentryUIViewControllerSwizzling ()
 
 - (void)start
 {
-    id<SentryUIApplication> app = [self findApp];
+    id<BuzzSentryUIApplication> app = [self findApp];
     if (app != nil) {
 
         // If an app targets, for example, iOS 13 or lower, the UIKit inits the initial/root view
@@ -95,7 +95,7 @@ SentryUIViewControllerSwizzling ()
     [self swizzleUIViewController];
 }
 
-- (id<SentryUIApplication>)findApp
+- (id<BuzzSentryUIApplication>)findApp
 {
     if (![UIApplication respondsToSelector:@selector(sharedApplication)]) {
         SENTRY_LOG_DEBUG(
@@ -113,7 +113,7 @@ SentryUIViewControllerSwizzling ()
     return app;
 }
 
-- (void)swizzleAllSubViewControllersInApp:(id<SentryUIApplication>)app
+- (void)swizzleAllSubViewControllersInApp:(id<BuzzSentryUIApplication>)app
 {
     if (app.delegate == nil) {
         SENTRY_LOG_DEBUG(@"UIViewControllerSwizzling: App delegate is nil. Skipping swizzling "
@@ -232,7 +232,7 @@ SentryUIViewControllerSwizzling ()
     }
 }
 
-- (BOOL)swizzleRootViewControllerFromUIApplication:(id<SentryUIApplication>)app
+- (BOOL)swizzleRootViewControllerFromUIApplication:(id<BuzzSentryUIApplication>)app
 {
     if (app.delegate == nil) {
         SENTRY_LOG_DEBUG(@"UIViewControllerSwizziling: App delegate is nil. Skipping "

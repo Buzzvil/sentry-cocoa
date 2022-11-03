@@ -1,7 +1,7 @@
 #import "SentryANRTracker.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDispatchQueueWrapper.h"
-#import "SentryUIApplication.h"
+#import "BuzzSentryUIApplication.h"
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <SentryCrashWrapper.h>
@@ -12,11 +12,11 @@
 #import <SentryHub.h>
 #import <SentryNSNotificationCenterWrapper.h>
 #import <SentrySDK+Private.h>
-#import <SentryScreenshot.h>
+#import <BuzzSentryScreenshot.h>
 #import <SentrySwizzleWrapper.h>
 #import <SentrySysctl.h>
 #import <SentryThreadWrapper.h>
-#import <SentryViewHierarchy.h>
+#import <BuzzSentryViewHierarchy.h>
 
 @implementation SentryDependencyContainer
 
@@ -118,12 +118,12 @@ static NSObject *sentryDependencyContainerLock;
     }
 }
 
-- (id<SentryRandom>)random
+- (id<BuzzSentryRandom>)random
 {
     if (_random == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_random == nil) {
-                _random = [[SentryRandom alloc] init];
+                _random = [[BuzzSentryRandom alloc] init];
             }
         }
     }
@@ -131,36 +131,36 @@ static NSObject *sentryDependencyContainerLock;
 }
 
 #if SENTRY_HAS_UIKIT
-- (SentryScreenshot *)screenshot
+- (BuzzSentryScreenshot *)screenshot
 {
     if (_screenshot == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_screenshot == nil) {
-                _screenshot = [[SentryScreenshot alloc] init];
+                _screenshot = [[BuzzSentryScreenshot alloc] init];
             }
         }
     }
     return _screenshot;
 }
 
-- (SentryViewHierarchy *)viewHierarchy
+- (BuzzSentryViewHierarchy *)viewHierarchy
 {
     if (_viewHierarchy == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_viewHierarchy == nil) {
-                _viewHierarchy = [[SentryViewHierarchy alloc] init];
+                _viewHierarchy = [[BuzzSentryViewHierarchy alloc] init];
             }
         }
     }
     return _viewHierarchy;
 }
 
-- (SentryUIApplication *)application
+- (BuzzSentryUIApplication *)application
 {
     if (_application == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_application == nil) {
-                _application = [[SentryUIApplication alloc] init];
+                _application = [[BuzzSentryUIApplication alloc] init];
             }
         }
     }

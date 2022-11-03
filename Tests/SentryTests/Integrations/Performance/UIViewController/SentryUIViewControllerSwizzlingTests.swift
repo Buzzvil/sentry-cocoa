@@ -93,7 +93,7 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
         XCTAssertNotNil(span)
         
         let transactionName = Dynamic(span).transactionContext.name.asString
-        let expectedTransactionName = SentryUIViewControllerSanitizer.sanitizeViewControllerName(controller)
+        let expectedTransactionName = BuzzSentryUIViewControllerSanitizer.sanitizeViewControllerName(controller)
         XCTAssertEqual(expectedTransactionName, transactionName)
     }
 
@@ -254,7 +254,7 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
     }
 }
 
-class MockApplication: NSObject, SentryUIApplicationProtocol {
+class MockApplication: NSObject, BuzzSentryUIApplicationProtocol {
     class MockApplicationDelegate: NSObject, UIApplicationDelegate {
         var window: UIWindow?
         
