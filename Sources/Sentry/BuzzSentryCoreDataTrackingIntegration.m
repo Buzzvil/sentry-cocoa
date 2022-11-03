@@ -2,7 +2,7 @@
 #import "BuzzSentryCoreDataSwizzling.h"
 #import "BuzzSentryCoreDataTracker.h"
 #import "SentryLog.h"
-#import "SentryNSDataSwizzling.h"
+#import "BuzzSentryNSDataSwizzling.h"
 #import "BuzzSentryOptions.h"
 
 @interface

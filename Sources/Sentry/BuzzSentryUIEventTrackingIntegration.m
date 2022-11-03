@@ -1,21 +1,21 @@
-#import "SentryUIEventTrackingIntegration.h"
+#import "BuzzSentryUIEventTrackingIntegration.h"
 #import <Foundation/Foundation.h>
 #import <SentryDependencyContainer.h>
 #import <SentryLog.h>
-#import <SentryNSDataSwizzling.h>
+#import <BuzzSentryNSDataSwizzling.h>
 #import <BuzzSentryOptions+Private.h>
 #import <BuzzSentryOptions.h>
-#import <SentryUIEventTracker.h>
+#import <BuzzSentryUIEventTracker.h>
 
 #if SENTRY_HAS_UIKIT
 @interface
-SentryUIEventTrackingIntegration ()
+BuzzSentryUIEventTrackingIntegration ()
 
-@property (nonatomic, strong) SentryUIEventTracker *uiEventTracker;
+@property (nonatomic, strong) BuzzSentryUIEventTracker *uiEventTracker;
 
 @end
 
-@implementation SentryUIEventTrackingIntegration
+@implementation BuzzSentryUIEventTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
@@ -24,7 +24,7 @@ SentryUIEventTrackingIntegration ()
     }
 
     SentryDependencyContainer *dependencies = [SentryDependencyContainer sharedInstance];
-    self.uiEventTracker = [[SentryUIEventTracker alloc]
+    self.uiEventTracker = [[BuzzSentryUIEventTracker alloc]
         initWithSwizzleWrapper:[SentryDependencyContainer sharedInstance].swizzleWrapper
           dispatchQueueWrapper:dependencies.dispatchQueueWrapper
                    idleTimeout:options.idleTimeout];

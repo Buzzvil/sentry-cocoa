@@ -1,9 +1,9 @@
-#import "SentryFileIOTrackingIntegration.h"
+#import "BuzzSentryFileIOTrackingIntegration.h"
 #import "SentryLog.h"
-#import "SentryNSDataSwizzling.h"
+#import "BuzzSentryNSDataSwizzling.h"
 #import "BuzzSentryOptions.h"
 
-@implementation SentryFileIOTrackingIntegration
+@implementation BuzzSentryFileIOTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
@@ -11,7 +11,7 @@
         return NO;
     }
 
-    [SentryNSDataSwizzling start];
+    [BuzzSentryNSDataSwizzling start];
 
     return YES;
 }
@@ -24,7 +24,7 @@
 
 - (void)uninstall
 {
-    [SentryNSDataSwizzling stop];
+    [BuzzSentryNSDataSwizzling stop];
 }
 
 @end

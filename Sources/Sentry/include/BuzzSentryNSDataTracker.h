@@ -5,9 +5,9 @@ static NSString *const SENTRY_FILE_WRITE_OPERATION = @"file.write";
 
 static NSString *const SENTRY_FILE_READ_OPERATION = @"file.read";
 
-@interface SentryNSDataTracker : NSObject
+@interface BuzzSentryNSDataTracker : NSObject
 
-@property (class, readonly, nonatomic) SentryNSDataTracker *sharedInstance;
+@property (class, readonly, nonatomic) BuzzSentryNSDataTracker *sharedInstance;
 
 - (void)enable;
 

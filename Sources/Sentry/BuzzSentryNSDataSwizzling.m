@@ -1,20 +1,20 @@
-#import "SentryNSDataSwizzling.h"
-#import "SentryNSDataTracker.h"
+#import "BuzzSentryNSDataSwizzling.h"
+#import "BuzzSentryNSDataTracker.h"
 #import "SentrySwizzle.h"
 #import <SentryLog.h>
 #import <objc/runtime.h>
 
-@implementation SentryNSDataSwizzling
+@implementation BuzzSentryNSDataSwizzling
 
 + (void)start
 {
-    [SentryNSDataTracker.sharedInstance enable];
+    [BuzzSentryNSDataTracker.sharedInstance enable];
     [self swizzleNSData];
 }
 
 + (void)stop
 {
-    [SentryNSDataTracker.sharedInstance disable];
+    [BuzzSentryNSDataTracker.sharedInstance disable];
 }
 
 // SentrySwizzleInstanceMethod declaration shadows a local variable. The swizzling is working
@@ -27,7 +27,7 @@
     SentrySwizzleInstanceMethod(NSData.class, writeToFileAtomicallySelector,
         SentrySWReturnType(BOOL), SentrySWArguments(NSString * path, BOOL useAuxiliaryFile),
         SentrySWReplacement({
-            return [SentryNSDataTracker.sharedInstance
+            return [BuzzSentryNSDataTracker.sharedInstance
                 measureNSData:self
                   writeToFile:path
                    atomically:useAuxiliaryFile
@@ -42,7 +42,7 @@
         SentrySWReturnType(BOOL),
         SentrySWArguments(NSString * path, NSDataWritingOptions writeOptionsMask, NSError * *error),
         SentrySWReplacement({
-            return [SentryNSDataTracker.sharedInstance
+            return [BuzzSentryNSDataTracker.sharedInstance
                 measureNSData:self
                   writeToFile:path
                       options:writeOptionsMask
@@ -60,7 +60,7 @@
         SentrySWReturnType(NSData *),
         SentrySWArguments(NSString * path, NSDataReadingOptions options, NSError * *error),
         SentrySWReplacement({
-            return [SentryNSDataTracker.sharedInstance
+            return [BuzzSentryNSDataTracker.sharedInstance
                 measureNSDataFromFile:path
                               options:options
                                 error:error
@@ -75,7 +75,7 @@
     SEL initWithContentsOfFileSelector = NSSelectorFromString(@"initWithContentsOfFile:");
     SentrySwizzleInstanceMethod(NSData.class, initWithContentsOfFileSelector,
         SentrySWReturnType(NSData *), SentrySWArguments(NSString * path), SentrySWReplacement({
-            return [SentryNSDataTracker.sharedInstance
+            return [BuzzSentryNSDataTracker.sharedInstance
                 measureNSDataFromFile:path
                                method:^NSData *(
                                    NSString *filePath) { return SentrySWCallOriginal(filePath); }];
@@ -88,7 +88,7 @@
         SentrySWReturnType(NSData *),
         SentrySWArguments(NSURL * url, NSDataReadingOptions options, NSError * *error),
         SentrySWReplacement({
-            return [SentryNSDataTracker.sharedInstance
+            return [BuzzSentryNSDataTracker.sharedInstance
                 measureNSDataFromURL:url
                              options:options
                                error:error

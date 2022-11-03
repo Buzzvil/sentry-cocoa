@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 #if SENTRY_HAS_UIKIT
-@interface SentryUIEventTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryUIEventTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 @end
 #endif

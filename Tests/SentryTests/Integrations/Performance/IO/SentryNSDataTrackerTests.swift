@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryNSDataTrackerTests: XCTestCase {
+class BuzzSentryNSDataTrackerTests: XCTestCase {
 
     private class Fixture {
         
@@ -9,8 +9,8 @@ class SentryNSDataTrackerTests: XCTestCase {
         let dateProvider = TestCurrentDateProvider()
         let data = "SOME DATA".data(using: .utf8)!
                 
-        func getSut() -> SentryNSDataTracker {
-            let result = SentryNSDataTracker.sharedInstance
+        func getSut() -> BuzzSentryNSDataTracker {
+            let result = BuzzSentryNSDataTracker.sharedInstance
             CurrentDate.setCurrentDateProvider(dateProvider)
             result.enable()
             return result

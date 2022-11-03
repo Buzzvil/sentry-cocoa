@@ -8,7 +8,7 @@
 #import "BuzzSentrySpanProtocol.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext+Private.h"
-#import "SentryUIEventTracker.h"
+#import "BuzzSentryUIEventTracker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -67,7 +67,7 @@ BuzzSentryPerformanceTracker () <BuzzSentryTracerDelegate>
         [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> span) {
             BOOL bindToScope = true;
             if (span != nil) {
-                if ([SentryUIEventTracker isUIEventOperation:span.context.operation]) {
+                if ([BuzzSentryUIEventTracker isUIEventOperation:span.context.operation]) {
                     [span finishWithStatus:kBuzzSentrySpanStatusCancelled];
                 } else {
                     bindToScope = false;

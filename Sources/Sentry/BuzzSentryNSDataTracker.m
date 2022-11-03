@@ -1,4 +1,4 @@
-#import "SentryNSDataTracker.h"
+#import "BuzzSentryNSDataTracker.h"
 #import "SentryByteCountFormatter.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryFileManager.h"
@@ -11,18 +11,18 @@
 const NSString *SENTRY_TRACKING_COUNTER_KEY = @"SENTRY_TRACKING_COUNTER_KEY";
 
 @interface
-SentryNSDataTracker ()
+BuzzSentryNSDataTracker ()
 
 @property (nonatomic, assign) BOOL isEnabled;
 @property (nonatomic, strong) NSMutableSet<NSData *> *processingData;
 
 @end
 
-@implementation SentryNSDataTracker
+@implementation BuzzSentryNSDataTracker
 
-+ (SentryNSDataTracker *)sharedInstance
++ (BuzzSentryNSDataTracker *)sharedInstance
 {
-    static SentryNSDataTracker *instance = nil;
+    static BuzzSentryNSDataTracker *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;
@@ -168,7 +168,7 @@ SentryNSDataTracker ()
     }
 
     SENTRY_LOG_DEBUG(
-        @"SentryNSDataTracker automatically started a new span with description: %@, operation: %@",
+        @"BuzzSentryNSDataTracker automatically started a new span with description: %@, operation: %@",
         ioSpan.description, operation);
 
     [ioSpan setDataValue:path forKey:@"file.path"];
@@ -217,7 +217,7 @@ SentryNSDataTracker ()
     [span setDataValue:[NSNumber numberWithUnsignedInteger:data.length] forKey:@"file.size"];
     [span finish];
 
-    SENTRY_LOG_DEBUG(@"SentryNSDataTracker automatically finished span %@", span.description);
+    SENTRY_LOG_DEBUG(@"BuzzSentryNSDataTracker automatically finished span %@", span.description);
 }
 
 - (BOOL)ignoreFile:(NSString *)path

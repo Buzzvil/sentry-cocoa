@@ -6,7 +6,7 @@ import XCTest
 // GitHub Actions doesn't have simulators for iOS 11 and 10.
 // That's why we need to keep it generic, without access
 // to any private part of the SDK.
-class SentryFileIOTrackingIntegrationTests: XCTestCase {
+class BuzzSentryFileIOTrackingIntegrationTests: XCTestCase {
 
     private class Fixture {
         let data = "SOME DATA".data(using: .utf8) ?? Data()

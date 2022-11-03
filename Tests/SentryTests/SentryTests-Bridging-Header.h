@@ -72,7 +72,7 @@
 #import "BuzzSentryEnvelopeRateLimit.h"
 #import "BuzzSentryEvent+Private.h"
 #import "SentryFileContents.h"
-#import "SentryFileIOTrackingIntegration.h"
+#import "BuzzSentryFileIOTrackingIntegration.h"
 #import "SentryFileManager+TestProperties.h"
 #import "SentryFileManager.h"
 #import "BuzzSentryFrame.h"
@@ -98,7 +98,7 @@
 #import "BuzzSentryMechanismMeta.h"
 #import "BuzzSentryMeta.h"
 #import "SentryMigrateSessionInit.h"
-#import "SentryNSDataTracker.h"
+#import "BuzzSentryNSDataTracker.h"
 #import "BuzzSentryNSError.h"
 #import "SentryNSNotificationCenterWrapper.h"
 #import "BuzzSentryNSURLRequest.h"
@@ -174,6 +174,6 @@
 #import "URLSessionTaskMock.h"
 
 #if SENTRY_HAS_UIKIT
-#    import "SentryUIEventTracker.h"
-#    import "SentryUIEventTrackingIntegration.h"
+#    import "BuzzSentryUIEventTracker.h"
+#    import "BuzzSentryUIEventTrackingIntegration.h"
 #endif

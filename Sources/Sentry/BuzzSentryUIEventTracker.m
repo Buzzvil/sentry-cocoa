@@ -8,18 +8,18 @@
 #import <BuzzSentrySpanProtocol.h>
 #import <BuzzSentryTracer.h>
 #import <BuzzSentryTransactionContext+Private.h>
-#import <SentryUIEventTracker.h>
+#import <BuzzSentryUIEventTracker.h>
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *const SentryUIEventTrackerSwizzleSendAction
-    = @"SentryUIEventTrackerSwizzleSendAction";
+static NSString *const BuzzSentryUIEventTrackerSwizzleSendAction
+    = @"BuzzSentryUIEventTrackerSwizzleSendAction";
 
 @interface
-SentryUIEventTracker ()
+BuzzSentryUIEventTracker ()
 
 @property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
@@ -30,7 +30,7 @@ SentryUIEventTracker ()
 
 #endif
 
-@implementation SentryUIEventTracker
+@implementation BuzzSentryUIEventTracker
 
 #if SENTRY_HAS_UIKIT
 
@@ -88,7 +88,7 @@ SentryUIEventTracker ()
             if (currentActiveTransaction) {
                 [SentryLog
                     logWithMessage:
-                        [NSString stringWithFormat:@"SentryUIEventTracker finished transaction %@",
+                        [NSString stringWithFormat:@"BuzzSentryUIEventTracker finished transaction %@",
                                   currentActiveTransaction.transactionContext.name]
                           andLevel:kSentryLevelDebug];
             }
@@ -117,7 +117,7 @@ SentryUIEventTracker ()
                                                  dispatchQueueWrapper:self.dispatchQueueWrapper];
 
                 [SentryLog
-                    logWithMessage:[NSString stringWithFormat:@"SentryUIEventTracker automatically "
+                    logWithMessage:[NSString stringWithFormat:@"BuzzSentryUIEventTracker automatically "
                                                               @"started a new transaction with "
                                                               @"name: %@, bindToScope: %@",
                                              transactionName, bindToScope ? @"YES" : @"NO"]
@@ -141,12 +141,12 @@ SentryUIEventTracker ()
                 [self.activeTransactions addObject:transaction];
             }
         }
-                   forKey:SentryUIEventTrackerSwizzleSendAction];
+                   forKey:BuzzSentryUIEventTrackerSwizzleSendAction];
 }
 
 - (void)stop
 {
-    [self.swizzleWrapper removeSwizzleSendActionForKey:SentryUIEventTrackerSwizzleSendAction];
+    [self.swizzleWrapper removeSwizzleSendActionForKey:BuzzSentryUIEventTrackerSwizzleSendAction];
 }
 
 - (NSString *)getOperation:(id)sender

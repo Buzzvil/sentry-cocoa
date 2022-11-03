@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryFileIOTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryFileIOTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 @end
 

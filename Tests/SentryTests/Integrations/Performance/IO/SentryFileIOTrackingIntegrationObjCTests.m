@@ -1,4 +1,4 @@
-#import "SentryNSDataTracker.h"
+#import "BuzzSentryNSDataTracker.h"
 #import "BuzzSentryOptions.h"
 #import "SentrySDK.h"
 #import "BuzzSentrySpan.h"
@@ -6,7 +6,7 @@
 #import "BuzzSentryTracer.h"
 #import <XCTest/XCTest.h>
 
-@interface SentryFileIOTrackingIntegrationObjCTests : XCTestCase
+@interface BuzzSentryFileIOTrackingIntegrationObjCTests : XCTestCase
 
 @end
 
@@ -14,7 +14,7 @@
  * Not all NSData methods have an equivalent in Swift.
  * These tests assure NSData methods are working properly.
  */
-@implementation SentryFileIOTrackingIntegrationObjCTests {
+@implementation BuzzSentryFileIOTrackingIntegrationObjCTests {
     NSString *filePath;
     NSURL *fileUrl;
     NSData *someData;

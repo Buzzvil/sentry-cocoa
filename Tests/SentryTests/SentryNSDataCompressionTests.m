@@ -2,11 +2,11 @@
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
 
-@interface SentryNSDataCompressionTests : XCTestCase
+@interface BuzzSentryNSDataCompressionTests : XCTestCase
 
 @end
 
-@implementation SentryNSDataCompressionTests
+@implementation BuzzSentryNSDataCompressionTests
 
 - (void)testCompress
 {

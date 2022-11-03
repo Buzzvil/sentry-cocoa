@@ -2,12 +2,12 @@ import Sentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryUIEventTrackerIntegrationTests: XCTestCase {
+class BuzzSentryUIEventTrackerIntegrationTests: XCTestCase {
     
     private class Fixture {
           
-        func getSut() -> SentryUIEventTrackingIntegration {
-            return SentryUIEventTrackingIntegration()
+        func getSut() -> BuzzSentryUIEventTrackingIntegration {
+            return BuzzSentryUIEventTrackingIntegration()
         }
         
         func optionForUIEventTracking(enableSwizzling: Bool = true, enableAutoPerformanceTracking: Bool = true, enableUserInteractionTracing: Bool = true, tracesSampleRate: Double = 1.0) -> Options {
@@ -63,14 +63,14 @@ class SentryUIEventTrackerIntegrationTests: XCTestCase {
     func test_Installation() {
         let sut = fixture.getSut()
         sut.install(with: fixture.optionForUIEventTracking())
-        XCTAssertNotNil(Dynamic(sut).uiEventTracker as SentryUIEventTracker?)
+        XCTAssertNotNil(Dynamic(sut).uiEventTracker as BuzzSentryUIEventTracker?)
         XCTAssertTrue(SentrySwizzleWrapper.hasItems())
     }
     
     func test_Uninstall() {
         let sut = fixture.getSut()
         sut.install(with: fixture.optionForUIEventTracking())
-        XCTAssertNotNil(Dynamic(sut).uiEventTracker as SentryUIEventTracker?)
+        XCTAssertNotNil(Dynamic(sut).uiEventTracker as BuzzSentryUIEventTracker?)
         XCTAssertTrue(SentrySwizzleWrapper.hasItems())
         
         sut.uninstall()
@@ -78,8 +78,8 @@ class SentryUIEventTrackerIntegrationTests: XCTestCase {
         XCTAssertFalse(SentrySwizzleWrapper.hasItems())
     }
     
-    func assertNoInstallation(_ integration: SentryUIEventTrackingIntegration) {
-        XCTAssertNil(Dynamic(integration).uiEventTracker as SentryUIEventTracker?)
+    func assertNoInstallation(_ integration: BuzzSentryUIEventTrackingIntegration) {
+        XCTAssertNil(Dynamic(integration).uiEventTracker as BuzzSentryUIEventTracker?)
     }
     
 }

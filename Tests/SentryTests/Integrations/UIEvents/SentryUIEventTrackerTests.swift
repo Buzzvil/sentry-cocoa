@@ -2,7 +2,7 @@ import Sentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryUIEventTrackerTests: XCTestCase {
+class BuzzSentryUIEventTrackerTests: XCTestCase {
 
     private class Fixture {
         let swizzleWrapper = TestSentrySwizzleWrapper()
@@ -11,13 +11,13 @@ class SentryUIEventTrackerTests: XCTestCase {
         let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         let button = UIButton()
         
-        func getSut() -> SentryUIEventTracker {
-            return SentryUIEventTracker(swizzleWrapper: swizzleWrapper, dispatchQueueWrapper: dispatchQueue, idleTimeout: 3.0)
+        func getSut() -> BuzzSentryUIEventTracker {
+            return BuzzSentryUIEventTracker(swizzleWrapper: swizzleWrapper, dispatchQueueWrapper: dispatchQueue, idleTimeout: 3.0)
         }
     }
 
     private var fixture: Fixture!
-    private var sut: SentryUIEventTracker!
+    private var sut: BuzzSentryUIEventTracker!
     
     let operation = "ui.action"
     let operationClick = "ui.action.click"
@@ -224,15 +224,15 @@ class SentryUIEventTrackerTests: XCTestCase {
     }
     
     func test_IsUIEventOperation_UIAction() {
-        XCTAssertTrue(SentryUIEventTracker.isUIEventOperation("ui.action"))
+        XCTAssertTrue(BuzzSentryUIEventTracker.isUIEventOperation("ui.action"))
     }
     
     func test_IsUIEventOperation_UIActionClick() {
-        XCTAssertTrue(SentryUIEventTracker.isUIEventOperation("ui.action.click"))
+        XCTAssertTrue(BuzzSentryUIEventTracker.isUIEventOperation("ui.action.click"))
     }
     
     func test_IsUIEventOperation_Unknown() {
-        XCTAssertFalse(SentryUIEventTracker.isUIEventOperation("unknown"))
+        XCTAssertFalse(BuzzSentryUIEventTracker.isUIEventOperation("unknown"))
     }
         
     func callExecuteAction(action: String, target: Any?, sender: Any?, event: UIEvent?) {
