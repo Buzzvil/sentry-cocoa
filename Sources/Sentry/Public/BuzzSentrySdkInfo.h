@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * For more info checkout: https://develop.sentry.dev/sdk/event-payloads/sdk/
  */
-@interface SentrySdkInfo : NSObject <BuzzSentrySerializable>
+@interface BuzzSentrySdkInfo : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**
@@ -33,7 +33,7 @@ SENTRY_NO_INIT
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
-- (instancetype)initWithDict:(NSDictionary *)dict orDefaults:(SentrySdkInfo *)info;
+- (instancetype)initWithDict:(NSDictionary *)dict orDefaults:(BuzzSentrySdkInfo *)info;
 
 @end
 

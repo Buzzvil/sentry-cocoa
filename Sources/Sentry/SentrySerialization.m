@@ -6,7 +6,7 @@
 #import "BuzzSentryId.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
-#import "SentrySdkInfo.h"
+#import "BuzzSentrySdkInfo.h"
 #import "BuzzSentrySession.h"
 #import "BuzzSentryTraceContext.h"
 
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
         [serializedData setValue:[envelope.header.eventId BuzzSentryIdString] forKey:@"event_id"];
     }
 
-    SentrySdkInfo *sdkInfo = envelope.header.sdkInfo;
+    BuzzSentrySdkInfo *sdkInfo = envelope.header.sdkInfo;
     if (nil != sdkInfo) {
         [serializedData addEntriesFromDictionary:[sdkInfo serialize]];
     }
@@ -182,9 +182,9 @@ NS_ASSUME_NONNULL_BEGIN
                     eventId = [[BuzzSentryId alloc] initWithUUIDString:eventIdAsString];
                 }
 
-                SentrySdkInfo *sdkInfo = nil;
+                BuzzSentrySdkInfo *sdkInfo = nil;
                 if (nil != headerDictionary[@"sdk"]) {
-                    sdkInfo = [[SentrySdkInfo alloc] initWithDict:headerDictionary];
+                    sdkInfo = [[BuzzSentrySdkInfo alloc] initWithDict:headerDictionary];
                 }
 
                 BuzzSentryTraceContext *traceContext = nil;

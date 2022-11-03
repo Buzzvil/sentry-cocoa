@@ -1,7 +1,7 @@
-#import "SentrySdkInfo+Equality.h"
+#import "BuzzSentrySdkInfo+Equality.h"
 
 @implementation
-SentrySdkInfo (Equality)
+BuzzSentrySdkInfo (Equality)
 
 - (BOOL)isEqual:(id _Nullable)object
 {
@@ -10,7 +10,7 @@ SentrySdkInfo (Equality)
     if ([self class] != [object class])
         return NO;
 
-    SentrySdkInfo *otherSdkInfo = (SentrySdkInfo *)object;
+    BuzzSentrySdkInfo *otherSdkInfo = (BuzzSentrySdkInfo *)object;
 
     if (![self.name isEqualToString:otherSdkInfo.name]) {
         return NO;

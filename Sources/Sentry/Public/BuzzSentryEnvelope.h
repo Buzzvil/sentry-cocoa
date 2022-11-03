@@ -2,7 +2,7 @@
 
 #import "SentryDefines.h"
 
-@class BuzzSentryEvent, BuzzSentrySession, SentrySdkInfo, BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
+@class BuzzSentryEvent, BuzzSentrySession, BuzzSentrySdkInfo, BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
     BuzzSentryTransaction, BuzzSentryTraceContext, BuzzSentryClientReport;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -42,7 +42,7 @@ SENTRY_NO_INIT
  * @param traceContext Current trace state.
  */
 - (instancetype)initWithId:(nullable BuzzSentryId *)eventId
-                   sdkInfo:(nullable SentrySdkInfo *)sdkInfo
+                   sdkInfo:(nullable BuzzSentrySdkInfo *)sdkInfo
               traceContext:(nullable BuzzSentryTraceContext *)traceContext NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -52,7 +52,7 @@ SENTRY_NO_INIT
  */
 @property (nullable, nonatomic, readonly, copy) BuzzSentryId *eventId;
 
-@property (nullable, nonatomic, readonly, copy) SentrySdkInfo *sdkInfo;
+@property (nullable, nonatomic, readonly, copy) BuzzSentrySdkInfo *sdkInfo;
 
 @property (nullable, nonatomic, readonly, copy) BuzzSentryTraceContext *traceContext;
 

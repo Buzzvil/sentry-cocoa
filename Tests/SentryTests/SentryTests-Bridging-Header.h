@@ -130,7 +130,7 @@
 #import "BuzzSentryScreenFrames.h"
 #import "BuzzSentryScreenshot.h"
 #import "BuzzSentryScreenshotIntegration.h"
-#import "SentrySdkInfo.h"
+#import "BuzzSentrySdkInfo.h"
 #import "SentrySerialization.h"
 #import "BuzzSentrySession+Private.h"
 #import "BuzzSentrySessionTracker.h"

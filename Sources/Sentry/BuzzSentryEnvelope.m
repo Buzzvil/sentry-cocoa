@@ -7,7 +7,7 @@
 #import "SentryLog.h"
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
-#import "SentrySdkInfo.h"
+#import "BuzzSentrySdkInfo.h"
 #import "SentrySerialization.h"
 #import "BuzzSentrySession.h"
 #import "BuzzSentryTransaction.h"
@@ -27,14 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithId:(nullable BuzzSentryId *)eventId
               traceContext:(nullable BuzzSentryTraceContext *)traceContext
 {
-    SentrySdkInfo *sdkInfo = [[SentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
+    BuzzSentrySdkInfo *sdkInfo = [[BuzzSentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
                                                       andVersion:BuzzSentryMeta.versionString];
     self = [self initWithId:eventId sdkInfo:sdkInfo traceContext:traceContext];
     return self;
 }
 
 - (instancetype)initWithId:(nullable BuzzSentryId *)eventId
-                   sdkInfo:(nullable SentrySdkInfo *)sdkInfo
+                   sdkInfo:(nullable BuzzSentrySdkInfo *)sdkInfo
               traceContext:(nullable BuzzSentryTraceContext *)traceContext
 {
     if (self = [super init]) {

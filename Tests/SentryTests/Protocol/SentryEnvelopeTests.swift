@@ -69,7 +69,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
         }
     }
 
-    private let defaultSdkInfo = SentrySdkInfo(name: BuzzSentryMeta.sdkName, andVersion: BuzzSentryMeta.versionString)
+    private let defaultSdkInfo = BuzzSentrySdkInfo(name: BuzzSentryMeta.sdkName, andVersion: BuzzSentryMeta.versionString)
     
     func testBuzzSentryEnvelopeFromEvent() {
         let event = Event()
@@ -150,7 +150,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
     
     func testInitBuzzSentryEnvelopeHeader_SetIdAndSdkInfo() {
         let eventId = BuzzSentryId()
-        let sdkInfo = SentrySdkInfo(name: "sdk", andVersion: "1.2.3-alpha.0")
+        let sdkInfo = BuzzSentrySdkInfo(name: "sdk", andVersion: "1.2.3-alpha.0")
         
         let envelopeHeader = BuzzSentryEnvelopeHeader(id: eventId, sdkInfo: sdkInfo, traceContext: nil)
         XCTAssertEqual(eventId, envelopeHeader.eventId)

@@ -33,7 +33,7 @@
 #import "SentryPermissionsObserver.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
-#import "SentrySdkInfo.h"
+#import "BuzzSentrySdkInfo.h"
 #import "BuzzSentryStacktraceBuilder.h"
 #import "SentryThreadInspector.h"
 #import "BuzzSentryTraceContext.h"

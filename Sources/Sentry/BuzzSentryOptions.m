@@ -5,7 +5,7 @@
 #import "SentryLog.h"
 #import "BuzzSentryMeta.h"
 #import "SentrySDK.h"
-#import "SentrySdkInfo.h"
+#import "BuzzSentrySdkInfo.h"
 
 @interface
 BuzzSentryOptions ()
@@ -352,14 +352,14 @@ BuzzSentryOptions ()
         self.tracePropagationTargets = options[@"tracePropagationTargets"];
     }
 
-    // SentrySdkInfo already expects a dictionary with {"sdk": {"name": ..., "value": ...}}
+    // BuzzSentrySdkInfo already expects a dictionary with {"sdk": {"name": ..., "value": ...}}
     // so we're passing the whole options object.
     // Note: we should remove this code once the hybrid SDKs move over to the new
     // PrivateBuzzSentrySDKOnly setter functions.
     if ([options[@"sdk"] isKindOfClass:[NSDictionary class]]) {
-        SentrySdkInfo *defaults = [[SentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
+        BuzzSentrySdkInfo *defaults = [[BuzzSentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
                                                            andVersion:BuzzSentryMeta.versionString];
-        SentrySdkInfo *sdkInfo = [[SentrySdkInfo alloc] initWithDict:options orDefaults:defaults];
+        BuzzSentrySdkInfo *sdkInfo = [[BuzzSentrySdkInfo alloc] initWithDict:options orDefaults:defaults];
         BuzzSentryMeta.versionString = sdkInfo.version;
         BuzzSentryMeta.sdkName = sdkInfo.name;
     }
@@ -371,9 +371,9 @@ BuzzSentryOptions ()
     }
 }
 
-- (SentrySdkInfo *)sdkInfo
+- (BuzzSentrySdkInfo *)sdkInfo
 {
-    return [[SentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
+    return [[BuzzSentrySdkInfo alloc] initWithName:BuzzSentryMeta.sdkName
                                     andVersion:BuzzSentryMeta.versionString];
 }
 
