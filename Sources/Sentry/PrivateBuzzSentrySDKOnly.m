@@ -6,7 +6,7 @@
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentrySerialization.h"
-#import <SentryDependencyContainer.h>
+#import <BuzzSentryDependencyContainer.h>
 #import <BuzzSentryFramesTracker.h>
 
 @implementation PrivateBuzzSentrySDKOnly
@@ -34,7 +34,7 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (NSArray<BuzzSentryDebugMeta *> *)getDebugImages
 {
-    return [[SentryDependencyContainer sharedInstance].debugImageProvider getDebugImages];
+    return [[BuzzSentryDependencyContainer sharedInstance].debugImageProvider getDebugImages];
 }
 
 + (nullable BuzzSentryAppStartMeasurement *)appStartMeasurement

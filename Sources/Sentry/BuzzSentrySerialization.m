@@ -2,7 +2,7 @@
 #import "BuzzSentryAppState.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
-#import "SentryError.h"
+#import "BuzzSentryError.h"
 #import "BuzzSentryId.h"
 #import "BuzzSentryLevelMapper.h"
 #import "BuzzSentryLog.h"
@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
     } else {
         SENTRY_LOG_ERROR(@"Invalid JSON.");
         if (error) {
-            *error = NSErrorFromSentryError(
-                kSentryErrorJsonConversionError, @"Event cannot be converted to JSON");
+            *error = NSErrorFromBuzzSentryError(
+                kBuzzSentryErrorJsonConversionError, @"Event cannot be converted to JSON");
         }
     }
 
@@ -55,8 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
     if (nil == header) {
         SENTRY_LOG_ERROR(@"Envelope header cannot be converted to JSON.");
         if (error) {
-            *error = NSErrorFromSentryError(
-                kSentryErrorJsonConversionError, @"Envelope header cannot be converted to JSON");
+            *error = NSErrorFromBuzzSentryError(
+                kBuzzSentryErrorJsonConversionError, @"Envelope header cannot be converted to JSON");
         }
         return nil;
     }
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
         if (nil == itemHeader) {
             SENTRY_LOG_ERROR(@"Envelope item header cannot be converted to JSON.");
             if (error) {
-                *error = NSErrorFromSentryError(kSentryErrorJsonConversionError,
+                *error = NSErrorFromBuzzSentryError(kBuzzSentryErrorJsonConversionError,
                     @"Envelope item header cannot be converted to JSON");
             }
             return nil;

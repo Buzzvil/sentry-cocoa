@@ -473,11 +473,11 @@ class BuzzSentrySDKTests: XCTestCase {
             options.dsn = BuzzSentrySDKTests.dsnAsString
         }
         
-        let first = SentryDependencyContainer.sharedInstance()
+        let first = BuzzSentryDependencyContainer.sharedInstance()
         
         BuzzSentrySDK.close()
         
-        let second = SentryDependencyContainer.sharedInstance()
+        let second = BuzzSentryDependencyContainer.sharedInstance()
         
         XCTAssertNotEqual(first, second)
     }

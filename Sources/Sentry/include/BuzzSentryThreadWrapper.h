@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A wrapper around NSThread functions for testability.
  */
-@interface SentryThreadWrapper : NSObject
+@interface BuzzSentryThreadWrapper : NSObject
 
 - (void)sleepForTimeInterval:(NSTimeInterval)timeInterval;
 

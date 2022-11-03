@@ -6,7 +6,7 @@
 #import <PrivateBuzzSentrySDKOnly.h>
 #import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryCrashWrapper.h>
-#import <SentryDependencyContainer.h>
+#import <BuzzSentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentrySysctl.h>
 
@@ -34,7 +34,7 @@ BuzzSentryAppStartTrackingIntegration ()
     BuzzSentrySysctl *sysctl = [[BuzzSentrySysctl alloc] init];
 
     BuzzSentryAppStateManager *appStateManager =
-        [SentryDependencyContainer sharedInstance].appStateManager;
+        [BuzzSentryDependencyContainer sharedInstance].appStateManager;
 
     self.tracker = [[BuzzSentryAppStartTracker alloc]
         initWithCurrentDateProvider:currentDateProvider

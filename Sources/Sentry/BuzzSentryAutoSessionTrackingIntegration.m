@@ -1,6 +1,6 @@
 #import "BuzzSentryAutoSessionTrackingIntegration.h"
 #import "BuzzSentryDefaultCurrentDateProvider.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryLog.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentrySDK.h"
@@ -26,7 +26,7 @@ BuzzSentryAutoSessionTrackingIntegration ()
     BuzzSentrySessionTracker *tracker = [[BuzzSentrySessionTracker alloc]
             initWithOptions:options
         currentDateProvider:[BuzzSentryDefaultCurrentDateProvider sharedInstance]
-         notificationCenter:[SentryDependencyContainer sharedInstance].notificationCenterWrapper];
+         notificationCenter:[BuzzSentryDependencyContainer sharedInstance].notificationCenterWrapper];
     [tracker start];
     self.tracker = tracker;
 

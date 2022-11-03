@@ -2,7 +2,7 @@
 #import "NSData+BuzzSentryCompression.h"
 #import "BuzzSentryClient.h"
 #import "BuzzSentryDsn.h"
-#import "SentryError.h"
+#import "BuzzSentryError.h"
 #import "BuzzSentryEvent.h"
 #import "BuzzSentryHub.h"
 #import "BuzzSentryLog.h"
@@ -34,8 +34,8 @@ BuzzSentryNSURLRequest ()
         if (error) {
             // TODO: We're possibly overriding an error set by the actual
             // code that failed ^
-            *error = NSErrorFromSentryError(
-                kSentryErrorJsonConversionError, @"Event cannot be converted to JSON");
+            *error = NSErrorFromBuzzSentryError(
+                kBuzzSentryErrorJsonConversionError, @"Event cannot be converted to JSON");
         }
         return nil;
     }

@@ -2,7 +2,7 @@
 #import "NSDate+BuzzSentryExtras.h"
 #import "BuzzSentryAppState.h"
 #import "BuzzSentryDataCategoryMapper.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
@@ -43,7 +43,7 @@ BuzzSentryFileManager ()
 {
     return [self initWithOptions:options
           andCurrentDateProvider:currentDateProvider
-            dispatchQueueWrapper:SentryDependencyContainer.sharedInstance.dispatchQueueWrapper
+            dispatchQueueWrapper:BuzzSentryDependencyContainer.sharedInstance.dispatchQueueWrapper
                            error:error];
 }
 

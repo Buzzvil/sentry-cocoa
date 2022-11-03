@@ -1,7 +1,7 @@
 #import "BuzzSentrySystemEventBreadcrumbs.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryCurrentDateProvider.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryLog.h"
 #import "BuzzSentrySDK.h"
 

@@ -1,8 +1,8 @@
-#import "SentryThreadWrapper.h"
+#import "BuzzSentryThreadWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryThreadWrapper
+@implementation BuzzSentryThreadWrapper
 
 - (void)sleepForTimeInterval:(NSTimeInterval)timeInterval
 {

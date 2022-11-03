@@ -40,7 +40,7 @@ NSError (SentrySimpleConstructor)
  * @param fmt Description of the error (gets placed into the user data with the
  * key NSLocalizedDescriptionKey).
  */
-+ (NSError *)sentryErrorWithDomain:(NSString *)domain
++ (NSError *)BuzzSentryErrorWithDomain:(NSString *)domain
                               code:(NSInteger)code
                        description:(NSString *)fmt, ...;
 

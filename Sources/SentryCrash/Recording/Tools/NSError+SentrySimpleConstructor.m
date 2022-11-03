@@ -29,7 +29,7 @@
 @implementation
 NSError (SentrySimpleConstructor)
 
-+ (NSError *)sentryErrorWithDomain:(NSString *)domain
++ (NSError *)BuzzSentryErrorWithDomain:(NSString *)domain
                               code:(NSInteger)code
                        description:(NSString *)fmt, ...
 {

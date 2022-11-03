@@ -1,5 +1,5 @@
 #import "BuzzSentryViewHierarchy.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryUIApplication.h"
 #import "UIView+BuzzSentry.h"
 
@@ -15,7 +15,7 @@
 
 - (NSArray<NSString *> *)fetchViewHierarchyPreventMoveToMainThread:(BOOL)preventMoveToMainThread
 {
-    NSArray<UIWindow *> *windows = [SentryDependencyContainer.sharedInstance.application windows];
+    NSArray<UIWindow *> *windows = [BuzzSentryDependencyContainer.sharedInstance.application windows];
 
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:[windows count]];
 

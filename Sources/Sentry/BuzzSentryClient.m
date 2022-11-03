@@ -9,7 +9,7 @@
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDebugImageProvider.h"
 #import "BuzzSentryDefaultCurrentDateProvider.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
@@ -119,7 +119,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                 transportAdapter:transportAdapter
                      fileManager:fileManager
                  threadInspector:threadInspector
-                          random:[SentryDependencyContainer sharedInstance].random
+                          random:[BuzzSentryDependencyContainer sharedInstance].random
                     crashWrapper:[BuzzSentryCrashWrapper sharedInstance]
              permissionsObserver:permissionsObserver
                    deviceWrapper:deviceWrapper
@@ -146,7 +146,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         self.random = random;
         self.crashWrapper = crashWrapper;
         self.permissionsObserver = permissionsObserver;
-        self.debugImageProvider = [SentryDependencyContainer sharedInstance].debugImageProvider;
+        self.debugImageProvider = [BuzzSentryDependencyContainer sharedInstance].debugImageProvider;
         self.locale = locale;
         self.timezone = timezone;
         self.attachmentProcessors = [[NSMutableArray alloc] init];

@@ -1,7 +1,7 @@
 #import "BuzzSentryViewHierarchyIntegration.h"
 #import "BuzzSentryAttachment.h"
 #import "SentryCrashC.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryEvent+Private.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentrySDK+Private.h"
@@ -13,7 +13,7 @@ void
 saveViewHierarchy(const char *path)
 {
     NSString *reportPath = [NSString stringWithUTF8String:path];
-    [SentryDependencyContainer.sharedInstance.viewHierarchy saveViewHierarchy:reportPath];
+    [BuzzSentryDependencyContainer.sharedInstance.viewHierarchy saveViewHierarchy:reportPath];
 }
 
 @implementation BuzzSentryViewHierarchyIntegration
@@ -55,7 +55,7 @@ saveViewHierarchy(const char *path)
     }
 
     NSArray *decriptions =
-        [SentryDependencyContainer.sharedInstance.viewHierarchy fetchViewHierarchy];
+        [BuzzSentryDependencyContainer.sharedInstance.viewHierarchy fetchViewHierarchy];
     NSMutableArray *result =
         [NSMutableArray arrayWithCapacity:attachments.count + decriptions.count];
     [result addObjectsFromArray:attachments];

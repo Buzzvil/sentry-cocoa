@@ -2,7 +2,7 @@
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryLog.h"
-#import "SentryThreadWrapper.h"
+#import "BuzzSentryThreadWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -12,7 +12,7 @@ BuzzSentryANRTracker ()
 @property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
-@property (nonatomic, strong) SentryThreadWrapper *threadWrapper;
+@property (nonatomic, strong) BuzzSentryThreadWrapper *threadWrapper;
 @property (nonatomic, strong) NSMutableSet<id<BuzzSentryANRTrackerDelegate>> *listeners;
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 
@@ -29,7 +29,7 @@ BuzzSentryANRTracker ()
                     currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                            crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                    dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
-                          threadWrapper:(SentryThreadWrapper *)threadWrapper
+                          threadWrapper:(BuzzSentryThreadWrapper *)threadWrapper
 {
     if (self = [super init]) {
         self.timeoutInterval = timeoutInterval;

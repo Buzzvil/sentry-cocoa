@@ -1,5 +1,5 @@
 #import "BuzzSentryOptions.h"
-#import "SentryError.h"
+#import "BuzzSentryError.h"
 #import "BuzzSentrySDK.h"
 #import "BuzzSentrySDKInfo.h"
 #import "SentryTests-Swift.h"
@@ -32,7 +32,7 @@
 {
     XCTAssertNil(options.parsedDsn);
     XCTAssertEqual(NO, options.debug);
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
 }
 
 - (void)testInvalidDsn
@@ -40,7 +40,7 @@
     NSError *error = nil;
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 

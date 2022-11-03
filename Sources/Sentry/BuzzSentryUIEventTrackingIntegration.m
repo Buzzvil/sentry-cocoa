@@ -1,6 +1,6 @@
 #import "BuzzSentryUIEventTrackingIntegration.h"
 #import <Foundation/Foundation.h>
-#import <SentryDependencyContainer.h>
+#import <BuzzSentryDependencyContainer.h>
 #import <BuzzSentryLog.h>
 #import <BuzzSentryNSDataSwizzling.h>
 #import <BuzzSentryOptions+Private.h>
@@ -23,9 +23,9 @@ BuzzSentryUIEventTrackingIntegration ()
         return NO;
     }
 
-    SentryDependencyContainer *dependencies = [SentryDependencyContainer sharedInstance];
+    BuzzSentryDependencyContainer *dependencies = [BuzzSentryDependencyContainer sharedInstance];
     self.uiEventTracker = [[BuzzSentryUIEventTracker alloc]
-        initWithSwizzleWrapper:[SentryDependencyContainer sharedInstance].swizzleWrapper
+        initWithSwizzleWrapper:[BuzzSentryDependencyContainer sharedInstance].swizzleWrapper
           dispatchQueueWrapper:dependencies.dispatchQueueWrapper
                    idleTimeout:options.idleTimeout];
 

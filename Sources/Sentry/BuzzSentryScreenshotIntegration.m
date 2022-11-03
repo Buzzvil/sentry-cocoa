@@ -1,7 +1,7 @@
 #import "BuzzSentryScreenshotIntegration.h"
 #import "BuzzSentryAttachment.h"
 #import "SentryCrashC.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryEvent+Private.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentrySDK+Private.h"
@@ -12,7 +12,7 @@ void
 saveScreenShot(const char *path)
 {
     NSString *reportPath = [NSString stringWithUTF8String:path];
-    [SentryDependencyContainer.sharedInstance.screenshot saveScreenShots:reportPath];
+    [BuzzSentryDependencyContainer.sharedInstance.screenshot saveScreenShots:reportPath];
 }
 
 @implementation BuzzSentryScreenshotIntegration
@@ -54,7 +54,7 @@ saveScreenShot(const char *path)
         return attachments;
     }
 
-    NSArray *screenshot = [SentryDependencyContainer.sharedInstance.screenshot appScreenshots];
+    NSArray *screenshot = [BuzzSentryDependencyContainer.sharedInstance.screenshot appScreenshots];
 
     NSMutableArray *result =
         [NSMutableArray arrayWithCapacity:attachments.count + screenshot.count];

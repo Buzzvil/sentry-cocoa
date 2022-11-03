@@ -1,5 +1,5 @@
 #import "BuzzSentryScreenshot.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryUIApplication.h"
 
 #if SENTRY_HAS_UIKIT
@@ -40,7 +40,7 @@
 
 - (NSArray<NSData *> *)takeScreenshots
 {
-    NSArray<UIWindow *> *windows = [SentryDependencyContainer.sharedInstance.application windows];
+    NSArray<UIWindow *> *windows = [BuzzSentryDependencyContainer.sharedInstance.application windows];
 
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:windows.count];
 

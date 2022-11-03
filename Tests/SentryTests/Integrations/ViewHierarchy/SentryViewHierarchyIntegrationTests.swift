@@ -25,7 +25,7 @@ class BuzzSentryViewHierarchyIntegrationTests: XCTestCase {
         super.setUp()
         fixture = Fixture()
 
-        SentryDependencyContainer.sharedInstance().viewHierarchy = fixture.viewHierarchy
+        BuzzSentryDependencyContainer.sharedInstance().viewHierarchy = fixture.viewHierarchy
     }
 
     override func tearDown() {

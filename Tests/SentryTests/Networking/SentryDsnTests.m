@@ -1,5 +1,5 @@
 #import "BuzzSentryDsn.h"
-#import "SentryError.h"
+#import "BuzzSentryError.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryNSURLRequest.h"
 #import <Sentry/Sentry.h>
@@ -16,7 +16,7 @@
     NSError *error = nil;
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
@@ -64,7 +64,7 @@
     NSError *error = nil;
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"sentry.io" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
@@ -73,7 +73,7 @@
     NSError *error = nil;
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"http:///1" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
@@ -82,7 +82,7 @@
     NSError *error = nil;
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"ftp://sentry.io/1" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 

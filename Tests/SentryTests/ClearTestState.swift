@@ -22,7 +22,7 @@ func clearTestState() {
     BuzzSentryAppStartTracker.load()
     #endif
     
-    SentryDependencyContainer.reset()
+    BuzzSentryDependencyContainer.reset()
     Dynamic(BuzzSentryGlobalEventProcessor.shared()).removeAllProcessors()
     BuzzSentrySwizzleWrapper.sharedInstance.removeAllCallbacks()
 }

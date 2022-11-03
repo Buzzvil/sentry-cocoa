@@ -7,7 +7,7 @@
 #import <BuzzSentryCrashWrapper.h>
 #import <BuzzSentryDebugImageProvider.h>
 #import <BuzzSentryDefaultCurrentDateProvider.h>
-#import <SentryDependencyContainer.h>
+#import <BuzzSentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryHub.h>
 #import <BuzzSentryNSNotificationCenterWrapper.h>
@@ -15,24 +15,24 @@
 #import <BuzzSentryScreenshot.h>
 #import <BuzzSentrySwizzleWrapper.h>
 #import <BuzzSentrySysctl.h>
-#import <SentryThreadWrapper.h>
+#import <BuzzSentryThreadWrapper.h>
 #import <BuzzSentryViewHierarchy.h>
 
-@implementation SentryDependencyContainer
+@implementation BuzzSentryDependencyContainer
 
-static SentryDependencyContainer *instance;
-static NSObject *sentryDependencyContainerLock;
+static BuzzSentryDependencyContainer *instance;
+static NSObject *BuzzSentryDependencyContainerLock;
 
 + (void)initialize
 {
-    if (self == [SentryDependencyContainer class]) {
-        sentryDependencyContainerLock = [[NSObject alloc] init];
+    if (self == [BuzzSentryDependencyContainer class]) {
+        BuzzSentryDependencyContainerLock = [[NSObject alloc] init];
     }
 }
 
 + (instancetype)sharedInstance
 {
-    @synchronized(sentryDependencyContainerLock) {
+    @synchronized(BuzzSentryDependencyContainerLock) {
         if (instance == nil) {
             instance = [[self alloc] init];
         }
@@ -42,14 +42,14 @@ static NSObject *sentryDependencyContainerLock;
 
 + (void)reset
 {
-    @synchronized(sentryDependencyContainerLock) {
+    @synchronized(BuzzSentryDependencyContainerLock) {
         instance = nil;
     }
 }
 
 - (BuzzSentryFileManager *)fileManager
 {
-    @synchronized(sentryDependencyContainerLock) {
+    @synchronized(BuzzSentryDependencyContainerLock) {
         if (_fileManager == nil) {
             _fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
         }
@@ -59,7 +59,7 @@ static NSObject *sentryDependencyContainerLock;
 
 - (BuzzSentryAppStateManager *)appStateManager
 {
-    @synchronized(sentryDependencyContainerLock) {
+    @synchronized(BuzzSentryDependencyContainerLock) {
         if (_appStateManager == nil) {
             BuzzSentryOptions *options = [[[BuzzSentrySDK currentHub] getClient] options];
             _appStateManager = [[BuzzSentryAppStateManager alloc]
@@ -77,7 +77,7 @@ static NSObject *sentryDependencyContainerLock;
 - (BuzzSentryCrashWrapper *)crashWrapper
 {
     if (_crashWrapper == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_crashWrapper == nil) {
                 _crashWrapper = [BuzzSentryCrashWrapper sharedInstance];
             }
@@ -86,12 +86,12 @@ static NSObject *sentryDependencyContainerLock;
     return _crashWrapper;
 }
 
-- (SentryThreadWrapper *)threadWrapper
+- (BuzzSentryThreadWrapper *)threadWrapper
 {
     if (_threadWrapper == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_threadWrapper == nil) {
-                _threadWrapper = [[SentryThreadWrapper alloc] init];
+                _threadWrapper = [[BuzzSentryThreadWrapper alloc] init];
             }
         }
     }
@@ -100,7 +100,7 @@ static NSObject *sentryDependencyContainerLock;
 
 - (BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
-    @synchronized(sentryDependencyContainerLock) {
+    @synchronized(BuzzSentryDependencyContainerLock) {
         if (_dispatchQueueWrapper == nil) {
             _dispatchQueueWrapper = [[BuzzSentryDispatchQueueWrapper alloc] init];
         }
@@ -110,7 +110,7 @@ static NSObject *sentryDependencyContainerLock;
 
 - (BuzzSentryNSNotificationCenterWrapper *)notificationCenterWrapper
 {
-    @synchronized(sentryDependencyContainerLock) {
+    @synchronized(BuzzSentryDependencyContainerLock) {
         if (_notificationCenterWrapper == nil) {
             _notificationCenterWrapper = [[BuzzSentryNSNotificationCenterWrapper alloc] init];
         }
@@ -121,7 +121,7 @@ static NSObject *sentryDependencyContainerLock;
 - (id<BuzzSentryRandom>)random
 {
     if (_random == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_random == nil) {
                 _random = [[BuzzSentryRandom alloc] init];
             }
@@ -134,7 +134,7 @@ static NSObject *sentryDependencyContainerLock;
 - (BuzzSentryScreenshot *)screenshot
 {
     if (_screenshot == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_screenshot == nil) {
                 _screenshot = [[BuzzSentryScreenshot alloc] init];
             }
@@ -146,7 +146,7 @@ static NSObject *sentryDependencyContainerLock;
 - (BuzzSentryViewHierarchy *)viewHierarchy
 {
     if (_viewHierarchy == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_viewHierarchy == nil) {
                 _viewHierarchy = [[BuzzSentryViewHierarchy alloc] init];
             }
@@ -158,7 +158,7 @@ static NSObject *sentryDependencyContainerLock;
 - (BuzzSentryUIApplication *)application
 {
     if (_application == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_application == nil) {
                 _application = [[BuzzSentryUIApplication alloc] init];
             }
@@ -171,7 +171,7 @@ static NSObject *sentryDependencyContainerLock;
 - (BuzzSentrySwizzleWrapper *)swizzleWrapper
 {
     if (_swizzleWrapper == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_swizzleWrapper == nil) {
                 _swizzleWrapper = BuzzSentrySwizzleWrapper.sharedInstance;
             }
@@ -183,7 +183,7 @@ static NSObject *sentryDependencyContainerLock;
 - (BuzzSentryDebugImageProvider *)debugImageProvider
 {
     if (_debugImageProvider == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_debugImageProvider == nil) {
                 _debugImageProvider = [[BuzzSentryDebugImageProvider alloc] init];
             }
@@ -196,7 +196,7 @@ static NSObject *sentryDependencyContainerLock;
 - (BuzzSentryANRTracker *)getANRTracker:(NSTimeInterval)timeout
 {
     if (_anrTracker == nil) {
-        @synchronized(sentryDependencyContainerLock) {
+        @synchronized(BuzzSentryDependencyContainerLock) {
             if (_anrTracker == nil) {
                 _anrTracker = [[BuzzSentryANRTracker alloc]
                     initWithTimeoutInterval:timeout

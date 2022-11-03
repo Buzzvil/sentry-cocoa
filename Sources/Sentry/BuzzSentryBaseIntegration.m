@@ -2,7 +2,7 @@
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryLog.h"
 #import <Foundation/Foundation.h>
-#import <SentryDependencyContainer.h>
+#import <BuzzSentryDependencyContainer.h>
 #import <BuzzSentryOptions+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -127,7 +127,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     if ((integrationOptions & kIntegrationOptionDebuggerNotAttached) &&
-        [SentryDependencyContainer.sharedInstance.crashWrapper isBeingTraced]) {
+        [BuzzSentryDependencyContainer.sharedInstance.crashWrapper isBeingTraced]) {
         [self logWithReason:@"because the debugger is attached"];
         return NO;
     }

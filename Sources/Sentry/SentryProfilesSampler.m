@@ -1,5 +1,5 @@
 #import "SentryProfilesSampler.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryOptions+Private.h"
 #import "BuzzSentryTracesSampler.h"
 
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
 {
-    return [self initWithOptions:options random:[SentryDependencyContainer sharedInstance].random];
+    return [self initWithOptions:options random:[BuzzSentryDependencyContainer sharedInstance].random];
 }
 
 - (SentryProfilesSamplerDecision *)sample:(BuzzSentrySamplingContext *)context

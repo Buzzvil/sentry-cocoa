@@ -16,7 +16,7 @@ class BuzzSentryScreenshotTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentryDependencyContainer.sharedInstance().application = fixture.uiApplication
+        BuzzSentryDependencyContainer.sharedInstance().application = fixture.uiApplication
     }
     
     override func tearDown() {

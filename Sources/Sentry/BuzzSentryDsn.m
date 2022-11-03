@@ -1,7 +1,7 @@
 #import <CommonCrypto/CommonDigest.h>
 
 #import "BuzzSentryDsn.h"
-#import "SentryError.h"
+#import "BuzzSentryError.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -119,7 +119,7 @@ BuzzSentryDsn ()
     }
     if (nil == url) {
         if (nil != error) {
-            *error = NSErrorFromSentryError(kSentryErrorInvalidDsnError, errorMessage);
+            *error = NSErrorFromBuzzSentryError(kBuzzSentryErrorInvalidDsnError, errorMessage);
         }
         return nil;
     }

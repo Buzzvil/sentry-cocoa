@@ -3,7 +3,7 @@
 #import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryCrashWrapper.h>
-#import <SentryDependencyContainer.h>
+#import <BuzzSentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryHub.h>
 #import <BuzzSentryOptions+Private.h>
@@ -53,8 +53,8 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
 
     BuzzSentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
     BuzzSentryAppStateManager *appStateManager =
-        [SentryDependencyContainer sharedInstance].appStateManager;
-    BuzzSentryCrashWrapper *crashWrapper = [SentryDependencyContainer sharedInstance].crashWrapper;
+        [BuzzSentryDependencyContainer sharedInstance].appStateManager;
+    BuzzSentryCrashWrapper *crashWrapper = [BuzzSentryDependencyContainer sharedInstance].crashWrapper;
     BuzzSentryOutOfMemoryLogic *logic =
         [[BuzzSentryOutOfMemoryLogic alloc] initWithOptions:options
                                            crashAdapter:crashWrapper
@@ -68,7 +68,7 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
     [self.tracker start];
 
     self.anrTracker =
-        [SentryDependencyContainer.sharedInstance getANRTracker:options.appHangTimeoutInterval];
+        [BuzzSentryDependencyContainer.sharedInstance getANRTracker:options.appHangTimeoutInterval];
     [self.anrTracker addListener:self];
 
     self.appStateManager = appStateManager;

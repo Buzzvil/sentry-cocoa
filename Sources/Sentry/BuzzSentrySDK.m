@@ -4,7 +4,7 @@
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrash.h"
-#import "SentryDependencyContainer.h"
+#import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryLog.h"
 #import "BuzzSentryMeta.h"
@@ -421,7 +421,7 @@ static NSUInteger startInvocations;
     client.options.enabled = NO;
     [hub bindClient:nil];
 
-    [SentryDependencyContainer reset];
+    [BuzzSentryDependencyContainer reset];
 
     SENTRY_LOG_DEBUG(@"SDK closed!");
 }

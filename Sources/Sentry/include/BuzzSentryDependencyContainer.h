@@ -2,7 +2,7 @@
 #import "BuzzSentryFileManager.h"
 #import "BuzzSentryRandom.h"
 
-@class BuzzSentryAppStateManager, BuzzSentryCrashWrapper, SentryThreadWrapper, BuzzSentrySwizzleWrapper,
+@class BuzzSentryAppStateManager, BuzzSentryCrashWrapper, BuzzSentryThreadWrapper, BuzzSentrySwizzleWrapper,
     BuzzSentryDispatchQueueWrapper, BuzzSentryDebugImageProvider, BuzzSentryANRTracker,
     BuzzSentryNSNotificationCenterWrapper;
 
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryDependencyContainer : NSObject
+@interface BuzzSentryDependencyContainer : NSObject
 SENTRY_NO_INIT
 
 + (instancetype)sharedInstance;
@@ -25,7 +25,7 @@ SENTRY_NO_INIT
 @property (nonatomic, strong) BuzzSentryFileManager *fileManager;
 @property (nonatomic, strong) BuzzSentryAppStateManager *appStateManager;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
-@property (nonatomic, strong) SentryThreadWrapper *threadWrapper;
+@property (nonatomic, strong) BuzzSentryThreadWrapper *threadWrapper;
 @property (nonatomic, strong) id<BuzzSentryRandom> random;
 @property (nonatomic, strong) BuzzSentrySwizzleWrapper *swizzleWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;

@@ -12,8 +12,8 @@
 #import "BuzzSentrySDK+Private.h"
 #import "SentryThread.h"
 #import "BuzzSentryThreadInspector.h"
-#import "SentryThreadWrapper.h"
-#import <SentryDependencyContainer.h>
+#import "BuzzSentryThreadWrapper.h"
+#import <BuzzSentryDependencyContainer.h>
 #import <BuzzSentryOptions+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -35,7 +35,7 @@ BuzzSentryANRTrackingIntegration ()
     }
 
     self.tracker =
-        [SentryDependencyContainer.sharedInstance getANRTracker:options.appHangTimeoutInterval];
+        [BuzzSentryDependencyContainer.sharedInstance getANRTracker:options.appHangTimeoutInterval];
 
     [self.tracker addListener:self];
     self.options = options;

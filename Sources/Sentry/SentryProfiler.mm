@@ -8,7 +8,7 @@
 #    import "BuzzSentryDebugImageProvider.h"
 #    import "BuzzSentryDebugMeta.h"
 #    import "SentryDefines.h"
-#    import "SentryDependencyContainer.h"
+#    import "BuzzSentryDependencyContainer.h"
 #    import "BuzzSentryDevice.h"
 #    import "BuzzSentryEnvelope.h"
 #    import "BuzzSentryEnvelopeItemType.h"
@@ -115,7 +115,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     }
 
     SENTRY_LOG_DEBUG(@"Initialized new SentryProfiler %@", self);
-    _debugImageProvider = [SentryDependencyContainer sharedInstance].debugImageProvider;
+    _debugImageProvider = [BuzzSentryDependencyContainer sharedInstance].debugImageProvider;
     _mainThreadID = ThreadHandle::current()->tid();
     _spansInFlight = [NSMutableArray<BuzzSentrySpanId *> array];
     _transactions = [NSMutableArray<BuzzSentryTransaction *> array];

@@ -3,7 +3,7 @@
 #endif
 
 #import "NSData+BuzzSentryCompression.h"
-#import "SentryError.h"
+#import "BuzzSentryError.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,7 +34,7 @@ NSData (BuzzSentryCompression)
         &stream, compressionLevel, Z_DEFLATED, (16 + MAX_WBITS), 9, Z_DEFAULT_STRATEGY);
     if (err != Z_OK) {
         if (error) {
-            *error = NSErrorFromSentryError(kSentryErrorCompressionError, @"deflateInit2 error");
+            *error = NSErrorFromBuzzSentryError(kBuzzSentryErrorCompressionError, @"deflateInit2 error");
         }
         return nil;
     }
