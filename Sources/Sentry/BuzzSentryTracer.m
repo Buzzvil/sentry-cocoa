@@ -18,7 +18,7 @@
 #import "SentrySpanId.h"
 #import "SentryTime.h"
 #import "BuzzSentryTraceContext.h"
-#import "SentryTransaction.h"
+#import "BuzzSentryTransaction.h"
 #import "BuzzSentryTransactionContext.h"
 #import "SentryUIViewControllerPerformanceTracker.h"
 #import <SentryDispatchQueueWrapper.h>
@@ -492,7 +492,7 @@ static BOOL appStartMeasurementRead;
     [SentryProfiler stopProfilingSpan:self.rootSpan];
 #endif // SENTRY_TARGET_PROFILING_SUPPORTED
 
-    SentryTransaction *transaction = [self toTransaction];
+    BuzzSentryTransaction *transaction = [self toTransaction];
 
     // Prewarming can execute code up to viewDidLoad of a UIViewController, and keep the app in the
     // background. This can lead to auto-generated transactions lasting for minutes or event hours.
@@ -531,7 +531,7 @@ static BOOL appStartMeasurementRead;
     }
 }
 
-- (SentryTransaction *)toTransaction
+- (BuzzSentryTransaction *)toTransaction
 {
     NSArray<id<SentrySpan>> *appStartSpans = [self buildAppStartSpans];
 
@@ -545,7 +545,7 @@ static BOOL appStartMeasurementRead;
         [self setStartTimestamp:appStartMeasurement.appStartTimestamp];
     }
 
-    SentryTransaction *transaction = [[SentryTransaction alloc] initWithTrace:self children:spans];
+    BuzzSentryTransaction *transaction = [[BuzzSentryTransaction alloc] initWithTrace:self children:spans];
     transaction.transaction = self.transactionContext.name;
     [self addMeasurements:transaction];
     return transaction;
@@ -659,7 +659,7 @@ static BOOL appStartMeasurementRead;
     return @[ appStartSpan, premainSpan, runtimeInitSpan, appInitSpan, frameRenderSpan ];
 }
 
-- (void)addMeasurements:(SentryTransaction *)transaction
+- (void)addMeasurements:(BuzzSentryTransaction *)transaction
 {
     if (appStartMeasurement != nil && appStartMeasurement.type != SentryAppStartTypeUnknown) {
         NSString *type = nil;

@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class BuzzSentryTracer, BuzzSentryTransactionContext;
 
 NS_SWIFT_NAME(Transaction)
-@interface SentryTransaction : SentryEvent
+@interface BuzzSentryTransaction : SentryEvent
 SENTRY_NO_INIT
 
 @property (nonatomic, strong) BuzzSentryTracer *trace;

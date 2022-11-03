@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryTransactionTests: XCTestCase {
+class BuzzSentryTransactionTests: XCTestCase {
     
     private class Fixture {
         let transactionName = "Some Transaction"

@@ -17,7 +17,7 @@
 #import "SentrySerialization.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTracesSampler.h"
-#import "SentryTransaction.h"
+#import "BuzzSentryTransaction.h"
 #import "BuzzSentryTransactionContext+Private.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -246,12 +246,12 @@ SentryHub ()
     [client captureCrashEvent:event withScope:scope];
 }
 
-- (SentryId *)captureTransaction:(SentryTransaction *)transaction withScope:(SentryScope *)scope
+- (SentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(SentryScope *)scope
 {
     return [self captureTransaction:transaction withScope:scope additionalEnvelopeItems:@[]];
 }
 
-- (SentryId *)captureTransaction:(SentryTransaction *)transaction
+- (SentryId *)captureTransaction:(BuzzSentryTransaction *)transaction
                        withScope:(SentryScope *)scope
          additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
 {
@@ -294,12 +294,12 @@ SentryHub ()
 {
     return [self startTransactionWithContext:[[BuzzSentryTransactionContext alloc]
                                                  initWithName:name
-                                                   nameSource:kSentryTransactionNameSourceCustom
+                                                   nameSource:kBuzzSentryTransactionNameSourceCustom
                                                     operation:operation]];
 }
 
 - (id<SentrySpan>)startTransactionWithName:(NSString *)name
-                                nameSource:(SentryTransactionNameSource)source
+                                nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
 {
     return [self
@@ -314,13 +314,13 @@ SentryHub ()
 {
     return [self startTransactionWithContext:[[BuzzSentryTransactionContext alloc]
                                                  initWithName:name
-                                                   nameSource:kSentryTransactionNameSourceCustom
+                                                   nameSource:kBuzzSentryTransactionNameSourceCustom
                                                     operation:operation]
                                  bindToScope:bindToScope];
 }
 
 - (id<SentrySpan>)startTransactionWithName:(NSString *)name
-                                nameSource:(SentryTransactionNameSource)source
+                                nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope
 {

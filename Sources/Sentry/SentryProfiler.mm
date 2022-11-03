@@ -23,7 +23,7 @@
 #    import "SentrySerialization.h"
 #    import "SentrySpanId.h"
 #    import "SentryTime.h"
-#    import "SentryTransaction.h"
+#    import "BuzzSentryTransaction.h"
 #    import "BuzzSentryTransactionContext.h"
 
 #    if defined(DEBUG)
@@ -91,7 +91,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     thread::TIDType _mainThreadID;
 
     NSMutableArray<SentrySpanId *> *_spansInFlight;
-    NSMutableArray<SentryTransaction *> *_transactions;
+    NSMutableArray<BuzzSentryTransaction *> *_transactions;
     SentryProfilerTruncationReason _truncationReason;
     SentryScreenFrames *_frameInfo;
     NSTimer *_timeoutTimer;
@@ -118,7 +118,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     _debugImageProvider = [SentryDependencyContainer sharedInstance].debugImageProvider;
     _mainThreadID = ThreadHandle::current()->tid();
     _spansInFlight = [NSMutableArray<SentrySpanId *> array];
-    _transactions = [NSMutableArray<SentryTransaction *> array];
+    _transactions = [NSMutableArray<BuzzSentryTransaction *> array];
     return self;
 }
 #    endif
@@ -195,7 +195,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
 
-+ (void)dropTransaction:(SentryTransaction *)transaction
++ (void)dropTransaction:(BuzzSentryTransaction *)transaction
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
     std::lock_guard<std::mutex> l(_gProfilerLock);
@@ -211,7 +211,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
 
-+ (void)linkTransaction:(SentryTransaction *)transaction
++ (void)linkTransaction:(BuzzSentryTransaction *)transaction
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
     std::lock_guard<std::mutex> l(_gProfilerLock);
@@ -449,7 +449,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     }
 }
 
-- (void)addTransaction:(nonnull SentryTransaction *)transaction
+- (void)addTransaction:(nonnull BuzzSentryTransaction *)transaction
 {
     NSParameterAssert(transaction);
     if (transaction == nil) {
@@ -460,7 +460,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     SENTRY_LOG_DEBUG(@"Adding transaction %@ to list of profiled transactions for profiler %@.",
         transaction, self);
     if (_transactions == nil) {
-        _transactions = [NSMutableArray<SentryTransaction *> array];
+        _transactions = [NSMutableArray<BuzzSentryTransaction *> array];
     }
     [_transactions addObject:transaction];
 }
@@ -574,7 +574,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     // populate info from all transactions that occurred while profiler was running
     auto transactionsInfo = [NSMutableArray array];
     NSString *mainThreadID = [profile[@"profile"][@"samples"] firstObject][@"thread_id"];
-    for (SentryTransaction *transaction in _transactions) {
+    for (BuzzSentryTransaction *transaction in _transactions) {
         const auto relativeStart =
             [NSString stringWithFormat:@"%llu",
                       [transaction.startTimestamp compare:_startDate] == NSOrderedAscending

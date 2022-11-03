@@ -238,7 +238,7 @@ class SentryHubTests: XCTestCase {
 
         let tracer = Dynamic(span)
         XCTAssertEqual(tracer.transactionContext.name, fixture.transactionName)
-        XCTAssertEqual(tracer.transactionContext.nameSource, SentryTransactionNameSource.url)
+        XCTAssertEqual(tracer.transactionContext.nameSource, BuzzSentryTransactionNameSource.url)
         XCTAssertEqual(span.context.operation, fixture.transactionOperation)
     }
     

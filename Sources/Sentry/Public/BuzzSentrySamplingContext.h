@@ -18,14 +18,14 @@ NS_SWIFT_NAME(SamplingContext)
 @property (nullable, nonatomic, readonly) NSDictionary<NSString *, id> *customSamplingContext;
 
 /**
- * Init a SentryTransactionSamplingContext.
+ * Init a BuzzSentryTransactionSamplingContext.
  *
  * @param transactionContext The context of the transaction being sampled.
  */
 - (instancetype)initWithTransactionContext:(BuzzSentryTransactionContext *)transactionContext;
 
 /**
- * Init a SentryTransactionSamplingContext.
+ * Init a BuzzSentryTransactionSamplingContext.
  *
  * @param transactionContext The context of the transaction being sampled.
  * @param customSamplingContext Custom data used for sampling.

@@ -7,12 +7,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithName:(NSString *)name operation:(NSString *)operation
 {
     return [self initWithName:name
-                   nameSource:kSentryTransactionNameSourceCustom
+                   nameSource:kBuzzSentryTransactionNameSourceCustom
                     operation:operation];
 }
 
 - (instancetype)initWithName:(NSString *)name
-                  nameSource:(SentryTransactionNameSource)source
+                  nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(NSString *)operation
 {
     if (self = [super initWithOperation:operation]) {
@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
                      sampled:(BuzzSentrySampleDecision)sampled
 {
     return [self initWithName:name
-                   nameSource:kSentryTransactionNameSourceCustom
+                   nameSource:kBuzzSentryTransactionNameSourceCustom
                     operation:operation
                       sampled:sampled];
 }
 
 - (instancetype)initWithName:(NSString *)name
-                  nameSource:(SentryTransactionNameSource)source
+                  nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(NSString *)operation
                      sampled:(BuzzSentrySampleDecision)sampled
 {
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
                parentSampled:(BuzzSentrySampleDecision)parentSampled
 {
     return [self initWithName:name
-                   nameSource:kSentryTransactionNameSourceCustom
+                   nameSource:kBuzzSentryTransactionNameSourceCustom
                     operation:operation
                       traceId:traceId
                        spanId:spanId
@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (instancetype)initWithName:(NSString *)name
-                  nameSource:(SentryTransactionNameSource)source
+                  nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(nonnull NSString *)operation
                      traceId:(SentryId *)traceId
                       spanId:(SentrySpanId *)spanId

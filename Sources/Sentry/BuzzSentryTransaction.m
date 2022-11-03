@@ -1,4 +1,4 @@
-#import "SentryTransaction.h"
+#import "BuzzSentryTransaction.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryEnvelopeItemType.h"
 #import "BuzzSentryMeasurementValue.h"
@@ -7,13 +7,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryTransaction ()
+BuzzSentryTransaction ()
 
 @property (nonatomic, strong) NSArray<id<SentrySpan>> *spans;
 
 @end
 
-@implementation SentryTransaction
+@implementation BuzzSentryTransaction
 
 - (instancetype)initWithTrace:(BuzzSentryTracer *)trace children:(NSArray<id<SentrySpan>> *)children
 {
@@ -94,20 +94,20 @@ SentryTransaction ()
     return serializedData;
 }
 
-- (NSString *)stringForNameSource:(SentryTransactionNameSource)source
+- (NSString *)stringForNameSource:(BuzzSentryTransactionNameSource)source
 {
     switch (source) {
-    case kSentryTransactionNameSourceCustom:
+    case kBuzzSentryTransactionNameSourceCustom:
         return @"custom";
-    case kSentryTransactionNameSourceUrl:
+    case kBuzzSentryTransactionNameSourceUrl:
         return @"url";
-    case kSentryTransactionNameSourceRoute:
+    case kBuzzSentryTransactionNameSourceRoute:
         return @"route";
-    case kSentryTransactionNameSourceView:
+    case kBuzzSentryTransactionNameSourceView:
         return @"view";
-    case kSentryTransactionNameSourceComponent:
+    case kBuzzSentryTransactionNameSourceComponent:
         return @"component";
-    case kSentryTransactionNameSourceTask:
+    case kBuzzSentryTransactionNameSourceTask:
         return @"task";
     }
 }

@@ -6,16 +6,16 @@ NS_ASSUME_NONNULL_BEGIN
 BuzzSentryTransactionContext (Private)
 
 - (instancetype)initWithName:(NSString *)name
-                  nameSource:(SentryTransactionNameSource)source
+                  nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(NSString *)operation;
 
 - (instancetype)initWithName:(NSString *)name
-                  nameSource:(SentryTransactionNameSource)source
+                  nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(NSString *)operation
                      sampled:(BuzzSentrySampleDecision)sampled;
 
 - (instancetype)initWithName:(NSString *)name
-                  nameSource:(SentryTransactionNameSource)source
+                  nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(nonnull NSString *)operation
                      traceId:(SentryId *)traceId
                       spanId:(SentrySpanId *)spanId

@@ -38,7 +38,7 @@
 #import "SentryThreadInspector.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTracer.h"
-#import "SentryTransaction.h"
+#import "BuzzSentryTransaction.h"
 #import "SentryTransport.h"
 #import "SentryTransportAdapter.h"
 #import "SentryTransportFactory.h"
@@ -311,8 +311,8 @@ NSString *const kSentryDefaultEnvironment = @"production";
                                               withScope:(SentryScope *)scope
 {
     id<SentrySpan> span;
-    if ([event isKindOfClass:[SentryTransaction class]]) {
-        span = [(SentryTransaction *)event trace];
+    if ([event isKindOfClass:[BuzzSentryTransaction class]]) {
+        span = [(BuzzSentryTransaction *)event trace];
     } else {
         // Even envelopes without transactions can contain the trace state, allowing Sentry to
         // eventually sample attachments belonging to a transaction.

@@ -80,11 +80,11 @@ class SentryEventTests: XCTestCase {
     func testSerializeWithExtraTransaction() {
         let event = TestData.event
         event.transaction = nil
-        let sentryTransaction = "trans"
-        event.extra?["__sentry_transaction"] = sentryTransaction
+        let BuzzSentryTransaction = "trans"
+        event.extra?["__sentry_transaction"] = BuzzSentryTransaction
         
         let actual = event.serialize()
-        XCTAssertEqual(sentryTransaction, actual["transaction"] as? String)
+        XCTAssertEqual(BuzzSentryTransaction, actual["transaction"] as? String)
     }
     
     func testSerializeWithoutBreadcrumbs() {

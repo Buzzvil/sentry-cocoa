@@ -42,12 +42,12 @@ SentryPerformanceTracker () <BuzzSentryTracerDelegate>
 - (SentrySpanId *)startSpanWithName:(NSString *)name operation:(NSString *)operation
 {
     return [self startSpanWithName:name
-                        nameSource:kSentryTransactionNameSourceCustom
+                        nameSource:kBuzzSentryTransactionNameSourceCustom
                          operation:operation];
 }
 
 - (SentrySpanId *)startSpanWithName:(NSString *)name
-                         nameSource:(SentryTransactionNameSource)source
+                         nameSource:(BuzzSentryTransactionNameSource)source
                           operation:(NSString *)operation
 {
     id<SentrySpan> activeSpan;
@@ -104,13 +104,13 @@ SentryPerformanceTracker () <BuzzSentryTracerDelegate>
                            inBlock:(void (^)(void))block
 {
     [self measureSpanWithDescription:description
-                          nameSource:kSentryTransactionNameSourceCustom
+                          nameSource:kBuzzSentryTransactionNameSourceCustom
                            operation:operation
                              inBlock:block];
 }
 
 - (void)measureSpanWithDescription:(NSString *)description
-                        nameSource:(SentryTransactionNameSource)source
+                        nameSource:(BuzzSentryTransactionNameSource)source
                          operation:(NSString *)operation
                            inBlock:(void (^)(void))block
 {
@@ -129,14 +129,14 @@ SentryPerformanceTracker () <BuzzSentryTracerDelegate>
                            inBlock:(void (^)(void))block
 {
     [self measureSpanWithDescription:description
-                          nameSource:kSentryTransactionNameSourceCustom
+                          nameSource:kBuzzSentryTransactionNameSourceCustom
                            operation:operation
                         parentSpanId:parentSpanId
                              inBlock:block];
 }
 
 - (void)measureSpanWithDescription:(NSString *)description
-                        nameSource:(SentryTransactionNameSource)source
+                        nameSource:(BuzzSentryTransactionNameSource)source
                          operation:(NSString *)operation
                       parentSpanId:(SentrySpanId *)parentSpanId
                            inBlock:(void (^)(void))block

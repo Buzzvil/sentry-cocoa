@@ -134,11 +134,11 @@ static NSUInteger const defaultMaxBreadcrumbs = 100;
 /**
  * Transaction name source
  */
-typedef NS_ENUM(NSInteger, SentryTransactionNameSource) {
-    kSentryTransactionNameSourceCustom = 0,
-    kSentryTransactionNameSourceUrl,
-    kSentryTransactionNameSourceRoute,
-    kSentryTransactionNameSourceView,
-    kSentryTransactionNameSourceComponent,
-    kSentryTransactionNameSourceTask
+typedef NS_ENUM(NSInteger, BuzzSentryTransactionNameSource) {
+    kBuzzSentryTransactionNameSourceCustom = 0,
+    kBuzzSentryTransactionNameSourceUrl,
+    kBuzzSentryTransactionNameSourceRoute,
+    kBuzzSentryTransactionNameSourceView,
+    kBuzzSentryTransactionNameSourceComponent,
+    kBuzzSentryTransactionNameSourceTask
 };

@@ -151,7 +151,7 @@
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTracer+Test.h"
 #import "BuzzSentryTracer.h"
-#import "SentryTransaction.h"
+#import "BuzzSentryTransaction.h"
 #import "BuzzSentryTransactionContext+Private.h"
 #import "SentryTransport.h"
 #import "SentryTransportAdapter.h"

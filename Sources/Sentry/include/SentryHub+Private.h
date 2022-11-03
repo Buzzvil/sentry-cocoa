@@ -1,6 +1,6 @@
 #import "SentryHub.h"
 
-@class SentryEnvelopeItem, SentryId, SentryScope, SentryTransaction, SentryDispatchQueueWrapper,
+@class SentryEnvelopeItem, SentryId, SentryScope, BuzzSentryTransaction, SentryDispatchQueueWrapper,
     BuzzSentryTracer;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,11 +23,11 @@ SentryHub (Private)
 - (void)closeCachedSessionWithTimestamp:(NSDate *_Nullable)timestamp;
 
 - (id<SentrySpan>)startTransactionWithName:(NSString *)name
-                                nameSource:(SentryTransactionNameSource)source
+                                nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation;
 
 - (id<SentrySpan>)startTransactionWithName:(NSString *)name
-                                nameSource:(SentryTransactionNameSource)source
+                                nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope;
 
@@ -47,9 +47,9 @@ SentryHub (Private)
     additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(capture(event:scope:additionalEnvelopeItems:));
 
-- (SentryId *)captureTransaction:(SentryTransaction *)transaction withScope:(SentryScope *)scope;
+- (SentryId *)captureTransaction:(BuzzSentryTransaction *)transaction withScope:(SentryScope *)scope;
 
-- (SentryId *)captureTransaction:(SentryTransaction *)transaction
+- (SentryId *)captureTransaction:(BuzzSentryTransaction *)transaction
                        withScope:(SentryScope *)scope
          additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems;
 

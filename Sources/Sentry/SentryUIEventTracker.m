@@ -97,7 +97,7 @@ SentryUIEventTracker ()
 
             BuzzSentryTransactionContext *context =
                 [[BuzzSentryTransactionContext alloc] initWithName:transactionName
-                                                    nameSource:kSentryTransactionNameSourceComponent
+                                                    nameSource:kBuzzSentryTransactionNameSourceComponent
                                                      operation:operation];
 
             __block BuzzSentryTracer *transaction;

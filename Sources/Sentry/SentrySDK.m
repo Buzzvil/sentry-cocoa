@@ -194,12 +194,12 @@ static NSUInteger startInvocations;
 + (id<SentrySpan>)startTransactionWithName:(NSString *)name operation:(NSString *)operation
 {
     return [self startTransactionWithName:name
-                               nameSource:kSentryTransactionNameSourceCustom
+                               nameSource:kBuzzSentryTransactionNameSourceCustom
                                 operation:operation];
 }
 
 + (id<SentrySpan>)startTransactionWithName:(NSString *)name
-                                nameSource:(SentryTransactionNameSource)source
+                                nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
 {
     return [SentrySDK.currentHub startTransactionWithName:name
@@ -212,13 +212,13 @@ static NSUInteger startInvocations;
                                bindToScope:(BOOL)bindToScope
 {
     return [self startTransactionWithName:name
-                               nameSource:kSentryTransactionNameSourceCustom
+                               nameSource:kBuzzSentryTransactionNameSourceCustom
                                 operation:operation
                               bindToScope:bindToScope];
 }
 
 + (id<SentrySpan>)startTransactionWithName:(NSString *)name
-                                nameSource:(SentryTransactionNameSource)source
+                                nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope
 {

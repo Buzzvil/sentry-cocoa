@@ -11,7 +11,7 @@
 @class SentryScreenFrames;
 @class SentryEnvelope;
 @class SentrySpanId;
-@class SentryTransaction;
+@class BuzzSentryTransaction;
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
@@ -63,7 +63,7 @@ SENTRY_EXTERN_C_END
  * been tracking them for profiling. This allows them to be removed from bookkeeping and finish
  * profile if necessary.
  */
-+ (void)dropTransaction:(SentryTransaction *)transaction;
++ (void)dropTransaction:(BuzzSentryTransaction *)transaction;
 ;
 
 /**
@@ -71,7 +71,7 @@ SENTRY_EXTERN_C_END
  * concurrent span being profiled, capture an envelope with the profile data and clean up the
  * profiler.
  */
-+ (void)linkTransaction:(SentryTransaction *)transaction;
++ (void)linkTransaction:(BuzzSentryTransaction *)transaction;
 
 + (BOOL)isRunning;
 

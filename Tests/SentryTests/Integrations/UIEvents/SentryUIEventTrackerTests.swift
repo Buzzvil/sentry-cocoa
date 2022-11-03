@@ -243,7 +243,7 @@ class SentryUIEventTrackerTests: XCTestCase {
         return try! XCTUnwrap(Dynamic(sut).activeTransactions.asArray as? [BuzzSentryTracer])
     }
     
-    private func assertTransaction(name: String, operation: String, nameSource: SentryTransactionNameSource = .component) {
+    private func assertTransaction(name: String, operation: String, nameSource: BuzzSentryTransactionNameSource = .component) {
         let span = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
         
         let transactions = try! XCTUnwrap(Dynamic(sut).activeTransactions.asArray as? [BuzzSentryTracer])
