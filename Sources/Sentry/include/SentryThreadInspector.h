@@ -13,7 +13,7 @@ SENTRY_NO_INIT
        andMachineContextWrapper:(id<SentryCrashMachineContextWrapper>)machineContextWrapper;
 
 /**
- * Gets current threads with the stacktrace only for the current thread. Frames from the SentrySDK
+ * Gets current threads with the stacktrace only for the current thread. Frames from the BuzzSentrySDK
  * are not included. For more details checkout BuzzSentryStacktraceBuilder.
  * The first thread in the result is always the main thread.
  */
@@ -22,7 +22,7 @@ SENTRY_NO_INIT
 /**
  * Gets current threads with stacktrace,
  * this will pause every thread in order to be possible to retrieve this information.
- * Frames from the SentrySDK are not included. For more details checkout BuzzSentryStacktraceBuilder.
+ * Frames from the BuzzSentrySDK are not included. For more details checkout BuzzSentryStacktraceBuilder.
  * The first thread in the result is always the main thread.
  */
 - (NSArray<SentryThread *> *)getCurrentThreadsWithStackTrace;

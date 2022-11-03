@@ -120,7 +120,7 @@ BuzzSentrySessionTracker ()
  */
 - (void)endCachedSession
 {
-    BuzzSentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [BuzzSentrySDK currentHub];
     NSDate *_Nullable lastInForeground =
         [[[hub getClient] fileManager] readTimestampLastInForeground];
     if (nil != lastInForeground) {
@@ -155,7 +155,7 @@ BuzzSentrySessionTracker ()
         self.wasDidBecomeActiveCalled = YES;
     }
 
-    BuzzSentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [BuzzSentrySDK currentHub];
     self.lastInForeground = [[[hub getClient] fileManager] readTimestampLastInForeground];
 
     if (nil == self.lastInForeground) {
@@ -187,7 +187,7 @@ BuzzSentrySessionTracker ()
 - (void)willResignActive
 {
     self.lastInForeground = [self.currentDateProvider date];
-    BuzzSentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [BuzzSentrySDK currentHub];
     [[[hub getClient] fileManager] storeTimestampLastInForeground:self.lastInForeground];
     self.wasDidBecomeActiveCalled = NO;
 }
@@ -199,7 +199,7 @@ BuzzSentrySessionTracker ()
 {
     NSDate *sessionEnded
         = nil == self.lastInForeground ? [self.currentDateProvider date] : self.lastInForeground;
-    BuzzSentryHub *hub = [SentrySDK currentHub];
+    BuzzSentryHub *hub = [BuzzSentrySDK currentHub];
     [hub endSessionWithTimestamp:sessionEnded];
     [[[hub getClient] fileManager] deleteTimestampLastInForeground];
     self.wasDidBecomeActiveCalled = NO;

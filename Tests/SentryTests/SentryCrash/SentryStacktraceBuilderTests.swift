@@ -68,7 +68,7 @@ class BuzzSentryStacktraceBuilderTests: XCTestCase {
     }
     
     func testAsyncStacktraces_disabled() throws {
-        SentrySDK.start { options in
+        BuzzSentrySDK.start { options in
             options.dsn = TestConstants.dsnAsString(username: "BuzzSentryStacktraceBuilderTests")
             options.stitchAsyncCode = true
         }

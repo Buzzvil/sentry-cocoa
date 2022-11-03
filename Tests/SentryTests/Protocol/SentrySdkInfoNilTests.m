@@ -1,21 +1,21 @@
-#import "BuzzSentrySdkInfo.h"
+#import "BuzzSentrySDKInfo.h"
 #import <XCTest/XCTest.h>
 
-@interface BuzzSentrySdkInfoNilTests : XCTestCase
+@interface BuzzSentrySDKInfoNilTests : XCTestCase
 
 @end
 
 /**
- * Actual tests are written in BuzzSentrySdkInfoTests.swift. This class only exists to test
+ * Actual tests are written in BuzzSentrySDKInfoTests.swift. This class only exists to test
  * passing nil values, which is not possible with Swift cause the compiler avoids it.
  */
-@implementation BuzzSentrySdkInfoNilTests
+@implementation BuzzSentrySDKInfoNilTests
 
 - (void)testSdkNameIsNil
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wnonnull"
-    BuzzSentrySdkInfo *actual = [[BuzzSentrySdkInfo alloc] initWithName:nil andVersion:@""];
+    BuzzSentrySDKInfo *actual = [[BuzzSentrySDKInfo alloc] initWithName:nil andVersion:@""];
 #pragma clang diagnostic pop
 
     [self assertSdkInfoIsEmtpy:actual];
@@ -25,7 +25,7 @@
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wnonnull"
-    BuzzSentrySdkInfo *actual = [[BuzzSentrySdkInfo alloc] initWithName:@"" andVersion:nil];
+    BuzzSentrySDKInfo *actual = [[BuzzSentrySDKInfo alloc] initWithName:@"" andVersion:nil];
 #pragma clang diagnostic pop
 
     [self assertSdkInfoIsEmtpy:actual];
@@ -35,7 +35,7 @@
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wnonnull"
-    BuzzSentrySdkInfo *actual = [[BuzzSentrySdkInfo alloc] initWithDict:nil];
+    BuzzSentrySDKInfo *actual = [[BuzzSentrySDKInfo alloc] initWithDict:nil];
 #pragma clang diagnostic pop
 
     [self assertSdkInfoIsEmtpy:actual];
@@ -45,14 +45,14 @@
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wnonnull"
-    BuzzSentrySdkInfo *actual =
-        [[BuzzSentrySdkInfo alloc] initWithDict:@{ @"sdk" : @ { @"name" : @20, @"version" : @0 } }];
+    BuzzSentrySDKInfo *actual =
+        [[BuzzSentrySDKInfo alloc] initWithDict:@{ @"sdk" : @ { @"name" : @20, @"version" : @0 } }];
 #pragma clang diagnostic pop
 
     [self assertSdkInfoIsEmtpy:actual];
 }
 
-- (void)assertSdkInfoIsEmtpy:(BuzzSentrySdkInfo *)sdkInfo
+- (void)assertSdkInfoIsEmtpy:(BuzzSentrySDKInfo *)sdkInfo
 {
     XCTAssertEqualObjects(@"", sdkInfo.name);
     XCTAssertEqualObjects(@"", sdkInfo.version);

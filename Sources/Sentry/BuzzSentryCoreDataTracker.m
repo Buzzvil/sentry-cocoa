@@ -25,7 +25,7 @@
                       originalImp:(NSArray *(NS_NOESCAPE ^)(NSFetchRequest *, NSError **))original
 {
     __block id<BuzzSentrySpan> fetchSpan;
-    [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
+    [BuzzSentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
         fetchSpan = [span startChildWithOperation:SENTRY_COREDATA_FETCH_OPERATION
                                       description:[self descriptionFromRequest:request]];
     }];
@@ -69,7 +69,7 @@
         __block NSDictionary<NSString *, NSDictionary *> *operations =
             [self groupEntitiesOperations:context];
 
-        [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
+        [BuzzSentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
             fetchSpan = [span startChildWithOperation:SENTRY_COREDATA_SAVE_OPERATION
                                           description:[self descriptionForOperations:operations
                                                                            inContext:context]];

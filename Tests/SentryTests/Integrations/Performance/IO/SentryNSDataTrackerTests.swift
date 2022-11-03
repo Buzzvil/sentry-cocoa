@@ -23,7 +23,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
         super.setUp()
         fixture = Fixture()
         fixture.getSut().enable()
-        SentrySDK.start { $0.enableFileIOTracking = true }
+        BuzzSentrySDK.start { $0.enableFileIOTracking = true }
     }
     
     override func tearDown() {
@@ -92,7 +92,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
     
     func testWriteAtomically_CheckTrace() {
         let sut = fixture.getSut()
-        let transaction = SentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
         var span: Span?
                 
         sut.measure(fixture.data, writeToFile: fixture.filePath, atomically: false) { _, _ -> Bool in
@@ -108,7 +108,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
     
     func testWriteWithOptionsAndError_CheckTrace() {
         let sut = fixture.getSut()
-        let transaction = SentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
         var span: Span?
         
         try! sut.measure(fixture.data, writeToFile: fixture.filePath, options: .atomic) { _, _, _ -> Bool in
@@ -124,7 +124,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
     
     func testDontTrackSentryFilesWrites() {
         let sut = fixture.getSut()
-        let transaction = SentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
         var span: Span?
         
         let expect = expectation(description: "")
@@ -140,7 +140,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
     
     func testReadFromString() {
         let sut = fixture.getSut()
-        let transaction = SentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
         var span: Span?
         var usedPath: String?
         
@@ -158,7 +158,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
     
     func testReadFromStringOptionsError() {
         let sut = fixture.getSut()
-        let transaction = SentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
         var span: Span?
         var usedPath: String?
         var usedOptions: NSData.ReadingOptions?
@@ -179,7 +179,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
     
     func testReadFromURLOptionsError() {
         let sut = fixture.getSut()
-        let transaction = SentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
         var span: Span?
         var usedUrl: URL?
         let url = URL(fileURLWithPath: fixture.filePath)
@@ -201,7 +201,7 @@ class BuzzSentryNSDataTrackerTests: XCTestCase {
     
     func testDontTrackSentryFilesRead() {
         let sut = fixture.getSut()
-        let transaction = SentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Transaction", operation: "Test", bindToScope: true)
         var span: Span?
        
         let expect = expectation(description: "")

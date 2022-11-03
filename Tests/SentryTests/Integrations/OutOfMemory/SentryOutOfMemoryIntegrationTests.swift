@@ -18,7 +18,7 @@ class BuzzSentryOutOfMemoryIntegrationTests: XCTestCase {
             SentryDependencyContainer.sharedInstance().crashWrapper = crashWrapper
 
             let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: crashWrapper, andCurrentDateProvider: currentDate)
-            SentrySDK.setCurrentHub(hub)
+            BuzzSentrySDK.setCurrentHub(hub)
             
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }

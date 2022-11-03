@@ -1,4 +1,4 @@
-#import "SentrySDK.h"
+#import "BuzzSentrySDK.h"
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryBreadcrumb.h"
@@ -12,19 +12,19 @@
 #import "BuzzSentryScope.h"
 
 @interface
-SentrySDK ()
+BuzzSentrySDK ()
 
 @property (class) BuzzSentryHub *currentHub;
 
 @end
 
 NS_ASSUME_NONNULL_BEGIN
-@implementation SentrySDK
+@implementation BuzzSentrySDK
 
 static BuzzSentryHub *_Nullable currentHub;
 static BOOL crashedLastRunCalled;
-static BuzzSentryAppStartMeasurement *sentrySDKappStartMeasurement;
-static NSObject *sentrySDKappStartMeasurementLock;
+static BuzzSentryAppStartMeasurement *BuzzSentrySDKappStartMeasurement;
+static NSObject *BuzzSentrySDKappStartMeasurementLock;
 
 /**
  * @brief We need to keep track of the number of times @c +[startWith...] is called, because our OOM
@@ -38,8 +38,8 @@ static NSUInteger startInvocations;
 
 + (void)initialize
 {
-    if (self == [SentrySDK class]) {
-        sentrySDKappStartMeasurementLock = [[NSObject alloc] init];
+    if (self == [BuzzSentrySDK class]) {
+        BuzzSentrySDKappStartMeasurementLock = [[NSObject alloc] init];
         startInvocations = 0;
     }
 }
@@ -94,8 +94,8 @@ static NSUInteger startInvocations;
  */
 + (void)setAppStartMeasurement:(nullable BuzzSentryAppStartMeasurement *)value
 {
-    @synchronized(sentrySDKappStartMeasurementLock) {
-        sentrySDKappStartMeasurement = value;
+    @synchronized(BuzzSentrySDKappStartMeasurementLock) {
+        BuzzSentrySDKappStartMeasurement = value;
     }
     if (PrivateBuzzSentrySDKOnly.onAppStartMeasurementAvailable) {
         PrivateBuzzSentrySDKOnly.onAppStartMeasurementAvailable(value);
@@ -107,8 +107,8 @@ static NSUInteger startInvocations;
  */
 + (nullable BuzzSentryAppStartMeasurement *)getAppStartMeasurement
 {
-    @synchronized(sentrySDKappStartMeasurementLock) {
-        return sentrySDKappStartMeasurement;
+    @synchronized(BuzzSentrySDKappStartMeasurementLock) {
+        return BuzzSentrySDKappStartMeasurement;
     }
 }
 
@@ -137,7 +137,7 @@ static NSUInteger startInvocations;
         SENTRY_LOG_ERROR(@"Error while initializing the SDK");
         SENTRY_LOG_ERROR(@"%@", error);
     } else {
-        [SentrySDK startWithOptionsObject:options];
+        [BuzzSentrySDK startWithOptionsObject:options];
     }
 }
 
@@ -152,43 +152,43 @@ static NSUInteger startInvocations;
 
     // The Hub needs to be initialized with a client so that closing a session
     // can happen.
-    [SentrySDK setCurrentHub:[[BuzzSentryHub alloc] initWithClient:newClient andScope:nil]];
+    [BuzzSentrySDK setCurrentHub:[[BuzzSentryHub alloc] initWithClient:newClient andScope:nil]];
     SENTRY_LOG_DEBUG(@"SDK initialized! Version: %@", BuzzSentryMeta.versionString);
-    [SentrySDK installIntegrations];
+    [BuzzSentrySDK installIntegrations];
 }
 
 + (void)startWithConfigureOptions:(void (^)(BuzzSentryOptions *options))configureOptions
 {
     BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     configureOptions(options);
-    [SentrySDK startWithOptionsObject:options];
+    [BuzzSentrySDK startWithOptionsObject:options];
 }
 
 + (void)captureCrashEvent:(BuzzSentryEvent *)event
 {
-    [SentrySDK.currentHub captureCrashEvent:event];
+    [BuzzSentrySDK.currentHub captureCrashEvent:event];
 }
 
 + (void)captureCrashEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope
 {
-    [SentrySDK.currentHub captureCrashEvent:event withScope:scope];
+    [BuzzSentrySDK.currentHub captureCrashEvent:event withScope:scope];
 }
 
 + (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event
 {
-    return [SentrySDK captureEvent:event withScope:SentrySDK.currentHub.scope];
+    return [BuzzSentrySDK captureEvent:event withScope:BuzzSentrySDK.currentHub.scope];
 }
 
 + (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScopeBlock:(void (^)(BuzzSentryScope *))block
 {
-    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:BuzzSentrySDK.currentHub.scope];
     block(scope);
-    return [SentrySDK captureEvent:event withScope:scope];
+    return [BuzzSentrySDK captureEvent:event withScope:scope];
 }
 
 + (BuzzSentryId *)captureEvent:(BuzzSentryEvent *)event withScope:(BuzzSentryScope *)scope
 {
-    return [SentrySDK.currentHub captureEvent:event withScope:scope];
+    return [BuzzSentrySDK.currentHub captureEvent:event withScope:scope];
 }
 
 + (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name operation:(NSString *)operation
@@ -202,7 +202,7 @@ static NSUInteger startInvocations;
                                 nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
 {
-    return [SentrySDK.currentHub startTransactionWithName:name
+    return [BuzzSentrySDK.currentHub startTransactionWithName:name
                                                nameSource:source
                                                 operation:operation];
 }
@@ -222,7 +222,7 @@ static NSUInteger startInvocations;
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope
 {
-    return [SentrySDK.currentHub startTransactionWithName:name
+    return [BuzzSentrySDK.currentHub startTransactionWithName:name
                                                nameSource:source
                                                 operation:operation
                                               bindToScope:bindToScope];
@@ -230,13 +230,13 @@ static NSUInteger startInvocations;
 
 + (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
 {
-    return [SentrySDK.currentHub startTransactionWithContext:transactionContext];
+    return [BuzzSentrySDK.currentHub startTransactionWithContext:transactionContext];
 }
 
 + (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
 {
-    return [SentrySDK.currentHub startTransactionWithContext:transactionContext
+    return [BuzzSentrySDK.currentHub startTransactionWithContext:transactionContext
                                                  bindToScope:bindToScope];
 }
 
@@ -244,7 +244,7 @@ static NSUInteger startInvocations;
                                   bindToScope:(BOOL)bindToScope
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
 {
-    return [SentrySDK.currentHub startTransactionWithContext:transactionContext
+    return [BuzzSentrySDK.currentHub startTransactionWithContext:transactionContext
                                                  bindToScope:bindToScope
                                        customSamplingContext:customSamplingContext];
 }
@@ -252,60 +252,60 @@ static NSUInteger startInvocations;
 + (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
 {
-    return [SentrySDK.currentHub startTransactionWithContext:transactionContext
+    return [BuzzSentrySDK.currentHub startTransactionWithContext:transactionContext
                                        customSamplingContext:customSamplingContext];
 }
 
 + (BuzzSentryId *)captureError:(NSError *)error
 {
-    return [SentrySDK captureError:error withScope:SentrySDK.currentHub.scope];
+    return [BuzzSentrySDK captureError:error withScope:BuzzSentrySDK.currentHub.scope];
 }
 
 + (BuzzSentryId *)captureError:(NSError *)error withScopeBlock:(void (^)(BuzzSentryScope *_Nonnull))block
 {
-    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:BuzzSentrySDK.currentHub.scope];
     block(scope);
-    return [SentrySDK captureError:error withScope:scope];
+    return [BuzzSentrySDK captureError:error withScope:scope];
 }
 
 + (BuzzSentryId *)captureError:(NSError *)error withScope:(BuzzSentryScope *)scope
 {
-    return [SentrySDK.currentHub captureError:error withScope:scope];
+    return [BuzzSentrySDK.currentHub captureError:error withScope:scope];
 }
 
 + (BuzzSentryId *)captureException:(NSException *)exception
 {
-    return [SentrySDK captureException:exception withScope:SentrySDK.currentHub.scope];
+    return [BuzzSentrySDK captureException:exception withScope:BuzzSentrySDK.currentHub.scope];
 }
 
 + (BuzzSentryId *)captureException:(NSException *)exception
                 withScopeBlock:(void (^)(BuzzSentryScope *))block
 {
-    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:BuzzSentrySDK.currentHub.scope];
     block(scope);
-    return [SentrySDK captureException:exception withScope:scope];
+    return [BuzzSentrySDK captureException:exception withScope:scope];
 }
 
 + (BuzzSentryId *)captureException:(NSException *)exception withScope:(BuzzSentryScope *)scope
 {
-    return [SentrySDK.currentHub captureException:exception withScope:scope];
+    return [BuzzSentrySDK.currentHub captureException:exception withScope:scope];
 }
 
 + (BuzzSentryId *)captureMessage:(NSString *)message
 {
-    return [SentrySDK captureMessage:message withScope:SentrySDK.currentHub.scope];
+    return [BuzzSentrySDK captureMessage:message withScope:BuzzSentrySDK.currentHub.scope];
 }
 
 + (BuzzSentryId *)captureMessage:(NSString *)message withScopeBlock:(void (^)(BuzzSentryScope *))block
 {
-    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:BuzzSentrySDK.currentHub.scope];
     block(scope);
-    return [SentrySDK captureMessage:message withScope:scope];
+    return [BuzzSentrySDK captureMessage:message withScope:scope];
 }
 
 + (BuzzSentryId *)captureMessage:(NSString *)message withScope:(BuzzSentryScope *)scope
 {
-    return [SentrySDK.currentHub captureMessage:message withScope:scope];
+    return [BuzzSentrySDK.currentHub captureMessage:message withScope:scope];
 }
 
 /**
@@ -313,7 +313,7 @@ static NSUInteger startInvocations;
  */
 + (void)captureEnvelope:(BuzzSentryEnvelope *)envelope
 {
-    [SentrySDK.currentHub captureEnvelope:envelope];
+    [BuzzSentrySDK.currentHub captureEnvelope:envelope];
 }
 
 /**
@@ -321,29 +321,29 @@ static NSUInteger startInvocations;
  */
 + (void)storeEnvelope:(BuzzSentryEnvelope *)envelope
 {
-    if (nil != [SentrySDK.currentHub getClient]) {
-        [[SentrySDK.currentHub getClient] storeEnvelope:envelope];
+    if (nil != [BuzzSentrySDK.currentHub getClient]) {
+        [[BuzzSentrySDK.currentHub getClient] storeEnvelope:envelope];
     }
 }
 
 + (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
-    [SentrySDK.currentHub captureUserFeedback:userFeedback];
+    [BuzzSentrySDK.currentHub captureUserFeedback:userFeedback];
 }
 
 + (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb
 {
-    [SentrySDK.currentHub addBreadcrumb:crumb];
+    [BuzzSentrySDK.currentHub addBreadcrumb:crumb];
 }
 
 + (void)configureScope:(void (^)(BuzzSentryScope *scope))callback
 {
-    [SentrySDK.currentHub configureScope:callback];
+    [BuzzSentrySDK.currentHub configureScope:callback];
 }
 
 + (void)setUser:(BuzzSentryUser *_Nullable)user
 {
-    [SentrySDK.currentHub setUser:user];
+    [BuzzSentrySDK.currentHub setUser:user];
 }
 
 + (BOOL)crashedLastRun
@@ -353,12 +353,12 @@ static NSUInteger startInvocations;
 
 + (void)startSession
 {
-    [SentrySDK.currentHub startSession];
+    [BuzzSentrySDK.currentHub startSession];
 }
 
 + (void)endSession
 {
-    [SentrySDK.currentHub endSession];
+    [BuzzSentrySDK.currentHub endSession];
 }
 
 /**
@@ -366,19 +366,19 @@ static NSUInteger startInvocations;
  */
 + (void)installIntegrations
 {
-    if (nil == [SentrySDK.currentHub getClient]) {
+    if (nil == [BuzzSentrySDK.currentHub getClient]) {
         // Gatekeeper
         return;
     }
-    BuzzSentryOptions *options = [SentrySDK.currentHub getClient].options;
-    for (NSString *integrationName in [SentrySDK.currentHub getClient].options.integrations) {
+    BuzzSentryOptions *options = [BuzzSentrySDK.currentHub getClient].options;
+    for (NSString *integrationName in [BuzzSentrySDK.currentHub getClient].options.integrations) {
         Class integrationClass = NSClassFromString(integrationName);
         if (nil == integrationClass) {
             SENTRY_LOG_ERROR(@"[BuzzSentryHub doInstallIntegrations] "
                              @"couldn't find \"%@\" -> skipping.",
                 integrationName);
             continue;
-        } else if ([SentrySDK.currentHub isIntegrationInstalled:integrationClass]) {
+        } else if ([BuzzSentrySDK.currentHub isIntegrationInstalled:integrationClass]) {
             SENTRY_LOG_ERROR(
                 @"[BuzzSentryHub doInstallIntegrations] already installed \"%@\" -> skipping.",
                 integrationName);
@@ -388,15 +388,15 @@ static NSUInteger startInvocations;
         BOOL shouldInstall = [integrationInstance installWithOptions:options];
         if (shouldInstall) {
             SENTRY_LOG_DEBUG(@"Integration installed: %@", integrationName);
-            [SentrySDK.currentHub.installedIntegrations addObject:integrationInstance];
-            [SentrySDK.currentHub.installedIntegrationNames addObject:integrationName];
+            [BuzzSentrySDK.currentHub.installedIntegrations addObject:integrationInstance];
+            [BuzzSentrySDK.currentHub.installedIntegrationNames addObject:integrationName];
         }
     }
 }
 
 + (void)flush:(NSTimeInterval)timeout
 {
-    [SentrySDK.currentHub flush:timeout];
+    [BuzzSentrySDK.currentHub flush:timeout];
 }
 
 /**
@@ -405,8 +405,8 @@ static NSUInteger startInvocations;
 + (void)close
 {
     // pop the hub and unset
-    BuzzSentryHub *hub = SentrySDK.currentHub;
-    [SentrySDK setCurrentHub:nil];
+    BuzzSentryHub *hub = BuzzSentrySDK.currentHub;
+    [BuzzSentrySDK setCurrentHub:nil];
 
     // uninstall all the integrations
     for (NSObject<BuzzSentryIntegrationProtocol> *integration in hub.installedIntegrations) {

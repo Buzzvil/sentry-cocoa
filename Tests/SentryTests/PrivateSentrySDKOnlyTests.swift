@@ -9,7 +9,7 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
 
     func testStoreEnvelope() {
         let client = TestClient(options: Options())
-        SentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
+        BuzzSentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
         
         let envelope = TestConstants.envelope
         PrivateBuzzSentrySDKOnly.store(envelope)
@@ -20,7 +20,7 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
     
     func testCaptureEnvelope() {
         let client = TestClient(options: Options())
-        SentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
+        BuzzSentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
         
         let envelope = TestConstants.envelope
         PrivateBuzzSentrySDKOnly.capture(envelope)
@@ -83,11 +83,11 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
     
     func testGetAppStartMeasurement() {
         let appStartMeasurement = TestData.getAppStartMeasurement(type: .warm)
-        SentrySDK.setAppStartMeasurement(appStartMeasurement)
+        BuzzSentrySDK.setAppStartMeasurement(appStartMeasurement)
         
         XCTAssertEqual(appStartMeasurement, PrivateBuzzSentrySDKOnly.appStartMeasurement)
         
-        SentrySDK.setAppStartMeasurement(nil)
+        BuzzSentrySDK.setAppStartMeasurement(nil)
         XCTAssertNil(PrivateBuzzSentrySDKOnly.appStartMeasurement)
     }
     
@@ -106,7 +106,7 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
         let options = Options()
         options.dsn = TestConstants.dsnAsString(username: "BuzzSentryFramesTrackingIntegrationTests")
         let client = TestClient(options: options)
-        SentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
+        BuzzSentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
 
         XCTAssertEqual(PrivateBuzzSentrySDKOnly.options, options)
     }

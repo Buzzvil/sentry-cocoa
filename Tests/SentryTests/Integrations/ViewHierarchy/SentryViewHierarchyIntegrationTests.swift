@@ -34,21 +34,21 @@ class BuzzSentryViewHierarchyIntegrationTests: XCTestCase {
     }
 
     func test_attachViewHierarchy_disabled() {
-        SentrySDK.start { $0.attachViewHierarchy = false }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
+        BuzzSentrySDK.start { $0.attachViewHierarchy = false }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
         XCTAssertFalse(sentrycrash_hasSaveViewHierarchyCallback())
     }
 
     func test_attachViewHierarchy_enabled() {
-        SentrySDK.start { $0.attachViewHierarchy = true }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
+        BuzzSentrySDK.start { $0.attachViewHierarchy = true }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
         XCTAssertTrue(sentrycrash_hasSaveViewHierarchyCallback())
     }
 
     func test_uninstall() {
-        SentrySDK.start { $0.attachViewHierarchy = true }
-        SentrySDK.close()
-        XCTAssertNil(SentrySDK.currentHub().getClient()?.attachmentProcessors)
+        BuzzSentrySDK.start { $0.attachViewHierarchy = true }
+        BuzzSentrySDK.close()
+        XCTAssertNil(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors)
         XCTAssertFalse(sentrycrash_hasSaveViewHierarchyCallback())
     }
 

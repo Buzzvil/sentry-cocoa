@@ -24,7 +24,7 @@ BuzzSentryBreadcrumbTracker (Private)
 
 - (void)setUp
 {
-    [SentrySDK.currentHub bindClient:nil];
+    [BuzzSentrySDK.currentHub bindClient:nil];
 }
 
 - (void)testVersion
@@ -51,22 +51,22 @@ BuzzSentryBreadcrumbTracker (Private)
 
     BuzzSentryClient *client = [[BuzzSentryClient alloc] initWithOptions:options];
     XCTAssertNil(error);
-    XCTAssertNil([SentrySDK.currentHub getClient]);
-    [SentrySDK.currentHub bindClient:client];
-    XCTAssertNotNil([SentrySDK.currentHub getClient]);
-    [SentrySDK.currentHub bindClient:nil];
+    XCTAssertNil([BuzzSentrySDK.currentHub getClient]);
+    [BuzzSentrySDK.currentHub bindClient:client];
+    XCTAssertNotNil([BuzzSentrySDK.currentHub getClient]);
+    [BuzzSentrySDK.currentHub bindClient:nil];
 }
 
 - (void)testSDKDefaultHub
 {
-    [SentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
-    XCTAssertNotNil([SentrySDK.currentHub getClient]);
-    [SentrySDK.currentHub bindClient:nil];
+    [BuzzSentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
+    XCTAssertNotNil([BuzzSentrySDK.currentHub getClient]);
+    [BuzzSentrySDK.currentHub bindClient:nil];
 }
 
 - (void)testSDKBreadCrumbAdd
 {
-    [SentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
+    [BuzzSentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
 
     BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                              category:@"testCategory"];
@@ -74,30 +74,30 @@ BuzzSentryBreadcrumbTracker (Private)
     crumb.message = @"testMessage";
     crumb.data = @{ @"testDataKey" : @"testDataVaue" };
 
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 }
 
 - (void)testSDKCaptureEvent
 {
-    [SentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
+    [BuzzSentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
 
     BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
 
     event.timestamp = [NSDate date];
     event.message = [[BuzzSentryMessage alloc] initWithFormatted:@"testy test"];
 
-    [SentrySDK captureEvent:event];
+    [BuzzSentrySDK captureEvent:event];
 }
 
 - (void)testSDKCaptureError
 {
-    [SentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
+    [BuzzSentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
 
     NSError *error =
         [NSError errorWithDomain:@"testworld"
                             code:200
                         userInfo:@{ NSLocalizedDescriptionKey : @"test ran out of money" }];
-    [SentrySDK captureError:error];
+    [BuzzSentrySDK captureError:error];
 }
 
 - (void)testLevelNames

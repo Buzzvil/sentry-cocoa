@@ -1019,7 +1019,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testSetSDKIntegrations() {
-        SentrySDK.start(options: Options())
+        BuzzSentrySDK.start(options: Options())
 
         let eventId = fixture.getSut().capture(message: fixture.messageAsString)
 
@@ -1033,7 +1033,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
 
     func testTrackStitchAsyncCode() {
-        SentrySDK.start(options: Options())
+        BuzzSentrySDK.start(options: Options())
 
         let eventId = fixture.getSut(configureOptions: { options in
             options.stitchAsyncCode = true

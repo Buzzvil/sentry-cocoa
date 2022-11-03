@@ -30,7 +30,7 @@ BuzzSentrySessionCrashedHandler ()
 - (void)endCurrentSessionAsCrashedWhenCrashOrOOM
 {
     if (self.crashWrapper.crashedLastLaunch || [self.outOfMemoryLogic isOOM]) {
-        SentryFileManager *fileManager = [[[SentrySDK currentHub] getClient] fileManager];
+        SentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
 
         if (nil == fileManager) {
             return;

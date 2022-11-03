@@ -55,7 +55,7 @@ BuzzSentryANRTrackingIntegration ()
 
 - (void)anrDetected
 {
-    SentryThreadInspector *threadInspector = SentrySDK.currentHub.getClient.threadInspector;
+    SentryThreadInspector *threadInspector = BuzzSentrySDK.currentHub.getClient.threadInspector;
 
     NSString *message = [NSString stringWithFormat:@"App hanging for at least %li ms.",
                                   (long)(self.options.appHangTimeoutInterval * 1000)];
@@ -73,7 +73,7 @@ BuzzSentryANRTrackingIntegration ()
     event.exceptions = @[ sentryException ];
     event.threads = threads;
 
-    [SentrySDK captureEvent:event];
+    [BuzzSentrySDK captureEvent:event];
 }
 
 - (void)anrStopped

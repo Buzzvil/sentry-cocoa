@@ -159,7 +159,7 @@ class CoreDataViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        let transaction = SentrySDK.startTransaction(name: "Sync person database", operation: "data.update", bindToScope: true)
+        let transaction = BuzzSentrySDK.startTransaction(name: "Sync person database", operation: "data.update", bindToScope: true)
         saveContext()
         transaction.finish()
         super.viewWillDisappear(animated)

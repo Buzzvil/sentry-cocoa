@@ -29,7 +29,7 @@ class BuzzSentryPerformanceTrackerTests: XCTestCase {
         super.setUp()
         
         fixture = Fixture()
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
     }
     
     override func tearDown() {
@@ -58,11 +58,11 @@ class BuzzSentryPerformanceTrackerTests: XCTestCase {
     func testStartSpan_ScopeAlreadyWithSpan() {
         let sut = fixture.getSut()
 
-        let firstTransaction = SentrySDK.startTransaction(name: fixture.someTransaction, operation: fixture.someOperation, bindToScope: true)
+        let firstTransaction = BuzzSentrySDK.startTransaction(name: fixture.someTransaction, operation: fixture.someOperation, bindToScope: true)
         let spanId = startSpan(tracker: sut)
                 
         let transaction = sut.getSpan(spanId)
-        let scopeSpan = SentrySDK.currentHub().scope.span
+        let scopeSpan = BuzzSentrySDK.currentHub().scope.span
         
         XCTAssert(scopeSpan !== transaction)
         XCTAssert(scopeSpan === firstTransaction)
@@ -70,11 +70,11 @@ class BuzzSentryPerformanceTrackerTests: XCTestCase {
     
     func testStartSpan_ScopeWithUIActionSpan_FinishesSpan() {
         let sut = fixture.getSut()
-        let firstTransaction = SentrySDK.startTransaction(name: fixture.someTransaction, operation: "ui.action", bindToScope: true)
+        let firstTransaction = BuzzSentrySDK.startTransaction(name: fixture.someTransaction, operation: "ui.action", bindToScope: true)
         let spanId = startSpan(tracker: sut)
                 
         let transaction = sut.getSpan(spanId)
-        let scopeSpan = SentrySDK.currentHub().scope.span
+        let scopeSpan = BuzzSentrySDK.currentHub().scope.span
         
         XCTAssert(scopeSpan === transaction)
         XCTAssert(scopeSpan !== firstTransaction)

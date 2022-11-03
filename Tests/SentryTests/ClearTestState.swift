@@ -2,14 +2,14 @@ import Foundation
 import Sentry
 
 func clearTestState() {
-    SentrySDK.close()
-    SentrySDK.setCurrentHub(nil)
-    SentrySDK.crashedLastRunCalled = false
-    SentrySDK.startInvocations = 0
+    BuzzSentrySDK.close()
+    BuzzSentrySDK.setCurrentHub(nil)
+    BuzzSentrySDK.crashedLastRunCalled = false
+    BuzzSentrySDK.startInvocations = 0
     
     PrivateBuzzSentrySDKOnly.onAppStartMeasurementAvailable = nil
     PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = false
-    SentrySDK.setAppStartMeasurement(nil)
+    BuzzSentrySDK.setAppStartMeasurement(nil)
     CurrentDate.setCurrentDateProvider(nil)
     BuzzSentryNetworkTracker.sharedInstance.disable()
     

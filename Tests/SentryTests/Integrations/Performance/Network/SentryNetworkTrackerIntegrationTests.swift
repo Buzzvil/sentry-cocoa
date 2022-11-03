@@ -144,14 +144,14 @@ class BuzzSentryNetworkTrackerIntegrationTests: XCTestCase {
         
         wait(for: [expect], timeout: 5)
         
-        let scope = SentrySDK.currentHub().scope
+        let scope = BuzzSentrySDK.currentHub().scope
         let breadcrumbs = Dynamic(scope).breadcrumbArray as [Breadcrumb]?
         XCTAssertEqual(1, breadcrumbs?.count)
     }
     
     func testGetRequest_SpanCreatedAndBaggageHeaderAdded_disabled() {
         startSDK()
-        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
+        let transaction = BuzzSentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
         let expect = expectation(description: "Request completed")
         let session = URLSession(configuration: URLSessionConfiguration.default)
 
@@ -180,7 +180,7 @@ class BuzzSentryNetworkTrackerIntegrationTests: XCTestCase {
     
     func testGetRequest_CompareBuzzSentryTraceHeader() {
         startSDK()
-        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
+        let transaction = BuzzSentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
         let expect = expectation(description: "Request completed")
         let session = URLSession(configuration: URLSessionConfiguration.default)
         var response: String?
@@ -212,11 +212,11 @@ class BuzzSentryNetworkTrackerIntegrationTests: XCTestCase {
     }
         
     private func startSDK() {
-        SentrySDK.start(options: self.fixture.options)
+        BuzzSentrySDK.start(options: self.fixture.options)
     }
     
     private func startTransactionBoundToScope() -> BuzzSentryTracer {
-        return SentrySDK.startTransaction(name: "Test", operation: "test", bindToScope: true) as! BuzzSentryTracer
+        return BuzzSentrySDK.startTransaction(name: "Test", operation: "test", bindToScope: true) as! BuzzSentryTracer
     }
     
     private func assertRemovedIntegration(_ options: Options) {

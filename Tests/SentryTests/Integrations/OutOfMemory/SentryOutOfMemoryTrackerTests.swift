@@ -26,7 +26,7 @@ class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
             crashWrapper = TestSentryCrashWrapper.sharedInstance()
             
             let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: crashWrapper, andCurrentDateProvider: currentDate)
-            SentrySDK.setCurrentHub(hub)
+            BuzzSentrySDK.setCurrentHub(hub)
             
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }
@@ -50,7 +50,7 @@ class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         
         fixture = Fixture()
         sut = fixture.getSut()
-        SentrySDK.startInvocations = 1
+        BuzzSentrySDK.startInvocations = 1
     }
     
     override func tearDown() {
@@ -182,7 +182,7 @@ class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         sut.start()
         goToForeground()
 
-        SentrySDK.startInvocations = 2
+        BuzzSentrySDK.startInvocations = 2
         sut.start()
         assertNoOOMSent()
     }

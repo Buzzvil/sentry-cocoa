@@ -36,7 +36,7 @@ class BuzzSentryNetworkTrackerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentrySDK.setCurrentHub(TestHub(client: TestClient(options: fixture.options), andScope: fixture.scope))
+        BuzzSentrySDK.setCurrentHub(TestHub(client: TestClient(options: fixture.options), andScope: fixture.scope))
         CurrentDate.setCurrentDateProvider(fixture.dateProvider)
     }
     
@@ -122,7 +122,7 @@ class BuzzSentryNetworkTrackerTests: XCTestCase {
     }
     
     func testSDKOptionsNil() {
-        SentrySDK.setCurrentHub(nil)
+        BuzzSentrySDK.setCurrentHub(nil)
         
         let task = fixture.sentryTask
         let span = spanForTask(task: task)
@@ -670,7 +670,7 @@ class BuzzSentryNetworkTrackerTests: XCTestCase {
     }
     
     private func startTransaction() -> Span {
-        return SentrySDK.startTransaction(name: BuzzSentryNetworkTrackerTests.transactionName, operation: BuzzSentryNetworkTrackerTests.transactionOperation, bindToScope: true)
+        return BuzzSentrySDK.startTransaction(name: BuzzSentryNetworkTrackerTests.transactionName, operation: BuzzSentryNetworkTrackerTests.transactionOperation, bindToScope: true)
     }
     
     private func createResponse(code: Int) -> URLResponse {

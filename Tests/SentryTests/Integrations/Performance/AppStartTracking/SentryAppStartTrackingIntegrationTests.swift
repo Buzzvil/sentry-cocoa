@@ -22,7 +22,7 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentrySDK.setAppStartMeasurement(nil)
+        BuzzSentrySDK.setAppStartMeasurement(nil)
         sut = BuzzSentryAppStartTrackingIntegration()
     }
 
@@ -30,7 +30,7 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         super.tearDown()
         fixture.fileManager.deleteAppState()
         PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = false
-        SentrySDK.setAppStartMeasurement(nil)
+        BuzzSentrySDK.setAppStartMeasurement(nil)
         sut.stop()
     }
     
@@ -39,7 +39,7 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNotNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNotNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testNoSampleRate_DoesNotUpdatesAppState() {
@@ -50,7 +50,7 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testHybridSDKModeEnabled_DoesUpdatesAppState() {
@@ -63,7 +63,7 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNotNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNotNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testOnlyAppStartMeasuringEnabled_DoesNotUpdatesAppState() {
@@ -74,7 +74,7 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testAutoPerformanceTrackingDisabled_DoesNotUpdatesAppState() {
@@ -84,7 +84,7 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func test_PerformanceTrackingDisabled() {

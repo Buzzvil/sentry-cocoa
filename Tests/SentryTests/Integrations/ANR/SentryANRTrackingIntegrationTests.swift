@@ -1,6 +1,6 @@
 import XCTest
 
-class BuzzSentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
+class BuzzSentryANRTrackingIntegrationTests: BuzzSentrySDKIntegrationTestsBase {
     
     private class Fixture {
         let options: Options
@@ -127,6 +127,6 @@ class BuzzSentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
             thread1
         ]
         
-        SentrySDK.currentHub().getClient()?.threadInspector = threadInspector
+        BuzzSentrySDK.currentHub().getClient()?.threadInspector = threadInspector
     }
 }

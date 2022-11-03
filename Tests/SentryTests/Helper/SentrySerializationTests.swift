@@ -91,7 +91,7 @@ class SentrySerializationTests: XCTestCase {
     }
 
     func testBuzzSentryEnvelopeSerializer_SdkInfo() {
-        let sdkInfo = BuzzSentrySdkInfo(name: "sentry.cocoa", andVersion: "5.0.1")
+        let sdkInfo = BuzzSentrySDKInfo(name: "sentry.cocoa", andVersion: "5.0.1")
         let envelopeHeader = BuzzSentryEnvelopeHeader(id: nil, sdkInfo: sdkInfo, traceContext: nil)
         let envelope = BuzzSentryEnvelope(header: envelopeHeader, singleItem: createItemWithEmptyAttachment())
 
@@ -307,7 +307,7 @@ class SentrySerializationTests: XCTestCase {
     }
 
     private func assertDefaultSdkInfoSet(deserializedEnvelope: BuzzSentryEnvelope) {
-        let sdkInfo = BuzzSentrySdkInfo(name: BuzzSentryMeta.sdkName, andVersion: BuzzSentryMeta.versionString)
+        let sdkInfo = BuzzSentrySDKInfo(name: BuzzSentryMeta.sdkName, andVersion: BuzzSentryMeta.versionString)
         XCTAssertEqual(sdkInfo, deserializedEnvelope.header.sdkInfo)
     }
     

@@ -2,11 +2,11 @@
 #import <XCTest/XCTest.h>
 #import <objc/runtime.h>
 
-@interface SentrySDKPerformanceBenchmarkTests : XCTestCase
+@interface BuzzSentrySDKPerformanceBenchmarkTests : XCTestCase
 
 @end
 
-@implementation SentrySDKPerformanceBenchmarkTests
+@implementation BuzzSentrySDKPerformanceBenchmarkTests
 
 - (void)testCPUBenchmark
 {

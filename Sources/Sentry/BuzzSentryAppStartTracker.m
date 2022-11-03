@@ -183,7 +183,7 @@ BuzzSentryAppStartTracker ()
             moduleInitializationTimestamp:self.sysctl.moduleInitializationTimestamp
               didFinishLaunchingTimestamp:self.didFinishLaunchingTimestamp];
 
-        SentrySDK.appStartMeasurement = appStartMeasurement;
+        BuzzSentrySDK.appStartMeasurement = appStartMeasurement;
     };
 
     // With only running this once we know that the process is a new one when the following

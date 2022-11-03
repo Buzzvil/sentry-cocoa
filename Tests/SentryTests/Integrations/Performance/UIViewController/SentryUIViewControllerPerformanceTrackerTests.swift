@@ -55,7 +55,7 @@ class BuzzSentryUIViewControllerPerformanceTrackerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
     }
 
     override func tearDown() {

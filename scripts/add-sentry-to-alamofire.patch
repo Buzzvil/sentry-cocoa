@@ -115,7 +115,7 @@ index 1eeafe7..f5f3dea 100644
 +        super.setUp()
 +        
 +        if (!SentryInitialized) {
-+            SentrySDK.start { options in
++            BuzzSentrySDK.start { options in
 +                options.dsn = "https://6cc9bae94def43cab8444a99e0031c28@o447951.ingest.sentry.io/5428557"
 +                options.environment = "integration-tests"
 +                options.tracesSampleRate = 1.0
@@ -127,7 +127,7 @@ index 1eeafe7..f5f3dea 100644
 +        }
 +        
 +        // Bind transaction to scope so we add spans to it
-+        transaction = SentrySDK.startTransaction(name: "Alamofire", operation: "alamofire", bindToScope: true)
++        transaction = BuzzSentrySDK.startTransaction(name: "Alamofire", operation: "alamofire", bindToScope: true)
 +    }
 +    
 +    override class func tearDown() {

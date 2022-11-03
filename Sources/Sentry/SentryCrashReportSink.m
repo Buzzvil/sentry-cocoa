@@ -12,7 +12,7 @@
 #import "BuzzSentryHub.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentrySDK.h"
+#import "BuzzSentrySDK.h"
 #import "BuzzSentryScope.h"
 #import "SentryThread.h"
 
@@ -52,7 +52,7 @@ SentryCrashReportSink ()
         SENTRY_LOG_WARN(@"Startup crash: detected.");
         [self sendReports:reports onCompletion:onCompletion];
 
-        [SentrySDK flush:SENTRY_APP_START_CRASH_FLUSH_DURATION];
+        [BuzzSentrySDK flush:SENTRY_APP_START_CRASH_FLUSH_DURATION];
         SENTRY_LOG_DEBUG(@"Startup crash: Finished flushing.");
 
     } else {
@@ -67,16 +67,16 @@ SentryCrashReportSink ()
     for (NSDictionary *report in reports) {
         BuzzSentryCrashReportConverter *reportConverter =
             [[BuzzSentryCrashReportConverter alloc] initWithReport:report inAppLogic:self.inAppLogic];
-        if (nil != [SentrySDK.currentHub getClient]) {
+        if (nil != [BuzzSentrySDK.currentHub getClient]) {
             BuzzSentryEvent *event = [reportConverter convertReportToEvent];
             if (nil != event) {
                 [self handleConvertedEvent:event report:report sentReports:sentReports];
             }
         } else {
             SENTRY_LOG_ERROR(
-                @"Crash reports were found but no [SentrySDK.currentHub getClient] is set. "
+                @"Crash reports were found but no [BuzzSentrySDK.currentHub getClient] is set. "
                 @"Cannot send crash reports to Sentry. This is probably a misconfiguration, "
-                @"make sure you set the client with [SentrySDK.currentHub bindClient] before "
+                @"make sure you set the client with [BuzzSentrySDK.currentHub bindClient] before "
                 @"calling startCrashHandlerWithError:.");
         }
     }
@@ -90,7 +90,7 @@ SentryCrashReportSink ()
                  sentReports:(NSMutableArray *)sentReports
 {
     [sentReports addObject:report];
-    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:SentrySDK.currentHub.scope];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithScope:BuzzSentrySDK.currentHub.scope];
 
     if (report[SENTRYCRASH_REPORT_ATTACHMENTS_ITEM]) {
         for (NSString *ssPath in report[SENTRYCRASH_REPORT_ATTACHMENTS_ITEM]) {
@@ -98,7 +98,7 @@ SentryCrashReportSink ()
         }
     }
 
-    [SentrySDK captureCrashEvent:event withScope:scope];
+    [BuzzSentrySDK captureCrashEvent:event withScope:scope];
 }
 
 @end

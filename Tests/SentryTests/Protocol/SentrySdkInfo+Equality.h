@@ -1,9 +1,9 @@
-#import "BuzzSentrySdkInfo.h"
+#import "BuzzSentrySDKInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-BuzzSentrySdkInfo (Equality)
+BuzzSentrySDKInfo (Equality)
 
 - (BOOL)isEqual:(id _Nullable)object;
 

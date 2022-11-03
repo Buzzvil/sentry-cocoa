@@ -40,7 +40,7 @@ import XCTest
     
     @available(macOS 10.12, iOS 10.0, tvOS 10.0, *)
     func testStacktraceHasFrames_forEveryThread_withStitchAsyncOn() {
-        SentrySDK.start { $0.stitchAsyncCode = true }
+        BuzzSentrySDK.start { $0.stitchAsyncCode = true }
         assertStackForEveryThread()
     }
     

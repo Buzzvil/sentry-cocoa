@@ -1,7 +1,7 @@
 import Foundation
 import XCTest
 
-class SentrySDKIntegrationTestsBase: XCTestCase {
+class BuzzSentrySDKIntegrationTestsBase: XCTestCase {
     
     var currentDate = TestCurrentDateProvider()
     var crashWrapper: TestSentryCrashWrapper!
@@ -26,15 +26,15 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
         let client = TestClient(options: options ?? self.options)!
         let hub = BuzzSentryHub(client: client, andScope: Scope(), andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDate)
         
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
     }
     
     func givenSdkWithHubButNoClient() {
-        SentrySDK.setCurrentHub(BuzzSentryHub(client: nil, andScope: nil))
+        BuzzSentrySDK.setCurrentHub(BuzzSentryHub(client: nil, andScope: nil))
     }
     
     func assertEventCaptured(_ callback: (Event?) -> Void) {
-        guard let client = SentrySDK.currentHub().getClient() as? TestClient else {
+        guard let client = BuzzSentrySDK.currentHub().getClient() as? TestClient else {
             XCTFail("Hub Client is not a `TestClient`")
             return
         }
@@ -43,7 +43,7 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
     }
     
     func assertEventWithScopeCaptured(_ callback: (Event?, Scope?, [BuzzSentryEnvelopeItem]?) -> Void) {
-        guard let client = SentrySDK.currentHub().getClient() as? TestClient else {
+        guard let client = BuzzSentrySDK.currentHub().getClient() as? TestClient else {
             XCTFail("Hub Client is not a `TestClient`")
             return
         }
@@ -54,7 +54,7 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
     }
     
     func lastErrorWithScopeCaptured(_ callback: (Error?, Scope?) -> Void) {
-        guard let client = SentrySDK.currentHub().getClient() as? TestClient else {
+        guard let client = BuzzSentrySDK.currentHub().getClient() as? TestClient else {
             XCTFail("Hub Client is not a `TestClient`")
             return
         }
@@ -65,7 +65,7 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
     }
     
     func assertExceptionWithScopeCaptured(_ callback: (NSException?, Scope?) -> Void) {
-        guard let client = SentrySDK.currentHub().getClient() as? TestClient else {
+        guard let client = BuzzSentrySDK.currentHub().getClient() as? TestClient else {
             XCTFail("Hub Client is not a `TestClient`")
             return
         }
@@ -76,7 +76,7 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
     }
     
     func assertMessageWithScopeCaptured(_ callback: (String?, Scope?) -> Void) {
-        guard let client = SentrySDK.currentHub().getClient() as? TestClient else {
+        guard let client = BuzzSentrySDK.currentHub().getClient() as? TestClient else {
             XCTFail("Hub Client is not a `TestClient`")
             return
         }
@@ -87,7 +87,7 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
     }
     
     func assertCrashEventWithScope(_ callback: (Event?, Scope?) -> Void) {
-        guard let client = SentrySDK.currentHub().getClient() as? TestClient else {
+        guard let client = BuzzSentrySDK.currentHub().getClient() as? TestClient else {
             XCTFail("Hub Client is not a `TestClient`")
             return
         }

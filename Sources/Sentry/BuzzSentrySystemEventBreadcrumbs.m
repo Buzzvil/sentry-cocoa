@@ -3,7 +3,7 @@
 #import "SentryCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "SentryLog.h"
-#import "SentrySDK.h"
+#import "BuzzSentrySDK.h"
 
 // all those notifications are not available for tvOS
 #if TARGET_OS_IOS
@@ -96,7 +96,7 @@ BuzzSentrySystemEventBreadcrumbs ()
                                                              category:@"device.event"];
     crumb.type = @"system";
     crumb.data = batteryData;
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 }
 
 - (NSMutableDictionary<NSString *, id> *)getBatteryStatus:(UIDevice *)currentDevice
@@ -158,7 +158,7 @@ BuzzSentrySystemEventBreadcrumbs ()
         crumb.data = @{ @"position" : @"portrait" };
     }
     crumb.type = @"navigation";
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 }
 
 - (void)initKeyboardVisibilityObserver
@@ -183,7 +183,7 @@ BuzzSentrySystemEventBreadcrumbs ()
                                                              category:@"device.event"];
     crumb.type = @"system";
     crumb.data = @{ @"action" : notification.name };
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 }
 
 - (void)initScreenshotObserver
@@ -236,7 +236,7 @@ BuzzSentrySystemEventBreadcrumbs ()
         @"previous_seconds_from_gmt" : storedTimezoneOffset,
         @"current_seconds_from_gmt" : @(offset)
     };
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 
     [self updateStoredTimezone];
 }

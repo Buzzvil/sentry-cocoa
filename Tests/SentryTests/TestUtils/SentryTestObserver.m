@@ -48,7 +48,7 @@ SentryTestObserver ()
 
         // The BuzzSentryCrashIntegration enriches the scope. We need to install the integration
         // once to get the scope data.
-        [SentrySDK startWithOptionsObject:options];
+        [BuzzSentrySDK startWithOptionsObject:options];
 
         self.scope = [[BuzzSentryScope alloc] init];
         [BuzzSentryCrashIntegration enrichScope:self.scope
@@ -73,7 +73,7 @@ SentryTestObserver ()
 
 - (void)testBundleDidFinish:(NSBundle *)testBundle
 {
-    [SentrySDK flush:5.0];
+    [BuzzSentrySDK flush:5.0];
 }
 
 - (void)testCase:(XCTestCase *)testCase didRecordIssue:(XCTIssue *)issue
@@ -86,7 +86,7 @@ SentryTestObserver ()
     // The tests might mess up the files or something else. Therefore, we create a fresh client and
     // hub to make sure the sending works.
     BuzzSentryClient *client = [[BuzzSentryClient alloc] initWithOptions:self.options];
-    // We create our own hub here, because we don't know the state of the SentrySDK.
+    // We create our own hub here, because we don't know the state of the BuzzSentrySDK.
     BuzzSentryHub *hub = [[BuzzSentryHub alloc] initWithClient:client andScope:self.scope];
     NSException *exception = [[NSException alloc] initWithName:testCase.name
                                                         reason:issue.description

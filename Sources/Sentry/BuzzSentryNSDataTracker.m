@@ -156,7 +156,7 @@ BuzzSentryNSDataTracker ()
     }
 
     __block id<BuzzSentrySpan> ioSpan;
-    [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
+    [BuzzSentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
         ioSpan = [span startChildWithOperation:operation
                                    description:[self transactionDescriptionForFile:path
                                                                           fileSize:size]];
@@ -222,7 +222,7 @@ BuzzSentryNSDataTracker ()
 
 - (BOOL)ignoreFile:(NSString *)path
 {
-    SentryFileManager *fileManager = [SentrySDK.currentHub getClient].fileManager;
+    SentryFileManager *fileManager = [BuzzSentrySDK.currentHub getClient].fileManager;
     return fileManager.sentryPath != nil && [path hasPrefix:fileManager.sentryPath];
 }
 

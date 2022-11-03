@@ -14,7 +14,7 @@ ViewController ()
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    [SentrySDK configureScope:^(BuzzSentryScope *_Nonnull scope) {
+    [BuzzSentrySDK configureScope:^(BuzzSentryScope *_Nonnull scope) {
         [scope setEnvironment:@"debug"];
         [scope setTagValue:@"objc" forKey:@"language"];
         [scope setExtraValue:[NSString stringWithFormat:@"%@", self]
@@ -35,7 +35,7 @@ ViewController ()
     // Also works
     BuzzSentryUser *user = [[BuzzSentryUser alloc] initWithUserId:@"1"];
     user.email = @"tony@example.com";
-    [SentrySDK setUser:user];
+    [BuzzSentrySDK setUser:user];
 
     // Load an image just for HTTP swizzling
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -50,12 +50,12 @@ ViewController ()
 {
     BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] init];
     crumb.message = @"tapped addBreadcrumb";
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 }
 
 - (IBAction)captureMessage:(id)sender
 {
-    BuzzSentryId *eventId = [SentrySDK captureMessage:@"Yeah captured a message"];
+    BuzzSentryId *eventId = [BuzzSentrySDK captureMessage:@"Yeah captured a message"];
     // Returns eventId in case of successful processed event
     // otherwise emptyId
     NSLog(@"%@", eventId);
@@ -67,7 +67,7 @@ ViewController ()
         [[NSError alloc] initWithDomain:@"UserFeedbackErrorDomain"
                                    code:0
                                userInfo:@{ NSLocalizedDescriptionKey : @"This never happens." }];
-    BuzzSentryId *eventId = [SentrySDK
+    BuzzSentryId *eventId = [BuzzSentrySDK
           captureError:error
         withScopeBlock:^(BuzzSentryScope *_Nonnull scope) { [scope setLevel:kSentryLevelFatal]; }];
 
@@ -75,7 +75,7 @@ ViewController ()
     userFeedback.comments = @"It broke on iOS-ObjectiveC. I don't know why, but this happens.";
     userFeedback.email = @"john@me.com";
     userFeedback.name = @"John Me";
-    [SentrySDK captureUserFeedback:userFeedback];
+    [BuzzSentrySDK captureUserFeedback:userFeedback];
 }
 
 - (IBAction)captureError:(id)sender
@@ -84,7 +84,7 @@ ViewController ()
         [[NSError alloc] initWithDomain:@"SampleErrorDomain"
                                    code:0
                                userInfo:@{ NSLocalizedDescriptionKey : @"Object does not exist" }];
-    [SentrySDK captureError:error
+    [BuzzSentrySDK captureError:error
              withScopeBlock:^(BuzzSentryScope *_Nonnull scope) {
                  // Changes in here will only be captured for this event
                  // The scope in this callback is a clone of the current scope
@@ -106,12 +106,12 @@ ViewController ()
     // the event; the global scope (calls to configureScope) will be ignored. If you do that, be
     // careful–a lot of useful info is lost. If you just want to mutate what's in the scope use the
     // callback, see: captureError.
-    [SentrySDK captureException:exception withScope:scope];
+    [BuzzSentrySDK captureException:exception withScope:scope];
 }
 
 - (IBAction)captureTransaction:(id)sender
 {
-    __block id<BuzzSentrySpan> fakeTransaction = [SentrySDK startTransactionWithName:@"Some Transaction"
+    __block id<BuzzSentrySpan> fakeTransaction = [BuzzSentrySDK startTransactionWithName:@"Some Transaction"
                                                                        operation:@"some operation"];
 
     dispatch_after(
@@ -121,7 +121,7 @@ ViewController ()
 
 - (IBAction)crash:(id)sender
 {
-    [SentrySDK crash];
+    [BuzzSentrySDK crash];
 }
 
 - (IBAction)asyncCrash:(id)sender
@@ -136,7 +136,7 @@ ViewController ()
 
 - (void)asyncCrash2
 {
-    dispatch_async(dispatch_get_main_queue(), ^{ [SentrySDK crash]; });
+    dispatch_async(dispatch_get_main_queue(), ^{ [BuzzSentrySDK crash]; });
 }
 
 - (IBAction)oomCrash:(id)sender

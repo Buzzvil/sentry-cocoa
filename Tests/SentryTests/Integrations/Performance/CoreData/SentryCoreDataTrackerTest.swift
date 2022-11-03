@@ -234,7 +234,7 @@ class BuzzSentryCoreDataTrackerTests: XCTestCase {
     }
     
     private func startTransaction() -> BuzzSentryTracer {
-        return SentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! BuzzSentryTracer
+        return BuzzSentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! BuzzSentryTracer
     }
     
 }

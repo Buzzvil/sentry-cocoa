@@ -1,11 +1,11 @@
-#import "SentrySDK.h"
+#import "BuzzSentrySDK.h"
 
 @class BuzzSentryHub, BuzzSentryId, BuzzSentryAppStartMeasurement, BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentrySDK (Private)
+BuzzSentrySDK (Private)
 
 + (void)captureCrashEvent:(BuzzSentryEvent *)event;
 

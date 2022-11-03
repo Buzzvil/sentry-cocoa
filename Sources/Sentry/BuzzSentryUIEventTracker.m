@@ -2,7 +2,7 @@
 #import <BuzzSentryHub+Private.h>
 #import <SentryLog.h>
 #import <BuzzSentrySDK+Private.h>
-#import <SentrySDK.h>
+#import <BuzzSentrySDK.h>
 #import <BuzzSentryScope.h>
 #import <BuzzSentrySpanOperations.h>
 #import <BuzzSentrySpanProtocol.h>
@@ -101,7 +101,7 @@ BuzzSentryUIEventTracker ()
                                                      operation:operation];
 
             __block BuzzSentryTracer *transaction;
-            [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
+            [BuzzSentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
                 BOOL ongoingScreenLoadTransaction = span != nil &&
                     [span.context.operation isEqualToString:BuzzSentrySpanOperationUILoad];
                 BOOL ongoingManualTransaction = span != nil
@@ -110,7 +110,7 @@ BuzzSentryUIEventTracker ()
 
                 BOOL bindToScope = !ongoingScreenLoadTransaction && !ongoingManualTransaction;
                 transaction =
-                    [SentrySDK.currentHub startTransactionWithContext:context
+                    [BuzzSentrySDK.currentHub startTransactionWithContext:context
                                                           bindToScope:bindToScope
                                                 customSamplingContext:@{}
                                                           idleTimeout:self.idleTimeout

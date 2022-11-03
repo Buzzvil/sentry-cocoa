@@ -33,7 +33,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         
         func setNewHubToSDK() {
             let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: currentDateProvider)
-            SentrySDK.setCurrentHub(hub)
+            BuzzSentrySDK.setCurrentHub(hub)
         }
     }
     
@@ -404,7 +404,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
     }
     
     private func captureError() {
-        SentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Object does not exist"]))
+        BuzzSentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Object does not exist"]))
     }
     
     private func crashInForeground() {
@@ -549,7 +549,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         fileManager.storeCrashedSession(crashedSession)
         
         sut.start()
-        SentrySDK.captureCrash(Event())
+        BuzzSentrySDK.captureCrash(Event())
         
         if let session = fixture.client.captureCrashEventWithSessionInvocations.last?.session {
             assertSession(session: session, started: sessionStartTime, status: BuzzSentrySessionStatus.crashed, duration: 5)

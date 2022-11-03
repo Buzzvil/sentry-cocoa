@@ -81,14 +81,14 @@ BuzzSentryBreadcrumbTracker ()
                     object:nil
                      queue:nil
                 usingBlock:^(NSNotification *notification) {
-                    if (nil != [SentrySDK.currentHub getClient]) {
+                    if (nil != [BuzzSentrySDK.currentHub getClient]) {
                         BuzzSentryBreadcrumb *crumb =
                             [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelWarning
                                                            category:@"device.event"];
                         crumb.type = @"system";
                         crumb.data = @ { @"action" : @"LOW_MEMORY" };
                         crumb.message = @"Low memory";
-                        [SentrySDK addBreadcrumb:crumb];
+                        [BuzzSentrySDK addBreadcrumb:crumb];
                     }
                 }];
 #endif
@@ -124,11 +124,11 @@ BuzzSentryBreadcrumbTracker ()
                   withDataKey:(NSString *)key
                 withDataValue:(NSString *)value
 {
-    if (nil != [SentrySDK.currentHub getClient]) {
+    if (nil != [BuzzSentrySDK.currentHub getClient]) {
         BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:level category:category];
         crumb.type = type;
         crumb.data = @{ key : value };
-        [SentrySDK addBreadcrumb:crumb];
+        [BuzzSentrySDK addBreadcrumb:crumb];
     }
 }
 
@@ -138,7 +138,7 @@ BuzzSentryBreadcrumbTracker ()
                                                              category:@"started"];
     crumb.type = @"debug";
     crumb.message = @"Breadcrumb Tracking";
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 }
 
 - (void)swizzleSendAction
@@ -147,7 +147,7 @@ BuzzSentryBreadcrumbTracker ()
 
     [self.swizzleWrapper
         swizzleSendAction:^(NSString *action, id target, id sender, UIEvent *event) {
-            if ([SentrySDK.currentHub getClient] == nil) {
+            if ([BuzzSentrySDK.currentHub getClient] == nil) {
                 return;
             }
 
@@ -163,7 +163,7 @@ BuzzSentryBreadcrumbTracker ()
             crumb.type = @"user";
             crumb.message = action;
             crumb.data = data;
-            [SentrySDK addBreadcrumb:crumb];
+            [BuzzSentrySDK addBreadcrumb:crumb];
         }
                    forKey:BuzzSentryBreadcrumbTrackerSwizzleSendAction];
 
@@ -185,15 +185,15 @@ BuzzSentryBreadcrumbTracker ()
     SEL selector = NSSelectorFromString(@"viewDidAppear:");
     SentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
-            if (nil != [SentrySDK.currentHub getClient]) {
+            if (nil != [BuzzSentrySDK.currentHub getClient]) {
                 BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
                                                                          category:@"ui.lifecycle"];
                 crumb.type = @"navigation";
                 crumb.data = [BuzzSentryBreadcrumbTracker fetchInfoAboutViewController:self];
 
                 // Adding crumb via the SDK calls SentryBeforeBreadcrumbCallback
-                [SentrySDK addBreadcrumb:crumb];
-                [SentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull scope) {
+                [BuzzSentrySDK addBreadcrumb:crumb];
+                [BuzzSentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull scope) {
                     [scope setExtraValue:crumb.data[@"screen"] forKey:@"__sentry_transaction"];
                 }];
             }

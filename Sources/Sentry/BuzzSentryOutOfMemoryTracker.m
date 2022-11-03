@@ -70,7 +70,7 @@ BuzzSentryOutOfMemoryTracker ()
 
             // We don't need to upate the releaseName of the event to the previous app state as we
             // assume it's not an OOM when the releaseName changed between app starts.
-            [SentrySDK captureCrashEvent:event];
+            [BuzzSentrySDK captureCrashEvent:event];
         }
     }];
 #else

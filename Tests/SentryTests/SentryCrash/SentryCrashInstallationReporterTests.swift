@@ -41,14 +41,14 @@ class SentryCrashInstallationReporterTests: XCTestCase {
     }
     
     private func sdkStarted() {
-        SentrySDK.start { options in
+        BuzzSentrySDK.start { options in
             options.dsn = SentryCrashInstallationReporterTests.dsnAsString
         }
         let options = Options()
         options.dsn = SentryCrashInstallationReporterTests.dsnAsString
         testClient = TestClient(options: options)!
         let hub = BuzzSentryHub(client: testClient, andScope: nil)
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
     }
     
     private func assertNoEventsSent() {

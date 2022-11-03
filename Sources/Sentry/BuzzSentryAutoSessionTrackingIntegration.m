@@ -3,7 +3,7 @@
 #import "SentryDependencyContainer.h"
 #import "SentryLog.h"
 #import "BuzzSentryOptions.h"
-#import "SentrySDK.h"
+#import "BuzzSentrySDK.h"
 #import "BuzzSentrySessionTracker.h"
 
 NS_ASSUME_NONNULL_BEGIN

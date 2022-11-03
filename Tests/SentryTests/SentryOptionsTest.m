@@ -1,7 +1,7 @@
 #import "BuzzSentryOptions.h"
 #import "SentryError.h"
-#import "SentrySDK.h"
-#import "BuzzSentrySdkInfo.h"
+#import "BuzzSentrySDK.h"
+#import "BuzzSentrySDKInfo.h"
 #import "SentryTests-Swift.h"
 #import <XCTest/XCTest.h>
 

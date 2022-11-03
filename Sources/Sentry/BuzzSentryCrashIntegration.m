@@ -170,7 +170,7 @@ BuzzSentryCrashIntegration ()
 {
     // We need to make sure to set always the scope to KSCrash so we have it in
     // case of a crash
-    [SentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull outerScope) {
+    [BuzzSentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull outerScope) {
         [BuzzSentryCrashIntegration enrichScope:outerScope crashWrapper:self.crashAdapter];
 
         NSMutableDictionary<NSString *, id> *userInfo =
@@ -298,7 +298,7 @@ BuzzSentryCrashIntegration ()
 
 - (void)currentLocaleDidChange
 {
-    [SentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull scope) {
+    [BuzzSentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull scope) {
         NSMutableDictionary<NSString *, id> *device;
         if (scope.contextDictionary != nil && scope.contextDictionary[DEVICE_KEY] != nil) {
             device = [[NSMutableDictionary alloc]

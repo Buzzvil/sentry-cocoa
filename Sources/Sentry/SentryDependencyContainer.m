@@ -51,7 +51,7 @@ static NSObject *sentryDependencyContainerLock;
 {
     @synchronized(sentryDependencyContainerLock) {
         if (_fileManager == nil) {
-            _fileManager = [[[SentrySDK currentHub] getClient] fileManager];
+            _fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
         }
         return _fileManager;
     }
@@ -61,7 +61,7 @@ static NSObject *sentryDependencyContainerLock;
 {
     @synchronized(sentryDependencyContainerLock) {
         if (_appStateManager == nil) {
-            BuzzSentryOptions *options = [[[SentrySDK currentHub] getClient] options];
+            BuzzSentryOptions *options = [[[BuzzSentrySDK currentHub] getClient] options];
             _appStateManager = [[SentryAppStateManager alloc]
                      initWithOptions:options
                         crashWrapper:self.crashWrapper

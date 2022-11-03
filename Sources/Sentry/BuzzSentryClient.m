@@ -33,7 +33,7 @@
 #import "SentryPermissionsObserver.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope+Private.h"
-#import "BuzzSentrySdkInfo.h"
+#import "BuzzSentrySDKInfo.h"
 #import "BuzzSentryStacktraceBuilder.h"
 #import "SentryThreadInspector.h"
 #import "BuzzSentryTraceContext.h"
@@ -588,10 +588,10 @@ NSString *const kSentryDefaultEnvironment = @"production";
         }
     }
 
-    if (isCrashEvent && nil != self.options.onCrashedLastRun && !SentrySDK.crashedLastRunCalled) {
+    if (isCrashEvent && nil != self.options.onCrashedLastRun && !BuzzSentrySDK.crashedLastRunCalled) {
         // We only want to call the callback once. It can occur that multiple crash events are
         // about to be sent.
-        SentrySDK.crashedLastRunCalled = YES;
+        BuzzSentrySDK.crashedLastRunCalled = YES;
         self.options.onCrashedLastRun(event);
     }
 
@@ -641,7 +641,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     id integrations = event.extra[@"__sentry_sdk_integrations"];
     if (!integrations) {
         integrations = [NSMutableArray new];
-        for (NSString *integration in SentrySDK.currentHub.installedIntegrationNames) {
+        for (NSString *integration in BuzzSentrySDK.currentHub.installedIntegrationNames) {
             // Every integration starts with "Sentry" and ends with "Integration". To keep the
             // payload of the event small we remove both.
             NSString *withoutSentry = [integration stringByReplacingOccurrencesOfString:@"Sentry"

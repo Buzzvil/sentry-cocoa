@@ -8,11 +8,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * The main entry point for the SentrySDK.
+ * The main entry point for the BuzzSentrySDK.
  *
  * We recommend using `[Sentry startWithConfigureOptions]` to initialize Sentry.
  */
-@interface SentrySDK : NSObject
+@interface BuzzSentrySDK : NSObject
 SENTRY_NO_INIT
 
 /**
@@ -21,7 +21,7 @@ SENTRY_NO_INIT
 @property (nullable, class, nonatomic, readonly) id<BuzzSentrySpan> span;
 
 /**
- * Indicates whether the SentrySDK is enabled.
+ * Indicates whether the BuzzSentrySDK is enabled.
  */
 @property (class, nonatomic, readonly) BOOL isEnabled;
 

@@ -55,7 +55,7 @@ class BuzzSentryCoreDataTrackingIntegrationTests: XCTestCase {
     }
     
     func test_Fetch() {
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
         let stack = fixture.coreDataStack
         let fetch = NSFetchRequest<TestEntity>(entityName: "TestEntity")
         let transaction = startTransaction()
@@ -64,7 +64,7 @@ class BuzzSentryCoreDataTrackingIntegrationTests: XCTestCase {
     }
     
     func test_Save() {
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
         let stack = fixture.coreDataStack
         let transaction = startTransaction()
         let newEntity: TestEntity = stack.getEntity()
@@ -76,7 +76,7 @@ class BuzzSentryCoreDataTrackingIntegrationTests: XCTestCase {
     }
     
     func test_Save_noChanges() {
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
         let stack = fixture.coreDataStack
         let transaction = startTransaction()
         
@@ -86,7 +86,7 @@ class BuzzSentryCoreDataTrackingIntegrationTests: XCTestCase {
     }
     
     func test_Fetch_StoppedSwizzling() {
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
         let stack = fixture.coreDataStack
         let fetch = NSFetchRequest<TestEntity>(entityName: "TestEntity")
         let transaction = startTransaction()
@@ -96,7 +96,7 @@ class BuzzSentryCoreDataTrackingIntegrationTests: XCTestCase {
     }
     
     func test_Save_StoppedSwizzling() {
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
         let stack = fixture.coreDataStack
         let transaction = startTransaction()
         let newEntity: TestEntity = stack.getEntity()
@@ -115,6 +115,6 @@ class BuzzSentryCoreDataTrackingIntegrationTests: XCTestCase {
     }
     
     private func startTransaction() -> BuzzSentryTracer {
-        return SentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! BuzzSentryTracer
+        return BuzzSentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! BuzzSentryTracer
     }
 }

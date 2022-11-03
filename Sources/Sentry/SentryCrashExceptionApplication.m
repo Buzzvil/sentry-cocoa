@@ -1,6 +1,6 @@
 #import "SentryCrashExceptionApplication.h"
 #import "SentryCrash.h"
-#import "SentrySDK.h"
+#import "BuzzSentrySDK.h"
 
 @implementation SentryCrashExceptionApplication
 
@@ -18,7 +18,7 @@
 
 - (void)_crashOnException:(NSException *)exception
 {
-    [SentrySDK captureException:exception];
+    [BuzzSentrySDK captureException:exception];
     abort();
 }
 

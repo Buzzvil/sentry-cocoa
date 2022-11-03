@@ -306,7 +306,7 @@ static BOOL appStartMeasurementRead;
             if (_traceContext == nil) {
                 _traceContext = [[BuzzSentryTraceContext alloc] initWithTracer:self
                                                                      scope:_hub.scope
-                                                                   options:SentrySDK.options];
+                                                                   options:BuzzSentrySDK.options];
             }
         }
     }
@@ -575,7 +575,7 @@ static BOOL appStartMeasurementRead;
             return nil;
         }
 
-        measurement = [SentrySDK getAppStartMeasurement];
+        measurement = [BuzzSentrySDK getAppStartMeasurement];
         if (measurement == nil) {
             return nil;
         }

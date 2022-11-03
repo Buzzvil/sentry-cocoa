@@ -32,7 +32,7 @@ BuzzSentryRequestOperation ()
 
                                    // We only have these if's here because of performance reasons
                                    SENTRY_LOG_DEBUG(@"Request status: %ld", (long)statusCode);
-                                   if ([SentrySDK.currentHub getClient].options.debug == YES) {
+                                   if ([BuzzSentrySDK.currentHub getClient].options.debug == YES) {
                                        SENTRY_LOG_DEBUG(@"Request response: %@",
                                            [[NSString alloc] initWithData:data
                                                                  encoding:NSUTF8StringEncoding]);

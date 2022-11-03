@@ -40,7 +40,7 @@ BuzzSentryNSURLRequest ()
         return nil;
     }
 
-    if ([SentrySDK.currentHub getClient].options.debug == YES) {
+    if ([BuzzSentrySDK.currentHub getClient].options.debug == YES) {
         SENTRY_LOG_DEBUG(@"Sending JSON -------------------------------");
         SENTRY_LOG_DEBUG(
             @"%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);

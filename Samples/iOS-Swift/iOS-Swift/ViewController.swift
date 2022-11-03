@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        SentrySDK.configureScope { (scope) in
+        BuzzSentrySDK.configureScope { (scope) in
             scope.setEnvironment("debug")
             scope.setTag(value: "swift", key: "language")
             scope.setExtra(value: String(describing: self), key: "currentViewController")
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         // Also works
         let user = Sentry.User(userId: "1")
         user.email = "tony1@example.com"
-        SentrySDK.setUser(user)
+        BuzzSentrySDK.setUser(user)
         
         dispatchQueue.async {
             let dsn = DSNStorage.shared.getDSN()
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
             }
         }
 
-        SentrySDK.configureScope { (scope) in
+        BuzzSentrySDK.configureScope { (scope) in
             let dict = scope.serialize()
 
             guard
@@ -75,11 +75,11 @@ class ViewController: UIViewController {
         let crumb = Breadcrumb(level: SentryLevel.info, category: "Debug")
         crumb.message = "tapped addBreadcrumb"
         crumb.type = "user"
-        SentrySDK.addBreadcrumb(crumb: crumb)
+        BuzzSentrySDK.addBreadcrumb(crumb: crumb)
     }
     
     @IBAction func captureMessage(_ sender: Any) {
-        let eventId = SentrySDK.capture(message: "Yeah captured a message")
+        let eventId = BuzzSentrySDK.capture(message: "Yeah captured a message")
         // Returns eventId in case of successfull processed event
         // otherwise nil
         print("\(String(describing: eventId))")
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
     @IBAction func captureUserFeedback(_ sender: Any) {
         let error = NSError(domain: "UserFeedbackErrorDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "This never happens."])
 
-        let eventId = SentrySDK.capture(error: error) { scope in
+        let eventId = BuzzSentrySDK.capture(error: error) { scope in
             scope.setLevel(.fatal)
         }
         
@@ -111,14 +111,14 @@ class ViewController: UIViewController {
         userFeedback.comments = "It broke on iOS-Swift. I don't know why, but this happens."
         userFeedback.email = "john@me.com"
         userFeedback.name = "John Me"
-        SentrySDK.capture(userFeedback: userFeedback)
+        BuzzSentrySDK.capture(userFeedback: userFeedback)
     }
     
     @IBAction func captureError(_ sender: Any) {
         do {
             try RandomErrorGenerator.generate()
         } catch {
-            SentrySDK.capture(error: error) { (scope) in
+            BuzzSentrySDK.capture(error: error) { (scope) in
                 // Changes in here will only be captured for this event
                 // The scope in this callback is a clone of the current scope
                 // It contains all data but mutations only influence the event being sent
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
         let scope = Scope()
         scope.setLevel(.fatal)
         // !!!: By explicity just passing the scope, only the data in this scope object will be added to the event; the global scope (calls to configureScope) will be ignored. If you do that, be careful–a lot of useful info is lost. If you just want to mutate what's in the scope use the callback, see: captureError.
-        SentrySDK.capture(exception: exception, scope: scope)
+        BuzzSentrySDK.capture(exception: exception, scope: scope)
     }
     
     @IBAction func captureFatalError(_ sender: Any) {
@@ -140,7 +140,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func captureTransaction(_ sender: Any) {
-        let transaction = SentrySDK.startTransaction(name: "Some Transaction", operation: "Some Operation")
+        let transaction = BuzzSentrySDK.startTransaction(name: "Some Transaction", operation: "Some Operation")
         
         transaction.setMeasurement(name: "duration", value: 44, unit: MeasurementUnitDuration.nanosecond)
         transaction.setMeasurement(name: "information", value: 44, unit: MeasurementUnitInformation.bit)
@@ -158,7 +158,7 @@ class ViewController: UIViewController {
     }
    
     @IBAction func crash(_ sender: Any) {
-        SentrySDK.crash()
+        BuzzSentrySDK.crash()
     }
     
     @IBAction func asyncCrash(_ sender: Any) {
@@ -175,7 +175,7 @@ class ViewController: UIViewController {
     
     func asyncCrash2() {
         DispatchQueue.main.async {
-            SentrySDK.crash()
+            BuzzSentrySDK.crash()
         }
     }
 
@@ -288,7 +288,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func flush(_ sender: Any) {
-        SentrySDK.flush(timeout: 5)
+        BuzzSentrySDK.flush(timeout: 5)
     }
     
 }

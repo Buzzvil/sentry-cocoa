@@ -1,6 +1,6 @@
 #import "BuzzSentryNSDataTracker.h"
 #import "BuzzSentryOptions.h"
-#import "SentrySDK.h"
+#import "BuzzSentrySDK.h"
 #import "BuzzSentrySpan.h"
 #import "SentrySwizzle.h"
 #import "BuzzSentryTracer.h"
@@ -48,7 +48,7 @@
     someData = [@"SOME DATA" dataUsingEncoding:NSUTF8StringEncoding];
     [someData writeToFile:filePath atomically:true];
 
-    [SentrySDK startWithConfigureOptions:^(BuzzSentryOptions *_Nonnull options) {
+    [BuzzSentrySDK startWithConfigureOptions:^(BuzzSentryOptions *_Nonnull options) {
         options.enableAutoPerformanceTracking = YES;
         options.enableFileIOTracking = YES;
         options.tracesSampleRate = @1;
@@ -61,7 +61,7 @@
     if (deleteFileDirectory) {
         [NSFileManager.defaultManager removeItemAtURL:fileDirectory error:nil];
     }
-    [SentrySDK close];
+    [BuzzSentrySDK close];
 }
 
 - (void)test_dataWithContentsOfFile
@@ -200,7 +200,7 @@
 
 - (void)assertTransactionForOperation:(NSString *)operation block:(void (^)(void))block
 {
-    BuzzSentryTracer *parentTransaction = [SentrySDK startTransactionWithName:@"Transaction"
+    BuzzSentryTracer *parentTransaction = [BuzzSentrySDK startTransactionWithName:@"Transaction"
                                                                 operation:@"Test"
                                                               bindToScope:YES];
 

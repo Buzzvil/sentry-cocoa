@@ -62,7 +62,7 @@ BuzzSentryNetworkTracker ()
 
 - (BOOL)addHeadersForRequestWithURL:(NSURL *)URL
 {
-    for (id targetCheck in SentrySDK.options.tracePropagationTargets) {
+    for (id targetCheck in BuzzSentrySDK.options.tracePropagationTargets) {
         if ([targetCheck isKindOfClass:[NSRegularExpression class]]) {
             NSString *string = URL.absoluteString;
             NSUInteger numberOfMatches =
@@ -94,7 +94,7 @@ BuzzSentryNetworkTracker ()
         return;
 
     // SDK not enabled no need to continue
-    if (SentrySDK.options == nil) {
+    if (BuzzSentrySDK.options == nil) {
         return;
     }
 
@@ -105,7 +105,7 @@ BuzzSentryNetworkTracker ()
     }
 
     // Don't measure requests to Sentry's backend
-    NSURL *apiUrl = [NSURL URLWithString:SentrySDK.options.dsn];
+    NSURL *apiUrl = [NSURL URLWithString:BuzzSentrySDK.options.dsn];
     if ([url.host isEqualToString:apiUrl.host] && [url.path containsString:apiUrl.path]) {
         return;
     }
@@ -125,7 +125,7 @@ BuzzSentryNetworkTracker ()
             return;
         }
 
-        [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable innerSpan) {
+        [BuzzSentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable innerSpan) {
             if (innerSpan != nil) {
                 span = innerSpan;
                 netSpan = [span
@@ -225,7 +225,7 @@ BuzzSentryNetworkTracker ()
     }
 
     // Don't measure requests to Sentry's backend
-    NSURL *apiUrl = [NSURL URLWithString:SentrySDK.options.dsn];
+    NSURL *apiUrl = [NSURL URLWithString:BuzzSentrySDK.options.dsn];
     if ([url.host isEqualToString:apiUrl.host] && [url.path containsString:apiUrl.path]) {
         return;
     }
@@ -293,7 +293,7 @@ BuzzSentryNetworkTracker ()
     }
 
     breadcrumb.data = breadcrumbData;
-    [SentrySDK addBreadcrumb:breadcrumb];
+    [BuzzSentrySDK addBreadcrumb:breadcrumb];
 }
 
 - (NSInteger)urlResponseStatusCode:(NSURLResponse *)response

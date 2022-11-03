@@ -34,22 +34,22 @@ class BuzzSentryScreenshotIntegrationTests: XCTestCase {
     }
 
     func test_attachScreenshot_disabled() {
-        SentrySDK.start { $0.attachScreenshot = false }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
+        BuzzSentrySDK.start { $0.attachScreenshot = false }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
         XCTAssertFalse(sentrycrash_hasSaveScreenshotCallback())
     }
     
     func test_attachScreenshot_enabled() {
-        SentrySDK.start { $0.attachScreenshot = true }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
+        BuzzSentrySDK.start { $0.attachScreenshot = true }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
         XCTAssertTrue(sentrycrash_hasSaveScreenshotCallback())
     }
     
     func test_uninstall() {
-        SentrySDK.start { $0.attachScreenshot = true }
-        SentrySDK.close()
+        BuzzSentrySDK.start { $0.attachScreenshot = true }
+        BuzzSentrySDK.close()
         
-        XCTAssertNil(SentrySDK.currentHub().getClient()?.attachmentProcessors)
+        XCTAssertNil(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors)
         XCTAssertFalse(sentrycrash_hasSaveScreenshotCallback())
     }
     

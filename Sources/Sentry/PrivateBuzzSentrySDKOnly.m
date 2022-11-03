@@ -19,12 +19,12 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (void)storeEnvelope:(BuzzSentryEnvelope *)envelope
 {
-    [SentrySDK storeEnvelope:envelope];
+    [BuzzSentrySDK storeEnvelope:envelope];
 }
 
 + (void)captureEnvelope:(BuzzSentryEnvelope *)envelope
 {
-    [SentrySDK captureEnvelope:envelope];
+    [BuzzSentrySDK captureEnvelope:envelope];
 }
 
 + (nullable BuzzSentryEnvelope *)envelopeWithData:(NSData *)data
@@ -39,7 +39,7 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (nullable BuzzSentryAppStartMeasurement *)appStartMeasurement
 {
-    return [SentrySDK getAppStartMeasurement];
+    return [BuzzSentrySDK getAppStartMeasurement];
 }
 
 + (NSString *)installationID
@@ -49,7 +49,7 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (BuzzSentryOptions *)options
 {
-    BuzzSentryOptions *options = [[SentrySDK currentHub] client].options;
+    BuzzSentryOptions *options = [[BuzzSentrySDK currentHub] client].options;
     if (options != nil) {
         return options;
     }

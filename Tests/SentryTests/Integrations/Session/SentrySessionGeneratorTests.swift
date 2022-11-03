@@ -84,7 +84,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
             // increment error count
             // We use the current date for the error message to generate new
             // issues for the release.
-            SentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error \(i) for \(Date())"]))
+            BuzzSentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error \(i) for \(Date())"]))
             goToBackground()
             goToForeground()
             // sends one errored session
@@ -104,7 +104,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
             let crashEvent = Event()
             crashEvent.level = SentryLevel.fatal
             crashEvent.message = BuzzSentryMessage(formatted: "Crash for BuzzSentrySessionGeneratorTests")
-            SentrySDK.captureCrash(crashEvent)
+            BuzzSentrySDK.captureCrash(crashEvent)
         }
         sentryCrash.internalCrashedLastLaunch = false
         
@@ -121,7 +121,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
             autoSessionTrackingIntegration.install(with: options)
             goToForeground()
             
-            SentrySDK.captureCrash(TestData.oomEvent)
+            BuzzSentrySDK.captureCrash(TestData.oomEvent)
         }
         fileManager.deleteAppState()
         #endif
@@ -141,12 +141,12 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
     
     private func startSdk() {
         
-        SentrySDK.start(options: options)
+        BuzzSentrySDK.start(options: options)
         
         sentryCrash = TestSentryCrashWrapper.sharedInstance()
-        let client = SentrySDK.currentHub().getClient()
+        let client = BuzzSentrySDK.currentHub().getClient()
         let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
         
         crashIntegration = BuzzSentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
         crashIntegration.install(with: options)

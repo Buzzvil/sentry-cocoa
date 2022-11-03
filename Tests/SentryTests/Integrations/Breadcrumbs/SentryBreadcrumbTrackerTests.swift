@@ -10,7 +10,7 @@ class BuzzSentryBreadcrumbTrackerTests: XCTestCase {
         scope = Scope()
         let client = TestClient(options: Options())
         let hub = TestHub(client: client, andScope: scope)
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
     }
     
     override func tearDown() {

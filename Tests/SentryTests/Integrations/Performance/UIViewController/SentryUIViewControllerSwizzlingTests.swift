@@ -46,7 +46,7 @@ class BuzzSentryUIViewControllerSwizzlingTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
     }
     
     override func tearDown() {
@@ -74,13 +74,13 @@ class BuzzSentryUIViewControllerSwizzlingTests: XCTestCase {
     func testUIViewController_loadView_noTransactionBoundToScope() {
         let controller = UIViewController()
         controller.loadView()
-        XCTAssertNil(SentrySDK.span)
+        XCTAssertNil(BuzzSentrySDK.span)
     }
     
     func testViewControllerWithoutLoadView_TransactionBoundToScope() {
         let controller = TestViewController()
         controller.loadView()
-        XCTAssertNotNil(SentrySDK.span)
+        XCTAssertNotNil(BuzzSentrySDK.span)
     }
     
     func testViewControllerWithLoadView_TransactionBoundToScope() {
@@ -89,7 +89,7 @@ class BuzzSentryUIViewControllerSwizzlingTests: XCTestCase {
         
         controller.loadView()
         
-        let span = SentrySDK.span
+        let span = BuzzSentrySDK.span
         XCTAssertNotNil(span)
         
         let transactionName = Dynamic(span).transactionContext.name.asString

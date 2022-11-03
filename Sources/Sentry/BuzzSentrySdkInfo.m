@@ -1,9 +1,9 @@
-#import "BuzzSentrySdkInfo.h"
+#import "BuzzSentrySDKInfo.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation BuzzSentrySdkInfo
+@implementation BuzzSentrySDKInfo
 
 - (instancetype)initWithName:(NSString *)name andVersion:(NSString *)version
 {
@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
     return [self initWithDictInternal:dict orDefaults:nil];
 }
 
-- (instancetype)initWithDict:(NSDictionary *)dict orDefaults:(BuzzSentrySdkInfo *)info;
+- (instancetype)initWithDict:(NSDictionary *)dict orDefaults:(BuzzSentrySDKInfo *)info;
 {
     return [self initWithDictInternal:dict orDefaults:info];
 }
 
-- (instancetype)initWithDictInternal:(NSDictionary *)dict orDefaults:(BuzzSentrySdkInfo *_Nullable)info;
+- (instancetype)initWithDictInternal:(NSDictionary *)dict orDefaults:(BuzzSentrySDKInfo *_Nullable)info;
 {
     NSString *name = @"";
     NSString *version = @"";

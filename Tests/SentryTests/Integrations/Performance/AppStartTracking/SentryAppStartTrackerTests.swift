@@ -298,7 +298,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
         didBecomeActive()
         
         // The Hybrid SDKs call start after all the notifications are posted,
-        // because they init the SentrySDK when the hybrid engine is ready.
+        // because they init the BuzzSentrySDK when the hybrid engine is ready.
         sut.start()
     }
     
@@ -311,11 +311,11 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
      * We assume a class reads the app measurement, sends it with a transaction to Sentry and sets it to nil.
      */
     private func sendAppMeasurement() {
-        SentrySDK.setAppStartMeasurement(nil)
+        BuzzSentrySDK.setAppStartMeasurement(nil)
     }
     
     private func assertValidStart(type: BuzzSentryAppStartType, expectedDuration: TimeInterval? = nil) {
-        guard let appStartMeasurement = SentrySDK.getAppStartMeasurement() else {
+        guard let appStartMeasurement = BuzzSentrySDK.getAppStartMeasurement() else {
             XCTFail("AppStartMeasurement must not be nil")
             return
         }
@@ -333,7 +333,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
     }
     
     private func assertValidHybridStart(type: BuzzSentryAppStartType) {
-        guard let appStartMeasurement = SentrySDK.getAppStartMeasurement() else {
+        guard let appStartMeasurement = BuzzSentrySDK.getAppStartMeasurement() else {
             XCTFail("AppStartMeasurement must not be nil")
             return
         }
@@ -349,7 +349,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
     }
     
     private func assertNoAppStartUp() {
-        XCTAssertNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     private func advanceTime(bySeconds: TimeInterval) {

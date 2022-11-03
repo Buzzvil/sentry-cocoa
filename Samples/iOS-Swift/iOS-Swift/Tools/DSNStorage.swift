@@ -22,7 +22,7 @@ class DSNStorage {
             deleteDSN()
             try dsn.write(to: dsnFile, atomically: true, encoding: .utf8)
         } catch {
-            SentrySDK.capture(error: error)
+            BuzzSentrySDK.capture(error: error)
         }
     }
     
@@ -33,7 +33,7 @@ class DSNStorage {
                 return try String(contentsOfFile: dsnFile.path)
             }
         } catch {
-            SentrySDK.capture(error: error)
+            BuzzSentrySDK.capture(error: error)
         }
         
         return nil
@@ -47,7 +47,7 @@ class DSNStorage {
                 try fileManager.removeItem(at: dsnFile)
             }
         } catch {
-            SentrySDK.capture(error: error)
+            BuzzSentrySDK.capture(error: error)
         }
     }
 }

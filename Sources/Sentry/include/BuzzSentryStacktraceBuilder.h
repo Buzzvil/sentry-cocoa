@@ -16,7 +16,7 @@ SENTRY_NO_INIT
 - (id)initWithCrashStackEntryMapper:(SentryCrashStackEntryMapper *)crashStackEntryMapper;
 
 /**
- * Builds the stacktrace for the current thread removing frames from the SentrySDK until frames from
+ * Builds the stacktrace for the current thread removing frames from the BuzzSentrySDK until frames from
  * a different package are found. When including Sentry via the Swift Package Manager the package is
  * the same as the application that includes Sentry. In this case the full stacktrace is returned
  * without skipping frames.
@@ -24,7 +24,7 @@ SENTRY_NO_INIT
 - (BuzzSentryStacktrace *)buildStacktraceForCurrentThread;
 
 /**
- * Builds the stacktrace for given thread removing frames from the SentrySDK until frames from
+ * Builds the stacktrace for given thread removing frames from the BuzzSentrySDK until frames from
  * a different package are found. When including Sentry via the Swift Package Manager the package is
  * the same as the application that includes Sentry. In this case the full stacktrace is returned
  * without skipping frames.

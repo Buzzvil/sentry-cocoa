@@ -51,7 +51,7 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
         [[BuzzSentryDispatchQueueWrapper alloc] initWithName:"sentry-out-of-memory-tracker"
                                               attributes:attributes];
 
-    SentryFileManager *fileManager = [[[SentrySDK currentHub] getClient] fileManager];
+    SentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
     SentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
     SentryCrashWrapper *crashWrapper = [SentryDependencyContainer sharedInstance].crashWrapper;

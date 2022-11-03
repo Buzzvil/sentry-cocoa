@@ -31,7 +31,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
         sut = fixture.getSut()
         sut.start()
         
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
     }
     
     override func tearDown() {
@@ -100,7 +100,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
         
         callExecuteAction(action: action, target: fixture.target, sender: button, event: TestUIEvent())
         
-        let span = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let span = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         XCTAssertTrue(span.tags.contains {
             $0.key == "accessibilityIdentifier" && $0.value == accessibilityIdentifier
         })
@@ -125,29 +125,29 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
     }
     
     func test_OnGoingUILoadTransaction_StartNewUIEventTransaction_NotBoundToScope() {
-        let uiLoadTransaction = SentrySDK.startTransaction(name: "test", operation: "ui.load", bindToScope: true)
+        let uiLoadTransaction = BuzzSentrySDK.startTransaction(name: "test", operation: "ui.load", bindToScope: true)
         
         callExecuteAction(action: action, target: fixture.target, sender: fixture.button, event: TestUIEvent())
         
-        XCTAssertTrue(uiLoadTransaction === SentrySDK.span)
+        XCTAssertTrue(uiLoadTransaction === BuzzSentrySDK.span)
     }
     
     func test_ManualTransactionOnScope_StartNewUIEventTransaction_NotBoundToScope() {
-        let manualTransaction = SentrySDK.startTransaction(name: "test", operation: "my.operation", bindToScope: true)
+        let manualTransaction = BuzzSentrySDK.startTransaction(name: "test", operation: "my.operation", bindToScope: true)
         
         callExecuteAction(action: action, target: fixture.target, sender: fixture.button, event: TestUIEvent())
         
-        XCTAssertTrue(manualTransaction === SentrySDK.span)
+        XCTAssertTrue(manualTransaction === BuzzSentrySDK.span)
     }
     
     func test_SameUIElementWithSameEvent_ResetsTimeout() {
         let view = fixture.button
         
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let firstTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
 
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let secondTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         
         assertResetsTimeout(firstTransaction, secondTransaction)
     }
@@ -156,12 +156,12 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
         let view = fixture.button
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
         
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let firstTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         fixture.dispatchQueue.invokeLastDispatchAfter()
         
         callExecuteAction(action: action, target: fixture.target, sender: view, event: TestUIEvent())
         
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let secondTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         
         XCTAssertFalse(firstTransaction === secondTransaction)
     }
@@ -170,11 +170,11 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
         let view1 = fixture.button
         callExecuteAction(action: action, target: fixture.target, sender: view1, event: TestUIEvent())
         
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let firstTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         
         let view2 = UIView()
         callExecuteAction(action: action, target: fixture.target, sender: view2, event: TestUIEvent())
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let secondTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         
         assertResetsTimeout(firstTransaction, secondTransaction)
     }
@@ -183,7 +183,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
         let view1 = fixture.button
         callExecuteAction(action: "otherAction", target: fixture.target, sender: view1, event: TestUIEvent())
         
-        let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let firstTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         
         let view2 = UIButton()
         callExecuteAction(action: action, target: fixture.target, sender: view2, event: TestUIEvent())
@@ -195,7 +195,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
         
         // We want firstTransaction to be deallocated by ARC
         func startChild() -> Span {
-            let firstTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+            let firstTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
             return firstTransaction.startChild(operation: "some")
         }
         
@@ -207,7 +207,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
         
         XCTAssertEqual(2, getInternalTransactions().count)
         
-        let secondTransaction = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let secondTransaction = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         
         XCTAssertTrue(secondTransaction === getInternalTransactions().last)
         
@@ -244,7 +244,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
     }
     
     private func assertTransaction(name: String, operation: String, nameSource: BuzzSentryTransactionNameSource = .component) {
-        let span = try! XCTUnwrap(SentrySDK.span as? BuzzSentryTracer)
+        let span = try! XCTUnwrap(BuzzSentrySDK.span as? BuzzSentryTracer)
         
         let transactions = try! XCTUnwrap(Dynamic(sut).activeTransactions.asArray as? [BuzzSentryTracer])
         XCTAssertEqual(1, transactions.count)
@@ -256,7 +256,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
     }
     
     private func assertNoTransaction() {
-        XCTAssertNil(SentrySDK.span as? BuzzSentryTracer)
+        XCTAssertNil(BuzzSentrySDK.span as? BuzzSentryTracer)
     }
     
     private func assertResetsTimeout(_ firstTransaction: BuzzSentryTracer, _ secondTransaction: BuzzSentryTracer) {

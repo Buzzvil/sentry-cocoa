@@ -24,7 +24,7 @@ saveViewHierarchy(const char *path)
         return NO;
     }
 
-    BuzzSentryClient *client = [SentrySDK.currentHub getClient];
+    BuzzSentryClient *client = [BuzzSentrySDK.currentHub getClient];
     [client addAttachmentProcessor:self];
 
     sentrycrash_setSaveViewHierarchy(&saveViewHierarchy);
@@ -41,7 +41,7 @@ saveViewHierarchy(const char *path)
 {
     sentrycrash_setSaveViewHierarchy(NULL);
 
-    BuzzSentryClient *client = [SentrySDK.currentHub getClient];
+    BuzzSentryClient *client = [BuzzSentrySDK.currentHub getClient];
     [client removeAttachmentProcessor:self];
 }
 

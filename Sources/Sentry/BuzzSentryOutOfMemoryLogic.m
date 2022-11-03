@@ -94,9 +94,9 @@ BuzzSentryOutOfMemoryLogic ()
         return NO;
     }
 
-    // When calling SentrySDK.start twice we would wrongly report an OOM. We can only
+    // When calling BuzzSentrySDK.start twice we would wrongly report an OOM. We can only
     // report an OOM when the SDK is started the first time.
-    if (SentrySDK.startInvocations != 1) {
+    if (BuzzSentrySDK.startInvocations != 1) {
         return NO;
     }
 

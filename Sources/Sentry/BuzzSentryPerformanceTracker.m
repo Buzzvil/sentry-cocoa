@@ -64,7 +64,7 @@ BuzzSentryPerformanceTracker () <BuzzSentryTracerDelegate>
                                                 nameSource:source
                                                  operation:operation];
 
-        [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> span) {
+        [BuzzSentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> span) {
             BOOL bindToScope = true;
             if (span != nil) {
                 if ([BuzzSentryUIEventTracker isUIEventOperation:span.context.operation]) {
@@ -74,7 +74,7 @@ BuzzSentryPerformanceTracker () <BuzzSentryTracerDelegate>
                 }
             }
 
-            newSpan = [SentrySDK.currentHub startTransactionWithContext:context
+            newSpan = [BuzzSentrySDK.currentHub startTransactionWithContext:context
                                                             bindToScope:bindToScope
                                                         waitForChildren:YES
                                                   customSamplingContext:@ {}];

@@ -77,7 +77,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         let releaseName = "1.0.0"
         let dist = "14G60"
         // The start of the SDK installs all integrations
-        SentrySDK.start(options: ["dsn": BuzzSentryCrashIntegrationTests.dsnAsString,
+        BuzzSentrySDK.start(options: ["dsn": BuzzSentryCrashIntegrationTests.dsnAsString,
                                   "release": releaseName,
                                   "dist": dist]
         )
@@ -91,7 +91,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     }
     
     func testContext_IsPassedToSentryCrash() {
-        SentrySDK.start { options in
+        BuzzSentrySDK.start { options in
             options.dsn = BuzzSentryCrashIntegrationTests.dsnAsString
         }
         
@@ -114,7 +114,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     
     func testEndSessionAsCrashed_WithCurrentSession() {
         let expectedCrashedSession = givenCrashedSession()
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
         
         advanceTime(bySeconds: 10)
         
@@ -127,11 +127,11 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     func testEndSessionAsCrashed_WhenOOM_WithCurrentSession() {
         givenOOMAppState()
-        SentrySDK.startInvocations = 1
+        BuzzSentrySDK.startInvocations = 1
         
         let expectedCrashedSession = givenCrashedSession()
         
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
         advanceTime(bySeconds: 10)
         
         let sut = fixture.sutWithoutCrash
@@ -244,7 +244,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         
         sut.install(with: Options())
         
-        SentrySDK.configureScope { scope in
+        BuzzSentrySDK.configureScope { scope in
             scope.removeContext(key: "device")
         }
         
@@ -327,7 +327,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     private func givenSutWithGlobalHub() -> (BuzzSentryCrashIntegration, BuzzSentryHub) {
         let sut = fixture.getSut()
         let hub = fixture.hub
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
 
         return (sut, hub)
     }
@@ -335,13 +335,13 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     private func givenSutWithGlobalHubAndCrashWrapper() -> (BuzzSentryCrashIntegration, BuzzSentryHub) {
         let sut = fixture.getSut(crashWrapper: SentryCrashWrapper.sharedInstance())
         let hub = fixture.hub
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
 
         return (sut, hub)
     }
     
     private func setLocaleToGlobalScope(locale: String) {
-        SentrySDK.configureScope { scope in
+        BuzzSentrySDK.configureScope { scope in
             guard var device = scope.contextDictionary["device"] as? [String: Any] else {
                 XCTFail("No device found on context.")
                 return

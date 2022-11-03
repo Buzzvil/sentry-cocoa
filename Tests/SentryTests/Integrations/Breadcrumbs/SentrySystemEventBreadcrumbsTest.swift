@@ -24,7 +24,7 @@ class BuzzSentrySystemEventBreadcrumbsTest: XCTestCase {
         func getSut(scope: Scope, currentDevice: UIDevice? = UIDevice.current) -> BuzzSentrySystemEventBreadcrumbs {
             let client = Client(options: self.options)
             let hub = BuzzSentryHub(client: client, andScope: scope)
-            SentrySDK.setCurrentHub(hub)
+            BuzzSentrySDK.setCurrentHub(hub)
 
             let systemEvents = BuzzSentrySystemEventBreadcrumbs(fileManager: fileManager, andCurrentDateProvider: currentDateProvider)!
             systemEvents.start(currentDevice)

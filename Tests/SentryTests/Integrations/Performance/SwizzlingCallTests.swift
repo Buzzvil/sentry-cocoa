@@ -34,7 +34,7 @@ class SwizzlingCallTests: XCTestCase {
     }
     
     private func initSDKForSwizzling() {
-        SentrySDK.start { options in
+        BuzzSentrySDK.start { options in
             options.dsn = ""
             options.tracesSampleRate = 1.0
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
