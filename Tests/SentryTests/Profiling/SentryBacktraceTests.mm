@@ -4,7 +4,7 @@
 
 #    import <XCTest/XCTest.h>
 
-#    import "SentryBacktrace.hpp"
+#    import "BuzzSentryBacktrace.hpp"
 #    import "BuzzSentryThreadHandle.hpp"
 
 #    import <cmath>
@@ -139,10 +139,10 @@ countof(Array &)
 }
 } // namespace
 
-@interface SentryBacktraceTests : XCTestCase
+@interface BuzzSentryBacktraceTests : XCTestCase
 @end
 
-@implementation SentryBacktraceTests
+@implementation BuzzSentryBacktraceTests
 
 - (void)testBacktrace
 {

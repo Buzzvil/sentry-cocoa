@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include "SentryCompiler.h"
+#include "BuzzSentryCompiler.h"
 
 /* ==== Platform adaptation macros: these describe properties of the target environment. ==== */
 

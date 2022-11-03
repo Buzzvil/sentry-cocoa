@@ -1,5 +1,5 @@
 #import "BuzzSentryFramesTracker.h"
-#import "SentryCompiler.h"
+#import "BuzzSentryCompiler.h"
 #import "BuzzSentryDisplayLinkWrapper.h"
 #import "SentryProfiler.h"
 #import "SentryProfilingConditionals.h"

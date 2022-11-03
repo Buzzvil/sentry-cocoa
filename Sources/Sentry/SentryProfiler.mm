@@ -2,7 +2,7 @@
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 #    import "NSDate+BuzzSentryExtras.h"
-#    import "SentryBacktrace.hpp"
+#    import "BuzzSentryBacktrace.hpp"
 #    import "BuzzSentryClient+Private.h"
 #    import "BuzzSentryCurrentDate.h"
 #    import "BuzzSentryDebugImageProvider.h"

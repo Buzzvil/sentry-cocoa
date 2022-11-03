@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SentryCPU.h"
+#include "BuzzSentryCPU.h"
 
 #include <cstdint>
 

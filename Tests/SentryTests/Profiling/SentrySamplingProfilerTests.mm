@@ -4,7 +4,7 @@
 
 #    import <XCTest/XCTest.h>
 
-#    import "SentryBacktrace.hpp"
+#    import "BuzzSentryBacktrace.hpp"
 #    import "SentrySamplingProfiler.hpp"
 #    import "BuzzSentryThreadMetadataCache.hpp"
 #    import "SentryTime.h"

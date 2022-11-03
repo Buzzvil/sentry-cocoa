@@ -1,4 +1,4 @@
-#import "SentryCompiler.h"
+#import "BuzzSentryCompiler.h"
 #import "SentryProfilingConditionals.h"
 #import <stdint.h>
 

@@ -4,8 +4,8 @@
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
-#    include "SentryCPU.h"
-#    include "SentryCompiler.h"
+#    include "BuzzSentryCPU.h"
+#    include "BuzzSentryCompiler.h"
 #    include "SentryStackFrame.hpp"
 #    include "BuzzSentryThreadHandle.hpp"
 

@@ -1,9 +1,9 @@
-#include "SentryBacktrace.hpp"
+#include "BuzzSentryBacktrace.hpp"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
-#    include "SentryAsyncSafeLogging.h"
-#    include "SentryCompiler.h"
+#    include "BuzzSentryAsyncSafeLogging.h"
+#    include "BuzzSentryCompiler.h"
 #    include "SentryMachLogging.hpp"
 #    include "SentryStackBounds.hpp"
 #    include "SentryStackFrame.hpp"

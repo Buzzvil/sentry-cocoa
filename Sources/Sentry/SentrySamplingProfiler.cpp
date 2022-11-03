@@ -2,7 +2,7 @@
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
-#    include "SentryBacktrace.hpp"
+#    include "BuzzSentryBacktrace.hpp"
 #    include "SentryMachLogging.hpp"
 #    include "BuzzSentryThreadMetadataCache.hpp"
 
