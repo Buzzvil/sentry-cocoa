@@ -21,7 +21,7 @@
 #import "BuzzSentryHub.h"
 #import "BuzzSentryId.h"
 #import "SentryInAppLogic.h"
-#import "SentryInstallation.h"
+#import "BuzzSentryInstallation.h"
 #import "SentryLog.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentryMechanismMeta.h"
@@ -684,7 +684,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     // identify the user.
     if (nil == event.user) {
         BuzzSentryUser *user = [[BuzzSentryUser alloc] init];
-        user.userId = [SentryInstallation id];
+        user.userId = [BuzzSentryInstallation id];
         event.user = user;
     }
 }

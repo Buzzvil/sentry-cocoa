@@ -1,7 +1,7 @@
 #import "BuzzSentrySession.h"
 #import "NSDate+SentryExtras.h"
 #import "SentryCurrentDate.h"
-#import "SentryInstallation.h"
+#import "BuzzSentryInstallation.h"
 #import "SentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,7 +38,7 @@ nameForBuzzSentrySessionStatus(BuzzSentrySessionStatus status)
         _status = kBuzzSentrySessionStatusOk;
         _sequence = 1;
         _errors = 0;
-        _distinctId = [SentryInstallation id];
+        _distinctId = [BuzzSentryInstallation id];
     }
 
     return self;

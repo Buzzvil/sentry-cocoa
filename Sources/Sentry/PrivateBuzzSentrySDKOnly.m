@@ -2,7 +2,7 @@
 #import "BuzzSentryClient.h"
 #import "SentryDebugImageProvider.h"
 #import "BuzzSentryHub+Private.h"
-#import "SentryInstallation.h"
+#import "BuzzSentryInstallation.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentrySerialization.h"
@@ -44,7 +44,7 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (NSString *)installationID
 {
-    return [SentryInstallation id];
+    return [BuzzSentryInstallation id];
 }
 
 + (BuzzSentryOptions *)options

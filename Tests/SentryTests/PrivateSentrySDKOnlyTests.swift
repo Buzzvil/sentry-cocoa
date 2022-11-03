@@ -92,7 +92,7 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
     }
     
     func testGetInstallationId() {
-        XCTAssertEqual(SentryInstallation.id(), PrivateBuzzSentrySDKOnly.installationID)
+        XCTAssertEqual(BuzzSentryInstallation.id(), PrivateBuzzSentrySDKOnly.installationID)
     }
     
     func testSendAppStartMeasurement() {

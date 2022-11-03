@@ -1,9 +1,9 @@
-#import "SentryInstallation.h"
+#import "BuzzSentryInstallation.h"
 #import "SentryDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryInstallation
+@implementation BuzzSentryInstallation
 
 static NSString *volatile installationString;
 

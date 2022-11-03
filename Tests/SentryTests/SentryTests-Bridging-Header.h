@@ -88,7 +88,7 @@
 #import "BuzzSentryId.h"
 #import "SentryInAppLogic.h"
 #import "SentryInitializeForGettingSubclassesNotCalled.h"
-#import "SentryInstallation.h"
+#import "BuzzSentryInstallation.h"
 #import "SentryInternalNotificationNames.h"
 #import "SentryLevelMapper.h"
 #import "SentryLog+TestInit.h"

@@ -1077,7 +1077,7 @@ class BuzzSentryClientTest: XCTestCase {
         fixture.getSut().capture(message: "any message")
         
         assertLastSentEvent { actual in
-            XCTAssertEqual(SentryInstallation.id(), actual.user?.userId)
+            XCTAssertEqual(BuzzSentryInstallation.id(), actual.user?.userId)
         }
     }
     
