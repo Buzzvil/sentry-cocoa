@@ -54,8 +54,8 @@ class BuzzSentryTracerTests: XCTestCase {
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
             displayLinkWrapper = TestDiplayLinkWrapper()
             
-            SentryFramesTracker.sharedInstance().setDisplayLinkWrapper(displayLinkWrapper)
-            SentryFramesTracker.sharedInstance().start()
+            BuzzSentryFramesTracker.sharedInstance().setDisplayLinkWrapper(displayLinkWrapper)
+            BuzzSentryFramesTracker.sharedInstance().start()
             displayLinkWrapper.call()
 #endif
         }
@@ -91,8 +91,8 @@ class BuzzSentryTracerTests: XCTestCase {
         clearTestState()
         BuzzSentryTracer.resetAppStartMeasurementRead()
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-        SentryFramesTracker.sharedInstance().resetFrames()
-        SentryFramesTracker.sharedInstance().stop()
+        BuzzSentryFramesTracker.sharedInstance().resetFrames()
+        BuzzSentryFramesTracker.sharedInstance().stop()
 #endif
     }
     
@@ -753,7 +753,7 @@ class BuzzSentryTracerTests: XCTestCase {
         
         let sut = fixture.getSut()
         
-        SentryFramesTracker.sharedInstance().resetFrames()
+        BuzzSentryFramesTracker.sharedInstance().resetFrames()
         
         sut.finish()
         

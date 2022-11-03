@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** An array of dictionaries that each contain a start and end timestamp for a rendered frame. */
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
-typedef NSArray<NSDictionary<NSString *, NSNumber *> *> SentryFrameInfoTimeSeries;
+typedef NSArray<NSDictionary<NSString *, NSNumber *> *> BuzzSentryFrameInfoTimeSeries;
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 
 @interface SentryScreenFrames : NSObject
@@ -19,8 +19,8 @@ SENTRY_NO_INIT
 - (instancetype)initWithTotal:(NSUInteger)total
                        frozen:(NSUInteger)frozen
                          slow:(NSUInteger)slow
-              frameTimestamps:(SentryFrameInfoTimeSeries *)frameTimestamps
-          frameRateTimestamps:(SentryFrameInfoTimeSeries *)frameRateTimestamps;
+              frameTimestamps:(BuzzSentryFrameInfoTimeSeries *)frameTimestamps
+          frameRateTimestamps:(BuzzSentryFrameInfoTimeSeries *)frameRateTimestamps;
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 
 @property (nonatomic, assign, readonly) NSUInteger total;
@@ -32,14 +32,14 @@ SENTRY_NO_INIT
  * Array of dictionaries describing slow/frozen frames' timestamps. Each dictionary start and end
  * timestamp for every such frame, keyed under @c start_timestamp and @c end_timestamp.
  */
-@property (nonatomic, copy, readonly) SentryFrameInfoTimeSeries *frameTimestamps;
+@property (nonatomic, copy, readonly) BuzzSentryFrameInfoTimeSeries *frameTimestamps;
 
 /**
  * Array of dictionaries describing the screen refresh rate at all points in time that it changes,
  * which can happen when modern devices e.g. go into low power mode. Each dictionary contains keys
  * @c timestamp and @c frame_rate.
  */
-@property (nonatomic, copy, readonly) SentryFrameInfoTimeSeries *frameRateTimestamps;
+@property (nonatomic, copy, readonly) BuzzSentryFrameInfoTimeSeries *frameRateTimestamps;
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 
 @end

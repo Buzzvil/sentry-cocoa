@@ -3,8 +3,8 @@
 #import "SentryCrashStackCursor_MachineContext.h"
 #import "SentryCrashStackCursor_SelfThread.h"
 #import "SentryCrashStackEntryMapper.h"
-#import "SentryFrame.h"
-#import "SentryFrameRemover.h"
+#import "BuzzSentryFrame.h"
+#import "BuzzSentryFrameRemover.h"
 #import "SentryStacktrace.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,8 +28,8 @@ SentryStacktraceBuilder ()
 
 - (SentryStacktrace *)retrieveStacktraceFromCursor:(SentryCrashStackCursor)stackCursor
 {
-    NSMutableArray<SentryFrame *> *frames = [NSMutableArray new];
-    SentryFrame *frame = nil;
+    NSMutableArray<BuzzSentryFrame *> *frames = [NSMutableArray new];
+    BuzzSentryFrame *frame = nil;
     while (stackCursor.advanceCursor(&stackCursor)) {
         if (stackCursor.symbolicate(&stackCursor)) {
             if (stackCursor.stackEntry.address == SentryCrashSC_ASYNC_MARKER) {
@@ -45,10 +45,10 @@ SentryStacktraceBuilder ()
     }
     sentrycrash_async_backtrace_decref(stackCursor.async_caller);
 
-    NSArray<SentryFrame *> *framesCleared = [SentryFrameRemover removeNonSdkFrames:frames];
+    NSArray<BuzzSentryFrame *> *framesCleared = [BuzzSentryFrameRemover removeNonSdkFrames:frames];
 
     // The frames must be ordered from caller to callee, or oldest to youngest
-    NSArray<SentryFrame *> *framesReversed = [[framesCleared reverseObjectEnumerator] allObjects];
+    NSArray<BuzzSentryFrame *> *framesReversed = [[framesCleared reverseObjectEnumerator] allObjects];
 
     SentryStacktrace *stacktrace = [[SentryStacktrace alloc] initWithFrames:framesReversed
                                                                   registers:@{}];
@@ -59,8 +59,8 @@ SentryStacktraceBuilder ()
 - (SentryStacktrace *)buildStackTraceFromStackEntries:(SentryCrashStackEntry *)entries
                                                amount:(unsigned int)amount
 {
-    NSMutableArray<SentryFrame *> *frames = [[NSMutableArray alloc] initWithCapacity:amount];
-    SentryFrame *frame = nil;
+    NSMutableArray<BuzzSentryFrame *> *frames = [[NSMutableArray alloc] initWithCapacity:amount];
+    BuzzSentryFrame *frame = nil;
     for (int i = 0; i < amount; i++) {
         SentryCrashStackEntry stackEntry = entries[i];
         if (stackEntry.address == SentryCrashSC_ASYNC_MARKER) {
@@ -70,14 +70,14 @@ SentryStacktraceBuilder ()
             // skip the marker frame
             continue;
         }
-        frame = [self.crashStackEntryMapper sentryCrashStackEntryToSentryFrame:stackEntry];
+        frame = [self.crashStackEntryMapper sentryCrashStackEntryToBuzzSentryFrame:stackEntry];
         [frames addObject:frame];
     }
 
-    NSArray<SentryFrame *> *framesCleared = [SentryFrameRemover removeNonSdkFrames:frames];
+    NSArray<BuzzSentryFrame *> *framesCleared = [BuzzSentryFrameRemover removeNonSdkFrames:frames];
 
     // The frames must be ordered from caller to callee, or oldest to youngest
-    NSArray<SentryFrame *> *framesReversed = [[framesCleared reverseObjectEnumerator] allObjects];
+    NSArray<BuzzSentryFrame *> *framesReversed = [[framesCleared reverseObjectEnumerator] allObjects];
 
     return [[SentryStacktrace alloc] initWithFrames:framesReversed registers:@{}];
 }

@@ -4,7 +4,7 @@
 #import <Foundation/Foundation.h>
 
 #if SENTRY_HAS_UIKIT
-@class SentryFramesTracker;
+@class BuzzSentryFramesTracker;
 #endif // SENTRY_HAS_UIKIT
 @class SentryHub;
 @class SentryProfilesSamplerDecision;

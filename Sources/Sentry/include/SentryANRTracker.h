@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * executed this block.
  *
  * @discussion We decided against using a CFRunLoopObserver or the CADisplayLink, which the
- * SentryFramesTracker already uses, because they come with two disadvantages. First, the solution
+ * BuzzSentryFramesTracker already uses, because they come with two disadvantages. First, the solution
  * is expensive. Quick benchmarks showed that hooking into the main thread's run loop and checking
  * for every event to process if the main thread executes it in time added around 0,5 % of CPU
  * overhead. Furthermore, if the main thread runs all scheduled events in time, it doesn't mean that

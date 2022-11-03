@@ -1,8 +1,8 @@
-#import "SentryFrame.h"
+#import "BuzzSentryFrame.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryFrame
+@implementation BuzzSentryFrame
 
 - (instancetype)init
 {

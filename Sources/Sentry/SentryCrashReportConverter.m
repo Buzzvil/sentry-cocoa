@@ -5,7 +5,7 @@
 #import "SentryDebugMeta.h"
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
-#import "SentryFrame.h"
+#import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
 #import "SentryInAppLogic.h"
 #import "SentryLog.h"
@@ -250,13 +250,13 @@ SentryCrashReportConverter ()
     return thread;
 }
 
-- (SentryFrame *)stackFrameAtIndex:(NSInteger)frameIndex inThreadIndex:(NSInteger)threadIndex
+- (BuzzSentryFrame *)stackFrameAtIndex:(NSInteger)frameIndex inThreadIndex:(NSInteger)threadIndex
 {
     NSDictionary *frameDictionary = [self rawStackTraceForThreadIndex:threadIndex][frameIndex];
     uintptr_t instructionAddress
         = (uintptr_t)[frameDictionary[@"instruction_addr"] unsignedLongLongValue];
     NSDictionary *binaryImage = [self binaryImageForAddress:instructionAddress];
-    SentryFrame *frame = [[SentryFrame alloc] init];
+    BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = sentry_formatHexAddress(frameDictionary[@"symbol_addr"]);
     frame.instructionAddress = sentry_formatHexAddress(frameDictionary[@"instruction_addr"]);
     frame.imageAddress = sentry_formatHexAddress(binaryImage[@"image_addr"]);
@@ -270,7 +270,7 @@ SentryCrashReportConverter ()
 }
 
 // We already get all the frames in the right order
-- (NSArray<SentryFrame *> *)stackFramesForThreadIndex:(NSInteger)threadIndex
+- (NSArray<BuzzSentryFrame *> *)stackFramesForThreadIndex:(NSInteger)threadIndex
 {
     NSUInteger frameCount = [self rawStackTraceForThreadIndex:threadIndex].count;
     if (frameCount <= 0) {
@@ -278,7 +278,7 @@ SentryCrashReportConverter ()
     }
 
     NSMutableArray *frames = [NSMutableArray arrayWithCapacity:frameCount];
-    SentryFrame *lastFrame = nil;
+    BuzzSentryFrame *lastFrame = nil;
 
     for (NSInteger i = 0; i < frameCount; i++) {
         NSDictionary *frameDictionary = [self rawStackTraceForThreadIndex:threadIndex][i];
@@ -300,7 +300,7 @@ SentryCrashReportConverter ()
 
 - (SentryStacktrace *)stackTraceForThreadIndex:(NSInteger)threadIndex
 {
-    NSArray<SentryFrame *> *frames = [self stackFramesForThreadIndex:threadIndex];
+    NSArray<BuzzSentryFrame *> *frames = [self stackFramesForThreadIndex:threadIndex];
     SentryStacktrace *stacktrace =
         [[SentryStacktrace alloc] initWithFrames:frames
                                        registers:[self registersForThreadIndex:threadIndex]];
@@ -333,7 +333,7 @@ SentryCrashReportConverter ()
     NSMutableSet<NSString *> *imageNames = [[NSMutableSet alloc] init];
 
     for (SentryThread *thread in threads) {
-        for (SentryFrame *frame in thread.stacktrace.frames) {
+        for (BuzzSentryFrame *frame in thread.stacktrace.frames) {
             if (frame.imageAddress && ![imageNames containsObject:frame.imageAddress]) {
                 [imageNames addObject:frame.imageAddress];
             }

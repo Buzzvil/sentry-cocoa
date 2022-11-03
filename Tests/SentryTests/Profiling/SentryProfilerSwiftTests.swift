@@ -38,8 +38,8 @@ class SentryProfilerSwiftTests: XCTestCase {
         clearTestState()
         BuzzSentryTracer.resetAppStartMeasurementRead()
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-        SentryFramesTracker.sharedInstance().resetFrames()
-        SentryFramesTracker.sharedInstance().stop()
+        BuzzSentryFramesTracker.sharedInstance().resetFrames()
+        BuzzSentryFramesTracker.sharedInstance().stop()
 #endif
     }
 

@@ -14,7 +14,7 @@ func clearTestState() {
     SentryNetworkTracker.sharedInstance.disable()
     
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-    let framesTracker = SentryFramesTracker.sharedInstance()
+    let framesTracker = BuzzSentryFramesTracker.sharedInstance()
     framesTracker.stop()
     framesTracker.resetFrames()
     

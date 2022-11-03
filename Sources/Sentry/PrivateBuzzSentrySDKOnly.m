@@ -7,7 +7,7 @@
 #import "BuzzSentrySDK+Private.h"
 #import "SentrySerialization.h"
 #import <SentryDependencyContainer.h>
-#import <SentryFramesTracker.h>
+#import <BuzzSentryFramesTracker.h>
 
 @implementation PrivateBuzzSentrySDKOnly
 
@@ -112,12 +112,12 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (BOOL)isFramesTrackingRunning
 {
-    return [SentryFramesTracker sharedInstance].isRunning;
+    return [BuzzSentryFramesTracker sharedInstance].isRunning;
 }
 
 + (SentryScreenFrames *)currentScreenFrames
 {
-    return [SentryFramesTracker sharedInstance].currentFrames;
+    return [BuzzSentryFramesTracker sharedInstance].currentFrames;
 }
 
 #endif

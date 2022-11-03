@@ -2,7 +2,7 @@
 #import "SentryCrashStackCursor.h"
 #include "SentryCrashStackCursor_MachineContext.h"
 #include "SentryCrashSymbolicator.h"
-#import "SentryFrame.h"
+#import "BuzzSentryFrame.h"
 #import "SentryStacktrace.h"
 #import "SentryStacktraceBuilder.h"
 #import "SentryThread.h"

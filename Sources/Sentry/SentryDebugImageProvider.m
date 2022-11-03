@@ -3,7 +3,7 @@
 #import "SentryCrashDynamicLinker.h"
 #import "SentryCrashUUIDConversion.h"
 #import "SentryDebugMeta.h"
-#import "SentryFrame.h"
+#import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
 #import "SentryLog.h"
 #import "SentryStacktrace.h"
@@ -44,7 +44,7 @@ SentryDebugImageProvider ()
     NSMutableSet<NSString *> *imageAdresses = [[NSMutableSet alloc] init];
 
     for (SentryThread *thread in threads) {
-        for (SentryFrame *frame in thread.stacktrace.frames) {
+        for (BuzzSentryFrame *frame in thread.stacktrace.frames) {
             if (frame.imageAddress && ![imageAdresses containsObject:frame.imageAddress]) {
                 [imageAdresses addObject:frame.imageAddress];
             }

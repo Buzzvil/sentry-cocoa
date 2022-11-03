@@ -1,20 +1,20 @@
-#import "SentryFramesTrackingIntegration.h"
+#import "BuzzSentryFramesTrackingIntegration.h"
 #import "PrivateBuzzSentrySDKOnly.h"
-#import "SentryFramesTracker.h"
+#import "BuzzSentryFramesTracker.h"
 #import "SentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryFramesTrackingIntegration ()
+BuzzSentryFramesTrackingIntegration ()
 
 #if SENTRY_HAS_UIKIT
-@property (nonatomic, strong) SentryFramesTracker *tracker;
+@property (nonatomic, strong) BuzzSentryFramesTracker *tracker;
 #endif
 
 @end
 
-@implementation SentryFramesTrackingIntegration
+@implementation BuzzSentryFramesTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
@@ -24,14 +24,14 @@ SentryFramesTrackingIntegration ()
         return NO;
     }
 
-    self.tracker = [SentryFramesTracker sharedInstance];
+    self.tracker = [BuzzSentryFramesTracker sharedInstance];
     [self.tracker start];
 
     return YES;
 #else
     [SentryLog
         logWithMessage:
-            @"NO UIKit -> SentryFramesTrackingIntegration will not track slow and frozen frames."
+            @"NO UIKit -> BuzzSentryFramesTrackingIntegration will not track slow and frozen frames."
               andLevel:kSentryLevelInfo];
 
     return NO;

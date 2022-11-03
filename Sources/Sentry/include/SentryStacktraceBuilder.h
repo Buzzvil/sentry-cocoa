@@ -4,7 +4,7 @@
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class SentryStacktrace, SentryFrameRemover, SentryCrashStackEntryMapper;
+@class SentryStacktrace, BuzzSentryFrameRemover, SentryCrashStackEntryMapper;
 
 NS_ASSUME_NONNULL_BEGIN
 

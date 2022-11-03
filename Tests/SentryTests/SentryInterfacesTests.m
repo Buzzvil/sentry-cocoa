@@ -40,13 +40,13 @@
 
 - (void)testFrame
 {
-    SentryFrame *frame = [[SentryFrame alloc] init];
+    BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = @"0x01";
     XCTAssertNotNil(frame.symbolAddress);
     NSDictionary *serialized = @{ @"symbol_addr" : @"0x01", @"function" : @"<redacted>" };
     XCTAssertEqualObjects([frame serialize], serialized);
 
-    SentryFrame *frame2 = [[SentryFrame alloc] init];
+    BuzzSentryFrame *frame2 = [[BuzzSentryFrame alloc] init];
     frame2.symbolAddress = @"0x01";
     XCTAssertNotNil(frame2.symbolAddress);
 
@@ -238,7 +238,7 @@
 
 - (void)testStacktrace
 {
-    SentryFrame *frame = [[SentryFrame alloc] init];
+    BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = @"0x01";
     SentryStacktrace *stacktrace = [[SentryStacktrace alloc] initWithFrames:@[ frame ]
                                                                   registers:@{ @"a" : @"1" }];
@@ -264,7 +264,7 @@
     thread2.crashed = @(YES);
     thread2.current = @(NO);
     thread2.name = @"name";
-    SentryFrame *frame = [[SentryFrame alloc] init];
+    BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = @"0x01";
     thread2.stacktrace = [[SentryStacktrace alloc] initWithFrames:@[ frame ]
                                                         registers:@{ @"a" : @"1" }];
@@ -352,7 +352,7 @@
     thread2.crashed = @(YES);
     thread2.current = @(NO);
     thread2.name = @"name";
-    SentryFrame *frame = [[SentryFrame alloc] init];
+    BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
     frame.symbolAddress = @"0x01";
     thread2.stacktrace = [[SentryStacktrace alloc] initWithFrames:@[ frame ]
                                                         registers:@{ @"a" : @"1" }];

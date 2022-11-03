@@ -1,12 +1,12 @@
 #import "SentryStacktrace.h"
-#import "SentryFrame.h"
+#import "BuzzSentryFrame.h"
 #import "SentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation SentryStacktrace
 
-- (instancetype)initWithFrames:(NSArray<SentryFrame *> *)frames
+- (instancetype)initWithFrames:(NSArray<BuzzSentryFrame *> *)frames
                      registers:(NSDictionary<NSString *, NSString *> *)registers
 {
     self = [super init];
@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
         return;
     }
 
-    SentryFrame *lastFrame = self.frames.lastObject;
-    SentryFrame *beforeLastFrame = [self.frames objectAtIndex:self.frames.count - 2];
+    BuzzSentryFrame *lastFrame = self.frames.lastObject;
+    BuzzSentryFrame *beforeLastFrame = [self.frames objectAtIndex:self.frames.count - 2];
 
     if ([lastFrame.symbolAddress isEqualToString:beforeLastFrame.symbolAddress] &&
         [self.registers[@"lr"] isEqualToString:beforeLastFrame.instructionAddress]) {
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableDictionary *serializedData = [NSMutableDictionary new];
 
     NSMutableArray *frames = [NSMutableArray new];
-    for (SentryFrame *frame in self.frames) {
+    for (BuzzSentryFrame *frame in self.frames) {
         NSDictionary *serialized = [frame serialize];
         if (serialized.allKeys.count > 0) {
             [frames addObject:[frame serialize]];

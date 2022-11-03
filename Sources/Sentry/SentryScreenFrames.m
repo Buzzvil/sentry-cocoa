@@ -27,8 +27,8 @@
 - (instancetype)initWithTotal:(NSUInteger)total
                        frozen:(NSUInteger)frozen
                          slow:(NSUInteger)slow
-              frameTimestamps:(SentryFrameInfoTimeSeries *)frameTimestamps
-          frameRateTimestamps:(SentryFrameInfoTimeSeries *)frameRateTimestamps
+              frameTimestamps:(BuzzSentryFrameInfoTimeSeries *)frameTimestamps
+          frameRateTimestamps:(BuzzSentryFrameInfoTimeSeries *)frameRateTimestamps
 {
     if (self = [super init]) {
         _total = total;

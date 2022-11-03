@@ -27,7 +27,7 @@
 #import "SentryMechanismMeta.h"
 #import "SentryMessage.h"
 #import "BuzzSentryMeta.h"
-#import "SentryNSError.h"
+#import "BuzzSentryNSError.h"
 #import "BuzzSentryOptions+Private.h"
 #import "SentryOutOfMemoryTracker.h"
 #import "SentryPermissionsObserver.h"
@@ -243,7 +243,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     // Sentry uses the error domain and code on the mechanism for gouping
     SentryMechanism *mechanism = [[SentryMechanism alloc] initWithType:@"NSError"];
     SentryMechanismMeta *mechanismMeta = [[SentryMechanismMeta alloc] init];
-    mechanismMeta.error = [[SentryNSError alloc] initWithDomain:error.domain code:error.code];
+    mechanismMeta.error = [[BuzzSentryNSError alloc] initWithDomain:error.domain code:error.code];
     mechanism.meta = mechanismMeta;
     // The description of the error can be especially useful for error from swift that
     // use a simple enum.

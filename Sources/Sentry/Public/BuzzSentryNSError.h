@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Sentry representation of an NSError to send to Sentry.
  */
-@interface SentryNSError : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryNSError : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 /**
@@ -21,7 +21,7 @@ SENTRY_NO_INIT
 @property (nonatomic, assign) NSInteger code;
 
 /**
- * Initializes SentryNSError and sets the domain and code.
+ * Initializes BuzzSentryNSError and sets the domain and code.
  *
  * @param domain The domain of an NSError.
  * @param code The error code of an NSError.

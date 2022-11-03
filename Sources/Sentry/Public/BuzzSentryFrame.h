@@ -5,7 +5,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(Frame)
-@interface SentryFrame : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryFrame : NSObject <BuzzSentrySerializable>
 
 /**
  * SymbolAddress of the frame

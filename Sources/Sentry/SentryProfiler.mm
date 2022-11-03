@@ -12,7 +12,7 @@
 #    import "SentryDevice.h"
 #    import "BuzzSentryEnvelope.h"
 #    import "BuzzSentryEnvelopeItemType.h"
-#    import "SentryFramesTracker.h"
+#    import "BuzzSentryFramesTracker.h"
 #    import "SentryHexAddressFormatter.h"
 #    import "SentryHub+Private.h"
 #    import "SentryId.h"
@@ -150,7 +150,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
             return;
         }
 #        if SENTRY_HAS_UIKIT
-        [SentryFramesTracker.sharedInstance resetProfilingTimestamps];
+        [BuzzSentryFramesTracker.sharedInstance resetProfilingTimestamps];
 #        endif // SENTRY_HAS_UIKIT
         [_gCurrentProfiler start];
         _gCurrentProfiler->_timeoutTimer =
@@ -285,8 +285,8 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     [_gCurrentProfiler stop];
     _gCurrentProfiler->_truncationReason = reason;
 #    if SENTRY_HAS_UIKIT
-    _gCurrentProfiler->_frameInfo = SentryFramesTracker.sharedInstance.currentFrames;
-    [SentryFramesTracker.sharedInstance resetProfilingTimestamps];
+    _gCurrentProfiler->_frameInfo = BuzzSentryFramesTracker.sharedInstance.currentFrames;
+    [BuzzSentryFramesTracker.sharedInstance resetProfilingTimestamps];
 #    endif // SENTRY_HAS_UIKIT
     _gCurrentProfiler = nil;
 }

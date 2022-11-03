@@ -5,7 +5,7 @@
 #import "SentryCrashStackCursor.h"
 #import "SentryCrashStackCursor_SelfThread.h"
 #import "SentryCrashThread.h"
-#import "SentryFrame.h"
+#import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
 #import "SentryStacktrace.h"
 #import "SentryStacktraceBuilder.h"

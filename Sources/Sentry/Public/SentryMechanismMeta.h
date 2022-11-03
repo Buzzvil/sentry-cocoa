@@ -2,7 +2,7 @@
 #import "BuzzSentrySerializable.h"
 #import <Foundation/Foundation.h>
 
-@class SentryNSError;
+@class BuzzSentryNSError;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,7 +31,7 @@ NS_SWIFT_NAME(MechanismMeta)
 /**
  * Sentry uses the NSErrors domain and code for grouping. Only domain and code are serialized.
  */
-@property (nullable, nonatomic, strong) SentryNSError *error;
+@property (nullable, nonatomic, strong) BuzzSentryNSError *error;
 
 @end
 

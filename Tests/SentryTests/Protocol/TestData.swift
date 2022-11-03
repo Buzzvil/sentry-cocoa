@@ -114,7 +114,7 @@ class TestData {
             "code_name": "BUS_NOOP"
         ]
         
-        mechanismMeta.error = SentryNSError(domain: "SentrySampleDomain", code: 1)
+        mechanismMeta.error = BuzzSentryNSError(domain: "SentrySampleDomain", code: 1)
         
         return mechanismMeta
     }

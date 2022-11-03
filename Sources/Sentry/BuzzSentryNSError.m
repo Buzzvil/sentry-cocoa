@@ -1,9 +1,9 @@
-#import "SentryNSError.h"
+#import "BuzzSentryNSError.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryNSError
+@implementation BuzzSentryNSError
 
 - (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code
 {

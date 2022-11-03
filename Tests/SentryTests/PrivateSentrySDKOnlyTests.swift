@@ -104,7 +104,7 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
 
     func testOptions() {
         let options = Options()
-        options.dsn = TestConstants.dsnAsString(username: "SentryFramesTrackingIntegrationTests")
+        options.dsn = TestConstants.dsnAsString(username: "BuzzSentryFramesTrackingIntegrationTests")
         let client = TestClient(options: options)
         SentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
 
@@ -121,12 +121,12 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
     
     func testIsFramesTrackingRunning() {
         XCTAssertFalse(PrivateBuzzSentrySDKOnly.isFramesTrackingRunning)
-        SentryFramesTracker.sharedInstance().start()
+        BuzzSentryFramesTracker.sharedInstance().start()
         XCTAssertTrue(PrivateBuzzSentrySDKOnly.isFramesTrackingRunning)
     }
     
     func testGetFrames() {
-        let tracker = SentryFramesTracker.sharedInstance()
+        let tracker = BuzzSentryFramesTracker.sharedInstance()
         let displayLink = TestDiplayLinkWrapper()
         
         tracker.setDisplayLinkWrapper(displayLink)

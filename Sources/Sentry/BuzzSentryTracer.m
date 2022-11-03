@@ -4,7 +4,7 @@
 #import "SentryAppStartMeasurement.h"
 #import "BuzzSentryClient.h"
 #import "SentryCurrentDate.h"
-#import "SentryFramesTracker.h"
+#import "BuzzSentryFramesTracker.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentryNoOpSpan.h"
@@ -166,7 +166,7 @@ static BOOL appStartMeasurementRead;
 
         // Store current amount of frames at the beginning to be able to calculate the amount of
         // frames at the end of the transaction.
-        SentryFramesTracker *framesTracker = [SentryFramesTracker sharedInstance];
+        BuzzSentryFramesTracker *framesTracker = [BuzzSentryFramesTracker sharedInstance];
         if (framesTracker.isRunning) {
             SentryScreenFrames *currentFrames = framesTracker.currentFrames;
             initTotalFrames = currentFrames.total;
@@ -676,7 +676,7 @@ static BOOL appStartMeasurementRead;
 
 #if SENTRY_HAS_UIKIT
     // Frames
-    SentryFramesTracker *framesTracker = [SentryFramesTracker sharedInstance];
+    BuzzSentryFramesTracker *framesTracker = [BuzzSentryFramesTracker sharedInstance];
     if (framesTracker.isRunning && !_startTimeChanged) {
 
         SentryScreenFrames *currentFrames = framesTracker.currentFrames;

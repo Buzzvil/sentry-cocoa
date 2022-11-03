@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 
-@class SentryFrame;
+@class BuzzSentryFrame;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryFrameRemover : NSObject
+@interface BuzzSentryFrameRemover : NSObject
 
 /**
  * Removes Sentry SDK frames until a frame from a different package is found.
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  * that are not from this SDK and contain "sentry". Therefore this logic only works for apps
  * including Sentry dynamically.
  */
-+ (NSArray<SentryFrame *> *)removeNonSdkFrames:(NSArray<SentryFrame *> *)frames;
++ (NSArray<BuzzSentryFrame *> *)removeNonSdkFrames:(NSArray<BuzzSentryFrame *> *)frames;
 
 @end
 

@@ -1,10 +1,10 @@
-#import "SentryFramesTracker.h"
+#import "BuzzSentryFramesTracker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 #if SENTRY_HAS_UIKIT
 @interface
-SentryFramesTracker (TestInit)
+BuzzSentryFramesTracker (TestInit)
 
 - (instancetype)initWithDisplayLinkWrapper:(SentryDisplayLinkWrapper *)displayLinkWrapper;
 

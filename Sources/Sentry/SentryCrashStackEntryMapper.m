@@ -1,5 +1,5 @@
 #import "SentryCrashStackEntryMapper.h"
-#import "SentryFrame.h"
+#import "BuzzSentryFrame.h"
 #import "SentryHexAddressFormatter.h"
 #import "SentryInAppLogic.h"
 #import <Foundation/Foundation.h>
@@ -23,9 +23,9 @@ SentryCrashStackEntryMapper ()
     return self;
 }
 
-- (SentryFrame *)sentryCrashStackEntryToSentryFrame:(SentryCrashStackEntry)stackEntry
+- (BuzzSentryFrame *)sentryCrashStackEntryToBuzzSentryFrame:(SentryCrashStackEntry)stackEntry
 {
-    SentryFrame *frame = [[SentryFrame alloc] init];
+    BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
 
     NSNumber *symbolAddress = @(stackEntry.symbolAddress);
     frame.symbolAddress = sentry_formatHexAddress(symbolAddress);
@@ -51,9 +51,9 @@ SentryCrashStackEntryMapper ()
     return frame;
 }
 
-- (SentryFrame *)mapStackEntryWithCursor:(SentryCrashStackCursor)stackCursor
+- (BuzzSentryFrame *)mapStackEntryWithCursor:(SentryCrashStackCursor)stackCursor
 {
-    return [self sentryCrashStackEntryToSentryFrame:stackCursor.stackEntry];
+    return [self sentryCrashStackEntryToBuzzSentryFrame:stackCursor.stackEntry];
 }
 
 @end

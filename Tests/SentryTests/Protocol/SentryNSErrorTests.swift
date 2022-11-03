@@ -1,9 +1,9 @@
 import XCTest
 
-class SentryNSErrorTests: XCTestCase {
+class BuzzSentryNSErrorTests: XCTestCase {
 
     func testSerialize() {
-        let error = SentryNSError(domain: "domain", code: 10)
+        let error = BuzzSentryNSError(domain: "domain", code: 10)
     
         let actual = error.serialize()
         

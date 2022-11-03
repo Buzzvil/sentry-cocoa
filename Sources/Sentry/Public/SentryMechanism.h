@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryNSError, SentryMechanismMeta;
+@class BuzzSentryNSError, SentryMechanismMeta;
 
 NS_SWIFT_NAME(Mechanism)
 @interface SentryMechanism : NSObject <BuzzSentrySerializable>

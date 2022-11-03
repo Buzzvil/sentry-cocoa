@@ -1,7 +1,7 @@
 #import "SentryMechanism.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryMechanismMeta.h"
-#import "SentryNSError.h"
+#import "BuzzSentryNSError.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

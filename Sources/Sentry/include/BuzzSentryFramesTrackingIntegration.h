@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryFramesTrackingIntegration : SentryBaseIntegration <SentryIntegrationProtocol>
+@interface BuzzSentryFramesTrackingIntegration : SentryBaseIntegration <SentryIntegrationProtocol>
 
 - (void)stop;
 
