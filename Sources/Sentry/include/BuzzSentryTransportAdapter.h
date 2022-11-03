@@ -3,7 +3,7 @@
 #import "BuzzSentryDiscardReason.h"
 #import "BuzzSentryTransport.h"
 
-@class BuzzSentryEnvelope, BuzzSentryEnvelopeItem, BuzzSentryEvent, SentrySession, BuzzSentryUserFeedback,
+@class BuzzSentryEnvelope, BuzzSentryEnvelopeItem, BuzzSentryEvent, BuzzSentrySession, BuzzSentryUserFeedback,
     BuzzSentryAttachment, BuzzSentryTraceContext, BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,7 +23,7 @@ SENTRY_NO_INIT
     NS_SWIFT_NAME(send(event:attachments:));
 
 - (void)sendEvent:(BuzzSentryEvent *)event
-          session:(SentrySession *)session
+          session:(BuzzSentrySession *)session
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments;
 
 - (void)sendEvent:(BuzzSentryEvent *)event
@@ -38,7 +38,7 @@ SENTRY_NO_INIT
     NS_SWIFT_NAME(send(event:traceContext:attachments:additionalEnvelopeItems:));
 
 - (void)sendEvent:(BuzzSentryEvent *)event
-      withSession:(SentrySession *)session
+      withSession:(BuzzSentrySession *)session
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments;
 

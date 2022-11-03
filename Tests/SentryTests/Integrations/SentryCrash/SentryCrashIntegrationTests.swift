@@ -26,8 +26,8 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
             hub = TestHub(client: client, andScope: nil)
         }
         
-        var session: SentrySession {
-            let session = SentrySession(releaseName: "1.0.0")
+        var session: BuzzSentrySession {
+            let session = BuzzSentrySession(releaseName: "1.0.0")
             session.incrementErrors()
             
             return session
@@ -301,14 +301,14 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         api?.pointee.setEnabled(false)
     }
     
-    private func givenCurrentSession() -> SentrySession {
+    private func givenCurrentSession() -> BuzzSentrySession {
         // serialize sets the timestamp
-        let session = SentrySession(jsonObject: fixture.session.serialize())!
+        let session = BuzzSentrySession(jsonObject: fixture.session.serialize())!
         fixture.fileManager.storeCurrentSession(session)
         return session
     }
     
-    private func givenCrashedSession() -> SentrySession {
+    private func givenCrashedSession() -> BuzzSentrySession {
         let session = givenCurrentSession()
         session.endCrashed(withTimestamp: fixture.currentDateProvider.date().addingTimeInterval(5))
         
@@ -360,9 +360,9 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         }
     }
     
-    private func assertCrashedSessionStored(expected: SentrySession) {
+    private func assertCrashedSessionStored(expected: BuzzSentrySession) {
         let crashedSession = fixture.fileManager.readCrashedSession()
-        XCTAssertEqual(SentrySessionStatus.crashed, crashedSession?.status)
+        XCTAssertEqual(BuzzSentrySessionStatus.crashed, crashedSession?.status)
         XCTAssertEqual(expected, crashedSession)
         XCTAssertNil(fixture.fileManager.readCurrentSession())
     }

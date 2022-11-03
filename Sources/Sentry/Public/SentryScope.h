@@ -2,7 +2,7 @@
 #import "BuzzSentrySerializable.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class BuzzSentryUser, SentrySession, BuzzSentryOptions, SentryBreadcrumb, BuzzSentryAttachment;
+@class BuzzSentryUser, BuzzSentrySession, BuzzSentryOptions, SentryBreadcrumb, BuzzSentryAttachment;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -106,7 +106,7 @@ NS_SWIFT_NAME(Scope)
 - (BuzzSentryEvent *__nullable)applyToEvent:(BuzzSentryEvent *)event
                           maxBreadcrumb:(NSUInteger)maxBreadcrumbs;
 
-- (void)applyToSession:(SentrySession *)session;
+- (void)applyToSession:(BuzzSentrySession *)session;
 
 /**
  * Sets context values which will overwrite BuzzSentryEvent.context when event is

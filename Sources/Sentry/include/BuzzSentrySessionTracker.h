@@ -9,7 +9,7 @@
  * https://docs.sentry.io/workflow/releases/health/#session
  */
 NS_SWIFT_NAME(SessionTracker)
-@interface SentrySessionTracker : NSObject
+@interface BuzzSentrySessionTracker : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options

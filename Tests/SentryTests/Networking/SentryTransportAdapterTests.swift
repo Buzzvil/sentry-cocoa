@@ -30,7 +30,7 @@ class BuzzSentryTransportAdapterTests: XCTestCase {
     }
     
     func testSendEventWithSession_SendsCorrectEnvelope() throws {
-        let session = SentrySession(releaseName: "1.0.1")
+        let session = BuzzSentrySession(releaseName: "1.0.1")
         let event = TestData.event
         sut.send(event, session: session, attachments: [fixture.attachment])
         

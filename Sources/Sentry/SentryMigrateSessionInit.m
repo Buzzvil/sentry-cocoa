@@ -3,7 +3,7 @@
 #import "BuzzSentryEnvelopeItemType.h"
 #import "SentryLog.h"
 #import "SentrySerialization.h"
-#import "SentrySession+Private.h"
+#import "BuzzSentrySession+Private.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     for (BuzzSentryEnvelopeItem *item in envelope.items) {
         if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeSession]) {
-            SentrySession *session = [SentrySerialization sessionWithData:item.data];
+            BuzzSentrySession *session = [SentrySerialization sessionWithData:item.data];
             if (nil != session && [session.flagInit boolValue]) {
                 BOOL didSetInitFlag =
                     [self setInitFlagOnNextEnvelopeWithSameSessionId:session
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
     return NO;
 }
 
-+ (BOOL)setInitFlagOnNextEnvelopeWithSameSessionId:(SentrySession *)session
++ (BOOL)setInitFlagOnNextEnvelopeWithSameSessionId:(BuzzSentrySession *)session
                                   envelopesDirPath:(NSString *)envelopesDirPath
                                  envelopeFilePaths:(NSArray<NSString *> *)envelopeFilePaths
 {
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     for (BuzzSentryEnvelopeItem *item in envelope.items) {
         if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeSession]) {
-            SentrySession *localSession = [SentrySerialization sessionWithData:item.data];
+            BuzzSentrySession *localSession = [SentrySerialization sessionWithData:item.data];
 
             if (nil != localSession && [localSession.sessionId isEqual:sessionId]) {
                 [localSession setFlagInit];
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (void)storeSessionInit:(BuzzSentryEnvelope *)originalEnvelope
-                 session:(SentrySession *)session
+                 session:(BuzzSentrySession *)session
                     path:(NSString *)envelopeFilePath
 {
     NSArray<BuzzSentryEnvelopeItem *> *envelopeItemsWithUpdatedSession =
@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-+ (NSArray<BuzzSentryEnvelopeItem *> *)replaceSessionEnvelopeItem:(SentrySession *)session
++ (NSArray<BuzzSentryEnvelopeItem *> *)replaceSessionEnvelopeItem:(BuzzSentrySession *)session
                                                    onEnvelope:(BuzzSentryEnvelope *)envelope
 {
     NSPredicate *noSessionEnvelopeItems =

@@ -175,8 +175,8 @@ class SentrySerializationTests: XCTestCase {
     }
     
     func testSerializeSession() throws {
-        let dict = SentrySession(releaseName: "1.0.0").serialize()
-        let session = SentrySession(jsonObject: dict)!
+        let dict = BuzzSentrySession(releaseName: "1.0.0").serialize()
+        let session = BuzzSentrySession(jsonObject: dict)!
         
         let data = try SentrySerialization.data(with: session)
         
@@ -184,9 +184,9 @@ class SentrySerializationTests: XCTestCase {
     }
     
     func testSerializeSessionWithNoReleaseName() throws {
-        var dict = SentrySession(releaseName: "1.0.0").serialize()
+        var dict = BuzzSentrySession(releaseName: "1.0.0").serialize()
         dict["attrs"] = nil // Remove release name
-        let session = SentrySession(jsonObject: dict)!
+        let session = BuzzSentrySession(jsonObject: dict)!
         
         let data = try SentrySerialization.data(with: session)
         
@@ -194,8 +194,8 @@ class SentrySerializationTests: XCTestCase {
     }
     
     func testSerializeSessionWithEmptyReleaseName() throws {
-        let dict = SentrySession(releaseName: "").serialize()
-        let session = SentrySession(jsonObject: dict)!
+        let dict = BuzzSentrySession(releaseName: "").serialize()
+        let session = BuzzSentrySession(jsonObject: dict)!
         
         let data = try SentrySerialization.data(with: session)
         
@@ -203,7 +203,7 @@ class SentrySerializationTests: XCTestCase {
     }
     
     func testSerializeSessionWithGarbageInDict() throws {
-        var dict = SentrySession(releaseName: "").serialize()
+        var dict = BuzzSentrySession(releaseName: "").serialize()
         dict["started"] = "20"
         let data = try SentrySerialization.data(withJSONObject: dict)
         

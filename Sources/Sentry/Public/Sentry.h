@@ -38,7 +38,7 @@ FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 #import "SentryScreenFrames.h"
 #import "SentrySdkInfo.h"
 #import "BuzzSentrySerializable.h"
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 #import "BuzzSentrySpanContext.h"
 #import "BuzzSentrySpanId.h"
 #import "BuzzSentrySpanProtocol.h"

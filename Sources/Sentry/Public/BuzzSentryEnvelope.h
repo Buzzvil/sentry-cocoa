@@ -2,7 +2,7 @@
 
 #import "SentryDefines.h"
 
-@class BuzzSentryEvent, SentrySession, SentrySdkInfo, SentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
+@class BuzzSentryEvent, BuzzSentrySession, SentrySdkInfo, SentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
     BuzzSentryTransaction, BuzzSentryTraceContext, BuzzSentryClientReport;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -82,7 +82,7 @@ SENTRY_NO_INIT
 SENTRY_NO_INIT
 
 - (instancetype)initWithEvent:(BuzzSentryEvent *)event;
-- (instancetype)initWithSession:(SentrySession *)session;
+- (instancetype)initWithSession:(BuzzSentrySession *)session;
 - (instancetype)initWithUserFeedback:(BuzzSentryUserFeedback *)userFeedback;
 - (_Nullable instancetype)initWithAttachment:(BuzzSentryAttachment *)attachment
                            maxAttachmentSize:(NSUInteger)maxAttachmentSize;
@@ -117,7 +117,7 @@ SENTRY_NO_INIT
  * @param session to init the envelope with.
  * @return an initialized BuzzSentryEnvelope
  */
-- (instancetype)initWithSession:(SentrySession *)session;
+- (instancetype)initWithSession:(BuzzSentrySession *)session;
 
 /**
  * Initializes a BuzzSentryEnvelope with a list of sessions.
@@ -126,7 +126,7 @@ SENTRY_NO_INIT
  * @param sessions to init the envelope with.
  * @return an initialized BuzzSentryEnvelope
  */
-- (instancetype)initWithSessions:(NSArray<SentrySession *> *)sessions;
+- (instancetype)initWithSessions:(NSArray<BuzzSentrySession *> *)sessions;
 
 - (instancetype)initWithHeader:(BuzzSentryEnvelopeHeader *)header
                          items:(NSArray<BuzzSentryEnvelopeItem *> *)items NS_DESIGNATED_INITIALIZER;

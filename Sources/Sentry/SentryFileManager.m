@@ -304,17 +304,17 @@ SentryFileManager ()
         [self.envelopesPath lastPathComponent]);
 }
 
-- (void)storeCurrentSession:(SentrySession *)session
+- (void)storeCurrentSession:(BuzzSentrySession *)session
 {
     [self storeSession:session sessionFilePath:self.currentSessionFilePath];
 }
 
-- (void)storeCrashedSession:(SentrySession *)session
+- (void)storeCrashedSession:(BuzzSentrySession *)session
 {
     [self storeSession:session sessionFilePath:self.crashedSessionFilePath];
 }
 
-- (void)storeSession:(SentrySession *)session sessionFilePath:(NSString *)sessionFilePath
+- (void)storeSession:(BuzzSentrySession *)session sessionFilePath:(NSString *)sessionFilePath
 {
     NSData *sessionData = [SentrySerialization dataWithSession:session error:nil];
     SENTRY_LOG_DEBUG(@"Writing session: %@", sessionFilePath);
@@ -342,17 +342,17 @@ SentryFileManager ()
     }
 }
 
-- (SentrySession *_Nullable)readCurrentSession
+- (BuzzSentrySession *_Nullable)readCurrentSession
 {
     return [self readSession:self.currentSessionFilePath];
 }
 
-- (SentrySession *_Nullable)readCrashedSession
+- (BuzzSentrySession *_Nullable)readCrashedSession
 {
     return [self readSession:self.crashedSessionFilePath];
 }
 
-- (nullable SentrySession *)readSession:(NSString *)sessionFilePath
+- (nullable BuzzSentrySession *)readSession:(NSString *)sessionFilePath
 {
     [SentryLog
         logWithMessage:[NSString stringWithFormat:@"Reading from session: %@", sessionFilePath]
@@ -365,7 +365,7 @@ SentryFileManager ()
             return nil;
         }
     }
-    SentrySession *currentSession = [SentrySerialization sessionWithData:currentData];
+    BuzzSentrySession *currentSession = [SentrySerialization sessionWithData:currentData];
     if (nil == currentSession) {
         SENTRY_LOG_ERROR(
             @"Data stored in session: '%@' was not parsed as session.", sessionFilePath);

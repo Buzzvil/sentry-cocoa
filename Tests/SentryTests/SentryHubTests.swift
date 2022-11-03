@@ -18,7 +18,7 @@ class SentryHubTests: XCTestCase {
         let currentDateProvider = TestCurrentDateProvider()
         let sentryCrash = TestSentryCrashWrapper.sharedInstance()
         let fileManager: SentryFileManager
-        let crashedSession: SentrySession
+        let crashedSession: BuzzSentrySession
         let transactionName = "Some Transaction"
         let transactionOperation = "Some Operation"
         let random = TestRandom(value: 0.5)
@@ -36,7 +36,7 @@ class SentryHubTests: XCTestCase {
             
             CurrentDate.setCurrentDateProvider(currentDateProvider)
             
-            crashedSession = SentrySession(releaseName: "1.0.0")
+            crashedSession = BuzzSentrySession(releaseName: "1.0.0")
             crashedSession.endCrashed(withTimestamp: currentDateProvider.date())
             crashedSession.environment = options.environment
         }
@@ -384,7 +384,7 @@ class SentryHubTests: XCTestCase {
             XCTAssertEqual(fixture.error, errorArguments.error as NSError)
             
             XCTAssertEqual(1, errorArguments.session.errors)
-            XCTAssertEqual(SentrySessionStatus.ok, errorArguments.session.status)
+            XCTAssertEqual(BuzzSentrySessionStatus.ok, errorArguments.session.status)
             
             XCTAssertEqual(fixture.scope, errorArguments.scope)
         }
@@ -433,7 +433,7 @@ class SentryHubTests: XCTestCase {
             XCTAssertEqual(fixture.exception, exceptionArguments.exception)
             
             XCTAssertEqual(1, exceptionArguments.session.errors)
-            XCTAssertEqual(SentrySessionStatus.ok, exceptionArguments.session.status)
+            XCTAssertEqual(BuzzSentrySessionStatus.ok, exceptionArguments.session.status)
             
             XCTAssertEqual(fixture.scope, exceptionArguments.scope)
         }
@@ -617,7 +617,7 @@ class SentryHubTests: XCTestCase {
     }
     
     func testCaptureEnvelope_WithSession() {
-        let envelope = BuzzSentryEnvelope(session: SentrySession(releaseName: ""))
+        let envelope = BuzzSentryEnvelope(session: BuzzSentrySession(releaseName: ""))
         sut.capture(envelope: envelope)
         
         XCTAssertEqual(1, fixture.client.captureEnvelopeInvocations.count)
@@ -699,7 +699,7 @@ class SentryHubTests: XCTestCase {
     
     private func assertNoCrashedSessionSent() {
         XCTAssertFalse(fixture.client.captureSessionInvocations.invocations.contains(where: { session in
-            return session.status == SentrySessionStatus.crashed
+            return session.status == BuzzSentrySessionStatus.crashed
         }))
     }
     
@@ -731,7 +731,7 @@ class SentryHubTests: XCTestCase {
 
         let session = argument?.session
         XCTAssertEqual(fixture.currentDateProvider.date(), session?.timestamp)
-        XCTAssertEqual(SentrySessionStatus.crashed, session?.status)
+        XCTAssertEqual(BuzzSentrySessionStatus.crashed, session?.status)
         XCTAssertEqual(fixture.options.environment, session?.environment)
 
         XCTAssertEqual(fixture.scope, argument?.scope)

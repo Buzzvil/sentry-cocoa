@@ -1,6 +1,6 @@
 import XCTest
 
-class SentrySessionTestsSwift: XCTestCase {
+class BuzzSentrySessionTestsSwift: XCTestCase {
     
     private var currentDateProvider: TestCurrentDateProvider!
     
@@ -11,24 +11,24 @@ class SentrySessionTestsSwift: XCTestCase {
     }
     
     func testEndSession() {
-        let session = SentrySession(releaseName: "0.1.0")
+        let session = BuzzSentrySession(releaseName: "0.1.0")
         let date = currentDateProvider.date().addingTimeInterval(1)
         session.endExited(withTimestamp: date)
         
         XCTAssertEqual(1, session.duration)
         XCTAssertEqual(date, session.timestamp)
-        XCTAssertEqual(SentrySessionStatus.exited, session.status)
+        XCTAssertEqual(BuzzSentrySessionStatus.exited, session.status)
     }
     
     func testInitAndDurationNilWhenSerialize() {
-        let session1 = SentrySession(releaseName: "1.4.0")
+        let session1 = BuzzSentrySession(releaseName: "1.4.0")
         var json = session1.serialize()
         json.removeValue(forKey: "init")
         json.removeValue(forKey: "duration")
         
         let date = currentDateProvider.date().addingTimeInterval(2)
         json["timestamp"] = (date as NSDate).sentry_toIso8601String()
-        guard let session = SentrySession(jsonObject: json) else {
+        guard let session = BuzzSentrySession(jsonObject: json) else {
             XCTFail("Couldn't create session from JSON"); return
         }
         
@@ -41,9 +41,9 @@ class SentrySessionTestsSwift: XCTestCase {
         let user = User()
         user.email = "someone@sentry.io"
 
-        let session = SentrySession(releaseName: "1.0.0")
+        let session = BuzzSentrySession(releaseName: "1.0.0")
         session.user = user
-        let copiedSession = session.copy() as! SentrySession
+        let copiedSession = session.copy() as! BuzzSentrySession
 
         XCTAssertEqual(session, copiedSession)
 
@@ -53,18 +53,18 @@ class SentrySessionTestsSwift: XCTestCase {
     }
     
     func testInitWithJson_Status_MapsToCorrectStatus() {
-        func testStatus(status: SentrySessionStatus, statusAsString: String) {
-            let expected = SentrySession(releaseName: "release")
+        func testStatus(status: BuzzSentrySessionStatus, statusAsString: String) {
+            let expected = BuzzSentrySession(releaseName: "release")
             var serialized = expected.serialize()
             serialized["status"] = statusAsString
-            let actual = SentrySession(jsonObject: serialized)!
+            let actual = BuzzSentrySession(jsonObject: serialized)!
             XCTAssertEqual(status, actual.status)
         }
         
-        testStatus(status: SentrySessionStatus.ok, statusAsString: "ok")
-        testStatus(status: SentrySessionStatus.exited, statusAsString: "exited")
-        testStatus(status: SentrySessionStatus.crashed, statusAsString: "crashed")
-        testStatus(status: SentrySessionStatus.abnormal, statusAsString: "abnormal")
+        testStatus(status: BuzzSentrySessionStatus.ok, statusAsString: "ok")
+        testStatus(status: BuzzSentrySessionStatus.exited, statusAsString: "exited")
+        testStatus(status: BuzzSentrySessionStatus.crashed, statusAsString: "crashed")
+        testStatus(status: BuzzSentrySessionStatus.abnormal, statusAsString: "abnormal")
     }
     
     func testInitWithJson_IfJsonMissesField_SessionIsNil() {
@@ -92,15 +92,15 @@ class SentrySessionTestsSwift: XCTestCase {
     }
     
     func withValue(setValue: (inout [String: Any]) -> Void) {
-        let expected = SentrySession(releaseName: "release")
+        let expected = BuzzSentrySession(releaseName: "release")
         var serialized = expected.serialize()
         setValue(&serialized)
-        XCTAssertNil(SentrySession(jsonObject: serialized))
+        XCTAssertNil(BuzzSentrySession(jsonObject: serialized))
     }
 }
 
-extension SentrySessionStatus {
+extension BuzzSentrySessionStatus {
     var description: String {
-        return nameForSentrySessionStatus(self)
+        return nameForBuzzSentrySessionStatus(self)
     }
 }

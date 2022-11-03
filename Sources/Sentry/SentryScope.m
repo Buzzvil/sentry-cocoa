@@ -7,7 +7,7 @@
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
 #import "SentryScopeObserver.h"
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 #import "BuzzSentrySpan.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext.h"
@@ -441,7 +441,7 @@ SentryScope ()
     return serializedCrumbs;
 }
 
-- (void)applyToSession:(SentrySession *)session
+- (void)applyToSession:(BuzzSentrySession *)session
 {
     BuzzSentryUser *userObject = self.userObject;
     if (nil != userObject) {

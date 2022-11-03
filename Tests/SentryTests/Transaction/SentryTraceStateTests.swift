@@ -2,7 +2,7 @@ import XCTest
 
 class BuzzSentryTraceContextTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentrySessionTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentrySessionTrackerTests")
     
     private class Fixture {
         let transactionName = "Some Transaction"
@@ -14,8 +14,8 @@ class BuzzSentryTraceContextTests: XCTestCase {
         let userSegment = "Test Segment"
         let sampleRate = "0.45"
         let traceId: SentryId
-        let publicKey = "SentrySessionTrackerTests"
-        let releaseName = "SentrySessionTrackerIntegrationTests"
+        let publicKey = "BuzzSentrySessionTrackerTests"
+        let releaseName = "BuzzSentrySessionTrackerIntegrationTests"
         let environment = "debug"
         
         init() {

@@ -1,4 +1,4 @@
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 #import "NSDate+SentryExtras.h"
 #import "SentryCurrentDate.h"
 #import "SentryInstallation.h"
@@ -7,22 +7,22 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NSString *
-nameForSentrySessionStatus(SentrySessionStatus status)
+nameForBuzzSentrySessionStatus(BuzzSentrySessionStatus status)
 {
     switch (status) {
-    case kSentrySessionStatusOk:
+    case kBuzzSentrySessionStatusOk:
         return @"ok";
-    case kSentrySessionStatusExited:
+    case kBuzzSentrySessionStatusExited:
         return @"exited";
-    case kSentrySessionStatusCrashed:
+    case kBuzzSentrySessionStatusCrashed:
         return @"crashed";
         break;
-    case kSentrySessionStatusAbnormal:
+    case kBuzzSentrySessionStatusAbnormal:
         return @"abnormal";
     }
 }
 
-@implementation SentrySession
+@implementation BuzzSentrySession
 
 @synthesize flagInit = _init;
 
@@ -35,7 +35,7 @@ nameForSentrySessionStatus(SentrySessionStatus status)
     if (self = [super init]) {
         _sessionId = [NSUUID UUID];
         _started = [SentryCurrentDate date];
-        _status = kSentrySessionStatusOk;
+        _status = kBuzzSentrySessionStatusOk;
         _sequence = 1;
         _errors = 0;
         _distinctId = [SentryInstallation id];
@@ -78,13 +78,13 @@ nameForSentrySessionStatus(SentrySessionStatus status)
         if (status == nil || ![status isKindOfClass:[NSString class]])
             return nil;
         if ([@"ok" isEqualToString:status]) {
-            _status = kSentrySessionStatusOk;
+            _status = kBuzzSentrySessionStatusOk;
         } else if ([@"exited" isEqualToString:status]) {
-            _status = kSentrySessionStatusExited;
+            _status = kBuzzSentrySessionStatusExited;
         } else if ([@"crashed" isEqualToString:status]) {
-            _status = kSentrySessionStatusCrashed;
+            _status = kBuzzSentrySessionStatusCrashed;
         } else if ([@"abnormal" isEqualToString:status]) {
-            _status = kSentrySessionStatusAbnormal;
+            _status = kBuzzSentrySessionStatusAbnormal;
         } else {
             return nil;
         }
@@ -145,7 +145,7 @@ nameForSentrySessionStatus(SentrySessionStatus status)
 {
     @synchronized(self) {
         [self changed];
-        _status = kSentrySessionStatusExited;
+        _status = kBuzzSentrySessionStatusExited;
         [self endSessionWithTimestamp:timestamp];
     }
 }
@@ -154,7 +154,7 @@ nameForSentrySessionStatus(SentrySessionStatus status)
 {
     @synchronized(self) {
         [self changed];
-        _status = kSentrySessionStatusCrashed;
+        _status = kBuzzSentrySessionStatusCrashed;
         [self endSessionWithTimestamp:timestamp];
     }
 }
@@ -163,7 +163,7 @@ nameForSentrySessionStatus(SentrySessionStatus status)
 {
     @synchronized(self) {
         [self changed];
-        _status = kSentrySessionStatusAbnormal;
+        _status = kBuzzSentrySessionStatusAbnormal;
         [self endSessionWithTimestamp:timestamp];
     }
 }
@@ -205,7 +205,7 @@ nameForSentrySessionStatus(SentrySessionStatus status)
             [serializedData setValue:_init forKey:@"init"];
         }
 
-        NSString *statusString = nameForSentrySessionStatus(_status);
+        NSString *statusString = nameForBuzzSentrySessionStatus(_status);
 
         if (nil != statusString) {
             [serializedData setValue:statusString forKey:@"status"];
@@ -244,7 +244,7 @@ nameForSentrySessionStatus(SentrySessionStatus status)
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
-    SentrySession *copy = [[[self class] allocWithZone:zone] init];
+    BuzzSentrySession *copy = [[[self class] allocWithZone:zone] init];
 
     if (copy != nil) {
         copy->_sessionId = _sessionId;

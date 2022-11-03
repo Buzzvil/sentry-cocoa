@@ -7,7 +7,7 @@
 #import "SentryLevelMapper.h"
 #import "SentryLog.h"
 #import "SentrySdkInfo.h"
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 #import "BuzzSentryTraceContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -301,13 +301,13 @@ NS_ASSUME_NONNULL_BEGIN
     return envelope;
 }
 
-+ (NSData *_Nullable)dataWithSession:(SentrySession *)session
++ (NSData *_Nullable)dataWithSession:(BuzzSentrySession *)session
                                error:(NSError *_Nullable *_Nullable)error
 {
     return [self dataWithJSONObject:[session serialize] error:error];
 }
 
-+ (SentrySession *_Nullable)sessionWithData:(NSData *)sessionData
++ (BuzzSentrySession *_Nullable)sessionWithData:(NSData *)sessionData
 {
     NSError *error = nil;
     NSDictionary *sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionData
@@ -320,7 +320,7 @@ NS_ASSUME_NONNULL_BEGIN
                   andLevel:kSentryLevelError];
         return nil;
     }
-    SentrySession *session = [[SentrySession alloc] initWithJSONObject:sessionDictionary];
+    BuzzSentrySession *session = [[BuzzSentrySession alloc] initWithJSONObject:sessionDictionary];
 
     if (nil == session) {
         SENTRY_LOG_ERROR(@"Failed to initialize session from dictionary. Dropping it.");

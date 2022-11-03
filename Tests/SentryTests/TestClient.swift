@@ -31,8 +31,8 @@ class TestClient: Client {
         sentryFileManager
     }
     
-    var captureSessionInvocations = Invocations<SentrySession>()
-    override func capture(session: SentrySession) {
+    var captureSessionInvocations = Invocations<BuzzSentrySession>()
+    override func capture(session: BuzzSentrySession) {
         captureSessionInvocations.record(session)
     }
     
@@ -84,14 +84,14 @@ class TestClient: Client {
         return SentryId()
     }
     
-    var captureErrorWithSessionInvocations = Invocations<(error: Error, session: SentrySession, scope: Scope)>()
-    override func captureError(_ error: Error, with session: SentrySession, with scope: Scope) -> SentryId {
+    var captureErrorWithSessionInvocations = Invocations<(error: Error, session: BuzzSentrySession, scope: Scope)>()
+    override func captureError(_ error: Error, with session: BuzzSentrySession, with scope: Scope) -> SentryId {
         captureErrorWithSessionInvocations.record((error, session, scope))
         return SentryId()
     }
     
-    var captureExceptionWithSessionInvocations = Invocations<(exception: NSException, session: SentrySession, scope: Scope)>()
-    override func capture(_ exception: NSException, with session: SentrySession, with scope: Scope) -> SentryId {
+    var captureExceptionWithSessionInvocations = Invocations<(exception: NSException, session: BuzzSentrySession, scope: Scope)>()
+    override func capture(_ exception: NSException, with session: BuzzSentrySession, with scope: Scope) -> SentryId {
         captureExceptionWithSessionInvocations.record((exception, session, scope))
         return SentryId()
     }
@@ -103,8 +103,8 @@ class TestClient: Client {
         return SentryId()
     }
     
-    var captureCrashEventWithSessionInvocations = Invocations<(event: Event, session: SentrySession, scope: Scope)>()
-    override func captureCrash(_ event: Event, with session: SentrySession, with scope: Scope) -> SentryId {
+    var captureCrashEventWithSessionInvocations = Invocations<(event: Event, session: BuzzSentrySession, scope: Scope)>()
+    override func captureCrash(_ event: Event, with session: BuzzSentrySession, with scope: Scope) -> SentryId {
         captureCrashEventWithSessionInvocations.record((event, session, scope))
         return SentryId()
     }

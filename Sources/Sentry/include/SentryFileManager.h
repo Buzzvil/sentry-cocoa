@@ -1,7 +1,7 @@
 #import "SentryCurrentDateProvider.h"
 #import "BuzzSentryDataCategory.h"
 #import "SentryDefines.h"
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,10 +29,10 @@ SENTRY_NO_INIT
 
 - (NSString *)storeEnvelope:(BuzzSentryEnvelope *)envelope;
 
-- (void)storeCurrentSession:(SentrySession *)session;
-- (void)storeCrashedSession:(SentrySession *)session;
-- (SentrySession *_Nullable)readCurrentSession;
-- (SentrySession *_Nullable)readCrashedSession;
+- (void)storeCurrentSession:(BuzzSentrySession *)session;
+- (void)storeCrashedSession:(BuzzSentrySession *)session;
+- (BuzzSentrySession *_Nullable)readCurrentSession;
+- (BuzzSentrySession *_Nullable)readCrashedSession;
 - (void)deleteCurrentSession;
 - (void)deleteCrashedSession;
 

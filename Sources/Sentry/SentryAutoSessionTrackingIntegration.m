@@ -4,14 +4,14 @@
 #import "SentryLog.h"
 #import "BuzzSentryOptions.h"
 #import "SentrySDK.h"
-#import "SentrySessionTracker.h"
+#import "BuzzSentrySessionTracker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
 SentryAutoSessionTrackingIntegration ()
 
-@property (nonatomic, strong) SentrySessionTracker *tracker;
+@property (nonatomic, strong) BuzzSentrySessionTracker *tracker;
 
 @end
 
@@ -23,7 +23,7 @@ SentryAutoSessionTrackingIntegration ()
         return NO;
     }
 
-    SentrySessionTracker *tracker = [[SentrySessionTracker alloc]
+    BuzzSentrySessionTracker *tracker = [[BuzzSentrySessionTracker alloc]
             initWithOptions:options
         currentDateProvider:[SentryDefaultCurrentDateProvider sharedInstance]
          notificationCenter:[SentryDependencyContainer sharedInstance].notificationCenterWrapper];

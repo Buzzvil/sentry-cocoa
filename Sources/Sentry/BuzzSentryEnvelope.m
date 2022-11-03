@@ -9,7 +9,7 @@
 #import "BuzzSentryMeta.h"
 #import "SentrySdkInfo.h"
 #import "SentrySerialization.h"
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 #import "BuzzSentryTransaction.h"
 #import "BuzzSentryUserFeedback.h"
 
@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
                            data:json];
 }
 
-- (instancetype)initWithSession:(SentrySession *)session
+- (instancetype)initWithSession:(BuzzSentrySession *)session
 {
     NSData *json = [NSJSONSerialization dataWithJSONObject:[session serialize]
                                                    options:0
@@ -228,13 +228,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation BuzzSentryEnvelope
 
-- (instancetype)initWithSession:(SentrySession *)session
+- (instancetype)initWithSession:(BuzzSentrySession *)session
 {
     BuzzSentryEnvelopeItem *item = [[BuzzSentryEnvelopeItem alloc] initWithSession:session];
     return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:nil] singleItem:item];
 }
 
-- (instancetype)initWithSessions:(NSArray<SentrySession *> *)sessions
+- (instancetype)initWithSessions:(NSArray<BuzzSentrySession *> *)sessions
 {
     NSMutableArray *envelopeItems = [[NSMutableArray alloc] initWithCapacity:sessions.count];
     for (int i = 0; i < sessions.count; ++i) {

@@ -19,7 +19,7 @@ class BuzzSentryHttpTransportTests: XCTestCase {
         let eventWithAttachmentRequest: BuzzSentryNSURLRequest
         let eventWithSessionEnvelope: BuzzSentryEnvelope
         let eventWithSessionRequest: BuzzSentryNSURLRequest
-        let session: SentrySession
+        let session: BuzzSentrySession
         let sessionEnvelope: BuzzSentryEnvelope
         let sessionRequest: BuzzSentryNSURLRequest
         let currentDateProvider: TestCurrentDateProvider
@@ -55,7 +55,7 @@ class BuzzSentryHttpTransportTests: XCTestCase {
             eventEnvelope = BuzzSentryEnvelope(id: event.eventId, items: [BuzzSentryEnvelopeItem(event: event), attachmentEnvelopeItem])
             eventWithAttachmentRequest = buildRequest(eventEnvelope)
 
-            session = SentrySession(releaseName: "2.0.1")
+            session = BuzzSentrySession(releaseName: "2.0.1")
             sessionEnvelope = BuzzSentryEnvelope(id: nil, singleItem: BuzzSentryEnvelopeItem(session: session))
             sessionRequest = buildRequest(sessionEnvelope)
 
@@ -227,7 +227,7 @@ class BuzzSentryHttpTransportTests: XCTestCase {
 
     func testSendAllCachedEnvelopes() {
         givenNoInternetConnection()
-        let envelope = BuzzSentryEnvelope(session: SentrySession(releaseName: "1.9.0"))
+        let envelope = BuzzSentryEnvelope(session: BuzzSentrySession(releaseName: "1.9.0"))
         sendEnvelope(envelope: envelope)
         sendEnvelope()
 

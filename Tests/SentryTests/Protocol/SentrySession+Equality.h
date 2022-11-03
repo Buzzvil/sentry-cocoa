@@ -1,13 +1,13 @@
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentrySession (Equality)
+BuzzSentrySession (Equality)
 
 - (BOOL)isEqual:(id _Nullable)object;
 
-- (BOOL)isEqualToSession:(SentrySession *)session;
+- (BOOL)isEqualToSession:(BuzzSentrySession *)session;
 
 - (NSUInteger)hash;
 

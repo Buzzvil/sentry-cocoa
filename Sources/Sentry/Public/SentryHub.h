@@ -2,7 +2,7 @@
 #import "SentryIntegrationProtocol.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class BuzzSentryEvent, BuzzSentryClient, SentryScope, SentrySession, BuzzSentryUser, SentryBreadcrumb,
+@class BuzzSentryEvent, BuzzSentryClient, SentryScope, BuzzSentrySession, BuzzSentryUser, SentryBreadcrumb,
     SentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,18 +15,18 @@ SENTRY_NO_INIT
 /**
  * Since there's no scope stack, single hub instance,  we keep the session here.
  */
-@property (nonatomic, readonly, strong) SentrySession *_Nullable session;
+@property (nonatomic, readonly, strong) BuzzSentrySession *_Nullable session;
 
 /**
- * Starts a new SentrySession. If there's a running SentrySession, it ends it before starting the
- * new one. You can use this method in combination with endSession to manually track SentrySessions.
- * The SDK uses SentrySession to inform Sentry about release and project associated project health.
+ * Starts a new BuzzSentrySession. If there's a running BuzzSentrySession, it ends it before starting the
+ * new one. You can use this method in combination with endSession to manually track BuzzSentrySessions.
+ * The SDK uses BuzzSentrySession to inform Sentry about release and project associated project health.
  */
 - (void)startSession;
 
 /**
- * Ends the current SentrySession. You can use this method in combination with startSession to
- * manually track SentrySessions. The SDK uses SentrySession to inform Sentry about release and
+ * Ends the current BuzzSentrySession. You can use this method in combination with startSession to
+ * manually track BuzzSentrySessions. The SDK uses BuzzSentrySession to inform Sentry about release and
  * project associated project health.
  */
 - (void)endSession;

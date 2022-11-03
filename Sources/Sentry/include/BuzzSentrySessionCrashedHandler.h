@@ -2,7 +2,7 @@
 
 @class SentryCrashWrapper, BuzzSentryDispatchQueueWrapper, SentryOutOfMemoryLogic;
 
-@interface SentrySessionCrashedHandler : NSObject
+@interface BuzzSentrySessionCrashedHandler : NSObject
 
 - (instancetype)initWithCrashWrapper:(SentryCrashWrapper *)crashWrapper
                     outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic;

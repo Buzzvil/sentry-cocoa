@@ -26,17 +26,17 @@ BuzzSentryClient (Private)
 - (SentryFileManager *)fileManager;
 
 - (SentryId *)captureError:(NSError *)error
-               withSession:(SentrySession *)session
+               withSession:(BuzzSentrySession *)session
                  withScope:(SentryScope *)scope;
 
 - (SentryId *)captureException:(NSException *)exception
-                   withSession:(SentrySession *)session
+                   withSession:(BuzzSentrySession *)session
                      withScope:(SentryScope *)scope;
 
 - (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event withScope:(SentryScope *)scope;
 
 - (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event
-                    withSession:(SentrySession *)session
+                    withSession:(BuzzSentrySession *)session
                       withScope:(SentryScope *)scope;
 
 - (SentryId *)captureEvent:(BuzzSentryEvent *)event

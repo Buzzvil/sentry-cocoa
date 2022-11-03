@@ -85,7 +85,7 @@ class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
         }
         
         for _ in 0...2 {
-            let session = SentrySession(releaseName: "")
+            let session = BuzzSentrySession(releaseName: "")
             envelopeItems.append(BuzzSentryEnvelopeItem(session: session))
         }
         

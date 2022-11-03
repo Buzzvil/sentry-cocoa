@@ -18,13 +18,13 @@ class SentryFileManagerTests: XCTestCase {
         
         let options: Options
 
-        let session = SentrySession(releaseName: "1.0.0")
+        let session = BuzzSentrySession(releaseName: "1.0.0")
         let sessionEnvelope: BuzzSentryEnvelope
 
-        let sessionUpdate: SentrySession
+        let sessionUpdate: BuzzSentrySession
         let sessionUpdateEnvelope: BuzzSentryEnvelope
 
-        let expectedSessionUpdate: SentrySession
+        let expectedSessionUpdate: BuzzSentrySession
         
         // swiftlint:disable weak_delegate
         // Swiftlint automatically changes this to a weak reference,
@@ -44,18 +44,18 @@ class SentryFileManagerTests: XCTestCase {
             
             sessionEnvelope = BuzzSentryEnvelope(session: session)
 
-            let sessionCopy = session.copy() as! SentrySession
+            let sessionCopy = session.copy() as! BuzzSentrySession
             sessionCopy.incrementErrors()
             // We need to serialize in order to set the timestamp and the duration
-            sessionUpdate = SentrySession(jsonObject: sessionCopy.serialize())!
+            sessionUpdate = BuzzSentrySession(jsonObject: sessionCopy.serialize())!
 
             let event = Event()
             let items = [BuzzSentryEnvelopeItem(session: sessionUpdate), BuzzSentryEnvelopeItem(event: event)]
             sessionUpdateEnvelope = BuzzSentryEnvelope(id: event.eventId, items: items)
 
-            let sessionUpdateCopy = sessionUpdate.copy() as! SentrySession
+            let sessionUpdateCopy = sessionUpdate.copy() as! BuzzSentrySession
             // We need to serialize in order to set the timestamp and the duration
-            expectedSessionUpdate = SentrySession(jsonObject: sessionUpdateCopy.serialize())!
+            expectedSessionUpdate = BuzzSentrySession(jsonObject: sessionUpdateCopy.serialize())!
             // We can only set the init flag after serialize, because the duration is not set if the init flag is set
             expectedSessionUpdate.setFlagInit()
             
@@ -107,7 +107,7 @@ class SentryFileManagerTests: XCTestCase {
     
     func testInitDoesNotOverrideDirectories() throws {
         sut.store(TestConstants.envelope)
-        sut.storeCurrentSession(SentrySession(releaseName: "1.0.0"))
+        sut.storeCurrentSession(BuzzSentrySession(releaseName: "1.0.0"))
         sut.storeTimestampLast(inForeground: Date())
 
         _ = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
@@ -268,7 +268,7 @@ class SentryFileManagerTests: XCTestCase {
     func testMigrateSessionInit_SessionUpdateIsLast() {
         sut.store(fixture.sessionEnvelope)
         // just some other session
-        sut.store(BuzzSentryEnvelope(session: SentrySession(releaseName: "1.0.0")))
+        sut.store(BuzzSentryEnvelope(session: BuzzSentrySession(releaseName: "1.0.0")))
         for _ in 0...(fixture.maxCacheItems - 3) {
             sut.store(TestConstants.envelope)
         }
@@ -410,7 +410,7 @@ class SentryFileManagerTests: XCTestCase {
     }
 
     func testStoreAndReadCurrentSession() {
-        let expectedSession = SentrySession(releaseName: "1.0.0")
+        let expectedSession = BuzzSentrySession(releaseName: "1.0.0")
         sut.storeCurrentSession(expectedSession)
         let actualSession = sut.readCurrentSession()
         XCTAssertTrue(expectedSession.distinctId == actualSession?.distinctId)
@@ -418,21 +418,21 @@ class SentryFileManagerTests: XCTestCase {
     }
     
     func testStoreAndReadCrashedSession() {
-        let expectedSession = SentrySession(releaseName: "1.0.0")
+        let expectedSession = BuzzSentrySession(releaseName: "1.0.0")
         sut.storeCrashedSession(expectedSession)
         let actualSession = sut.readCrashedSession()
         XCTAssertTrue(expectedSession.distinctId == actualSession?.distinctId)
     }
 
     func testStoreDeleteCurrentSession() {
-        sut.storeCurrentSession(SentrySession(releaseName: "1.0.0"))
+        sut.storeCurrentSession(BuzzSentrySession(releaseName: "1.0.0"))
         sut.deleteCurrentSession()
         let actualSession = sut.readCurrentSession()
         XCTAssertNil(actualSession)
     }
     
     func testStoreDeleteCrashedSession() {
-        sut.storeCrashedSession(SentrySession(releaseName: "1.0.0"))
+        sut.storeCrashedSession(BuzzSentrySession(releaseName: "1.0.0"))
         sut.deleteCrashedSession()
         let actualSession = sut.readCrashedSession()
         XCTAssertNil(actualSession)
@@ -462,7 +462,7 @@ class SentryFileManagerTests: XCTestCase {
     func testDeleteAllFolders() {
         storeEvent()
         sut.store(TestConstants.envelope)
-        sut.storeCurrentSession(SentrySession(releaseName: "1.0.1"))
+        sut.storeCurrentSession(BuzzSentrySession(releaseName: "1.0.1"))
         
         sut.deleteAllFolders()
 

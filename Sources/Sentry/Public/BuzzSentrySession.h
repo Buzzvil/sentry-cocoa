@@ -5,27 +5,27 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, SentrySessionStatus) {
-    kSentrySessionStatusOk = 0,
-    kSentrySessionStatusExited = 1,
-    kSentrySessionStatusCrashed = 2,
-    kSentrySessionStatusAbnormal = 3,
+typedef NS_ENUM(NSUInteger, BuzzSentrySessionStatus) {
+    kBuzzSentrySessionStatusOk = 0,
+    kBuzzSentrySessionStatusExited = 1,
+    kBuzzSentrySessionStatusCrashed = 2,
+    kBuzzSentrySessionStatusAbnormal = 3,
 };
 
 /**
- * The SDK uses SentrySession to inform Sentry about release and project associated project health.
+ * The SDK uses BuzzSentrySession to inform Sentry about release and project associated project health.
  */
-@interface SentrySession : NSObject <BuzzSentrySerializable, NSCopying>
+@interface BuzzSentrySession : NSObject <BuzzSentrySerializable, NSCopying>
 SENTRY_NO_INIT
 
 - (instancetype)initWithReleaseName:(NSString *)releaseName;
 
 /**
- * Initializes SentrySession from a JSON object.
+ * Initializes BuzzSentrySession from a JSON object.
  *
  * @param jsonObject The jsonObject containing the session.
  *
- * @return The SentrySession or nil if the JSONObject contains an error.
+ * @return The BuzzSentrySession or nil if the JSONObject contains an error.
  */
 - (nullable instancetype)initWithJSONObject:(NSDictionary *)jsonObject;
 
@@ -37,7 +37,7 @@ SENTRY_NO_INIT
 
 @property (nonatomic, readonly, strong) NSUUID *sessionId;
 @property (nonatomic, readonly, strong) NSDate *started;
-@property (nonatomic, readonly) enum SentrySessionStatus status;
+@property (nonatomic, readonly) enum BuzzSentrySessionStatus status;
 @property (nonatomic, readonly) NSUInteger errors;
 @property (nonatomic, readonly) NSUInteger sequence;
 @property (nonatomic, readonly, strong) NSString *distinctId;

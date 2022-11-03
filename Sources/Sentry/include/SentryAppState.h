@@ -17,7 +17,7 @@ SENTRY_NO_INIT
  *
  * @param jsonObject The jsonObject containing the session.
  *
- * @return The SentrySession or nil if the JSONObject contains an error.
+ * @return The BuzzSentrySession or nil if the JSONObject contains an error.
  */
 - (nullable instancetype)initWithJSONObject:(NSDictionary *)jsonObject;
 

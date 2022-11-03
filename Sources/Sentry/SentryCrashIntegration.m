@@ -8,7 +8,7 @@
 #import "SentryOutOfMemoryLogic.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
-#import "SentrySessionCrashedHandler.h"
+#import "BuzzSentrySessionCrashedHandler.h"
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <SentryCrashScopeObserver.h>
@@ -33,7 +33,7 @@ SentryCrashIntegration ()
 @property (nonatomic, weak) BuzzSentryOptions *options;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryCrashWrapper *crashAdapter;
-@property (nonatomic, strong) SentrySessionCrashedHandler *crashedSessionHandler;
+@property (nonatomic, strong) BuzzSentrySessionCrashedHandler *crashedSessionHandler;
 @property (nonatomic, strong) SentryCrashScopeObserver *scopeObserver;
 
 @end
@@ -75,7 +75,7 @@ SentryCrashIntegration ()
                                            crashAdapter:self.crashAdapter
                                         appStateManager:appStateManager];
     self.crashedSessionHandler =
-        [[SentrySessionCrashedHandler alloc] initWithCrashWrapper:self.crashAdapter
+        [[BuzzSentrySessionCrashedHandler alloc] initWithCrashWrapper:self.crashAdapter
                                                  outOfMemoryLogic:logic];
 
     self.scopeObserver =

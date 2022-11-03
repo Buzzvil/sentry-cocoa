@@ -33,7 +33,7 @@ BuzzSentryTransportAdapter ()
 }
 
 - (void)sendEvent:(BuzzSentryEvent *)event
-          session:(SentrySession *)session
+          session:(BuzzSentrySession *)session
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
 {
     [self sendEvent:event withSession:session traceContext:nil attachments:attachments];
@@ -66,7 +66,7 @@ BuzzSentryTransportAdapter ()
 }
 
 - (void)sendEvent:(BuzzSentryEvent *)event
-      withSession:(SentrySession *)session
+      withSession:(BuzzSentrySession *)session
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
 {

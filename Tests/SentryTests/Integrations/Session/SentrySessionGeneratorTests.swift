@@ -5,7 +5,7 @@ import XCTest
 * This isn't an actual test. It sends Sessions to the Sentry, but doesn't verify if they arrive there.
 */
 @available(OSX 10.10, *)
-class SentrySessionGeneratorTests: NotificationCenterTestCase {
+class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
     
     struct Sessions {
         var healthy = 0
@@ -103,7 +103,7 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
             // crash report on a background thread.
             let crashEvent = Event()
             crashEvent.level = SentryLevel.fatal
-            crashEvent.message = SentryMessage(formatted: "Crash for SentrySessionGeneratorTests")
+            crashEvent.message = SentryMessage(formatted: "Crash for BuzzSentrySessionGeneratorTests")
             SentrySDK.captureCrash(crashEvent)
         }
         sentryCrash.internalCrashedLastLaunch = false

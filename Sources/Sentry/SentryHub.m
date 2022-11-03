@@ -77,7 +77,7 @@ SentryHub ()
 
 - (void)startSession
 {
-    SentrySession *lastSession = nil;
+    BuzzSentrySession *lastSession = nil;
     SentryScope *scope = self.scope;
     BuzzSentryOptions *options = [_client options];
     if (nil == options || nil == options.releaseName) {
@@ -90,7 +90,7 @@ SentryHub ()
         if (nil != _session) {
             lastSession = _session;
         }
-        _session = [[SentrySession alloc] initWithReleaseName:options.releaseName];
+        _session = [[BuzzSentrySession alloc] initWithReleaseName:options.releaseName];
 
         NSString *environment = options.environment;
         if (nil != environment) {
@@ -114,7 +114,7 @@ SentryHub ()
 
 - (void)endSessionWithTimestamp:(NSDate *)timestamp
 {
-    SentrySession *currentSession = nil;
+    BuzzSentrySession *currentSession = nil;
     @synchronized(_sessionLock) {
         currentSession = _session;
         _session = nil;
@@ -130,7 +130,7 @@ SentryHub ()
     [self captureSession:currentSession];
 }
 
-- (void)storeCurrentSession:(SentrySession *)session
+- (void)storeCurrentSession:(BuzzSentrySession *)session
 {
     [[_client fileManager] storeCurrentSession:session];
 }
@@ -143,7 +143,7 @@ SentryHub ()
 - (void)closeCachedSessionWithTimestamp:(nullable NSDate *)timestamp
 {
     SentryFileManager *fileManager = [_client fileManager];
-    SentrySession *session = [fileManager readCurrentSession];
+    BuzzSentrySession *session = [fileManager readCurrentSession];
     if (nil == session) {
         SENTRY_LOG_DEBUG(@"No cached session to close.");
         return;
@@ -175,7 +175,7 @@ SentryHub ()
     }
 }
 
-- (void)captureSession:(nullable SentrySession *)session
+- (void)captureSession:(nullable BuzzSentrySession *)session
 {
     if (nil != session) {
         BuzzSentryClient *client = _client;
@@ -195,9 +195,9 @@ SentryHub ()
     }
 }
 
-- (nullable SentrySession *)incrementSessionErrors
+- (nullable BuzzSentrySession *)incrementSessionErrors
 {
-    SentrySession *sessionCopy = nil;
+    BuzzSentrySession *sessionCopy = nil;
     @synchronized(_sessionLock) {
         if (nil != _session) {
             [_session incrementErrors];
@@ -232,7 +232,7 @@ SentryHub ()
     // Check this condition first to avoid unnecessary I/O
     if (client.options.enableAutoSessionTracking) {
         SentryFileManager *fileManager = [client fileManager];
-        SentrySession *crashedSession = [fileManager readCrashedSession];
+        BuzzSentrySession *crashedSession = [fileManager readCrashedSession];
 
         // It can be that there is no session yet, because autoSessionTracking was just enabled and
         // there is a previous crash on disk. In this case we just send the crash event.
@@ -438,7 +438,7 @@ SentryHub ()
 
 - (SentryId *)captureError:(NSError *)error withScope:(SentryScope *)scope
 {
-    SentrySession *currentSession = [self incrementSessionErrors];
+    BuzzSentrySession *currentSession = [self incrementSessionErrors];
     BuzzSentryClient *client = _client;
     if (nil != client) {
         if (nil != currentSession) {
@@ -457,7 +457,7 @@ SentryHub ()
 
 - (SentryId *)captureException:(NSException *)exception withScope:(SentryScope *)scope
 {
-    SentrySession *currentSession = [self incrementSessionErrors];
+    BuzzSentrySession *currentSession = [self incrementSessionErrors];
 
     BuzzSentryClient *client = _client;
     if (nil != client) {
@@ -570,7 +570,7 @@ SentryHub ()
 - (BuzzSentryEnvelope *)updateSessionState:(BuzzSentryEnvelope *)envelope
 {
     if ([self envelopeContainsEventWithErrorOrHigher:envelope.items]) {
-        SentrySession *currentSession = [self incrementSessionErrors];
+        BuzzSentrySession *currentSession = [self incrementSessionErrors];
 
         if (nil != currentSession) {
             // Create a new envelope with the session update

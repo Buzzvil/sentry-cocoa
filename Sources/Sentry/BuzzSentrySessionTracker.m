@@ -1,4 +1,4 @@
-#import "SentrySessionTracker.h"
+#import "BuzzSentrySessionTracker.h"
 #import "BuzzSentryClient+Private.h"
 #import "BuzzSentryClient.h"
 #import "SentryFileManager.h"
@@ -15,7 +15,7 @@
 #endif
 
 @interface
-SentrySessionTracker ()
+BuzzSentrySessionTracker ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDateProvider;
@@ -26,7 +26,7 @@ SentrySessionTracker ()
 
 @end
 
-@implementation SentrySessionTracker
+@implementation BuzzSentrySessionTracker
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
             currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
@@ -82,7 +82,7 @@ SentrySessionTracker ()
            selector:@selector(willTerminate)
                name:SentryNSNotificationCenterWrapper.willTerminateNotificationName];
 #else
-    SENTRY_LOG_DEBUG(@"NO UIKit -> SentrySessionTracker will not track sessions automatically.");
+    SENTRY_LOG_DEBUG(@"NO UIKit -> BuzzSentrySessionTracker will not track sessions automatically.");
 #endif
 }
 

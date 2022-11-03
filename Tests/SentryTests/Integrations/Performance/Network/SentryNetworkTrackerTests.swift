@@ -3,7 +3,7 @@ import XCTest
 
 class SentryNetworkTrackerTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentrySessionTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentrySessionTrackerTests")
     private static let testURL = URL(string: "https://www.domain.com/api")!
     private static let transactionName = "TestTransaction"
     private static let transactionOperation = "Test"

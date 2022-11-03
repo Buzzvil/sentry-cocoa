@@ -184,7 +184,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 }
 
 - (SentryId *)captureException:(NSException *)exception
-                   withSession:(SentrySession *)session
+                   withSession:(BuzzSentrySession *)session
                      withScope:(SentryScope *)scope
 {
     BuzzSentryEvent *event = [self buildExceptionEvent:exception];
@@ -215,7 +215,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 }
 
 - (SentryId *)captureError:(NSError *)error
-               withSession:(SentrySession *)session
+               withSession:(BuzzSentrySession *)session
                  withScope:(SentryScope *)scope
 {
     BuzzSentryEvent *event = [self buildErrorEvent:error];
@@ -266,7 +266,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 }
 
 - (SentryId *)captureCrashEvent:(BuzzSentryEvent *)event
-                    withSession:(SentrySession *)session
+                    withSession:(BuzzSentrySession *)session
                       withScope:(SentryScope *)scope
 {
     BuzzSentryEvent *preparedEvent = [self prepareEvent:event
@@ -373,7 +373,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 }
 
 - (SentryId *)sendEvent:(BuzzSentryEvent *)event
-            withSession:(SentrySession *)session
+            withSession:(BuzzSentrySession *)session
               withScope:(SentryScope *)scope
 {
     if (nil != event) {
@@ -405,7 +405,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 }
 
-- (void)captureSession:(SentrySession *)session
+- (void)captureSession:(BuzzSentrySession *)session
 {
     if (nil == session.releaseName || [session.releaseName length] == 0) {
         SENTRY_LOG_DEBUG(DropSessionLogMessage);

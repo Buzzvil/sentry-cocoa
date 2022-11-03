@@ -15,7 +15,7 @@ class BuzzSentryClientTest: XCTestCase {
         let debugImageBuilder = SentryDebugImageProvider()
         let threadInspector = TestThreadInspector.instance
         
-        let session: SentrySession
+        let session: BuzzSentrySession
         let event: Event
         let environment = "Environment"
         let messageAsString = "message"
@@ -34,7 +34,7 @@ class BuzzSentryClientTest: XCTestCase {
         let timezone = TimeZone(identifier: "Europe/Vienna")!
         
         init() {
-            session = SentrySession(releaseName: "release")
+            session = BuzzSentrySession(releaseName: "release")
             session.incrementErrors()
 
             message = SentryMessage(formatted: messageAsString)
@@ -308,7 +308,7 @@ class BuzzSentryClientTest: XCTestCase {
         }
         
         sut.add(processor)
-        sut.captureError(error, with: SentrySession(releaseName: ""), with: Scope())
+        sut.captureError(error, with: BuzzSentrySession(releaseName: ""), with: Scope())
         
         let sendedAttachments = fixture.transportAdapter.sendEventWithTraceStateInvocations.first?.attachments ?? []
         
@@ -721,14 +721,14 @@ class BuzzSentryClientTest: XCTestCase {
     }
 
     func testCaptureSession() {
-        let session = SentrySession(releaseName: "release")
+        let session = BuzzSentrySession(releaseName: "release")
         fixture.getSut().capture(session: session)
 
         assertLastSentEnvelopeIsASession()
     }
     
     func testCaptureSessionWithoutReleaseName() {
-        let session = SentrySession(releaseName: "")
+        let session = BuzzSentrySession(releaseName: "")
         
         fixture.getSut().capture(session: session)
         fixture.getSut().capture(exception, with: session, with: Scope())
@@ -1303,7 +1303,7 @@ class BuzzSentryClientTest: XCTestCase {
         }
     }
     
-    private func assertLastSentEventWithSession(assert: (Event, SentrySession, BuzzSentryTraceContext?) -> Void) {
+    private func assertLastSentEventWithSession(assert: (Event, BuzzSentrySession, BuzzSentryTraceContext?) -> Void) {
         XCTAssertNotNil(fixture.transportAdapter.sentEventsWithSessionTraceState.last)
         if let args = fixture.transportAdapter.sentEventsWithSessionTraceState.last {
             assert(args.event, args.session, args.traceContext)

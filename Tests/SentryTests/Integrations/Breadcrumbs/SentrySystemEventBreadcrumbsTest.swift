@@ -14,7 +14,7 @@ class SentrySystemEventBreadcrumbsTest: XCTestCase {
         init() {
             options = Options()
             options.dsn = TestConstants.dsnAsString(username: "SentrySystemEventBreadcrumbsTest")
-            options.releaseName = "SentrySessionTrackerIntegrationTests"
+            options.releaseName = "BuzzSentrySessionTrackerIntegrationTests"
             options.sessionTrackingIntervalMillis = 10_000
             options.environment = "debug"
 

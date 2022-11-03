@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class BuzzSentryOptions, SentrySession, BuzzSentryEvent, BuzzSentryEnvelope, SentryScope, SentryFileManager,
+@class BuzzSentryOptions, BuzzSentrySession, BuzzSentryEvent, BuzzSentryEnvelope, SentryScope, SentryFileManager,
     SentryId, BuzzSentryUserFeedback, BuzzSentryTransaction;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -107,7 +107,7 @@ SENTRY_NO_INIT
 - (void)captureUserFeedback:(BuzzSentryUserFeedback *)userFeedback
     NS_SWIFT_NAME(capture(userFeedback:));
 
-- (void)captureSession:(SentrySession *)session NS_SWIFT_NAME(capture(session:));
+- (void)captureSession:(BuzzSentrySession *)session NS_SWIFT_NAME(capture(session:));
 
 - (void)captureEnvelope:(BuzzSentryEnvelope *)envelope NS_SWIFT_NAME(capture(envelope:));
 

@@ -6,12 +6,12 @@ public class TestTransportAdapter: BuzzSentryTransportAdapter {
         self.send(event: event, traceContext: nil, attachments: attachments)
     }
     
-    public override func send(_ event: Event, session: SentrySession, attachments: [Attachment]) {
+    public override func send(_ event: Event, session: BuzzSentrySession, attachments: [Attachment]) {
         self.send(event, with: session, traceContext: nil, attachments: attachments)
     }
     
-    var sentEventsWithSessionTraceState = Invocations<(event: Event, session: SentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment])>()
-    public override func send(_ event: Event, with session: SentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment]) {
+    var sentEventsWithSessionTraceState = Invocations<(event: Event, session: BuzzSentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment])>()
+    public override func send(_ event: Event, with session: BuzzSentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment]) {
         sentEventsWithSessionTraceState.record((event, session, traceContext, attachments))
     }
     

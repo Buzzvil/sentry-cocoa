@@ -1,4 +1,4 @@
-#import "SentrySessionCrashedHandler.h"
+#import "BuzzSentrySessionCrashedHandler.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrashWrapper.h"
 #import "SentryCurrentDate.h"
@@ -8,14 +8,14 @@
 #import "BuzzSentrySDK+Private.h"
 
 @interface
-SentrySessionCrashedHandler ()
+BuzzSentrySessionCrashedHandler ()
 
 @property (nonatomic, strong) SentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) SentryOutOfMemoryLogic *outOfMemoryLogic;
 
 @end
 
-@implementation SentrySessionCrashedHandler
+@implementation BuzzSentrySessionCrashedHandler
 
 - (instancetype)initWithCrashWrapper:(SentryCrashWrapper *)crashWrapper
                     outOfMemoryLogic:(SentryOutOfMemoryLogic *)outOfMemoryLogic;
@@ -36,7 +36,7 @@ SentrySessionCrashedHandler ()
             return;
         }
 
-        SentrySession *session = [fileManager readCurrentSession];
+        BuzzSentrySession *session = [fileManager readCurrentSession];
         if (nil == session) {
             return;
         }

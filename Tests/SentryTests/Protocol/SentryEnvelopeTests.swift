@@ -167,7 +167,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
     }
     
     func testInitBuzzSentryEnvelopeWithSession_DefaultSdkInfoIsSet() {
-        let envelope = BuzzSentryEnvelope(session: SentrySession(releaseName: "1.1.1"))
+        let envelope = BuzzSentryEnvelope(session: BuzzSentrySession(releaseName: "1.1.1"))
         
         XCTAssertEqual(defaultSdkInfo, envelope.header.sdkInfo)
     }

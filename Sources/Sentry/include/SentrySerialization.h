@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class SentrySession, BuzzSentryEnvelope, SentryAppState;
+@class BuzzSentrySession, BuzzSentryEnvelope, SentryAppState;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -11,13 +11,13 @@ static int const SENTRY_BAGGAGE_MAX_SIZE = 8192;
 + (NSData *_Nullable)dataWithJSONObject:(NSDictionary *)dictionary
                                   error:(NSError *_Nullable *_Nullable)error;
 
-+ (NSData *_Nullable)dataWithSession:(SentrySession *)session
++ (NSData *_Nullable)dataWithSession:(BuzzSentrySession *)session
                                error:(NSError *_Nullable *_Nullable)error;
 
 + (NSDictionary<NSString *, NSString *> *)decodeBaggage:(NSString *)baggage;
 + (NSString *)baggageEncodedDictionary:(NSDictionary *)dictionary;
 
-+ (SentrySession *_Nullable)sessionWithData:(NSData *)sessionData;
++ (BuzzSentrySession *_Nullable)sessionWithData:(NSData *)sessionData;
 
 // TODO: use (NSOutputStream *)outputStream
 + (NSData *_Nullable)dataWithEnvelope:(BuzzSentryEnvelope *)envelope

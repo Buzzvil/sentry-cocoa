@@ -1,8 +1,8 @@
-#import "SentrySession+Equality.h"
+#import "BuzzSentrySession+Equality.h"
 #import "BuzzSentryUser.h"
 
 @implementation
-SentrySession (Equality)
+BuzzSentrySession (Equality)
 
 - (BOOL)isEqual:(id _Nullable)other
 {
@@ -14,7 +14,7 @@ SentrySession (Equality)
     return [self isEqualToSession:other];
 }
 
-- (BOOL)isEqualToSession:(SentrySession *)session
+- (BOOL)isEqualToSession:(BuzzSentrySession *)session
 {
     if (self == session)
         return YES;

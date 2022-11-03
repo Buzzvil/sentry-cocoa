@@ -377,14 +377,14 @@ class SentrySDKTests: XCTestCase {
         XCTAssertEqual(1, fixture.client.captureSessionInvocations.count)
         
         let actual = fixture.client.captureSessionInvocations.first
-        let expected = SentrySession(releaseName: fixture.options.releaseName ?? "")
+        let expected = BuzzSentrySession(releaseName: fixture.options.releaseName ?? "")
         
         XCTAssertEqual(expected.flagInit, actual?.flagInit)
         XCTAssertEqual(expected.errors, actual?.errors)
         XCTAssertEqual(expected.sequence, actual?.sequence)
         XCTAssertEqual(expected.releaseName, actual?.releaseName)
         XCTAssertEqual(fixture.currentDate.date(), actual?.started)
-        XCTAssertEqual(SentrySessionStatus.ok, actual?.status)
+        XCTAssertEqual(BuzzSentrySessionStatus.ok, actual?.status)
         XCTAssertNil(actual?.timestamp)
         XCTAssertNil(actual?.duration)
     }
@@ -403,7 +403,7 @@ class SentrySDKTests: XCTestCase {
         XCTAssertNil(actual.flagInit)
         XCTAssertEqual(0, actual.errors)
         XCTAssertEqual(2, actual.sequence)
-        XCTAssertEqual(SentrySessionStatus.exited, actual.status)
+        XCTAssertEqual(BuzzSentrySessionStatus.exited, actual.status)
         XCTAssertEqual(fixture.options.releaseName ?? "", actual.releaseName)
         XCTAssertEqual(1, actual.duration)
         XCTAssertEqual(fixture.currentDate.date(), actual.timestamp)
