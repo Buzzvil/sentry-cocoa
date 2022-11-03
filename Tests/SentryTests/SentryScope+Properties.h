@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 SentryScope (Properties)
 
-@property (atomic, strong) SentryUser *_Nullable userObject;
+@property (atomic, strong) BuzzSentryUser *_Nullable userObject;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *_Nullable tagDictionary;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, id> *_Nullable extraDictionary;
 @property (nonatomic, strong)

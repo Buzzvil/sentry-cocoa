@@ -2,7 +2,7 @@
 #import "BuzzSentryClient+Private.h"
 #import "SentryScope+Private.h"
 #import "SentryScope.h"
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 #import <XCTest/XCTest.h>
 
 @interface SentryScopeTests : XCTestCase
@@ -102,7 +102,7 @@
 - (void)testSetUser
 {
     SentryScope *scope = [[SentryScope alloc] init];
-    SentryUser *user = [[SentryUser alloc] init];
+    BuzzSentryUser *user = [[BuzzSentryUser alloc] init];
 
     [user setUserId:@"123"];
     [scope setUser:user];
@@ -169,7 +169,7 @@
     [scope setExtras:@{ @"a" : @"b" }];
     [scope setTags:@{ @"b" : @"c" }];
     [scope addBreadcrumb:[self getBreadcrumb]];
-    [scope setUser:[[SentryUser alloc] initWithUserId:@"id"]];
+    [scope setUser:[[BuzzSentryUser alloc] initWithUserId:@"id"]];
     [scope setContextValue:@{ @"e" : @"f" } forKey:@"myContext"];
     [scope setDist:@"456"];
     [scope setEnvironment:@"789"];
@@ -184,7 +184,7 @@
     [cloned setTags:@{ @"ab" : @"c" }];
     [cloned addBreadcrumb:[[SentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
                                                          category:@"http2"]];
-    [cloned setUser:[[SentryUser alloc] initWithUserId:@"aid"]];
+    [cloned setUser:[[BuzzSentryUser alloc] initWithUserId:@"aid"]];
     [cloned setContextValue:@{ @"ae" : @"af" } forKey:@"myContext"];
     [cloned setDist:@"a456"];
     [cloned setEnvironment:@"a789"];

@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(User)
-@interface SentryUser : NSObject <SentrySerializable, NSCopying>
+@interface BuzzSentryUser : NSObject <SentrySerializable, NSCopying>
 
 /**
  * Optional: Id of the user
@@ -37,9 +37,9 @@ NS_SWIFT_NAME(User)
 @property (atomic, strong) NSDictionary<NSString *, id> *_Nullable data;
 
 /**
- * Initializes a SentryUser with the id
+ * Initializes a BuzzSentryUser with the id
  * @param userId NSString
- * @return SentryUser
+ * @return BuzzSentryUser
  */
 - (instancetype)initWithUserId:(NSString *)userId;
 
@@ -47,7 +47,7 @@ NS_SWIFT_NAME(User)
 
 - (BOOL)isEqual:(id _Nullable)other;
 
-- (BOOL)isEqualToUser:(SentryUser *)user;
+- (BOOL)isEqualToUser:(BuzzSentryUser *)user;
 
 - (NSUInteger)hash;
 

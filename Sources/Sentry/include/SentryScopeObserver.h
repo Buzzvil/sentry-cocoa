@@ -2,14 +2,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryUser;
+@class BuzzSentryUser;
 
 /**
  * An observer to sync the scope to SentryCrash.
  */
 @protocol SentryScopeObserver <NSObject>
 
-- (void)setUser:(nullable SentryUser *)user;
+- (void)setUser:(nullable BuzzSentryUser *)user;
 
 - (void)setTags:(nullable NSDictionary<NSString *, NSString *> *)tags;
 

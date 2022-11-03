@@ -12,7 +12,7 @@
 #import "BuzzSentryMeta.h"
 #import "SentryStacktrace.h"
 #import "SentryThread.h"
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -2,7 +2,7 @@
 #import "SentryIntegrationProtocol.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class SentryEvent, BuzzSentryClient, SentryScope, SentrySession, SentryUser, SentryBreadcrumb,
+@class SentryEvent, BuzzSentryClient, SentryScope, SentrySession, BuzzSentryUser, SentryBreadcrumb,
     SentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -247,7 +247,7 @@ SENTRY_NO_INIT
  *
  * @param user The user to set to the Scope.
  */
-- (void)setUser:(SentryUser *_Nullable)user;
+- (void)setUser:(BuzzSentryUser *_Nullable)user;
 
 /**
  * The SDK reserves this method for hybrid SDKs, which use it to capture events.

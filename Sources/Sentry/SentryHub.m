@@ -549,7 +549,7 @@ SentryHub ()
     return [self.installedIntegrationNames containsObject:integrationName];
 }
 
-- (void)setUser:(nullable SentryUser *)user
+- (void)setUser:(nullable BuzzSentryUser *)user
 {
     SentryScope *scope = self.scope;
     if (nil != scope) {

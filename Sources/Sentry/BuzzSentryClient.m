@@ -43,7 +43,7 @@
 #import "BuzzSentryTransportAdapter.h"
 #import "BuzzSentryTransportFactory.h"
 #import "SentryUIDeviceWrapper.h"
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 #import "BuzzSentryUserFeedback.h"
 
 #if SENTRY_HAS_UIKIT
@@ -683,7 +683,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     // We only want to set the id if the customer didn't set a user so we at least set something to
     // identify the user.
     if (nil == event.user) {
-        SentryUser *user = [[SentryUser alloc] init];
+        BuzzSentryUser *user = [[BuzzSentryUser alloc] init];
         user.userId = [SentryInstallation id];
         event.user = user;
     }

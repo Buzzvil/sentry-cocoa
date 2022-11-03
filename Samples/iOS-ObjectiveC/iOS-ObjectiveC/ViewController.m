@@ -19,7 +19,7 @@ ViewController ()
         [scope setTagValue:@"objc" forKey:@"language"];
         [scope setExtraValue:[NSString stringWithFormat:@"%@", self]
                       forKey:@"currentViewController"];
-        SentryUser *user = [[SentryUser alloc] initWithUserId:@"1"];
+        BuzzSentryUser *user = [[BuzzSentryUser alloc] initWithUserId:@"1"];
         user.email = @"tony@example.com";
         [scope setUser:user];
 
@@ -33,7 +33,7 @@ ViewController ()
                                      filename:@"log.txt"]];
     }];
     // Also works
-    SentryUser *user = [[SentryUser alloc] initWithUserId:@"1"];
+    BuzzSentryUser *user = [[BuzzSentryUser alloc] initWithUserId:@"1"];
     user.email = @"tony@example.com";
     [SentrySDK setUser:user];
 

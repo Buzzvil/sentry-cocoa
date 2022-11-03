@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryThread, SentryException, SentryStacktrace, SentryUser, SentryDebugMeta,
+@class SentryThread, SentryException, SentryStacktrace, BuzzSentryUser, SentryDebugMeta,
     SentryBreadcrumb, SentryId, SentryMessage;
 
 NS_SWIFT_NAME(Event)
@@ -121,9 +121,9 @@ NS_SWIFT_NAME(Event)
 @property (nonatomic, strong) NSArray<NSString *> *_Nullable fingerprint;
 
 /**
- * Set the SentryUser for the event
+ * Set the BuzzSentryUser for the event
  */
-@property (nonatomic, strong) SentryUser *_Nullable user;
+@property (nonatomic, strong) BuzzSentryUser *_Nullable user;
 
 /**
  * This object contains meta information.

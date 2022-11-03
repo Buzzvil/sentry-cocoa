@@ -13,7 +13,7 @@
 #import "SentryMechanismMeta.h"
 #import "SentryStacktrace.h"
 #import "SentryThread.h"
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 
 @interface
 SentryCrashReportConverter ()
@@ -146,12 +146,12 @@ SentryCrashReportConverter ()
     return nil;
 }
 
-- (SentryUser *_Nullable)convertUser
+- (BuzzSentryUser *_Nullable)convertUser
 {
-    SentryUser *user = nil;
+    BuzzSentryUser *user = nil;
     if (nil != self.userContext[@"user"]) {
         NSDictionary *storedUser = self.userContext[@"user"];
-        user = [[SentryUser alloc] init];
+        user = [[BuzzSentryUser alloc] init];
         user.userId = storedUser[@"id"];
         user.email = storedUser[@"email"];
         user.username = storedUser[@"username"];

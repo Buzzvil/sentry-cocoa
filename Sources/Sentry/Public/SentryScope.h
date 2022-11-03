@@ -2,7 +2,7 @@
 #import "SentrySerializable.h"
 #import "BuzzSentrySpanProtocol.h"
 
-@class SentryUser, SentrySession, BuzzSentryOptions, SentryBreadcrumb, BuzzSentryAttachment;
+@class BuzzSentryUser, SentrySession, BuzzSentryOptions, SentryBreadcrumb, BuzzSentryAttachment;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,7 +30,7 @@ NS_SWIFT_NAME(Scope)
 /**
  * Set global user -> thus will be sent with every event
  */
-- (void)setUser:(SentryUser *_Nullable)user;
+- (void)setUser:(BuzzSentryUser *_Nullable)user;
 
 /**
  * Set a global tag. Tags are searchable key/value string pairs attached to

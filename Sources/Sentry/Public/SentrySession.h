@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 #import "SentrySerializable.h"
 
-@class SentryUser;
+@class BuzzSentryUser;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -50,7 +50,7 @@ SENTRY_NO_INIT
 
 @property (nonatomic, readonly, copy) NSString *_Nullable releaseName;
 @property (nonatomic, copy) NSString *_Nullable environment;
-@property (nonatomic, copy) SentryUser *_Nullable user;
+@property (nonatomic, copy) BuzzSentryUser *_Nullable user;
 
 - (NSDictionary<NSString *, id> *)serialize;
 

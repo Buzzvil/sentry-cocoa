@@ -7,7 +7,7 @@
 #import <SentryCrashScopeObserver.h>
 #import <SentryLog.h>
 #import <SentryScopeSyncC.h>
-#import <SentryUser.h>
+#import <BuzzSentryUser.h>
 
 @interface
 SentryCrashScopeObserver ()
@@ -25,7 +25,7 @@ SentryCrashScopeObserver ()
     return self;
 }
 
-- (void)setUser:(nullable SentryUser *)user
+- (void)setUser:(nullable BuzzSentryUser *)user
 {
     [self syncScope:user
         serialize:^{ return [user serialize]; }

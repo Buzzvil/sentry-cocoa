@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryUserTests: XCTestCase {
+class BuzzSentryUserTests: XCTestCase {
 
     func testSerializationWithAllProperties() {
         let user = TestData.user.copy() as! User

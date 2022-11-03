@@ -14,7 +14,7 @@ SentryScope (Private)
 
 @property (atomic, strong, readonly) NSArray<BuzzSentryAttachment *> *attachments;
 
-@property (atomic, strong) SentryUser *_Nullable userObject;
+@property (atomic, strong) BuzzSentryUser *_Nullable userObject;
 
 @property (atomic, strong)
     NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *contextDictionary;

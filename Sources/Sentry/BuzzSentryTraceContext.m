@@ -7,7 +7,7 @@
 #import "SentrySerialization.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext.h"
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

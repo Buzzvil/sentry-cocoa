@@ -1,5 +1,5 @@
 #import "SentrySession+Equality.h"
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 
 @implementation
 SentrySession (Equality)

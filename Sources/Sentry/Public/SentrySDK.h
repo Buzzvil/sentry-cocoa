@@ -2,7 +2,7 @@
 
 @protocol BuzzSentrySpan;
 
-@class BuzzSentryOptions, SentryEvent, SentryBreadcrumb, SentryScope, SentryUser, SentryId,
+@class BuzzSentryOptions, SentryEvent, SentryBreadcrumb, SentryScope, BuzzSentryUser, SentryId,
     BuzzSentryUserFeedback, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -284,7 +284,7 @@ SENTRY_NO_INIT
  *
  * @param user The user to set to the current Scope.
  */
-+ (void)setUser:(SentryUser *_Nullable)user;
++ (void)setUser:(BuzzSentryUser *_Nullable)user;
 
 /**
  * Starts a new SentrySession. If there's a running SentrySession, it ends it before starting the

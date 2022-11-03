@@ -341,7 +341,7 @@ static NSUInteger startInvocations;
     [SentrySDK.currentHub configureScope:callback];
 }
 
-+ (void)setUser:(SentryUser *_Nullable)user
++ (void)setUser:(BuzzSentryUser *_Nullable)user
 {
     [SentrySDK.currentHub setUser:user];
 }

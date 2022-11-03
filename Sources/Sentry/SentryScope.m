@@ -11,7 +11,7 @@
 #import "BuzzSentrySpan.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext.h"
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +21,7 @@ SentryScope ()
 /**
  * Set global user -> thus will be sent with every event
  */
-@property (atomic, strong) SentryUser *_Nullable userObject;
+@property (atomic, strong) BuzzSentryUser *_Nullable userObject;
 
 /**
  * Set global tags -> these will be sent with every event
@@ -321,7 +321,7 @@ SentryScope ()
     }
 }
 
-- (void)setUser:(SentryUser *_Nullable)user
+- (void)setUser:(BuzzSentryUser *_Nullable)user
 {
     self.userObject = user;
 
@@ -443,7 +443,7 @@ SentryScope ()
 
 - (void)applyToSession:(SentrySession *)session
 {
-    SentryUser *userObject = self.userObject;
+    BuzzSentryUser *userObject = self.userObject;
     if (nil != userObject) {
         session.user = userObject.copy;
     }
@@ -488,7 +488,7 @@ SentryScope ()
             subarrayWithRange:NSMakeRange(0, MIN(maxBreadcrumbs, [breadcrumbs count]))];
     }
 
-    SentryUser *user = self.userObject.copy;
+    BuzzSentryUser *user = self.userObject.copy;
     if (nil != user) {
         event.user = user;
     }

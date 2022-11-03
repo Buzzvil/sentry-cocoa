@@ -283,13 +283,13 @@
 
 - (void)testUser
 {
-    SentryUser *user = [[SentryUser alloc] init];
+    BuzzSentryUser *user = [[BuzzSentryUser alloc] init];
     user.userId = @"1";
     XCTAssertNotNil(user.userId);
     NSDictionary *serialized = @{ @"id" : @"1" };
     XCTAssertEqualObjects([user serialize], serialized);
 
-    SentryUser *user2 = [[SentryUser alloc] init];
+    BuzzSentryUser *user2 = [[BuzzSentryUser alloc] init];
     user2.userId = @"1";
     XCTAssertNotNil(user2.userId);
     user2.email = @"a@b.com";
@@ -306,13 +306,13 @@
 
 - (void)testUserCopy
 {
-    SentryUser *user = [[SentryUser alloc] init];
+    BuzzSentryUser *user = [[BuzzSentryUser alloc] init];
     user.userId = @"1";
     user.email = @"a@b.com";
     user.username = @"tony";
     user.data = @{ @"test" : @"a" };
 
-    SentryUser *user2 = user.copy;
+    BuzzSentryUser *user2 = user.copy;
     NSDictionary *serialized = [user serialize].mutableCopy;
     XCTAssertEqualObjects(serialized, [user2 serialize]);
 

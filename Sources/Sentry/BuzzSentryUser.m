@@ -1,9 +1,9 @@
-#import "SentryUser.h"
+#import "BuzzSentryUser.h"
 #import "NSDictionary+SentrySanitize.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryUser
+@implementation BuzzSentryUser
 
 - (instancetype)initWithUserId:(NSString *)userId
 {
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
-    SentryUser *copy = [[SentryUser allocWithZone:zone] init];
+    BuzzSentryUser *copy = [[BuzzSentryUser allocWithZone:zone] init];
 
     @synchronized(self) {
         if (copy != nil) {
@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (BOOL)isEqualToUser:(SentryUser *)user
+- (BOOL)isEqualToUser:(BuzzSentryUser *)user
 {
     @synchronized(self) {
         // We need to get some local copies of the properties, because they could be modified during
