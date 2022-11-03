@@ -1,5 +1,5 @@
 #import "BuzzSentryNSDataTracker.h"
-#import "SentryByteCountFormatter.h"
+#import "BuzzSentryByteCountFormatter.h"
 #import "BuzzSentryClient+Private.h"
 #import "BuzzSentryFileManager.h"
 #import "BuzzSentryHub+Private.h"
@@ -229,7 +229,7 @@ BuzzSentryNSDataTracker ()
 - (NSString *)transactionDescriptionForFile:(NSString *)path fileSize:(NSUInteger)size
 {
     return size > 0 ? [NSString stringWithFormat:@"%@ (%@)", [path lastPathComponent],
-                                [SentryByteCountFormatter bytesCountDescription:size]]
+                                [BuzzSentryByteCountFormatter bytesCountDescription:size]]
                     : [NSString stringWithFormat:@"%@", [path lastPathComponent]];
 }
 

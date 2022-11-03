@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@protocol SentryObjCRuntimeWrapper <NSObject>
+@protocol BuzzSentryObjCRuntimeWrapper <NSObject>
 
 - (const char **)copyClassNamesForImage:(const char *)image amount:(unsigned int *)outCount;
 

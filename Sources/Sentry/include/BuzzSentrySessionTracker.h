@@ -2,7 +2,7 @@
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
-@class BuzzSentryEvent, BuzzSentryOptions, BuzzSentryCurrentDateProvider, SentryNSNotificationCenterWrapper;
+@class BuzzSentryEvent, BuzzSentryOptions, BuzzSentryCurrentDateProvider, BuzzSentryNSNotificationCenterWrapper;
 
 /**
  * Tracks sessions for release health. For more info see:
@@ -14,7 +14,7 @@ SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
             currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
-             notificationCenter:(SentryNSNotificationCenterWrapper *)notificationCenter;
+             notificationCenter:(BuzzSentryNSNotificationCenterWrapper *)notificationCenter;
 
 - (void)start;
 - (void)stop;

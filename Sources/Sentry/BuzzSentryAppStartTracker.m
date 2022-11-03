@@ -1,7 +1,7 @@
 #import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryAppStateManager.h"
 #import "SentryLog.h"
-#import "SentrySysctl.h"
+#import "BuzzSentrySysctl.h"
 #import <Foundation/Foundation.h>
 #import <PrivateBuzzSentrySDKOnly.h>
 #import <BuzzSentryAppStartTracker.h>
@@ -31,7 +31,7 @@ BuzzSentryAppStartTracker ()
 @property (nonatomic, strong) BuzzSentryAppState *previousAppState;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) BuzzSentryAppStateManager *appStateManager;
-@property (nonatomic, strong) SentrySysctl *sysctl;
+@property (nonatomic, strong) BuzzSentrySysctl *sysctl;
 @property (nonatomic, assign) BOOL wasInBackground;
 @property (nonatomic, strong) NSDate *didFinishLaunchingTimestamp;
 
@@ -54,7 +54,7 @@ BuzzSentryAppStartTracker ()
 - (instancetype)initWithCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                        dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                             appStateManager:(BuzzSentryAppStateManager *)appStateManager
-                                     sysctl:(SentrySysctl *)sysctl
+                                     sysctl:(BuzzSentrySysctl *)sysctl
 {
     if (self = [super init]) {
         self.currentDate = currentDateProvider;

@@ -1,5 +1,5 @@
 #import "SentryCrashSysCtl.h"
-#import "SentrySysctl.h"
+#import "BuzzSentrySysctl.h"
 #import <Foundation/Foundation.h>
 #import <BuzzSentryAppState.h>
 #import <BuzzSentryAppStateManager.h>
@@ -11,7 +11,7 @@
 
 #if SENTRY_HAS_UIKIT
 #    import <BuzzSentryInternalNotificationNames.h>
-#    import <SentryNSNotificationCenterWrapper.h>
+#    import <BuzzSentryNSNotificationCenterWrapper.h>
 #    import <UIKit/UIKit.h>
 #endif
 
@@ -22,7 +22,7 @@ BuzzSentryAppStateManager ()
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryFileManager *fileManager;
 @property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDate;
-@property (nonatomic, strong) SentrySysctl *sysctl;
+@property (nonatomic, strong) BuzzSentrySysctl *sysctl;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic) NSInteger startCount;
 
@@ -34,7 +34,7 @@ BuzzSentryAppStateManager ()
                    crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                     fileManager:(BuzzSentryFileManager *)fileManager
             currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
-                         sysctl:(SentrySysctl *)sysctl
+                         sysctl:(BuzzSentrySysctl *)sysctl
            dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     if (self = [super init]) {
@@ -57,7 +57,7 @@ BuzzSentryAppStateManager ()
         [NSNotificationCenter.defaultCenter
             addObserver:self
                selector:@selector(didBecomeActive)
-                   name:SentryNSNotificationCenterWrapper.didBecomeActiveNotificationName
+                   name:BuzzSentryNSNotificationCenterWrapper.didBecomeActiveNotificationName
                  object:nil];
 
         [NSNotificationCenter.defaultCenter
@@ -69,13 +69,13 @@ BuzzSentryAppStateManager ()
         [NSNotificationCenter.defaultCenter
             addObserver:self
                selector:@selector(willResignActive)
-                   name:SentryNSNotificationCenterWrapper.willResignActiveNotificationName
+                   name:BuzzSentryNSNotificationCenterWrapper.willResignActiveNotificationName
                  object:nil];
 
         [NSNotificationCenter.defaultCenter
             addObserver:self
                selector:@selector(willTerminate)
-                   name:SentryNSNotificationCenterWrapper.willTerminateNotificationName
+                   name:BuzzSentryNSNotificationCenterWrapper.willTerminateNotificationName
                  object:nil];
 
         [self storeCurrentAppState];
@@ -97,7 +97,7 @@ BuzzSentryAppStateManager ()
         // https://developer.apple.com/documentation/foundation/nsnotificationcenter/1413994-removeobserver
         [NSNotificationCenter.defaultCenter
             removeObserver:self
-                      name:SentryNSNotificationCenterWrapper.didBecomeActiveNotificationName
+                      name:BuzzSentryNSNotificationCenterWrapper.didBecomeActiveNotificationName
                     object:nil];
 
         [NSNotificationCenter.defaultCenter
@@ -107,12 +107,12 @@ BuzzSentryAppStateManager ()
 
         [NSNotificationCenter.defaultCenter
             removeObserver:self
-                      name:SentryNSNotificationCenterWrapper.willResignActiveNotificationName
+                      name:BuzzSentryNSNotificationCenterWrapper.willResignActiveNotificationName
                     object:nil];
 
         [NSNotificationCenter.defaultCenter
             removeObserver:self
-                      name:SentryNSNotificationCenterWrapper.willTerminateNotificationName
+                      name:BuzzSentryNSNotificationCenterWrapper.willTerminateNotificationName
                     object:nil];
 
         [self deleteAppState];

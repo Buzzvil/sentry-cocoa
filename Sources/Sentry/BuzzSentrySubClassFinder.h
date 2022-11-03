@@ -1,16 +1,16 @@
 #import "SentryDefines.h"
-#import "SentryObjCRuntimeWrapper.h"
+#import "BuzzSentryObjCRuntimeWrapper.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BuzzSentryDispatchQueueWrapper, SentryDefaultObjCRuntimeWrapper;
+@class BuzzSentryDispatchQueueWrapper, BuzzSentryDefaultObjCRuntimeWrapper;
 
 @interface BuzzSentrySubClassFinder : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithDispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
-                   objcRuntimeWrapper:(id<SentryObjCRuntimeWrapper>)objcRuntimeWrapper;
+                   objcRuntimeWrapper:(id<BuzzSentryObjCRuntimeWrapper>)objcRuntimeWrapper;
 
 /**
  * Fetch all subclasses of UIViewController from given objc Image on a background thread and then

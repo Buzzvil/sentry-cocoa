@@ -1,4 +1,4 @@
-#import "SentrySysctl.h"
+#import "BuzzSentrySysctl.h"
 #import "SentryCrashSysCtl.h"
 #include <stdio.h>
 #include <time.h>
@@ -24,7 +24,7 @@ sentryModuleInitializationHook()
     moduleInitializationTimestamp = [NSDate date];
 }
 
-@implementation SentrySysctl
+@implementation BuzzSentrySysctl
 
 + (void)load
 {

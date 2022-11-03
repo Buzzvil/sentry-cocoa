@@ -1,10 +1,10 @@
 #import "SentryDefines.h"
-#import "SentryObjCRuntimeWrapper.h"
+#import "BuzzSentryObjCRuntimeWrapper.h"
 
 /**
  * A wrapper around the objc runtime functions for testability.
  */
-@interface SentryDefaultObjCRuntimeWrapper : NSObject <SentryObjCRuntimeWrapper>
+@interface BuzzSentryDefaultObjCRuntimeWrapper : NSObject <BuzzSentryObjCRuntimeWrapper>
 SENTRY_NO_INIT
 
 + (instancetype)sharedInstance;

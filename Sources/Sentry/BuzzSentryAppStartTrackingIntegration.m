@@ -8,7 +8,7 @@
 #import <BuzzSentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
-#import <SentrySysctl.h>
+#import <BuzzSentrySysctl.h>
 
 @interface
 BuzzSentryAppStartTrackingIntegration ()
@@ -31,7 +31,7 @@ BuzzSentryAppStartTrackingIntegration ()
 
     BuzzSentryDefaultCurrentDateProvider *currentDateProvider =
         [BuzzSentryDefaultCurrentDateProvider sharedInstance];
-    SentrySysctl *sysctl = [[SentrySysctl alloc] init];
+    BuzzSentrySysctl *sysctl = [[BuzzSentrySysctl alloc] init];
 
     BuzzSentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;

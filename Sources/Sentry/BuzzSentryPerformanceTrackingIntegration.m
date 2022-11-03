@@ -1,5 +1,5 @@
 #import "BuzzSentryPerformanceTrackingIntegration.h"
-#import "SentryDefaultObjCRuntimeWrapper.h"
+#import "BuzzSentryDefaultObjCRuntimeWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "SentryLog.h"
 #import "BuzzSentrySubClassFinder.h"
@@ -31,12 +31,12 @@ BuzzSentryPerformanceTrackingIntegration ()
 
     BuzzSentrySubClassFinder *subClassFinder = [[BuzzSentrySubClassFinder alloc]
         initWithDispatchQueue:dispatchQueue
-           objcRuntimeWrapper:[SentryDefaultObjCRuntimeWrapper sharedInstance]];
+           objcRuntimeWrapper:[BuzzSentryDefaultObjCRuntimeWrapper sharedInstance]];
 
     self.swizzling = [[BuzzSentryUIViewControllerSwizzling alloc]
            initWithOptions:options
              dispatchQueue:dispatchQueue
-        objcRuntimeWrapper:[SentryDefaultObjCRuntimeWrapper sharedInstance]
+        objcRuntimeWrapper:[BuzzSentryDefaultObjCRuntimeWrapper sharedInstance]
             subClassFinder:subClassFinder];
 
     [self.swizzling start];

@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryByteCountFormatterTests: XCTestCase {
+class BuzzSentryByteCountFormatterTests: XCTestCase {
 
     func testBytesDescription() {
         assertDescription(baseValue: 1, unitName: "bytes")
@@ -19,9 +19,9 @@ class SentryByteCountFormatterTests: XCTestCase {
     }
     
     func assertDescription(baseValue: UInt, unitName: String) {
-        XCTAssertEqual("1 \(unitName)", SentryByteCountFormatter.bytesCountDescription(baseValue))
-        XCTAssertEqual("512 \(unitName)", SentryByteCountFormatter.bytesCountDescription(baseValue * 512))
-        XCTAssertEqual("1,023 \(unitName)", SentryByteCountFormatter.bytesCountDescription(baseValue * 1_024 - 1))
+        XCTAssertEqual("1 \(unitName)", BuzzSentryByteCountFormatter.bytesCountDescription(baseValue))
+        XCTAssertEqual("512 \(unitName)", BuzzSentryByteCountFormatter.bytesCountDescription(baseValue * 512))
+        XCTAssertEqual("1,023 \(unitName)", BuzzSentryByteCountFormatter.bytesCountDescription(baseValue * 1_024 - 1))
     }
     
 }

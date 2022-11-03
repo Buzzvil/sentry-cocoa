@@ -1,6 +1,6 @@
 import Foundation
 
-class TestSysctl: SentrySysctl {
+class TestSysctl: BuzzSentrySysctl {
     
     private var internalSystemBootTimestamp: Date = Date(timeIntervalSinceReferenceDate: 0)
     

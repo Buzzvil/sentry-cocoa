@@ -1,10 +1,10 @@
 #import "SentryDefines.h"
-#import "SentryObjCRuntimeWrapper.h"
+#import "BuzzSentryObjCRuntimeWrapper.h"
 
 /**
  * Written in ObjC, because dealing with the pointers in Swift is super complicated.
  */
-@interface SentryTestObjCRuntimeWrapper : NSObject <SentryObjCRuntimeWrapper>
+@interface SentryTestObjCRuntimeWrapper : NSObject <BuzzSentryObjCRuntimeWrapper>
 
 @property (nullable, nonatomic, copy) void (^beforeGetClassList)(void);
 

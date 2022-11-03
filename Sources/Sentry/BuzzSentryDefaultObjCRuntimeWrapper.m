@@ -1,11 +1,11 @@
-#import "SentryDefaultObjCRuntimeWrapper.h"
+#import "BuzzSentryDefaultObjCRuntimeWrapper.h"
 #import <objc/runtime.h>
 
-@implementation SentryDefaultObjCRuntimeWrapper
+@implementation BuzzSentryDefaultObjCRuntimeWrapper
 
 + (instancetype)sharedInstance
 {
-    static SentryDefaultObjCRuntimeWrapper *instance = nil;
+    static BuzzSentryDefaultObjCRuntimeWrapper *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;

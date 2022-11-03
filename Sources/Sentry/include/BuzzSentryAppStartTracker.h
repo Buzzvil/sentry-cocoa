@@ -1,7 +1,7 @@
 #import "BuzzSentryCurrentDateProvider.h"
 #import "SentryDefines.h"
 
-@class BuzzSentryDispatchQueueWrapper, BuzzSentryAppStateManager, SentrySysctl;
+@class BuzzSentryDispatchQueueWrapper, BuzzSentryAppStateManager, BuzzSentrySysctl;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,7 @@ SENTRY_NO_INIT
 - (instancetype)initWithCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                        dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                             appStateManager:(BuzzSentryAppStateManager *)appStateManager
-                                     sysctl:(SentrySysctl *)sysctl;
+                                     sysctl:(BuzzSentrySysctl *)sysctl;
 
 - (void)start;
 - (void)stop;

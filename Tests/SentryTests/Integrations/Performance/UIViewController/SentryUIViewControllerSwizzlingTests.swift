@@ -27,7 +27,7 @@ class BuzzSentryUIViewControllerSwizzlingTests: XCTestCase {
         }
         
         var sutWithDefaultObjCRuntimeWrapper: BuzzSentryUIViewControllerSwizzling {
-            return BuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: SentryDefaultObjCRuntimeWrapper.sharedInstance(), subClassFinder: subClassFinder)
+            return BuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: BuzzSentryDefaultObjCRuntimeWrapper.sharedInstance(), subClassFinder: subClassFinder)
         }
         
         var testableSut: TestBuzzSentryUIViewControllerSwizzling {

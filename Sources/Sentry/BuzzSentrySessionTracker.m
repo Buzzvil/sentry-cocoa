@@ -5,7 +5,7 @@
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryInternalNotificationNames.h"
 #import "SentryLog.h"
-#import "SentryNSNotificationCenterWrapper.h"
+#import "BuzzSentryNSNotificationCenterWrapper.h"
 #import "BuzzSentrySDK+Private.h"
 
 #if SENTRY_HAS_UIKIT
@@ -22,7 +22,7 @@ BuzzSentrySessionTracker ()
 @property (atomic, strong) NSDate *lastInForeground;
 @property (nonatomic, assign) BOOL wasDidBecomeActiveCalled;
 @property (nonatomic, assign) BOOL subscribedToNotifications;
-@property (nonatomic, strong) SentryNSNotificationCenterWrapper *notificationCenter;
+@property (nonatomic, strong) BuzzSentryNSNotificationCenterWrapper *notificationCenter;
 
 @end
 
@@ -30,7 +30,7 @@ BuzzSentrySessionTracker ()
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
             currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
-             notificationCenter:(SentryNSNotificationCenterWrapper *)notificationCenter;
+             notificationCenter:(BuzzSentryNSNotificationCenterWrapper *)notificationCenter;
 {
     if (self = [super init]) {
         self.options = options;
@@ -66,7 +66,7 @@ BuzzSentrySessionTracker ()
     [self.notificationCenter
         addObserver:self
            selector:@selector(didBecomeActive)
-               name:SentryNSNotificationCenterWrapper.didBecomeActiveNotificationName];
+               name:BuzzSentryNSNotificationCenterWrapper.didBecomeActiveNotificationName];
 
     [self.notificationCenter addObserver:self
                                 selector:@selector(didBecomeActive)
@@ -75,12 +75,12 @@ BuzzSentrySessionTracker ()
     [self.notificationCenter
         addObserver:self
            selector:@selector(willResignActive)
-               name:SentryNSNotificationCenterWrapper.willResignActiveNotificationName];
+               name:BuzzSentryNSNotificationCenterWrapper.willResignActiveNotificationName];
 
     [self.notificationCenter
         addObserver:self
            selector:@selector(willTerminate)
-               name:SentryNSNotificationCenterWrapper.willTerminateNotificationName];
+               name:BuzzSentryNSNotificationCenterWrapper.willTerminateNotificationName];
 #else
     SENTRY_LOG_DEBUG(@"NO UIKit -> BuzzSentrySessionTracker will not track sessions automatically.");
 #endif
@@ -93,15 +93,15 @@ BuzzSentrySessionTracker ()
     // https://developer.apple.com/documentation/foundation/nsnotificationcenter/1413994-removeobserver
     [self.notificationCenter
         removeObserver:self
-                  name:SentryNSNotificationCenterWrapper.didBecomeActiveNotificationName];
+                  name:BuzzSentryNSNotificationCenterWrapper.didBecomeActiveNotificationName];
     [self.notificationCenter removeObserver:self
                                        name:SentryHybridSdkDidBecomeActiveNotificationName];
     [self.notificationCenter
         removeObserver:self
-                  name:SentryNSNotificationCenterWrapper.willResignActiveNotificationName];
+                  name:BuzzSentryNSNotificationCenterWrapper.willResignActiveNotificationName];
     [self.notificationCenter
         removeObserver:self
-                  name:SentryNSNotificationCenterWrapper.willTerminateNotificationName];
+                  name:BuzzSentryNSNotificationCenterWrapper.willTerminateNotificationName];
 #endif
 }
 

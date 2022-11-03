@@ -10,11 +10,11 @@
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryHub.h>
-#import <SentryNSNotificationCenterWrapper.h>
+#import <BuzzSentryNSNotificationCenterWrapper.h>
 #import <BuzzSentrySDK+Private.h>
 #import <BuzzSentryScreenshot.h>
 #import <BuzzSentrySwizzleWrapper.h>
-#import <SentrySysctl.h>
+#import <BuzzSentrySysctl.h>
 #import <SentryThreadWrapper.h>
 #import <BuzzSentryViewHierarchy.h>
 
@@ -67,7 +67,7 @@ static NSObject *sentryDependencyContainerLock;
                         crashWrapper:self.crashWrapper
                          fileManager:self.fileManager
                  currentDateProvider:[BuzzSentryDefaultCurrentDateProvider sharedInstance]
-                              sysctl:[[SentrySysctl alloc] init]
+                              sysctl:[[BuzzSentrySysctl alloc] init]
                 dispatchQueueWrapper:self.dispatchQueueWrapper];
         }
         return _appStateManager;
@@ -108,11 +108,11 @@ static NSObject *sentryDependencyContainerLock;
     }
 }
 
-- (SentryNSNotificationCenterWrapper *)notificationCenterWrapper
+- (BuzzSentryNSNotificationCenterWrapper *)notificationCenterWrapper
 {
     @synchronized(sentryDependencyContainerLock) {
         if (_notificationCenterWrapper == nil) {
-            _notificationCenterWrapper = [[SentryNSNotificationCenterWrapper alloc] init];
+            _notificationCenterWrapper = [[BuzzSentryNSNotificationCenterWrapper alloc] init];
         }
         return _notificationCenterWrapper;
     }

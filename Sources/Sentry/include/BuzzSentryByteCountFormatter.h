@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
  * and the result changes according to the device configuration.
  * With our own formatter we can control the result.
  */
-@interface SentryByteCountFormatter : NSObject
+@interface BuzzSentryByteCountFormatter : NSObject
 
 + (NSString *)bytesCountDescription:(unsigned long)bytes;
 

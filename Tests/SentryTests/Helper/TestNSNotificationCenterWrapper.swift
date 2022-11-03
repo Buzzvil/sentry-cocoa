@@ -1,6 +1,6 @@
 import Foundation
 
-class TestNSNotificationCenterWrapper: SentryNSNotificationCenterWrapper {
+class TestNSNotificationCenterWrapper: BuzzSentryNSNotificationCenterWrapper {
     
     var addObserverInvocations = Invocations<(observer: Any, selector: Selector, name: NSNotification.Name)>()
     override func addObserver(_ observer: Any, selector aSelector: Selector, name aName: NSNotification.Name) {

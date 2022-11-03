@@ -4,7 +4,7 @@
 
 @class BuzzSentryAppStateManager, BuzzSentryCrashWrapper, SentryThreadWrapper, BuzzSentrySwizzleWrapper,
     BuzzSentryDispatchQueueWrapper, BuzzSentryDebugImageProvider, BuzzSentryANRTracker,
-    SentryNSNotificationCenterWrapper;
+    BuzzSentryNSNotificationCenterWrapper;
 
 #if SENTRY_HAS_UIKIT
 @class BuzzSentryScreenshot, BuzzSentryUIApplication, BuzzSentryViewHierarchy;
@@ -29,7 +29,7 @@ SENTRY_NO_INIT
 @property (nonatomic, strong) id<BuzzSentryRandom> random;
 @property (nonatomic, strong) BuzzSentrySwizzleWrapper *swizzleWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
-@property (nonatomic, strong) SentryNSNotificationCenterWrapper *notificationCenterWrapper;
+@property (nonatomic, strong) BuzzSentryNSNotificationCenterWrapper *notificationCenterWrapper;
 @property (nonatomic, strong) BuzzSentryDebugImageProvider *debugImageProvider;
 @property (nonatomic, strong) BuzzSentryANRTracker *anrTracker;
 

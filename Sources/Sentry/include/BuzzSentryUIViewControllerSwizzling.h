@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentryObjCRuntimeWrapper.h"
+#import "BuzzSentryObjCRuntimeWrapper.h"
 #import <Foundation/Foundation.h>
 
 #if SENTRY_HAS_UIKIT
@@ -28,7 +28,7 @@ SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                   dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue
-             objcRuntimeWrapper:(id<SentryObjCRuntimeWrapper>)objcRuntimeWrapper
+             objcRuntimeWrapper:(id<BuzzSentryObjCRuntimeWrapper>)objcRuntimeWrapper
                  subClassFinder:(BuzzSentrySubClassFinder *)subClassFinder;
 
 - (void)start;

@@ -1,6 +1,6 @@
-#import "SentryByteCountFormatter.h"
+#import "BuzzSentryByteCountFormatter.h"
 
-@implementation SentryByteCountFormatter
+@implementation BuzzSentryByteCountFormatter
 
 + (NSString *)bytesCountDescription:(unsigned long)bytes
 {

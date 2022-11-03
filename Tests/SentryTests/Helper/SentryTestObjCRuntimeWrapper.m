@@ -1,12 +1,12 @@
 #import "SentryTestObjCRuntimeWrapper.h"
-#import "SentryDefaultObjCRuntimeWrapper.h"
+#import "BuzzSentryDefaultObjCRuntimeWrapper.h"
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
 @interface
 SentryTestObjCRuntimeWrapper ()
 
-@property (nonatomic, strong) SentryDefaultObjCRuntimeWrapper *objcRuntimeWrapper;
+@property (nonatomic, strong) BuzzSentryDefaultObjCRuntimeWrapper *objcRuntimeWrapper;
 
 @end
 
@@ -15,7 +15,7 @@ SentryTestObjCRuntimeWrapper ()
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.objcRuntimeWrapper = [SentryDefaultObjCRuntimeWrapper sharedInstance];
+        self.objcRuntimeWrapper = [BuzzSentryDefaultObjCRuntimeWrapper sharedInstance];
     }
 
     return self;

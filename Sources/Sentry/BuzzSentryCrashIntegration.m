@@ -15,7 +15,7 @@
 #import <BuzzSentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentrySDK+Private.h>
-#import <SentrySysctl.h>
+#import <BuzzSentrySysctl.h>
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>

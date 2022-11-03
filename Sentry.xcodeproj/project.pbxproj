@@ -301,8 +301,8 @@
 		7B14089824878F950035403D /* BuzzSentryCrashStackEntryMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B14089724878F950035403D /* BuzzSentryCrashStackEntryMapper.m */; };
 		7B14089A248791660035403D /* SentryCrashStackEntryMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B140899248791660035403D /* SentryCrashStackEntryMapperTests.swift */; };
 		7B16FD022654F86B008177D3 /* SentrySysctlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B16FD012654F86B008177D3 /* SentrySysctlTests.swift */; };
-		7B18DE4028D9F748004845C6 /* SentryNSNotificationCenterWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B18DE3F28D9F748004845C6 /* SentryNSNotificationCenterWrapper.h */; };
-		7B18DE4228D9F794004845C6 /* SentryNSNotificationCenterWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18DE4128D9F794004845C6 /* SentryNSNotificationCenterWrapper.m */; };
+		7B18DE4028D9F748004845C6 /* BuzzSentryNSNotificationCenterWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B18DE3F28D9F748004845C6 /* BuzzSentryNSNotificationCenterWrapper.h */; };
+		7B18DE4228D9F794004845C6 /* BuzzSentryNSNotificationCenterWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18DE4128D9F794004845C6 /* BuzzSentryNSNotificationCenterWrapper.m */; };
 		7B18DE4428D9F8F6004845C6 /* TestNSNotificationCenterWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B18DE4328D9F8F6004845C6 /* TestNSNotificationCenterWrapper.swift */; };
 		7B18DE4A28DA0C8B004845C6 /* SentryNSNotificationCenterWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B18DE4928DA0C8B004845C6 /* SentryNSNotificationCenterWrapperTests.swift */; };
 		7B26BBFB24C0A66D00A79CCC /* SentrySdkInfoNilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26BBFA24C0A66D00A79CCC /* SentrySdkInfoNilTests.m */; };
@@ -519,8 +519,8 @@
 		7BD729962463E83300EA3610 /* BuzzSentryDateUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD729952463E83300EA3610 /* BuzzSentryDateUtil.h */; };
 		7BD729982463E93500EA3610 /* BuzzSentryDateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD729972463E93500EA3610 /* BuzzSentryDateUtil.m */; };
 		7BD7299A2463EA4A00EA3610 /* SentryDateUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD729992463EA4A00EA3610 /* SentryDateUtilTests.swift */; };
-		7BD86EC5264A63F6005439DB /* SentrySysctl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD86EC4264A63F6005439DB /* SentrySysctl.h */; };
-		7BD86EC7264A641D005439DB /* SentrySysctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD86EC6264A641D005439DB /* SentrySysctl.m */; };
+		7BD86EC5264A63F6005439DB /* BuzzSentrySysctl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD86EC4264A63F6005439DB /* BuzzSentrySysctl.h */; };
+		7BD86EC7264A641D005439DB /* BuzzSentrySysctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD86EC6264A641D005439DB /* BuzzSentrySysctl.m */; };
 		7BD86ECB264A6DB5005439DB /* TestSysctl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD86ECA264A6DB5005439DB /* TestSysctl.swift */; };
 		7BD86ECD264A78A6005439DB /* SentryAppStartTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD86ECC264A78A6005439DB /* SentryAppStartTrackerTests.swift */; };
 		7BD86ECF264A7C77005439DB /* BuzzSentryAppStartMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD86ECE264A7C77005439DB /* BuzzSentryAppStartMeasurement.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -564,9 +564,9 @@
 		7BF9EF762722B34700B5BBEF /* BuzzSentrySubClassFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF752722B34700B5BBEF /* BuzzSentrySubClassFinder.h */; };
 		7BF9EF782722B35D00B5BBEF /* BuzzSentrySubClassFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF772722B35D00B5BBEF /* BuzzSentrySubClassFinder.m */; };
 		7BF9EF7A2722B58900B5BBEF /* SentrySubClassFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF792722B58900B5BBEF /* SentrySubClassFinderTests.swift */; };
-		7BF9EF7C2722B90E00B5BBEF /* SentryDefaultObjCRuntimeWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF7B2722B90E00B5BBEF /* SentryDefaultObjCRuntimeWrapper.h */; };
-		7BF9EF7E2722B91F00B5BBEF /* SentryDefaultObjCRuntimeWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF7D2722B91F00B5BBEF /* SentryDefaultObjCRuntimeWrapper.m */; };
-		7BF9EF842722D07B00B5BBEF /* SentryObjCRuntimeWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF832722D07B00B5BBEF /* SentryObjCRuntimeWrapper.h */; };
+		7BF9EF7C2722B90E00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF7B2722B90E00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.h */; };
+		7BF9EF7E2722B91F00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF7D2722B91F00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.m */; };
+		7BF9EF842722D07B00B5BBEF /* BuzzSentryObjCRuntimeWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF832722D07B00B5BBEF /* BuzzSentryObjCRuntimeWrapper.h */; };
 		7BF9EF862722D10600B5BBEF /* SentryTestObjCRuntimeWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF852722D10600B5BBEF /* SentryTestObjCRuntimeWrapper.h */; };
 		7BF9EF882722D13000B5BBEF /* SentryTestObjCRuntimeWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF872722D13000B5BBEF /* SentryTestObjCRuntimeWrapper.m */; };
 		7BF9EF8B2722D58700B5BBEF /* SentryInitializeForGettingSubclassesNotCalled.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF8A2722D58700B5BBEF /* SentryInitializeForGettingSubclassesNotCalled.m */; };
@@ -671,8 +671,8 @@
 		D81FDF12280EA1060045E0E4 /* SentryScreenShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81FDF10280EA0080045E0E4 /* SentryScreenShotTests.swift */; };
 		D8370B6A273DF1E900F66E2D /* BuzzSentryNSURLSessionTaskSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = D8370B68273DF1E900F66E2D /* BuzzSentryNSURLSessionTaskSearch.m */; };
 		D8370B6C273DF20F00F66E2D /* BuzzSentryNSURLSessionTaskSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = D8370B6B273DF20F00F66E2D /* BuzzSentryNSURLSessionTaskSearch.h */; };
-		D84793262788737D00BE8E99 /* SentryByteCountFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D84793242788737D00BE8E99 /* SentryByteCountFormatter.m */; };
-		D8479328278873A100BE8E99 /* SentryByteCountFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = D8479327278873A100BE8E99 /* SentryByteCountFormatter.h */; };
+		D84793262788737D00BE8E99 /* BuzzSentryByteCountFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D84793242788737D00BE8E99 /* BuzzSentryByteCountFormatter.m */; };
+		D8479328278873A100BE8E99 /* BuzzSentryByteCountFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = D8479327278873A100BE8E99 /* BuzzSentryByteCountFormatter.h */; };
 		D85596F3280580F10041FF8B /* BuzzSentryScreenshotIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = D85596F1280580F10041FF8B /* BuzzSentryScreenshotIntegration.m */; };
 		D855AD62286ED6A4002573E1 /* SentryCrashTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D855AD61286ED6A4002573E1 /* SentryCrashTests.m */; };
 		D855B3E827D652AF00BCED76 /* SentryCoreDataTrackingIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D855B3E727D652AF00BCED76 /* SentryCoreDataTrackingIntegrationTest.swift */; };
@@ -1032,8 +1032,8 @@
 		7B14089724878F950035403D /* BuzzSentryCrashStackEntryMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryCrashStackEntryMapper.m; sourceTree = "<group>"; };
 		7B140899248791660035403D /* SentryCrashStackEntryMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryCrashStackEntryMapperTests.swift; sourceTree = "<group>"; };
 		7B16FD012654F86B008177D3 /* SentrySysctlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentrySysctlTests.swift; sourceTree = "<group>"; };
-		7B18DE3F28D9F748004845C6 /* SentryNSNotificationCenterWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SentryNSNotificationCenterWrapper.h; path = include/SentryNSNotificationCenterWrapper.h; sourceTree = "<group>"; };
-		7B18DE4128D9F794004845C6 /* SentryNSNotificationCenterWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryNSNotificationCenterWrapper.m; sourceTree = "<group>"; };
+		7B18DE3F28D9F748004845C6 /* BuzzSentryNSNotificationCenterWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuzzSentryNSNotificationCenterWrapper.h; path = include/BuzzSentryNSNotificationCenterWrapper.h; sourceTree = "<group>"; };
+		7B18DE4128D9F794004845C6 /* BuzzSentryNSNotificationCenterWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryNSNotificationCenterWrapper.m; sourceTree = "<group>"; };
 		7B18DE4328D9F8F6004845C6 /* TestNSNotificationCenterWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNSNotificationCenterWrapper.swift; sourceTree = "<group>"; };
 		7B18DE4928DA0C8B004845C6 /* SentryNSNotificationCenterWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryNSNotificationCenterWrapperTests.swift; sourceTree = "<group>"; };
 		7B26BBFA24C0A66D00A79CCC /* SentrySdkInfoNilTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentrySdkInfoNilTests.m; sourceTree = "<group>"; };
@@ -1267,8 +1267,8 @@
 		7BD729952463E83300EA3610 /* BuzzSentryDateUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuzzSentryDateUtil.h; path = include/BuzzSentryDateUtil.h; sourceTree = "<group>"; };
 		7BD729972463E93500EA3610 /* BuzzSentryDateUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryDateUtil.m; sourceTree = "<group>"; };
 		7BD729992463EA4A00EA3610 /* SentryDateUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryDateUtilTests.swift; sourceTree = "<group>"; };
-		7BD86EC4264A63F6005439DB /* SentrySysctl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SentrySysctl.h; path = include/SentrySysctl.h; sourceTree = "<group>"; };
-		7BD86EC6264A641D005439DB /* SentrySysctl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentrySysctl.m; sourceTree = "<group>"; };
+		7BD86EC4264A63F6005439DB /* BuzzSentrySysctl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuzzSentrySysctl.h; path = include/BuzzSentrySysctl.h; sourceTree = "<group>"; };
+		7BD86EC6264A641D005439DB /* BuzzSentrySysctl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentrySysctl.m; sourceTree = "<group>"; };
 		7BD86ECA264A6DB5005439DB /* TestSysctl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSysctl.swift; sourceTree = "<group>"; };
 		7BD86ECC264A78A6005439DB /* SentryAppStartTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryAppStartTrackerTests.swift; sourceTree = "<group>"; };
 		7BD86ECE264A7C77005439DB /* BuzzSentryAppStartMeasurement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuzzSentryAppStartMeasurement.h; path = Public/BuzzSentryAppStartMeasurement.h; sourceTree = "<group>"; };
@@ -1318,9 +1318,9 @@
 		7BF9EF752722B34700B5BBEF /* BuzzSentrySubClassFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuzzSentrySubClassFinder.h; sourceTree = "<group>"; };
 		7BF9EF772722B35D00B5BBEF /* BuzzSentrySubClassFinder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentrySubClassFinder.m; sourceTree = "<group>"; };
 		7BF9EF792722B58900B5BBEF /* SentrySubClassFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentrySubClassFinderTests.swift; sourceTree = "<group>"; };
-		7BF9EF7B2722B90E00B5BBEF /* SentryDefaultObjCRuntimeWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SentryDefaultObjCRuntimeWrapper.h; sourceTree = "<group>"; };
-		7BF9EF7D2722B91F00B5BBEF /* SentryDefaultObjCRuntimeWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryDefaultObjCRuntimeWrapper.m; sourceTree = "<group>"; };
-		7BF9EF832722D07B00B5BBEF /* SentryObjCRuntimeWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SentryObjCRuntimeWrapper.h; path = include/SentryObjCRuntimeWrapper.h; sourceTree = "<group>"; };
+		7BF9EF7B2722B90E00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuzzSentryDefaultObjCRuntimeWrapper.h; sourceTree = "<group>"; };
+		7BF9EF7D2722B91F00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryDefaultObjCRuntimeWrapper.m; sourceTree = "<group>"; };
+		7BF9EF832722D07B00B5BBEF /* BuzzSentryObjCRuntimeWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuzzSentryObjCRuntimeWrapper.h; path = include/BuzzSentryObjCRuntimeWrapper.h; sourceTree = "<group>"; };
 		7BF9EF852722D10600B5BBEF /* SentryTestObjCRuntimeWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SentryTestObjCRuntimeWrapper.h; sourceTree = "<group>"; };
 		7BF9EF872722D13000B5BBEF /* SentryTestObjCRuntimeWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryTestObjCRuntimeWrapper.m; sourceTree = "<group>"; };
 		7BF9EF892722D57100B5BBEF /* SentryInitializeForGettingSubclassesNotCalled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SentryInitializeForGettingSubclassesNotCalled.h; sourceTree = "<group>"; };
@@ -1454,8 +1454,8 @@
 		D81FDF10280EA0080045E0E4 /* SentryScreenShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryScreenShotTests.swift; sourceTree = "<group>"; };
 		D8370B68273DF1E900F66E2D /* BuzzSentryNSURLSessionTaskSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryNSURLSessionTaskSearch.m; sourceTree = "<group>"; };
 		D8370B6B273DF20F00F66E2D /* BuzzSentryNSURLSessionTaskSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryNSURLSessionTaskSearch.h; path = include/BuzzSentryNSURLSessionTaskSearch.h; sourceTree = "<group>"; };
-		D84793242788737D00BE8E99 /* SentryByteCountFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryByteCountFormatter.m; sourceTree = "<group>"; };
-		D8479327278873A100BE8E99 /* SentryByteCountFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SentryByteCountFormatter.h; path = include/SentryByteCountFormatter.h; sourceTree = "<group>"; };
+		D84793242788737D00BE8E99 /* BuzzSentryByteCountFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryByteCountFormatter.m; sourceTree = "<group>"; };
+		D8479327278873A100BE8E99 /* BuzzSentryByteCountFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryByteCountFormatter.h; path = include/BuzzSentryByteCountFormatter.h; sourceTree = "<group>"; };
 		D85596F1280580F10041FF8B /* BuzzSentryScreenshotIntegration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryScreenshotIntegration.m; sourceTree = "<group>"; };
 		D855AD61286ED6A4002573E1 /* SentryCrashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryCrashTests.m; sourceTree = "<group>"; };
 		D855B3E727D652AF00BCED76 /* SentryCoreDataTrackingIntegrationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryCoreDataTrackingIntegrationTest.swift; sourceTree = "<group>"; };
@@ -1832,17 +1832,17 @@
 				7B98D7E725FB7BCD00C5A389 /* BuzzSentryAppState.m */,
 				7B8ECBF926498906005FE2EF /* BuzzSentryAppStateManager.h */,
 				7B8ECBFB26498958005FE2EF /* BuzzSentryAppStateManager.m */,
-				7BD86EC4264A63F6005439DB /* SentrySysctl.h */,
-				7BD86EC6264A641D005439DB /* SentrySysctl.m */,
-				7BF9EF832722D07B00B5BBEF /* SentryObjCRuntimeWrapper.h */,
-				7BF9EF7B2722B90E00B5BBEF /* SentryDefaultObjCRuntimeWrapper.h */,
-				7BF9EF7D2722B91F00B5BBEF /* SentryDefaultObjCRuntimeWrapper.m */,
-				D8479327278873A100BE8E99 /* SentryByteCountFormatter.h */,
-				D84793242788737D00BE8E99 /* SentryByteCountFormatter.m */,
+				7BD86EC4264A63F6005439DB /* BuzzSentrySysctl.h */,
+				7BD86EC6264A641D005439DB /* BuzzSentrySysctl.m */,
+				7BF9EF832722D07B00B5BBEF /* BuzzSentryObjCRuntimeWrapper.h */,
+				7BF9EF7B2722B90E00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.h */,
+				7BF9EF7D2722B91F00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.m */,
+				D8479327278873A100BE8E99 /* BuzzSentryByteCountFormatter.h */,
+				D84793242788737D00BE8E99 /* BuzzSentryByteCountFormatter.m */,
 				7B2A70DA27D607CF008B0D15 /* SentryThreadWrapper.h */,
 				7B2A70DC27D6083D008B0D15 /* SentryThreadWrapper.m */,
-				7B18DE3F28D9F748004845C6 /* SentryNSNotificationCenterWrapper.h */,
-				7B18DE4128D9F794004845C6 /* SentryNSNotificationCenterWrapper.m */,
+				7B18DE3F28D9F748004845C6 /* BuzzSentryNSNotificationCenterWrapper.h */,
+				7B18DE4128D9F794004845C6 /* BuzzSentryNSNotificationCenterWrapper.m */,
 				84A8891A28DBD28900C51DFD /* SentryDevice.h */,
 				84A8891B28DBD28900C51DFD /* SentryDevice.mm */,
 				0A9E917028DC7E7000FB4182 /* SentryInternalDefines.h */,
@@ -2981,7 +2981,7 @@
 				7B14089624878F090035403D /* BuzzSentryCrashStackEntryMapper.h in Headers */,
 				63FE714920DA4C1100CDBAE8 /* SentryCrashStackCursor_Backtrace.h in Headers */,
 				7BFC169B2524995700FF6266 /* BuzzSentryMessage.h in Headers */,
-				7B18DE4028D9F748004845C6 /* SentryNSNotificationCenterWrapper.h in Headers */,
+				7B18DE4028D9F748004845C6 /* BuzzSentryNSNotificationCenterWrapper.h in Headers */,
 				03F84D1E27DD414C008FE43F /* SentryBacktrace.hpp in Headers */,
 				63AA76991EB9C1C200D153DE /* SentryDefines.h in Headers */,
 				0A4EDEA928D3461B00FA67CB /* BuzzSentryPerformanceTracker+Private.h in Headers */,
@@ -3002,7 +3002,7 @@
 				630436101EC0600A00C4D3FA /* BuzzSentrySerializable.h in Headers */,
 				63FE70DD20DA4C1000CDBAE8 /* SentryCrashMonitor_Signal.h in Headers */,
 				63FE710320DA4C1000CDBAE8 /* SentryCrashMachineContext_Apple.h in Headers */,
-				D8479328278873A100BE8E99 /* SentryByteCountFormatter.h in Headers */,
+				D8479328278873A100BE8E99 /* BuzzSentryByteCountFormatter.h in Headers */,
 				63AA76981EB9C1C200D153DE /* BuzzSentryClient.h in Headers */,
 				63AA76971EB9C1C200D153DE /* Sentry.h in Headers */,
 				0A9E917128DC7E7000FB4182 /* SentryInternalDefines.h in Headers */,
@@ -3014,7 +3014,7 @@
 				631E6D331EBC679C00712345 /* BuzzSentryQueueableRequestManager.h in Headers */,
 				7B3398632459C14000BD9C96 /* BuzzSentryEnvelopeRateLimit.h in Headers */,
 				6304360A1EC0595B00C4D3FA /* NSData+BuzzSentryCompression.h in Headers */,
-				7BF9EF7C2722B90E00B5BBEF /* SentryDefaultObjCRuntimeWrapper.h in Headers */,
+				7BF9EF7C2722B90E00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.h in Headers */,
 				63FE718720DA4C1100CDBAE8 /* SentryCrashReportVersion.h in Headers */,
 				0A56DA5F28ABA01B00C400D5 /* BuzzSentryTransactionContext+Private.h in Headers */,
 				8E7C98312693E1CC00E6336C /* BuzzSentryTraceHeader.h in Headers */,
@@ -3059,7 +3059,7 @@
 				7BF9EF762722B34700B5BBEF /* BuzzSentrySubClassFinder.h in Headers */,
 				7BC852332458802C005A70F0 /* BuzzSentryDataCategoryMapper.h in Headers */,
 				7BDB03B7251364F800BAE198 /* BuzzSentryDispatchQueueWrapper.h in Headers */,
-				7BF9EF842722D07B00B5BBEF /* SentryObjCRuntimeWrapper.h in Headers */,
+				7BF9EF842722D07B00B5BBEF /* BuzzSentryObjCRuntimeWrapper.h in Headers */,
 				639889B71EDECFA800EA7442 /* BuzzSentryBreadcrumbTracker.h in Headers */,
 				632331F9240506DF008D91D6 /* BuzzSentryScope+Private.h in Headers */,
 				D8603DD8284F894C000E1227 /* BuzzSentryBaggage.h in Headers */,
@@ -3091,7 +3091,7 @@
 				7B6C5EDA264E8D860010D138 /* BuzzSentryFramesTrackingIntegration.h in Headers */,
 				63FE713920DA4C1100CDBAE8 /* SentryCrashMach.h in Headers */,
 				63EED6BE2237923600E02400 /* BuzzSentryOptions.h in Headers */,
-				7BD86EC5264A63F6005439DB /* SentrySysctl.h in Headers */,
+				7BD86EC5264A63F6005439DB /* BuzzSentrySysctl.h in Headers */,
 				63BE85701ECEC6DE00DC44F5 /* NSDate+BuzzSentryExtras.h in Headers */,
 				63FE709520DA4C1000CDBAE8 /* SentryCrashReportFilterBasic.h in Headers */,
 				63FE70A120DA4C1000CDBAE8 /* SentryCrashCString.h in Headers */,
@@ -3322,7 +3322,7 @@
 				7BE3C7692445C1A800A38442 /* BuzzSentryCurrentDate.m in Sources */,
 				7BCFA71627D0BB50008C662C /* BuzzSentryANRTracker.m in Sources */,
 				63EED6C02237923600E02400 /* BuzzSentryOptions.m in Sources */,
-				D84793262788737D00BE8E99 /* SentryByteCountFormatter.m in Sources */,
+				D84793262788737D00BE8E99 /* BuzzSentryByteCountFormatter.m in Sources */,
 				63AA769E1EB9C57A00D153DE /* SentryError.m in Sources */,
 				7B8713B026415B22006D6004 /* BuzzSentryAppStartTrackingIntegration.m in Sources */,
 				8E133FA225E72DEF00ABD0BF /* BuzzSentrySamplingContext.m in Sources */,
@@ -3332,7 +3332,7 @@
 				63FE718120DA4C1100CDBAE8 /* SentryCrashDoctor.m in Sources */,
 				63FE713720DA4C1100CDBAE8 /* SentryCrashCPU_x86_64.c in Sources */,
 				8ECC674725C23A20000E2BF6 /* BuzzSentrySpanContext.m in Sources */,
-				7B18DE4228D9F794004845C6 /* SentryNSNotificationCenterWrapper.m in Sources */,
+				7B18DE4228D9F794004845C6 /* BuzzSentryNSNotificationCenterWrapper.m in Sources */,
 				639FCFA91EBC80CC00778193 /* BuzzSentryFrame.m in Sources */,
 				8E564AEA267AF22600FE117D /* BuzzSentryNetworkTracker.m in Sources */,
 				15360CED2433A15500112302 /* BuzzSentryInstallation.m in Sources */,
@@ -3406,7 +3406,7 @@
 				63FE70D320DA4C1000CDBAE8 /* SentryCrashMonitor_AppState.c in Sources */,
 				639FCFA51EBC809A00778193 /* BuzzSentryStacktrace.m in Sources */,
 				63FE70DF20DA4C1000CDBAE8 /* SentryCrashMonitorType.c in Sources */,
-				7BF9EF7E2722B91F00B5BBEF /* SentryDefaultObjCRuntimeWrapper.m in Sources */,
+				7BF9EF7E2722B91F00B5BBEF /* BuzzSentryDefaultObjCRuntimeWrapper.m in Sources */,
 				7BC3936E25B1AB72004F03D3 /* BuzzSentryLevelMapper.m in Sources */,
 				63FE70AD20DA4C1000CDBAE8 /* SentryCrashCString.m in Sources */,
 				6304360B1EC0595B00C4D3FA /* NSData+BuzzSentryCompression.m in Sources */,
@@ -3458,7 +3458,7 @@
 				8EBF870926140D37001A6853 /* BuzzSentryPerformanceTracker.m in Sources */,
 				7BC9A20428F4166D001E7C4C /* BuzzSentryMeasurementValue.m in Sources */,
 				D859696B27BECD8F0036A46E /* BuzzSentryCoreDataTrackingIntegration.m in Sources */,
-				7BD86EC7264A641D005439DB /* SentrySysctl.m in Sources */,
+				7BD86EC7264A641D005439DB /* BuzzSentrySysctl.m in Sources */,
 				D859697327BECDD20036A46E /* BuzzSentryCoreDataSwizzling.m in Sources */,
 				639889BD1EDED18400EA7442 /* BuzzSentrySwizzle.m in Sources */,
 				8453421228BE855D00C22EEC /* BuzzSentrySampleDecision.m in Sources */,

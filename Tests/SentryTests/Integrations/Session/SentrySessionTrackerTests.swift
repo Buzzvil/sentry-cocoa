@@ -562,10 +562,10 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         XCTAssertEqual(4, notificationNames.count)
         
         XCTAssertEqual([
-            SentryNSNotificationCenterWrapper.didBecomeActiveNotificationName,
+            BuzzSentryNSNotificationCenterWrapper.didBecomeActiveNotificationName,
             NSNotification.Name(rawValue: SentryHybridSdkDidBecomeActiveNotificationName),
-            SentryNSNotificationCenterWrapper.willResignActiveNotificationName,
-            SentryNSNotificationCenterWrapper.willTerminateNotificationName
+            BuzzSentryNSNotificationCenterWrapper.willResignActiveNotificationName,
+            BuzzSentryNSNotificationCenterWrapper.willTerminateNotificationName
         ], notificationNames)
     }
 }
