@@ -1,13 +1,13 @@
 import Sentry
 import XCTest
 
-class MyTestIntegration: SentryBaseIntegration {
+class MyTestIntegration: BuzzSentryBaseIntegration {
     override func integrationOptions() -> SentryIntegrationOption {
         return .integrationOptionEnableAutoSessionTracking
     }
 }
 
-class SentryBaseIntegrationTests: XCTestCase {
+class BuzzSentryBaseIntegrationTests: XCTestCase {
     var logOutput: TestLogOutput!
     var oldDebug: Bool!
     var oldLevel: SentryLevel!
@@ -30,12 +30,12 @@ class SentryBaseIntegrationTests: XCTestCase {
     }
 
     func testIntegrationName() {
-        let sut = SentryBaseIntegration()
-        XCTAssertEqual(sut.integrationName(), "SentryBaseIntegration")
+        let sut = BuzzSentryBaseIntegration()
+        XCTAssertEqual(sut.integrationName(), "BuzzSentryBaseIntegration")
     }
 
     func testInstall() {
-        let sut = SentryBaseIntegration()
+        let sut = BuzzSentryBaseIntegration()
         let result = sut.install(with: .init())
         XCTAssertTrue(result)
     }

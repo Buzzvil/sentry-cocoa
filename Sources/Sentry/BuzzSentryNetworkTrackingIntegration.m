@@ -33,7 +33,7 @@
     }
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionIsTracingEnabled | kIntegrationOptionEnableAutoPerformanceTracking
         | kIntegrationOptionEnableNetworkTracking;

@@ -1,4 +1,4 @@
-#import "SentryBaseIntegration.h"
+#import "BuzzSentryBaseIntegration.h"
 #import "SentryCrashWrapper.h"
 #import "SentryLog.h"
 #import <Foundation/Foundation.h>
@@ -7,7 +7,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryBaseIntegration
+@implementation BuzzSentryBaseIntegration
 
 - (NSString *)integrationName
 {
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)shouldBeEnabledWithOptions:(BuzzSentryOptions *)options
 {
-    SentryIntegrationOption integrationOptions = [self integrationOptions];
+    BuzzSentryIntegrationOption integrationOptions = [self integrationOptions];
 
     if (integrationOptions & kIntegrationOptionNone) {
         return YES;
@@ -149,7 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
     return YES;
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionNone;
 }

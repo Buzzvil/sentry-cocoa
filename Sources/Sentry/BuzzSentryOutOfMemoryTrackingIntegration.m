@@ -76,7 +76,7 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
     return YES;
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionEnableOutOfMemoryTracking;
 }

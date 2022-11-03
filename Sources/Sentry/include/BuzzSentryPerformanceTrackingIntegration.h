@@ -1,4 +1,4 @@
-#import "SentryBaseIntegration.h"
+#import "BuzzSentryBaseIntegration.h"
 #import "BuzzSentryIntegrationProtocol.h"
 #import <Foundation/Foundation.h>
 
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
  * enableAutoPerformanceTracking to NO
  * in BuzzSentryOptions during SentrySDK initialization.
  */
-@interface BuzzSentryPerformanceTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryPerformanceTrackingIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 @end
 

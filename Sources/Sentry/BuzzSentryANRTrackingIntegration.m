@@ -43,7 +43,7 @@ BuzzSentryANRTrackingIntegration ()
     return YES;
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionEnableAppHangTracking | kIntegrationOptionDebuggerNotAttached;
 }

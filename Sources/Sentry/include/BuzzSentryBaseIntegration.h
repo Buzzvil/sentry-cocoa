@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_OPTIONS(NSUInteger, SentryIntegrationOption) {
+typedef NS_OPTIONS(NSUInteger, BuzzSentryIntegrationOption) {
     kIntegrationOptionNone = 0,
     kIntegrationOptionEnableAutoSessionTracking = 1 << 0,
     kIntegrationOptionEnableOutOfMemoryTracking = 1 << 1,
@@ -24,14 +24,14 @@ typedef NS_OPTIONS(NSUInteger, SentryIntegrationOption) {
     kIntegrationOptionEnableCrashHandler = 1 << 16,
 };
 
-@interface SentryBaseIntegration : NSObject
+@interface BuzzSentryBaseIntegration : NSObject
 
 - (NSString *)integrationName;
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options;
 - (void)logWithOptionName:(NSString *)optionName;
 - (void)logWithReason:(NSString *)reason;
 - (BOOL)shouldBeEnabledWithOptions:(BuzzSentryOptions *)options;
-- (SentryIntegrationOption)integrationOptions;
+- (BuzzSentryIntegrationOption)integrationOptions;
 
 @end
 

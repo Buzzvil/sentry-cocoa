@@ -26,7 +26,7 @@ BuzzSentryCoreDataTrackingIntegration ()
     return YES;
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionEnableAutoPerformanceTracking | kIntegrationOptionEnableSwizzling
         | kIntegrationOptionIsTracingEnabled | kIntegrationOptionEnableCoreDataTracking;

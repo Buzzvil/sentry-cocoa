@@ -92,7 +92,7 @@ SentryCrashIntegration ()
     return YES;
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionEnableCrashHandler;
 }

@@ -1,4 +1,4 @@
-#import "SentryBaseIntegration.h"
+#import "BuzzSentryBaseIntegration.h"
 #import "BuzzSentryIntegrationProtocol.h"
 #import <Foundation/Foundation.h>
 
@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *const SentryDeviceContextFreeMemoryKey = @"free_memory";
 static NSString *const SentryDeviceContextAppMemoryKey = @"app_memory";
 
-@interface SentryCrashIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface SentryCrashIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 + (void)enrichScope:(SentryScope *)scope crashWrapper:(SentryCrashWrapper *)crashWrapper;
 

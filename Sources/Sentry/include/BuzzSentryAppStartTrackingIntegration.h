@@ -1,4 +1,4 @@
-#import "SentryBaseIntegration.h"
+#import "BuzzSentryBaseIntegration.h"
 #import "BuzzSentryIntegrationProtocol.h"
 #import <Foundation/Foundation.h>
 
@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Tracks cold and warm app start time for iOS, tvOS, and Mac Catalyst.
  */
-@interface BuzzSentryAppStartTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryAppStartTrackingIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 - (void)stop;
 

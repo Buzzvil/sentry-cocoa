@@ -1,9 +1,9 @@
-#import "SentryBaseIntegration.h"
+#import "BuzzSentryBaseIntegration.h"
 #import "BuzzSentryIntegrationProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BuzzSentryNetworkTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryNetworkTrackingIntegration : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 @end
 

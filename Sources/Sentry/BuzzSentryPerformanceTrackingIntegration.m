@@ -47,7 +47,7 @@ BuzzSentryPerformanceTrackingIntegration ()
 #endif
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionEnableAutoPerformanceTracking
         | kIntegrationOptionEnableUIViewControllerTracking | kIntegrationOptionIsTracingEnabled

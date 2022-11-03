@@ -31,7 +31,7 @@ saveScreenShot(const char *path)
     return YES;
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionAttachScreenshot;
 }

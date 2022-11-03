@@ -33,7 +33,7 @@ BuzzSentryAutoSessionTrackingIntegration ()
     return YES;
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionEnableAutoSessionTracking;
 }

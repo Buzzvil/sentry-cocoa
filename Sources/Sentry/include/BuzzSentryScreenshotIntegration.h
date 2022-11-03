@@ -1,4 +1,4 @@
-#import "SentryBaseIntegration.h"
+#import "BuzzSentryBaseIntegration.h"
 #import "BuzzSentryClient+Private.h"
 #import "BuzzSentryIntegrationProtocol.h"
 #import "BuzzSentryScreenshot.h"
@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 #if SENTRY_HAS_UIKIT
 
 @interface BuzzSentryScreenshotIntegration
-    : SentryBaseIntegration <BuzzSentryIntegrationProtocol, BuzzSentryClientAttachmentProcessor>
+    : BuzzSentryBaseIntegration <BuzzSentryIntegrationProtocol, BuzzSentryClientAttachmentProcessor>
 
 @end
 

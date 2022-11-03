@@ -38,7 +38,7 @@ BuzzSentryFramesTrackingIntegration ()
 #endif
 }
 
-- (SentryIntegrationOption)integrationOptions
+- (BuzzSentryIntegrationOption)integrationOptions
 {
     return kIntegrationOptionEnableAutoPerformanceTracking | kIntegrationOptionIsTracingEnabled;
 }
