@@ -7,7 +7,7 @@
 #import "SentryFramesTracker.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
-#import "SentryNoOpSpan.h"
+#import "BuzzSentryNoOpSpan.h"
 #import "SentryProfiler.h"
 #import "SentryProfilesSampler.h"
 #import "SentryProfilingConditionals.h"
@@ -250,7 +250,7 @@ static BOOL appStartMeasurementRead;
     if (self.isFinished) {
         SENTRY_LOG_WARN(
             @"Starting a child on a finished span is not supported; it won't be sent to Sentry.");
-        return [SentryNoOpSpan shared];
+        return [BuzzSentryNoOpSpan shared];
     }
 
     BuzzSentrySpanContext *context =

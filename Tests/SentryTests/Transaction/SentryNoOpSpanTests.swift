@@ -1,17 +1,17 @@
 import Sentry
 import XCTest
 
-class SentryNoOpSpanTests: XCTestCase {
+class BuzzSentryNoOpSpanTests: XCTestCase {
 
     func testIsOneInstance() {
-        let first = SentryNoOpSpan.shared()
-        let second = SentryNoOpSpan.shared()
+        let first = BuzzSentryNoOpSpan.shared()
+        let second = BuzzSentryNoOpSpan.shared()
         
         XCTAssertTrue(first === second)
     }
     
     func testStartChild_ReturnsSameInstance() {
-        let sut = SentryNoOpSpan.shared()
+        let sut = BuzzSentryNoOpSpan.shared()
         
         let child = sut.startChild(operation: "operation")
         XCTAssertNil(child.context.spanDescription)
@@ -24,7 +24,7 @@ class SentryNoOpSpanTests: XCTestCase {
     }
 
     func testData_StaysNil() {
-        let sut = SentryNoOpSpan.shared()
+        let sut = BuzzSentryNoOpSpan.shared()
         XCTAssertNil(sut.data)
         sut.setData(value: "tet", key: "key")
         sut.setExtra(value: "tet", key: "key")
@@ -33,7 +33,7 @@ class SentryNoOpSpanTests: XCTestCase {
     }
     
     func testTagsStayEmpty_ReturnsEmptyDict() {
-        let sut = SentryNoOpSpan.shared()
+        let sut = BuzzSentryNoOpSpan.shared()
         XCTAssertTrue(sut.tags.isEmpty)
         sut.setTag(value: "value", key: "key")
         sut.removeTag(key: "any")
@@ -41,7 +41,7 @@ class SentryNoOpSpanTests: XCTestCase {
     }
     
     func testIsAlwaysNotFinished() {
-        let sut = SentryNoOpSpan.shared()
+        let sut = BuzzSentryNoOpSpan.shared()
         
         XCTAssertFalse(sut.isFinished)
         sut.finish()
@@ -50,11 +50,11 @@ class SentryNoOpSpanTests: XCTestCase {
     }
     
     func testSerialize_ReturnsEmptyDict() {
-        XCTAssertTrue(SentryNoOpSpan.shared().serialize().isEmpty)
+        XCTAssertTrue(BuzzSentryNoOpSpan.shared().serialize().isEmpty)
     }
     
     func testToTraceHeader() {
-        let actual = SentryNoOpSpan.shared().toTraceHeader()
+        let actual = BuzzSentryNoOpSpan.shared().toTraceHeader()
         
         XCTAssertEqual(SentryId.empty, actual.traceId)
         XCTAssertEqual(SpanId.empty, actual.spanId)
@@ -62,7 +62,7 @@ class SentryNoOpSpanTests: XCTestCase {
     }
     
     func testContext() {
-        let actual = SentryNoOpSpan.shared().context
+        let actual = BuzzSentryNoOpSpan.shared().context
         
         XCTAssertEqual(SentryId.empty, actual.traceId)
         XCTAssertEqual(SpanId.empty, actual.spanId)

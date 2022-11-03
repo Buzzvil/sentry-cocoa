@@ -106,7 +106,7 @@
 #import "SentryNSURLSessionTaskSearch.h"
 #import "SentryNetworkTracker.h"
 #import "SentryNetworkTrackingIntegration.h"
-#import "SentryNoOpSpan.h"
+#import "BuzzSentryNoOpSpan.h"
 #import "SentryObjCRuntimeWrapper.h"
 #import "BuzzSentryOptions+Private.h"
 #import "SentryOutOfMemoryLogic.h"

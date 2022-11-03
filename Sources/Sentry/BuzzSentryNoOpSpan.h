@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryNoOpSpan : NSObject <BuzzSentrySpan, SentrySerializable>
+@interface BuzzSentryNoOpSpan : NSObject <BuzzSentrySpan, SentrySerializable>
 SENTRY_NO_INIT
 
 + (instancetype)shared;

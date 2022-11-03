@@ -4,7 +4,7 @@
 #import "SentryCurrentDate.h"
 #import "SentryLog.h"
 #import "BuzzSentryMeasurementValue.h"
-#import "SentryNoOpSpan.h"
+#import "BuzzSentryNoOpSpan.h"
 #import "BuzzSentrySpanId.h"
 #import "SentryTime.h"
 #import "BuzzSentryTraceHeader.h"
@@ -47,7 +47,7 @@ BuzzSentrySpan ()
 {
     if (self.tracer == nil) {
         SENTRY_LOG_DEBUG(@"No tracer, returning no-op span");
-        return [SentryNoOpSpan shared];
+        return [BuzzSentryNoOpSpan shared];
     }
 
     return [self.tracer startChildWithParentId:[self.context spanId]

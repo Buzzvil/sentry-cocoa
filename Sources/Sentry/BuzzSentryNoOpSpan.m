@@ -1,4 +1,4 @@
-#import "SentryNoOpSpan.h"
+#import "BuzzSentryNoOpSpan.h"
 #import "SentryId.h"
 #import "BuzzSentrySpanContext.h"
 #import "BuzzSentrySpanId.h"
@@ -6,11 +6,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryNoOpSpan
+@implementation BuzzSentryNoOpSpan
 
 + (instancetype)shared
 {
-    static SentryNoOpSpan *instance = nil;
+    static BuzzSentryNoOpSpan *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;
@@ -30,13 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
 {
-    return [SentryNoOpSpan shared];
+    return [BuzzSentryNoOpSpan shared];
 }
 
 - (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
                               description:(nullable NSString *)description
 {
-    return [SentryNoOpSpan shared];
+    return [BuzzSentryNoOpSpan shared];
 }
 
 - (void)setDataValue:(nullable id)value forKey:(NSString *)key

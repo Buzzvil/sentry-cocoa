@@ -323,10 +323,10 @@ class BuzzSentrySpanTests: XCTestCase {
         let sut = sutGenerator()
 
         let actual = sut.startChild(operation: fixture.someOperation)
-        XCTAssertTrue(SentryNoOpSpan.shared() === actual)
+        XCTAssertTrue(BuzzSentryNoOpSpan.shared() === actual)
         
         let actualWithDescription = sut.startChild(operation: fixture.someOperation, description: fixture.someDescription)
-        XCTAssertTrue(SentryNoOpSpan.shared() === actualWithDescription)
+        XCTAssertTrue(BuzzSentryNoOpSpan.shared() === actualWithDescription)
     }
     
     @available(tvOS 10.0, *)
