@@ -1,7 +1,7 @@
 #import "SentryDefines.h"
 #import "SentryProfilingConditionals.h"
 
-@class BuzzSentryOptions, SentryDisplayLinkWrapper, SentryScreenFrames;
+@class BuzzSentryOptions, BuzzSentryDisplayLinkWrapper, BuzzSentryScreenFrames;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ SENTRY_NO_INIT
 
 + (instancetype)sharedInstance;
 
-@property (nonatomic, assign, readonly) SentryScreenFrames *currentFrames;
+@property (nonatomic, assign, readonly) BuzzSentryScreenFrames *currentFrames;
 @property (nonatomic, assign, readonly) BOOL isRunning;
 
 #    if SENTRY_TARGET_PROFILING_SUPPORTED

@@ -2,19 +2,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, SentryAppStartType) {
-    SentryAppStartTypeWarm,
-    SentryAppStartTypeCold,
-    SentryAppStartTypeUnknown,
+typedef NS_ENUM(NSUInteger, BuzzSentryAppStartType) {
+    BuzzSentryAppStartTypeWarm,
+    BuzzSentryAppStartTypeCold,
+    BuzzSentryAppStartTypeUnknown,
 };
 
-@interface SentryAppStartMeasurement : NSObject
+@interface BuzzSentryAppStartMeasurement : NSObject
 SENTRY_NO_INIT
 
 /**
- * Initializes SentryAppStartMeasurement with the given parameters.
+ * Initializes BuzzSentryAppStartMeasurement with the given parameters.
  */
-- (instancetype)initWithType:(SentryAppStartType)type
+- (instancetype)initWithType:(BuzzSentryAppStartType)type
               appStartTimestamp:(NSDate *)appStartTimestamp
                        duration:(NSTimeInterval)duration
            runtimeInitTimestamp:(NSDate *)runtimeInitTimestamp
@@ -24,9 +24,9 @@ SENTRY_NO_INIT
                              "runtimeInitTimestamp:didFinishLaunchingTimestamp instead.");
 
 /**
- * Initializes SentryAppStartMeasurement with the given parameters.
+ * Initializes BuzzSentryAppStartMeasurement with the given parameters.
  */
-- (instancetype)initWithType:(SentryAppStartType)type
+- (instancetype)initWithType:(BuzzSentryAppStartType)type
                 appStartTimestamp:(NSDate *)appStartTimestamp
                          duration:(NSTimeInterval)duration
              runtimeInitTimestamp:(NSDate *)runtimeInitTimestamp
@@ -36,7 +36,7 @@ SENTRY_NO_INIT
 /**
  * The type of the app start.
  */
-@property (readonly, nonatomic, assign) SentryAppStartType type;
+@property (readonly, nonatomic, assign) BuzzSentryAppStartType type;
 
 /**
  * How long the app start took. From appStartTimestamp to when the SDK creates the
@@ -50,7 +50,7 @@ SENTRY_NO_INIT
 @property (readonly, nonatomic, strong) NSDate *appStartTimestamp;
 
 /**
- * When the runtime was initialized / when SentryAppStartTracker is added to the Objective-C runtime
+ * When the runtime was initialized / when BuzzSentryAppStartTracker is added to the Objective-C runtime
  */
 @property (readonly, nonatomic, strong) NSDate *runtimeInitTimestamp;
 

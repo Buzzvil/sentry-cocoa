@@ -19,7 +19,7 @@
 #    import "SentryLog.h"
 #    import "SentrySamplingProfiler.hpp"
 #    import "SentryScope+Private.h"
-#    import "SentryScreenFrames.h"
+#    import "BuzzSentryScreenFrames.h"
 #    import "SentrySerialization.h"
 #    import "BuzzSentrySpanId.h"
 #    import "SentryTime.h"
@@ -93,7 +93,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     NSMutableArray<BuzzSentrySpanId *> *_spansInFlight;
     NSMutableArray<BuzzSentryTransaction *> *_transactions;
     SentryProfilerTruncationReason _truncationReason;
-    SentryScreenFrames *_frameInfo;
+    BuzzSentryScreenFrames *_frameInfo;
     NSTimer *_timeoutTimer;
     SentryHub *__weak _hub;
 }

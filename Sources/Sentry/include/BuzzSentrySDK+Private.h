@@ -1,6 +1,6 @@
 #import "SentrySDK.h"
 
-@class SentryHub, BuzzSentryId, SentryAppStartMeasurement, BuzzSentryEnvelope;
+@class SentryHub, BuzzSentryId, BuzzSentryAppStartMeasurement, BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,9 +16,9 @@ SentrySDK (Private)
  */
 @property (nonatomic, class) BOOL crashedLastRunCalled;
 
-+ (void)setAppStartMeasurement:(nullable SentryAppStartMeasurement *)appStartMeasurement;
++ (void)setAppStartMeasurement:(nullable BuzzSentryAppStartMeasurement *)appStartMeasurement;
 
-+ (nullable SentryAppStartMeasurement *)getAppStartMeasurement;
++ (nullable BuzzSentryAppStartMeasurement *)getAppStartMeasurement;
 
 @property (nonatomic, class) NSUInteger startInvocations;
 

@@ -1,10 +1,10 @@
 #import "BuzzSentryFramesTracker.h"
 #import "SentryCompiler.h"
-#import "SentryDisplayLinkWrapper.h"
+#import "BuzzSentryDisplayLinkWrapper.h"
 #import "SentryProfiler.h"
 #import "SentryProfilingConditionals.h"
 #import "BuzzSentryTracer.h"
-#import <SentryScreenFrames.h>
+#import <BuzzSentryScreenFrames.h>
 #include <stdatomic.h>
 
 #if SENTRY_HAS_UIKIT
@@ -27,7 +27,7 @@ static memory_order const BuzzSentryFramesMemoryOrder = memory_order_relaxed;
 @interface
 BuzzSentryFramesTracker ()
 
-@property (nonatomic, strong, readonly) SentryDisplayLinkWrapper *displayLinkWrapper;
+@property (nonatomic, strong, readonly) BuzzSentryDisplayLinkWrapper *displayLinkWrapper;
 @property (nonatomic, assign) CFTimeInterval previousFrameTimestamp;
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
 @property (nonatomic, readwrite) SentryMutableFrameInfoTimeSeries *frameTimestamps;
@@ -53,13 +53,13 @@ BuzzSentryFramesTracker ()
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance =
-            [[self alloc] initWithDisplayLinkWrapper:[[SentryDisplayLinkWrapper alloc] init]];
+            [[self alloc] initWithDisplayLinkWrapper:[[BuzzSentryDisplayLinkWrapper alloc] init]];
     });
     return sharedInstance;
 }
 
 /** Internal constructor for testing */
-- (instancetype)initWithDisplayLinkWrapper:(SentryDisplayLinkWrapper *)displayLinkWrapper
+- (instancetype)initWithDisplayLinkWrapper:(BuzzSentryDisplayLinkWrapper *)displayLinkWrapper
 {
     if (self = [super init]) {
         _isRunning = NO;
@@ -70,7 +70,7 @@ BuzzSentryFramesTracker ()
 }
 
 /** Internal for testing */
-- (void)setDisplayLinkWrapper:(SentryDisplayLinkWrapper *)displayLinkWrapper
+- (void)setDisplayLinkWrapper:(BuzzSentryDisplayLinkWrapper *)displayLinkWrapper
 {
     _displayLinkWrapper = displayLinkWrapper;
 }
@@ -186,20 +186,20 @@ BuzzSentryFramesTracker ()
 }
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 
-- (SentryScreenFrames *)currentFrames
+- (BuzzSentryScreenFrames *)currentFrames
 {
     NSUInteger total = atomic_load_explicit(&_totalFrames, BuzzSentryFramesMemoryOrder);
     NSUInteger slow = atomic_load_explicit(&_slowFrames, BuzzSentryFramesMemoryOrder);
     NSUInteger frozen = atomic_load_explicit(&_frozenFrames, BuzzSentryFramesMemoryOrder);
 
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
-    return [[SentryScreenFrames alloc] initWithTotal:total
+    return [[BuzzSentryScreenFrames alloc] initWithTotal:total
                                               frozen:frozen
                                                 slow:slow
                                      frameTimestamps:self.frameTimestamps
                                  frameRateTimestamps:self.frameRateTimestamps];
 #    else
-    return [[SentryScreenFrames alloc] initWithTotal:total frozen:frozen slow:slow];
+    return [[BuzzSentryScreenFrames alloc] initWithTotal:total frozen:frozen slow:slow];
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
 

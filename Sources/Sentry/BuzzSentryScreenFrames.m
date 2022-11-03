@@ -1,8 +1,8 @@
-#import <SentryScreenFrames.h>
+#import <BuzzSentryScreenFrames.h>
 
 #if SENTRY_HAS_UIKIT
 
-@implementation SentryScreenFrames
+@implementation BuzzSentryScreenFrames
 
 - (instancetype)initWithTotal:(NSUInteger)total frozen:(NSUInteger)frozen slow:(NSUInteger)slow
 {

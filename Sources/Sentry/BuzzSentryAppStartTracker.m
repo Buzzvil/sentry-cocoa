@@ -1,10 +1,10 @@
-#import "SentryAppStartMeasurement.h"
+#import "BuzzSentryAppStartMeasurement.h"
 #import "SentryAppStateManager.h"
 #import "SentryLog.h"
 #import "SentrySysctl.h"
 #import <Foundation/Foundation.h>
 #import <PrivateBuzzSentrySDKOnly.h>
-#import <SentryAppStartTracker.h>
+#import <BuzzSentryAppStartTracker.h>
 #import <SentryAppState.h>
 #import <SentryCurrentDateProvider.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
@@ -25,7 +25,7 @@ static BOOL isActivePrewarm = NO;
 static const NSTimeInterval SENTRY_APP_START_MAX_DURATION = 180.0;
 
 @interface
-SentryAppStartTracker ()
+BuzzSentryAppStartTracker ()
 
 @property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) SentryAppState *previousAppState;
@@ -37,7 +37,7 @@ SentryAppStartTracker ()
 
 @end
 
-@implementation SentryAppStartTracker
+@implementation BuzzSentryAppStartTracker
 
 + (void)load
 {
@@ -128,9 +128,9 @@ SentryAppStartTracker ()
             return;
         }
 
-        SentryAppStartType appStartType = [self getStartType];
+        BuzzSentryAppStartType appStartType = [self getStartType];
 
-        if (appStartType == SentryAppStartTypeUnknown) {
+        if (appStartType == BuzzSentryAppStartTypeUnknown) {
             SENTRY_LOG_WARN(@"Unknown start type. Not measuring app start.");
             return;
         }
@@ -175,7 +175,7 @@ SentryAppStartTracker ()
             appStartDuration = 0;
         }
 
-        SentryAppStartMeasurement *appStartMeasurement = [[SentryAppStartMeasurement alloc]
+        BuzzSentryAppStartMeasurement *appStartMeasurement = [[BuzzSentryAppStartMeasurement alloc]
                              initWithType:appStartType
                         appStartTimestamp:self.sysctl.processStartTimestamp
                                  duration:appStartDuration
@@ -205,18 +205,18 @@ SentryAppStartTracker ()
     [self buildAppStartMeasurement];
 }
 
-- (SentryAppStartType)getStartType
+- (BuzzSentryAppStartType)getStartType
 {
     // App launched the first time
     if (self.previousAppState == nil) {
-        return SentryAppStartTypeCold;
+        return BuzzSentryAppStartTypeCold;
     }
 
     SentryAppState *currentAppState = [self.appStateManager buildCurrentAppState];
 
     // If the release name is different we assume it's an app upgrade
     if (![currentAppState.releaseName isEqualToString:self.previousAppState.releaseName]) {
-        return SentryAppStartTypeCold;
+        return BuzzSentryAppStartTypeCold;
     }
 
     NSTimeInterval intervalSincePreviousBootTime = [self.previousAppState.systemBootTimestamp
@@ -224,18 +224,18 @@ SentryAppStartTracker ()
 
     // System rebooted, because the previous boot time is in the past.
     if (intervalSincePreviousBootTime < 0) {
-        return SentryAppStartTypeCold;
+        return BuzzSentryAppStartTypeCold;
     }
 
     // System didn't reboot, previous and current boot time are the same.
     if (intervalSincePreviousBootTime == 0) {
-        return SentryAppStartTypeWarm;
+        return BuzzSentryAppStartTypeWarm;
     }
 
     // This should never be reached as we unsubscribe to didBecomeActive after it is called the
     // first time. If the previous boot time is in the future most likely the system time
     // changed and we can't to anything.
-    return SentryAppStartTypeUnknown;
+    return BuzzSentryAppStartTypeUnknown;
 }
 
 - (void)didFinishLaunching

@@ -1,9 +1,9 @@
-#import "SentryDisplayLinkWrapper.h"
+#import "BuzzSentryDisplayLinkWrapper.h"
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>
 
-@implementation SentryDisplayLinkWrapper {
+@implementation BuzzSentryDisplayLinkWrapper {
     CADisplayLink *displayLink;
 }
 

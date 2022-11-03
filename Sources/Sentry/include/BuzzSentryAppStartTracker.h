@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * After reboot of the device, the app is not in memory and no process exists. Warm start: When the
  * app recently terminated, the app is partially in memory and no process exists.
  */
-@interface SentryAppStartTracker : NSObject
+@interface BuzzSentryAppStartTracker : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider

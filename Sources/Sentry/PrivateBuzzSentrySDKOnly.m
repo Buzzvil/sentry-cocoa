@@ -37,7 +37,7 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
     return [[SentryDependencyContainer sharedInstance].debugImageProvider getDebugImages];
 }
 
-+ (nullable SentryAppStartMeasurement *)appStartMeasurement
++ (nullable BuzzSentryAppStartMeasurement *)appStartMeasurement
 {
     return [SentrySDK getAppStartMeasurement];
 }
@@ -115,7 +115,7 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
     return [BuzzSentryFramesTracker sharedInstance].isRunning;
 }
 
-+ (SentryScreenFrames *)currentScreenFrames
++ (BuzzSentryScreenFrames *)currentScreenFrames
 {
     return [BuzzSentryFramesTracker sharedInstance].currentFrames;
 }

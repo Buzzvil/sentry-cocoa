@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Tracks cold and warm app start time for iOS, tvOS, and Mac Catalyst.
  */
-@interface SentryAppStartTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
+@interface BuzzSentryAppStartTrackingIntegration : SentryBaseIntegration <BuzzSentryIntegrationProtocol>
 
 - (void)stop;
 

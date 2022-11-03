@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSArray<NSDictionary<NSString *, NSNumber *> *> BuzzSentryFrameInfoTimeSeries;
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 
-@interface SentryScreenFrames : NSObject
+@interface BuzzSentryScreenFrames : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithTotal:(NSUInteger)total frozen:(NSUInteger)frozen slow:(NSUInteger)slow;

@@ -60,13 +60,13 @@ class BuzzSentryTracerTests: XCTestCase {
 #endif
         }
         
-        func getAppStartMeasurement(type: SentryAppStartType) -> SentryAppStartMeasurement {
+        func getAppStartMeasurement(type: BuzzSentryAppStartType) -> BuzzSentryAppStartMeasurement {
             let appStartDuration = 0.5
             let main = appStart.addingTimeInterval(0.15)
             let runtimeInit = appStart.addingTimeInterval(0.05)
             let didFinishLaunching = appStart.addingTimeInterval(0.3)
             
-            return SentryAppStartMeasurement(type: type, appStartTimestamp: appStart, duration: appStartDuration, runtimeInitTimestamp: runtimeInit, moduleInitializationTimestamp: main, didFinishLaunchingTimestamp: didFinishLaunching)
+            return BuzzSentryAppStartMeasurement(type: type, appStartTimestamp: appStart, duration: appStartDuration, runtimeInitTimestamp: runtimeInit, moduleInitializationTimestamp: main, didFinishLaunchingTimestamp: didFinishLaunching)
         }
         
         func getSut(waitForChildren: Bool = true) -> BuzzSentryTracer {
@@ -470,8 +470,8 @@ class BuzzSentryTracerTests: XCTestCase {
     }
     
     func testAddUnknownAppStartMeasurement_NotPutOnNextTransaction() {
-        SentrySDK.setAppStartMeasurement(SentryAppStartMeasurement(
-            type: SentryAppStartType.unknown,
+        SentrySDK.setAppStartMeasurement(BuzzSentryAppStartMeasurement(
+            type: BuzzSentryAppStartType.unknown,
             appStartTimestamp: fixture.currentDateProvider.date(),
             duration: 0.5,
             runtimeInitTimestamp: fixture.currentDateProvider.date(),
@@ -806,7 +806,7 @@ class BuzzSentryTracerTests: XCTestCase {
         XCTAssertEqual(1, fixture.hub.capturedEventsWithScopes.count)
     }
     
-    private func assertAppStartsSpanAdded(transaction: Transaction, startType: String, operation: String, appStartMeasurement: SentryAppStartMeasurement) {
+    private func assertAppStartsSpanAdded(transaction: Transaction, startType: String, operation: String, appStartMeasurement: BuzzSentryAppStartMeasurement) {
         let spans: [BuzzSentrySpan]? = Dynamic(transaction).spans
         XCTAssertEqual(5, spans?.count)
         
@@ -836,7 +836,7 @@ class BuzzSentryTracerTests: XCTestCase {
         assertSpan("Initial Frame Render", appStartMeasurement.didFinishLaunchingTimestamp, fixture.appStartEnd)
     }
     
-    private func assertAppStartMeasurementOn(transaction: Transaction, appStartMeasurement: SentryAppStartMeasurement) {
+    private func assertAppStartMeasurementOn(transaction: Transaction, appStartMeasurement: BuzzSentryAppStartMeasurement) {
         let serializedTransaction = transaction.serialize()
         let measurements = serializedTransaction["measurements"] as? [String: [String: Int]]
         

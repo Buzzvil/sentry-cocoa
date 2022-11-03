@@ -7,7 +7,7 @@ FOUNDATION_EXPORT double SentryVersionNumber;
 FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 
 #import "PrivateBuzzSentrySDKOnly.h"
-#import "SentryAppStartMeasurement.h"
+#import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryAttachment.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
@@ -35,7 +35,7 @@ FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 #import "BuzzSentrySampleDecision.h"
 #import "BuzzSentrySamplingContext.h"
 #import "SentryScope.h"
-#import "SentryScreenFrames.h"
+#import "BuzzSentryScreenFrames.h"
 #import "SentrySdkInfo.h"
 #import "BuzzSentrySerializable.h"
 #import "BuzzSentrySession.h"

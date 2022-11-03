@@ -1,10 +1,10 @@
-#import "SentryAppStartMeasurement.h"
+#import "BuzzSentryAppStartMeasurement.h"
 #import "NSDate+SentryExtras.h"
 #import <Foundation/Foundation.h>
 
-@implementation SentryAppStartMeasurement
+@implementation BuzzSentryAppStartMeasurement
 
-- (instancetype)initWithType:(SentryAppStartType)type
+- (instancetype)initWithType:(BuzzSentryAppStartType)type
               appStartTimestamp:(NSDate *)appStartTimestamp
                        duration:(NSTimeInterval)duration
            runtimeInitTimestamp:(NSDate *)runtimeInitTimestamp
@@ -18,7 +18,7 @@
           didFinishLaunchingTimestamp:didFinishLaunchingTimestamp];
 }
 
-- (instancetype)initWithType:(SentryAppStartType)type
+- (instancetype)initWithType:(BuzzSentryAppStartType)type
                 appStartTimestamp:(NSDate *)appStartTimestamp
                          duration:(NSTimeInterval)duration
              runtimeInitTimestamp:(NSDate *)runtimeInitTimestamp

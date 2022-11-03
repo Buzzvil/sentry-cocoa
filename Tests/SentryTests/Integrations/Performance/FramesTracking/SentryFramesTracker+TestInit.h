@@ -6,9 +6,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 BuzzSentryFramesTracker (TestInit)
 
-- (instancetype)initWithDisplayLinkWrapper:(SentryDisplayLinkWrapper *)displayLinkWrapper;
+- (instancetype)initWithDisplayLinkWrapper:(BuzzSentryDisplayLinkWrapper *)displayLinkWrapper;
 
-- (void)setDisplayLinkWrapper:(SentryDisplayLinkWrapper *)displayLinkWrapper;
+- (void)setDisplayLinkWrapper:(BuzzSentryDisplayLinkWrapper *)displayLinkWrapper;
 
 - (void)resetFrames;
 

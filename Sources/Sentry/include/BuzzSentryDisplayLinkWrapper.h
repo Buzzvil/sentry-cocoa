@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A wrapper around DisplayLink for testability.
  */
-@interface SentryDisplayLinkWrapper : NSObject
+@interface BuzzSentryDisplayLinkWrapper : NSObject
 
 @property (readonly, nonatomic) CFTimeInterval timestamp;
 

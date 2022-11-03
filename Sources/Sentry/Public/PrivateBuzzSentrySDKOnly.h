@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class BuzzSentryEnvelope, BuzzSentryDebugMeta, SentryAppStartMeasurement, SentryScreenFrames,
+@class BuzzSentryEnvelope, BuzzSentryDebugMeta, BuzzSentryAppStartMeasurement, BuzzSentryScreenFrames,
     BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
  * A callback to be notified when the AppStartMeasurement is available.
  */
 typedef void (^SentryOnAppStartMeasurementAvailable)(
-    SentryAppStartMeasurement *_Nullable appStartMeasurement);
+    BuzzSentryAppStartMeasurement *_Nullable appStartMeasurement);
 
 /**
  * ATTENTION: This class is reserved for hybrid SDKs. Methods may be changed, renamed or removed
@@ -63,7 +63,7 @@ typedef void (^SentryOnAppStartMeasurementAvailable)(
 @property (class, nullable, nonatomic, copy)
     SentryOnAppStartMeasurementAvailable onAppStartMeasurementAvailable;
 
-@property (class, nullable, nonatomic, readonly) SentryAppStartMeasurement *appStartMeasurement;
+@property (class, nullable, nonatomic, readonly) BuzzSentryAppStartMeasurement *appStartMeasurement;
 
 @property (class, nonatomic, readonly, copy) NSString *installationID;
 
@@ -87,7 +87,7 @@ typedef void (^SentryOnAppStartMeasurementAvailable)(
 
 @property (class, nonatomic, assign, readonly) BOOL isFramesTrackingRunning;
 
-@property (class, nonatomic, assign, readonly) SentryScreenFrames *currentScreenFrames;
+@property (class, nonatomic, assign, readonly) BuzzSentryScreenFrames *currentScreenFrames;
 #endif
 
 @end

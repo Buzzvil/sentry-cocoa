@@ -219,12 +219,12 @@ class TestData {
         scope.setContext(value: TestData.context["context"]!, key: "context")
     }
     
-    static func getAppStartMeasurement(type: SentryAppStartType, appStartTimestamp: Date = TestData.timestamp) -> SentryAppStartMeasurement {
+    static func getAppStartMeasurement(type: BuzzSentryAppStartType, appStartTimestamp: Date = TestData.timestamp) -> BuzzSentryAppStartMeasurement {
         let appStartDuration = 0.5
         let main = appStartTimestamp.addingTimeInterval(0.15)
         let runtimeInit = appStartTimestamp.addingTimeInterval(0.05)
         let didFinishLaunching = appStartTimestamp.addingTimeInterval(0.3)
         
-        return SentryAppStartMeasurement(type: type, appStartTimestamp: appStartTimestamp, duration: appStartDuration, runtimeInitTimestamp: runtimeInit, moduleInitializationTimestamp: main, didFinishLaunchingTimestamp: didFinishLaunching)
+        return BuzzSentryAppStartMeasurement(type: type, appStartTimestamp: appStartTimestamp, duration: appStartDuration, runtimeInitTimestamp: runtimeInit, moduleInitializationTimestamp: main, didFinishLaunchingTimestamp: didFinishLaunching)
     }
 }

@@ -1,5 +1,5 @@
-#import "SentryAppStartTrackingIntegration.h"
-#import "SentryAppStartTracker.h"
+#import "BuzzSentryAppStartTrackingIntegration.h"
+#import "BuzzSentryAppStartTracker.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryLog.h"
 #import <Foundation/Foundation.h>
@@ -11,15 +11,15 @@
 #import <SentrySysctl.h>
 
 @interface
-SentryAppStartTrackingIntegration ()
+BuzzSentryAppStartTrackingIntegration ()
 
 #if SENTRY_HAS_UIKIT
-@property (nonatomic, strong) SentryAppStartTracker *tracker;
+@property (nonatomic, strong) BuzzSentryAppStartTracker *tracker;
 #endif
 
 @end
 
-@implementation SentryAppStartTrackingIntegration
+@implementation BuzzSentryAppStartTrackingIntegration
 
 - (BOOL)installWithOptions:(BuzzSentryOptions *)options
 {
@@ -36,7 +36,7 @@ SentryAppStartTrackingIntegration ()
     SentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
 
-    self.tracker = [[SentryAppStartTracker alloc]
+    self.tracker = [[BuzzSentryAppStartTracker alloc]
         initWithCurrentDateProvider:currentDateProvider
                dispatchQueueWrapper:[[BuzzSentryDispatchQueueWrapper alloc] init]
                     appStateManager:appStateManager
@@ -45,7 +45,7 @@ SentryAppStartTrackingIntegration ()
 
     return YES;
 #else
-    SENTRY_LOG_DEBUG(@"NO UIKit -> SentryAppStartTracker will not track app start up time.");
+    SENTRY_LOG_DEBUG(@"NO UIKit -> BuzzSentryAppStartTracker will not track app start up time.");
     return NO;
 #endif
 }

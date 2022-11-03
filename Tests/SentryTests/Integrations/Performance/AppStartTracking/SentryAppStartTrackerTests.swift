@@ -1,10 +1,10 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryAppStartTrackerTests: NotificationCenterTestCase {
+class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryAppStartTrackerTests")
-    private static let dsn = TestConstants.dsn(username: "SentryAppStartTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryAppStartTrackerTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryAppStartTrackerTests")
     
     private class Fixture {
         
@@ -22,7 +22,7 @@ class SentryAppStartTrackerTests: NotificationCenterTestCase {
         
         init() {
             options = Options()
-            options.dsn = SentryAppStartTrackerTests.dsnAsString
+            options.dsn = BuzzSentryAppStartTrackerTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
@@ -33,14 +33,14 @@ class SentryAppStartTrackerTests: NotificationCenterTestCase {
             didFinishLaunchingTimestamp = currentDate.date().addingTimeInterval(0.3)
         }
         
-        var sut: SentryAppStartTracker {
-            let sut = SentryAppStartTracker(currentDateProvider: currentDate, dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper(), appStateManager: appStateManager, sysctl: sysctl)
+        var sut: BuzzSentryAppStartTracker {
+            let sut = BuzzSentryAppStartTracker(currentDateProvider: currentDate, dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper(), appStateManager: appStateManager, sysctl: sysctl)
             return sut
         }
     }
     
     private var fixture: Fixture!
-    private var sut: SentryAppStartTracker!
+    private var sut: BuzzSentryAppStartTracker!
     
     override func setUp() {
         super.setUp()
@@ -133,7 +133,7 @@ class SentryAppStartTrackerTests: NotificationCenterTestCase {
     
     func testAppLaunches_OSPrewarmedProcess_NoAppStartUp() {
         setenv("ActivePrewarm", "1", 1)
-        SentryAppStartTracker.load()
+        BuzzSentryAppStartTracker.load()
         givenSystemNotRebooted()
 
         fixture.fileManager.moveAppStateToPreviousAppState()
@@ -152,7 +152,7 @@ class SentryAppStartTrackerTests: NotificationCenterTestCase {
     
     func testAppLaunches_WrongEnvValue_AppStartUp() {
         setenv("ActivePrewarm", "0", 1)
-        SentryAppStartTracker.load()
+        BuzzSentryAppStartTracker.load()
         givenSystemNotRebooted()
 
         fixture.fileManager.moveAppStateToPreviousAppState()
@@ -248,7 +248,7 @@ class SentryAppStartTrackerTests: NotificationCenterTestCase {
         fixture.sysctl.setProcessStartTimestamp(value: processStartTimeStamp ?? fixture.currentDate.date())
     }
     
-    private func givenRuntimeInitTimestamp(sut: SentryAppStartTracker) {
+    private func givenRuntimeInitTimestamp(sut: BuzzSentryAppStartTracker) {
         fixture.runtimeInitTimestamp = fixture.currentDate.date().addingTimeInterval(0.2)
         Dynamic(sut).setRuntimeInit(fixture.runtimeInitTimestamp)
     }
@@ -314,7 +314,7 @@ class SentryAppStartTrackerTests: NotificationCenterTestCase {
         SentrySDK.setAppStartMeasurement(nil)
     }
     
-    private func assertValidStart(type: SentryAppStartType, expectedDuration: TimeInterval? = nil) {
+    private func assertValidStart(type: BuzzSentryAppStartType, expectedDuration: TimeInterval? = nil) {
         guard let appStartMeasurement = SentrySDK.getAppStartMeasurement() else {
             XCTFail("AppStartMeasurement must not be nil")
             return
@@ -332,7 +332,7 @@ class SentryAppStartTrackerTests: NotificationCenterTestCase {
         XCTAssertEqual(fixture.didFinishLaunchingTimestamp, appStartMeasurement.didFinishLaunchingTimestamp)
     }
     
-    private func assertValidHybridStart(type: SentryAppStartType) {
+    private func assertValidHybridStart(type: BuzzSentryAppStartType) {
         guard let appStartMeasurement = SentrySDK.getAppStartMeasurement() else {
             XCTFail("AppStartMeasurement must not be nil")
             return

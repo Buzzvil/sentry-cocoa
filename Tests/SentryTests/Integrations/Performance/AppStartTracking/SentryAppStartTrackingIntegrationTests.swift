@@ -1,7 +1,7 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
+class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
     
     private class Fixture {
         let options = Options()
@@ -10,20 +10,20 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         init() {
             options.tracesSampleRate = 0.1
             options.tracesSampler = { _ in return 0 } 
-            options.dsn = TestConstants.dsnAsString(username: "SentryAppStartTrackingIntegrationTests")
+            options.dsn = TestConstants.dsnAsString(username: "BuzzSentryAppStartTrackingIntegrationTests")
             
             fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         }
     }
     
     private var fixture: Fixture!
-    private var sut: SentryAppStartTrackingIntegration!
+    private var sut: BuzzSentryAppStartTrackingIntegration!
     
     override func setUp() {
         super.setUp()
         fixture = Fixture()
         SentrySDK.setAppStartMeasurement(nil)
-        sut = SentryAppStartTrackingIntegration()
+        sut = BuzzSentryAppStartTrackingIntegration()
     }
 
     override func tearDown() {

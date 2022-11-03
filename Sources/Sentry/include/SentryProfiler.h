@@ -8,7 +8,7 @@
 #endif // SENTRY_HAS_UIKIT
 @class SentryHub;
 @class SentryProfilesSamplerDecision;
-@class SentryScreenFrames;
+@class BuzzSentryScreenFrames;
 @class BuzzSentryEnvelope;
 @class BuzzSentrySpanId;
 @class BuzzSentryTransaction;

@@ -1,6 +1,6 @@
 #import "SentrySDK.h"
 #import "PrivateBuzzSentrySDKOnly.h"
-#import "SentryAppStartMeasurement.h"
+#import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrash.h"
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 static SentryHub *_Nullable currentHub;
 static BOOL crashedLastRunCalled;
-static SentryAppStartMeasurement *sentrySDKappStartMeasurement;
+static BuzzSentryAppStartMeasurement *sentrySDKappStartMeasurement;
 static NSObject *sentrySDKappStartMeasurementLock;
 
 /**
@@ -92,7 +92,7 @@ static NSUInteger startInvocations;
 /**
  * Not public, only for internal use.
  */
-+ (void)setAppStartMeasurement:(nullable SentryAppStartMeasurement *)value
++ (void)setAppStartMeasurement:(nullable BuzzSentryAppStartMeasurement *)value
 {
     @synchronized(sentrySDKappStartMeasurementLock) {
         sentrySDKappStartMeasurement = value;
@@ -105,7 +105,7 @@ static NSUInteger startInvocations;
 /**
  * Not public, only for internal use.
  */
-+ (nullable SentryAppStartMeasurement *)getAppStartMeasurement
++ (nullable BuzzSentryAppStartMeasurement *)getAppStartMeasurement
 {
     @synchronized(sentrySDKappStartMeasurementLock) {
         return sentrySDKappStartMeasurement;

@@ -19,7 +19,7 @@ func clearTestState() {
     framesTracker.resetFrames()
     
     setenv("ActivePrewarm", "0", 1)
-    SentryAppStartTracker.load()
+    BuzzSentryAppStartTracker.load()
     #endif
     
     SentryDependencyContainer.reset()
