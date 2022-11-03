@@ -4,8 +4,8 @@
 #import "SentryCurrentDateProvider.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
-#import "SentryEnvelope.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelope.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import "SentryEvent+Private.h"
 #import "SentryFileManager.h"
 #import "SentryId.h"
@@ -253,7 +253,7 @@ SentryHub ()
 
 - (SentryId *)captureTransaction:(BuzzSentryTransaction *)transaction
                        withScope:(SentryScope *)scope
-         additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
+         additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
     BuzzSentrySampleDecision decision = transaction.trace.context.sampled;
     if (decision != kBuzzSentrySampleDecisionYes) {
@@ -279,7 +279,7 @@ SentryHub ()
 
 - (SentryId *)captureEvent:(SentryEvent *)event
                   withScope:(SentryScope *)scope
-    additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
+    additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
     BuzzSentryClient *client = _client;
     if (nil != client) {
@@ -557,7 +557,7 @@ SentryHub ()
     }
 }
 
-- (void)captureEnvelope:(SentryEnvelope *)envelope
+- (void)captureEnvelope:(BuzzSentryEnvelope *)envelope
 {
     BuzzSentryClient *client = _client;
     if (nil == client) {
@@ -567,28 +567,28 @@ SentryHub ()
     [client captureEnvelope:[self updateSessionState:envelope]];
 }
 
-- (SentryEnvelope *)updateSessionState:(SentryEnvelope *)envelope
+- (BuzzSentryEnvelope *)updateSessionState:(BuzzSentryEnvelope *)envelope
 {
     if ([self envelopeContainsEventWithErrorOrHigher:envelope.items]) {
         SentrySession *currentSession = [self incrementSessionErrors];
 
         if (nil != currentSession) {
             // Create a new envelope with the session update
-            NSMutableArray<SentryEnvelopeItem *> *itemsToSend =
+            NSMutableArray<BuzzSentryEnvelopeItem *> *itemsToSend =
                 [[NSMutableArray alloc] initWithArray:envelope.items];
-            [itemsToSend addObject:[[SentryEnvelopeItem alloc] initWithSession:currentSession]];
+            [itemsToSend addObject:[[BuzzSentryEnvelopeItem alloc] initWithSession:currentSession]];
 
-            return [[SentryEnvelope alloc] initWithHeader:envelope.header items:itemsToSend];
+            return [[BuzzSentryEnvelope alloc] initWithHeader:envelope.header items:itemsToSend];
         }
     }
 
     return envelope;
 }
 
-- (BOOL)envelopeContainsEventWithErrorOrHigher:(NSArray<SentryEnvelopeItem *> *)items
+- (BOOL)envelopeContainsEventWithErrorOrHigher:(NSArray<BuzzSentryEnvelopeItem *> *)items
 {
-    for (SentryEnvelopeItem *item in items) {
-        if ([item.header.type isEqualToString:SentryEnvelopeItemTypeEvent]) {
+    for (BuzzSentryEnvelopeItem *item in items) {
+        if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeEvent]) {
             // If there is no level the default is error
             SentryLevel level = [SentrySerialization levelFromData:item.data];
             if (level >= kSentryLevelError) {

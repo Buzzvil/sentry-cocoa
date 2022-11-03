@@ -17,17 +17,17 @@ static BOOL _appStartMeasurementHybridSDKMode = NO;
 static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 #endif
 
-+ (void)storeEnvelope:(SentryEnvelope *)envelope
++ (void)storeEnvelope:(BuzzSentryEnvelope *)envelope
 {
     [SentrySDK storeEnvelope:envelope];
 }
 
-+ (void)captureEnvelope:(SentryEnvelope *)envelope
++ (void)captureEnvelope:(BuzzSentryEnvelope *)envelope
 {
     [SentrySDK captureEnvelope:envelope];
 }
 
-+ (nullable SentryEnvelope *)envelopeWithData:(NSData *)data
++ (nullable BuzzSentryEnvelope *)envelopeWithData:(NSData *)data
 {
     return [SentrySerialization envelopeWithData:data];
 }

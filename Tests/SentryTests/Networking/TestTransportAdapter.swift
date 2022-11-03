@@ -15,12 +15,12 @@ public class TestTransportAdapter: SentryTransportAdapter {
         sentEventsWithSessionTraceState.record((event, session, traceContext, attachments))
     }
     
-    var sendEventWithTraceStateInvocations = Invocations<(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem])>()
+    var sendEventWithTraceStateInvocations = Invocations<(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [BuzzSentryEnvelopeItem])>()
     public override func send(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment]) {
         sendEventWithTraceStateInvocations.record((event, traceContext, attachments, []))
     }
     
-    public override func send(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem]) {
+    public override func send(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [BuzzSentryEnvelopeItem]) {
         sendEventWithTraceStateInvocations.record((event, traceContext, attachments, additionalEnvelopeItems))
     }
 

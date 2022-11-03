@@ -617,7 +617,7 @@ class SentryHubTests: XCTestCase {
     }
     
     func testCaptureEnvelope_WithSession() {
-        let envelope = SentryEnvelope(session: SentrySession(releaseName: ""))
+        let envelope = BuzzSentryEnvelope(session: SentrySession(releaseName: ""))
         sut.capture(envelope: envelope)
         
         XCTAssertEqual(1, fixture.client.captureEnvelopeInvocations.count)
@@ -656,7 +656,7 @@ class SentryHubTests: XCTestCase {
     private func captureEventEnvelope(level: SentryLevel) {
         let event = TestData.event
         event.level = level
-        sut.capture(envelope: SentryEnvelope(event: event))
+        sut.capture(envelope: BuzzSentryEnvelope(event: event))
     }
     
     private func givenCrashedSession() {
@@ -672,15 +672,15 @@ class SentryHubTests: XCTestCase {
         sut = fixture.getSut(options)
     }
     
-    private func givenEnvelopeWithModifiedEvent(modifyEventDict: (inout [String: Any]) -> Void) throws -> SentryEnvelope {
+    private func givenEnvelopeWithModifiedEvent(modifyEventDict: (inout [String: Any]) -> Void) throws -> BuzzSentryEnvelope {
         let event = TestData.event
-        let envelopeItem = SentryEnvelopeItem(event: event)
+        let envelopeItem = BuzzSentryEnvelopeItem(event: event)
         var eventDict = try JSONSerialization.jsonObject(with: envelopeItem.data) as! [String: Any]
         
         modifyEventDict(&eventDict)
         
         let eventData = try JSONSerialization.data(withJSONObject: eventDict)
-        return SentryEnvelope(header: SentryEnvelopeHeader(id: event.eventId, traceContext: nil), items: [SentryEnvelopeItem(header: envelopeItem.header, data: eventData)])
+        return BuzzSentryEnvelope(header: BuzzSentryEnvelopeHeader(id: event.eventId, traceContext: nil), items: [BuzzSentryEnvelopeItem(header: envelopeItem.header, data: eventData)])
     }
     
     private func advanceTime(bySeconds: TimeInterval) {

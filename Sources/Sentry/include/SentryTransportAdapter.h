@@ -3,13 +3,13 @@
 #import "SentryDiscardReason.h"
 #import "SentryTransport.h"
 
-@class SentryEnvelope, SentryEnvelopeItem, SentryEvent, SentrySession, BuzzSentryUserFeedback,
+@class BuzzSentryEnvelope, BuzzSentryEnvelopeItem, SentryEvent, SentrySession, BuzzSentryUserFeedback,
     BuzzSentryAttachment, BuzzSentryTraceContext, BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * This class converts data objects to a SentryEnvelope and passes the SentryEnvelope to the
+ * This class converts data objects to a BuzzSentryEnvelope and passes the BuzzSentryEnvelope to the
  * SentryTransport. It is a layer between the BuzzSentryClient and the transport to keep the
  * BuzzSentryClient small and make testing easier for the BuzzSentryClient.
  */
@@ -34,7 +34,7 @@ SENTRY_NO_INIT
 - (void)sendEvent:(SentryEvent *)event
                traceContext:(nullable BuzzSentryTraceContext *)traceContext
                 attachments:(NSArray<BuzzSentryAttachment *> *)attachments
-    additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
+    additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(send(event:traceContext:attachments:additionalEnvelopeItems:));
 
 - (void)sendEvent:(SentryEvent *)event
@@ -44,7 +44,7 @@ SENTRY_NO_INIT
 
 - (void)sendUserFeedback:(BuzzSentryUserFeedback *)userFeedback NS_SWIFT_NAME(send(userFeedback:));
 
-- (void)sendEnvelope:(SentryEnvelope *)envelope NS_SWIFT_NAME(send(envelope:));
+- (void)sendEnvelope:(BuzzSentryEnvelope *)envelope NS_SWIFT_NAME(send(envelope:));
 
 - (void)recordLostEvent:(SentryDataCategory)category reason:(SentryDiscardReason)reason;
 

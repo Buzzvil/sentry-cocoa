@@ -1,8 +1,8 @@
-#import "SentryEnvelope.h"
+#import "BuzzSentryEnvelope.h"
 #import "BuzzSentryAttachment.h"
 #import "SentryBreadcrumb.h"
 #import "BuzzSentryClientReport.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import "SentryEvent.h"
 #import "SentryLog.h"
 #import "SentryMessage.h"
@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryEnvelopeHeader
+@implementation BuzzSentryEnvelopeHeader
 
 // id can be null if no event in the envelope or attachment related to event
 - (instancetype)initWithId:(SentryId *_Nullable)eventId
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@implementation SentryEnvelopeItemHeader
+@implementation BuzzSentryEnvelopeItemHeader
 
 - (instancetype)initWithType:(NSString *)type length:(NSUInteger)length
 {
@@ -73,9 +73,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@implementation SentryEnvelopeItem
+@implementation BuzzSentryEnvelopeItem
 
-- (instancetype)initWithHeader:(SentryEnvelopeItemHeader *)header data:(NSData *)data
+- (instancetype)initWithHeader:(BuzzSentryEnvelopeItemHeader *)header data:(NSData *)data
 {
     if (self = [super init]) {
         _header = header;
@@ -111,11 +111,11 @@ NS_ASSUME_NONNULL_BEGIN
 
     // event.type can be nil and the server infers error if there's a stack trace, otherwise
     // default. In any case in the envelope type it should be event. Except for transactions
-    NSString *envelopeType = [event.type isEqualToString:SentryEnvelopeItemTypeTransaction]
-        ? SentryEnvelopeItemTypeTransaction
-        : SentryEnvelopeItemTypeEvent;
+    NSString *envelopeType = [event.type isEqualToString:BuzzSentryEnvelopeItemTypeTransaction]
+        ? BuzzSentryEnvelopeItemTypeTransaction
+        : BuzzSentryEnvelopeItemTypeEvent;
 
-    return [self initWithHeader:[[SentryEnvelopeItemHeader alloc] initWithType:envelopeType
+    return [self initWithHeader:[[BuzzSentryEnvelopeItemHeader alloc] initWithType:envelopeType
                                                                         length:json.length]
                            data:json];
 }
@@ -127,7 +127,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                      // TODO: handle error
                                                      error:nil];
     return [self
-        initWithHeader:[[SentryEnvelopeItemHeader alloc] initWithType:SentryEnvelopeItemTypeSession
+        initWithHeader:[[BuzzSentryEnvelopeItemHeader alloc] initWithType:BuzzSentryEnvelopeItemTypeSession
                                                                length:json.length]
                   data:json];
 }
@@ -144,8 +144,8 @@ NS_ASSUME_NONNULL_BEGIN
         json = [NSData new];
     }
 
-    return [self initWithHeader:[[SentryEnvelopeItemHeader alloc]
-                                    initWithType:SentryEnvelopeItemTypeUserFeedback
+    return [self initWithHeader:[[BuzzSentryEnvelopeItemHeader alloc]
+                                    initWithType:BuzzSentryEnvelopeItemTypeUserFeedback
                                           length:json.length]
                            data:json];
 }
@@ -162,8 +162,8 @@ NS_ASSUME_NONNULL_BEGIN
         json = [NSData new];
     }
 
-    return [self initWithHeader:[[SentryEnvelopeItemHeader alloc]
-                                    initWithType:SentryEnvelopeItemTypeClientReport
+    return [self initWithHeader:[[BuzzSentryEnvelopeItemHeader alloc]
+                                    initWithType:BuzzSentryEnvelopeItemTypeClientReport
                                           length:json.length]
                            data:json];
 }
@@ -215,8 +215,8 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
 
-    SentryEnvelopeItemHeader *itemHeader =
-        [[SentryEnvelopeItemHeader alloc] initWithType:SentryEnvelopeItemTypeAttachment
+    BuzzSentryEnvelopeItemHeader *itemHeader =
+        [[BuzzSentryEnvelopeItemHeader alloc] initWithType:BuzzSentryEnvelopeItemTypeAttachment
                                                 length:data.length
                                              filenname:attachment.filename
                                            contentType:attachment.contentType];
@@ -226,57 +226,57 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@implementation SentryEnvelope
+@implementation BuzzSentryEnvelope
 
 - (instancetype)initWithSession:(SentrySession *)session
 {
-    SentryEnvelopeItem *item = [[SentryEnvelopeItem alloc] initWithSession:session];
-    return [self initWithHeader:[[SentryEnvelopeHeader alloc] initWithId:nil] singleItem:item];
+    BuzzSentryEnvelopeItem *item = [[BuzzSentryEnvelopeItem alloc] initWithSession:session];
+    return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:nil] singleItem:item];
 }
 
 - (instancetype)initWithSessions:(NSArray<SentrySession *> *)sessions
 {
     NSMutableArray *envelopeItems = [[NSMutableArray alloc] initWithCapacity:sessions.count];
     for (int i = 0; i < sessions.count; ++i) {
-        SentryEnvelopeItem *item =
-            [[SentryEnvelopeItem alloc] initWithSession:[sessions objectAtIndex:i]];
+        BuzzSentryEnvelopeItem *item =
+            [[BuzzSentryEnvelopeItem alloc] initWithSession:[sessions objectAtIndex:i]];
         [envelopeItems addObject:item];
     }
-    return [self initWithHeader:[[SentryEnvelopeHeader alloc] initWithId:nil] items:envelopeItems];
+    return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:nil] items:envelopeItems];
 }
 
 - (instancetype)initWithEvent:(SentryEvent *)event
 {
-    SentryEnvelopeItem *item = [[SentryEnvelopeItem alloc] initWithEvent:event];
-    return [self initWithHeader:[[SentryEnvelopeHeader alloc] initWithId:event.eventId]
+    BuzzSentryEnvelopeItem *item = [[BuzzSentryEnvelopeItem alloc] initWithEvent:event];
+    return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:event.eventId]
                      singleItem:item];
 }
 
 - (instancetype)initWithUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
-    SentryEnvelopeItem *item = [[SentryEnvelopeItem alloc] initWithUserFeedback:userFeedback];
+    BuzzSentryEnvelopeItem *item = [[BuzzSentryEnvelopeItem alloc] initWithUserFeedback:userFeedback];
 
-    return [self initWithHeader:[[SentryEnvelopeHeader alloc] initWithId:userFeedback.eventId]
+    return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:userFeedback.eventId]
                      singleItem:item];
 }
 
-- (instancetype)initWithId:(SentryId *_Nullable)id singleItem:(SentryEnvelopeItem *)item
+- (instancetype)initWithId:(SentryId *_Nullable)id singleItem:(BuzzSentryEnvelopeItem *)item
 {
-    return [self initWithHeader:[[SentryEnvelopeHeader alloc] initWithId:id] singleItem:item];
+    return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:id] singleItem:item];
 }
 
-- (instancetype)initWithId:(SentryId *_Nullable)id items:(NSArray<SentryEnvelopeItem *> *)items
+- (instancetype)initWithId:(SentryId *_Nullable)id items:(NSArray<BuzzSentryEnvelopeItem *> *)items
 {
-    return [self initWithHeader:[[SentryEnvelopeHeader alloc] initWithId:id] items:items];
+    return [self initWithHeader:[[BuzzSentryEnvelopeHeader alloc] initWithId:id] items:items];
 }
 
-- (instancetype)initWithHeader:(SentryEnvelopeHeader *)header singleItem:(SentryEnvelopeItem *)item
+- (instancetype)initWithHeader:(BuzzSentryEnvelopeHeader *)header singleItem:(BuzzSentryEnvelopeItem *)item
 {
     return [self initWithHeader:header items:@[ item ]];
 }
 
-- (instancetype)initWithHeader:(SentryEnvelopeHeader *)header
-                         items:(NSArray<SentryEnvelopeItem *> *)items
+- (instancetype)initWithHeader:(BuzzSentryEnvelopeHeader *)header
+                         items:(NSArray<BuzzSentryEnvelopeItem *> *)items
 {
     if (self = [super init]) {
         _header = header;

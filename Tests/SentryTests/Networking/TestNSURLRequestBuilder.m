@@ -20,7 +20,7 @@ TestNSURLRequestBuilder ()
     return self;
 }
 
-- (NSURLRequest *)createEnvelopeRequest:(SentryEnvelope *)envelope
+- (NSURLRequest *)createEnvelopeRequest:(BuzzSentryEnvelope *)envelope
                                     dsn:(SentryDsn *)dsn
                        didFailWithError:(NSError *_Nullable *_Nullable)error
 {

@@ -1,5 +1,5 @@
 #import "SentryTransportAdapter.h"
-#import "SentryEnvelope.h"
+#import "BuzzSentryEnvelope.h"
 #import "SentryEvent.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentryUserFeedback.h"
@@ -52,15 +52,15 @@ SentryTransportAdapter ()
 - (void)sendEvent:(SentryEvent *)event
                traceContext:(nullable BuzzSentryTraceContext *)traceContext
                 attachments:(NSArray<BuzzSentryAttachment *> *)attachments
-    additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
+    additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
-    NSMutableArray<SentryEnvelopeItem *> *items = [self buildEnvelopeItems:event
+    NSMutableArray<BuzzSentryEnvelopeItem *> *items = [self buildEnvelopeItems:event
                                                                attachments:attachments];
     [items addObjectsFromArray:additionalEnvelopeItems];
 
-    SentryEnvelopeHeader *envelopeHeader = [[SentryEnvelopeHeader alloc] initWithId:event.eventId
+    BuzzSentryEnvelopeHeader *envelopeHeader = [[BuzzSentryEnvelopeHeader alloc] initWithId:event.eventId
                                                                        traceContext:traceContext];
-    SentryEnvelope *envelope = [[SentryEnvelope alloc] initWithHeader:envelopeHeader items:items];
+    BuzzSentryEnvelope *envelope = [[BuzzSentryEnvelope alloc] initWithHeader:envelopeHeader items:items];
 
     [self sendEnvelope:envelope];
 }
@@ -70,29 +70,29 @@ SentryTransportAdapter ()
      traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<BuzzSentryAttachment *> *)attachments
 {
-    NSMutableArray<SentryEnvelopeItem *> *items = [self buildEnvelopeItems:event
+    NSMutableArray<BuzzSentryEnvelopeItem *> *items = [self buildEnvelopeItems:event
                                                                attachments:attachments];
-    [items addObject:[[SentryEnvelopeItem alloc] initWithSession:session]];
+    [items addObject:[[BuzzSentryEnvelopeItem alloc] initWithSession:session]];
 
-    SentryEnvelopeHeader *envelopeHeader = [[SentryEnvelopeHeader alloc] initWithId:event.eventId
+    BuzzSentryEnvelopeHeader *envelopeHeader = [[BuzzSentryEnvelopeHeader alloc] initWithId:event.eventId
                                                                        traceContext:traceContext];
 
-    SentryEnvelope *envelope = [[SentryEnvelope alloc] initWithHeader:envelopeHeader items:items];
+    BuzzSentryEnvelope *envelope = [[BuzzSentryEnvelope alloc] initWithHeader:envelopeHeader items:items];
 
     [self sendEnvelope:envelope];
 }
 
 - (void)sendUserFeedback:(BuzzSentryUserFeedback *)userFeedback
 {
-    SentryEnvelopeItem *item = [[SentryEnvelopeItem alloc] initWithUserFeedback:userFeedback];
-    SentryEnvelopeHeader *envelopeHeader =
-        [[SentryEnvelopeHeader alloc] initWithId:userFeedback.eventId traceContext:nil];
-    SentryEnvelope *envelope = [[SentryEnvelope alloc] initWithHeader:envelopeHeader
+    BuzzSentryEnvelopeItem *item = [[BuzzSentryEnvelopeItem alloc] initWithUserFeedback:userFeedback];
+    BuzzSentryEnvelopeHeader *envelopeHeader =
+        [[BuzzSentryEnvelopeHeader alloc] initWithId:userFeedback.eventId traceContext:nil];
+    BuzzSentryEnvelope *envelope = [[BuzzSentryEnvelope alloc] initWithHeader:envelopeHeader
                                                            singleItem:item];
     [self sendEnvelope:envelope];
 }
 
-- (void)sendEnvelope:(SentryEnvelope *)envelope
+- (void)sendEnvelope:(BuzzSentryEnvelope *)envelope
 {
     [self.transport sendEnvelope:envelope];
 }
@@ -107,16 +107,16 @@ SentryTransportAdapter ()
     [self.transport flush:timeout];
 }
 
-- (NSMutableArray<SentryEnvelopeItem *> *)buildEnvelopeItems:(SentryEvent *)event
+- (NSMutableArray<BuzzSentryEnvelopeItem *> *)buildEnvelopeItems:(SentryEvent *)event
                                                  attachments:
                                                      (NSArray<BuzzSentryAttachment *> *)attachments
 {
-    NSMutableArray<SentryEnvelopeItem *> *items = [NSMutableArray new];
-    [items addObject:[[SentryEnvelopeItem alloc] initWithEvent:event]];
+    NSMutableArray<BuzzSentryEnvelopeItem *> *items = [NSMutableArray new];
+    [items addObject:[[BuzzSentryEnvelopeItem alloc] initWithEvent:event]];
 
     for (BuzzSentryAttachment *attachment in attachments) {
-        SentryEnvelopeItem *item =
-            [[SentryEnvelopeItem alloc] initWithAttachment:attachment
+        BuzzSentryEnvelopeItem *item =
+            [[BuzzSentryEnvelopeItem alloc] initWithAttachment:attachment
                                          maxAttachmentSize:self.options.maxAttachmentSize];
         // The item is nil, when creating the envelopeItem failed.
         if (nil != item) {

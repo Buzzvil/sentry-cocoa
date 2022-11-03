@@ -33,8 +33,8 @@ class TestHub: SentryHub {
         sentCrashEventsWithScope.append((event, scope))
     }
     
-    var capturedEventsWithScopes: [(event: Event, scope: Scope, additionalEnvelopeItems: [SentryEnvelopeItem])] = []
-    override func capture(event: Event, scope: Scope, additionalEnvelopeItems: [SentryEnvelopeItem]) -> SentryId {
+    var capturedEventsWithScopes: [(event: Event, scope: Scope, additionalEnvelopeItems: [BuzzSentryEnvelopeItem])] = []
+    override func capture(event: Event, scope: Scope, additionalEnvelopeItems: [BuzzSentryEnvelopeItem]) -> SentryId {
         group.enter()
         queue.async(flags: .barrier) {
             self.capturedEventsWithScopes.append((event, scope, additionalEnvelopeItems))

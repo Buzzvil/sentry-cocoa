@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class SentrySession, SentryEnvelope, SentryAppState;
+@class SentrySession, BuzzSentryEnvelope, SentryAppState;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,11 +20,11 @@ static int const SENTRY_BAGGAGE_MAX_SIZE = 8192;
 + (SentrySession *_Nullable)sessionWithData:(NSData *)sessionData;
 
 // TODO: use (NSOutputStream *)outputStream
-+ (NSData *_Nullable)dataWithEnvelope:(SentryEnvelope *)envelope
++ (NSData *_Nullable)dataWithEnvelope:(BuzzSentryEnvelope *)envelope
                                 error:(NSError *_Nullable *_Nullable)error;
 
 // TODO: (NSInputStream *)inputStream
-+ (SentryEnvelope *_Nullable)envelopeWithData:(NSData *)data;
++ (BuzzSentryEnvelope *_Nullable)envelopeWithData:(NSData *)data;
 
 + (SentryAppState *_Nullable)appStateWithData:(NSData *)sessionData;
 

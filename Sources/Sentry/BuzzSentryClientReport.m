@@ -1,13 +1,13 @@
 #import "BuzzSentryClientReport.h"
 #import "SentryCurrentDate.h"
 #import <Foundation/Foundation.h>
-#import <SentryDiscardedEvent.h>
+#import <BuzzSentryDiscardedEvent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation BuzzSentryClientReport
 
-- (instancetype)initWithDiscardedEvents:(NSArray<SentryDiscardedEvent *> *)discardedEvents
+- (instancetype)initWithDiscardedEvents:(NSArray<BuzzSentryDiscardedEvent *> *)discardedEvents
 {
     if (self = [super init]) {
         _timestamp = [SentryCurrentDate date];
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     NSMutableArray<NSDictionary<NSString *, id> *> *events =
         [[NSMutableArray alloc] initWithCapacity:self.discardedEvents.count];
-    for (SentryDiscardedEvent *event in self.discardedEvents) {
+    for (BuzzSentryDiscardedEvent *event in self.discardedEvents) {
         [events addObject:[event serialize]];
     }
 

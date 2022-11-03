@@ -1,6 +1,6 @@
 #import "SentryMigrateSessionInit.h"
-#import "SentryEnvelope.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelope.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import "SentryLog.h"
 #import "SentrySerialization.h"
 #import "SentrySession+Private.h"
@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SentryMigrateSessionInit
 
-+ (BOOL)migrateSessionInit:(SentryEnvelope *)envelope
++ (BOOL)migrateSessionInit:(BuzzSentryEnvelope *)envelope
           envelopesDirPath:(NSString *)envelopesDirPath
          envelopeFilePaths:(NSArray<NSString *> *)envelopeFilePaths;
 {
@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
         return NO;
     }
 
-    for (SentryEnvelopeItem *item in envelope.items) {
-        if ([item.header.type isEqualToString:SentryEnvelopeItemTypeSession]) {
+    for (BuzzSentryEnvelopeItem *item in envelope.items) {
+        if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeSession]) {
             SentrySession *session = [SentrySerialization sessionWithData:item.data];
             if (nil != session && [session.flagInit boolValue]) {
                 BOOL didSetInitFlag =
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
             continue;
         }
 
-        SentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeData];
+        BuzzSentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeData];
 
         if (nil != envelope) {
             BOOL didSetInitFlag = [self setInitFlagIfContainsSameSessionId:session.sessionId
@@ -68,11 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (BOOL)setInitFlagIfContainsSameSessionId:(NSUUID *)sessionId
-                                  envelope:(SentryEnvelope *)envelope
+                                  envelope:(BuzzSentryEnvelope *)envelope
                           envelopeFilePath:(NSString *)envelopeFilePath
 {
-    for (SentryEnvelopeItem *item in envelope.items) {
-        if ([item.header.type isEqualToString:SentryEnvelopeItemTypeSession]) {
+    for (BuzzSentryEnvelopeItem *item in envelope.items) {
+        if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeSession]) {
             SentrySession *localSession = [SentrySerialization sessionWithData:item.data];
 
             if (nil != localSession && [localSession.sessionId isEqual:sessionId]) {
@@ -87,14 +87,14 @@ NS_ASSUME_NONNULL_BEGIN
     return NO;
 }
 
-+ (void)storeSessionInit:(SentryEnvelope *)originalEnvelope
++ (void)storeSessionInit:(BuzzSentryEnvelope *)originalEnvelope
                  session:(SentrySession *)session
                     path:(NSString *)envelopeFilePath
 {
-    NSArray<SentryEnvelopeItem *> *envelopeItemsWithUpdatedSession =
+    NSArray<BuzzSentryEnvelopeItem *> *envelopeItemsWithUpdatedSession =
         [self replaceSessionEnvelopeItem:session onEnvelope:originalEnvelope];
-    SentryEnvelope *envelopeWithInitFlag =
-        [[SentryEnvelope alloc] initWithHeader:originalEnvelope.header
+    BuzzSentryEnvelope *envelopeWithInitFlag =
+        [[BuzzSentryEnvelope alloc] initWithHeader:originalEnvelope.header
                                          items:envelopeItemsWithUpdatedSession];
 
     NSError *error;
@@ -113,19 +113,19 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-+ (NSArray<SentryEnvelopeItem *> *)replaceSessionEnvelopeItem:(SentrySession *)session
-                                                   onEnvelope:(SentryEnvelope *)envelope
++ (NSArray<BuzzSentryEnvelopeItem *> *)replaceSessionEnvelopeItem:(SentrySession *)session
+                                                   onEnvelope:(BuzzSentryEnvelope *)envelope
 {
     NSPredicate *noSessionEnvelopeItems =
         [NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
-            SentryEnvelopeItem *item = object;
-            return ![item.header.type isEqualToString:SentryEnvelopeItemTypeSession];
+            BuzzSentryEnvelopeItem *item = object;
+            return ![item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeSession];
         }];
-    NSMutableArray<SentryEnvelopeItem *> *itemsWithoutSession
-        = (NSMutableArray<SentryEnvelopeItem *> *)[[envelope.items
+    NSMutableArray<BuzzSentryEnvelopeItem *> *itemsWithoutSession
+        = (NSMutableArray<BuzzSentryEnvelopeItem *> *)[[envelope.items
             filteredArrayUsingPredicate:noSessionEnvelopeItems] mutableCopy];
 
-    SentryEnvelopeItem *sessionEnvelopeItem = [[SentryEnvelopeItem alloc] initWithSession:session];
+    BuzzSentryEnvelopeItem *sessionEnvelopeItem = [[BuzzSentryEnvelopeItem alloc] initWithSession:session];
     [itemsWithoutSession addObject:sessionEnvelopeItem];
     return itemsWithoutSession;
 }

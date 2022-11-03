@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryEnvelopeRateLimitTests: XCTestCase {
+class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
     
     private var rateLimits: TestRateLimits!
 // swiftlint:disable weak_delegate
@@ -34,7 +34,7 @@ class SentryEnvelopeRateLimitTests: XCTestCase {
         
         XCTAssertEqual(3, actual.items.count)
         for item in actual.items {
-            XCTAssertEqual(SentryEnvelopeItemTypeSession, item.header.type)
+            XCTAssertEqual(BuzzSentryEnvelopeItemTypeSession, item.header.type)
         }
         XCTAssertEqual(envelope.header, actual.header)
         
@@ -51,7 +51,7 @@ class SentryEnvelopeRateLimitTests: XCTestCase {
         
         XCTAssertEqual(3, actual.items.count)
         for item in actual.items {
-            XCTAssertEqual(SentryEnvelopeItemTypeEvent, item.header.type)
+            XCTAssertEqual(BuzzSentryEnvelopeItemTypeEvent, item.header.type)
         }
         XCTAssertEqual(envelope.header, actual.header)
         
@@ -62,34 +62,34 @@ class SentryEnvelopeRateLimitTests: XCTestCase {
     
     func testLimitForCustomType() {
         rateLimits.rateLimits = [SentryDataCategory.default]
-        var envelopeItems = [SentryEnvelopeItem]()
-        envelopeItems.append(SentryEnvelopeItem(event: Event()))
+        var envelopeItems = [BuzzSentryEnvelopeItem]()
+        envelopeItems.append(BuzzSentryEnvelopeItem(event: Event()))
         
-        let envelopeHeader = SentryEnvelopeItemHeader(type: "customType", length: 10)
-        envelopeItems.append(SentryEnvelopeItem(header: envelopeHeader, data: Data()))
-        envelopeItems.append(SentryEnvelopeItem(header: envelopeHeader, data: Data()))
+        let envelopeHeader = BuzzSentryEnvelopeItemHeader(type: "customType", length: 10)
+        envelopeItems.append(BuzzSentryEnvelopeItem(header: envelopeHeader, data: Data()))
+        envelopeItems.append(BuzzSentryEnvelopeItem(header: envelopeHeader, data: Data()))
         
-        let envelope = SentryEnvelope(id: SentryId(), items: envelopeItems)
+        let envelope = BuzzSentryEnvelope(id: SentryId(), items: envelopeItems)
         
         let actual = sut.removeRateLimitedItems(envelope)
         
         XCTAssertEqual(1, actual.items.count)
-        XCTAssertEqual(SentryEnvelopeItemTypeEvent, actual.items[0].header.type)
+        XCTAssertEqual(BuzzSentryEnvelopeItemTypeEvent, actual.items[0].header.type)
     }
     
-    func getEnvelope() -> SentryEnvelope {
-        var envelopeItems = [SentryEnvelopeItem]()
+    func getEnvelope() -> BuzzSentryEnvelope {
+        var envelopeItems = [BuzzSentryEnvelopeItem]()
         for _ in 0...2 {
             let event = Event()
-            envelopeItems.append(SentryEnvelopeItem(event: event))
+            envelopeItems.append(BuzzSentryEnvelopeItem(event: event))
         }
         
         for _ in 0...2 {
             let session = SentrySession(releaseName: "")
-            envelopeItems.append(SentryEnvelopeItem(session: session))
+            envelopeItems.append(BuzzSentryEnvelopeItem(session: session))
         }
         
-        return SentryEnvelope(id: SentryId(), items: envelopeItems)
+        return BuzzSentryEnvelope(id: SentryId(), items: envelopeItems)
     }
     
 }

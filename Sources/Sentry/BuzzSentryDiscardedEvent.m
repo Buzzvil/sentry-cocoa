@@ -1,10 +1,10 @@
-#import "SentryDiscardedEvent.h"
+#import "BuzzSentryDiscardedEvent.h"
 #import "SentryDataCategoryMapper.h"
 #import "SentryDiscardReasonMapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryDiscardedEvent
+@implementation BuzzSentryDiscardedEvent
 
 - (instancetype)initWithReason:(SentryDiscardReason)reason
                       category:(SentryDataCategory)category

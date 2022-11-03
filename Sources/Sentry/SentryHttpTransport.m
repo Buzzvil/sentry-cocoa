@@ -3,13 +3,13 @@
 #import "SentryCurrentDate.h"
 #import "SentryDataCategoryMapper.h"
 #import "SentryDiscardReasonMapper.h"
-#import "SentryDiscardedEvent.h"
+#import "BuzzSentryDiscardedEvent.h"
 #import "SentryDispatchQueueWrapper.h"
 #import "SentryDsn.h"
-#import "SentryEnvelope+Private.h"
-#import "SentryEnvelope.h"
-#import "SentryEnvelopeItemType.h"
-#import "SentryEnvelopeRateLimit.h"
+#import "BuzzSentryEnvelope+Private.h"
+#import "BuzzSentryEnvelope.h"
+#import "BuzzSentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelopeRateLimit.h"
 #import "SentryEvent.h"
 #import "SentryFileContents.h"
 #import "SentryFileManager.h"
@@ -30,7 +30,7 @@ SentryHttpTransport ()
 @property (nonatomic, strong) SentryNSURLRequestBuilder *requestBuilder;
 @property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) id<SentryRateLimits> rateLimits;
-@property (nonatomic, strong) SentryEnvelopeRateLimit *envelopeRateLimit;
+@property (nonatomic, strong) BuzzSentryEnvelopeRateLimit *envelopeRateLimit;
 @property (nonatomic, strong) SentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic, strong) dispatch_group_t dispatchGroup;
 @property (nonatomic, strong) SentryReachability *reachability;
@@ -39,10 +39,10 @@ SentryHttpTransport ()
  * Relay expects the discarded events split by data category and reason; see
  * https://develop.sentry.dev/sdk/client-reports/#envelope-item-payload.
  * We could use nested dictionaries, but instead, we use a dictionary with key
- * `data-category:reason` and value `SentryDiscardedEvent` because it's easier to read and type.
+ * `data-category:reason` and value `BuzzSentryDiscardedEvent` because it's easier to read and type.
  */
 @property (nonatomic, strong)
-    NSMutableDictionary<NSString *, SentryDiscardedEvent *> *discardedEvents;
+    NSMutableDictionary<NSString *, BuzzSentryDiscardedEvent *> *discardedEvents;
 
 /**
  * Synching with a dispatch queue to have concurrent reads and writes as barrier blocks is roughly
@@ -61,7 +61,7 @@ SentryHttpTransport ()
           requestManager:(id<SentryRequestManager>)requestManager
           requestBuilder:(SentryNSURLRequestBuilder *)requestBuilder
               rateLimits:(id<SentryRateLimits>)rateLimits
-       envelopeRateLimit:(SentryEnvelopeRateLimit *)envelopeRateLimit
+       envelopeRateLimit:(BuzzSentryEnvelopeRateLimit *)envelopeRateLimit
     dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
             reachability:(SentryReachability *)reachability
 {
@@ -105,7 +105,7 @@ SentryHttpTransport ()
 #endif
 }
 
-- (void)sendEnvelope:(SentryEnvelope *)envelope
+- (void)sendEnvelope:(BuzzSentryEnvelope *)envelope
 {
     envelope = [self.envelopeRateLimit removeRateLimitedItems:envelope];
 
@@ -114,7 +114,7 @@ SentryHttpTransport ()
         return;
     }
 
-    SentryEnvelope *envelopeToStore = [self addClientReportTo:envelope];
+    BuzzSentryEnvelope *envelopeToStore = [self addClientReportTo:envelope];
 
     // With this we accept the a tradeoff. We might loose some envelopes when a hard crash happens,
     // because this being done on a background thread, but instead we don't block the calling
@@ -135,13 +135,13 @@ SentryHttpTransport ()
                               nameForSentryDiscardReason(reason)];
 
     @synchronized(self.discardedEvents) {
-        SentryDiscardedEvent *event = self.discardedEvents[key];
+        BuzzSentryDiscardedEvent *event = self.discardedEvents[key];
         NSUInteger quantity = 1;
         if (event != nil) {
             quantity = event.quantity + 1;
         }
 
-        event = [[SentryDiscardedEvent alloc] initWithReason:reason
+        event = [[BuzzSentryDiscardedEvent alloc] initWithReason:reason
                                                     category:category
                                                     quantity:quantity];
 
@@ -190,7 +190,7 @@ SentryHttpTransport ()
 }
 
 /**
- * SentryEnvelopeRateLimitDelegate.
+ * BuzzSentryEnvelopeRateLimitDelegate.
  */
 - (void)envelopeItemDropped:(SentryDataCategory)dataCategory
 {
@@ -207,13 +207,13 @@ SentryHttpTransport ()
 
 #pragma mark private methods
 
-- (SentryEnvelope *)addClientReportTo:(SentryEnvelope *)envelope
+- (BuzzSentryEnvelope *)addClientReportTo:(BuzzSentryEnvelope *)envelope
 {
     if (!self.options.sendClientReports) {
         return envelope;
     }
 
-    NSArray<SentryDiscardedEvent *> *events;
+    NSArray<BuzzSentryDiscardedEvent *> *events;
 
     @synchronized(self.discardedEvents) {
         if (self.discardedEvents.count == 0) {
@@ -226,14 +226,14 @@ SentryHttpTransport ()
 
     BuzzSentryClientReport *clientReport = [[BuzzSentryClientReport alloc] initWithDiscardedEvents:events];
 
-    SentryEnvelopeItem *clientReportEnvelopeItem =
-        [[SentryEnvelopeItem alloc] initWithClientReport:clientReport];
+    BuzzSentryEnvelopeItem *clientReportEnvelopeItem =
+        [[BuzzSentryEnvelopeItem alloc] initWithClientReport:clientReport];
 
-    NSMutableArray<SentryEnvelopeItem *> *currentItems =
+    NSMutableArray<BuzzSentryEnvelopeItem *> *currentItems =
         [[NSMutableArray alloc] initWithArray:envelope.items];
     [currentItems addObject:clientReportEnvelopeItem];
 
-    return [[SentryEnvelope alloc] initWithHeader:envelope.header items:currentItems];
+    return [[BuzzSentryEnvelope alloc] initWithHeader:envelope.header items:currentItems];
 }
 
 - (void)sendAllCachedEnvelopes
@@ -255,13 +255,13 @@ SentryHttpTransport ()
         return;
     }
 
-    SentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeFileContents.contents];
+    BuzzSentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeFileContents.contents];
     if (nil == envelope) {
         [self deleteEnvelopeAndSendNext:envelopeFileContents.path];
         return;
     }
 
-    SentryEnvelope *rateLimitedEnvelope = [self.envelopeRateLimit removeRateLimitedItems:envelope];
+    BuzzSentryEnvelope *rateLimitedEnvelope = [self.envelopeRateLimit removeRateLimitedItems:envelope];
     if (rateLimitedEnvelope.items.count == 0) {
         [self deleteEnvelopeAndSendNext:envelopeFileContents.path];
         return;
@@ -292,7 +292,7 @@ SentryHttpTransport ()
                                 block:^{ [self sendAllCachedEnvelopes]; }];
 }
 
-- (void)sendEnvelope:(SentryEnvelope *)envelope
+- (void)sendEnvelope:(BuzzSentryEnvelope *)envelope
         envelopePath:(NSString *)envelopePath
              request:(NSURLRequest *)request
 {
@@ -328,13 +328,13 @@ SentryHttpTransport ()
     }
 }
 
-- (void)recordLostEventFor:(NSArray<SentryEnvelopeItem *> *)items
+- (void)recordLostEventFor:(NSArray<BuzzSentryEnvelopeItem *> *)items
 {
-    for (SentryEnvelopeItem *item in items) {
+    for (BuzzSentryEnvelopeItem *item in items) {
         NSString *itemType = item.header.type;
         // We don't want to record a lost event when it's a client report.
         // It's fine to drop it silently.
-        if ([itemType isEqualToString:SentryEnvelopeItemTypeClientReport]) {
+        if ([itemType isEqualToString:BuzzSentryEnvelopeItemTypeClientReport]) {
             continue;
         }
         SentryDataCategory category = sentryDataCategoryForEnvelopItemType(itemType);

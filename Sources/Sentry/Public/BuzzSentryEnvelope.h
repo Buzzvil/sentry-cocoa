@@ -7,11 +7,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryEnvelopeHeader : NSObject
+@interface BuzzSentryEnvelopeHeader : NSObject
 SENTRY_NO_INIT
 
 /**
- * Initializes an SentryEnvelopeHeader object with the specified eventId.
+ * Initializes an BuzzSentryEnvelopeHeader object with the specified eventId.
  *
  * Sets the sdkInfo from BuzzSentryMeta.
  *
@@ -21,7 +21,7 @@ SENTRY_NO_INIT
 - (instancetype)initWithId:(SentryId *_Nullable)eventId;
 
 /**
- * Initializes an SentryEnvelopeHeader object with the specified eventId and traceContext.
+ * Initializes an BuzzSentryEnvelopeHeader object with the specified eventId and traceContext.
  *
  * @param eventId The identifier of the event. Can be nil if no event in the envelope or attachment
  * related to event.
@@ -31,7 +31,7 @@ SENTRY_NO_INIT
               traceContext:(nullable BuzzSentryTraceContext *)traceContext;
 
 /**
- * Initializes an SentryEnvelopeHeader object with the specified eventId, skdInfo and traceContext.
+ * Initializes an BuzzSentryEnvelopeHeader object with the specified eventId, skdInfo and traceContext.
  *
  * It is recommended to use initWithId:traceContext: because it sets the sdkInfo for you.
  *
@@ -58,7 +58,7 @@ SENTRY_NO_INIT
 
 @end
 
-@interface SentryEnvelopeItemHeader : NSObject
+@interface BuzzSentryEnvelopeItemHeader : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithType:(NSString *)type length:(NSUInteger)length NS_DESIGNATED_INITIALIZER;
@@ -78,7 +78,7 @@ SENTRY_NO_INIT
 
 @end
 
-@interface SentryEnvelopeItem : NSObject
+@interface BuzzSentryEnvelopeItem : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithEvent:(SentryEvent *)event;
@@ -86,13 +86,13 @@ SENTRY_NO_INIT
 - (instancetype)initWithUserFeedback:(BuzzSentryUserFeedback *)userFeedback;
 - (_Nullable instancetype)initWithAttachment:(BuzzSentryAttachment *)attachment
                            maxAttachmentSize:(NSUInteger)maxAttachmentSize;
-- (instancetype)initWithHeader:(SentryEnvelopeItemHeader *)header
+- (instancetype)initWithHeader:(BuzzSentryEnvelopeItemHeader *)header
                           data:(NSData *)data NS_DESIGNATED_INITIALIZER;
 
 /**
  * The envelope item header.
  */
-@property (nonatomic, readonly, strong) SentryEnvelopeItemHeader *header;
+@property (nonatomic, readonly, strong) BuzzSentryEnvelopeItemHeader *header;
 
 /**
  * The envelope payload.
@@ -101,35 +101,35 @@ SENTRY_NO_INIT
 
 @end
 
-@interface SentryEnvelope : NSObject
+@interface BuzzSentryEnvelope : NSObject
 SENTRY_NO_INIT
 
 // If no event, or no data related to event, id will be null
-- (instancetype)initWithId:(SentryId *_Nullable)id singleItem:(SentryEnvelopeItem *)item;
+- (instancetype)initWithId:(SentryId *_Nullable)id singleItem:(BuzzSentryEnvelopeItem *)item;
 
-- (instancetype)initWithHeader:(SentryEnvelopeHeader *)header singleItem:(SentryEnvelopeItem *)item;
+- (instancetype)initWithHeader:(BuzzSentryEnvelopeHeader *)header singleItem:(BuzzSentryEnvelopeItem *)item;
 
 // If no event, or no data related to event, id will be null
-- (instancetype)initWithId:(SentryId *_Nullable)id items:(NSArray<SentryEnvelopeItem *> *)items;
+- (instancetype)initWithId:(SentryId *_Nullable)id items:(NSArray<BuzzSentryEnvelopeItem *> *)items;
 
 /**
- * Initializes a SentryEnvelope with a single session.
+ * Initializes a BuzzSentryEnvelope with a single session.
  * @param session to init the envelope with.
- * @return an initialized SentryEnvelope
+ * @return an initialized BuzzSentryEnvelope
  */
 - (instancetype)initWithSession:(SentrySession *)session;
 
 /**
- * Initializes a SentryEnvelope with a list of sessions.
+ * Initializes a BuzzSentryEnvelope with a list of sessions.
  * Can be used when an operations that starts a session closes an ongoing
  * session
  * @param sessions to init the envelope with.
- * @return an initialized SentryEnvelope
+ * @return an initialized BuzzSentryEnvelope
  */
 - (instancetype)initWithSessions:(NSArray<SentrySession *> *)sessions;
 
-- (instancetype)initWithHeader:(SentryEnvelopeHeader *)header
-                         items:(NSArray<SentryEnvelopeItem *> *)items NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithHeader:(BuzzSentryEnvelopeHeader *)header
+                         items:(NSArray<BuzzSentryEnvelopeItem *> *)items NS_DESIGNATED_INITIALIZER;
 
 // Convenience init for a single event
 - (instancetype)initWithEvent:(SentryEvent *)event;
@@ -139,12 +139,12 @@ SENTRY_NO_INIT
 /**
  * The envelope header.
  */
-@property (nonatomic, readonly, strong) SentryEnvelopeHeader *header;
+@property (nonatomic, readonly, strong) BuzzSentryEnvelopeHeader *header;
 
 /**
  * The envelope items.
  */
-@property (nonatomic, readonly, strong) NSArray<SentryEnvelopeItem *> *items;
+@property (nonatomic, readonly, strong) NSArray<BuzzSentryEnvelopeItem *> *items;
 
 @end
 

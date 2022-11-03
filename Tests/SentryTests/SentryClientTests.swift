@@ -209,7 +209,7 @@ class BuzzSentryClientTest: XCTestCase {
     func testCaptureEventTypeTransactionDoesNotIncludeThreadAndDebugMeta() {
         let event = Event(level: SentryLevel.warning)
         event.message = fixture.message
-        event.type = SentryEnvelopeItemTypeTransaction
+        event.type = BuzzSentryEnvelopeItemTypeTransaction
         let scope = Scope()
         let expectedTags = ["tagKey": "tagValue"]
         scope.setTags(expectedTags)
@@ -828,7 +828,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
 
     func testNoDsn_SessionsNotSent() {
-        _ = SentryEnvelope(event: Event())
+        _ = BuzzSentryEnvelope(event: Event())
         fixture.getSut(configureOptions: { options in
             options.dsn = nil
         }).capture(session: fixture.session)
@@ -837,7 +837,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
 
     func testNoDsn_EventWithSessionsNotSent() {
-        _ = SentryEnvelope(event: Event())
+        _ = BuzzSentryEnvelope(event: Event())
         let eventId = fixture.getSut(configureOptions: { options in
             options.dsn = nil
         }).captureCrash(Event(), with: fixture.session, with: fixture.scope)
@@ -847,7 +847,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
 
     func testNoDsn_ExceptionWithSessionsNotSent() {
-        _ = SentryEnvelope(event: Event())
+        _ = BuzzSentryEnvelope(event: Event())
         let eventId = fixture.getSut(configureOptions: { options in
             options.dsn = nil
         }).capture(self.exception, with: fixture.session, with: fixture.scope)
@@ -857,7 +857,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
 
     func testNoDsn_ErrorWithSessionsNotSent() {
-        _ = SentryEnvelope(event: Event())
+        _ = BuzzSentryEnvelope(event: Event())
         let eventId = fixture.getSut(configureOptions: { options in
             options.dsn = nil
         }).captureError(self.error, with: fixture.session, with: fixture.scope)
@@ -1140,7 +1140,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testStoreEnvelope_StoresEnvelopeToDisk() {
-        fixture.getSut().store(SentryEnvelope(event: Event()))
+        fixture.getSut().store(BuzzSentryEnvelope(event: Event()))
         XCTAssertEqual(1, fixture.fileManager.getAllEnvelopes().count)
     }
     
@@ -1241,8 +1241,8 @@ class BuzzSentryClientTest: XCTestCase {
         
         let attachment = "{}"
         let data = attachment.data(using: .utf8)!
-        let itemHeader = SentryEnvelopeItemHeader(type: "attachment", length: UInt(data.count))
-        let item = SentryEnvelopeItem(header: itemHeader, data: data)
+        let itemHeader = BuzzSentryEnvelopeItemHeader(type: "attachment", length: UInt(data.count))
+        let item = BuzzSentryEnvelopeItem(header: itemHeader, data: data)
         
         let client = fixture.getSut()
         client.capture(event: event, scope: Scope(), additionalEnvelopeItems: [item])
@@ -1346,7 +1346,7 @@ class BuzzSentryClientTest: XCTestCase {
         assertValidThreads(actual: event.threads)
     }
     
-    private func assertLastSentEnvelope(assert: (SentryEnvelope) -> Void) {
+    private func assertLastSentEnvelope(assert: (BuzzSentryEnvelope) -> Void) {
         XCTAssertNotNil(fixture.transport.sentEnvelopes)
         if let lastSentEnvelope = fixture.transport.sentEnvelopes.last {
             assert(lastSentEnvelope)

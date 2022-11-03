@@ -42,8 +42,8 @@ class TestClient: Client {
         return event.eventId
     }
     
-    var captureEventWithScopeInvocations = Invocations<(event: Event, scope: Scope, additionalEnvelopeItems: [SentryEnvelopeItem])>()
-    override func capture(event: Event, scope: Scope, additionalEnvelopeItems: [SentryEnvelopeItem]) -> SentryId {
+    var captureEventWithScopeInvocations = Invocations<(event: Event, scope: Scope, additionalEnvelopeItems: [BuzzSentryEnvelopeItem])>()
+    override func capture(event: Event, scope: Scope, additionalEnvelopeItems: [BuzzSentryEnvelopeItem]) -> SentryId {
         captureEventWithScopeInvocations.record((event, scope, additionalEnvelopeItems))
         return event.eventId
     }
@@ -114,13 +114,13 @@ class TestClient: Client {
         captureUserFeedbackInvocations.record(userFeedback)
     }
     
-    var captureEnvelopeInvocations = Invocations<SentryEnvelope>()
-    override func capture(envelope: SentryEnvelope) {
+    var captureEnvelopeInvocations = Invocations<BuzzSentryEnvelope>()
+    override func capture(envelope: BuzzSentryEnvelope) {
         captureEnvelopeInvocations.record(envelope)
     }
     
-    var storedEnvelopeInvocations = Invocations<SentryEnvelope>()
-    override func store(_ envelope: SentryEnvelope) {
+    var storedEnvelopeInvocations = Invocations<BuzzSentryEnvelope>()
+    override func store(_ envelope: BuzzSentryEnvelope) {
         storedEnvelopeInvocations.record(envelope)
     }
     

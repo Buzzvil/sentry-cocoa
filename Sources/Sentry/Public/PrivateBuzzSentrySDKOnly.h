@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class SentryEnvelope, SentryDebugMeta, SentryAppStartMeasurement, SentryScreenFrames,
+@class BuzzSentryEnvelope, SentryDebugMeta, SentryAppStartMeasurement, SentryScreenFrames,
     BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -25,14 +25,14 @@ typedef void (^SentryOnAppStartMeasurementAvailable)(
 /**
  * For storing an envelope synchronously to disk.
  */
-+ (void)storeEnvelope:(SentryEnvelope *)envelope;
++ (void)storeEnvelope:(BuzzSentryEnvelope *)envelope;
 
-+ (void)captureEnvelope:(SentryEnvelope *)envelope;
++ (void)captureEnvelope:(BuzzSentryEnvelope *)envelope;
 
 /**
  * Create an envelope from NSData. Needed for example by Flutter.
  */
-+ (nullable SentryEnvelope *)envelopeWithData:(NSData *)data;
++ (nullable BuzzSentryEnvelope *)envelopeWithData:(NSData *)data;
 
 /**
  * Returns the current list of debug images. Be aware that the SentryDebugMeta is actually

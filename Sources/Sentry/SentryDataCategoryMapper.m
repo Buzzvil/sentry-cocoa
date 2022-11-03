@@ -1,6 +1,6 @@
 #import "SentryDataCategoryMapper.h"
 #import "SentryDataCategory.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import <Foundation/Foundation.h>
 
 NSString *const kSentryDataCategoryNameAll = @"";
@@ -18,19 +18,19 @@ NS_ASSUME_NONNULL_BEGIN
 SentryDataCategory
 sentryDataCategoryForEnvelopItemType(NSString *itemType)
 {
-    if ([itemType isEqualToString:SentryEnvelopeItemTypeEvent]) {
+    if ([itemType isEqualToString:BuzzSentryEnvelopeItemTypeEvent]) {
         return kSentryDataCategoryError;
     }
-    if ([itemType isEqualToString:SentryEnvelopeItemTypeSession]) {
+    if ([itemType isEqualToString:BuzzSentryEnvelopeItemTypeSession]) {
         return kSentryDataCategorySession;
     }
-    if ([itemType isEqualToString:SentryEnvelopeItemTypeTransaction]) {
+    if ([itemType isEqualToString:BuzzSentryEnvelopeItemTypeTransaction]) {
         return kSentryDataCategoryTransaction;
     }
-    if ([itemType isEqualToString:SentryEnvelopeItemTypeAttachment]) {
+    if ([itemType isEqualToString:BuzzSentryEnvelopeItemTypeAttachment]) {
         return kSentryDataCategoryAttachment;
     }
-    if ([itemType isEqualToString:SentryEnvelopeItemTypeProfile]) {
+    if ([itemType isEqualToString:BuzzSentryEnvelopeItemTypeProfile]) {
         return kSentryDataCategoryProfile;
     }
     return kSentryDataCategoryDefault;

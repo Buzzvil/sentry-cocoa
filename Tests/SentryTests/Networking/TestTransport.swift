@@ -3,8 +3,8 @@ import Foundation
 @objc
 public class TestTransport: NSObject, Transport {
     
-    var sentEnvelopes = Invocations<SentryEnvelope>()
-    public func send(envelope: SentryEnvelope) {
+    var sentEnvelopes = Invocations<BuzzSentryEnvelope>()
+    public func send(envelope: BuzzSentryEnvelope) {
         sentEnvelopes.record(envelope)
     }
     

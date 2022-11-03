@@ -30,9 +30,9 @@ struct TestConstants {
         return event
     }
     
-    static var envelope: SentryEnvelope {
+    static var envelope: BuzzSentryEnvelope {
         let event = Event()
-        let envelopeItem = SentryEnvelopeItem(event: event)
-        return SentryEnvelope(id: event.eventId, singleItem: envelopeItem)
+        let envelopeItem = BuzzSentryEnvelopeItem(event: event)
+        return BuzzSentryEnvelope(id: event.eventId, singleItem: envelopeItem)
     }
 }

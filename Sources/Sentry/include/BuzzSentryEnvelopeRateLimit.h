@@ -1,27 +1,27 @@
 #import "SentryRateLimits.h"
 #import <Foundation/Foundation.h>
 
-@protocol SentryEnvelopeRateLimitDelegate;
+@protocol BuzzSentryEnvelopeRateLimitDelegate;
 
-@class SentryEnvelope;
+@class BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(EnvelopeRateLimit)
-@interface SentryEnvelopeRateLimit : NSObject
+@interface BuzzSentryEnvelopeRateLimit : NSObject
 
 - (instancetype)initWithRateLimits:(id<SentryRateLimits>)sentryRateLimits;
 
 /**
  * Removes SentryEnvelopItems for which a rate limit is active.
  */
-- (SentryEnvelope *)removeRateLimitedItems:(SentryEnvelope *)envelope;
+- (BuzzSentryEnvelope *)removeRateLimitedItems:(BuzzSentryEnvelope *)envelope;
 
-- (void)setDelegate:(id<SentryEnvelopeRateLimitDelegate>)delegate;
+- (void)setDelegate:(id<BuzzSentryEnvelopeRateLimitDelegate>)delegate;
 
 @end
 
-@protocol SentryEnvelopeRateLimitDelegate <NSObject>
+@protocol BuzzSentryEnvelopeRateLimitDelegate <NSObject>
 
 - (void)envelopeItemDropped:(SentryDataCategory)dataCategory;
 

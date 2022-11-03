@@ -2,7 +2,7 @@
 #import "SentryDataCategory.h"
 #import "SentryDiscardReason.h"
 
-@class SentryEnvelopeItem, SentryId, BuzzSentryAttachment, SentryThreadInspector;
+@class BuzzSentryEnvelopeItem, SentryId, BuzzSentryAttachment, SentryThreadInspector;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,13 +41,13 @@ BuzzSentryClient (Private)
 
 - (SentryId *)captureEvent:(SentryEvent *)event
                   withScope:(SentryScope *)scope
-    additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
+    additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(capture(event:scope:additionalEnvelopeItems:));
 
 /**
  * Needed by hybrid SDKs as react-native to synchronously store an envelope to disk.
  */
-- (void)storeEnvelope:(SentryEnvelope *)envelope;
+- (void)storeEnvelope:(BuzzSentryEnvelope *)envelope;
 
 - (void)recordLostEvent:(SentryDataCategory)category reason:(SentryDiscardReason)reason;
 

@@ -9,7 +9,7 @@
 @class SentryHub;
 @class SentryProfilesSamplerDecision;
 @class SentryScreenFrames;
-@class SentryEnvelope;
+@class BuzzSentryEnvelope;
 @class BuzzSentrySpanId;
 @class BuzzSentryTransaction;
 

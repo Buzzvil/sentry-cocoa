@@ -1,7 +1,7 @@
 #import "SentryTransportFactory.h"
 #import "SentryDefaultRateLimits.h"
 #import "SentryDispatchQueueWrapper.h"
-#import "SentryEnvelopeRateLimit.h"
+#import "BuzzSentryEnvelopeRateLimit.h"
 #import "SentryHttpDateParser.h"
 #import "SentryHttpTransport.h"
 #import "SentryNSURLRequestBuilder.h"
@@ -42,8 +42,8 @@ SentryTransportFactory ()
         [[SentryDefaultRateLimits alloc] initWithRetryAfterHeaderParser:retryAfterHeaderParser
                                                      andRateLimitParser:rateLimitParser];
 
-    SentryEnvelopeRateLimit *envelopeRateLimit =
-        [[SentryEnvelopeRateLimit alloc] initWithRateLimits:rateLimits];
+    BuzzSentryEnvelopeRateLimit *envelopeRateLimit =
+        [[BuzzSentryEnvelopeRateLimit alloc] initWithRateLimits:rateLimits];
 
     dispatch_queue_attr_t attributes = dispatch_queue_attr_make_with_qos_class(
         DISPATCH_QUEUE_SERIAL, DISPATCH_QUEUE_PRIORITY_LOW, 0);

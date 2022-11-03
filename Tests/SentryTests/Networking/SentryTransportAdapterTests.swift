@@ -34,10 +34,10 @@ class SentryTransportAdapterTests: XCTestCase {
         let event = TestData.event
         sut.send(event, session: session, attachments: [fixture.attachment])
         
-        let expectedEnvelope = SentryEnvelope(id: event.eventId, items: [
-            SentryEnvelopeItem(event: event),
-            SentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!,
-            SentryEnvelopeItem(session: session)
+        let expectedEnvelope = BuzzSentryEnvelope(id: event.eventId, items: [
+            BuzzSentryEnvelopeItem(event: event),
+            BuzzSentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!,
+            BuzzSentryEnvelopeItem(session: session)
         ])
         
         assertEnvelope(expected: expectedEnvelope)
@@ -47,9 +47,9 @@ class SentryTransportAdapterTests: XCTestCase {
         let event = TestData.event
         sut.send(event: event, attachments: [fixture.faultyAttachment, fixture.attachment])
         
-        let expectedEnvelope = SentryEnvelope(id: event.eventId, items: [
-            SentryEnvelopeItem(event: event),
-            SentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!
+        let expectedEnvelope = BuzzSentryEnvelope(id: event.eventId, items: [
+            BuzzSentryEnvelopeItem(event: event),
+            BuzzSentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!
         ])
         
         assertEnvelope(expected: expectedEnvelope)
@@ -59,12 +59,12 @@ class SentryTransportAdapterTests: XCTestCase {
         let userFeedback = TestData.userFeedback
         sut.send(userFeedback: userFeedback)
         
-        let expectedEnvelope = SentryEnvelope(userFeedback: userFeedback)
+        let expectedEnvelope = BuzzSentryEnvelope(userFeedback: userFeedback)
         
         assertEnvelope(expected: expectedEnvelope)
     }
     
-    private func assertEnvelope(expected: SentryEnvelope) {
+    private func assertEnvelope(expected: BuzzSentryEnvelope) {
         XCTAssertEqual(1, fixture.transport.sentEnvelopes.count)
         let actual = fixture.transport.sentEnvelopes.first!
         XCTAssertNotNil(actual)

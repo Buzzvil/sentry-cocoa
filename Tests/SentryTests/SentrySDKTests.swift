@@ -287,7 +287,7 @@ class SentrySDKTests: XCTestCase {
     func testCaptureEnvelope() {
         givenSdkWithHub()
         
-        let envelope = SentryEnvelope(event: TestData.event)
+        let envelope = BuzzSentryEnvelope(event: TestData.event)
         SentrySDK.capture(envelope)
         
         XCTAssertEqual(1, fixture.client.captureEnvelopeInvocations.count)
@@ -297,7 +297,7 @@ class SentrySDKTests: XCTestCase {
     func testStoreEnvelope() {
         givenSdkWithHub()
         
-        let envelope = SentryEnvelope(event: TestData.event)
+        let envelope = BuzzSentryEnvelope(event: TestData.event)
         SentrySDK.store(envelope)
         
         XCTAssertEqual(1, fixture.client.storedEnvelopeInvocations.count)
@@ -305,7 +305,7 @@ class SentrySDKTests: XCTestCase {
     }
     
     func testStoreEnvelope_WhenNoClient_NoCrash() {
-        SentrySDK.store(SentryEnvelope(event: TestData.event))
+        SentrySDK.store(BuzzSentryEnvelope(event: TestData.event))
         
         XCTAssertEqual(0, fixture.client.storedEnvelopeInvocations.count)
     }

@@ -5,7 +5,7 @@
 #import "SentryDependencyContainer.h"
 #import "SentryDispatchQueueWrapper.h"
 #import "SentryDsn.h"
-#import "SentryEnvelope.h"
+#import "BuzzSentryEnvelope.h"
 #import "SentryEvent.h"
 #import "SentryFileContents.h"
 #import "SentryLog.h"
@@ -248,7 +248,7 @@ SentryFileManager ()
     return YES;
 }
 
-- (NSString *)storeEnvelope:(SentryEnvelope *)envelope
+- (NSString *)storeEnvelope:(BuzzSentryEnvelope *)envelope
 {
     @synchronized(self) {
         NSString *result = [self storeData:[SentrySerialization dataWithEnvelope:envelope error:nil]
@@ -276,14 +276,14 @@ SentryFileManager ()
         [envelopePathsCopy removeObjectAtIndex:i];
 
         NSData *envelopeData = [[NSFileManager defaultManager] contentsAtPath:envelopeFilePath];
-        SentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeData];
+        BuzzSentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeData];
 
         BOOL didMigrateSessionInit =
             [SentryMigrateSessionInit migrateSessionInit:envelope
                                         envelopesDirPath:self.envelopesPath
                                        envelopeFilePaths:envelopePathsCopy];
 
-        for (SentryEnvelopeItem *item in envelope.items) {
+        for (BuzzSentryEnvelopeItem *item in envelope.items) {
             SentryDataCategory rateLimitCategory
                 = sentryDataCategoryForEnvelopItemType(item.header.type);
 

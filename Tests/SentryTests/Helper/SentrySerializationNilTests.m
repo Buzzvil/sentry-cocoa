@@ -12,7 +12,7 @@
  */
 @implementation SentrySerializationNilTests
 
-- (void)testSentryEnvelopeSerializerWithNilInput
+- (void)testBuzzSentryEnvelopeSerializerWithNilInput
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wnonnull"

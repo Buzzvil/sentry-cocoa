@@ -11,8 +11,8 @@
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "SentryDsn.h"
-#import "SentryEnvelope.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelope.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import "SentryEvent.h"
 #import "SentryException.h"
 #import "SentryFileManager.h"
@@ -288,7 +288,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
 - (SentryId *)captureEvent:(SentryEvent *)event
                   withScope:(SentryScope *)scope
-    additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
+    additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
     return [self sendEvent:event
                       withScope:scope
@@ -342,7 +342,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                   withScope:(SentryScope *)scope
      alwaysAttachStacktrace:(BOOL)alwaysAttachStacktrace
                isCrashEvent:(BOOL)isCrashEvent
-    additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
+    additionalEnvelopeItems:(NSArray<BuzzSentryEnvelopeItem *> *)additionalEnvelopeItems
 {
     SentryEvent *preparedEvent = [self prepareEvent:event
                                           withScope:scope
@@ -412,15 +412,15 @@ NSString *const kSentryDefaultEnvironment = @"production";
         return;
     }
 
-    SentryEnvelopeItem *item = [[SentryEnvelopeItem alloc] initWithSession:session];
-    SentryEnvelopeHeader *envelopeHeader = [[SentryEnvelopeHeader alloc] initWithId:nil
+    BuzzSentryEnvelopeItem *item = [[BuzzSentryEnvelopeItem alloc] initWithSession:session];
+    BuzzSentryEnvelopeHeader *envelopeHeader = [[BuzzSentryEnvelopeHeader alloc] initWithId:nil
                                                                        traceContext:nil];
-    SentryEnvelope *envelope = [[SentryEnvelope alloc] initWithHeader:envelopeHeader
+    BuzzSentryEnvelope *envelope = [[BuzzSentryEnvelope alloc] initWithHeader:envelopeHeader
                                                            singleItem:item];
     [self captureEnvelope:envelope];
 }
 
-- (void)captureEnvelope:(SentryEnvelope *)envelope
+- (void)captureEnvelope:(BuzzSentryEnvelope *)envelope
 {
     // TODO: What is about beforeSend
 
@@ -447,7 +447,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     [self.transportAdapter sendUserFeedback:userFeedback];
 }
 
-- (void)storeEnvelope:(SentryEnvelope *)envelope
+- (void)storeEnvelope:(BuzzSentryEnvelope *)envelope
 {
     [self.fileManager storeEnvelope:envelope];
 }
@@ -488,7 +488,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 
     BOOL eventIsNotATransaction
-        = event.type == nil || ![event.type isEqualToString:SentryEnvelopeItemTypeTransaction];
+        = event.type == nil || ![event.type isEqualToString:BuzzSentryEnvelopeItemTypeTransaction];
 
     // Transactions have their own sampleRate
     if (eventIsNotATransaction && [self isSampled:self.options.sampleRate]) {

@@ -1,6 +1,6 @@
 #import "SentrySDK.h"
 
-@class SentryHub, SentryId, SentryAppStartMeasurement, SentryEnvelope;
+@class SentryHub, SentryId, SentryAppStartMeasurement, BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,12 +29,12 @@ SentrySDK (Private)
 /**
  * Needed by hybrid SDKs as react-native to synchronously store an envelope to disk.
  */
-+ (void)storeEnvelope:(SentryEnvelope *)envelope;
++ (void)storeEnvelope:(BuzzSentryEnvelope *)envelope;
 
 /**
  * Needed by hybrid SDKs as react-native to synchronously capture an envelope.
  */
-+ (void)captureEnvelope:(SentryEnvelope *)envelope;
++ (void)captureEnvelope:(BuzzSentryEnvelope *)envelope;
 
 /**
  * Start a transaction with a name and a name source.

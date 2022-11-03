@@ -1,6 +1,6 @@
 import Foundation
 
-class TestEnvelopeRateLimitDelegate: NSObject, SentryEnvelopeRateLimitDelegate {
+class TestEnvelopeRateLimitDelegate: NSObject, BuzzSentryEnvelopeRateLimitDelegate {
     
     var envelopeItemsDropped = Invocations<SentryDataCategory>()
     func envelopeItemDropped(_ dataCategory: SentryDataCategory) {

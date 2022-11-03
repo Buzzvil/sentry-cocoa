@@ -311,7 +311,7 @@ static NSUInteger startInvocations;
 /**
  * Needed by hybrid SDKs as react-native to synchronously capture an envelope.
  */
-+ (void)captureEnvelope:(SentryEnvelope *)envelope
++ (void)captureEnvelope:(BuzzSentryEnvelope *)envelope
 {
     [SentrySDK.currentHub captureEnvelope:envelope];
 }
@@ -319,7 +319,7 @@ static NSUInteger startInvocations;
 /**
  * Needed by hybrid SDKs as react-native to synchronously store an envelope to disk.
  */
-+ (void)storeEnvelope:(SentryEnvelope *)envelope
++ (void)storeEnvelope:(BuzzSentryEnvelope *)envelope
 {
     if (nil != [SentrySDK.currentHub getClient]) {
         [[SentrySDK.currentHub getClient] storeEnvelope:envelope];

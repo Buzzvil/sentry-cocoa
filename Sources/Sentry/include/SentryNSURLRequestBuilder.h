@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class SentryEnvelope, SentryDsn;
+@class BuzzSentryEnvelope, SentryDsn;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SentryNSURLRequestBuilder : NSObject
 
-- (NSURLRequest *)createEnvelopeRequest:(SentryEnvelope *)envelope
+- (NSURLRequest *)createEnvelopeRequest:(BuzzSentryEnvelope *)envelope
                                     dsn:(SentryDsn *)dsn
                        didFailWithError:(NSError *_Nullable *_Nullable)error;
 

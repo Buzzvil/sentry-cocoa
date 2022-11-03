@@ -1,7 +1,7 @@
 #import "SentryScope.h"
 #import "BuzzSentryAttachment.h"
 #import "SentryBreadcrumb.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import "SentryEvent.h"
 #import "SentryGlobalEventProcessor.h"
 #import "SentryLevelMapper.h"
@@ -530,7 +530,7 @@ SentryScope ()
 
         // Span could be nil as we do the first check outside the synchronize
         if (span != nil) {
-            if (![event.type isEqualToString:SentryEnvelopeItemTypeTransaction] &&
+            if (![event.type isEqualToString:BuzzSentryEnvelopeItemTypeTransaction] &&
                 [span isKindOfClass:[BuzzSentryTracer class]]) {
                 event.transaction = [[(BuzzSentryTracer *)span transactionContext] name];
             }

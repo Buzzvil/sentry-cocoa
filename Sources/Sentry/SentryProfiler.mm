@@ -10,8 +10,8 @@
 #    import "SentryDefines.h"
 #    import "SentryDependencyContainer.h"
 #    import "SentryDevice.h"
-#    import "SentryEnvelope.h"
-#    import "SentryEnvelopeItemType.h"
+#    import "BuzzSentryEnvelope.h"
+#    import "BuzzSentryEnvelopeItemType.h"
 #    import "SentryFramesTracker.h"
 #    import "SentryHexAddressFormatter.h"
 #    import "SentryHub+Private.h"
@@ -608,11 +608,11 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
         return;
     }
 
-    const auto header = [[SentryEnvelopeItemHeader alloc] initWithType:SentryEnvelopeItemTypeProfile
+    const auto header = [[BuzzSentryEnvelopeItemHeader alloc] initWithType:BuzzSentryEnvelopeItemTypeProfile
                                                                 length:JSONData.length];
-    const auto item = [[SentryEnvelopeItem alloc] initWithHeader:header data:JSONData];
-    const auto envelopeHeader = [[SentryEnvelopeHeader alloc] initWithId:profileID];
-    const auto envelope = [[SentryEnvelope alloc] initWithHeader:envelopeHeader singleItem:item];
+    const auto item = [[BuzzSentryEnvelopeItem alloc] initWithHeader:header data:JSONData];
+    const auto envelopeHeader = [[BuzzSentryEnvelopeHeader alloc] initWithId:profileID];
+    const auto envelope = [[BuzzSentryEnvelope alloc] initWithHeader:envelopeHeader singleItem:item];
     [_hub captureEnvelope:envelope];
 }
 

@@ -1,7 +1,7 @@
 #import "SentrySerialization.h"
 #import "SentryAppState.h"
-#import "SentryEnvelope.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelope.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import "SentryError.h"
 #import "SentryId.h"
 #import "SentryLevelMapper.h"
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
     return data;
 }
 
-+ (NSData *_Nullable)dataWithEnvelope:(SentryEnvelope *)envelope
++ (NSData *_Nullable)dataWithEnvelope:(BuzzSentryEnvelope *)envelope
                                 error:(NSError *_Nullable *_Nullable)error
 {
 
@@ -153,9 +153,9 @@ NS_ASSUME_NONNULL_BEGIN
     return decoded.copy;
 }
 
-+ (SentryEnvelope *_Nullable)envelopeWithData:(NSData *)data
++ (BuzzSentryEnvelope *_Nullable)envelopeWithData:(NSData *)data
 {
-    SentryEnvelopeHeader *envelopeHeader = nil;
+    BuzzSentryEnvelopeHeader *envelopeHeader = nil;
     const unsigned char *bytes = [data bytes];
     int envelopeHeaderIndex = 0;
 
@@ -193,7 +193,7 @@ NS_ASSUME_NONNULL_BEGIN
                         [[BuzzSentryTraceContext alloc] initWithDict:headerDictionary[@"trace"]];
                 }
 
-                envelopeHeader = [[SentryEnvelopeHeader alloc] initWithId:eventId
+                envelopeHeader = [[BuzzSentryEnvelopeHeader alloc] initWithId:eventId
                                                                   sdkInfo:sdkInfo
                                                              traceContext:traceContext];
             }
@@ -215,7 +215,7 @@ NS_ASSUME_NONNULL_BEGIN
     // Parse items
     NSInteger itemHeaderStart = envelopeHeaderIndex + 1;
 
-    NSMutableArray<SentryEnvelopeItem *> *items = [NSMutableArray new];
+    NSMutableArray<BuzzSentryEnvelopeItem *> *items = [NSMutableArray new];
     NSUInteger endOfEnvelope = data.length - 1;
     for (NSInteger i = itemHeaderStart; i <= endOfEnvelope; ++i) {
         if (bytes[i] == '\n' || i == endOfEnvelope) {
@@ -266,26 +266,26 @@ NS_ASSUME_NONNULL_BEGIN
             NSString *_Nullable filename = [headerDictionary valueForKey:@"filename"];
             NSString *_Nullable contentType = [headerDictionary valueForKey:@"content_type"];
 
-            SentryEnvelopeItemHeader *itemHeader;
+            BuzzSentryEnvelopeItemHeader *itemHeader;
             if (nil != filename && nil != contentType) {
-                itemHeader = [[SentryEnvelopeItemHeader alloc] initWithType:type
+                itemHeader = [[BuzzSentryEnvelopeItemHeader alloc] initWithType:type
                                                                      length:bodyLength
                                                                   filenname:filename
                                                                 contentType:contentType];
             } else {
-                itemHeader = [[SentryEnvelopeItemHeader alloc] initWithType:type length:bodyLength];
+                itemHeader = [[BuzzSentryEnvelopeItemHeader alloc] initWithType:type length:bodyLength];
             }
 
             NSData *itemBody = [data subdataWithRange:NSMakeRange(i + 1, bodyLength)];
 #ifdef DEBUG
-            if ([SentryEnvelopeItemTypeEvent isEqual:type] ||
-                [SentryEnvelopeItemTypeSession isEqual:type]) {
+            if ([BuzzSentryEnvelopeItemTypeEvent isEqual:type] ||
+                [BuzzSentryEnvelopeItemTypeSession isEqual:type]) {
                 NSString *event = [[NSString alloc] initWithData:itemBody
                                                         encoding:NSUTF8StringEncoding];
                 SENTRY_LOG_DEBUG(@"Event %@", event);
             }
 #endif
-            SentryEnvelopeItem *envelopeItem = [[SentryEnvelopeItem alloc] initWithHeader:itemHeader
+            BuzzSentryEnvelopeItem *envelopeItem = [[BuzzSentryEnvelopeItem alloc] initWithHeader:itemHeader
                                                                                      data:itemBody];
             [items addObject:envelopeItem];
             i = itemHeaderStart = i + 1 + [bodyLengthNumber integerValue];
@@ -297,7 +297,7 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
 
-    SentryEnvelope *envelope = [[SentryEnvelope alloc] initWithHeader:envelopeHeader items:items];
+    BuzzSentryEnvelope *envelope = [[BuzzSentryEnvelope alloc] initWithHeader:envelopeHeader items:items];
     return envelope;
 }
 

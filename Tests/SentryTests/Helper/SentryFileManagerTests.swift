@@ -19,10 +19,10 @@ class SentryFileManagerTests: XCTestCase {
         let options: Options
 
         let session = SentrySession(releaseName: "1.0.0")
-        let sessionEnvelope: SentryEnvelope
+        let sessionEnvelope: BuzzSentryEnvelope
 
         let sessionUpdate: SentrySession
-        let sessionUpdateEnvelope: SentryEnvelope
+        let sessionUpdateEnvelope: BuzzSentryEnvelope
 
         let expectedSessionUpdate: SentrySession
         
@@ -42,7 +42,7 @@ class SentryFileManagerTests: XCTestCase {
             options = Options()
             options.dsn = TestConstants.dsnAsString(username: "SentryFileManagerTests")
             
-            sessionEnvelope = SentryEnvelope(session: session)
+            sessionEnvelope = BuzzSentryEnvelope(session: session)
 
             let sessionCopy = session.copy() as! SentrySession
             sessionCopy.incrementErrors()
@@ -50,8 +50,8 @@ class SentryFileManagerTests: XCTestCase {
             sessionUpdate = SentrySession(jsonObject: sessionCopy.serialize())!
 
             let event = Event()
-            let items = [SentryEnvelopeItem(session: sessionUpdate), SentryEnvelopeItem(event: event)]
-            sessionUpdateEnvelope = SentryEnvelope(id: event.eventId, items: items)
+            let items = [BuzzSentryEnvelopeItem(session: sessionUpdate), BuzzSentryEnvelopeItem(event: event)]
+            sessionUpdateEnvelope = BuzzSentryEnvelope(id: event.eventId, items: items)
 
             let sessionUpdateCopy = sessionUpdate.copy() as! SentrySession
             // We need to serialize in order to set the timestamp and the duration
@@ -218,9 +218,9 @@ class SentryFileManagerTests: XCTestCase {
     
     func testDefaultMaxEnvelopes_CallsEnvelopeItemDeleted() {
         let event = Event()
-        let envelope = SentryEnvelope(id: event.eventId, items: [
-            SentryEnvelopeItem(event: event),
-            SentryEnvelopeItem(attachment: TestData.dataAttachment, maxAttachmentSize: 5 * 1_024 * 1_024)!
+        let envelope = BuzzSentryEnvelope(id: event.eventId, items: [
+            BuzzSentryEnvelopeItem(event: event),
+            BuzzSentryEnvelopeItem(attachment: TestData.dataAttachment, maxAttachmentSize: 5 * 1_024 * 1_024)!
         ])
         sut.store(envelope)
         sut.store(fixture.sessionUpdateEnvelope)
@@ -268,7 +268,7 @@ class SentryFileManagerTests: XCTestCase {
     func testMigrateSessionInit_SessionUpdateIsLast() {
         sut.store(fixture.sessionEnvelope)
         // just some other session
-        sut.store(SentryEnvelope(session: SentrySession(releaseName: "1.0.0")))
+        sut.store(BuzzSentryEnvelope(session: SentrySession(releaseName: "1.0.0")))
         for _ in 0...(fixture.maxCacheItems - 3) {
             sut.store(TestConstants.envelope)
         }
@@ -585,7 +585,7 @@ class SentryFileManagerTests: XCTestCase {
 
     private func givenMaximumEnvelopes() {
         fixture.eventIds.forEach { id in
-            let envelope = SentryEnvelope(id: id, singleItem: SentryEnvelopeItem(event: Event()))
+            let envelope = BuzzSentryEnvelope(id: id, singleItem: BuzzSentryEnvelopeItem(event: Event()))
 
             sut.store(envelope)
             advanceTime(bySeconds: 0.1)
@@ -668,7 +668,7 @@ class SentryFileManagerTests: XCTestCase {
     private func assertSessionEnvelopesStored(count: Int) {
         let fileContentsWithSession = sut.getAllEnvelopes().filter { envelopeFileContents in
             let envelope = SentrySerialization.envelope(with: envelopeFileContents.contents)
-            return !(envelope?.items.filter { item in item.header.type == SentryEnvelopeItemTypeSession }.isEmpty ?? false)
+            return !(envelope?.items.filter { item in item.header.type == BuzzSentryEnvelopeItemTypeSession }.isEmpty ?? false)
         }
 
         XCTAssertEqual(count, fileContentsWithSession.count)

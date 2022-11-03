@@ -7,9 +7,9 @@ SentrySDK (Tests)
 
 + (void)setCurrentHub:(nullable SentryHub *)hub;
 
-+ (void)captureEnvelope:(SentryEnvelope *)envelope;
++ (void)captureEnvelope:(BuzzSentryEnvelope *)envelope;
 
-+ (void)storeEnvelope:(SentryEnvelope *)envelope;
++ (void)storeEnvelope:(BuzzSentryEnvelope *)envelope;
 
 @end
 

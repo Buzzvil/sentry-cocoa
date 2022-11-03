@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentryEnvelopeRateLimit.h"
+#import "BuzzSentryEnvelopeRateLimit.h"
 #import "SentryFileManager.h"
 #import "SentryRateLimits.h"
 #import "SentryRequestManager.h"
@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SentryHttpTransport
-    : NSObject <SentryTransport, SentryEnvelopeRateLimitDelegate, SentryFileManagerDelegate>
+    : NSObject <SentryTransport, BuzzSentryEnvelopeRateLimitDelegate, SentryFileManagerDelegate>
 SENTRY_NO_INIT
 
 - (id)initWithOptions:(BuzzSentryOptions *)options
@@ -19,7 +19,7 @@ SENTRY_NO_INIT
           requestManager:(id<SentryRequestManager>)requestManager
           requestBuilder:(SentryNSURLRequestBuilder *)requestBuilder
               rateLimits:(id<SentryRateLimits>)rateLimits
-       envelopeRateLimit:(SentryEnvelopeRateLimit *)envelopeRateLimit
+       envelopeRateLimit:(BuzzSentryEnvelopeRateLimit *)envelopeRateLimit
     dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper
             reachability:(SentryReachability *)reachability;
 

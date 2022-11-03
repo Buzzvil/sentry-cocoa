@@ -1,6 +1,6 @@
 #import "BuzzSentryTransaction.h"
 #import "NSDictionary+SentrySanitize.h"
-#import "SentryEnvelopeItemType.h"
+#import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryMeasurementValue.h"
 #import "BuzzSentryTransactionContext.h"
 
@@ -22,7 +22,7 @@ BuzzSentryTransaction ()
         self.startTimestamp = trace.startTimestamp;
         self.trace = trace;
         self.spans = children;
-        self.type = SentryEnvelopeItemTypeTransaction;
+        self.type = BuzzSentryEnvelopeItemTypeTransaction;
     }
     return self;
 }

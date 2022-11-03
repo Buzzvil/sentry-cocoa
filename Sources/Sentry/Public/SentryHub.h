@@ -3,7 +3,7 @@
 #import "BuzzSentrySpanProtocol.h"
 
 @class SentryEvent, BuzzSentryClient, SentryScope, SentrySession, SentryUser, SentryBreadcrumb,
-    SentryId, BuzzSentryUserFeedback, SentryEnvelope, BuzzSentryTransactionContext;
+    SentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface SentryHub : NSObject
@@ -257,7 +257,7 @@ SENTRY_NO_INIT
  * list, like the Java and Python SDK do this, but this would require full deserialization of the
  * event.
  */
-- (void)captureEnvelope:(SentryEnvelope *)envelope NS_SWIFT_NAME(capture(envelope:));
+- (void)captureEnvelope:(BuzzSentryEnvelope *)envelope NS_SWIFT_NAME(capture(envelope:));
 
 /**
  * Waits synchronously for the SDK to flush out all queued and cached items for up to the specified

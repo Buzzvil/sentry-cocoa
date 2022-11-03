@@ -2,14 +2,14 @@
 #import "SentryDiscardReason.h"
 #import <Foundation/Foundation.h>
 
-@class SentryEnvelope;
+@class BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(Transport)
 @protocol SentryTransport <NSObject>
 
-- (void)sendEnvelope:(SentryEnvelope *)envelope NS_SWIFT_NAME(send(envelope:));
+- (void)sendEnvelope:(BuzzSentryEnvelope *)envelope NS_SWIFT_NAME(send(envelope:));
 
 - (void)recordLostEvent:(SentryDataCategory)category reason:(SentryDiscardReason)reason;
 

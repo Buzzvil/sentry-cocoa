@@ -42,7 +42,7 @@ class SentrySDKIntegrationTestsBase: XCTestCase {
         callback(client.captureEventInvocations.first)
     }
     
-    func assertEventWithScopeCaptured(_ callback: (Event?, Scope?, [SentryEnvelopeItem]?) -> Void) {
+    func assertEventWithScopeCaptured(_ callback: (Event?, Scope?, [BuzzSentryEnvelopeItem]?) -> Void) {
         guard let client = SentrySDK.currentHub().getClient() as? TestClient else {
             XCTFail("Hub Client is not a `TestClient`")
             return

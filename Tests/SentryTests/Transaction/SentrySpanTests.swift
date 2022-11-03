@@ -67,7 +67,7 @@ class BuzzSentrySpanTests: XCTestCase {
         XCTAssertEqual(lastEvent.transaction, fixture.someTransaction)
         XCTAssertEqual(lastEvent.timestamp, TestData.timestamp)
         XCTAssertEqual(lastEvent.startTimestamp, TestData.timestamp)
-        XCTAssertEqual(lastEvent.type, SentryEnvelopeItemTypeTransaction)
+        XCTAssertEqual(lastEvent.type, BuzzSentryEnvelopeItemTypeTransaction)
     }
     
     func testFinish_Custom_Timestamp() {
@@ -89,7 +89,7 @@ class BuzzSentrySpanTests: XCTestCase {
         XCTAssertEqual(lastEvent.transaction, fixture.someTransaction)
         XCTAssertEqual(lastEvent.timestamp, finishDate)
         XCTAssertEqual(lastEvent.startTimestamp, TestData.timestamp)
-        XCTAssertEqual(lastEvent.type, SentryEnvelopeItemTypeTransaction)
+        XCTAssertEqual(lastEvent.type, BuzzSentryEnvelopeItemTypeTransaction)
     }
 
     func testFinishSpanWithDefaultTimestamp() {

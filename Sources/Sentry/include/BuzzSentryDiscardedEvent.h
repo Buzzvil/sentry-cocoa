@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryDiscardedEvent : NSObject <SentrySerializable>
+@interface BuzzSentryDiscardedEvent : NSObject <SentrySerializable>
 SENTRY_NO_INIT
 
 - (instancetype)initWithReason:(SentryDiscardReason)reason

@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SentryNSURLRequestBuilder
 
-- (NSURLRequest *)createEnvelopeRequest:(SentryEnvelope *)envelope
+- (NSURLRequest *)createEnvelopeRequest:(BuzzSentryEnvelope *)envelope
                                     dsn:(SentryDsn *)dsn
                        didFailWithError:(NSError *_Nullable *_Nullable)error
 {

@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class SentryEnvelope;
+@class BuzzSentryEnvelope;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,7 +28,7 @@ SENTRY_NO_INIT
  *
  * @return YES if the function migrated the session init. NO if not.
  */
-+ (BOOL)migrateSessionInit:(SentryEnvelope *)envelope
++ (BOOL)migrateSessionInit:(BuzzSentryEnvelope *)envelope
           envelopesDirPath:(NSString *)envelopesDirPath
          envelopeFilePaths:(NSArray<NSString *> *)envelopeFilePaths;
 
