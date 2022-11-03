@@ -6,7 +6,7 @@
 
 #    include "BuzzSentryCPU.h"
 #    include "BuzzSentryCompiler.h"
-#    include "SentryStackFrame.hpp"
+#    include "BuzzSentryStackFrame.hpp"
 #    include "BuzzSentryThreadHandle.hpp"
 
 #    include <cstdint>

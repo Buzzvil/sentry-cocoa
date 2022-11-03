@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BuzzSentryCPU.h"
-#include "SentryStackFrame.hpp"
+#include "BuzzSentryStackFrame.hpp"
 
 #include <cstdint>
 
