@@ -1,6 +1,6 @@
 #import "BuzzSentryCrashStackEntryMapper.h"
 #import "BuzzSentryFrame.h"
-#import "SentryHexAddressFormatter.h"
+#import "BuzzSentryHexAddressFormatter.h"
 #import "BuzzSentryInAppLogic.h"
 #import <Foundation/Foundation.h>
 

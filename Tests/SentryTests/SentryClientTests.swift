@@ -28,8 +28,8 @@ class BuzzSentryClientTest: XCTestCase {
         let trace = BuzzSentryTracer(transactionContext: TransactionContext(name: "SomeTransaction", operation: "SomeOperation"), hub: nil)
         let transaction: Transaction
         let crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
-        let permissionsObserver = TestSentryPermissionsObserver()
-        let deviceWrapper = TestSentryUIDeviceWrapper()
+        let permissionsObserver = TestBuzzSentryPermissionsObserver()
+        let deviceWrapper = TestBuzzSentryUIDeviceWrapper()
         let locale = Locale(identifier: "en_US")
         let timezone = TimeZone(identifier: "Europe/Vienna")!
         
@@ -1066,7 +1066,7 @@ class BuzzSentryClientTest: XCTestCase {
         
         let options = Options()
         options.dsn = BuzzSentryClientTest.dsn
-        let client = Client(options: options, permissionsObserver: TestSentryPermissionsObserver())
+        let client = Client(options: options, permissionsObserver: TestBuzzSentryPermissionsObserver())
         
         XCTAssertNil(client)
         

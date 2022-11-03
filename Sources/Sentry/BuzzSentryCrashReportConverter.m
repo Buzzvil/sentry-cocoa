@@ -6,7 +6,7 @@
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
 #import "BuzzSentryFrame.h"
-#import "SentryHexAddressFormatter.h"
+#import "BuzzSentryHexAddressFormatter.h"
 #import "BuzzSentryInAppLogic.h"
 #import "SentryLog.h"
 #import "BuzzSentryMechanism.h"

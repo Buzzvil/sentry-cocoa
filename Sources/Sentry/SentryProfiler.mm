@@ -13,7 +13,7 @@
 #    import "BuzzSentryEnvelope.h"
 #    import "BuzzSentryEnvelopeItemType.h"
 #    import "BuzzSentryFramesTracker.h"
-#    import "SentryHexAddressFormatter.h"
+#    import "BuzzSentryHexAddressFormatter.h"
 #    import "BuzzSentryHub+Private.h"
 #    import "BuzzSentryId.h"
 #    import "SentryLog.h"

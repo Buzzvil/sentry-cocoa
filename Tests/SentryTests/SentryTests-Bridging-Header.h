@@ -157,7 +157,7 @@
 #import "BuzzSentryTransportAdapter.h"
 #import "BuzzSentryTransportFactory.h"
 #import "BuzzSentryUIApplication.h"
-#import "SentryUIDeviceWrapper.h"
+#import "BuzzSentryUIDeviceWrapper.h"
 #import "BuzzSentryUIViewControllerPerformanceTracker.h"
 #import "BuzzSentryUIViewControllerSanitizer.h"
 #import "BuzzSentryUIViewControllerSwizzling+Test.h"

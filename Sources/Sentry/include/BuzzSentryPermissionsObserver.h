@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryPermissionsObserver : NSObject
+@interface BuzzSentryPermissionsObserver : NSObject
 
 /*
  * We want as many permissions as possible,

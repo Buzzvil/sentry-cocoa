@@ -1,14 +1,14 @@
-#import "SentryUIDeviceWrapper.h"
+#import "BuzzSentryUIDeviceWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryUIDeviceWrapper ()
+BuzzSentryUIDeviceWrapper ()
 @property (nonatomic) BOOL cleanupDeviceOrientationNotifications;
 @property (nonatomic) BOOL cleanupBatteryMonitoring;
 @end
 
-@implementation SentryUIDeviceWrapper
+@implementation BuzzSentryUIDeviceWrapper
 
 #if TARGET_OS_IOS
 

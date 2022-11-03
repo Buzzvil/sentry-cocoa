@@ -1,6 +1,6 @@
 import Sentry
 
-class TestSentryPermissionsObserver: SentryPermissionsObserver {
+class TestBuzzSentryPermissionsObserver: BuzzSentryPermissionsObserver {
     var internalPushPermissionStatus = SentryPermissionStatus.unknown
     var internalLocationPermissionStatus = SentryPermissionStatus.unknown
     var internalMediaLibraryPermissionStatus = SentryPermissionStatus.unknown

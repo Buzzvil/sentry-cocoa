@@ -1,4 +1,4 @@
-#import "SentryPermissionsObserver.h"
+#import "BuzzSentryPermissionsObserver.h"
 #import <CoreLocation/CoreLocation.h>
 #import <UserNotifications/UserNotifications.h>
 
@@ -10,11 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryPermissionsObserver () <CLLocationManagerDelegate>
+BuzzSentryPermissionsObserver () <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
-@implementation SentryPermissionsObserver
+@implementation BuzzSentryPermissionsObserver
 
 - (instancetype)init
 {

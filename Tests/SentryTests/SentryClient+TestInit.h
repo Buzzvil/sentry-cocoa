@@ -1,9 +1,9 @@
-#import "SentryPermissionsObserver.h"
+#import "BuzzSentryPermissionsObserver.h"
 #import "BuzzSentryRandom.h"
 #import "BuzzSentryTransport.h"
 #import <Sentry/Sentry.h>
 
-@class BuzzSentryCrashWrapper, BuzzSentryThreadInspector, BuzzSentryTransportAdapter, SentryUIDeviceWrapper;
+@class BuzzSentryCrashWrapper, BuzzSentryThreadInspector, BuzzSentryTransportAdapter, BuzzSentryUIDeviceWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 BuzzSentryClient (TestInit)
 
 - (_Nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
-                      permissionsObserver:(SentryPermissionsObserver *)permissionsObserver;
+                      permissionsObserver:(BuzzSentryPermissionsObserver *)permissionsObserver;
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                transportAdapter:(BuzzSentryTransportAdapter *)transportAdapter
@@ -20,8 +20,8 @@ BuzzSentryClient (TestInit)
                 threadInspector:(BuzzSentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random
                    crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
-            permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
-                  deviceWrapper:(SentryUIDeviceWrapper *)deviceWrapper
+            permissionsObserver:(BuzzSentryPermissionsObserver *)permissionsObserver
+                  deviceWrapper:(BuzzSentryUIDeviceWrapper *)deviceWrapper
                          locale:(NSLocale *)locale
                        timezone:(NSTimeZone *)timezone;
 

@@ -22,7 +22,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
             options.dsn = BuzzSentryCrashIntegrationTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
-            let client = Client(options: options, permissionsObserver: TestSentryPermissionsObserver())
+            let client = Client(options: options, permissionsObserver: TestBuzzSentryPermissionsObserver())
             hub = TestHub(client: client, andScope: nil)
         }
         

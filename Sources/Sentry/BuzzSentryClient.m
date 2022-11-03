@@ -30,7 +30,7 @@
 #import "BuzzSentryNSError.h"
 #import "BuzzSentryOptions+Private.h"
 #import "BuzzSentryOutOfMemoryTracker.h"
-#import "SentryPermissionsObserver.h"
+#import "BuzzSentryPermissionsObserver.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope+Private.h"
 #import "BuzzSentrySDKInfo.h"
@@ -42,7 +42,7 @@
 #import "BuzzSentryTransport.h"
 #import "BuzzSentryTransportAdapter.h"
 #import "BuzzSentryTransportFactory.h"
-#import "SentryUIDeviceWrapper.h"
+#import "BuzzSentryUIDeviceWrapper.h"
 #import "BuzzSentryUser.h"
 #import "BuzzSentryUserFeedback.h"
 
@@ -63,8 +63,8 @@ BuzzSentryClient ()
 @property (nonatomic, strong)
     NSMutableArray<id<BuzzSentryClientAttachmentProcessor>> *attachmentProcessors;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
-@property (nonatomic, strong) SentryPermissionsObserver *permissionsObserver;
-@property (nonatomic, strong) SentryUIDeviceWrapper *deviceWrapper;
+@property (nonatomic, strong) BuzzSentryPermissionsObserver *permissionsObserver;
+@property (nonatomic, strong) BuzzSentryUIDeviceWrapper *deviceWrapper;
 @property (nonatomic, strong) NSLocale *locale;
 @property (nonatomic, strong) NSTimeZone *timezone;
 
@@ -78,12 +78,12 @@ NSString *const kSentryDefaultEnvironment = @"production";
 - (_Nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
 {
     return [self initWithOptions:options
-             permissionsObserver:[[SentryPermissionsObserver alloc] init]];
+             permissionsObserver:[[BuzzSentryPermissionsObserver alloc] init]];
 }
 
 /** Internal constructors for testing */
 - (_Nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
-                      permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
+                      permissionsObserver:(BuzzSentryPermissionsObserver *)permissionsObserver
 {
     NSError *error = nil;
     SentryFileManager *fileManager =
@@ -113,7 +113,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     BuzzSentryThreadInspector *threadInspector =
         [[BuzzSentryThreadInspector alloc] initWithStacktraceBuilder:stacktraceBuilder
                                         andMachineContextWrapper:machineContextWrapper];
-    SentryUIDeviceWrapper *deviceWrapper = [[SentryUIDeviceWrapper alloc] init];
+    BuzzSentryUIDeviceWrapper *deviceWrapper = [[BuzzSentryUIDeviceWrapper alloc] init];
 
     return [self initWithOptions:options
                 transportAdapter:transportAdapter
@@ -133,8 +133,8 @@ NSString *const kSentryDefaultEnvironment = @"production";
                 threadInspector:(BuzzSentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random
                    crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
-            permissionsObserver:(SentryPermissionsObserver *)permissionsObserver
-                  deviceWrapper:(SentryUIDeviceWrapper *)deviceWrapper
+            permissionsObserver:(BuzzSentryPermissionsObserver *)permissionsObserver
+                  deviceWrapper:(BuzzSentryUIDeviceWrapper *)deviceWrapper
                          locale:(NSLocale *)locale
                        timezone:(NSTimeZone *)timezone
 {

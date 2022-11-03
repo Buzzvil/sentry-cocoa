@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryUIDeviceWrapper : NSObject
+@interface BuzzSentryUIDeviceWrapper : NSObject
 
 #if TARGET_OS_IOS
 - (UIDeviceOrientation)orientation;

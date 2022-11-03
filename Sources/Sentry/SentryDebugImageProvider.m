@@ -4,7 +4,7 @@
 #import "SentryCrashUUIDConversion.h"
 #import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryFrame.h"
-#import "SentryHexAddressFormatter.h"
+#import "BuzzSentryHexAddressFormatter.h"
 #import "SentryLog.h"
 #import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
