@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class BuzzSentryOptions, BuzzSentryCrashWrapper, SentryAppState, SentryFileManager, SentryAppStateManager;
+@class BuzzSentryOptions, BuzzSentryCrashWrapper, BuzzSentryAppState, BuzzSentryFileManager, BuzzSentryAppStateManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -9,7 +9,7 @@ SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                    crashAdapter:(BuzzSentryCrashWrapper *)crashAdapter
-                appStateManager:(SentryAppStateManager *)appStateManager;
+                appStateManager:(BuzzSentryAppStateManager *)appStateManager;
 
 - (BOOL)isOOM;
 

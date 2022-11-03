@@ -7,7 +7,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #if SENTRY_HAS_UIKIT
-typedef void (^SentrySwizzleSendActionCallback)(
+typedef void (^BuzzSentrySwizzleSendActionCallback)(
     NSString *actionName, _Nullable id target, _Nullable id sender, UIEvent *_Nullable event);
 #endif
 
@@ -15,12 +15,12 @@ typedef void (^SentrySwizzleSendActionCallback)(
  * A wrapper around swizzling for testability and to only swizzle once when multiple implementations
  * need to be called for the same swizzled method.
  */
-@interface SentrySwizzleWrapper : NSObject
+@interface BuzzSentrySwizzleWrapper : NSObject
 
-@property (class, readonly, nonatomic) SentrySwizzleWrapper *sharedInstance;
+@property (class, readonly, nonatomic) BuzzSentrySwizzleWrapper *sharedInstance;
 
 #if SENTRY_HAS_UIKIT
-- (void)swizzleSendAction:(SentrySwizzleSendActionCallback)callback forKey:(NSString *)key;
+- (void)swizzleSendAction:(BuzzSentrySwizzleSendActionCallback)callback forKey:(NSString *)key;
 
 - (void)removeSwizzleSendActionForKey:(NSString *)key;
 #endif

@@ -1,21 +1,21 @@
-#import "SentryDateUtil.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryDateUtil.h"
+#import "BuzzSentryCurrentDate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryDateUtil ()
+BuzzSentryDateUtil ()
 
 @end
 
-@implementation SentryDateUtil
+@implementation BuzzSentryDateUtil
 
 + (BOOL)isInFuture:(NSDate *_Nullable)date
 {
     if (nil == date)
         return NO;
 
-    NSComparisonResult result = [[SentryCurrentDate date] compare:date];
+    NSComparisonResult result = [[BuzzSentryCurrentDate date] compare:date];
     return result == NSOrderedAscending;
 }
 

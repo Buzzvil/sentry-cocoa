@@ -2,12 +2,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentrySwizzleWrapper;
+@class BuzzSentrySwizzleWrapper;
 
 @interface BuzzSentryBreadcrumbTracker : NSObject
 SENTRY_NO_INIT
 
-- (instancetype)initWithSwizzleWrapper:(SentrySwizzleWrapper *)swizzleWrapper;
+- (instancetype)initWithSwizzleWrapper:(BuzzSentrySwizzleWrapper *)swizzleWrapper;
 
 - (void)start;
 - (void)startSwizzle;

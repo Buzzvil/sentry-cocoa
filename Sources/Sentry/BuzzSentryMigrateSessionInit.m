@@ -1,13 +1,13 @@
-#import "SentryMigrateSessionInit.h"
+#import "BuzzSentryMigrateSessionInit.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "SentryLog.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import "BuzzSentrySession+Private.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryMigrateSessionInit
+@implementation BuzzSentryMigrateSessionInit
 
 + (BOOL)migrateSessionInit:(BuzzSentryEnvelope *)envelope
           envelopesDirPath:(NSString *)envelopesDirPath
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     for (BuzzSentryEnvelopeItem *item in envelope.items) {
         if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeSession]) {
-            BuzzSentrySession *session = [SentrySerialization sessionWithData:item.data];
+            BuzzSentrySession *session = [BuzzSentrySerialization sessionWithData:item.data];
             if (nil != session && [session.flagInit boolValue]) {
                 BOOL didSetInitFlag =
                     [self setInitFlagOnNextEnvelopeWithSameSessionId:session
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
             continue;
         }
 
-        BuzzSentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeData];
+        BuzzSentryEnvelope *envelope = [BuzzSentrySerialization envelopeWithData:envelopeData];
 
         if (nil != envelope) {
             BOOL didSetInitFlag = [self setInitFlagIfContainsSameSessionId:session.sessionId
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     for (BuzzSentryEnvelopeItem *item in envelope.items) {
         if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeSession]) {
-            BuzzSentrySession *localSession = [SentrySerialization sessionWithData:item.data];
+            BuzzSentrySession *localSession = [BuzzSentrySerialization sessionWithData:item.data];
 
             if (nil != localSession && [localSession.sessionId isEqual:sessionId]) {
                 [localSession setFlagInit];
@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
                                          items:envelopeItemsWithUpdatedSession];
 
     NSError *error;
-    NSData *envelopeWithInitFlagData = [SentrySerialization dataWithEnvelope:envelopeWithInitFlag
+    NSData *envelopeWithInitFlagData = [BuzzSentrySerialization dataWithEnvelope:envelopeWithInitFlag
                                                                        error:&error];
     [envelopeWithInitFlagData writeToFile:envelopeFilePath
                                   options:NSDataWritingAtomic

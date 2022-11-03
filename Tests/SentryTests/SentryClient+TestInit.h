@@ -16,7 +16,7 @@ BuzzSentryClient (TestInit)
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                transportAdapter:(BuzzSentryTransportAdapter *)transportAdapter
-                    fileManager:(SentryFileManager *)fileManager
+                    fileManager:(BuzzSentryFileManager *)fileManager
                 threadInspector:(BuzzSentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random
                    crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper

@@ -1,7 +1,7 @@
 #import "BuzzSentrySpan.h"
 #import "NSDate+BuzzSentryExtras.h"
 #import "NSDictionary+BuzzSentrySanitize.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "SentryLog.h"
 #import "BuzzSentryMeasurementValue.h"
 #import "BuzzSentryNoOpSpan.h"
@@ -29,7 +29,7 @@ BuzzSentrySpan ()
             @"Starting span %@ with tracer %@", context.spanId.BuzzSentrySpanIdString, tracer);
         _tracer = tracer;
         _context = context;
-        self.startTimestamp = [SentryCurrentDate date];
+        self.startTimestamp = [BuzzSentryCurrentDate date];
         _data = [[NSMutableDictionary alloc] init];
         _tags = [[NSMutableDictionary alloc] init];
         _isFinished = NO;
@@ -127,7 +127,7 @@ BuzzSentrySpan ()
     self.context.status = status;
     _isFinished = YES;
     if (self.timestamp == nil) {
-        self.timestamp = [SentryCurrentDate date];
+        self.timestamp = [BuzzSentryCurrentDate date];
     }
     if (self.tracer != nil) {
         [self.tracer spanFinished:self];

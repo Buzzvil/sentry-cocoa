@@ -2,7 +2,7 @@
 #import "SentryDefaultObjCRuntimeWrapper.h"
 #import "SentryLog.h"
 #import "BuzzSentrySubClassFinder.h"
-#import "SentrySwizzle.h"
+#import "BuzzSentrySwizzle.h"
 #import "BuzzSentryUIViewControllerPerformanceTracker.h"
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryInAppLogic.h>
@@ -55,7 +55,7 @@ BuzzSentryUIViewControllerSwizzling ()
     return self;
 }
 
-// SentrySwizzleInstanceMethod declaration shadows a local variable. The swizzling is working
+// BuzzSentrySwizzleInstanceMethod declaration shadows a local variable. The swizzling is working
 // fine and we accept this warning.
 #    pragma clang diagnostic push
 #    pragma clang diagnostic ignored "-Wshadow"
@@ -68,7 +68,7 @@ BuzzSentryUIViewControllerSwizzling ()
         // If an app targets, for example, iOS 13 or lower, the UIKit inits the initial/root view
         // controller before the BuzzSentrySDK is initialized. Therefore, we manually call swizzle here
         // not to lose auto-generated transactions for the initial view controller. As we use
-        // SentrySwizzleModeOncePerClassAndSuperclasses, we don't have to worry about swizzling
+        // BuzzSentrySwizzleModeOncePerClassAndSuperclasses, we don't have to worry about swizzling
         // twice. We could also use objc_getClassList to lookup sub classes of UIViewController, but
         // the lookup can take around 60ms, which is not acceptable.
         if (![self swizzleRootViewControllerFromUIApplication:app]) {
@@ -295,13 +295,13 @@ BuzzSentryUIViewControllerSwizzling ()
 - (void)swizzleUIViewController
 {
     SEL selector = NSSelectorFromString(@"loadView");
-    SentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
+    BuzzSentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
         SentrySWArguments(), SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerLoadView:self
                       callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
-        SentrySwizzleModeOncePerClassAndSuperclasses, (void *)selector);
+        BuzzSentrySwizzleModeOncePerClassAndSuperclasses, (void *)selector);
 }
 
 - (void)swizzleViewControllerSubClass:(Class)class
@@ -341,82 +341,82 @@ BuzzSentryUIViewControllerSwizzling ()
         return;
     }
 
-    SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void), SentrySWArguments(),
+    BuzzSentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerLoadView:self
                       callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
-        SentrySwizzleModeOncePerClass, (void *)selector);
+        BuzzSentrySwizzleModeOncePerClass, (void *)selector);
 }
 
 - (void)swizzleViewDidLoad:(Class)class
 {
     SEL selector = NSSelectorFromString(@"viewDidLoad");
-    SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void), SentrySWArguments(),
+    BuzzSentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewDidLoad:self
                          callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
-        SentrySwizzleModeOncePerClass, (void *)selector);
+        BuzzSentrySwizzleModeOncePerClass, (void *)selector);
 }
 
 - (void)swizzleViewWillAppear:(Class)class
 {
     SEL selector = NSSelectorFromString(@"viewWillAppear:");
-    SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
+    BuzzSentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewWillAppear:self
                             callbackToOrigin:^{ SentrySWCallOriginal(animated); }];
         }),
-        SentrySwizzleModeOncePerClass, (void *)selector);
+        BuzzSentrySwizzleModeOncePerClass, (void *)selector);
 }
 
 - (void)swizzleViewDidAppear:(Class)class
 {
     SEL selector = NSSelectorFromString(@"viewDidAppear:");
-    SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
+    BuzzSentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewDidAppear:self
                            callbackToOrigin:^{ SentrySWCallOriginal(animated); }];
         }),
-        SentrySwizzleModeOncePerClass, (void *)selector);
+        BuzzSentrySwizzleModeOncePerClass, (void *)selector);
 }
 
 - (void)swizzleViewWillDisappear:(Class)class
 {
     SEL selector = NSSelectorFromString(@"viewWillDisappear:");
-    SentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
+    BuzzSentrySwizzleInstanceMethod(class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewWillDisappear:self
                                callbackToOrigin:^{ SentrySWCallOriginal(animated); }];
         }),
-        SentrySwizzleModeOncePerClass, (void *)selector);
+        BuzzSentrySwizzleModeOncePerClass, (void *)selector);
 }
 
 - (void)swizzleViewLayoutSubViews:(Class)class
 {
     SEL willSelector = NSSelectorFromString(@"viewWillLayoutSubviews");
-    SentrySwizzleInstanceMethod(class, willSelector, SentrySWReturnType(void), SentrySWArguments(),
+    BuzzSentrySwizzleInstanceMethod(class, willSelector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewWillLayoutSubViews:self
                                     callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
-        SentrySwizzleModeOncePerClass, (void *)willSelector);
+        BuzzSentrySwizzleModeOncePerClass, (void *)willSelector);
 
     SEL didSelector = NSSelectorFromString(@"viewDidLayoutSubviews");
-    SentrySwizzleInstanceMethod(class, didSelector, SentrySWReturnType(void), SentrySWArguments(),
+    BuzzSentrySwizzleInstanceMethod(class, didSelector, SentrySWReturnType(void), SentrySWArguments(),
         SentrySWReplacement({
             [BuzzSentryUIViewControllerPerformanceTracker.shared
                 viewControllerViewDidLayoutSubViews:self
                                    callbackToOrigin:^{ SentrySWCallOriginal(); }];
         }),
-        SentrySwizzleModeOncePerClass, (void *)didSelector);
+        BuzzSentrySwizzleModeOncePerClass, (void *)didSelector);
 }
 
 @end

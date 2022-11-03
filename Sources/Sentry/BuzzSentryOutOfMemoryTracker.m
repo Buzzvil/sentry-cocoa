@@ -1,7 +1,7 @@
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import <Foundation/Foundation.h>
-#import <SentryAppState.h>
-#import <SentryAppStateManager.h>
+#import <BuzzSentryAppState.h>
+#import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryEvent.h>
@@ -25,8 +25,8 @@ BuzzSentryOutOfMemoryTracker ()
 @property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) BuzzSentryOutOfMemoryLogic *outOfMemoryLogic;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
-@property (nonatomic, strong) SentryAppStateManager *appStateManager;
-@property (nonatomic, strong) SentryFileManager *fileManager;
+@property (nonatomic, strong) BuzzSentryAppStateManager *appStateManager;
+@property (nonatomic, strong) BuzzSentryFileManager *fileManager;
 
 @end
 
@@ -34,9 +34,9 @@ BuzzSentryOutOfMemoryTracker ()
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                outOfMemoryLogic:(BuzzSentryOutOfMemoryLogic *)outOfMemoryLogic
-                appStateManager:(SentryAppStateManager *)appStateManager
+                appStateManager:(BuzzSentryAppStateManager *)appStateManager
            dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
-                    fileManager:(SentryFileManager *)fileManager
+                    fileManager:(BuzzSentryFileManager *)fileManager
 {
     if (self = [super init]) {
         self.options = options;

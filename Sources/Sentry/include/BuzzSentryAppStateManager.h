@@ -1,18 +1,18 @@
-#import "SentryCurrentDateProvider.h"
+#import "BuzzSentryCurrentDateProvider.h"
 #import "SentryDefines.h"
 
-@class BuzzSentryOptions, BuzzSentryCrashWrapper, SentryAppState, SentryFileManager, SentrySysctl,
+@class BuzzSentryOptions, BuzzSentryCrashWrapper, BuzzSentryAppState, BuzzSentryFileManager, SentrySysctl,
     BuzzSentryDispatchQueueWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryAppStateManager : NSObject
+@interface BuzzSentryAppStateManager : NSObject
 SENTRY_NO_INIT
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                    crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
-                    fileManager:(SentryFileManager *)fileManager
-            currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+                    fileManager:(BuzzSentryFileManager *)fileManager
+            currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                          sysctl:(SentrySysctl *)sysctl
            dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
@@ -29,15 +29,15 @@ SENTRY_NO_INIT
  * been awake since the last time it was restarted. This means This is a good enough approximation
  * about the timestamp the system booted.
  */
-- (SentryAppState *)buildCurrentAppState;
+- (BuzzSentryAppState *)buildCurrentAppState;
 
-- (SentryAppState *)loadPreviousAppState;
+- (BuzzSentryAppState *)loadPreviousAppState;
 
 - (void)storeCurrentAppState;
 
 - (void)deleteAppState;
 
-- (void)updateAppState:(void (^)(SentryAppState *))block;
+- (void)updateAppState:(void (^)(BuzzSentryAppState *))block;
 
 #endif
 

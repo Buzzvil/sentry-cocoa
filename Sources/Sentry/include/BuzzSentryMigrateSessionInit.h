@@ -7,12 +7,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * For proper statistics in release health, we need to make sure we don't send session updates
  without sending a session init first. In other words, we can't drop a session init. The
-  SentryFileManager deletes an envelope once the maximum amount of envelopes is stored. When this
+  BuzzSentryFileManager deletes an envelope once the maximum amount of envelopes is stored. When this
  happens and the envelope to delete contains a session init we look for the next envelope containing
  a session update for the same session. If such a session envelope is found we migrate the init
  flag. If none is found we delete the envelope. We don't migrate other envelope items as events.
  */
-@interface SentryMigrateSessionInit : NSObject
+@interface BuzzSentryMigrateSessionInit : NSObject
 SENTRY_NO_INIT
 
 /**

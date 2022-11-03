@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 #import "BuzzSentryEnvelopeRateLimit.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "BuzzSentryRateLimits.h"
 #import "BuzzSentryRequestManager.h"
 #import "BuzzSentryTransport.h"
@@ -11,11 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BuzzSentryHttpTransport
-    : NSObject <BuzzSentryTransport, BuzzSentryEnvelopeRateLimitDelegate, SentryFileManagerDelegate>
+    : NSObject <BuzzSentryTransport, BuzzSentryEnvelopeRateLimitDelegate, BuzzSentryFileManagerDelegate>
 SENTRY_NO_INIT
 
 - (id)initWithOptions:(BuzzSentryOptions *)options
-             fileManager:(SentryFileManager *)fileManager
+             fileManager:(BuzzSentryFileManager *)fileManager
           requestManager:(id<BuzzSentryRequestManager>)requestManager
           requestBuilder:(BuzzSentryNSURLRequestBuilder *)requestBuilder
               rateLimits:(id<BuzzSentryRateLimits>)rateLimits

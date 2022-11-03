@@ -1,6 +1,6 @@
 #import "BuzzSentrySystemEventBreadcrumbs.h"
 #import "BuzzSentryBreadcrumb.h"
-#import "SentryCurrentDateProvider.h"
+#import "BuzzSentryCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK.h"
@@ -12,14 +12,14 @@
 
 @interface
 BuzzSentrySystemEventBreadcrumbs ()
-@property (nonatomic, strong) SentryFileManager *fileManager;
-@property (nonatomic, strong) id<SentryCurrentDateProvider> currentDateProvider;
+@property (nonatomic, strong) BuzzSentryFileManager *fileManager;
+@property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDateProvider;
 @end
 
 @implementation BuzzSentrySystemEventBreadcrumbs
 
-- (instancetype)initWithFileManager:(SentryFileManager *)fileManager
-             andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+- (instancetype)initWithFileManager:(BuzzSentryFileManager *)fileManager
+             andCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
 {
     if (self = [super init]) {
         _fileManager = fileManager;

@@ -1,6 +1,6 @@
 
 #import "BuzzSentryCoreDataSwizzling.h"
-#import "SentrySwizzle.h"
+#import "BuzzSentrySwizzle.h"
 
 @interface
 BuzzSentryCoreDataSwizzling ()
@@ -33,7 +33,7 @@ BuzzSentryCoreDataSwizzling ()
     self.middleware = nil;
 }
 
-// SentrySwizzleInstanceMethod declaration shadows a local variable. The swizzling is working
+// BuzzSentrySwizzleInstanceMethod declaration shadows a local variable. The swizzling is working
 // fine and we accept this warning.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
@@ -42,7 +42,7 @@ BuzzSentryCoreDataSwizzling ()
 {
     SEL fetchSelector = NSSelectorFromString(@"executeFetchRequest:error:");
 
-    SentrySwizzleInstanceMethod(NSManagedObjectContext.class, fetchSelector,
+    BuzzSentrySwizzleInstanceMethod(NSManagedObjectContext.class, fetchSelector,
         SentrySWReturnType(NSArray *),
         SentrySWArguments(NSFetchRequest * originalRequest, NSError * *error), SentrySWReplacement({
             NSArray *result;
@@ -64,10 +64,10 @@ BuzzSentryCoreDataSwizzling ()
 
             return result;
         }),
-        SentrySwizzleModeOncePerClassAndSuperclasses, (void *)fetchSelector);
+        BuzzSentrySwizzleModeOncePerClassAndSuperclasses, (void *)fetchSelector);
 
     SEL saveSelector = NSSelectorFromString(@"save:");
-    SentrySwizzleInstanceMethod(NSManagedObjectContext.class, saveSelector,
+    BuzzSentrySwizzleInstanceMethod(NSManagedObjectContext.class, saveSelector,
         SentrySWReturnType(BOOL), SentrySWArguments(NSError * *error), SentrySWReplacement({
             BOOL result;
             id<BuzzSentryCoreDataMiddleware> middleware
@@ -85,7 +85,7 @@ BuzzSentryCoreDataSwizzling ()
 
             return result;
         }),
-        SentrySwizzleModeOncePerClassAndSuperclasses, (void *)saveSelector);
+        BuzzSentrySwizzleModeOncePerClassAndSuperclasses, (void *)saveSelector);
 }
 
 #pragma clang diagnostic pop

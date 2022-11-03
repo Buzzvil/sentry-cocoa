@@ -1,10 +1,10 @@
-#import "SentrySerialization.h"
-#import "SentryAppState.h"
+#import "BuzzSentrySerialization.h"
+#import "BuzzSentryAppState.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "SentryError.h"
 #import "BuzzSentryId.h"
-#import "SentryLevelMapper.h"
+#import "BuzzSentryLevelMapper.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDKInfo.h"
 #import "BuzzSentrySession.h"
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentrySerialization
+@implementation BuzzSentrySerialization
 
 + (NSData *_Nullable)dataWithJSONObject:(NSDictionary *)dictionary
                                   error:(NSError *_Nullable *_Nullable)error
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
         [serializedData setValue:[traceContext serialize] forKey:@"trace"];
     }
 
-    NSData *header = [SentrySerialization dataWithJSONObject:serializedData error:error];
+    NSData *header = [BuzzSentrySerialization dataWithJSONObject:serializedData error:error];
     if (nil == header) {
         SENTRY_LOG_ERROR(@"Envelope header cannot be converted to JSON.");
         if (error) {
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
                 setValue:[NSNumber numberWithUnsignedInteger:envelope.items[i].header.length]
                   forKey:@"length"];
         }
-        NSData *itemHeader = [SentrySerialization dataWithJSONObject:serializedItemHeaderData
+        NSData *itemHeader = [BuzzSentrySerialization dataWithJSONObject:serializedItemHeaderData
                                                                error:error];
         if (nil == itemHeader) {
             SENTRY_LOG_ERROR(@"Envelope item header cannot be converted to JSON.");
@@ -337,7 +337,7 @@ NS_ASSUME_NONNULL_BEGIN
     return session;
 }
 
-+ (SentryAppState *_Nullable)appStateWithData:(NSData *)data
++ (BuzzSentryAppState *_Nullable)appStateWithData:(NSData *)data
 {
     NSError *error = nil;
     NSDictionary *appSateDictionary = [NSJSONSerialization JSONObjectWithData:data
@@ -351,7 +351,7 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
 
-    return [[SentryAppState alloc] initWithJSONObject:appSateDictionary];
+    return [[BuzzSentryAppState alloc] initWithJSONObject:appSateDictionary];
 }
 
 + (SentryLevel)levelFromData:(NSData *)eventEnvelopeItemData

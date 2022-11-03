@@ -1,6 +1,6 @@
 import XCTest
 
-class SentrySerializationTests: XCTestCase {
+class BuzzSentrySerializationTests: XCTestCase {
     
     private class Fixture {
         static var invalidData = "hi".data(using: .utf8)!
@@ -133,7 +133,7 @@ class SentrySerializationTests: XCTestCase {
 
     func testBuzzSentryEnvelopeSerializer_ZeroByteItemReturnsEnvelope() {
         let itemData = "{}\n{\"length\":0,\"type\":\"attachment\"}\n".data(using: .utf8)!
-        XCTAssertNotNil(SentrySerialization.envelope(with: itemData))
+        XCTAssertNotNil(BuzzSentrySerialization.envelope(with: itemData))
     }
 
     func testBuzzSentryEnvelopeSerializer_EnvelopeWithHeaderAndItemWithAttachmet() {
@@ -146,7 +146,7 @@ class SentrySerializationTests: XCTestCase {
                        \(payloadAsString)
                        """.data(using: .utf8)!
 
-        if let envelope = SentrySerialization.envelope(with: itemData) {
+        if let envelope = BuzzSentrySerialization.envelope(with: itemData) {
             XCTAssertEqual(eventId, envelope.header.eventId!)
 
             XCTAssertEqual(1, envelope.items.count)
@@ -161,26 +161,26 @@ class SentrySerializationTests: XCTestCase {
 
     func testBuzzSentryEnvelopeSerializer_ItemWithoutTypeReturnsNil() {
         let itemData = "{}\n{\"length\":0}".data(using: .utf8)!
-        XCTAssertNil(SentrySerialization.envelope(with: itemData))
+        XCTAssertNil(BuzzSentrySerialization.envelope(with: itemData))
     }
 
     func testBuzzSentryEnvelopeSerializer_WithoutItemReturnsNil() {
         let itemData = "{}\n".data(using: .utf8)!
-        XCTAssertNil(SentrySerialization.envelope(with: itemData))
+        XCTAssertNil(BuzzSentrySerialization.envelope(with: itemData))
     }
 
     func testBuzzSentryEnvelopeSerializer_WithoutLineBreak() {
         let itemData = "{}".data(using: .utf8)!
-        XCTAssertNil(SentrySerialization.envelope(with: itemData))
+        XCTAssertNil(BuzzSentrySerialization.envelope(with: itemData))
     }
     
     func testSerializeSession() throws {
         let dict = BuzzSentrySession(releaseName: "1.0.0").serialize()
         let session = BuzzSentrySession(jsonObject: dict)!
         
-        let data = try SentrySerialization.data(with: session)
+        let data = try BuzzSentrySerialization.data(with: session)
         
-        XCTAssertNotNil(SentrySerialization.session(with: data))
+        XCTAssertNotNil(BuzzSentrySerialization.session(with: data))
     }
     
     func testSerializeSessionWithNoReleaseName() throws {
@@ -188,26 +188,26 @@ class SentrySerializationTests: XCTestCase {
         dict["attrs"] = nil // Remove release name
         let session = BuzzSentrySession(jsonObject: dict)!
         
-        let data = try SentrySerialization.data(with: session)
+        let data = try BuzzSentrySerialization.data(with: session)
         
-        XCTAssertNil(SentrySerialization.session(with: data))
+        XCTAssertNil(BuzzSentrySerialization.session(with: data))
     }
     
     func testSerializeSessionWithEmptyReleaseName() throws {
         let dict = BuzzSentrySession(releaseName: "").serialize()
         let session = BuzzSentrySession(jsonObject: dict)!
         
-        let data = try SentrySerialization.data(with: session)
+        let data = try BuzzSentrySerialization.data(with: session)
         
-        XCTAssertNil(SentrySerialization.session(with: data))
+        XCTAssertNil(BuzzSentrySerialization.session(with: data))
     }
     
     func testSerializeSessionWithGarbageInDict() throws {
         var dict = BuzzSentrySession(releaseName: "").serialize()
         dict["started"] = "20"
-        let data = try SentrySerialization.data(withJSONObject: dict)
+        let data = try BuzzSentrySerialization.data(withJSONObject: dict)
         
-        XCTAssertNil(SentrySerialization.session(with: data))
+        XCTAssertNil(BuzzSentrySerialization.session(with: data))
     }
     
     func testSerializeSessionWithGarbage() throws {
@@ -215,72 +215,72 @@ class SentrySerializationTests: XCTestCase {
             XCTFail("Failed to create data"); return
         }
         
-        XCTAssertNil(SentrySerialization.session(with: data))
+        XCTAssertNil(BuzzSentrySerialization.session(with: data))
     }
     
     func testLevelFromEventData() {
         let envelopeItem = BuzzSentryEnvelopeItem(event: TestData.event)
         
-        let level = SentrySerialization.level(from: envelopeItem.data)
+        let level = BuzzSentrySerialization.level(from: envelopeItem.data)
         XCTAssertEqual(TestData.event.level, level)
     }
     
     func testLevelFromEventData_WithGarbage() {
-        let level = SentrySerialization.level(from: Fixture.invalidData)
+        let level = BuzzSentrySerialization.level(from: Fixture.invalidData)
         XCTAssertEqual(SentryLevel.error, level)
     }
     
     func testAppStateWithValidData_ReturnsValidAppState() throws {
         let appState = TestData.appState
-        let appStateData = try SentrySerialization.data(withJSONObject: appState.serialize())
+        let appStateData = try BuzzSentrySerialization.data(withJSONObject: appState.serialize())
         
-        let actual = SentrySerialization.appState(with: appStateData)
+        let actual = BuzzSentrySerialization.appState(with: appStateData)
         
         XCTAssertEqual(appState, actual)
     }
     
     func testAppStateWithInvalidData_ReturnsNil() throws {
-        let actual = SentrySerialization.appState(with: Fixture.invalidData)
+        let actual = BuzzSentrySerialization.appState(with: Fixture.invalidData)
         
         XCTAssertNil(actual)
     }
 
     func testDictionaryToBaggageEncoded() {
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value"]), "key=value")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value", "key2": "value2"]), "key2=value2,key=value")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value&"]), "key=value%26")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value="]), "key=value%3D")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value "]), "key=value%20")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value%"]), "key=value%25")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value-_"]), "key=value-_")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": "value\n\r"]), "key=value%0A%0D")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": ""]), "key=")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value"]), "key=value")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value", "key2": "value2"]), "key2=value2,key=value")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value&"]), "key=value%26")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value="]), "key=value%3D")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value "]), "key=value%20")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value%"]), "key=value%25")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value-_"]), "key=value-_")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": "value\n\r"]), "key=value%0A%0D")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": ""]), "key=")
         
         let largeValue = String(repeating: "a", count: 8_188)
         
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["key": largeValue]), "key=\(largeValue)")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["AKey": "something", "BKey": largeValue]), "AKey=something")
-        XCTAssertEqual(SentrySerialization.baggageEncodedDictionary(["AKey": "something", "BKey": largeValue, "CKey": "Other Value"]), "AKey=something,CKey=Other%20Value")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["key": largeValue]), "key=\(largeValue)")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["AKey": "something", "BKey": largeValue]), "AKey=something")
+        XCTAssertEqual(BuzzSentrySerialization.baggageEncodedDictionary(["AKey": "something", "BKey": largeValue, "CKey": "Other Value"]), "AKey=something,CKey=Other%20Value")
     }
 
     func testBaggageStringToDictionaryDecoded() {
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key=value"), ["key": "value"])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key2=value2,key=value"), ["key": "value", "key2": "value2"])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key=value%26"), ["key": "value&"])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key=value%3D"), ["key": "value="])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key=value%20"), ["key": "value "])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key=value%25"), ["key": "value%"])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key=value-_"), ["key": "value-_"])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key=value%0A%0D"), ["key": "value\n\r"])
-        XCTAssertEqual(SentrySerialization.decodeBaggage(""), [:])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key"), [:])
-        XCTAssertEqual(SentrySerialization.decodeBaggage("key="), ["key": ""])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key=value"), ["key": "value"])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key2=value2,key=value"), ["key": "value", "key2": "value2"])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key=value%26"), ["key": "value&"])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key=value%3D"), ["key": "value="])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key=value%20"), ["key": "value "])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key=value%25"), ["key": "value%"])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key=value-_"), ["key": "value-_"])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key=value%0A%0D"), ["key": "value\n\r"])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage(""), [:])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key"), [:])
+        XCTAssertEqual(BuzzSentrySerialization.decodeBaggage("key="), ["key": ""])
     }
     
     private func serializeEnvelope(envelope: BuzzSentryEnvelope) -> Data {
         var serializedEnvelope: Data = Data()
         do {
-            serializedEnvelope = try SentrySerialization.data(with: envelope)
+            serializedEnvelope = try BuzzSentrySerialization.data(with: envelope)
         } catch {
             XCTFail("Could not serialize envelope.")
         }
@@ -299,7 +299,7 @@ class SentrySerializationTests: XCTestCase {
     ) {
         let serializedEnvelope = serializeEnvelope(envelope: envelope)
 
-        if let deserializedEnvelope = SentrySerialization.envelope(with: serializedEnvelope) {
+        if let deserializedEnvelope = BuzzSentrySerialization.envelope(with: serializedEnvelope) {
             assert(deserializedEnvelope)
         } else {
             XCTFail("Could not deserialize envelope.")

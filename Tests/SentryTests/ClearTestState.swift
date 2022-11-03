@@ -24,5 +24,5 @@ func clearTestState() {
     
     SentryDependencyContainer.reset()
     Dynamic(BuzzSentryGlobalEventProcessor.shared()).removeAllProcessors()
-    SentrySwizzleWrapper.sharedInstance.removeAllCallbacks()
+    BuzzSentrySwizzleWrapper.sharedInstance.removeAllCallbacks()
 }

@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryDateUtilTests: XCTestCase {
+class BuzzSentryDateUtilTests: XCTestCase {
 
     private var currentDateProvider: TestCurrentDateProvider!
 

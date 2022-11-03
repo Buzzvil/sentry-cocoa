@@ -1,5 +1,5 @@
 #import "TestURLSession.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 
 @implementation TestURLSession
 
@@ -20,7 +20,7 @@
 
 - (void)invalidateAndCancel
 {
-    self.invalidateAndCancelDate = [SentryCurrentDate date];
+    self.invalidateAndCancelDate = [BuzzSentryCurrentDate date];
 }
 
 @end

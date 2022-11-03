@@ -17,8 +17,8 @@ class BuzzSentryTransportFactoryTests: XCTestCase {
         options.dsn = BuzzSentryTransportFactoryTests.dsnAsString
         options.urlSessionDelegate = urlSessionDelegateSpy
         
-        let fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
-        let transport = TransportInitializer.initTransport(options, sentryFileManager: fileManager)
+        let fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+        let transport = TransportInitializer.initTransport(options, BuzzSentryFileManager: fileManager)
         let requestManager = Dynamic(transport).requestManager.asObject as! BuzzSentryQueueableRequestManager
         
         let imgUrl = URL(string: "https://github.com")!

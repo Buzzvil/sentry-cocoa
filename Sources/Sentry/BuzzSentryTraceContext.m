@@ -4,7 +4,7 @@
 #import "SentryLog.h"
 #import "BuzzSentryOptions+Private.h"
 #import "BuzzSentryScope+Private.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext.h"
 #import "BuzzSentryUser.h"

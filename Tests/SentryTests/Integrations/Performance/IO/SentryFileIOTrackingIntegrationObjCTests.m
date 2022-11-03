@@ -2,7 +2,7 @@
 #import "BuzzSentryOptions.h"
 #import "BuzzSentrySDK.h"
 #import "BuzzSentrySpan.h"
-#import "SentrySwizzle.h"
+#import "BuzzSentrySwizzle.h"
 #import "BuzzSentryTracer.h"
 #import <XCTest/XCTest.h>
 

@@ -8,7 +8,7 @@
 #import "SentryLog.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ BuzzSentryNSURLRequest ()
                                  didFailWithError:(NSError *_Nullable *_Nullable)error
 {
     NSDictionary *serialized = [event serialize];
-    NSData *jsonData = [SentrySerialization dataWithJSONObject:serialized error:error];
+    NSData *jsonData = [BuzzSentrySerialization dataWithJSONObject:serialized error:error];
     if (nil == jsonData) {
         if (error) {
             // TODO: We're possibly overriding an error set by the actual

@@ -3,7 +3,7 @@
 #import "BuzzSentryClient+Private.h"
 #import "SentryCrashMachineContext.h"
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"

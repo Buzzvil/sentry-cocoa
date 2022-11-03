@@ -12,7 +12,7 @@
 #define SentrySWReplacement(code...) code
 
 /// A macro for casting and calling original implementation.
-/// May be used only in SentrySwizzleInstanceMethod or SentrySwizzleClassMethod
+/// May be used only in BuzzSentrySwizzleInstanceMethod or BuzzSentrySwizzleClassMethod
 /// macros.
 #define SentrySWCallOriginal(arguments...) _SentrySWCallOriginal(arguments)
 
@@ -25,7 +25,7 @@
 
  @code
 
-    SentrySwizzleInstanceMethod(classToSwizzle,
+    BuzzSentrySwizzleInstanceMethod(classToSwizzle,
                             @selector(calculate:),
                             SentrySWReturnType(int),
                             SentrySWArguments(int number),
@@ -41,7 +41,7 @@
 
  Swizzling frequently goes along with checking whether this particular class (or
  one of its superclasses) has been already swizzled. Here the
- `SentrySwizzleMode` and `key` parameters can help. See +[SentrySwizzle
+ `BuzzSentrySwizzleMode` and `key` parameters can help. See +[BuzzSentrySwizzle
  swizzleInstanceMethod:inClass:newImpFactory:mode:key:] for details.
 
  Swizzling is fully thread-safe.
@@ -59,23 +59,23 @@
  @param SentrySWReplacement The code of the new implementation of the swizzled
  method wrapped in the SentrySWReplacement macro.
 
- @param SentrySwizzleMode The mode is used in combination with the key to
+ @param BuzzSentrySwizzleMode The mode is used in combination with the key to
  indicate whether the swizzling should be done for the given class. You can pass
- 0 for SentrySwizzleModeAlways.
+ 0 for BuzzSentrySwizzleModeAlways.
 
  @param key The key is used in combination with the mode to indicate whether the
  swizzling should be done for the given class. May be NULL if the mode is
- SentrySwizzleModeAlways.
+ BuzzSentrySwizzleModeAlways.
 
  @return YES if successfully swizzled and NO if swizzling has been already done
  for given key and class (or one of superclasses, depends on the mode).
 
  */
-#define SentrySwizzleInstanceMethod(classToSwizzle, selector, SentrySWReturnType,                  \
-    SentrySWArguments, SentrySWReplacement, SentrySwizzleMode, key)                                \
-    _SentrySwizzleInstanceMethod(classToSwizzle, selector, SentrySWReturnType,                     \
+#define BuzzSentrySwizzleInstanceMethod(classToSwizzle, selector, SentrySWReturnType,                  \
+    SentrySWArguments, SentrySWReplacement, BuzzSentrySwizzleMode, key)                                \
+    _BuzzSentrySwizzleInstanceMethod(classToSwizzle, selector, SentrySWReturnType,                     \
         _SentrySWWrapArg(SentrySWArguments), _SentrySWWrapArg(SentrySWReplacement),                \
-        SentrySwizzleMode, key)
+        BuzzSentrySwizzleMode, key)
 
 #pragma mark └ Swizzle Class Method
 
@@ -86,7 +86,7 @@
 
  @code
 
-    SentrySwizzleClassMethod(classToSwizzle,
+    BuzzSentrySwizzleClassMethod(classToSwizzle,
                          @selector(calculate:),
                          SentrySWReturnType(int),
                          SentrySWArguments(int number),
@@ -116,9 +116,9 @@
  method wrapped in the SentrySWReplacement macro.
 
  */
-#define SentrySwizzleClassMethod(                                                                  \
+#define BuzzSentrySwizzleClassMethod(                                                                  \
     classToSwizzle, selector, SentrySWReturnType, SentrySWArguments, SentrySWReplacement)          \
-    _SentrySwizzleClassMethod(classToSwizzle, selector, SentrySWReturnType,                        \
+    _BuzzSentrySwizzleClassMethod(classToSwizzle, selector, SentrySWReturnType,                        \
         _SentrySWWrapArg(SentrySWArguments), _SentrySWWrapArg(SentrySWReplacement))
 
 #pragma mark - Main API
@@ -126,13 +126,13 @@
 /**
  A function pointer to the original implementation of the swizzled method.
  */
-typedef void (*SentrySwizzleOriginalIMP)(void /* id, SEL, ... */);
+typedef void (*BuzzSentrySwizzleOriginalIMP)(void /* id, SEL, ... */);
 
 /**
- SentrySwizzleInfo is used in the new implementation block to get and call
+ BuzzSentrySwizzleInfo is used in the new implementation block to get and call
  original implementation of the swizzled method.
  */
-@interface SentrySwizzleInfo : NSObject
+@interface BuzzSentrySwizzleInfo : NSObject
 
 /**
  Returns the original implementation of the swizzled method.
@@ -147,7 +147,7 @@ typedef void (*SentrySwizzleOriginalIMP)(void /* id, SEL, ... */);
  @return A function pointer to the original implementation of the swizzled
  method.
  */
-- (SentrySwizzleOriginalIMP)getOriginalImplementation;
+- (BuzzSentrySwizzleOriginalIMP)getOriginalImplementation;
 
 /// The selector of the swizzled method.
 @property (nonatomic, readonly) SEL selector;
@@ -173,24 +173,24 @@ typedef void (*SentrySwizzleOriginalIMP)(void /* id, SEL, ... */);
     Its signature should be: `method_return_type ^(id self, method_args...)`.
     The selector is not available as a parameter to this block.
  */
-typedef id (^SentrySwizzleImpFactoryBlock)(SentrySwizzleInfo *swizzleInfo);
+typedef id (^BuzzSentrySwizzleImpFactoryBlock)(BuzzSentrySwizzleInfo *swizzleInfo);
 
-typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
-    /// SentrySwizzle always does swizzling.
-    SentrySwizzleModeAlways = 0,
-    /// SentrySwizzle does not do swizzling if the same class has been swizzled
+typedef NS_ENUM(NSUInteger, BuzzSentrySwizzleMode) {
+    /// BuzzSentrySwizzle always does swizzling.
+    BuzzSentrySwizzleModeAlways = 0,
+    /// BuzzSentrySwizzle does not do swizzling if the same class has been swizzled
     /// earlier with the same key.
-    SentrySwizzleModeOncePerClass = 1,
-    /// SentrySwizzle does not do swizzling if the same class or one of its
+    BuzzSentrySwizzleModeOncePerClass = 1,
+    /// BuzzSentrySwizzle does not do swizzling if the same class or one of its
     /// superclasses have been swizzled earlier with the same key.
     /// @note There is no guarantee that your implementation will be called only
     /// once per method call. If the order of swizzling is: first inherited
     /// class, second superclass, then both swizzlings will be done and the new
     /// implementation will be called twice.
-    SentrySwizzleModeOncePerClassAndSuperclasses = 2
+    BuzzSentrySwizzleModeOncePerClassAndSuperclasses = 2
 };
 
-@interface SentrySwizzle : NSObject
+@interface BuzzSentrySwizzle : NSObject
 
 #pragma mark └ Swizzle Instance Method
 
@@ -211,10 +211,10 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
  @code
 
     SEL selector = @selector(calculate:);
-    [SentrySwizzle
+    [BuzzSentrySwizzle
      swizzleInstanceMethod:selector
      inClass:classToSwizzle
-     newImpFactory:^id(SentrySwizzleInfo *swizzleInfo) {
+     newImpFactory:^id(BuzzSentrySwizzleInfo *swizzleInfo) {
          // This block will be used as the new implementation.
          return ^int(__unsafe_unretained id self, int num){
              // You MUST always cast implementation to the correct function
@@ -226,7 +226,7 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
              return res + 1;
          };
      }
-     mode:SentrySwizzleModeAlways
+     mode:BuzzSentrySwizzleModeAlways
      key:NULL];
 
  @endcode
@@ -245,10 +245,10 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
 
     static const void *key = &key;
     SEL selector = NSSelectorFromString(@"dealloc");
-    [SentrySwizzle
+    [BuzzSentrySwizzle
      swizzleInstanceMethod:selector
      inClass:classToSwizzle
-     newImpFactory:^id(SentrySwizzleInfo *swizzleInfo) {
+     newImpFactory:^id(BuzzSentrySwizzleInfo *swizzleInfo) {
          return ^void(__unsafe_unretained id self){
              NSLog(@"Deallocating %@.",self);
 
@@ -257,7 +257,7 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
  getOriginalImplementation]; originalIMP(self,selector);
          };
      }
-     mode:SentrySwizzleModeOncePerClassAndSuperclasses
+     mode:BuzzSentrySwizzleModeOncePerClassAndSuperclasses
      key:key];
 
  @endcode
@@ -276,15 +276,15 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
 
  @param key The key is used in combination with the mode to indicate whether the
  swizzling should be done for the given class. May be NULL if the mode is
- SentrySwizzleModeAlways.
+ BuzzSentrySwizzleModeAlways.
 
  @return YES if successfully swizzled and NO if swizzling has been already done
  for given key and class (or one of superclasses, depends on the mode).
  */
 + (BOOL)swizzleInstanceMethod:(SEL)selector
                       inClass:(Class)classToSwizzle
-                newImpFactory:(SentrySwizzleImpFactoryBlock)factoryBlock
-                         mode:(SentrySwizzleMode)mode
+                newImpFactory:(BuzzSentrySwizzleImpFactoryBlock)factoryBlock
+                         mode:(BuzzSentrySwizzleMode)mode
                           key:(const void *)key;
 
 #pragma mark └ Swizzle Class method
@@ -306,10 +306,10 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
  @code
 
     SEL selector = @selector(calculate:);
-    [SentrySwizzle
+    [BuzzSentrySwizzle
      swizzleClassMethod:selector
      inClass:classToSwizzle
-     newImpFactory:^id(SentrySwizzleInfo *swizzleInfo) {
+     newImpFactory:^id(BuzzSentrySwizzleInfo *swizzleInfo) {
          // This block will be used as the new implementation.
          return ^int(__unsafe_unretained id self, int num){
              // You MUST always cast implementation to the correct function
@@ -335,7 +335,7 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
  */
 + (void)swizzleClassMethod:(SEL)selector
                    inClass:(Class)classToSwizzle
-             newImpFactory:(SentrySwizzleImpFactoryBlock)factoryBlock;
+             newImpFactory:(BuzzSentrySwizzleImpFactoryBlock)factoryBlock;
 
 @end
 
@@ -366,27 +366,27 @@ typedef NS_ENUM(NSUInteger, SentrySwizzleMode) {
 #    define _SentrySWReplacement(code...) code
 #endif
 
-#define _SentrySwizzleInstanceMethod(classToSwizzle, selector, SentrySWReturnType,                 \
-    SentrySWArguments, SentrySWReplacement, SentrySwizzleMode, KEY)                                \
-    [SentrySwizzle                                                                                 \
+#define _BuzzSentrySwizzleInstanceMethod(classToSwizzle, selector, SentrySWReturnType,                 \
+    SentrySWArguments, SentrySWReplacement, BuzzSentrySwizzleMode, KEY)                                \
+    [BuzzSentrySwizzle                                                                                 \
         swizzleInstanceMethod:selector                                                             \
                       inClass:[classToSwizzle class]                                               \
-                newImpFactory:^id(SentrySwizzleInfo *swizzleInfo) {                                \
+                newImpFactory:^id(BuzzSentrySwizzleInfo *swizzleInfo) {                                \
                     SentrySWReturnType (*originalImplementation_)(                                 \
                         _SentrySWDel3Arg(__unsafe_unretained id, SEL, SentrySWArguments));         \
                     SEL selector_ = selector;                                                      \
                     return ^SentrySWReturnType(_SentrySWDel2Arg(__unsafe_unretained id self,       \
                         SentrySWArguments)) { _SentrySWReplacement(SentrySWReplacement) };         \
                 }                                                                                  \
-                         mode:SentrySwizzleMode                                                    \
+                         mode:BuzzSentrySwizzleMode                                                    \
                           key:KEY];
 
-#define _SentrySwizzleClassMethod(                                                                 \
+#define _BuzzSentrySwizzleClassMethod(                                                                 \
     classToSwizzle, selector, SentrySWReturnType, SentrySWArguments, SentrySWReplacement)          \
-    [SentrySwizzle                                                                                 \
+    [BuzzSentrySwizzle                                                                                 \
         swizzleClassMethod:selector                                                                \
                    inClass:[classToSwizzle class]                                                  \
-             newImpFactory:^id(SentrySwizzleInfo *swizzleInfo) {                                   \
+             newImpFactory:^id(BuzzSentrySwizzleInfo *swizzleInfo) {                                   \
                  SentrySWReturnType (*originalImplementation_)(                                    \
                      _SentrySWDel3Arg(__unsafe_unretained id, SEL, SentrySWArguments));            \
                  SEL selector_ = selector;                                                         \

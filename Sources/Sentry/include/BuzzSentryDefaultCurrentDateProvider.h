@@ -1,10 +1,10 @@
-#import "SentryCurrentDateProvider.h"
+#import "BuzzSentryCurrentDateProvider.h"
 #import "SentryDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(DefaultCurrentDateProvider)
-@interface SentryDefaultCurrentDateProvider : NSObject <SentryCurrentDateProvider>
+@interface BuzzSentryDefaultCurrentDateProvider : NSObject <BuzzSentryCurrentDateProvider>
 SENTRY_NO_INIT
 
 + (instancetype)sharedInstance;

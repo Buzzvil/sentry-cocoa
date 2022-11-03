@@ -24,7 +24,7 @@ BuzzSentryTransportFactory ()
 @implementation BuzzSentryTransportFactory
 
 + (id<BuzzSentryTransport>)initTransport:(BuzzSentryOptions *)options
-                   sentryFileManager:(SentryFileManager *)sentryFileManager
+                   BuzzSentryFileManager:(BuzzSentryFileManager *)BuzzSentryFileManager
 {
     NSURLSessionConfiguration *configuration =
         [NSURLSessionConfiguration ephemeralSessionConfiguration];
@@ -52,7 +52,7 @@ BuzzSentryTransportFactory ()
                                               attributes:attributes];
 
     return [[BuzzSentryHttpTransport alloc] initWithOptions:options
-                                            fileManager:sentryFileManager
+                                            fileManager:BuzzSentryFileManager
                                          requestManager:requestManager
                                          requestBuilder:[[BuzzSentryNSURLRequestBuilder alloc] init]
                                              rateLimits:rateLimits

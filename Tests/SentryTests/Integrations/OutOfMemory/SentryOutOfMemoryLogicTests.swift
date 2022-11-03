@@ -10,7 +10,7 @@ class BuzzSentryOutOfMemoryLogicTests: XCTestCase {
         let options: Options
         let client: TestClient!
         let crashWrapper: TestBuzzSentryCrashWrapper
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         let currentDate = TestCurrentDateProvider()
         let sysctl = TestSysctl()
         let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
@@ -24,11 +24,11 @@ class BuzzSentryOutOfMemoryLogicTests: XCTestCase {
             
             crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
             
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }
         
         func getSut() -> BuzzSentryOutOfMemoryLogic {
-            let appStateManager = SentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: self.dispatchQueue)
+            let appStateManager = BuzzSentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: self.dispatchQueue)
             return BuzzSentryOutOfMemoryLogic(options: options, crashAdapter: crashWrapper, appStateManager: appStateManager)
         }
     }

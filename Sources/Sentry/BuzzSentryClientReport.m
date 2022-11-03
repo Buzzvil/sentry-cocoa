@@ -1,5 +1,5 @@
 #import "BuzzSentryClientReport.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import <Foundation/Foundation.h>
 #import <BuzzSentryDiscardedEvent.h>
 
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDiscardedEvents:(NSArray<BuzzSentryDiscardedEvent *> *)discardedEvents
 {
     if (self = [super init]) {
-        _timestamp = [SentryCurrentDate date];
+        _timestamp = [BuzzSentryCurrentDate date];
         _discardedEvents = discardedEvents;
     }
     return self;

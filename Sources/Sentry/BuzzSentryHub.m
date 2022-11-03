@@ -1,20 +1,20 @@
 #import "BuzzSentryHub.h"
 #import "BuzzSentryClient+Private.h"
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryCurrentDateProvider.h"
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryCurrentDateProvider.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent+Private.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "BuzzSentryId.h"
 #import "SentryLog.h"
 #import "SentryProfilesSampler.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentrySamplingContext.h"
 #import "BuzzSentryScope.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTracesSampler.h"
 #import "BuzzSentryTransaction.h"
@@ -30,7 +30,7 @@ BuzzSentryHub ()
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryTracesSampler *tracesSampler;
 @property (nonatomic, strong) SentryProfilesSampler *profilesSampler;
-@property (nonatomic, strong) id<SentryCurrentDateProvider> currentDateProvider;
+@property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDateProvider;
 @property (nonatomic, strong)
     NSMutableArray<NSObject<BuzzSentryIntegrationProtocol> *> *installedIntegrations;
 @property (nonatomic, strong) NSMutableArray<NSString *> *installedIntegrationNames;
@@ -57,7 +57,7 @@ BuzzSentryHub ()
             _profilesSampler = [[SentryProfilesSampler alloc] initWithOptions:client.options];
         }
 #endif
-        _currentDateProvider = [SentryDefaultCurrentDateProvider sharedInstance];
+        _currentDateProvider = [BuzzSentryDefaultCurrentDateProvider sharedInstance];
     }
     return self;
 }
@@ -66,7 +66,7 @@ BuzzSentryHub ()
 - (instancetype)initWithClient:(nullable BuzzSentryClient *)client
                       andScope:(nullable BuzzSentryScope *)scope
                andCrashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
-        andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+        andCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
 {
     self = [self initWithClient:client andScope:scope];
     _crashWrapper = crashWrapper;
@@ -142,7 +142,7 @@ BuzzSentryHub ()
 
 - (void)closeCachedSessionWithTimestamp:(nullable NSDate *)timestamp
 {
-    SentryFileManager *fileManager = [_client fileManager];
+    BuzzSentryFileManager *fileManager = [_client fileManager];
     BuzzSentrySession *session = [fileManager readCurrentSession];
     if (nil == session) {
         SENTRY_LOG_DEBUG(@"No cached session to close.");
@@ -231,7 +231,7 @@ BuzzSentryHub ()
 
     // Check this condition first to avoid unnecessary I/O
     if (client.options.enableAutoSessionTracking) {
-        SentryFileManager *fileManager = [client fileManager];
+        BuzzSentryFileManager *fileManager = [client fileManager];
         BuzzSentrySession *crashedSession = [fileManager readCrashedSession];
 
         // It can be that there is no session yet, because autoSessionTracking was just enabled and
@@ -590,7 +590,7 @@ BuzzSentryHub ()
     for (BuzzSentryEnvelopeItem *item in items) {
         if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeEvent]) {
             // If there is no level the default is error
-            SentryLevel level = [SentrySerialization levelFromData:item.data];
+            SentryLevel level = [BuzzSentrySerialization levelFromData:item.data];
             if (level >= kSentryLevelError) {
                 return YES;
             }

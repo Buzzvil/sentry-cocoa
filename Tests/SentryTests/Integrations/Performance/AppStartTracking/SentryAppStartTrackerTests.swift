@@ -11,9 +11,9 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
         let options: Options
         let currentDate = TestCurrentDateProvider()
         let sysctl = TestSysctl()
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         let crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
-        let appStateManager: SentryAppStateManager
+        let appStateManager: BuzzSentryAppStateManager
         let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         
         let appStartDuration: TimeInterval = 0.4
@@ -25,9 +25,9 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
             options.dsn = BuzzSentryAppStartTrackerTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDate)
             
-            appStateManager = SentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: dispatchQueue)
+            appStateManager = BuzzSentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: dispatchQueue)
             
             runtimeInitTimestamp = currentDate.date().addingTimeInterval(0.2)
             didFinishLaunchingTimestamp = currentDate.date().addingTimeInterval(0.3)
@@ -65,7 +65,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
     
     func testSecondStart_AfterSystemReboot_IsColdStart() {
         let previousBootTime = fixture.currentDate.date().addingTimeInterval(-1)
-        let appState = SentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: previousBootTime)
+        let appState = BuzzSentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: previousBootTime)
         givenPreviousAppState(appState: appState)
         
         startApp()
@@ -83,7 +83,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
     }
     
     func testAppUpgrade_IsColdStart() {
-        let appState = SentryAppState(releaseName: "0.9.0", osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date())
+        let appState = BuzzSentryAppState(releaseName: "0.9.0", osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date())
         givenPreviousAppState(appState: appState)
         
         startApp()
@@ -109,7 +109,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
         sendAppMeasurement()
         terminateApp()
         
-        let appState = SentryAppState(releaseName: "1.0.0", osVersion: "14.4.1", vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: self.fixture.currentDate.date())
+        let appState = BuzzSentryAppState(releaseName: "1.0.0", osVersion: "14.4.1", vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: self.fixture.currentDate.date())
         givenPreviousAppState(appState: appState)
 
         fixture.fileManager.moveAppStateToPreviousAppState()
@@ -122,7 +122,7 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
      * Test if the user changes the time of his phone and the previous boot time is in the future.
      */
     func testAppLaunches_PreviousBootTimeInFuture_NoAppStartUp() {
-        let appState = SentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date().addingTimeInterval(1))
+        let appState = BuzzSentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date().addingTimeInterval(1))
         givenPreviousAppState(appState: appState)
 
         fixture.fileManager.moveAppStateToPreviousAppState()
@@ -233,14 +233,14 @@ class BuzzSentryAppStartTrackerTests: NotificationCenterTestCase {
         assertValidHybridStart(type: .warm)
     }
     
-    private func givenPreviousAppState(appState: SentryAppState) {
+    private func givenPreviousAppState(appState: BuzzSentryAppState) {
         fixture.fileManager.store(appState)
     }
     
     private func givenSystemNotRebooted() {
         let systemBootTimestamp = fixture.currentDate.date()
         fixture.sysctl.setProcessStartTimestamp(value: fixture.currentDate.date())
-        let appState = SentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: systemBootTimestamp)
+        let appState = BuzzSentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: systemBootTimestamp)
         givenPreviousAppState(appState: appState)
     }
     

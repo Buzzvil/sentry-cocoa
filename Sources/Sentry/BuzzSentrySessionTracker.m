@@ -1,7 +1,7 @@
 #import "BuzzSentrySessionTracker.h"
 #import "BuzzSentryClient+Private.h"
 #import "BuzzSentryClient.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryInternalNotificationNames.h"
 #import "SentryLog.h"
@@ -18,7 +18,7 @@
 BuzzSentrySessionTracker ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
-@property (nonatomic, strong) id<SentryCurrentDateProvider> currentDateProvider;
+@property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDateProvider;
 @property (atomic, strong) NSDate *lastInForeground;
 @property (nonatomic, assign) BOOL wasDidBecomeActiveCalled;
 @property (nonatomic, assign) BOOL subscribedToNotifications;
@@ -29,7 +29,7 @@ BuzzSentrySessionTracker ()
 @implementation BuzzSentrySessionTracker
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
-            currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+            currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
              notificationCenter:(SentryNSNotificationCenterWrapper *)notificationCenter;
 {
     if (self = [super init]) {

@@ -3,7 +3,7 @@
 #import "SentryLog.h"
 #import "BuzzSentryOptions+Private.h"
 #import "BuzzSentryScope+Private.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryUser.h"
@@ -65,7 +65,7 @@
         [information setValue:_sampleRate forKey:@"sentry-sample_rate"];
     }
 
-    return [SentrySerialization baggageEncodedDictionary:information];
+    return [BuzzSentrySerialization baggageEncodedDictionary:information];
 }
 
 @end

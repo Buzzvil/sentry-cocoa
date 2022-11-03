@@ -1,4 +1,4 @@
-#import "SentrySwizzleWrapper.h"
+#import "BuzzSentrySwizzleWrapper.h"
 #import <BuzzSentryHub+Private.h>
 #import <SentryLog.h>
 #import <BuzzSentrySDK+Private.h>
@@ -21,7 +21,7 @@ static NSString *const BuzzSentryUIEventTrackerSwizzleSendAction
 @interface
 BuzzSentryUIEventTracker ()
 
-@property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;
+@property (nonatomic, strong) BuzzSentrySwizzleWrapper *swizzleWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, assign) NSTimeInterval idleTimeout;
 @property (nullable, nonatomic, strong) NSMutableArray<BuzzSentryTracer *> *activeTransactions;
@@ -34,7 +34,7 @@ BuzzSentryUIEventTracker ()
 
 #if SENTRY_HAS_UIKIT
 
-- (instancetype)initWithSwizzleWrapper:(SentrySwizzleWrapper *)swizzleWrapper
+- (instancetype)initWithSwizzleWrapper:(BuzzSentrySwizzleWrapper *)swizzleWrapper
                   dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                            idleTimeout:(NSTimeInterval)idleTimeout
 {

@@ -6,7 +6,7 @@ import XCTest
 @available(OSX 10.12, *)
 @available(iOS 10.0, *)
 @available(tvOS 10.0, *)
-class SentryFileManagerTests: XCTestCase {
+class BuzzSentryFileManagerTests: XCTestCase {
     
     private class Fixture {
         
@@ -40,7 +40,7 @@ class SentryFileManagerTests: XCTestCase {
             eventIds = (0...(maxCacheItems + 10)).map { _ in BuzzSentryId() }
             
             options = Options()
-            options.dsn = TestConstants.dsnAsString(username: "SentryFileManagerTests")
+            options.dsn = TestConstants.dsnAsString(username: "BuzzSentryFileManagerTests")
             
             sessionEnvelope = BuzzSentryEnvelope(session: session)
 
@@ -62,15 +62,15 @@ class SentryFileManagerTests: XCTestCase {
             delegate = TestFileManagerDelegate()
         }
         
-        func getSut() throws -> SentryFileManager {
-            let sut = try SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider, dispatchQueueWrapper: dispatchQueueWrapper)
+        func getSut() throws -> BuzzSentryFileManager {
+            let sut = try BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDateProvider, dispatchQueueWrapper: dispatchQueueWrapper)
             sut.setDelegate(delegate)
             return sut
         }
         
-        func getSut(maxCacheItems: UInt) throws -> SentryFileManager {
+        func getSut(maxCacheItems: UInt) throws -> BuzzSentryFileManager {
             options.maxCacheItems = maxCacheItems
-            let sut = try SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider, dispatchQueueWrapper: dispatchQueueWrapper)
+            let sut = try BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDateProvider, dispatchQueueWrapper: dispatchQueueWrapper)
             sut.setDelegate(delegate)
             return sut
         }
@@ -78,7 +78,7 @@ class SentryFileManagerTests: XCTestCase {
     }
 
     private var fixture: Fixture!
-    private var sut: SentryFileManager!
+    private var sut: BuzzSentryFileManager!
 
     override func setUp() {
         super.setUp()
@@ -91,7 +91,7 @@ class SentryFileManagerTests: XCTestCase {
             sut.deleteAllEnvelopes()
             sut.deleteTimestampLastInForeground()
         } catch {
-            XCTFail("SentryFileManager could not be created")
+            XCTFail("BuzzSentryFileManager could not be created")
         }
     }
     
@@ -110,8 +110,8 @@ class SentryFileManagerTests: XCTestCase {
         sut.storeCurrentSession(BuzzSentrySession(releaseName: "1.0.0"))
         sut.storeTimestampLast(inForeground: Date())
 
-        _ = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
-        let fileManager = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
+        _ = try BuzzSentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
+        let fileManager = try BuzzSentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
 
         XCTAssertEqual(1, fileManager.getAllEnvelopes().count)
         XCTAssertNotNil(fileManager.readCurrentSession())
@@ -121,7 +121,7 @@ class SentryFileManagerTests: XCTestCase {
     func testInitDeletesEventsFolder() throws {
         storeEvent()
         
-        _ = try SentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
+        _ = try BuzzSentryFileManager(options: fixture.options, andCurrentDateProvider: TestCurrentDateProvider(), dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
         
         assertEventFolderDoesntExist()
     }
@@ -134,7 +134,7 @@ class SentryFileManagerTests: XCTestCase {
         let envelope = TestConstants.envelope
         sut.store(envelope)
         
-        let expectedData = try SentrySerialization.data(with: envelope)
+        let expectedData = try BuzzSentrySerialization.data(with: envelope)
         
         let envelopes = sut.getAllEnvelopes()
         XCTAssertEqual(1, envelopes.count)
@@ -189,7 +189,7 @@ class SentryFileManagerTests: XCTestCase {
     }
 
     func testCreateDirDoesNotThrow() throws {
-        try SentryFileManager.createDirectory(atPath: "a")
+        try BuzzSentryFileManager.createDirectory(atPath: "a")
     }
     
     func testAllFilesInFolder() {
@@ -384,7 +384,7 @@ class SentryFileManagerTests: XCTestCase {
 
         XCTAssertEqual(fixture.maxCacheItems, envelopes.count)
         for i in 0..<fixture.maxCacheItems {
-            let envelope = SentrySerialization.envelope(with: envelopes[i].contents)
+            let envelope = BuzzSentrySerialization.envelope(with: envelopes[i].contents)
             let actualEventId = envelope?.header.eventId
             XCTAssertEqual(expectedEventIds[i], actualEventId)
         }
@@ -393,7 +393,7 @@ class SentryFileManagerTests: XCTestCase {
     func testGetOldestEnvelope() {
         givenMaximumEnvelopes()
 
-        let actualEnvelope = SentrySerialization.envelope(with: sut.getOldestEnvelope()?.contents ?? Data())
+        let actualEnvelope = BuzzSentrySerialization.envelope(with: sut.getOldestEnvelope()?.contents ?? Data())
 
         XCTAssertEqual(fixture.eventIds[11], actualEnvelope?.header.eventId)
     }
@@ -405,7 +405,7 @@ class SentryFileManagerTests: XCTestCase {
     func testGetOldestEnvelope_WithGarbageInEnvelopesFolder() {
         givenGarbageInEnvelopesFolder()
 
-        let actualEnvelope = SentrySerialization.envelope(with: sut.getOldestEnvelope()?.contents ?? Data())
+        let actualEnvelope = BuzzSentrySerialization.envelope(with: sut.getOldestEnvelope()?.contents ?? Data())
         XCTAssertNil(actualEnvelope)
     }
 
@@ -502,7 +502,7 @@ class SentryFileManagerTests: XCTestCase {
         
         setImmutableForAppState(immutable: true)
         
-        sut.store(SentryAppState(releaseName: "", osVersion: "", vendorId: "", isDebugging: false, systemBootTimestamp: fixture.currentDateProvider.date()))
+        sut.store(BuzzSentryAppState(releaseName: "", osVersion: "", vendorId: "", isDebugging: false, systemBootTimestamp: fixture.currentDateProvider.date()))
         
         assertValidAppStateStored()
     }
@@ -540,7 +540,7 @@ class SentryFileManagerTests: XCTestCase {
         sut.store(TestData.appState)
         sut.moveAppStateToPreviousAppState()
 
-        let newAppState = SentryAppState(releaseName: "2.0.0", osVersion: "14.4.1", vendorId: "12345678-1234-1234-1234-12344567890AB", isDebugging: false, systemBootTimestamp: Date(timeIntervalSince1970: 10))
+        let newAppState = BuzzSentryAppState(releaseName: "2.0.0", osVersion: "14.4.1", vendorId: "12345678-1234-1234-1234-12344567890AB", isDebugging: false, systemBootTimestamp: Date(timeIntervalSince1970: 10))
         sut.store(newAppState)
         sut.moveAppStateToPreviousAppState()
 
@@ -645,21 +645,21 @@ class SentryFileManagerTests: XCTestCase {
                         "Folder for events should be deleted on init: \(sut.eventsPath)")
     }
 
-    private func assertSessionInitMoved(_ actualSessionFileContents: SentryFileContents) {
-        let actualSessionEnvelope = SentrySerialization.envelope(with: actualSessionFileContents.contents)
+    private func assertSessionInitMoved(_ actualSessionFileContents: BuzzSentryFileContents) {
+        let actualSessionEnvelope = BuzzSentrySerialization.envelope(with: actualSessionFileContents.contents)
         XCTAssertEqual(2, actualSessionEnvelope?.items.count)
 
-        let actualSession = SentrySerialization.session(with: actualSessionEnvelope?.items[1].data ?? Data())
+        let actualSession = BuzzSentrySerialization.session(with: actualSessionEnvelope?.items[1].data ?? Data())
         XCTAssertNotNil(actualSession)
 
         XCTAssertEqual(fixture.expectedSessionUpdate, actualSession)
     }
     
-    private func assertSessionInitNotMoved(_ actualSessionFileContents: SentryFileContents) {
-        let actualSessionEnvelope = SentrySerialization.envelope(with: actualSessionFileContents.contents)
+    private func assertSessionInitNotMoved(_ actualSessionFileContents: BuzzSentryFileContents) {
+        let actualSessionEnvelope = BuzzSentrySerialization.envelope(with: actualSessionFileContents.contents)
         XCTAssertEqual(2, actualSessionEnvelope?.items.count)
 
-        let actualSession = SentrySerialization.session(with: actualSessionEnvelope?.items[0].data ?? Data())
+        let actualSession = BuzzSentrySerialization.session(with: actualSessionEnvelope?.items[0].data ?? Data())
         XCTAssertNotNil(actualSession)
 
         XCTAssertEqual(fixture.sessionUpdate, actualSession)
@@ -667,7 +667,7 @@ class SentryFileManagerTests: XCTestCase {
 
     private func assertSessionEnvelopesStored(count: Int) {
         let fileContentsWithSession = sut.getAllEnvelopes().filter { envelopeFileContents in
-            let envelope = SentrySerialization.envelope(with: envelopeFileContents.contents)
+            let envelope = BuzzSentrySerialization.envelope(with: envelopeFileContents.contents)
             return !(envelope?.items.filter { item in item.header.type == BuzzSentryEnvelopeItemTypeSession }.isEmpty ?? false)
         }
 
@@ -683,7 +683,7 @@ class SentryFileManagerTests: XCTestCase {
         fixture.currentDateProvider.setDate(date: fixture.currentDateProvider.date().addingTimeInterval(bySeconds))
     }
     
-    private class AppStateWithFaultySerialization: SentryAppState {
+    private class AppStateWithFaultySerialization: BuzzSentryAppState {
         override func serialize() -> [String: Any] {
             return ["app": self]
         }

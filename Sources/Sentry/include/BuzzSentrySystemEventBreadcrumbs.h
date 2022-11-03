@@ -1,5 +1,5 @@
-#import "SentryCurrentDateProvider.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryCurrentDateProvider.h"
+#import "BuzzSentryFileManager.h"
 #import <Foundation/Foundation.h>
 
 #if TARGET_OS_IOS
@@ -9,8 +9,8 @@
 @interface BuzzSentrySystemEventBreadcrumbs : NSObject
 SENTRY_NO_INIT
 
-- (instancetype)initWithFileManager:(SentryFileManager *)fileManager
-             andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider;
+- (instancetype)initWithFileManager:(BuzzSentryFileManager *)fileManager
+             andCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider;
 
 - (void)start;
 

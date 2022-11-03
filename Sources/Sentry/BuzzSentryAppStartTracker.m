@@ -1,12 +1,12 @@
 #import "BuzzSentryAppStartMeasurement.h"
-#import "SentryAppStateManager.h"
+#import "BuzzSentryAppStateManager.h"
 #import "SentryLog.h"
 #import "SentrySysctl.h"
 #import <Foundation/Foundation.h>
 #import <PrivateBuzzSentrySDKOnly.h>
 #import <BuzzSentryAppStartTracker.h>
-#import <SentryAppState.h>
-#import <SentryCurrentDateProvider.h>
+#import <BuzzSentryAppState.h>
+#import <BuzzSentryCurrentDateProvider.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryInternalNotificationNames.h>
 #import <SentryLog.h>
@@ -27,10 +27,10 @@ static const NSTimeInterval SENTRY_APP_START_MAX_DURATION = 180.0;
 @interface
 BuzzSentryAppStartTracker ()
 
-@property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
-@property (nonatomic, strong) SentryAppState *previousAppState;
+@property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDate;
+@property (nonatomic, strong) BuzzSentryAppState *previousAppState;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
-@property (nonatomic, strong) SentryAppStateManager *appStateManager;
+@property (nonatomic, strong) BuzzSentryAppStateManager *appStateManager;
 @property (nonatomic, strong) SentrySysctl *sysctl;
 @property (nonatomic, assign) BOOL wasInBackground;
 @property (nonatomic, strong) NSDate *didFinishLaunchingTimestamp;
@@ -51,9 +51,9 @@ BuzzSentryAppStartTracker ()
         [[NSProcessInfo processInfo].environment[@"ActivePrewarm"] isEqualToString:@"1"];
 }
 
-- (instancetype)initWithCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+- (instancetype)initWithCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                        dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
-                            appStateManager:(SentryAppStateManager *)appStateManager
+                            appStateManager:(BuzzSentryAppStateManager *)appStateManager
                                      sysctl:(SentrySysctl *)sysctl
 {
     if (self = [super init]) {
@@ -212,7 +212,7 @@ BuzzSentryAppStartTracker ()
         return BuzzSentryAppStartTypeCold;
     }
 
-    SentryAppState *currentAppState = [self.appStateManager buildCurrentAppState];
+    BuzzSentryAppState *currentAppState = [self.appStateManager buildCurrentAppState];
 
     // If the release name is different we assume it's an app upgrade
     if (![currentAppState.releaseName isEqualToString:self.previousAppState.releaseName]) {

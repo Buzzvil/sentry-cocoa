@@ -1,7 +1,7 @@
 #import "BuzzSentryOptions.h"
 #import "BuzzSentryANRTracker.h"
 #import "BuzzSentryDsn.h"
-#import "SentryLevelMapper.h"
+#import "BuzzSentryLevelMapper.h"
 #import "SentryLog.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK.h"

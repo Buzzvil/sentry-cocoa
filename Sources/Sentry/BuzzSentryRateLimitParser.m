@@ -1,7 +1,7 @@
 #import "BuzzSentryRateLimitParser.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryDataCategoryMapper.h"
-#import "SentryDateUtil.h"
+#import "BuzzSentryDateUtil.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -80,8 +80,8 @@ BuzzSentryRateLimitParser ()
          andRateLimitInSeconds:(NSNumber *)newRateLimitInSeconds
 {
     NSDate *newDate =
-        [SentryCurrentDate.date dateByAddingTimeInterval:[newRateLimitInSeconds doubleValue]];
-    return [SentryDateUtil getMaximumDate:newDate andOther:existingRateLimit];
+        [BuzzSentryCurrentDate.date dateByAddingTimeInterval:[newRateLimitInSeconds doubleValue]];
+    return [BuzzSentryDateUtil getMaximumDate:newDate andOther:existingRateLimit];
 }
 
 @end

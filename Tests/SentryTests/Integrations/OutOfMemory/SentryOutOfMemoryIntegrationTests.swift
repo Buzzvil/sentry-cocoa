@@ -7,7 +7,7 @@ class BuzzSentryOutOfMemoryIntegrationTests: XCTestCase {
         let client: TestClient!
         let crashWrapper: TestBuzzSentryCrashWrapper
         let currentDate = TestCurrentDateProvider()
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         
         init() {
             options = Options()
@@ -20,7 +20,7 @@ class BuzzSentryOutOfMemoryIntegrationTests: XCTestCase {
             let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: crashWrapper, andCurrentDateProvider: currentDate)
             BuzzSentrySDK.setCurrentHub(hub)
             
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }
     }
     

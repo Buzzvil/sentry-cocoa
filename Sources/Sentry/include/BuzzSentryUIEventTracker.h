@@ -2,14 +2,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentrySwizzleWrapper, BuzzSentryDispatchQueueWrapper;
+@class BuzzSentrySwizzleWrapper, BuzzSentryDispatchQueueWrapper;
 
 @interface BuzzSentryUIEventTracker : NSObject
 SENTRY_NO_INIT
 
 #if SENTRY_HAS_UIKIT
 
-- (instancetype)initWithSwizzleWrapper:(SentrySwizzleWrapper *)swizzleWrapper
+- (instancetype)initWithSwizzleWrapper:(BuzzSentrySwizzleWrapper *)swizzleWrapper
                   dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                            idleTimeout:(NSTimeInterval)idleTimeout;
 

@@ -4,7 +4,7 @@
 #    import "NSDate+BuzzSentryExtras.h"
 #    import "SentryBacktrace.hpp"
 #    import "BuzzSentryClient+Private.h"
-#    import "SentryCurrentDate.h"
+#    import "BuzzSentryCurrentDate.h"
 #    import "BuzzSentryDebugImageProvider.h"
 #    import "BuzzSentryDebugMeta.h"
 #    import "SentryDefines.h"
@@ -20,7 +20,7 @@
 #    import "SentrySamplingProfiler.hpp"
 #    import "BuzzSentryScope+Private.h"
 #    import "BuzzSentryScreenFrames.h"
-#    import "SentrySerialization.h"
+#    import "BuzzSentrySerialization.h"
 #    import "BuzzSentrySpanId.h"
 #    import "SentryTime.h"
 #    import "BuzzSentryTransaction.h"
@@ -360,7 +360,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
         sampledProfile[@"queue_metadata"] = queueMetadata;
         _profile[@"profile"] = sampledProfile;
         _startTimestamp = getAbsoluteTime();
-        _startDate = [SentryCurrentDate date];
+        _startDate = [BuzzSentryCurrentDate date];
 
         SENTRY_LOG_DEBUG(@"Starting profiler %@ at system time %llu.", self, _startTimestamp);
 
@@ -474,7 +474,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
         _profiler->stopSampling();
         _endTimestamp = getAbsoluteTime();
-        _endDate = [SentryCurrentDate date];
+        _endDate = [BuzzSentryCurrentDate date];
         SENTRY_LOG_DEBUG(@"Stopped profiler %@ at system time: %llu.", self, _endTimestamp);
     }
 }
@@ -524,7 +524,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     profile[@"truncation_reason"] = profilerTruncationReasonName(_truncationReason);
     profile[@"platform"] = _transactions.firstObject.platform;
     profile[@"environment"] = _hub.scope.environmentString ?: _hub.getClient.options.environment ?: kSentryDefaultEnvironment;
-    profile[@"timestamp"] = [[SentryCurrentDate date] sentry_toIso8601String];
+    profile[@"timestamp"] = [[BuzzSentryCurrentDate date] sentry_toIso8601String];
 
     const auto bundle = NSBundle.mainBundle;
     profile[@"release"] =
@@ -602,7 +602,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     profile[@"transactions"] = transactionsInfo;
 
     NSError *error = nil;
-    const auto JSONData = [SentrySerialization dataWithJSONObject:profile error:&error];
+    const auto JSONData = [BuzzSentrySerialization dataWithJSONObject:profile error:&error];
     if (JSONData == nil) {
         SENTRY_LOG_DEBUG(@"Failed to encode profile to JSON: %@", error);
         return;

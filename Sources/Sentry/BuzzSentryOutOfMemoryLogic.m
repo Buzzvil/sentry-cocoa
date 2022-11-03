@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#import <SentryAppState.h>
-#import <SentryAppStateManager.h>
+#import <BuzzSentryAppState.h>
+#import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryCrashWrapper.h>
 #import <BuzzSentryOptions.h>
 #import <BuzzSentryOutOfMemoryLogic.h>
@@ -15,7 +15,7 @@ BuzzSentryOutOfMemoryLogic ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashAdapter;
-@property (nonatomic, strong) SentryAppStateManager *appStateManager;
+@property (nonatomic, strong) BuzzSentryAppStateManager *appStateManager;
 
 @end
 
@@ -23,7 +23,7 @@ BuzzSentryOutOfMemoryLogic ()
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                    crashAdapter:(BuzzSentryCrashWrapper *)crashAdapter
-                appStateManager:(SentryAppStateManager *)appStateManager
+                appStateManager:(BuzzSentryAppStateManager *)appStateManager
 {
     if (self = [super init]) {
         self.options = options;
@@ -40,8 +40,8 @@ BuzzSentryOutOfMemoryLogic ()
     }
 
 #if SENTRY_HAS_UIKIT
-    SentryAppState *previousAppState = [self.appStateManager loadPreviousAppState];
-    SentryAppState *currentAppState = [self.appStateManager buildCurrentAppState];
+    BuzzSentryAppState *previousAppState = [self.appStateManager loadPreviousAppState];
+    BuzzSentryAppState *currentAppState = [self.appStateManager buildCurrentAppState];
 
     // If there is no previous app state, we can't do anything.
     if (nil == previousAppState) {

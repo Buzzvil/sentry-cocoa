@@ -3,7 +3,7 @@
 #import "PrivateBuzzSentrySDKOnly.h"
 #import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryClient.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryFramesTracker.h"
 #import "BuzzSentryHub+Private.h"
 #import "SentryLog.h"

@@ -1,4 +1,4 @@
-#import "SentryCurrentDateProvider.h"
+#import "BuzzSentryCurrentDateProvider.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -8,15 +8,15 @@ NS_ASSUME_NONNULL_BEGIN
  * date, especially useful for testing.
  */
 NS_SWIFT_NAME(CurrentDate)
-@interface SentryCurrentDate : NSObject
+@interface BuzzSentryCurrentDate : NSObject
 
 + (NSDate *)date;
 
 + (dispatch_time_t)dispatchTimeNow;
 
-+ (void)setCurrentDateProvider:(nullable id<SentryCurrentDateProvider>)currentDateProvider;
++ (void)setCurrentDateProvider:(nullable id<BuzzSentryCurrentDateProvider>)currentDateProvider;
 
-+ (nullable id<SentryCurrentDateProvider>)getCurrentDateProvider;
++ (nullable id<BuzzSentryCurrentDateProvider>)getCurrentDateProvider;
 
 @end
 

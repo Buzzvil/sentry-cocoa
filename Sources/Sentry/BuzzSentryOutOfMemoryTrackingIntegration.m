@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
-#import <SentryAppState.h>
-#import <SentryAppStateManager.h>
+#import <BuzzSentryAppState.h>
+#import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
@@ -20,7 +20,7 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
 @property (nonatomic, strong) BuzzSentryOutOfMemoryTracker *tracker;
 @property (nonatomic, strong) BuzzSentryANRTracker *anrTracker;
 @property (nullable, nonatomic, copy) NSString *testConfigurationFilePath;
-@property (nonatomic, strong) SentryAppStateManager *appStateManager;
+@property (nonatomic, strong) BuzzSentryAppStateManager *appStateManager;
 
 @end
 
@@ -51,8 +51,8 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
         [[BuzzSentryDispatchQueueWrapper alloc] initWithName:"sentry-out-of-memory-tracker"
                                               attributes:attributes];
 
-    SentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
-    SentryAppStateManager *appStateManager =
+    BuzzSentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
+    BuzzSentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
     BuzzSentryCrashWrapper *crashWrapper = [SentryDependencyContainer sharedInstance].crashWrapper;
     BuzzSentryOutOfMemoryLogic *logic =
@@ -93,7 +93,7 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
 {
 #if SENTRY_HAS_UIKIT
     [self.appStateManager
-        updateAppState:^(SentryAppState *appState) { appState.isANROngoing = YES; }];
+        updateAppState:^(BuzzSentryAppState *appState) { appState.isANROngoing = YES; }];
 #endif
 }
 
@@ -101,7 +101,7 @@ BuzzSentryOutOfMemoryTrackingIntegration ()
 {
 #if SENTRY_HAS_UIKIT
     [self.appStateManager
-        updateAppState:^(SentryAppState *appState) { appState.isANROngoing = NO; }];
+        updateAppState:^(BuzzSentryAppState *appState) { appState.isANROngoing = NO; }];
 #endif
 }
 

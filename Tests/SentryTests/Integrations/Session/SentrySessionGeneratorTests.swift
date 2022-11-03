@@ -19,7 +19,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
     private var autoSessionTrackingIntegration: BuzzSentryAutoSessionTrackingIntegration!
     private var crashIntegration: BuzzSentryCrashIntegration!
     private var options: Options!
-    private var fileManager: SentryFileManager!
+    private var fileManager: BuzzSentryFileManager!
     
     override func setUp() {
         super.setUp()
@@ -38,7 +38,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         }
         
         do {
-            fileManager = try SentryFileManager(options: options, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
+            fileManager = try BuzzSentryFileManager(options: options, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
             
             fileManager.deleteCurrentSession()
             fileManager.deleteCrashedSession()
@@ -109,7 +109,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
         sentryCrash.internalCrashedLastLaunch = false
         
         #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-        let appState = SentryAppState(releaseName: options.releaseName!, osVersion: UIDevice.current.systemVersion, vendorId: "12345678-1234-1234-1234-1234567890AB", isDebugging: false, systemBootTimestamp: Date())
+        let appState = BuzzSentryAppState(releaseName: options.releaseName!, osVersion: UIDevice.current.systemVersion, vendorId: "12345678-1234-1234-1234-1234567890AB", isDebugging: false, systemBootTimestamp: Date())
         appState.isActive = true
         fileManager.store(appState)
         

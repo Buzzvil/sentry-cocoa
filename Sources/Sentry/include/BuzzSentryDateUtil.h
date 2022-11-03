@@ -3,7 +3,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(DateUtil)
-@interface SentryDateUtil : NSObject
+@interface BuzzSentryDateUtil : NSObject
 
 + (BOOL)isInFuture:(NSDate *_Nullable)date;
 

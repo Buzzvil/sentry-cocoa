@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class SentryLogOutput;
+@class BuzzSentryLogOutput;
 
 NS_ASSUME_NONNULL_BEGIN
 

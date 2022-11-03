@@ -1,8 +1,8 @@
-#import "SentryLogOutput.h"
+#import "BuzzSentryLogOutput.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryLogOutput
+@implementation BuzzSentryLogOutput
 
 - (void)log:(NSString *)message
 {

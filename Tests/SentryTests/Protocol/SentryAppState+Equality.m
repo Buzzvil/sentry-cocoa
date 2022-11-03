@@ -1,9 +1,9 @@
-#import "SentryAppState+Equality.h"
+#import "BuzzSentryAppState+Equality.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation
-SentryAppState (Equality)
+BuzzSentryAppState (Equality)
 
 - (BOOL)isEqual:(id _Nullable)other
 {
@@ -15,7 +15,7 @@ SentryAppState (Equality)
     return [self isEqualToAppState:other];
 }
 
-- (BOOL)isEqualToAppState:(SentryAppState *_Nullable)appState
+- (BOOL)isEqualToAppState:(BuzzSentryAppState *_Nullable)appState
 {
     if (self == appState)
         return YES;

@@ -37,7 +37,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         }
     }
     
-    private var fileManager: SentryFileManager!
+    private var fileManager: BuzzSentryFileManager!
     
     private var fixture: Fixture!
     private var sut: SessionTracker!
@@ -51,7 +51,7 @@ class BuzzSentrySessionTrackerTests: XCTestCase {
         
         CurrentDate.setCurrentDateProvider(fixture.currentDateProvider)
         
-        fileManager = try! SentryFileManager(options: fixture.options, andCurrentDateProvider: fixture.currentDateProvider)
+        fileManager = try! BuzzSentryFileManager(options: fixture.options, andCurrentDateProvider: fixture.currentDateProvider)
         fileManager.deleteCurrentSession()
         fileManager.deleteCrashedSession()
         fileManager.deleteTimestampLastInForeground()

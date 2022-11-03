@@ -1,4 +1,4 @@
-#import "SentryLevelMapper.h"
+#import "BuzzSentryLevelMapper.h"
 #import <Foundation/Foundation.h>
 #import <NSData+BuzzSentry.h>
 #import <BuzzSentryBreadcrumb.h>

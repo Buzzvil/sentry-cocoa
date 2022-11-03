@@ -6,8 +6,8 @@
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope.h"
-#import "SentrySwizzle.h"
-#import "SentrySwizzleWrapper.h"
+#import "BuzzSentrySwizzle.h"
+#import "BuzzSentrySwizzleWrapper.h"
 #import "BuzzSentryUIViewControllerSanitizer.h"
 
 #if SENTRY_HAS_UIKIT
@@ -24,13 +24,13 @@ static NSString *const BuzzSentryBreadcrumbTrackerSwizzleSendAction
 @interface
 BuzzSentryBreadcrumbTracker ()
 
-@property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;
+@property (nonatomic, strong) BuzzSentrySwizzleWrapper *swizzleWrapper;
 
 @end
 
 @implementation BuzzSentryBreadcrumbTracker
 
-- (instancetype)initWithSwizzleWrapper:(SentrySwizzleWrapper *)swizzleWrapper
+- (instancetype)initWithSwizzleWrapper:(BuzzSentrySwizzleWrapper *)swizzleWrapper
 {
     if (self = [super init]) {
         self.swizzleWrapper = swizzleWrapper;
@@ -176,14 +176,14 @@ BuzzSentryBreadcrumbTracker ()
 {
 #if SENTRY_HAS_UIKIT
 
-    // SentrySwizzleInstanceMethod declaration shadows a local variable. The swizzling is working
+    // BuzzSentrySwizzleInstanceMethod declaration shadows a local variable. The swizzling is working
     // fine and we accept this warning.
 #    pragma clang diagnostic push
 #    pragma clang diagnostic ignored "-Wshadow"
 
     static const void *swizzleViewDidAppearKey = &swizzleViewDidAppearKey;
     SEL selector = NSSelectorFromString(@"viewDidAppear:");
-    SentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
+    BuzzSentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
             if (nil != [BuzzSentrySDK.currentHub getClient]) {
                 BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
@@ -199,7 +199,7 @@ BuzzSentryBreadcrumbTracker ()
             }
             SentrySWCallOriginal(animated);
         }),
-        SentrySwizzleModeOncePerClassAndSuperclasses, swizzleViewDidAppearKey);
+        BuzzSentrySwizzleModeOncePerClassAndSuperclasses, swizzleViewDidAppearKey);
 #    pragma clang diagnostic pop
 #else
     SENTRY_LOG_DEBUG(@"NO UIKit -> [BuzzSentryBreadcrumbTracker swizzleViewDidAppear] does nothing.");

@@ -89,6 +89,6 @@ class BuzzSentryTransportAdapterTests: XCTestCase {
             XCTAssertTrue(containsData, "Envelope data with type:\(expectedHeader.type) doesn't match.")
         }
         
-        XCTAssertEqual(try SentrySerialization.data(with: expected), try SentrySerialization.data(with: actual))
+        XCTAssertEqual(try BuzzSentrySerialization.data(with: expected), try BuzzSentrySerialization.data(with: actual))
     }
 }

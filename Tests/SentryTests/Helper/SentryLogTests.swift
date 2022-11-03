@@ -3,7 +3,7 @@ import XCTest
 class SentryLogTests: XCTestCase {
     var oldDebug: Bool!
     var oldLevel: SentryLevel!
-    var oldOutput: SentryLogOutput!
+    var oldOutput: BuzzSentryLogOutput!
 
     override func setUp() {
         super.setUp()

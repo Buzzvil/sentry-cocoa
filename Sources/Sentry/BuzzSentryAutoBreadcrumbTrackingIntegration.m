@@ -1,8 +1,8 @@
 #import "BuzzSentryAutoBreadcrumbTrackingIntegration.h"
 #import "BuzzSentryBreadcrumbTracker.h"
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "SentryLog.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentrySystemEventBreadcrumbs.h"
@@ -32,7 +32,7 @@ BuzzSentryAutoBreadcrumbTrackingIntegration ()
         systemEventBreadcrumbs:[[BuzzSentrySystemEventBreadcrumbs alloc]
                                       initWithFileManager:[SentryDependencyContainer sharedInstance]
                                                               .fileManager
-                                   andCurrentDateProvider:[SentryDefaultCurrentDateProvider
+                                   andCurrentDateProvider:[BuzzSentryDefaultCurrentDateProvider
                                                               sharedInstance]]];
 
     return YES;

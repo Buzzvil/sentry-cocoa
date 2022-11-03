@@ -2,7 +2,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryFileContents : NSObject
+@interface BuzzSentryFileContents : NSObject
 
 - (instancetype)initWithPath:(NSString *)path andContents:(NSData *)contents;
 

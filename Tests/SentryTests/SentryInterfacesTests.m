@@ -2,7 +2,7 @@
 #import <XCTest/XCTest.h>
 
 #import "NSDate+BuzzSentryExtras.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "BuzzSentryId.h"
 #import "BuzzSentryMeta.h"
 

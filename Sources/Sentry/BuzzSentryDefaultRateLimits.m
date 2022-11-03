@@ -1,8 +1,8 @@
 #import "BuzzSentryDefaultRateLimits.h"
 #import "BuzzSentryConcurrentRateLimitsDictionary.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryDataCategoryMapper.h"
-#import "SentryDateUtil.h"
+#import "BuzzSentryDateUtil.h"
 #import "SentryLog.h"
 #import "BuzzSentryRateLimitParser.h"
 #import "BuzzSentryRetryAfterHeaderParser.h"
@@ -38,8 +38,8 @@ BuzzSentryDefaultRateLimits ()
     NSDate *categoryDate = [self.rateLimits getRateLimitForCategory:category];
     NSDate *allCategoriesDate = [self.rateLimits getRateLimitForCategory:kBuzzSentryDataCategoryAll];
 
-    BOOL isActiveForCategory = [SentryDateUtil isInFuture:categoryDate];
-    BOOL isActiveForCategories = [SentryDateUtil isInFuture:allCategoriesDate];
+    BOOL isActiveForCategory = [BuzzSentryDateUtil isInFuture:categoryDate];
+    BOOL isActiveForCategories = [BuzzSentryDateUtil isInFuture:allCategoriesDate];
 
     if (isActiveForCategory || isActiveForCategories) {
         return YES;
@@ -66,7 +66,7 @@ BuzzSentryDefaultRateLimits ()
 
         if (nil == retryAfterHeaderDate) {
             // parsing failed use default value
-            retryAfterHeaderDate = [[SentryCurrentDate date] dateByAddingTimeInterval:60];
+            retryAfterHeaderDate = [[BuzzSentryCurrentDate date] dateByAddingTimeInterval:60];
         }
 
         [self updateRateLimit:kBuzzSentryDataCategoryAll withDate:retryAfterHeaderDate];
@@ -76,7 +76,7 @@ BuzzSentryDefaultRateLimits ()
 - (void)updateRateLimit:(BuzzSentryDataCategory)category withDate:(NSDate *)newDate
 {
     NSDate *existingDate = [self.rateLimits getRateLimitForCategory:category];
-    NSDate *longerRateLimitDate = [SentryDateUtil getMaximumDate:existingDate andOther:newDate];
+    NSDate *longerRateLimitDate = [BuzzSentryDateUtil getMaximumDate:existingDate andOther:newDate];
     [self.rateLimits addRateLimit:category validUntil:longerRateLimitDate];
 }
 

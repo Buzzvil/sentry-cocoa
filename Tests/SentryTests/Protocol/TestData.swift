@@ -168,8 +168,8 @@ class TestData {
     
     static var someUUID = "12345678-1234-1234-1234-12344567890AB"
     
-    static var appState: SentryAppState {
-        return SentryAppState(releaseName: "1.0.0", osVersion: "14.4.1", vendorId: someUUID, isDebugging: false, systemBootTimestamp: timestamp)
+    static var appState: BuzzSentryAppState {
+        return BuzzSentryAppState(releaseName: "1.0.0", osVersion: "14.4.1", vendorId: someUUID, isDebugging: false, systemBootTimestamp: timestamp)
     }
     
     static var oomEvent: Event {

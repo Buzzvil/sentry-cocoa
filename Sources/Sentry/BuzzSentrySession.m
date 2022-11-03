@@ -1,6 +1,6 @@
 #import "BuzzSentrySession.h"
 #import "NSDate+BuzzSentryExtras.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryInstallation.h"
 #import "SentryLog.h"
 
@@ -34,7 +34,7 @@ nameForBuzzSentrySessionStatus(BuzzSentrySessionStatus status)
 {
     if (self = [super init]) {
         _sessionId = [NSUUID UUID];
-        _started = [SentryCurrentDate date];
+        _started = [BuzzSentryCurrentDate date];
         _status = kBuzzSentrySessionStatusOk;
         _sequence = 1;
         _errors = 0;
@@ -211,7 +211,7 @@ nameForBuzzSentrySessionStatus(BuzzSentrySessionStatus status)
             [serializedData setValue:statusString forKey:@"status"];
         }
 
-        NSDate *timestamp = nil != _timestamp ? _timestamp : [SentryCurrentDate date];
+        NSDate *timestamp = nil != _timestamp ? _timestamp : [BuzzSentryCurrentDate date];
         [serializedData setValue:[timestamp sentry_toIso8601String] forKey:@"timestamp"];
 
         if (nil != _duration) {

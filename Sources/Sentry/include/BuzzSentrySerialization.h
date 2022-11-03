@@ -1,12 +1,12 @@
 #import "SentryDefines.h"
 
-@class BuzzSentrySession, BuzzSentryEnvelope, SentryAppState;
+@class BuzzSentrySession, BuzzSentryEnvelope, BuzzSentryAppState;
 
 NS_ASSUME_NONNULL_BEGIN
 
 static int const SENTRY_BAGGAGE_MAX_SIZE = 8192;
 
-@interface SentrySerialization : NSObject
+@interface BuzzSentrySerialization : NSObject
 
 + (NSData *_Nullable)dataWithJSONObject:(NSDictionary *)dictionary
                                   error:(NSError *_Nullable *_Nullable)error;
@@ -26,7 +26,7 @@ static int const SENTRY_BAGGAGE_MAX_SIZE = 8192;
 // TODO: (NSInputStream *)inputStream
 + (BuzzSentryEnvelope *_Nullable)envelopeWithData:(NSData *)data;
 
-+ (SentryAppState *_Nullable)appStateWithData:(NSData *)sessionData;
++ (BuzzSentryAppState *_Nullable)appStateWithData:(NSData *)sessionData;
 
 /**
  * Extract the level from data of an envelopte item containing an event. Default is the 'error'

@@ -23,7 +23,7 @@ BuzzSentryClient (Private)
     NSMutableArray<id<BuzzSentryClientAttachmentProcessor>> *attachmentProcessors;
 @property (nonatomic, strong) BuzzSentryThreadInspector *threadInspector;
 
-- (SentryFileManager *)fileManager;
+- (BuzzSentryFileManager *)fileManager;
 
 - (BuzzSentryId *)captureError:(NSError *)error
                withSession:(BuzzSentrySession *)session

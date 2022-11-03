@@ -1,9 +1,9 @@
-#import "SentryAppState.h"
+#import "BuzzSentryAppState.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryAppState (Equality)
+BuzzSentryAppState (Equality)
 
 - (BOOL)isEqual:(id _Nullable)object;
 

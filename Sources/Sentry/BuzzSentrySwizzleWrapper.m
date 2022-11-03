@@ -1,18 +1,18 @@
-#import "SentrySwizzleWrapper.h"
-#import "SentrySwizzle.h"
+#import "BuzzSentrySwizzleWrapper.h"
+#import "BuzzSentrySwizzle.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentrySwizzleWrapper
+@implementation BuzzSentrySwizzleWrapper
 
 #if SENTRY_HAS_UIKIT
-static NSMutableDictionary<NSString *, SentrySwizzleSendActionCallback>
-    *sentrySwizzleSendActionCallbacks;
+static NSMutableDictionary<NSString *, BuzzSentrySwizzleSendActionCallback>
+    *BuzzSentrySwizzleSendActionCallbacks;
 #endif
 
-+ (SentrySwizzleWrapper *)sharedInstance
++ (BuzzSentrySwizzleWrapper *)sharedInstance
 {
-    static SentrySwizzleWrapper *instance = nil;
+    static BuzzSentrySwizzleWrapper *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;
@@ -21,19 +21,19 @@ static NSMutableDictionary<NSString *, SentrySwizzleSendActionCallback>
 + (void)initialize
 {
 #if SENTRY_HAS_UIKIT
-    if (self == [SentrySwizzleWrapper class]) {
-        sentrySwizzleSendActionCallbacks = [NSMutableDictionary new];
+    if (self == [BuzzSentrySwizzleWrapper class]) {
+        BuzzSentrySwizzleSendActionCallbacks = [NSMutableDictionary new];
     }
 #endif
 }
 
 #if SENTRY_HAS_UIKIT
-- (void)swizzleSendAction:(SentrySwizzleSendActionCallback)callback forKey:(NSString *)key
+- (void)swizzleSendAction:(BuzzSentrySwizzleSendActionCallback)callback forKey:(NSString *)key
 {
     // We need to make a copy of the block to avoid ARC of autoreleasing it.
-    sentrySwizzleSendActionCallbacks[key] = [callback copy];
+    BuzzSentrySwizzleSendActionCallbacks[key] = [callback copy];
 
-    if (sentrySwizzleSendActionCallbacks.count != 1) {
+    if (BuzzSentrySwizzleSendActionCallbacks.count != 1) {
         return;
     }
 
@@ -41,18 +41,18 @@ static NSMutableDictionary<NSString *, SentrySwizzleSendActionCallback>
 #    pragma clang diagnostic ignored "-Wshadow"
     static const void *swizzleSendActionKey = &swizzleSendActionKey;
     SEL selector = NSSelectorFromString(@"sendAction:to:from:forEvent:");
-    SentrySwizzleInstanceMethod(UIApplication.class, selector, SentrySWReturnType(BOOL),
+    BuzzSentrySwizzleInstanceMethod(UIApplication.class, selector, SentrySWReturnType(BOOL),
         SentrySWArguments(SEL action, id target, id sender, UIEvent * event), SentrySWReplacement({
-            [SentrySwizzleWrapper sendActionCalled:action target:target sender:sender event:event];
+            [BuzzSentrySwizzleWrapper sendActionCalled:action target:target sender:sender event:event];
             return SentrySWCallOriginal(action, target, sender, event);
         }),
-        SentrySwizzleModeOncePerClassAndSuperclasses, swizzleSendActionKey);
+        BuzzSentrySwizzleModeOncePerClassAndSuperclasses, swizzleSendActionKey);
 #    pragma clang diagnostic pop
 }
 
 - (void)removeSwizzleSendActionForKey:(NSString *)key
 {
-    [sentrySwizzleSendActionCallbacks removeObjectForKey:key];
+    [BuzzSentrySwizzleSendActionCallbacks removeObjectForKey:key];
 }
 
 /**
@@ -61,7 +61,7 @@ static NSMutableDictionary<NSString *, SentrySwizzleSendActionCallback>
  */
 + (void)sendActionCalled:(SEL)action target:(id)target sender:(id)sender event:(UIEvent *)event
 {
-    for (SentrySwizzleSendActionCallback callback in sentrySwizzleSendActionCallbacks.allValues) {
+    for (BuzzSentrySwizzleSendActionCallback callback in BuzzSentrySwizzleSendActionCallbacks.allValues) {
         callback([NSString stringWithFormat:@"%s", sel_getName(action)], target, sender, event);
     }
 }
@@ -69,16 +69,16 @@ static NSMutableDictionary<NSString *, SentrySwizzleSendActionCallback>
 /**
  * For testing.
  */
-- (NSDictionary<NSString *, SentrySwizzleSendActionCallback> *)swizzleSendActionCallbacks
+- (NSDictionary<NSString *, BuzzSentrySwizzleSendActionCallback> *)swizzleSendActionCallbacks
 {
-    return sentrySwizzleSendActionCallbacks;
+    return BuzzSentrySwizzleSendActionCallbacks;
 }
 #endif
 
 - (void)removeAllCallbacks
 {
 #if SENTRY_HAS_UIKIT
-    [sentrySwizzleSendActionCallbacks removeAllObjects];
+    [BuzzSentrySwizzleSendActionCallbacks removeAllObjects];
 #endif
 }
 
@@ -86,7 +86,7 @@ static NSMutableDictionary<NSString *, SentrySwizzleSendActionCallback>
 // For test purpose
 + (BOOL)hasCallbacks
 {
-    return sentrySwizzleSendActionCallbacks.count > 0;
+    return BuzzSentrySwizzleSendActionCallbacks.count > 0;
 }
 #endif
 

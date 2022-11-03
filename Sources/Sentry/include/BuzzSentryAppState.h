@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryAppState : NSObject <BuzzSentrySerializable>
+@interface BuzzSentryAppState : NSObject <BuzzSentrySerializable>
 SENTRY_NO_INIT
 
 - (instancetype)initWithReleaseName:(NSString *)releaseName
@@ -13,7 +13,7 @@ SENTRY_NO_INIT
                 systemBootTimestamp:(NSDate *)systemBootTimestamp;
 
 /**
- * Initializes SentryAppState from a JSON object.
+ * Initializes BuzzSentryAppState from a JSON object.
  *
  * @param jsonObject The jsonObject containing the session.
  *

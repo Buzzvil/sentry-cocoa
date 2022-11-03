@@ -1,23 +1,23 @@
-#import "SentrySwizzle.h"
+#import "BuzzSentrySwizzle.h"
 
 #import <objc/runtime.h>
 #include <pthread.h>
 
 #pragma mark - Swizzling
 
-#pragma mark └ SentrySwizzleInfo
+#pragma mark └ BuzzSentrySwizzleInfo
 
-typedef IMP (^SentrySwizzleImpProvider)(void);
+typedef IMP (^BuzzSentrySwizzleImpProvider)(void);
 
 @interface
-SentrySwizzleInfo ()
-@property (nonatomic, copy) SentrySwizzleImpProvider impProviderBlock;
+BuzzSentrySwizzleInfo ()
+@property (nonatomic, copy) BuzzSentrySwizzleImpProvider impProviderBlock;
 @property (nonatomic, readwrite) SEL selector;
 @end
 
-@implementation SentrySwizzleInfo
+@implementation BuzzSentrySwizzleInfo
 
-- (SentrySwizzleOriginalIMP)getOriginalImplementation
+- (BuzzSentrySwizzleOriginalIMP)getOriginalImplementation
 {
     NSAssert(_impProviderBlock, @"_impProviderBlock can't be missing");
     if (!_impProviderBlock) {
@@ -31,18 +31,18 @@ SentrySwizzleInfo ()
     }
 #endif
 
-    // Casting IMP to SentrySwizzleOriginalIMP to force user casting.
-    return (SentrySwizzleOriginalIMP)_impProviderBlock();
+    // Casting IMP to BuzzSentrySwizzleOriginalIMP to force user casting.
+    return (BuzzSentrySwizzleOriginalIMP)_impProviderBlock();
 }
 
 @end
 
-#pragma mark └ SentrySwizzle
+#pragma mark └ BuzzSentrySwizzle
 
-@implementation SentrySwizzle
+@implementation BuzzSentrySwizzle
 
 static void
-swizzle(Class classToSwizzle, SEL selector, SentrySwizzleImpFactoryBlock factoryBlock)
+swizzle(Class classToSwizzle, SEL selector, BuzzSentrySwizzleImpFactoryBlock factoryBlock)
 {
     Method method = class_getInstanceMethod(classToSwizzle, selector);
 
@@ -58,7 +58,7 @@ swizzle(Class classToSwizzle, SEL selector, SentrySwizzleImpFactoryBlock factory
 
     // This block will be called by the client to get original implementation
     // and call it.
-    SentrySwizzleImpProvider originalImpProvider = ^IMP {
+    BuzzSentrySwizzleImpProvider originalImpProvider = ^IMP {
         // It's possible that another thread can call the method between the
         // call to class_replaceMethod and its return value being set. So to be
         // sure originalIMP has the right value, we need a lock.
@@ -79,7 +79,7 @@ swizzle(Class classToSwizzle, SEL selector, SentrySwizzleImpFactoryBlock factory
         return imp;
     };
 
-    SentrySwizzleInfo *swizzleInfo = [SentrySwizzleInfo new];
+    BuzzSentrySwizzleInfo *swizzleInfo = [BuzzSentrySwizzleInfo new];
     swizzleInfo.selector = selector;
     swizzleInfo.impProviderBlock = originalImpProvider;
 
@@ -136,26 +136,26 @@ swizzledClassesForKey(const void *key)
 
 + (BOOL)swizzleInstanceMethod:(SEL)selector
                       inClass:(nonnull Class)classToSwizzle
-                newImpFactory:(SentrySwizzleImpFactoryBlock)factoryBlock
-                         mode:(SentrySwizzleMode)mode
+                newImpFactory:(BuzzSentrySwizzleImpFactoryBlock)factoryBlock
+                         mode:(BuzzSentrySwizzleMode)mode
                           key:(const void *)key
 {
-    NSAssert(!(key == NULL && mode != SentrySwizzleModeAlways),
-        @"Key may not be NULL if mode is not SentrySwizzleModeAlways.");
+    NSAssert(!(key == NULL && mode != BuzzSentrySwizzleModeAlways),
+        @"Key may not be NULL if mode is not BuzzSentrySwizzleModeAlways.");
 
-    if (key == NULL && mode != SentrySwizzleModeAlways) {
-        NSLog(@"Key may not be NULL if mode is not SentrySwizzleModeAlways.");
+    if (key == NULL && mode != BuzzSentrySwizzleModeAlways) {
+        NSLog(@"Key may not be NULL if mode is not BuzzSentrySwizzleModeAlways.");
         return NO;
     }
 
     @synchronized(swizzledClassesDictionary()) {
         if (key) {
             NSSet<Class> *swizzledClasses = swizzledClassesForKey(key);
-            if (mode == SentrySwizzleModeOncePerClass) {
+            if (mode == BuzzSentrySwizzleModeOncePerClass) {
                 if ([swizzledClasses containsObject:classToSwizzle]) {
                     return NO;
                 }
-            } else if (mode == SentrySwizzleModeOncePerClassAndSuperclasses) {
+            } else if (mode == BuzzSentrySwizzleModeOncePerClassAndSuperclasses) {
                 for (Class currentClass = classToSwizzle; nil != currentClass;
                      currentClass = class_getSuperclass(currentClass)) {
                     if ([swizzledClasses containsObject:currentClass]) {
@@ -177,12 +177,12 @@ swizzledClassesForKey(const void *key)
 
 + (void)swizzleClassMethod:(SEL)selector
                    inClass:(Class)classToSwizzle
-             newImpFactory:(SentrySwizzleImpFactoryBlock)factoryBlock
+             newImpFactory:(BuzzSentrySwizzleImpFactoryBlock)factoryBlock
 {
     [self swizzleInstanceMethod:selector
                         inClass:object_getClass(classToSwizzle)
                   newImpFactory:factoryBlock
-                           mode:SentrySwizzleModeAlways
+                           mode:BuzzSentrySwizzleModeAlways
                             key:NULL];
 }
 

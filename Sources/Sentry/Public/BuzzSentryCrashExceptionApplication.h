@@ -6,9 +6,9 @@
 
 #if TARGET_OS_OSX
 #    import <AppKit/NSApplication.h>
-@interface SentryCrashExceptionApplication : NSApplication
+@interface BuzzSentryCrashExceptionApplication : NSApplication
 #else
-@interface SentryCrashExceptionApplication : NSObject
+@interface BuzzSentryCrashExceptionApplication : NSObject
 #endif
 
 @end

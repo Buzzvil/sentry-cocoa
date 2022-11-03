@@ -5,7 +5,7 @@ import XCTest
 class BuzzSentryUIEventTrackerTests: XCTestCase {
 
     private class Fixture {
-        let swizzleWrapper = TestSentrySwizzleWrapper()
+        let swizzleWrapper = TestBuzzSentrySwizzleWrapper()
         let target = FirstViewController()
         let hub = BuzzSentryHub(client: TestClient(options: Options()), andScope: nil)
         let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()

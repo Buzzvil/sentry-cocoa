@@ -1,7 +1,7 @@
 #import "BuzzSentryNSDataTracker.h"
 #import "SentryByteCountFormatter.h"
 #import "BuzzSentryClient+Private.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "BuzzSentryHub+Private.h"
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
@@ -222,7 +222,7 @@ BuzzSentryNSDataTracker ()
 
 - (BOOL)ignoreFile:(NSString *)path
 {
-    SentryFileManager *fileManager = [BuzzSentrySDK.currentHub getClient].fileManager;
+    BuzzSentryFileManager *fileManager = [BuzzSentrySDK.currentHub getClient].fileManager;
     return fileManager.sentryPath != nil && [path hasPrefix:fileManager.sentryPath];
 }
 

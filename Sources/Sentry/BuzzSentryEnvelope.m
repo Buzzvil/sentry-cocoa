@@ -8,7 +8,7 @@
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDKInfo.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import "BuzzSentrySession.h"
 #import "BuzzSentryTransaction.h"
 #import "BuzzSentryUserFeedback.h"
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithEvent:(BuzzSentryEvent *)event
 {
     NSError *error;
-    NSData *json = [SentrySerialization dataWithJSONObject:[event serialize] error:&error];
+    NSData *json = [BuzzSentrySerialization dataWithJSONObject:[event serialize] error:&error];
 
     if (nil != error) {
         // We don't know what caused the serialization to fail.
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 
         // We accept the risk that this simple serialization fails. Therefore we ignore the
         // error on purpose.
-        json = [SentrySerialization dataWithJSONObject:[errorEvent serialize] error:nil];
+        json = [BuzzSentrySerialization dataWithJSONObject:[errorEvent serialize] error:nil];
     }
 
     // event.type can be nil and the server infers error if there's a stack trace, otherwise

@@ -8,14 +8,14 @@
 #import "BuzzSentryCrashStackEntryMapper.h"
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDebugImageProvider.h"
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "BuzzSentryGlobalEventProcessor.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryHub.h"
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 BuzzSentryClient ()
 
 @property (nonatomic, strong) BuzzSentryTransportAdapter *transportAdapter;
-@property (nonatomic, strong) SentryFileManager *fileManager;
+@property (nonatomic, strong) BuzzSentryFileManager *fileManager;
 @property (nonatomic, strong) BuzzSentryDebugImageProvider *debugImageProvider;
 @property (nonatomic, strong) BuzzSentryThreadInspector *threadInspector;
 @property (nonatomic, strong) id<BuzzSentryRandom> random;
@@ -86,9 +86,9 @@ NSString *const kSentryDefaultEnvironment = @"production";
                       permissionsObserver:(BuzzSentryPermissionsObserver *)permissionsObserver
 {
     NSError *error = nil;
-    SentryFileManager *fileManager =
-        [[SentryFileManager alloc] initWithOptions:options
-                            andCurrentDateProvider:[SentryDefaultCurrentDateProvider sharedInstance]
+    BuzzSentryFileManager *fileManager =
+        [[BuzzSentryFileManager alloc] initWithOptions:options
+                            andCurrentDateProvider:[BuzzSentryDefaultCurrentDateProvider sharedInstance]
                                              error:&error];
     if (nil != error) {
         SENTRY_LOG_ERROR(@"%@", error.localizedDescription);
@@ -96,7 +96,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     }
 
     id<BuzzSentryTransport> transport = [BuzzSentryTransportFactory initTransport:options
-                                                        sentryFileManager:fileManager];
+                                                        BuzzSentryFileManager:fileManager];
 
     BuzzSentryTransportAdapter *transportAdapter =
         [[BuzzSentryTransportAdapter alloc] initWithTransport:transport options:options];
@@ -129,7 +129,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                transportAdapter:(BuzzSentryTransportAdapter *)transportAdapter
-                    fileManager:(SentryFileManager *)fileManager
+                    fileManager:(BuzzSentryFileManager *)fileManager
                 threadInspector:(BuzzSentryThreadInspector *)threadInspector
                          random:(id<BuzzSentryRandom>)random
                    crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
@@ -155,7 +155,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     return self;
 }
 
-- (SentryFileManager *)fileManager
+- (BuzzSentryFileManager *)fileManager
 {
     return _fileManager;
 }

@@ -1,8 +1,8 @@
 #import "BuzzSentrySessionCrashedHandler.h"
 #import "BuzzSentryClient+Private.h"
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryCurrentDate.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryCurrentDate.h"
+#import "BuzzSentryFileManager.h"
 #import "BuzzSentryHub.h"
 #import "BuzzSentryOutOfMemoryLogic.h"
 #import "BuzzSentrySDK+Private.h"
@@ -30,7 +30,7 @@ BuzzSentrySessionCrashedHandler ()
 - (void)endCurrentSessionAsCrashedWhenCrashOrOOM
 {
     if (self.crashWrapper.crashedLastLaunch || [self.outOfMemoryLogic isOOM]) {
-        SentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
+        BuzzSentryFileManager *fileManager = [[[BuzzSentrySDK currentHub] getClient] fileManager];
 
         if (nil == fileManager) {
             return;
@@ -41,7 +41,7 @@ BuzzSentrySessionCrashedHandler ()
             return;
         }
 
-        NSDate *timeSinceLastCrash = [[SentryCurrentDate date]
+        NSDate *timeSinceLastCrash = [[BuzzSentryCurrentDate date]
             dateByAddingTimeInterval:-self.crashWrapper.activeDurationSinceLastCrash];
 
         [session endSessionCrashedWithTimestamp:timeSinceLastCrash];

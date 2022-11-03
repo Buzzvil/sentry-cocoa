@@ -33,8 +33,8 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
             return session
         }
         
-        var fileManager: SentryFileManager {
-            return try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+        var fileManager: BuzzSentryFileManager {
+            return try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         }
         
         func getSut() -> BuzzSentryCrashIntegration {
@@ -317,7 +317,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     private func givenOOMAppState() {
-        let appState = SentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: UIDevice.current.identifierForVendor?.uuidString ?? "", isDebugging: false, systemBootTimestamp: fixture.currentDateProvider.date())
+        let appState = BuzzSentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: UIDevice.current.identifierForVendor?.uuidString ?? "", isDebugging: false, systemBootTimestamp: fixture.currentDateProvider.date())
         appState.isActive = true
         fixture.fileManager.store(appState)
         fixture.fileManager.moveAppStateToPreviousAppState()

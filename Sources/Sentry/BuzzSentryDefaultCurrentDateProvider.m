@@ -1,17 +1,17 @@
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryDefaultCurrentDateProvider ()
+BuzzSentryDefaultCurrentDateProvider ()
 
 @end
 
-@implementation SentryDefaultCurrentDateProvider
+@implementation BuzzSentryDefaultCurrentDateProvider
 
 + (instancetype)sharedInstance
 {
-    static SentryDefaultCurrentDateProvider *instance = nil;
+    static BuzzSentryDefaultCurrentDateProvider *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;

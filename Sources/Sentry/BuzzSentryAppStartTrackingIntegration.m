@@ -1,10 +1,10 @@
 #import "BuzzSentryAppStartTrackingIntegration.h"
 #import "BuzzSentryAppStartTracker.h"
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "SentryLog.h"
 #import <Foundation/Foundation.h>
 #import <PrivateBuzzSentrySDKOnly.h>
-#import <SentryAppStateManager.h>
+#import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryCrashWrapper.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
@@ -29,11 +29,11 @@ BuzzSentryAppStartTrackingIntegration ()
         return NO;
     }
 
-    SentryDefaultCurrentDateProvider *currentDateProvider =
-        [SentryDefaultCurrentDateProvider sharedInstance];
+    BuzzSentryDefaultCurrentDateProvider *currentDateProvider =
+        [BuzzSentryDefaultCurrentDateProvider sharedInstance];
     SentrySysctl *sysctl = [[SentrySysctl alloc] init];
 
-    SentryAppStateManager *appStateManager =
+    BuzzSentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
 
     self.tracker = [[BuzzSentryAppStartTracker alloc]

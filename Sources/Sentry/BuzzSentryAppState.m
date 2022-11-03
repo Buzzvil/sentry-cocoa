@@ -1,9 +1,9 @@
 #import <NSDate+BuzzSentryExtras.h>
-#import <SentryAppState.h>
+#import <BuzzSentryAppState.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryAppState
+@implementation BuzzSentryAppState
 
 - (instancetype)initWithReleaseName:(NSString *)releaseName
                           osVersion:(NSString *)osVersion

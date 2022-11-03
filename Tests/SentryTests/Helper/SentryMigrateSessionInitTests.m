@@ -1,20 +1,20 @@
-#import "SentryMigrateSessionInit.h"
-#import "SentrySerialization.h"
+#import "BuzzSentryMigrateSessionInit.h"
+#import "BuzzSentrySerialization.h"
 #import <XCTest/XCTest.h>
 
 /**
- * Most of the tests are in SentryFileManagerTests.
+ * Most of the tests are in BuzzSentryFileManagerTests.
  */
-@interface SentryMigrateSessionInitTests : XCTestCase
+@interface BuzzSentryMigrateSessionInitTests : XCTestCase
 
 @end
 
-@implementation SentryMigrateSessionInitTests
+@implementation BuzzSentryMigrateSessionInitTests
 
 - (void)testWithGarbageParametersDoesNotCrash
 {
-    BuzzSentryEnvelope *envelope = [SentrySerialization envelopeWithData:[[NSData alloc] init]];
-    [SentryMigrateSessionInit migrateSessionInit:envelope
+    BuzzSentryEnvelope *envelope = [BuzzSentrySerialization envelopeWithData:[[NSData alloc] init]];
+    [BuzzSentryMigrateSessionInit migrateSessionInit:envelope
                                 envelopesDirPath:@"asdf"
                                envelopeFilePaths:@[]];
 }

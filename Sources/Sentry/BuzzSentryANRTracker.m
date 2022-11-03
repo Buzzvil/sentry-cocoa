@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 BuzzSentryANRTracker ()
 
-@property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
+@property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryThreadWrapper *threadWrapper;
@@ -26,7 +26,7 @@ BuzzSentryANRTracker ()
 }
 
 - (instancetype)initWithTimeoutInterval:(NSTimeInterval)timeoutInterval
-                    currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+                    currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                            crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                    dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                           threadWrapper:(SentryThreadWrapper *)threadWrapper

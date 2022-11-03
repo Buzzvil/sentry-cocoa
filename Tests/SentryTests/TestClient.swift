@@ -1,18 +1,18 @@
 import Foundation
 
 class TestClient: Client {
-    let sentryFileManager: SentryFileManager
+    let BuzzSentryFileManager: BuzzSentryFileManager
     let queue = DispatchQueue(label: "TestClient", attributes: .concurrent)
 
     override init?(options: Options) {
-        sentryFileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+        BuzzSentryFileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         super.init(options: options, permissionsObserver: TestBuzzSentryPermissionsObserver())
     }
 
     // Without this override we get a fatal error: use of unimplemented initializer
     // see https://stackoverflow.com/questions/28187261/ios-swift-fatal-error-use-of-unimplemented-initializer-init
-    override init(options: Options, transportAdapter: BuzzSentryTransportAdapter, fileManager: SentryFileManager, threadInspector: BuzzSentryThreadInspector, random: BuzzSentryRandomProtocol, crashWrapper: BuzzSentryCrashWrapper, permissionsObserver: BuzzSentryPermissionsObserver, deviceWrapper: BuzzSentryUIDeviceWrapper, locale: Locale, timezone: TimeZone) {
-        sentryFileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+    override init(options: Options, transportAdapter: BuzzSentryTransportAdapter, fileManager: BuzzSentryFileManager, threadInspector: BuzzSentryThreadInspector, random: BuzzSentryRandomProtocol, crashWrapper: BuzzSentryCrashWrapper, permissionsObserver: BuzzSentryPermissionsObserver, deviceWrapper: BuzzSentryUIDeviceWrapper, locale: Locale, timezone: TimeZone) {
+        BuzzSentryFileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         super.init(
             options: options,
             transportAdapter: transportAdapter,
@@ -27,8 +27,8 @@ class TestClient: Client {
         )
     }
 
-    override func fileManager() -> SentryFileManager {
-        sentryFileManager
+    override func fileManager() -> BuzzSentryFileManager {
+        BuzzSentryFileManager
     }
     
     var captureSessionInvocations = Invocations<BuzzSentrySession>()
@@ -135,7 +135,7 @@ class TestClient: Client {
     }
 }
 
-class TestFileManager: SentryFileManager {
+class TestFileManager: BuzzSentryFileManager {
     var timestampLastInForeground: Date?
     var readTimestampLastInForegroundInvocations: Int = 0
     var storeTimestampLastInForegroundInvocations: Int = 0
@@ -157,13 +157,13 @@ class TestFileManager: SentryFileManager {
     }
     
     var readAppStateInvocations = Invocations<Void>()
-    override func readAppState() -> SentryAppState? {
+    override func readAppState() -> BuzzSentryAppState? {
         readAppStateInvocations.record(Void())
         return nil
     }
 
     var readPreviousAppStateInvocations = Invocations<Void>()
-    override func readPreviousAppState() -> SentryAppState? {
+    override func readPreviousAppState() -> BuzzSentryAppState? {
         readPreviousAppStateInvocations.record(Void())
         return nil
     }

@@ -1,4 +1,4 @@
-#import "SentryLevelMapper.h"
+#import "BuzzSentryLevelMapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

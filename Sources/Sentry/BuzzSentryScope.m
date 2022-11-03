@@ -4,7 +4,7 @@
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent.h"
 #import "BuzzSentryGlobalEventProcessor.h"
-#import "SentryLevelMapper.h"
+#import "BuzzSentryLevelMapper.h"
 #import "SentryLog.h"
 #import "BuzzSentryScopeObserver.h"
 #import "BuzzSentrySession.h"

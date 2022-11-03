@@ -1,31 +1,31 @@
-#import "SentryCurrentDateProvider.h"
+#import "BuzzSentryCurrentDateProvider.h"
 #import "BuzzSentryDataCategory.h"
 #import "SentryDefines.h"
 #import "BuzzSentrySession.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SentryFileManagerDelegate;
+@protocol BuzzSentryFileManagerDelegate;
 
-@class BuzzSentryEvent, BuzzSentryOptions, BuzzSentryEnvelope, SentryFileContents, SentryAppState,
+@class BuzzSentryEvent, BuzzSentryOptions, BuzzSentryEnvelope, BuzzSentryFileContents, BuzzSentryAppState,
     BuzzSentryDispatchQueueWrapper;
 
-NS_SWIFT_NAME(SentryFileManager)
-@interface SentryFileManager : NSObject
+NS_SWIFT_NAME(BuzzSentryFileManager)
+@interface BuzzSentryFileManager : NSObject
 SENTRY_NO_INIT
 
 @property (nonatomic, readonly) NSString *sentryPath;
 
 - (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
-                  andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+                  andCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                                    error:(NSError **)error;
 
 - (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
-                  andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+                  andCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                     dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                                    error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
-- (void)setDelegate:(id<SentryFileManagerDelegate>)delegate;
+- (void)setDelegate:(id<BuzzSentryFileManagerDelegate>)delegate;
 
 - (NSString *)storeEnvelope:(BuzzSentryEnvelope *)envelope;
 
@@ -49,14 +49,14 @@ SENTRY_NO_INIT
  * Get all envelopes sorted ascending by the timeIntervalSince1970 the envelope was stored and if
  * two envelopes are stored at the same time sorted by the order they were stored.
  */
-- (NSArray<SentryFileContents *> *)getAllEnvelopes;
+- (NSArray<BuzzSentryFileContents *> *)getAllEnvelopes;
 
 /**
  * Gets the oldest stored envelope. For the order see getAllEnvelopes.
  *
  * @return SentryFileContens if there is an envelope and nil if there are no envelopes.
  */
-- (SentryFileContents *_Nullable)getOldestEnvelope;
+- (BuzzSentryFileContents *_Nullable)getOldestEnvelope;
 
 - (BOOL)removeFileAtPath:(NSString *)path;
 
@@ -64,10 +64,10 @@ SENTRY_NO_INIT
 
 - (NSString *)storeDictionary:(NSDictionary *)dictionary toPath:(NSString *)path;
 
-- (void)storeAppState:(SentryAppState *)appState;
+- (void)storeAppState:(BuzzSentryAppState *)appState;
 - (void)moveAppStateToPreviousAppState;
-- (SentryAppState *_Nullable)readAppState;
-- (SentryAppState *_Nullable)readPreviousAppState;
+- (BuzzSentryAppState *_Nullable)readAppState;
+- (BuzzSentryAppState *_Nullable)readPreviousAppState;
 - (void)deleteAppState;
 
 - (NSNumber *_Nullable)readTimezoneOffset;
@@ -76,7 +76,7 @@ SENTRY_NO_INIT
 
 @end
 
-@protocol SentryFileManagerDelegate <NSObject>
+@protocol BuzzSentryFileManagerDelegate <NSObject>
 
 - (void)envelopeItemDeleted:(BuzzSentryDataCategory)dataCategory;
 

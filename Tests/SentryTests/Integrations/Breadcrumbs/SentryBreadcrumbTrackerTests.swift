@@ -21,7 +21,7 @@ class BuzzSentryBreadcrumbTrackerTests: XCTestCase {
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     
     func testStopRemovesSwizzleSendAction() {
-        let swizzleWrapper = SentrySwizzleWrapper.sharedInstance
+        let swizzleWrapper = BuzzSentrySwizzleWrapper.sharedInstance
         let sut = BuzzSentryBreadcrumbTracker(swizzleWrapper: swizzleWrapper)
 
         sut.start()
@@ -33,7 +33,7 @@ class BuzzSentryBreadcrumbTrackerTests: XCTestCase {
     }
 
     func testSwizzlingStarted_ViewControllerAppears_AddsUILifeCycleBreadcrumb() {
-        let sut = BuzzSentryBreadcrumbTracker(swizzleWrapper: SentrySwizzleWrapper.sharedInstance)
+        let sut = BuzzSentryBreadcrumbTracker(swizzleWrapper: BuzzSentrySwizzleWrapper.sharedInstance)
         sut.start()
         sut.startSwizzle()
 

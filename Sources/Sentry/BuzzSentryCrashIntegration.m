@@ -9,10 +9,10 @@
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope+Private.h"
 #import "BuzzSentrySessionCrashedHandler.h"
-#import <SentryAppStateManager.h>
+#import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryCrashScopeObserver.h>
-#import <SentryDefaultCurrentDateProvider.h>
+#import <BuzzSentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentrySDK+Private.h>
 #import <SentrySysctl.h>
@@ -68,7 +68,7 @@ BuzzSentryCrashIntegration ()
 
     self.options = options;
 
-    SentryAppStateManager *appStateManager =
+    BuzzSentryAppStateManager *appStateManager =
         [SentryDependencyContainer sharedInstance].appStateManager;
     BuzzSentryOutOfMemoryLogic *logic =
         [[BuzzSentryOutOfMemoryLogic alloc] initWithOptions:options

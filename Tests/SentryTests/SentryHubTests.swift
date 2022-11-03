@@ -17,7 +17,7 @@ class BuzzSentryHubTests: XCTestCase {
         let event: Event
         let currentDateProvider = TestCurrentDateProvider()
         let sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         let crashedSession: BuzzSentrySession
         let transactionName = "Some Transaction"
         let transactionOperation = "Some Operation"
@@ -32,7 +32,7 @@ class BuzzSentryHubTests: XCTestCase {
             event = Event()
             event.message = BuzzSentryMessage(formatted: message)
             
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
             
             CurrentDate.setCurrentDateProvider(currentDateProvider)
             
@@ -741,7 +741,7 @@ class BuzzSentryHubTests: XCTestCase {
         XCTAssertEqual(1, fixture.client.captureEnvelopeInvocations.count)
         let envelope = fixture.client.captureEnvelopeInvocations.first!
         XCTAssertEqual(2, envelope.items.count)
-        let session = SentrySerialization.session(with: envelope.items[1].data)
+        let session = BuzzSentrySerialization.session(with: envelope.items[1].data)
         XCTAssertEqual(1, session?.errors)
     }
     

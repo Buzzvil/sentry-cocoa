@@ -1,4 +1,4 @@
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import <Sentry/Sentry.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Used to make properties visible for testing.
  */
 @interface
-SentryFileManager (TestProperties)
+BuzzSentryFileManager (TestProperties)
 
 @property (nonatomic, copy) NSString *eventsPath;
 

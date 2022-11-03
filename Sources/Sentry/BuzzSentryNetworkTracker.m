@@ -5,7 +5,7 @@
 #import "SentryLog.h"
 #import "BuzzSentrySDK+Private.h"
 #import "BuzzSentryScope+Private.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTraceHeader.h"
 #import "BuzzSentryTracer.h"
@@ -150,7 +150,7 @@ BuzzSentryNetworkTracker ()
             if (tracer != nil) {
                 baggageHeader = [[tracer.traceContext toBaggage]
                     toHTTPHeaderWithOriginalBaggage:
-                        [SentrySerialization
+                        [BuzzSentrySerialization
                             decodeBaggage:sessionTask.currentRequest
                                               .allHTTPHeaderFields[SENTRY_BAGGAGE_HEADER]]];
             }

@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 
-@class BuzzSentryOptions, BuzzSentrySession, BuzzSentryEvent, BuzzSentryEnvelope, BuzzSentryScope, SentryFileManager,
+@class BuzzSentryOptions, BuzzSentrySession, BuzzSentryEvent, BuzzSentryEnvelope, BuzzSentryScope, BuzzSentryFileManager,
     BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryTransaction;
 
 NS_ASSUME_NONNULL_BEGIN

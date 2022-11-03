@@ -1,6 +1,6 @@
 #import "SentryLog.h"
-#import "SentryLevelMapper.h"
-#import "SentryLogOutput.h"
+#import "BuzzSentryLevelMapper.h"
+#import "BuzzSentryLogOutput.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 static BOOL isDebug = YES;
 static SentryLevel diagnosticLevel = kSentryLevelError;
-static SentryLogOutput *logOutput;
+static BuzzSentryLogOutput *logOutput;
 
 + (void)configure:(BOOL)debug diagnosticLevel:(SentryLevel)level
 {
@@ -22,7 +22,7 @@ static SentryLogOutput *logOutput;
 + (void)logWithMessage:(NSString *)message andLevel:(SentryLevel)level
 {
     if (nil == logOutput) {
-        logOutput = [[SentryLogOutput alloc] init];
+        logOutput = [[BuzzSentryLogOutput alloc] init];
     }
 
     if (isDebug && level != kSentryLevelNone && level >= diagnosticLevel) {
@@ -32,13 +32,13 @@ static SentryLogOutput *logOutput;
 }
 
 // Internal and only needed for testing.
-+ (void)setLogOutput:(SentryLogOutput *)output
++ (void)setLogOutput:(BuzzSentryLogOutput *)output
 {
     logOutput = output;
 }
 
 // Internal and only needed for testing.
-+ (SentryLogOutput *)logOutput
++ (BuzzSentryLogOutput *)logOutput
 {
     return logOutput;
 }

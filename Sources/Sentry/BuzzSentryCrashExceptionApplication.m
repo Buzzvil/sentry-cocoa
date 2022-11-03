@@ -1,8 +1,8 @@
-#import "SentryCrashExceptionApplication.h"
+#import "BuzzSentryCrashExceptionApplication.h"
 #import "SentryCrash.h"
 #import "BuzzSentrySDK.h"
 
-@implementation SentryCrashExceptionApplication
+@implementation BuzzSentryCrashExceptionApplication
 
 #if TARGET_OS_OSX
 

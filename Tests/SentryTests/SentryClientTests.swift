@@ -22,7 +22,7 @@ class BuzzSentryClientTest: XCTestCase {
         let message: BuzzSentryMessage
         
         let user: User
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         let random = TestRandom(value: 1.0)
         
         let trace = BuzzSentryTracer(transactionContext: TransactionContext(name: "SomeTransaction", operation: "SomeOperation"), hub: nil)
@@ -48,7 +48,7 @@ class BuzzSentryClientTest: XCTestCase {
             
             let options = Options()
             options.dsn = BuzzSentryClientTest.dsn
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
             
             transaction = Transaction(trace: trace, children: [])
             
@@ -1062,7 +1062,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testFileManagerCantBeInit() {
-        SentryFileManager.prepareInitError()
+        BuzzSentryFileManager.prepareInitError()
         
         let options = Options()
         options.dsn = BuzzSentryClientTest.dsn
@@ -1070,7 +1070,7 @@ class BuzzSentryClientTest: XCTestCase {
         
         XCTAssertNil(client)
         
-        SentryFileManager.tearDownInitError()
+        BuzzSentryFileManager.tearDownInitError()
     }
     
     func testInstallationIdSetWhenNoUserId() {

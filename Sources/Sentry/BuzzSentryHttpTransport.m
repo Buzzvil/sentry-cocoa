@@ -1,6 +1,6 @@
 #import "BuzzSentryHttpTransport.h"
 #import "BuzzSentryClientReport.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryDataCategoryMapper.h"
 #import "BuzzSentryDiscardReasonMapper.h"
 #import "BuzzSentryDiscardedEvent.h"
@@ -11,21 +11,21 @@
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEnvelopeRateLimit.h"
 #import "BuzzSentryEvent.h"
-#import "SentryFileContents.h"
-#import "SentryFileManager.h"
+#import "BuzzSentryFileContents.h"
+#import "BuzzSentryFileManager.h"
 #import "SentryLog.h"
 #import "BuzzSentryNSURLRequest.h"
 #import "BuzzSentryNSURLRequestBuilder.h"
 #import "BuzzSentryOptions.h"
 #import "BuzzSentryReachability.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 
 static NSTimeInterval const cachedEnvelopeSendDelay = 0.1;
 
 @interface
 BuzzSentryHttpTransport ()
 
-@property (nonatomic, strong) SentryFileManager *fileManager;
+@property (nonatomic, strong) BuzzSentryFileManager *fileManager;
 @property (nonatomic, strong) id<BuzzSentryRequestManager> requestManager;
 @property (nonatomic, strong) BuzzSentryNSURLRequestBuilder *requestBuilder;
 @property (nonatomic, strong) BuzzSentryOptions *options;
@@ -57,7 +57,7 @@ BuzzSentryHttpTransport ()
 @implementation BuzzSentryHttpTransport
 
 - (id)initWithOptions:(BuzzSentryOptions *)options
-             fileManager:(SentryFileManager *)fileManager
+             fileManager:(BuzzSentryFileManager *)fileManager
           requestManager:(id<BuzzSentryRequestManager>)requestManager
           requestBuilder:(BuzzSentryNSURLRequestBuilder *)requestBuilder
               rateLimits:(id<BuzzSentryRateLimits>)rateLimits
@@ -198,7 +198,7 @@ BuzzSentryHttpTransport ()
 }
 
 /**
- * SentryFileManagerDelegate.
+ * BuzzSentryFileManagerDelegate.
  */
 - (void)envelopeItemDeleted:(BuzzSentryDataCategory)dataCategory
 {
@@ -248,14 +248,14 @@ BuzzSentryHttpTransport ()
         self.isSending = YES;
     }
 
-    SentryFileContents *envelopeFileContents = [self.fileManager getOldestEnvelope];
+    BuzzSentryFileContents *envelopeFileContents = [self.fileManager getOldestEnvelope];
     if (nil == envelopeFileContents) {
         SENTRY_LOG_DEBUG(@"No envelopes left to send.");
         [self finishedSending];
         return;
     }
 
-    BuzzSentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeFileContents.contents];
+    BuzzSentryEnvelope *envelope = [BuzzSentrySerialization envelopeWithData:envelopeFileContents.contents];
     if (nil == envelope) {
         [self deleteEnvelopeAndSendNext:envelopeFileContents.path];
         return;

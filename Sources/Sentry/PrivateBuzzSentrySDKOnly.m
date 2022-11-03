@@ -5,7 +5,7 @@
 #import "BuzzSentryInstallation.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentrySDK+Private.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryFramesTracker.h>
 
@@ -29,7 +29,7 @@ static BOOL _framesTrackingMeasurementHybridSDKMode = NO;
 
 + (nullable BuzzSentryEnvelope *)envelopeWithData:(NSData *)data
 {
-    return [SentrySerialization envelopeWithData:data];
+    return [BuzzSentrySerialization envelopeWithData:data];
 }
 
 + (NSArray<BuzzSentryDebugMeta *> *)getDebugImages

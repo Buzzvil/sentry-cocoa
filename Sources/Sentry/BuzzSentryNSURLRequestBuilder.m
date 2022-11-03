@@ -1,7 +1,7 @@
 #import "BuzzSentryNSURLRequestBuilder.h"
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryNSURLRequest.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     return [[BuzzSentryNSURLRequest alloc]
         initEnvelopeRequestWithDsn:dsn
-                           andData:[SentrySerialization dataWithEnvelope:envelope error:error]
+                           andData:[BuzzSentrySerialization dataWithEnvelope:envelope error:error]
                   didFailWithError:error];
 }
 

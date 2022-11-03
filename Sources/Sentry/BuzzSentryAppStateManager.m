@@ -1,12 +1,12 @@
 #import "SentryCrashSysCtl.h"
 #import "SentrySysctl.h"
 #import <Foundation/Foundation.h>
-#import <SentryAppState.h>
-#import <SentryAppStateManager.h>
+#import <BuzzSentryAppState.h>
+#import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryCrashWrapper.h>
-#import <SentryCurrentDateProvider.h>
+#import <BuzzSentryCurrentDateProvider.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
-#import <SentryFileManager.h>
+#import <BuzzSentryFileManager.h>
 #import <BuzzSentryOptions.h>
 
 #if SENTRY_HAS_UIKIT
@@ -16,24 +16,24 @@
 #endif
 
 @interface
-SentryAppStateManager ()
+BuzzSentryAppStateManager ()
 
 @property (nonatomic, strong) BuzzSentryOptions *options;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
-@property (nonatomic, strong) SentryFileManager *fileManager;
-@property (nonatomic, strong) id<SentryCurrentDateProvider> currentDate;
+@property (nonatomic, strong) BuzzSentryFileManager *fileManager;
+@property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDate;
 @property (nonatomic, strong) SentrySysctl *sysctl;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueue;
 @property (nonatomic) NSInteger startCount;
 
 @end
 
-@implementation SentryAppStateManager
+@implementation BuzzSentryAppStateManager
 
 - (instancetype)initWithOptions:(BuzzSentryOptions *)options
                    crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
-                    fileManager:(SentryFileManager *)fileManager
-            currentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+                    fileManager:(BuzzSentryFileManager *)fileManager
+            currentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                          sysctl:(SentrySysctl *)sysctl
            dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
@@ -137,7 +137,7 @@ SentryAppStateManager ()
  */
 - (void)didBecomeActive
 {
-    [self updateAppStateInBackground:^(SentryAppState *appState) { appState.isActive = YES; }];
+    [self updateAppStateInBackground:^(BuzzSentryAppState *appState) { appState.isActive = YES; }];
 }
 
 /**
@@ -146,7 +146,7 @@ SentryAppStateManager ()
  */
 - (void)willResignActive
 {
-    [self updateAppStateInBackground:^(SentryAppState *appState) { appState.isActive = NO; }];
+    [self updateAppStateInBackground:^(BuzzSentryAppState *appState) { appState.isActive = NO; }];
 }
 
 - (void)willTerminate
@@ -154,20 +154,20 @@ SentryAppStateManager ()
     // The app is terminating so it is fine to do this on the main thread.
     // Furthermore, so users can manually post UIApplicationWillTerminateNotification and then call
     // exit(0), to avoid getting false OOM when using exit(0), see GH-1252.
-    [self updateAppState:^(SentryAppState *appState) { appState.wasTerminated = YES; }];
+    [self updateAppState:^(BuzzSentryAppState *appState) { appState.wasTerminated = YES; }];
 }
 
-- (void)updateAppStateInBackground:(void (^)(SentryAppState *))block
+- (void)updateAppStateInBackground:(void (^)(BuzzSentryAppState *))block
 {
     // We accept the tradeoff that the app state might not be 100% up to date over blocking the main
     // thread.
     [self.dispatchQueue dispatchAsyncWithBlock:^{ [self updateAppState:block]; }];
 }
 
-- (void)updateAppState:(void (^)(SentryAppState *))block
+- (void)updateAppState:(void (^)(BuzzSentryAppState *))block
 {
     @synchronized(self) {
-        SentryAppState *appState = [self.fileManager readAppState];
+        BuzzSentryAppState *appState = [self.fileManager readAppState];
         if (nil != appState) {
             block(appState);
             [self.fileManager storeAppState:appState];
@@ -175,21 +175,21 @@ SentryAppStateManager ()
     }
 }
 
-- (SentryAppState *)buildCurrentAppState
+- (BuzzSentryAppState *)buildCurrentAppState
 {
     // Is the current process being traced or not? If it is a debugger is attached.
     bool isDebugging = self.crashWrapper.isBeingTraced;
 
     NSString *vendorId = [UIDevice.currentDevice.identifierForVendor UUIDString];
 
-    return [[SentryAppState alloc] initWithReleaseName:self.options.releaseName
+    return [[BuzzSentryAppState alloc] initWithReleaseName:self.options.releaseName
                                              osVersion:UIDevice.currentDevice.systemVersion
                                               vendorId:vendorId
                                            isDebugging:isDebugging
                                    systemBootTimestamp:self.sysctl.systemBootTimestamp];
 }
 
-- (SentryAppState *)loadPreviousAppState
+- (BuzzSentryAppState *)loadPreviousAppState
 {
     return [self.fileManager readPreviousAppState];
 }

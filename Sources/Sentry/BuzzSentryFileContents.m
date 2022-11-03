@@ -1,11 +1,11 @@
-#import "SentryFileContents.h"
+#import "BuzzSentryFileContents.h"
 
 @interface
-SentryFileContents ()
+BuzzSentryFileContents ()
 
 @end
 
-@implementation SentryFileContents
+@implementation BuzzSentryFileContents
 
 - (instancetype)initWithPath:(NSString *)path andContents:(NSData *)contents
 {

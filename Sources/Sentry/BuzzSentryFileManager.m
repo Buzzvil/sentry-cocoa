@@ -1,24 +1,24 @@
-#import "SentryFileManager.h"
+#import "BuzzSentryFileManager.h"
 #import "NSDate+BuzzSentryExtras.h"
-#import "SentryAppState.h"
+#import "BuzzSentryAppState.h"
 #import "BuzzSentryDataCategoryMapper.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryDsn.h"
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEvent.h"
-#import "SentryFileContents.h"
+#import "BuzzSentryFileContents.h"
 #import "SentryLog.h"
-#import "SentryMigrateSessionInit.h"
+#import "BuzzSentryMigrateSessionInit.h"
 #import "BuzzSentryOptions.h"
-#import "SentrySerialization.h"
+#import "BuzzSentrySerialization.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryFileManager ()
+BuzzSentryFileManager ()
 
-@property (nonatomic, strong) id<SentryCurrentDateProvider> currentDateProvider;
+@property (nonatomic, strong) id<BuzzSentryCurrentDateProvider> currentDateProvider;
 @property (nonatomic, copy) NSString *basePath;
 @property (nonatomic, copy) NSString *sentryPath;
 @property (nonatomic, copy) NSString *eventsPath;
@@ -31,14 +31,14 @@ SentryFileManager ()
 @property (nonatomic, copy) NSString *timezoneOffsetFilePath;
 @property (nonatomic, assign) NSUInteger currentFileCounter;
 @property (nonatomic, assign) NSUInteger maxEnvelopes;
-@property (nonatomic, weak) id<SentryFileManagerDelegate> delegate;
+@property (nonatomic, weak) id<BuzzSentryFileManagerDelegate> delegate;
 
 @end
 
-@implementation SentryFileManager
+@implementation BuzzSentryFileManager
 
 - (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
-                  andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+                  andCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                                    error:(NSError **)error
 {
     return [self initWithOptions:options
@@ -48,7 +48,7 @@ SentryFileManager ()
 }
 
 - (nullable instancetype)initWithOptions:(BuzzSentryOptions *)options
-                  andCurrentDateProvider:(id<SentryCurrentDateProvider>)currentDateProvider
+                  andCurrentDateProvider:(id<BuzzSentryCurrentDateProvider>)currentDateProvider
                     dispatchQueueWrapper:(BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
                                    error:(NSError **)error
 {
@@ -61,7 +61,7 @@ SentryFileManager ()
             = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)
                   .firstObject;
 
-        SENTRY_LOG_DEBUG(@"SentryFileManager.cachePath: %@", cachePath);
+        SENTRY_LOG_DEBUG(@"BuzzSentryFileManager.cachePath: %@", cachePath);
 
         self.basePath = [cachePath stringByAppendingPathComponent:@"io.sentry"];
         self.sentryPath =
@@ -102,7 +102,7 @@ SentryFileManager ()
     return self;
 }
 
-- (void)setDelegate:(id<SentryFileManagerDelegate>)delegate
+- (void)setDelegate:(id<BuzzSentryFileManagerDelegate>)delegate
 {
     _delegate = delegate;
 }
@@ -125,12 +125,12 @@ SentryFileManager ()
                      (unsigned long)self.currentFileCounter++, [NSUUID UUID].UUIDString];
 }
 
-- (NSArray<SentryFileContents *> *)getAllEnvelopes
+- (NSArray<BuzzSentryFileContents *> *)getAllEnvelopes
 {
     return [self allFilesContentInFolder:self.envelopesPath];
 }
 
-- (SentryFileContents *_Nullable)getOldestEnvelope
+- (BuzzSentryFileContents *_Nullable)getOldestEnvelope
 {
     NSArray<NSString *> *pathsOfAllEnvelopes;
     @synchronized(self) {
@@ -145,12 +145,12 @@ SentryFileManager ()
     return nil;
 }
 
-- (NSArray<SentryFileContents *> *)allFilesContentInFolder:(NSString *)path
+- (NSArray<BuzzSentryFileContents *> *)allFilesContentInFolder:(NSString *)path
 {
     @synchronized(self) {
-        NSMutableArray<SentryFileContents *> *contents = [NSMutableArray new];
+        NSMutableArray<BuzzSentryFileContents *> *contents = [NSMutableArray new];
         for (NSString *filePath in [self allFilesInFolder:path]) {
-            SentryFileContents *fileContents = [self getFileContents:path filePath:filePath];
+            BuzzSentryFileContents *fileContents = [self getFileContents:path filePath:filePath];
 
             if (nil != fileContents) {
                 [contents addObject:fileContents];
@@ -160,7 +160,7 @@ SentryFileManager ()
     }
 }
 
-- (SentryFileContents *_Nullable)getFileContents:(NSString *)folderPath
+- (BuzzSentryFileContents *_Nullable)getFileContents:(NSString *)folderPath
                                         filePath:(NSString *)filePath
 {
 
@@ -168,7 +168,7 @@ SentryFileManager ()
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSData *content = [fileManager contentsAtPath:finalPath];
     if (nil != content) {
-        return [[SentryFileContents alloc] initWithPath:finalPath andContents:content];
+        return [[BuzzSentryFileContents alloc] initWithPath:finalPath andContents:content];
     } else {
         return nil;
     }
@@ -251,7 +251,7 @@ SentryFileManager ()
 - (NSString *)storeEnvelope:(BuzzSentryEnvelope *)envelope
 {
     @synchronized(self) {
-        NSString *result = [self storeData:[SentrySerialization dataWithEnvelope:envelope error:nil]
+        NSString *result = [self storeData:[BuzzSentrySerialization dataWithEnvelope:envelope error:nil]
                                     toPath:self.envelopesPath];
         [self handleEnvelopesLimit];
         return result;
@@ -276,10 +276,10 @@ SentryFileManager ()
         [envelopePathsCopy removeObjectAtIndex:i];
 
         NSData *envelopeData = [[NSFileManager defaultManager] contentsAtPath:envelopeFilePath];
-        BuzzSentryEnvelope *envelope = [SentrySerialization envelopeWithData:envelopeData];
+        BuzzSentryEnvelope *envelope = [BuzzSentrySerialization envelopeWithData:envelopeData];
 
         BOOL didMigrateSessionInit =
-            [SentryMigrateSessionInit migrateSessionInit:envelope
+            [BuzzSentryMigrateSessionInit migrateSessionInit:envelope
                                         envelopesDirPath:self.envelopesPath
                                        envelopeFilePaths:envelopePathsCopy];
 
@@ -316,7 +316,7 @@ SentryFileManager ()
 
 - (void)storeSession:(BuzzSentrySession *)session sessionFilePath:(NSString *)sessionFilePath
 {
-    NSData *sessionData = [SentrySerialization dataWithSession:session error:nil];
+    NSData *sessionData = [BuzzSentrySerialization dataWithSession:session error:nil];
     SENTRY_LOG_DEBUG(@"Writing session: %@", sessionFilePath);
     @synchronized(self.currentSessionFilePath) {
         [sessionData writeToFile:sessionFilePath options:NSDataWritingAtomic error:nil];
@@ -365,7 +365,7 @@ SentryFileManager ()
             return nil;
         }
     }
-    BuzzSentrySession *currentSession = [SentrySerialization sessionWithData:currentData];
+    BuzzSentrySession *currentSession = [BuzzSentrySerialization sessionWithData:currentData];
     if (nil == currentSession) {
         SENTRY_LOG_ERROR(
             @"Data stored in session: '%@' was not parsed as session.", sessionFilePath);
@@ -425,16 +425,16 @@ SentryFileManager ()
 
 - (NSString *)storeDictionary:(NSDictionary *)dictionary toPath:(NSString *)path
 {
-    NSData *saveData = [SentrySerialization dataWithJSONObject:dictionary error:nil];
+    NSData *saveData = [BuzzSentrySerialization dataWithJSONObject:dictionary error:nil];
     return nil != saveData ? [self storeData:saveData toPath:path]
                            : path; // TODO: Should we return null instead? Whoever is using this
                                    // return value is being tricked.
 }
 
-- (void)storeAppState:(SentryAppState *)appState
+- (void)storeAppState:(BuzzSentryAppState *)appState
 {
     NSError *error = nil;
-    NSData *data = [SentrySerialization dataWithJSONObject:[appState serialize] error:&error];
+    NSData *data = [BuzzSentrySerialization dataWithJSONObject:[appState serialize] error:&error];
 
     if (nil != error) {
         SENTRY_LOG_ERROR(
@@ -477,21 +477,21 @@ SentryFileManager ()
     }
 }
 
-- (SentryAppState *_Nullable)readAppState
+- (BuzzSentryAppState *_Nullable)readAppState
 {
     @synchronized(self.appStateFilePath) {
         return [self readAppStateFrom:self.appStateFilePath];
     }
 }
 
-- (SentryAppState *_Nullable)readPreviousAppState
+- (BuzzSentryAppState *_Nullable)readPreviousAppState
 {
     @synchronized(self.previousAppStateFilePath) {
         return [self readAppStateFrom:self.previousAppStateFilePath];
     }
 }
 
-- (SentryAppState *_Nullable)readAppStateFrom:(NSString *)path
+- (BuzzSentryAppState *_Nullable)readAppStateFrom:(NSString *)path
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSData *currentData = nil;
@@ -499,7 +499,7 @@ SentryFileManager ()
     if (nil == currentData) {
         return nil;
     }
-    return [SentrySerialization appStateWithData:currentData];
+    return [BuzzSentrySerialization appStateWithData:currentData];
 }
 
 - (void)deleteAppState

@@ -3,16 +3,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryLogOutput;
+@class BuzzSentryLogOutput;
 
 @interface
 SentryLog (TestInit)
 
 /** Internal and only needed for testing. */
-+ (void)setLogOutput:(nullable SentryLogOutput *)output;
++ (void)setLogOutput:(nullable BuzzSentryLogOutput *)output;
 
 /** Internal and only needed for testing. */
-+ (SentryLogOutput *)logOutput;
++ (BuzzSentryLogOutput *)logOutput;
 
 /** Internal and only needed for testing. */
 + (BOOL)isDebug;

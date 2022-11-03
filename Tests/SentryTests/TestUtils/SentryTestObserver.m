@@ -3,8 +3,8 @@
 #import "BuzzSentryClient.h"
 #import "BuzzSentryCrashIntegration.h"
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryCurrentDate.h"
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryCurrentDate.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryHub.h"
 #import "SentryLog+TestInit.h"
 #import "BuzzSentryOptions.h"
@@ -80,8 +80,8 @@ SentryTestObserver ()
 {
     // Tests set a fixed time. We want to use the current time for sending
     // the test result to Sentry.
-    id<SentryCurrentDateProvider> currentDateProvider = [SentryCurrentDate getCurrentDateProvider];
-    [SentryCurrentDate setCurrentDateProvider:[SentryDefaultCurrentDateProvider sharedInstance]];
+    id<BuzzSentryCurrentDateProvider> currentDateProvider = [BuzzSentryCurrentDate getCurrentDateProvider];
+    [BuzzSentryCurrentDate setCurrentDateProvider:[BuzzSentryDefaultCurrentDateProvider sharedInstance]];
 
     // The tests might mess up the files or something else. Therefore, we create a fresh client and
     // hub to make sure the sending works.
@@ -93,7 +93,7 @@ SentryTestObserver ()
                                                       userInfo:nil];
     [hub captureException:exception withScope:hub.scope];
 
-    [SentryCurrentDate setCurrentDateProvider:currentDateProvider];
+    [BuzzSentryCurrentDate setCurrentDateProvider:currentDateProvider];
 }
 
 @end

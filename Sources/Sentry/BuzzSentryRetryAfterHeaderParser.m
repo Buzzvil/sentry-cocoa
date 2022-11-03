@@ -1,5 +1,5 @@
 #import "BuzzSentryRetryAfterHeaderParser.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryHttpDateParser.h"
 #import <Foundation/Foundation.h>
 
@@ -30,7 +30,7 @@ BuzzSentryRetryAfterHeaderParser ()
 
     NSInteger retryAfterSeconds = [retryAfterHeader integerValue];
     if (0 != retryAfterSeconds) {
-        return [[SentryCurrentDate date] dateByAddingTimeInterval:retryAfterSeconds];
+        return [[BuzzSentryCurrentDate date] dateByAddingTimeInterval:retryAfterSeconds];
     }
 
     // parsing as double/seconds failed, try to parse as date

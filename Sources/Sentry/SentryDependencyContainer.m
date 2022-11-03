@@ -1,19 +1,19 @@
 #import "BuzzSentryANRTracker.h"
-#import "SentryDefaultCurrentDateProvider.h"
+#import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryUIApplication.h"
-#import <SentryAppStateManager.h>
+#import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryCrashWrapper.h>
 #import <BuzzSentryDebugImageProvider.h>
-#import <SentryDefaultCurrentDateProvider.h>
+#import <BuzzSentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryHub.h>
 #import <SentryNSNotificationCenterWrapper.h>
 #import <BuzzSentrySDK+Private.h>
 #import <BuzzSentryScreenshot.h>
-#import <SentrySwizzleWrapper.h>
+#import <BuzzSentrySwizzleWrapper.h>
 #import <SentrySysctl.h>
 #import <SentryThreadWrapper.h>
 #import <BuzzSentryViewHierarchy.h>
@@ -47,7 +47,7 @@ static NSObject *sentryDependencyContainerLock;
     }
 }
 
-- (SentryFileManager *)fileManager
+- (BuzzSentryFileManager *)fileManager
 {
     @synchronized(sentryDependencyContainerLock) {
         if (_fileManager == nil) {
@@ -57,16 +57,16 @@ static NSObject *sentryDependencyContainerLock;
     }
 }
 
-- (SentryAppStateManager *)appStateManager
+- (BuzzSentryAppStateManager *)appStateManager
 {
     @synchronized(sentryDependencyContainerLock) {
         if (_appStateManager == nil) {
             BuzzSentryOptions *options = [[[BuzzSentrySDK currentHub] getClient] options];
-            _appStateManager = [[SentryAppStateManager alloc]
+            _appStateManager = [[BuzzSentryAppStateManager alloc]
                      initWithOptions:options
                         crashWrapper:self.crashWrapper
                          fileManager:self.fileManager
-                 currentDateProvider:[SentryDefaultCurrentDateProvider sharedInstance]
+                 currentDateProvider:[BuzzSentryDefaultCurrentDateProvider sharedInstance]
                               sysctl:[[SentrySysctl alloc] init]
                 dispatchQueueWrapper:self.dispatchQueueWrapper];
         }
@@ -168,12 +168,12 @@ static NSObject *sentryDependencyContainerLock;
 }
 #endif
 
-- (SentrySwizzleWrapper *)swizzleWrapper
+- (BuzzSentrySwizzleWrapper *)swizzleWrapper
 {
     if (_swizzleWrapper == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_swizzleWrapper == nil) {
-                _swizzleWrapper = SentrySwizzleWrapper.sharedInstance;
+                _swizzleWrapper = BuzzSentrySwizzleWrapper.sharedInstance;
             }
         }
     }
@@ -200,7 +200,7 @@ static NSObject *sentryDependencyContainerLock;
             if (_anrTracker == nil) {
                 _anrTracker = [[BuzzSentryANRTracker alloc]
                     initWithTimeoutInterval:timeout
-                        currentDateProvider:[SentryDefaultCurrentDateProvider sharedInstance]
+                        currentDateProvider:[BuzzSentryDefaultCurrentDateProvider sharedInstance]
                                crashWrapper:self.crashWrapper
                        dispatchQueueWrapper:[[BuzzSentryDispatchQueueWrapper alloc] init]
                               threadWrapper:self.threadWrapper];

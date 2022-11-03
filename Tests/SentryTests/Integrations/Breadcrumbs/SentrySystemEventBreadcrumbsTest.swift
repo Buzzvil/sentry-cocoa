@@ -8,7 +8,7 @@ class BuzzSentrySystemEventBreadcrumbsTest: XCTestCase {
     
     private class Fixture {
         let options: Options
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         var currentDateProvider = TestCurrentDateProvider()
 
         init() {
@@ -18,7 +18,7 @@ class BuzzSentrySystemEventBreadcrumbsTest: XCTestCase {
             options.sessionTrackingIntervalMillis = 10_000
             options.environment = "debug"
 
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
         }
 
         func getSut(scope: Scope, currentDevice: UIDevice? = UIDevice.current) -> BuzzSentrySystemEventBreadcrumbs {

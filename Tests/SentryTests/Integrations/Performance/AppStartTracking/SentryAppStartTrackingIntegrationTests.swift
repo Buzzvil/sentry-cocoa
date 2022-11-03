@@ -5,14 +5,14 @@ class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
     
     private class Fixture {
         let options = Options()
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         
         init() {
             options.tracesSampleRate = 0.1
             options.tracesSampler = { _ in return 0 } 
             options.dsn = TestConstants.dsnAsString(username: "BuzzSentryAppStartTrackingIntegrationTests")
             
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         }
     }
     

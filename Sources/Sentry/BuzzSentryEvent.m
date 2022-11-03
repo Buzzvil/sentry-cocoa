@@ -3,11 +3,11 @@
 #import "NSDictionary+BuzzSentrySanitize.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryDebugMeta.h"
 #import "SentryException.h"
 #import "BuzzSentryId.h"
-#import "SentryLevelMapper.h"
+#import "BuzzSentryLevelMapper.h"
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
 #import "BuzzSentryStacktrace.h"
@@ -37,7 +37,7 @@ BuzzSentryEvent ()
         self.eventId = [[BuzzSentryId alloc] init];
         self.level = level;
         self.platform = @"cocoa";
-        self.timestamp = [SentryCurrentDate date];
+        self.timestamp = [BuzzSentryCurrentDate date];
     }
     return self;
 }
@@ -52,7 +52,7 @@ BuzzSentryEvent ()
 - (NSDictionary<NSString *, id> *)serialize
 {
     if (nil == self.timestamp) {
-        self.timestamp = [SentryCurrentDate date];
+        self.timestamp = [BuzzSentryCurrentDate date];
     }
 
     NSMutableDictionary *serializedData = @{
