@@ -10,7 +10,7 @@
 #import <SentryDispatchQueueWrapper.h>
 #import <SentryInternalNotificationNames.h>
 #import <SentryLog.h>
-#import <SentrySDK+Private.h>
+#import <BuzzSentrySDK+Private.h>
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>

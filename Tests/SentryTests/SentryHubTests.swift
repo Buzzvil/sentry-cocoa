@@ -755,7 +755,7 @@ class SentryHubTests: XCTestCase {
         XCTAssertEqual(0, fixture.client.captureEnvelopeInvocations.count)
     }
 
-    private func assertSampler(expected: SentrySampleDecision, options: (Options) -> Void) {
+    private func assertSampler(expected: BuzzSentrySampleDecision, options: (Options) -> Void) {
         options(fixture.options)
 
         let hub = fixture.getSut()

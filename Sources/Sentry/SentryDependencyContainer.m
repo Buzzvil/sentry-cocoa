@@ -11,7 +11,7 @@
 #import <SentryDispatchQueueWrapper.h>
 #import <SentryHub.h>
 #import <SentryNSNotificationCenterWrapper.h>
-#import <SentrySDK+Private.h>
+#import <BuzzSentrySDK+Private.h>
 #import <BuzzSentryScreenshot.h>
 #import <SentrySwizzleWrapper.h>
 #import <SentrySysctl.h>

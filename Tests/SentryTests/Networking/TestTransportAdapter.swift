@@ -10,17 +10,17 @@ public class TestTransportAdapter: SentryTransportAdapter {
         self.send(event, with: session, traceContext: nil, attachments: attachments)
     }
     
-    var sentEventsWithSessionTraceState = Invocations<(event: Event, session: SentrySession, traceContext: SentryTraceContext?, attachments: [Attachment])>()
-    public override func send(_ event: Event, with session: SentrySession, traceContext: SentryTraceContext?, attachments: [Attachment]) {
+    var sentEventsWithSessionTraceState = Invocations<(event: Event, session: SentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment])>()
+    public override func send(_ event: Event, with session: SentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment]) {
         sentEventsWithSessionTraceState.record((event, session, traceContext, attachments))
     }
     
-    var sendEventWithTraceStateInvocations = Invocations<(event: Event, traceContext: SentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem])>()
-    public override func send(event: Event, traceContext: SentryTraceContext?, attachments: [Attachment]) {
+    var sendEventWithTraceStateInvocations = Invocations<(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem])>()
+    public override func send(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment]) {
         sendEventWithTraceStateInvocations.record((event, traceContext, attachments, []))
     }
     
-    public override func send(event: Event, traceContext: SentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem]) {
+    public override func send(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem]) {
         sendEventWithTraceStateInvocations.record((event, traceContext, attachments, additionalEnvelopeItems))
     }
 

@@ -4,7 +4,7 @@
 #import "SentryDefines.h"
 #import "SentryHub.h"
 #import "SentryLog.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentryScope.h"
 #import "SentrySwizzle.h"
 #import "SentrySwizzleWrapper.h"

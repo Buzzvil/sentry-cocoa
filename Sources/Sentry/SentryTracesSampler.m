@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SentryTracesSamplerDecision
 
-- (instancetype)initWithDecision:(SentrySampleDecision)decision
+- (instancetype)initWithDecision:(BuzzSentrySampleDecision)decision
                    forSampleRate:(nullable NSNumber *)sampleRate
 {
     if (self = [super init]) {
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (SentryTracesSamplerDecision *)sample:(SentrySamplingContext *)context
 {
-    if (context.transactionContext.sampled != kSentrySampleDecisionUndecided) {
+    if (context.transactionContext.sampled != kBuzzSentrySampleDecisionUndecided) {
         return [[SentryTracesSamplerDecision alloc]
             initWithDecision:context.transactionContext.sampled
                forSampleRate:context.transactionContext.sampleRate];
@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
         }
     }
 
-    if (context.transactionContext.parentSampled != kSentrySampleDecisionUndecided)
+    if (context.transactionContext.parentSampled != kBuzzSentrySampleDecisionUndecided)
         return [[SentryTracesSamplerDecision alloc]
             initWithDecision:context.transactionContext.parentSampled
                forSampleRate:context.transactionContext.sampleRate];
@@ -67,14 +67,14 @@ NS_ASSUME_NONNULL_BEGIN
     if (_options.tracesSampleRate != nil)
         return [self calcSample:_options.tracesSampleRate.doubleValue];
 
-    return [[SentryTracesSamplerDecision alloc] initWithDecision:kSentrySampleDecisionNo
+    return [[SentryTracesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionNo
                                                    forSampleRate:nil];
 }
 
 - (SentryTracesSamplerDecision *)calcSample:(double)rate
 {
     double r = [self.random nextNumber];
-    SentrySampleDecision decision = r <= rate ? kSentrySampleDecisionYes : kSentrySampleDecisionNo;
+    BuzzSentrySampleDecision decision = r <= rate ? kBuzzSentrySampleDecisionYes : kBuzzSentrySampleDecisionNo;
     return [[SentryTracesSamplerDecision alloc] initWithDecision:decision
                                                    forSampleRate:[NSNumber numberWithDouble:rate]];
 }

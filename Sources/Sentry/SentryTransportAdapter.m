@@ -40,7 +40,7 @@ SentryTransportAdapter ()
 }
 
 - (void)sendEvent:(SentryEvent *)event
-     traceContext:(nullable SentryTraceContext *)traceContext
+     traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<SentryAttachment *> *)attachments
 {
     [self sendEvent:event
@@ -50,7 +50,7 @@ SentryTransportAdapter ()
 }
 
 - (void)sendEvent:(SentryEvent *)event
-               traceContext:(nullable SentryTraceContext *)traceContext
+               traceContext:(nullable BuzzSentryTraceContext *)traceContext
                 attachments:(NSArray<SentryAttachment *> *)attachments
     additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
 {
@@ -67,7 +67,7 @@ SentryTransportAdapter ()
 
 - (void)sendEvent:(SentryEvent *)event
       withSession:(SentrySession *)session
-     traceContext:(nullable SentryTraceContext *)traceContext
+     traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<SentryAttachment *> *)attachments
 {
     NSMutableArray<SentryEnvelopeItem *> *items = [self buildEnvelopeItems:event

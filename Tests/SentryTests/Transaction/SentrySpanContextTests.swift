@@ -5,7 +5,7 @@ class SentrySpanContextTests: XCTestCase {
     
     func testInit() {
         let spanContext = SpanContext(operation: someOperation)
-        XCTAssertEqual(spanContext.sampled, SentrySampleDecision.undecided)
+        XCTAssertEqual(spanContext.sampled, BuzzSentrySampleDecision.undecided)
         XCTAssertNil(spanContext.parentSpanId)
         XCTAssertEqual(spanContext.operation, someOperation)
         XCTAssertNil(spanContext.spanDescription)
@@ -75,9 +75,9 @@ class SentrySpanContextTests: XCTestCase {
     }
 
     func testSamplerDecisionNames() {
-        XCTAssertEqual(kSentrySampleDecisionNameUndecided, nameForSentrySampleDecision(.undecided))
-        XCTAssertEqual(kSentrySampleDecisionNameNo, nameForSentrySampleDecision(.no))
-        XCTAssertEqual(kSentrySampleDecisionNameYes, nameForSentrySampleDecision(.yes))
+        XCTAssertEqual(kBuzzSentrySampleDecisionNameUndecided, nameForBuzzSentrySampleDecision(.undecided))
+        XCTAssertEqual(kBuzzSentrySampleDecisionNameNo, nameForBuzzSentrySampleDecision(.no))
+        XCTAssertEqual(kBuzzSentrySampleDecisionNameYes, nameForBuzzSentrySampleDecision(.yes))
     }
     
     func testSampledNoSerialization() {

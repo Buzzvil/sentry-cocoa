@@ -11,18 +11,18 @@
 #import "SentryProfiler.h"
 #import "SentryProfilesSampler.h"
 #import "SentryProfilingConditionals.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentryScope.h"
 #import "SentrySpan.h"
 #import "SentrySpanContext.h"
 #import "SentrySpanId.h"
 #import "SentryTime.h"
-#import "SentryTraceContext.h"
+#import "BuzzSentryTraceContext.h"
 #import "SentryTransaction.h"
 #import "SentryTransactionContext.h"
 #import "SentryUIViewControllerPerformanceTracker.h"
 #import <SentryDispatchQueueWrapper.h>
-#import <SentryMeasurementValue.h>
+#import <BuzzSentryMeasurementValue.h>
 #import <SentryScreenFrames.h>
 #import <SentrySpanOperations.h>
 
@@ -56,11 +56,11 @@ SentryTracer ()
 @implementation SentryTracer {
     /** Wether the tracer should wait for child spans to finish before finishing itself. */
     BOOL _waitForChildren;
-    SentryTraceContext *_traceContext;
+    BuzzSentryTraceContext *_traceContext;
     SentryAppStartMeasurement *appStartMeasurement;
     NSMutableDictionary<NSString *, id> *_tags;
     NSMutableDictionary<NSString *, id> *_data;
-    NSMutableDictionary<NSString *, SentryMeasurementValue *> *_measurements;
+    NSMutableDictionary<NSString *, BuzzSentryMeasurementValue *> *_measurements;
     dispatch_block_t _idleTimeoutBlock;
     NSMutableArray<id<SentrySpan>> *_children;
 
@@ -176,7 +176,7 @@ static BOOL appStartMeasurementRead;
 #endif // SENTRY_HAS_UIKIT
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
-        if (profilesSamplerDecision.decision == kSentrySampleDecisionYes) {
+        if (profilesSamplerDecision.decision == kBuzzSentrySampleDecisionYes) {
             [SentryProfiler startForSpanID:transactionContext.spanId hub:hub];
         }
 #endif // SENTRY_TARGET_PROFILING_SUPPORTED
@@ -299,12 +299,12 @@ static BOOL appStartMeasurementRead;
     return self.rootSpan.startTimestamp;
 }
 
-- (SentryTraceContext *)traceContext
+- (BuzzSentryTraceContext *)traceContext
 {
     if (_traceContext == nil) {
         @synchronized(self) {
             if (_traceContext == nil) {
-                _traceContext = [[SentryTraceContext alloc] initWithTracer:self
+                _traceContext = [[BuzzSentryTraceContext alloc] initWithTracer:self
                                                                      scope:_hub.scope
                                                                    options:SentrySDK.options];
             }
@@ -381,18 +381,18 @@ static BOOL appStartMeasurementRead;
 
 - (void)setMeasurement:(NSString *)name value:(NSNumber *)value
 {
-    SentryMeasurementValue *measurement = [[SentryMeasurementValue alloc] initWithValue:value];
+    BuzzSentryMeasurementValue *measurement = [[BuzzSentryMeasurementValue alloc] initWithValue:value];
     _measurements[name] = measurement;
 }
 
 - (void)setMeasurement:(NSString *)name value:(NSNumber *)value unit:(SentryMeasurementUnit *)unit
 {
-    SentryMeasurementValue *measurement = [[SentryMeasurementValue alloc] initWithValue:value
+    BuzzSentryMeasurementValue *measurement = [[BuzzSentryMeasurementValue alloc] initWithValue:value
                                                                                    unit:unit];
     _measurements[name] = measurement;
 }
 
-- (SentryTraceHeader *)toTraceHeader
+- (BuzzSentryTraceHeader *)toTraceHeader
 {
     return [self.rootSpan toTraceHeader];
 }

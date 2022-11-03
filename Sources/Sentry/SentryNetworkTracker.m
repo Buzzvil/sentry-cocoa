@@ -1,13 +1,13 @@
 #import "SentryNetworkTracker.h"
-#import "SentryBaggage.h"
+#import "BuzzSentryBaggage.h"
 #import "SentryBreadcrumb.h"
 #import "SentryHub+Private.h"
 #import "SentryLog.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySerialization.h"
-#import "SentryTraceContext.h"
-#import "SentryTraceHeader.h"
+#import "BuzzSentryTraceContext.h"
+#import "BuzzSentryTraceHeader.h"
 #import "SentryTracer.h"
 #import <objc/runtime.h>
 

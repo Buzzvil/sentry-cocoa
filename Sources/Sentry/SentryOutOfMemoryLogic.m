@@ -4,7 +4,7 @@
 #import <SentryCrashWrapper.h>
 #import <BuzzSentryOptions.h>
 #import <SentryOutOfMemoryLogic.h>
-#import <SentrySDK+Private.h>
+#import <BuzzSentrySDK+Private.h>
 
 #if SENTRY_HAS_UIKIT
 #    import <UIKit/UIKit.h>

@@ -10,7 +10,7 @@
 #import <SentryOutOfMemoryLogic.h>
 #import <SentryOutOfMemoryTracker.h>
 #import <SentryOutOfMemoryTrackingIntegration.h>
-#import <SentrySDK+Private.h>
+#import <BuzzSentrySDK+Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

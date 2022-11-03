@@ -4,7 +4,7 @@
 #import "SentryTransport.h"
 
 @class SentryEnvelope, SentryEnvelopeItem, SentryEvent, SentrySession, SentryUserFeedback,
-    SentryAttachment, SentryTraceContext, BuzzSentryOptions;
+    SentryAttachment, BuzzSentryTraceContext, BuzzSentryOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,19 +27,19 @@ SENTRY_NO_INIT
       attachments:(NSArray<SentryAttachment *> *)attachments;
 
 - (void)sendEvent:(SentryEvent *)event
-     traceContext:(nullable SentryTraceContext *)traceContext
+     traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<SentryAttachment *> *)attachments
     NS_SWIFT_NAME(send(event:traceContext:attachments:));
 
 - (void)sendEvent:(SentryEvent *)event
-               traceContext:(nullable SentryTraceContext *)traceContext
+               traceContext:(nullable BuzzSentryTraceContext *)traceContext
                 attachments:(NSArray<SentryAttachment *> *)attachments
     additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
     NS_SWIFT_NAME(send(event:traceContext:attachments:additionalEnvelopeItems:));
 
 - (void)sendEvent:(SentryEvent *)event
       withSession:(SentrySession *)session
-     traceContext:(nullable SentryTraceContext *)traceContext
+     traceContext:(nullable BuzzSentryTraceContext *)traceContext
       attachments:(NSArray<SentryAttachment *> *)attachments;
 
 - (void)sendUserFeedback:(SentryUserFeedback *)userFeedback NS_SWIFT_NAME(send(userFeedback:));

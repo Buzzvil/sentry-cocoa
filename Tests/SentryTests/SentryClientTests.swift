@@ -1303,7 +1303,7 @@ class BuzzSentryClientTest: XCTestCase {
         }
     }
     
-    private func assertLastSentEventWithSession(assert: (Event, SentrySession, SentryTraceContext?) -> Void) {
+    private func assertLastSentEventWithSession(assert: (Event, SentrySession, BuzzSentryTraceContext?) -> Void) {
         XCTAssertNotNil(fixture.transportAdapter.sentEventsWithSessionTraceState.last)
         if let args = fixture.transportAdapter.sentEventsWithSessionTraceState.last {
             assert(args.event, args.session, args.traceContext)

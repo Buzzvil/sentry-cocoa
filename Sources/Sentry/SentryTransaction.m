@@ -1,7 +1,7 @@
 #import "SentryTransaction.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryEnvelopeItemType.h"
-#import "SentryMeasurementValue.h"
+#import "BuzzSentryMeasurementValue.h"
 #import "SentryTransactionContext.h"
 
 NS_ASSUME_NONNULL_BEGIN

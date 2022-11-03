@@ -20,7 +20,7 @@ BuzzSentryOptions ()
 
 @implementation BuzzSentryOptions
 
-- (void)setMeasurement:(SentryMeasurementValue *)measurement
+- (void)setMeasurement:(BuzzSentryMeasurementValue *)measurement
 {
 }
 

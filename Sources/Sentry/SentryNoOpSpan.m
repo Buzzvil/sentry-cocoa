@@ -2,7 +2,7 @@
 #import "SentryId.h"
 #import "SentrySpanContext.h"
 #import "SentrySpanId.h"
-#import "SentryTraceHeader.h"
+#import "BuzzSentryTraceHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                        spanId:SentrySpanId.empty
                                                      parentId:nil
                                                     operation:@""
-                                                      sampled:kSentrySampleDecisionUndecided];
+                                                      sampled:kBuzzSentrySampleDecisionUndecided];
     }
     return self;
 }
@@ -90,9 +90,9 @@ NS_ASSUME_NONNULL_BEGIN
 {
 }
 
-- (SentryTraceHeader *)toTraceHeader
+- (BuzzSentryTraceHeader *)toTraceHeader
 {
-    return [[SentryTraceHeader alloc] initWithTraceId:self.context.traceId
+    return [[BuzzSentryTraceHeader alloc] initWithTraceId:self.context.traceId
                                                spanId:self.context.spanId
                                               sampled:self.context.sampled];
 }

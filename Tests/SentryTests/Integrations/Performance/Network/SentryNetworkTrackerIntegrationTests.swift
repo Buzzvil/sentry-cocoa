@@ -178,7 +178,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         XCTAssertEqual("200", networkSpan.tags["http.status_code"])
     }
     
-    func testGetRequest_CompareSentryTraceHeader() {
+    func testGetRequest_CompareBuzzSentryTraceHeader() {
         startSDK()
         let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! SentryTracer
         let expect = expectation(description: "Request completed")

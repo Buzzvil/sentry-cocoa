@@ -1,5 +1,5 @@
 #import "SentryDefines.h"
-#import "SentrySampleDecision.h"
+#import "BuzzSentrySampleDecision.h"
 
 @class SentryId, SentrySpanId;
 
@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *const SENTRY_TRACE_HEADER = @"sentry-trace";
 
 NS_SWIFT_NAME(TraceHeader)
-@interface SentryTraceHeader : NSObject
+@interface BuzzSentryTraceHeader : NSObject
 SENTRY_NO_INIT
 /**
  * Trace ID.
@@ -23,20 +23,20 @@ SENTRY_NO_INIT
 /**
  * The trace sample decision.
  */
-@property (nonatomic, readonly) SentrySampleDecision sampled;
+@property (nonatomic, readonly) BuzzSentrySampleDecision sampled;
 
 /**
- * Initialize a SentryTraceHeader with given trace id, span id and sample decision.
+ * Initialize a BuzzSentryTraceHeader with given trace id, span id and sample decision.
  *
  * @param traceId The trace id.
  * @param spanId The span id.
  * @param sampled The decision made to sample the trace related to this header.
  *
- * @return A SentryTraceHeader.
+ * @return A BuzzSentryTraceHeader.
  */
 - (instancetype)initWithTraceId:(SentryId *)traceId
                          spanId:(SentrySpanId *)spanId
-                        sampled:(SentrySampleDecision)sampled;
+                        sampled:(BuzzSentrySampleDecision)sampled;
 
 /**
  * Return the value to use in a request header.

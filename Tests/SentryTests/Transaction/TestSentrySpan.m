@@ -21,7 +21,7 @@
     return nil;
 }
 
-- (SentryTraceHeader *)toTraceHeader
+- (BuzzSentryTraceHeader *)toTraceHeader
 {
     return nil;
 }

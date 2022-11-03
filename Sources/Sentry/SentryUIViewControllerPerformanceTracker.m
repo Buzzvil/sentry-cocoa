@@ -3,7 +3,7 @@
 #import "SentryLog.h"
 #import "SentryPerformanceTracker+Private.h"
 #import "SentryPerformanceTracker.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentryScope.h"
 #import "SentrySpanId.h"
 #import "BuzzSentryUIViewControllerSanitizer.h"

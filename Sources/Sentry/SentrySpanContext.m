@@ -18,7 +18,7 @@ SentrySpanContext () {
     return [self initWithOperation:operation sampled:false];
 }
 
-- (instancetype)initWithOperation:(NSString *)operation sampled:(SentrySampleDecision)sampled
+- (instancetype)initWithOperation:(NSString *)operation sampled:(BuzzSentrySampleDecision)sampled
 {
     return [self initWithTraceId:[[SentryId alloc] init]
                           spanId:[[SentrySpanId alloc] init]
@@ -31,7 +31,7 @@ SentrySpanContext () {
                          spanId:(SentrySpanId *)spanId
                        parentId:(nullable SentrySpanId *)parentId
                       operation:(NSString *)operation
-                        sampled:(SentrySampleDecision)sampled
+                        sampled:(BuzzSentrySampleDecision)sampled
 {
     if (self = [super init]) {
         _traceId = traceId;
@@ -91,8 +91,8 @@ SentrySpanContext () {
 
     // Since we guard for 'undecided', we'll
     // either send it if it's 'true' or 'false'.
-    if (self.sampled != kSentrySampleDecisionUndecided) {
-        [mutabledictionary setValue:nameForSentrySampleDecision(self.sampled) forKey:@"sampled"];
+    if (self.sampled != kBuzzSentrySampleDecisionUndecided) {
+        [mutabledictionary setValue:nameForBuzzSentrySampleDecision(self.sampled) forKey:@"sampled"];
     }
 
     if (self.spanDescription != nil) {

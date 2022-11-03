@@ -11,7 +11,7 @@
 #import "SentryId.h"
 #import "SentryLog.h"
 #import "SentryProfilesSampler.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentrySamplingContext.h"
 #import "SentryScope.h"
 #import "SentrySerialization.h"
@@ -255,8 +255,8 @@ SentryHub ()
                        withScope:(SentryScope *)scope
          additionalEnvelopeItems:(NSArray<SentryEnvelopeItem *> *)additionalEnvelopeItems
 {
-    SentrySampleDecision decision = transaction.trace.context.sampled;
-    if (decision != kSentrySampleDecisionYes) {
+    BuzzSentrySampleDecision decision = transaction.trace.context.sampled;
+    if (decision != kBuzzSentrySampleDecisionYes) {
         [self.client recordLostEvent:kSentryDataCategoryTransaction
                               reason:kSentryDiscardReasonSampleRate];
         return SentryId.empty;

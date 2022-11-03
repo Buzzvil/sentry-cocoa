@@ -58,7 +58,7 @@ class SentryNoOpSpanTests: XCTestCase {
         
         XCTAssertEqual(SentryId.empty, actual.traceId)
         XCTAssertEqual(SpanId.empty, actual.spanId)
-        XCTAssertEqual(SentrySampleDecision.undecided, actual.sampled)
+        XCTAssertEqual(BuzzSentrySampleDecision.undecided, actual.sampled)
     }
     
     func testContext() {
@@ -66,7 +66,7 @@ class SentryNoOpSpanTests: XCTestCase {
         
         XCTAssertEqual(SentryId.empty, actual.traceId)
         XCTAssertEqual(SpanId.empty, actual.spanId)
-        XCTAssertEqual(SentrySampleDecision.undecided, actual.sampled)
+        XCTAssertEqual(BuzzSentrySampleDecision.undecided, actual.sampled)
     }
 
 }

@@ -1,5 +1,5 @@
-#import "SentryTraceContext.h"
-#import "SentryBaggage.h"
+#import "BuzzSentryTraceContext.h"
+#import "BuzzSentryBaggage.h"
 #import "SentryDsn.h"
 #import "SentryLog.h"
 #import "BuzzSentryOptions+Private.h"
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryTraceContext
+@implementation BuzzSentryTraceContext
 
 - (instancetype)initWithTraceId:(SentryId *)traceId
                       publicKey:(NSString *)publicKey
@@ -96,9 +96,9 @@ NS_ASSUME_NONNULL_BEGIN
                       sampleRate:dictionary[@"sample_rate"]];
 }
 
-- (SentryBaggage *)toBaggage
+- (BuzzSentryBaggage *)toBaggage
 {
-    SentryBaggage *result = [[SentryBaggage alloc] initWithTraceId:_traceId
+    BuzzSentryBaggage *result = [[BuzzSentryBaggage alloc] initWithTraceId:_traceId
                                                          publicKey:_publicKey
                                                        releaseName:_releaseName
                                                        environment:_environment

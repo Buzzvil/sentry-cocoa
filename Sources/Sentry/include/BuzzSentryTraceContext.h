@@ -3,9 +3,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryScope, BuzzSentryOptions, SentryTracer, SentryUser, SentryBaggage;
+@class SentryScope, BuzzSentryOptions, SentryTracer, SentryUser, BuzzSentryBaggage;
 
-@interface SentryTraceContext : NSObject <SentrySerializable>
+@interface BuzzSentryTraceContext : NSObject <SentrySerializable>
 
 /**
  * UUID V4 encoded as a hexadecimal sequence with no dashes (e.g. 771a43a4192642f0b136d5159a501700)
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic) NSString *sampleRate;
 
 /**
- * Initializes a SentryTraceContext with given properties.
+ * Initializes a BuzzSentryTraceContext with given properties.
  */
 - (instancetype)initWithTraceId:(SentryId *)traceId
                       publicKey:(NSString *)publicKey
@@ -55,26 +55,26 @@ NS_ASSUME_NONNULL_BEGIN
                      sampleRate:(nullable NSString *)sampleRate;
 
 /**
- * Initializes a SentryTraceContext with data from scope and options.
+ * Initializes a BuzzSentryTraceContext with data from scope and options.
  */
 - (nullable instancetype)initWithScope:(SentryScope *)scope options:(BuzzSentryOptions *)options;
 
 /**
- * Initializes a SentryTraceContext with data from a dictionary.
+ * Initializes a BuzzSentryTraceContext with data from a dictionary.
  */
 - (nullable instancetype)initWithDict:(NSDictionary<NSString *, id> *)dictionary;
 
 /**
- * Initializes a SentryTraceContext with data from a trace, scope and options.
+ * Initializes a BuzzSentryTraceContext with data from a trace, scope and options.
  */
 - (nullable instancetype)initWithTracer:(SentryTracer *)tracer
                                   scope:(nullable SentryScope *)scope
                                 options:(BuzzSentryOptions *)options;
 
 /**
- * Create a SentryBaggage with the information of this SentryTraceContext.
+ * Create a BuzzSentryBaggage with the information of this BuzzSentryTraceContext.
  */
-- (SentryBaggage *)toBaggage;
+- (BuzzSentryBaggage *)toBaggage;
 @end
 
 NS_ASSUME_NONNULL_END

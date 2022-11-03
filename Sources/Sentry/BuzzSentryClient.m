@@ -31,12 +31,12 @@
 #import "BuzzSentryOptions+Private.h"
 #import "SentryOutOfMemoryTracker.h"
 #import "SentryPermissionsObserver.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySdkInfo.h"
 #import "SentryStacktraceBuilder.h"
 #import "SentryThreadInspector.h"
-#import "SentryTraceContext.h"
+#import "BuzzSentryTraceContext.h"
 #import "SentryTracer.h"
 #import "SentryTransaction.h"
 #import "SentryTransport.h"
@@ -307,7 +307,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                   isCrashEvent:NO];
 }
 
-- (nullable SentryTraceContext *)getTraceStateWithEvent:(SentryEvent *)event
+- (nullable BuzzSentryTraceContext *)getTraceStateWithEvent:(SentryEvent *)event
                                               withScope:(SentryScope *)scope
 {
     id<SentrySpan> span;
@@ -323,7 +323,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     if (tracer == nil)
         return nil;
 
-    return [[SentryTraceContext alloc] initWithTracer:tracer scope:scope options:_options];
+    return [[BuzzSentryTraceContext alloc] initWithTracer:tracer scope:scope options:_options];
 }
 
 - (SentryId *)sendEvent:(SentryEvent *)event
@@ -350,7 +350,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
                                        isCrashEvent:isCrashEvent];
 
     if (nil != preparedEvent) {
-        SentryTraceContext *traceContext = [self getTraceStateWithEvent:event withScope:scope];
+        BuzzSentryTraceContext *traceContext = [self getTraceStateWithEvent:event withScope:scope];
 
         NSArray *attachments = scope.attachments;
         if (self.attachmentProcessors.count) {
@@ -386,7 +386,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         }
 
         if (nil == session.releaseName || [session.releaseName length] == 0) {
-            SentryTraceContext *traceContext = [self getTraceStateWithEvent:event withScope:scope];
+            BuzzSentryTraceContext *traceContext = [self getTraceStateWithEvent:event withScope:scope];
 
             SENTRY_LOG_DEBUG(DropSessionLogMessage);
 

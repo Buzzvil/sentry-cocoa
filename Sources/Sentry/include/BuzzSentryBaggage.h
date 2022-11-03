@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 static NSString *const SENTRY_BAGGAGE_HEADER = @"baggage";
 
-@interface SentryBaggage : NSObject
+@interface BuzzSentryBaggage : NSObject
 
 /*
  * UUID V4 encoded as a hexadecimal sequence with no dashes (e.g. 771a43a4192642f0b136d5159a501700)

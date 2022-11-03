@@ -1,4 +1,4 @@
-#import "SentrySampleDecision.h"
+#import "BuzzSentrySampleDecision.h"
 #import "SentrySpanContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +18,7 @@ SENTRY_NO_INIT
 /**
  * Parent sampled
  */
-@property (nonatomic) SentrySampleDecision parentSampled;
+@property (nonatomic) BuzzSentrySampleDecision parentSampled;
 
 /**
  * Sample rate used for this transaction
@@ -46,7 +46,7 @@ SENTRY_NO_INIT
  */
 - (instancetype)initWithName:(NSString *)name
                    operation:(NSString *)operation
-                     sampled:(SentrySampleDecision)sampled;
+                     sampled:(BuzzSentrySampleDecision)sampled;
 
 /**
  * Init a SentryTransactionContext with given name, traceId, SpanId, parentSpanId and whether the
@@ -66,7 +66,7 @@ SENTRY_NO_INIT
                      traceId:(SentryId *)traceId
                       spanId:(SentrySpanId *)spanId
                 parentSpanId:(nullable SentrySpanId *)parentSpanId
-               parentSampled:(SentrySampleDecision)parentSampled;
+               parentSampled:(BuzzSentrySampleDecision)parentSampled;
 
 @end
 

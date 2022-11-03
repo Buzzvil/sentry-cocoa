@@ -3,7 +3,7 @@
 #import "SentryDefines.h"
 
 @class SentryEvent, SentrySession, SentrySdkInfo, SentryId, SentryUserFeedback, SentryAttachment,
-    SentryTransaction, SentryTraceContext, SentryClientReport;
+    SentryTransaction, BuzzSentryTraceContext, SentryClientReport;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,7 +28,7 @@ SENTRY_NO_INIT
  * @param traceContext Current trace state.
  */
 - (instancetype)initWithId:(nullable SentryId *)eventId
-              traceContext:(nullable SentryTraceContext *)traceContext;
+              traceContext:(nullable BuzzSentryTraceContext *)traceContext;
 
 /**
  * Initializes an SentryEnvelopeHeader object with the specified eventId, skdInfo and traceContext.
@@ -43,7 +43,7 @@ SENTRY_NO_INIT
  */
 - (instancetype)initWithId:(nullable SentryId *)eventId
                    sdkInfo:(nullable SentrySdkInfo *)sdkInfo
-              traceContext:(nullable SentryTraceContext *)traceContext NS_DESIGNATED_INITIALIZER;
+              traceContext:(nullable BuzzSentryTraceContext *)traceContext NS_DESIGNATED_INITIALIZER;
 
 /**
  * The event identifier, if available.
@@ -54,7 +54,7 @@ SENTRY_NO_INIT
 
 @property (nullable, nonatomic, readonly, copy) SentrySdkInfo *sdkInfo;
 
-@property (nullable, nonatomic, readonly, copy) SentryTraceContext *traceContext;
+@property (nullable, nonatomic, readonly, copy) BuzzSentryTraceContext *traceContext;
 
 @end
 

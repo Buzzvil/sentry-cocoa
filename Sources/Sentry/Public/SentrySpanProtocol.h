@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentrySpanId, SentryId, SentryTraceHeader, SentryMeasurementUnit;
+@class SentrySpanId, SentryId, BuzzSentryTraceHeader, SentryMeasurementUnit;
 
 NS_SWIFT_NAME(Span)
 @protocol SentrySpan <SentrySerializable>
@@ -131,9 +131,9 @@ NS_SWIFT_NAME(Span)
 /**
  * Returns the trace information that could be sent as a sentry-trace header.
  *
- * @return SentryTraceHeader.
+ * @return BuzzSentryTraceHeader.
  */
-- (SentryTraceHeader *)toTraceHeader;
+- (BuzzSentryTraceHeader *)toTraceHeader;
 
 @end
 

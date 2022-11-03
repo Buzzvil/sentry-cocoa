@@ -4,7 +4,7 @@
 #import "SentryHub+Private.h"
 #import "SentryInstallation.h"
 #import "BuzzSentryMeta.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentrySerialization.h"
 #import <SentryDependencyContainer.h>
 #import <SentryFramesTracker.h>

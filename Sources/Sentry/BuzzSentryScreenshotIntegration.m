@@ -4,7 +4,7 @@
 #import "SentryDependencyContainer.h"
 #import "SentryEvent+Private.h"
 #import "SentryHub+Private.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 
 #if SENTRY_HAS_UIKIT
 

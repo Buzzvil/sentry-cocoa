@@ -12,7 +12,7 @@ SentryTransactionContext (Private)
 - (instancetype)initWithName:(NSString *)name
                   nameSource:(SentryTransactionNameSource)source
                    operation:(NSString *)operation
-                     sampled:(SentrySampleDecision)sampled;
+                     sampled:(BuzzSentrySampleDecision)sampled;
 
 - (instancetype)initWithName:(NSString *)name
                   nameSource:(SentryTransactionNameSource)source
@@ -20,7 +20,7 @@ SentryTransactionContext (Private)
                      traceId:(SentryId *)traceId
                       spanId:(SentrySpanId *)spanId
                 parentSpanId:(nullable SentrySpanId *)parentSpanId
-               parentSampled:(SentrySampleDecision)parentSampled;
+               parentSampled:(BuzzSentrySampleDecision)parentSampled;
 
 @end
 

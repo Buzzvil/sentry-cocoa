@@ -3,7 +3,7 @@
 #import "SentryLevelMapper.h"
 #import "SentryMessage.h"
 #import "BuzzSentryMeta.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import <Sentry/Sentry.h>
 #import <XCTest/XCTest.h>
 

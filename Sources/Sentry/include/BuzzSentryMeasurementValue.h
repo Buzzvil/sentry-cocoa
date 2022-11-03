@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryMeasurementValue : NSObject <SentrySerializable>
+@interface BuzzSentryMeasurementValue : NSObject <SentrySerializable>
 SENTRY_NO_INIT
 
 - (instancetype)initWithValue:(NSNumber *)value;

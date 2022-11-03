@@ -8,7 +8,7 @@
 #import "SentryLog.h"
 #import "SentrySdkInfo.h"
 #import "SentrySession.h"
-#import "SentryTraceContext.h"
+#import "BuzzSentryTraceContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
         [serializedData addEntriesFromDictionary:[sdkInfo serialize]];
     }
 
-    SentryTraceContext *traceContext = envelope.header.traceContext;
+    BuzzSentryTraceContext *traceContext = envelope.header.traceContext;
     if (traceContext != nil) {
         [serializedData setValue:[traceContext serialize] forKey:@"trace"];
     }
@@ -187,10 +187,10 @@ NS_ASSUME_NONNULL_BEGIN
                     sdkInfo = [[SentrySdkInfo alloc] initWithDict:headerDictionary];
                 }
 
-                SentryTraceContext *traceContext = nil;
+                BuzzSentryTraceContext *traceContext = nil;
                 if (nil != headerDictionary[@"trace"]) {
                     traceContext =
-                        [[SentryTraceContext alloc] initWithDict:headerDictionary[@"trace"]];
+                        [[BuzzSentryTraceContext alloc] initWithDict:headerDictionary[@"trace"]];
                 }
 
                 envelopeHeader = [[SentryEnvelopeHeader alloc] initWithId:eventId

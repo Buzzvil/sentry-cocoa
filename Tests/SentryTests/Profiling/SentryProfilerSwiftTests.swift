@@ -342,7 +342,7 @@ private extension SentryProfilerSwiftTests {
         }
     }
 
-    func assertProfilesSampler(expectedDecision: SentrySampleDecision, options: (Options) -> Void) {
+    func assertProfilesSampler(expectedDecision: BuzzSentrySampleDecision, options: (Options) -> Void) {
         let fixtureOptions = fixture.options
         fixtureOptions.tracesSampleRate = 1.0
         fixtureOptions.profilesSampler = { _ in

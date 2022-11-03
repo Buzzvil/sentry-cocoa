@@ -9,7 +9,7 @@
 #import "SentryException.h"
 #import "SentryHub+Private.h"
 #import "SentryMechanism.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentryThread.h"
 #import "SentryThreadInspector.h"
 #import "SentryThreadWrapper.h"

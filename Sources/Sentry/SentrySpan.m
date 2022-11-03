@@ -3,11 +3,11 @@
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryCurrentDate.h"
 #import "SentryLog.h"
-#import "SentryMeasurementValue.h"
+#import "BuzzSentryMeasurementValue.h"
 #import "SentryNoOpSpan.h"
 #import "SentrySpanId.h"
 #import "SentryTime.h"
-#import "SentryTraceHeader.h"
+#import "BuzzSentryTraceHeader.h"
 #import "SentryTracer.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -134,9 +134,9 @@ SentrySpan ()
     }
 }
 
-- (SentryTraceHeader *)toTraceHeader
+- (BuzzSentryTraceHeader *)toTraceHeader
 {
-    return [[SentryTraceHeader alloc] initWithTraceId:self.context.traceId
+    return [[BuzzSentryTraceHeader alloc] initWithTraceId:self.context.traceId
                                                spanId:self.context.spanId
                                               sampled:self.context.sampled];
 }

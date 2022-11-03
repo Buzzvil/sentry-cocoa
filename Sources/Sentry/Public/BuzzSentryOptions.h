@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryDsn, SentrySdkInfo, SentryMeasurementValue;
+@class SentryDsn, SentrySdkInfo, BuzzSentryMeasurementValue;
 
 NS_SWIFT_NAME(Options)
 @interface BuzzSentryOptions : NSObject

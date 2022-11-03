@@ -1,8 +1,8 @@
-#import "SentryMeasurementValue.h"
+#import "BuzzSentryMeasurementValue.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryMeasurementValue
+@implementation BuzzSentryMeasurementValue
 
 - (instancetype)initWithValue:(NSNumber *)value
 {

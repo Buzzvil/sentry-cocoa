@@ -1,5 +1,5 @@
 #import "BuzzSentryRandom.h"
-#import "SentrySampleDecision.h"
+#import "BuzzSentrySampleDecision.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -7,11 +7,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SentryTracesSamplerDecision : NSObject
 
-@property (nonatomic, readonly) SentrySampleDecision decision;
+@property (nonatomic, readonly) BuzzSentrySampleDecision decision;
 
 @property (nullable, nonatomic, strong, readonly) NSNumber *sampleRate;
 
-- (instancetype)initWithDecision:(SentrySampleDecision)decision
+- (instancetype)initWithDecision:(BuzzSentrySampleDecision)decision
                    forSampleRate:(nullable NSNumber *)sampleRate;
 
 @end

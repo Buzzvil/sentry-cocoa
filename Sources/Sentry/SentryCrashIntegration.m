@@ -6,7 +6,7 @@
 #import "SentryHub.h"
 #import "SentryInAppLogic.h"
 #import "SentryOutOfMemoryLogic.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySessionCrashedHandler.h"
 #import <SentryAppStateManager.h>
@@ -14,7 +14,7 @@
 #import <SentryCrashScopeObserver.h>
 #import <SentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
-#import <SentrySDK+Private.h>
+#import <BuzzSentrySDK+Private.h>
 #import <SentrySysctl.h>
 
 #if SENTRY_HAS_UIKIT

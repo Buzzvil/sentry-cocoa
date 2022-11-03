@@ -11,7 +11,7 @@
 #import "SentryException.h"
 #import "SentryHub.h"
 #import "SentryLog.h"
-#import "SentrySDK+Private.h"
+#import "BuzzSentrySDK+Private.h"
 #import "SentrySDK.h"
 #import "SentryScope.h"
 #import "SentryThread.h"

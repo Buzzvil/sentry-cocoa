@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SentryProfilesSamplerDecision
 
-- (instancetype)initWithDecision:(SentrySampleDecision)decision
+- (instancetype)initWithDecision:(BuzzSentrySampleDecision)decision
                    forSampleRate:(nullable NSNumber *)sampleRate
 {
     if (self = [super init]) {
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
     // the profile will not be either. If the trace is sampled, we can proceed to checking
     // whether the associated profile should be sampled.
 #if SENTRY_TARGET_PROFILING_SUPPORTED
-    if (tracesSamplerDecision.decision == kSentrySampleDecisionYes) {
+    if (tracesSamplerDecision.decision == kBuzzSentrySampleDecisionYes) {
         if (_options.profilesSampler != nil) {
             NSNumber *callbackDecision = _options.profilesSampler(context);
             if (callbackDecision != nil) {
@@ -65,21 +65,21 @@ NS_ASSUME_NONNULL_BEGIN
 #    pragma clang diagnostic push
 #    pragma clang diagnostic ignored "-Wdeprecated-declarations"
         if (_options.enableProfiling) {
-            return [[SentryProfilesSamplerDecision alloc] initWithDecision:kSentrySampleDecisionYes
+            return [[SentryProfilesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionYes
                                                              forSampleRate:@1.0];
         }
 #    pragma clang diagnostic pop
     }
 #endif
 
-    return [[SentryProfilesSamplerDecision alloc] initWithDecision:kSentrySampleDecisionNo
+    return [[SentryProfilesSamplerDecision alloc] initWithDecision:kBuzzSentrySampleDecisionNo
                                                      forSampleRate:nil];
 }
 
 - (SentryProfilesSamplerDecision *)calcSample:(double)rate
 {
     double r = [self.random nextNumber];
-    SentrySampleDecision decision = r <= rate ? kSentrySampleDecisionYes : kSentrySampleDecisionNo;
+    BuzzSentrySampleDecision decision = r <= rate ? kBuzzSentrySampleDecisionYes : kBuzzSentrySampleDecisionNo;
     return
         [[SentryProfilesSamplerDecision alloc] initWithDecision:decision
                                                   forSampleRate:[NSNumber numberWithDouble:rate]];

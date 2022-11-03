@@ -3,8 +3,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryHub, SentryTransactionContext, SentryTraceHeader, SentryTraceContext,
-    SentryDispatchQueueWrapper, SentryTracer, SentryProfilesSamplerDecision, SentryMeasurementValue;
+@class SentryHub, SentryTransactionContext, BuzzSentryTraceHeader, BuzzSentryTraceContext,
+    SentryDispatchQueueWrapper, SentryTracer, SentryProfilesSamplerDecision, BuzzSentryMeasurementValue;
 
 static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
 
@@ -54,7 +54,7 @@ static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
 /**
  * Retrieves a trace context from this tracer.
  */
-@property (nonatomic, readonly) SentryTraceContext *traceContext;
+@property (nonatomic, readonly) BuzzSentryTraceContext *traceContext;
 
 /*
  The root span of this tracer.
@@ -71,7 +71,7 @@ static NSTimeInterval const SentryTracerDefaultTimeout = 3.0;
  */
 @property (nullable, nonatomic, weak) id<SentryTracerDelegate> delegate;
 
-@property (nonatomic, readonly) NSDictionary<NSString *, SentryMeasurementValue *> *measurements;
+@property (nonatomic, readonly) NSDictionary<NSString *, BuzzSentryMeasurementValue *> *measurements;
 
 /**
  * Init a SentryTracer with given transaction context and hub and set other fields by default

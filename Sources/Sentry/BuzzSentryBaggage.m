@@ -1,14 +1,14 @@
-#import "SentryBaggage.h"
+#import "BuzzSentryBaggage.h"
 #import "SentryDsn.h"
 #import "SentryLog.h"
 #import "BuzzSentryOptions+Private.h"
 #import "SentryScope+Private.h"
 #import "SentrySerialization.h"
-#import "SentryTraceContext.h"
+#import "BuzzSentryTraceContext.h"
 #import "SentryTracer.h"
 #import "SentryUser.h"
 
-@implementation SentryBaggage
+@implementation BuzzSentryBaggage
 
 - (instancetype)initWithTraceId:(SentryId *)traceId
                       publicKey:(NSString *)publicKey
