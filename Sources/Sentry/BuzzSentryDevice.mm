@@ -1,7 +1,7 @@
 // This file is also compiled into iOS-SwiftUITests and doesn't have access to private Sentry API
 // there, so we add a few polyfills:
-#if __has_include("SentryDefines.h")
-#    import "SentryDefines.h"
+#if __has_include("BuzzSentryDefines.h")
+#    import "BuzzSentryDefines.h"
 #else
 #    define SENTRY_HAS_UIKIT (TARGET_OS_IOS || TARGET_OS_TV)
 #endif

@@ -1,5 +1,5 @@
 
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 

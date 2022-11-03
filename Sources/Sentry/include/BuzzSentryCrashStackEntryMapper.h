@@ -1,6 +1,6 @@
 #import "SentryCrashDynamicLinker.h"
 #import "SentryCrashStackCursor.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import <Foundation/Foundation.h>
 
 @class BuzzSentryFrame, BuzzSentryInAppLogic;

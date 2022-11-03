@@ -1,4 +1,4 @@
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 
 #if SENTRY_HAS_UIKIT
 

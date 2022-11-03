@@ -1,5 +1,5 @@
 #import "BuzzSentryInstallation.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

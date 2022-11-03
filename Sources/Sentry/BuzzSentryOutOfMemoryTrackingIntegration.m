@@ -1,4 +1,4 @@
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import <BuzzSentryAppState.h>
 #import <BuzzSentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>

@@ -1,4 +1,4 @@
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import "SentryProfilingConditionals.h"
 
 @class BuzzSentryOptions, BuzzSentryDisplayLinkWrapper, BuzzSentryScreenFrames;

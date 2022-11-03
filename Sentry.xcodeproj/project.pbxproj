@@ -138,7 +138,7 @@
 		63AA767A1EB8D20500D153DE /* BuzzSentryLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA76781EB8D20500D153DE /* BuzzSentryLog.m */; };
 		63AA76971EB9C1C200D153DE /* Sentry.h in Headers */ = {isa = PBXBuildFile; fileRef = 63AA76931EB9C1C200D153DE /* Sentry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63AA76981EB9C1C200D153DE /* BuzzSentryClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 63AA76941EB9C1C200D153DE /* BuzzSentryClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63AA76991EB9C1C200D153DE /* SentryDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 63AA76951EB9C1C200D153DE /* SentryDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		63AA76991EB9C1C200D153DE /* BuzzSentryDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 63AA76951EB9C1C200D153DE /* BuzzSentryDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63AA769A1EB9C1C200D153DE /* BuzzSentryLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 63AA76961EB9C1C200D153DE /* BuzzSentryLog.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		63AA769D1EB9C57A00D153DE /* BuzzSentryError.h in Headers */ = {isa = PBXBuildFile; fileRef = 63AA769B1EB9C57A00D153DE /* BuzzSentryError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63AA769E1EB9C57A00D153DE /* BuzzSentryError.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA769C1EB9C57A00D153DE /* BuzzSentryError.m */; };
@@ -867,7 +867,7 @@
 		63AA76781EB8D20500D153DE /* BuzzSentryLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryLog.m; sourceTree = "<group>"; };
 		63AA76931EB9C1C200D153DE /* Sentry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sentry.h; path = Public/Sentry.h; sourceTree = "<group>"; };
 		63AA76941EB9C1C200D153DE /* BuzzSentryClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryClient.h; path = Public/BuzzSentryClient.h; sourceTree = "<group>"; };
-		63AA76951EB9C1C200D153DE /* SentryDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SentryDefines.h; path = Public/SentryDefines.h; sourceTree = "<group>"; };
+		63AA76951EB9C1C200D153DE /* BuzzSentryDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryDefines.h; path = Public/BuzzSentryDefines.h; sourceTree = "<group>"; };
 		63AA76961EB9C1C200D153DE /* BuzzSentryLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryLog.h; path = include/BuzzSentryLog.h; sourceTree = "<group>"; };
 		63AA769B1EB9C57A00D153DE /* BuzzSentryError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuzzSentryError.h; path = Public/BuzzSentryError.h; sourceTree = "<group>"; };
 		63AA769C1EB9C57A00D153DE /* BuzzSentryError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryError.m; sourceTree = "<group>"; };
@@ -1796,7 +1796,7 @@
 		639889D51EDF10BE00EA7442 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				63AA76951EB9C1C200D153DE /* SentryDefines.h */,
+				63AA76951EB9C1C200D153DE /* BuzzSentryDefines.h */,
 				63AA769B1EB9C57A00D153DE /* BuzzSentryError.h */,
 				63AA769C1EB9C57A00D153DE /* BuzzSentryError.m */,
 				7B42C47F27E08F33009B58C2 /* BuzzSentryDependencyContainer.h */,
@@ -2983,7 +2983,7 @@
 				7BFC169B2524995700FF6266 /* BuzzSentryMessage.h in Headers */,
 				7B18DE4028D9F748004845C6 /* BuzzSentryNSNotificationCenterWrapper.h in Headers */,
 				03F84D1E27DD414C008FE43F /* SentryBacktrace.hpp in Headers */,
-				63AA76991EB9C1C200D153DE /* SentryDefines.h in Headers */,
+				63AA76991EB9C1C200D153DE /* BuzzSentryDefines.h in Headers */,
 				0A4EDEA928D3461B00FA67CB /* BuzzSentryPerformanceTracker+Private.h in Headers */,
 				0A8F0A392886CC70000B15F6 /* BuzzSentryPermissionsObserver.h in Headers */,
 				63FE70CF20DA4C1000CDBAE8 /* SentryCrashMonitor_User.h in Headers */,

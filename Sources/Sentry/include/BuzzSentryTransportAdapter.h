@@ -1,5 +1,5 @@
 #import "BuzzSentryDataCategory.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import "BuzzSentryDiscardReason.h"
 #import "BuzzSentryTransport.h"
 

@@ -1,7 +1,7 @@
 #import "BuzzSentryBreadcrumbTracker.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import "BuzzSentryHub.h"
 #import "BuzzSentryLog.h"
 #import "BuzzSentrySDK+Private.h"

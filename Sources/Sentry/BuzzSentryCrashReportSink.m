@@ -5,7 +5,7 @@
 #include "SentryCrashMonitor_AppState.h"
 #import "BuzzSentryCrashReportConverter.h"
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
 #import "SentryException.h"

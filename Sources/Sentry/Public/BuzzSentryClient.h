@@ -1,4 +1,4 @@
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 
 @class BuzzSentryOptions, BuzzSentrySession, BuzzSentryEvent, BuzzSentryEnvelope, BuzzSentryScope, BuzzSentryFileManager,
     BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryTransaction;

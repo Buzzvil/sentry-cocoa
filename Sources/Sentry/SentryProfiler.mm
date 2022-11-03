@@ -7,7 +7,7 @@
 #    import "BuzzSentryCurrentDate.h"
 #    import "BuzzSentryDebugImageProvider.h"
 #    import "BuzzSentryDebugMeta.h"
-#    import "SentryDefines.h"
+#    import "BuzzSentryDefines.h"
 #    import "BuzzSentryDependencyContainer.h"
 #    import "BuzzSentryDevice.h"
 #    import "BuzzSentryEnvelope.h"

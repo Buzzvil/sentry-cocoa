@@ -1,4 +1,4 @@
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import "BuzzSentryInternalDefines.h"
 #import <Foundation/Foundation.h>
 

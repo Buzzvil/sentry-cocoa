@@ -1,4 +1,4 @@
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import "BuzzSentryIntegrationProtocol.h"
 #import "BuzzSentrySpanProtocol.h"
 

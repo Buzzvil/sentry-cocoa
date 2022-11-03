@@ -1,5 +1,5 @@
 #import "SentryCrash.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import <Foundation/Foundation.h>
 
 @class BuzzSentryInAppLogic, BuzzSentryCrashWrapper, BuzzSentryDispatchQueueWrapper;

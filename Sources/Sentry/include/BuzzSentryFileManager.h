@@ -1,6 +1,6 @@
 #import "BuzzSentryCurrentDateProvider.h"
 #import "BuzzSentryDataCategory.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import "BuzzSentrySession.h"
 
 NS_ASSUME_NONNULL_BEGIN

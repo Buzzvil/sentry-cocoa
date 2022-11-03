@@ -1,7 +1,7 @@
 #import "SentryCrashMachineContext.h"
 #import "SentryCrashStackCursor.h"
 #include "SentryCrashThread.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 #import <Foundation/Foundation.h>
 
 @class BuzzSentryStacktrace, BuzzSentryFrameRemover, BuzzSentryCrashStackEntryMapper;

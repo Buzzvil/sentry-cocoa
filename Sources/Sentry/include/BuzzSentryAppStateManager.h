@@ -1,5 +1,5 @@
 #import "BuzzSentryCurrentDateProvider.h"
-#import "SentryDefines.h"
+#import "BuzzSentryDefines.h"
 
 @class BuzzSentryOptions, BuzzSentryCrashWrapper, BuzzSentryAppState, BuzzSentryFileManager, BuzzSentrySysctl,
     BuzzSentryDispatchQueueWrapper;
