@@ -7,9 +7,9 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *const SENTRY_NETWORK_REQUEST_OPERATION = @"http.client";
 static NSString *const SENTRY_NETWORK_REQUEST_TRACKER_SPAN = @"SENTRY_NETWORK_REQUEST_TRACKER_SPAN";
 
-@interface SentryNetworkTracker : NSObject
+@interface BuzzSentryNetworkTracker : NSObject
 
-@property (class, readonly, nonatomic) SentryNetworkTracker *sharedInstance;
+@property (class, readonly, nonatomic) BuzzSentryNetworkTracker *sharedInstance;
 
 - (void)urlSessionTaskResume:(NSURLSessionTask *)sessionTask;
 - (void)urlSessionTask:(NSURLSessionTask *)sessionTask setState:(NSURLSessionTaskState)newState;

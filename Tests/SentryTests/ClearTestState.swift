@@ -11,7 +11,7 @@ func clearTestState() {
     PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = false
     SentrySDK.setAppStartMeasurement(nil)
     CurrentDate.setCurrentDateProvider(nil)
-    SentryNetworkTracker.sharedInstance.disable()
+    BuzzSentryNetworkTracker.sharedInstance.disable()
     
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     let framesTracker = BuzzSentryFramesTracker.sharedInstance()

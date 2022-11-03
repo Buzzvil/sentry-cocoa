@@ -111,7 +111,7 @@ class SentrySDKTests: XCTestCase {
             "SentryCrashIntegration",
             "BuzzSentryAutoBreadcrumbTrackingIntegration",
             "BuzzSentryAutoSessionTrackingIntegration",
-            "SentryNetworkTrackingIntegration"
+            "BuzzSentryNetworkTrackingIntegration"
         ])
     }
     

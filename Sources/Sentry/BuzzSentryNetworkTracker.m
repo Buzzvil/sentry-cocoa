@@ -1,4 +1,4 @@
-#import "SentryNetworkTracker.h"
+#import "BuzzSentryNetworkTracker.h"
 #import "BuzzSentryBaggage.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "SentryHub+Private.h"
@@ -12,18 +12,18 @@
 #import <objc/runtime.h>
 
 @interface
-SentryNetworkTracker ()
+BuzzSentryNetworkTracker ()
 
 @property (nonatomic, assign) BOOL isNetworkTrackingEnabled;
 @property (nonatomic, assign) BOOL isNetworkBreadcrumbEnabled;
 
 @end
 
-@implementation SentryNetworkTracker
+@implementation BuzzSentryNetworkTracker
 
-+ (SentryNetworkTracker *)sharedInstance
++ (BuzzSentryNetworkTracker *)sharedInstance
 {
-    static SentryNetworkTracker *instance = nil;
+    static BuzzSentryNetworkTracker *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ instance = [[self alloc] init]; });
     return instance;
@@ -196,7 +196,7 @@ SentryNetworkTracker ()
         }
 
         SENTRY_LOG_DEBUG(
-            @"SentryNetworkTracker automatically started HTTP span for sessionTask: %@",
+            @"BuzzSentryNetworkTracker automatically started HTTP span for sessionTask: %@",
             netSpan.description);
 
         objc_setAssociatedObject(sessionTask, &SENTRY_NETWORK_REQUEST_TRACKER_SPAN, netSpan,
@@ -262,7 +262,7 @@ SentryNetworkTracker ()
     [netSpan setDataValue:@"fetch" forKey:@"type"];
 
     [netSpan finishWithStatus:[self statusForSessionTask:sessionTask state:newState]];
-    SENTRY_LOG_DEBUG(@"SentryNetworkTracker finished HTTP span for sessionTask");
+    SENTRY_LOG_DEBUG(@"BuzzSentryNetworkTracker finished HTTP span for sessionTask");
 }
 
 - (void)addBreadcrumbForSessionTask:(NSURLSessionTask *)sessionTask

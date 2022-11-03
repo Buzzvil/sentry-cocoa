@@ -5,10 +5,10 @@ https://github.com/AFNetworking/AFNetworking/blob/4eaec5b586ddd897ebeda896e332a6
  * under the MIT license
  */
 
-#import "SentryNSURLSessionTaskSearch.h"
+#import "BuzzSentryNSURLSessionTaskSearch.h"
 #import <objc/runtime.h>
 
-@implementation SentryNSURLSessionTaskSearch
+@implementation BuzzSentryNSURLSessionTaskSearch
 
 /**
  * WARNING: This code can easily lead to bad behavior, like crashes or messing up HTTP requests. Be

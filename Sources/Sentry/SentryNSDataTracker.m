@@ -121,7 +121,7 @@ SentryNSDataTracker ()
 
     // We dont track reads from a url that is not a file url
     // because these reads are handled by NSURLSession and
-    // SentryNetworkTracker will create spans in these cases.
+    // BuzzSentryNetworkTracker will create spans in these cases.
     if (![url.scheme isEqualToString:NSURLFileScheme])
         return method(url, readOptionsMask, error);
 
