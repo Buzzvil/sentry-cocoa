@@ -5,7 +5,7 @@
 #import "BuzzSentryClient.h"
 #import "BuzzSentryCurrentDate.h"
 #import "BuzzSentryDebugMeta.h"
-#import "SentryException.h"
+#import "BuzzSentryException.h"
 #import "BuzzSentryId.h"
 #import "BuzzSentryLevelMapper.h"
 #import "BuzzSentryMessage.h"
@@ -98,7 +98,7 @@ BuzzSentryEvent ()
 - (void)addExceptions:(NSMutableDictionary *)serializedData
 {
     NSMutableArray *exceptions = [NSMutableArray new];
-    for (SentryException *exception in self.exceptions) {
+    for (BuzzSentryException *exception in self.exceptions) {
         [exceptions addObject:[exception serialize]];
     }
     if (exceptions.count > 0) {

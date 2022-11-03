@@ -44,7 +44,7 @@
     XCTAssertTrue([firstDebugImage.imageVmAddress isEqualToString:@"0x0000000100000000"]);
     XCTAssertEqualObjects(firstDebugImage.imageSize, @(65536));
 
-    SentryException *exception = event.exceptions.firstObject;
+    BuzzSentryException *exception = event.exceptions.firstObject;
     XCTAssertEqualObjects(
         exception.stacktrace.frames.lastObject.symbolAddress, @"0x000000010014c1ec");
     XCTAssertEqualObjects(
@@ -106,7 +106,7 @@
 
     // Do only a few basic assertions here. RecrashReport is tested with testUnknownTypeException
     XCTAssertEqual(1, event.exceptions.count);
-    SentryException *exception = event.exceptions.firstObject;
+    BuzzSentryException *exception = event.exceptions.firstObject;
     XCTAssertEqualObjects(@"EXC_BAD_ACCESS", exception.type);
     XCTAssertEqualObjects(@"Exception 1, Code 3657279596, Subcode 8", exception.value);
 
@@ -218,7 +218,7 @@
     BuzzSentryCrashReportConverter *reportConverter =
         [[BuzzSentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
     BuzzSentryEvent *event = [reportConverter convertReportToEvent];
-    SentryException *exception = event.exceptions.firstObject;
+    BuzzSentryException *exception = event.exceptions.firstObject;
     XCTAssertEqualObjects(exception.stacktrace.frames.lastObject.function, @"<redacted>");
 }
 
@@ -247,7 +247,7 @@
     BuzzSentryCrashReportConverter *reportConverter =
         [[BuzzSentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
     BuzzSentryEvent *event = [reportConverter convertReportToEvent];
-    SentryException *exception = event.exceptions.firstObject;
+    BuzzSentryException *exception = event.exceptions.firstObject;
     XCTAssertEqual(exception.stacktrace.frames.count, (unsigned long)22);
     XCTAssertEqualObjects(exception.value,
         @"-[__NSArrayI objectForKey:]: unrecognized selector sent to instance "
@@ -262,7 +262,7 @@
     BuzzSentryCrashReportConverter *reportConverter =
         [[BuzzSentryCrashReportConverter alloc] initWithReport:rawCrash inAppLogic:self.inAppLogic];
     BuzzSentryEvent *event = [reportConverter convertReportToEvent];
-    SentryException *exception = event.exceptions.firstObject;
+    BuzzSentryException *exception = event.exceptions.firstObject;
     XCTAssertEqualObjects(exception.value, @"this is the reason");
 }
 

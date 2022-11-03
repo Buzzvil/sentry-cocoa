@@ -334,7 +334,7 @@
 
 - (void)testException
 {
-    SentryException *exception = [[SentryException alloc] initWithValue:@"value" type:@"type"];
+    BuzzSentryException *exception = [[BuzzSentryException alloc] initWithValue:@"value" type:@"type"];
     XCTAssertNotNil(exception.value);
     XCTAssertNotNil(exception.type);
     NSDictionary *serialized = @{
@@ -343,7 +343,7 @@
     };
     XCTAssertEqualObjects([exception serialize], serialized);
 
-    SentryException *exception2 = [[SentryException alloc] initWithValue:@"value" type:@"type"];
+    BuzzSentryException *exception2 = [[BuzzSentryException alloc] initWithValue:@"value" type:@"type"];
     XCTAssertNotNil(exception2.value);
     XCTAssertNotNil(exception2.type);
 

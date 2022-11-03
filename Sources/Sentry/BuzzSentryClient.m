@@ -14,7 +14,7 @@
 #import "BuzzSentryEnvelope.h"
 #import "BuzzSentryEnvelopeItemType.h"
 #import "BuzzSentryEvent.h"
-#import "SentryException.h"
+#import "BuzzSentryException.h"
 #import "BuzzSentryFileManager.h"
 #import "BuzzSentryGlobalEventProcessor.h"
 #import "BuzzSentryHub+Private.h"
@@ -195,7 +195,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 - (BuzzSentryEvent *)buildExceptionEvent:(NSException *)exception
 {
     BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelError];
-    SentryException *sentryException = [[SentryException alloc] initWithValue:exception.reason
+    BuzzSentryException *sentryException = [[BuzzSentryException alloc] initWithValue:exception.reason
                                                                          type:exception.name];
 
     event.exceptions = @[ sentryException ];
@@ -237,7 +237,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
     } else {
         exceptionValue = [NSString stringWithFormat:@"Code: %ld", (long)error.code];
     }
-    SentryException *exception = [[SentryException alloc] initWithValue:exceptionValue
+    BuzzSentryException *exception = [[BuzzSentryException alloc] initWithValue:exceptionValue
                                                                    type:error.domain];
 
     // Sentry uses the error domain and code on the mechanism for gouping
@@ -699,7 +699,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         return NO;
     }
 
-    SentryException *exception = event.exceptions[0];
+    BuzzSentryException *exception = event.exceptions[0];
     return nil != exception.mechanism &&
         [exception.mechanism.type isEqualToString:BuzzSentryOutOfMemoryMechanismType];
 }

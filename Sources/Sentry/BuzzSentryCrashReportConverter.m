@@ -4,7 +4,7 @@
 #import "SentryCrashStackCursor.h"
 #import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryEvent.h"
-#import "SentryException.h"
+#import "BuzzSentryException.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryHexAddressFormatter.h"
 #import "BuzzSentryInAppLogic.h"
@@ -351,28 +351,28 @@ BuzzSentryCrashReportConverter ()
     return result;
 }
 
-- (NSArray<SentryException *> *_Nullable)convertExceptions
+- (NSArray<BuzzSentryException *> *_Nullable)convertExceptions
 {
     if (nil == self.exceptionContext) {
         return nil;
     }
     NSString *const exceptionType = self.exceptionContext[@"type"] ?: @"Unknown Exception";
-    SentryException *exception = nil;
+    BuzzSentryException *exception = nil;
     if ([exceptionType isEqualToString:@"nsexception"]) {
         exception = [self parseNSException];
     } else if ([exceptionType isEqualToString:@"cpp_exception"]) {
         exception =
-            [[SentryException alloc] initWithValue:self.exceptionContext[@"cpp_exception"][@"name"]
+            [[BuzzSentryException alloc] initWithValue:self.exceptionContext[@"cpp_exception"][@"name"]
                                               type:@"C++ Exception"];
     } else if ([exceptionType isEqualToString:@"mach"]) {
-        exception = [[SentryException alloc]
+        exception = [[BuzzSentryException alloc]
             initWithValue:[NSString stringWithFormat:@"Exception %@, Code %@, Subcode %@",
                                     self.exceptionContext[@"mach"][@"exception"],
                                     self.exceptionContext[@"mach"][@"code"],
                                     self.exceptionContext[@"mach"][@"subcode"]]
                      type:self.exceptionContext[@"mach"][@"exception_name"]];
     } else if ([exceptionType isEqualToString:@"signal"]) {
-        exception = [[SentryException alloc]
+        exception = [[BuzzSentryException alloc]
             initWithValue:[NSString stringWithFormat:@"Signal %@, Code %@",
                                     self.exceptionContext[@"signal"][@"signal"],
                                     self.exceptionContext[@"signal"][@"code"]]
@@ -380,13 +380,13 @@ BuzzSentryCrashReportConverter ()
     } else if ([exceptionType isEqualToString:@"user"]) {
         NSString *exceptionReason =
             [NSString stringWithFormat:@"%@", self.exceptionContext[@"reason"]];
-        exception = [[SentryException alloc]
+        exception = [[BuzzSentryException alloc]
             initWithValue:exceptionReason
                      type:self.exceptionContext[@"user_reported"][@"name"]];
 
         NSRange match = [exceptionReason rangeOfString:@":"];
         if (match.location != NSNotFound) {
-            exception = [[SentryException alloc]
+            exception = [[BuzzSentryException alloc]
                 initWithValue:[[exceptionReason
                                   substringWithRange:NSMakeRange(match.location + match.length,
                                                          (exceptionReason.length - match.location)
@@ -396,7 +396,7 @@ BuzzSentryCrashReportConverter ()
                          type:[exceptionReason substringWithRange:NSMakeRange(0, match.location)]];
         }
     } else {
-        exception = [[SentryException alloc] initWithValue:@"Unknown Exception" type:exceptionType];
+        exception = [[BuzzSentryException alloc] initWithValue:@"Unknown Exception" type:exceptionType];
     }
 
     [self enhanceValueFromNotableAddresses:exception];
@@ -415,7 +415,7 @@ BuzzSentryCrashReportConverter ()
     return @[ exception ];
 }
 
-- (SentryException *)parseNSException
+- (BuzzSentryException *)parseNSException
 {
     NSString *reason = @"";
     if (nil != self.exceptionContext[@"nsexception"][@"reason"]) {
@@ -424,11 +424,11 @@ BuzzSentryCrashReportConverter ()
         reason = self.exceptionContext[@"reason"];
     }
 
-    return [[SentryException alloc] initWithValue:[NSString stringWithFormat:@"%@", reason]
+    return [[BuzzSentryException alloc] initWithValue:[NSString stringWithFormat:@"%@", reason]
                                              type:self.exceptionContext[@"nsexception"][@"name"]];
 }
 
-- (void)enhanceValueFromNotableAddresses:(SentryException *)exception
+- (void)enhanceValueFromNotableAddresses:(BuzzSentryException *)exception
 {
     // Gatekeeper fixes https://github.com/getsentry/sentry-cocoa/issues/231
     if ([self.threads count] == 0 || self.crashedThreadIndex >= [self.threads count]) {
@@ -482,7 +482,7 @@ BuzzSentryCrashReportConverter ()
  *  5.
  * https://github.com/apple/swift/blob/d1bb98b11ede375a1cee739f964b7d23b6657aaf/include/swift/Runtime/Debug.h#L29-L58
  */
-- (void)enhanceValueFromCrashInfoMessage:(SentryException *)exception
+- (void)enhanceValueFromCrashInfoMessage:(BuzzSentryException *)exception
 {
     NSMutableArray<NSString *> *crashInfoMessages = [NSMutableArray new];
 

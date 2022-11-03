@@ -5,7 +5,7 @@
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
 #import <BuzzSentryEvent.h>
-#import <SentryException.h>
+#import <BuzzSentryException.h>
 #import <BuzzSentryHub.h>
 #import <BuzzSentryLog.h>
 #import <BuzzSentryMechanism.h>
@@ -59,8 +59,8 @@ BuzzSentryOutOfMemoryTracker ()
             // Set to empty list so no breadcrumbs of the current scope are added
             event.breadcrumbs = @[];
 
-            SentryException *exception =
-                [[SentryException alloc] initWithValue:BuzzSentryOutOfMemoryExceptionValue
+            BuzzSentryException *exception =
+                [[BuzzSentryException alloc] initWithValue:BuzzSentryOutOfMemoryExceptionValue
                                                   type:BuzzSentryOutOfMemoryExceptionType];
             BuzzSentryMechanism *mechanism =
                 [[BuzzSentryMechanism alloc] initWithType:BuzzSentryOutOfMemoryMechanismType];

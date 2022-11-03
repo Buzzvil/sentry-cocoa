@@ -1,11 +1,11 @@
-#import "SentryException.h"
+#import "BuzzSentryException.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentryStacktrace.h"
 #import "SentryThread.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation SentryException
+@implementation BuzzSentryException
 
 - (instancetype)initWithValue:(NSString *)value type:(NSString *)type
 {

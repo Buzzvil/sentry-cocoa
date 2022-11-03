@@ -6,7 +6,7 @@
 #import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
-#import "SentryException.h"
+#import "BuzzSentryException.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryMechanism.h"
 #import "BuzzSentrySDK+Private.h"
@@ -63,7 +63,7 @@ BuzzSentryANRTrackingIntegration ()
     NSArray<SentryThread *> *threads = [threadInspector getCurrentThreadsWithStackTrace];
 
     BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelError];
-    SentryException *sentryException = [[SentryException alloc] initWithValue:message
+    BuzzSentryException *sentryException = [[BuzzSentryException alloc] initWithValue:message
                                                                          type:@"App Hanging"];
     sentryException.mechanism = [[BuzzSentryMechanism alloc] initWithType:@"AppHang"];
     sentryException.stacktrace = [threads[0] stacktrace];
