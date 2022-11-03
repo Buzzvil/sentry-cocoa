@@ -1,7 +1,7 @@
 #import "BuzzSentryPermissionsObserver.h"
 #import "BuzzSentryRandom.h"
 #import "BuzzSentryTransport.h"
-#import <Sentry/Sentry.h>
+#import <BuzzSentry/BuzzSentry.h>
 
 @class BuzzSentryCrashWrapper, BuzzSentryThreadInspector, BuzzSentryTransportAdapter, BuzzSentryUIDeviceWrapper;
 
