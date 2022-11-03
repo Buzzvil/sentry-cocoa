@@ -4,8 +4,8 @@
 #import <BuzzSentrySDK+Private.h>
 #import <SentrySDK.h>
 #import <SentryScope.h>
-#import <SentrySpanOperations.h>
-#import <SentrySpanProtocol.h>
+#import <BuzzSentrySpanOperations.h>
+#import <BuzzSentrySpanProtocol.h>
 #import <BuzzSentryTracer.h>
 #import <BuzzSentryTransactionContext+Private.h>
 #import <SentryUIEventTracker.h>
@@ -101,12 +101,12 @@ SentryUIEventTracker ()
                                                      operation:operation];
 
             __block BuzzSentryTracer *transaction;
-            [SentrySDK.currentHub.scope useSpan:^(id<SentrySpan> _Nullable span) {
+            [SentrySDK.currentHub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
                 BOOL ongoingScreenLoadTransaction = span != nil &&
-                    [span.context.operation isEqualToString:SentrySpanOperationUILoad];
+                    [span.context.operation isEqualToString:BuzzSentrySpanOperationUILoad];
                 BOOL ongoingManualTransaction = span != nil
-                    && ![span.context.operation isEqualToString:SentrySpanOperationUILoad]
-                    && ![span.context.operation containsString:SentrySpanOperationUIAction];
+                    && ![span.context.operation isEqualToString:BuzzSentrySpanOperationUILoad]
+                    && ![span.context.operation containsString:BuzzSentrySpanOperationUIAction];
 
                 BOOL bindToScope = !ongoingScreenLoadTransaction && !ongoingManualTransaction;
                 transaction =
@@ -156,10 +156,10 @@ SentryUIEventTracker ()
         [senderClass isSubclassOfClass:[UIBarButtonItem class]] ||
         [senderClass isSubclassOfClass:[UISegmentedControl class]] ||
         [senderClass isSubclassOfClass:[UIPageControl class]]) {
-        return SentrySpanOperationUIActionClick;
+        return BuzzSentrySpanOperationUIActionClick;
     }
 
-    return SentrySpanOperationUIAction;
+    return BuzzSentrySpanOperationUIAction;
 }
 
 /**
@@ -194,10 +194,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isUIEventOperation:(NSString *)operation
 {
-    if ([operation isEqualToString:SentrySpanOperationUIAction]) {
+    if ([operation isEqualToString:BuzzSentrySpanOperationUIAction]) {
         return YES;
     }
-    if ([operation isEqualToString:SentrySpanOperationUIActionClick]) {
+    if ([operation isEqualToString:BuzzSentrySpanOperationUIActionClick]) {
         return YES;
     }
     return NO;

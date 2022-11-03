@@ -1,7 +1,7 @@
 #import "SentryNoOpSpan.h"
 #import "SentryId.h"
-#import "SentrySpanContext.h"
-#import "SentrySpanId.h"
+#import "BuzzSentrySpanContext.h"
+#import "BuzzSentrySpanId.h"
 #import "BuzzSentryTraceHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init
 {
     if (self = [super init]) {
-        _context = [[SentrySpanContext alloc] initWithTraceId:SentryId.empty
-                                                       spanId:SentrySpanId.empty
+        _context = [[BuzzSentrySpanContext alloc] initWithTraceId:SentryId.empty
+                                                       spanId:BuzzSentrySpanId.empty
                                                      parentId:nil
                                                     operation:@""
                                                       sampled:kBuzzSentrySampleDecisionUndecided];
@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
 {
     return [SentryNoOpSpan shared];
 }
 
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
                               description:(nullable NSString *)description
 {
     return [SentryNoOpSpan shared];

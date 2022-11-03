@@ -13,9 +13,9 @@
 #import "SentryProfilingConditionals.h"
 #import "BuzzSentrySDK+Private.h"
 #import "SentryScope.h"
-#import "SentrySpan.h"
-#import "SentrySpanContext.h"
-#import "SentrySpanId.h"
+#import "BuzzSentrySpan.h"
+#import "BuzzSentrySpanContext.h"
+#import "BuzzSentrySpanId.h"
 #import "SentryTime.h"
 #import "BuzzSentryTraceContext.h"
 #import "BuzzSentryTransaction.h"
@@ -24,7 +24,7 @@
 #import <SentryDispatchQueueWrapper.h>
 #import <BuzzSentryMeasurementValue.h>
 #import <SentryScreenFrames.h>
-#import <SentrySpanOperations.h>
+#import <BuzzSentrySpanOperations.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,7 +40,7 @@ static const NSTimeInterval SENTRY_AUTO_TRANSACTION_MAX_DURATION = 500.0;
 @interface
 BuzzSentryTracer ()
 
-@property (nonatomic, strong) SentrySpan *rootSpan;
+@property (nonatomic, strong) BuzzSentrySpan *rootSpan;
 @property (nonatomic, strong) SentryHub *hub;
 @property (nonatomic) BuzzSentrySpanStatus finishStatus;
 /** This property is different from isFinished. While isFinished states if the tracer is actually
@@ -62,7 +62,7 @@ BuzzSentryTracer ()
     NSMutableDictionary<NSString *, id> *_data;
     NSMutableDictionary<NSString *, BuzzSentryMeasurementValue *> *_measurements;
     dispatch_block_t _idleTimeoutBlock;
-    NSMutableArray<id<SentrySpan>> *_children;
+    NSMutableArray<id<BuzzSentrySpan>> *_children;
 
 #if SENTRY_HAS_UIKIT
     BOOL _startTimeChanged;
@@ -143,7 +143,7 @@ static BOOL appStartMeasurementRead;
           dispatchQueueWrapper:(nullable SentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     if (self = [super init]) {
-        self.rootSpan = [[SentrySpan alloc] initWithTracer:self context:transactionContext];
+        self.rootSpan = [[BuzzSentrySpan alloc] initWithTracer:self context:transactionContext];
         self.transactionContext = transactionContext;
         _children = [[NSMutableArray alloc] init];
         self.hub = hub;
@@ -212,9 +212,9 @@ static BOOL appStartMeasurementRead;
     }
 }
 
-- (id<SentrySpan>)getActiveSpan
+- (id<BuzzSentrySpan>)getActiveSpan
 {
-    id<SentrySpan> span;
+    id<BuzzSentrySpan> span;
 
     if (self.delegate) {
         @synchronized(_children) {
@@ -230,18 +230,18 @@ static BOOL appStartMeasurementRead;
     return span;
 }
 
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
 {
     return [[self getActiveSpan] startChildWithOperation:operation];
 }
 
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
                               description:(nullable NSString *)description
 {
     return [[self getActiveSpan] startChildWithOperation:operation description:description];
 }
 
-- (id<SentrySpan>)startChildWithParentId:(SentrySpanId *)parentId
+- (id<BuzzSentrySpan>)startChildWithParentId:(BuzzSentrySpanId *)parentId
                                operation:(NSString *)operation
                              description:(nullable NSString *)description
 {
@@ -253,16 +253,16 @@ static BOOL appStartMeasurementRead;
         return [SentryNoOpSpan shared];
     }
 
-    SentrySpanContext *context =
-        [[SentrySpanContext alloc] initWithTraceId:_rootSpan.context.traceId
-                                            spanId:[[SentrySpanId alloc] init]
+    BuzzSentrySpanContext *context =
+        [[BuzzSentrySpanContext alloc] initWithTraceId:_rootSpan.context.traceId
+                                            spanId:[[BuzzSentrySpanId alloc] init]
                                           parentId:parentId
                                          operation:operation
                                            sampled:_rootSpan.context.sampled];
     context.spanDescription = description;
 
-    SENTRY_LOG_DEBUG(@"Starting child span under %@", parentId.sentrySpanIdString);
-    SentrySpan *child = [[SentrySpan alloc] initWithTracer:self context:context];
+    SENTRY_LOG_DEBUG(@"Starting child span under %@", parentId.BuzzSentrySpanIdString);
+    BuzzSentrySpan *child = [[BuzzSentrySpan alloc] initWithTracer:self context:context];
     @synchronized(_children) {
         [_children addObject:child];
     }
@@ -270,7 +270,7 @@ static BOOL appStartMeasurementRead;
     return child;
 }
 
-- (void)spanFinished:(id<SentrySpan>)finishedSpan
+- (void)spanFinished:(id<BuzzSentrySpan>)finishedSpan
 {
     // Calling canBeFinished on the rootSpan would end up in an endless loop because canBeFinished
     // calls finish on the rootSpan.
@@ -279,7 +279,7 @@ static BOOL appStartMeasurementRead;
     }
 }
 
-- (SentrySpanContext *)context
+- (BuzzSentrySpanContext *)context
 {
     return self.rootSpan.context;
 }
@@ -341,7 +341,7 @@ static BOOL appStartMeasurementRead;
     return self.rootSpan.isFinished;
 }
 
-- (NSArray<id<SentrySpan>> *)children
+- (NSArray<id<BuzzSentrySpan>> *)children
 {
     return [_children copy];
 }
@@ -438,7 +438,7 @@ static BOOL appStartMeasurementRead;
     }
 
     @synchronized(_children) {
-        for (id<SentrySpan> span in _children) {
+        for (id<BuzzSentrySpan> span in _children) {
             if (![span isFinished])
                 return YES;
         }
@@ -462,7 +462,7 @@ static BOOL appStartMeasurementRead;
         return;
     }
 
-    [_hub.scope useSpan:^(id<SentrySpan> _Nullable span) {
+    [_hub.scope useSpan:^(id<BuzzSentrySpan> _Nullable span) {
         if (span == self) {
             [self->_hub.scope setSpan:nil];
         }
@@ -473,7 +473,7 @@ static BOOL appStartMeasurementRead;
             return;
         }
 
-        for (id<SentrySpan> span in _children) {
+        for (id<BuzzSentrySpan> span in _children) {
             if (!span.isFinished) {
                 [span finishWithStatus:kBuzzSentrySpanStatusDeadlineExceeded];
 
@@ -520,7 +520,7 @@ static BOOL appStartMeasurementRead;
 {
     NSDate *oldest = self.startTimestamp;
 
-    for (id<SentrySpan> childSpan in _children) {
+    for (id<BuzzSentrySpan> childSpan in _children) {
         if ([oldest compare:childSpan.timestamp] == NSOrderedAscending) {
             oldest = childSpan.timestamp;
         }
@@ -533,9 +533,9 @@ static BOOL appStartMeasurementRead;
 
 - (BuzzSentryTransaction *)toTransaction
 {
-    NSArray<id<SentrySpan>> *appStartSpans = [self buildAppStartSpans];
+    NSArray<id<BuzzSentrySpan>> *appStartSpans = [self buildAppStartSpans];
 
-    NSArray<id<SentrySpan>> *spans;
+    NSArray<id<BuzzSentrySpan>> *spans;
     @synchronized(_children) {
         [_children addObjectsFromArray:appStartSpans];
         spans = [_children copy];
@@ -555,7 +555,7 @@ static BOOL appStartMeasurementRead;
 {
     // Only send app start measurement for transactions generated by auto performance
     // instrumentation.
-    if (![self.context.operation isEqualToString:SentrySpanOperationUILoad]) {
+    if (![self.context.operation isEqualToString:BuzzSentrySpanOperationUILoad]) {
         return nil;
     }
 
@@ -600,7 +600,7 @@ static BOOL appStartMeasurementRead;
     return measurement;
 }
 
-- (NSArray<SentrySpan *> *)buildAppStartSpans
+- (NSArray<BuzzSentrySpan *> *)buildAppStartSpans
 {
     if (appStartMeasurement == nil) {
         return @[];
@@ -625,30 +625,30 @@ static BOOL appStartMeasurementRead;
     NSDate *appStartEndTimestamp = [appStartMeasurement.appStartTimestamp
         dateByAddingTimeInterval:appStartMeasurement.duration];
 
-    SentrySpan *appStartSpan = [self buildSpan:_rootSpan.context.spanId
+    BuzzSentrySpan *appStartSpan = [self buildSpan:_rootSpan.context.spanId
                                      operation:operation
                                    description:type];
     [appStartSpan setStartTimestamp:appStartMeasurement.appStartTimestamp];
 
-    SentrySpan *premainSpan = [self buildSpan:appStartSpan.context.spanId
+    BuzzSentrySpan *premainSpan = [self buildSpan:appStartSpan.context.spanId
                                     operation:operation
                                   description:@"Pre Runtime Init"];
     [premainSpan setStartTimestamp:appStartMeasurement.appStartTimestamp];
     [premainSpan setTimestamp:appStartMeasurement.runtimeInitTimestamp];
 
-    SentrySpan *runtimeInitSpan = [self buildSpan:appStartSpan.context.spanId
+    BuzzSentrySpan *runtimeInitSpan = [self buildSpan:appStartSpan.context.spanId
                                         operation:operation
                                       description:@"Runtime Init to Pre Main Initializers"];
     [runtimeInitSpan setStartTimestamp:appStartMeasurement.runtimeInitTimestamp];
     [runtimeInitSpan setTimestamp:appStartMeasurement.moduleInitializationTimestamp];
 
-    SentrySpan *appInitSpan = [self buildSpan:appStartSpan.context.spanId
+    BuzzSentrySpan *appInitSpan = [self buildSpan:appStartSpan.context.spanId
                                     operation:operation
                                   description:@"UIKit and Application Init"];
     [appInitSpan setStartTimestamp:appStartMeasurement.moduleInitializationTimestamp];
     [appInitSpan setTimestamp:appStartMeasurement.didFinishLaunchingTimestamp];
 
-    SentrySpan *frameRenderSpan = [self buildSpan:appStartSpan.context.spanId
+    BuzzSentrySpan *frameRenderSpan = [self buildSpan:appStartSpan.context.spanId
                                         operation:operation
                                       description:@"Initial Frame Render"];
     [frameRenderSpan setStartTimestamp:appStartMeasurement.didFinishLaunchingTimestamp];
@@ -699,19 +699,19 @@ static BOOL appStartMeasurementRead;
 #endif
 }
 
-- (id<SentrySpan>)buildSpan:(SentrySpanId *)parentId
+- (id<BuzzSentrySpan>)buildSpan:(BuzzSentrySpanId *)parentId
                   operation:(NSString *)operation
                 description:(NSString *)description
 {
-    SentrySpanContext *context =
-        [[SentrySpanContext alloc] initWithTraceId:_rootSpan.context.traceId
-                                            spanId:[[SentrySpanId alloc] init]
+    BuzzSentrySpanContext *context =
+        [[BuzzSentrySpanContext alloc] initWithTraceId:_rootSpan.context.traceId
+                                            spanId:[[BuzzSentrySpanId alloc] init]
                                           parentId:parentId
                                          operation:operation
                                            sampled:_rootSpan.context.sampled];
     context.spanDescription = description;
 
-    return [[SentrySpan alloc] initWithTracer:self context:context];
+    return [[BuzzSentrySpan alloc] initWithTracer:self context:context];
 }
 
 - (NSDictionary *)serialize
@@ -754,7 +754,7 @@ static BOOL appStartMeasurementRead;
     }
 }
 
-+ (nullable BuzzSentryTracer *)getTracer:(id<SentrySpan>)span
++ (nullable BuzzSentryTracer *)getTracer:(id<BuzzSentrySpan>)span
 {
     if (span == nil) {
         return nil;
@@ -762,8 +762,8 @@ static BOOL appStartMeasurementRead;
 
     if ([span isKindOfClass:[BuzzSentryTracer class]]) {
         return span;
-    } else if ([span isKindOfClass:[SentrySpan class]]) {
-        return [(SentrySpan *)span tracer];
+    } else if ([span isKindOfClass:[BuzzSentrySpan class]]) {
+        return [(BuzzSentrySpan *)span tracer];
     }
     return nil;
 }

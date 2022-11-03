@@ -1,18 +1,18 @@
 #import "SentryDefines.h"
 #import "SentrySerializable.h"
-#import "SentrySpanContext.h"
+#import "BuzzSentrySpanContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentrySpanId, SentryId, BuzzSentryTraceHeader, SentryMeasurementUnit;
+@class BuzzSentrySpanId, SentryId, BuzzSentryTraceHeader, SentryMeasurementUnit;
 
 NS_SWIFT_NAME(Span)
-@protocol SentrySpan <SentrySerializable>
+@protocol BuzzSentrySpan <SentrySerializable>
 
 /**
  * The context information of the span.
  */
-@property (nonatomic, readonly) SentrySpanContext *context;
+@property (nonatomic, readonly) BuzzSentrySpanContext *context;
 
 /**
  * The timestamp of which the span ended.
@@ -44,9 +44,9 @@ NS_SWIFT_NAME(Span)
  *
  * @param operation Short code identifying the type of operation the span is measuring.
  *
- * @return SentrySpan
+ * @return BuzzSentrySpan
  */
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
     NS_SWIFT_NAME(startChild(operation:));
 
 /**
@@ -55,9 +55,9 @@ NS_SWIFT_NAME(Span)
  * @param operation Defines the child span operation.
  * @param description Define the child span description.
  *
- * @return SentrySpan
+ * @return BuzzSentrySpan
  */
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
                               description:(nullable NSString *)description
     NS_SWIFT_NAME(startChild(operation:description:));
 

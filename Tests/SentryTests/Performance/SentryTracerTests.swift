@@ -807,7 +807,7 @@ class BuzzSentryTracerTests: XCTestCase {
     }
     
     private func assertAppStartsSpanAdded(transaction: Transaction, startType: String, operation: String, appStartMeasurement: SentryAppStartMeasurement) {
-        let spans: [SentrySpan]? = Dynamic(transaction).spans
+        let spans: [BuzzSentrySpan]? = Dynamic(transaction).spans
         XCTAssertEqual(5, spans?.count)
         
         let appLaunchSpan = spans?.first { span in

@@ -1,12 +1,12 @@
 #import "BuzzSentrySampleDecision.h"
-#import "SentrySpanContext.h"
+#import "BuzzSentrySpanContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentrySpanId;
+@class BuzzSentrySpanId;
 
 NS_SWIFT_NAME(TransactionContext)
-@interface BuzzSentryTransactionContext : SentrySpanContext
+@interface BuzzSentryTransactionContext : BuzzSentrySpanContext
 SENTRY_NO_INIT
 
 /**
@@ -64,8 +64,8 @@ SENTRY_NO_INIT
 - (instancetype)initWithName:(NSString *)name
                    operation:(NSString *)operation
                      traceId:(SentryId *)traceId
-                      spanId:(SentrySpanId *)spanId
-                parentSpanId:(nullable SentrySpanId *)parentSpanId
+                      spanId:(BuzzSentrySpanId *)spanId
+                parentSpanId:(nullable BuzzSentrySpanId *)parentSpanId
                parentSampled:(BuzzSentrySampleDecision)parentSampled;
 
 @end

@@ -1,6 +1,6 @@
 import XCTest
 
-class SentrySpanIdTests: XCTestCase {
+class BuzzSentrySpanIdTests: XCTestCase {
     
     private class Fixture {
         let uuid: UUID
@@ -23,12 +23,12 @@ class SentrySpanIdTests: XCTestCase {
     func testInitWithUUID_ValidIdString() {
         let spanId = SpanId(uuid: fixture.uuid)
         
-        XCTAssertEqual(fixture.expectedUUIDV4String, spanId.sentrySpanIdString)
+        XCTAssertEqual(fixture.expectedUUIDV4String, spanId.BuzzSentrySpanIdString)
     }
     
     func testDescriptionEqualsIdString() {
         let spanId = SpanId()
-        XCTAssertEqual(spanId.description, spanId.sentrySpanIdString)
+        XCTAssertEqual(spanId.description, spanId.BuzzSentrySpanIdString)
     }
       
     func testInitWithUUIDV4String_ValidIdString() {

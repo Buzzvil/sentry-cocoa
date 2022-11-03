@@ -23,7 +23,7 @@
     +(instancetype) new NS_UNAVAILABLE;
 
 @class SentryEvent, SentryBreadcrumb, BuzzSentrySamplingContext;
-@protocol SentrySpan;
+@protocol BuzzSentrySpan;
 
 /**
  * Block used for returning after a request finished
@@ -79,7 +79,7 @@ typedef NSNumber *_Nullable (^BuzzSentryTracesSamplerCallback)(
  *
  * @param span The span to be used.
  */
-typedef void (^SentrySpanCallback)(id<SentrySpan> _Nullable span);
+typedef void (^BuzzSentrySpanCallback)(id<BuzzSentrySpan> _Nullable span);
 
 /**
  * Loglevel

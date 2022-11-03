@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 #import "SentrySerializable.h"
-#import "SentrySpanProtocol.h"
+#import "BuzzSentrySpanProtocol.h"
 
 @class SentryUser, SentrySession, BuzzSentryOptions, SentryBreadcrumb, SentryAttachment;
 
@@ -21,7 +21,7 @@ NS_SWIFT_NAME(Scope)
  *
  * @return current Span or Transaction or null if transaction has not been set.
  */
-@property (nullable, nonatomic, strong) id<SentrySpan> span;
+@property (nullable, nonatomic, strong) id<BuzzSentrySpan> span;
 
 - (instancetype)initWithMaxBreadcrumbs:(NSInteger)maxBreadcrumbs NS_DESIGNATED_INITIALIZER;
 - (instancetype)init;
@@ -141,9 +141,9 @@ NS_SWIFT_NAME(Scope)
 /**
  * Mutates the current transaction atomically.
  *
- * @param callback the SentrySpanCallback.
+ * @param callback the BuzzSentrySpanCallback.
  */
-- (void)useSpan:(SentrySpanCallback)callback;
+- (void)useSpan:(BuzzSentrySpanCallback)callback;
 
 @end
 

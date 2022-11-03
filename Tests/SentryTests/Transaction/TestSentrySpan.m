@@ -1,8 +1,8 @@
-#import "TestSentrySpan.h"
-#import "SentrySpanProtocol.h"
+#import "TestBuzzSentrySpan.h"
+#import "BuzzSentrySpanProtocol.h"
 #import "BuzzSentryTracer.h"
 
-@implementation TestSentrySpan
+@implementation TestBuzzSentrySpan
 
 @synthesize context;
 @synthesize data;
@@ -11,12 +11,12 @@
 @synthesize startTimestamp;
 @synthesize timestamp;
 
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation description:(NSString *)description
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation description:(NSString *)description
 {
     return nil;
 }
 
-- (id<SentrySpan>)startChildWithOperation:(nonnull NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(nonnull NSString *)operation
 {
     return nil;
 }

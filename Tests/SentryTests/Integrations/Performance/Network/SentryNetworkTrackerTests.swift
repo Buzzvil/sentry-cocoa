@@ -526,7 +526,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         let transaction = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
-        let children = Dynamic(transaction).children as [SentrySpan]?
+        let children = Dynamic(transaction).children as [BuzzSentrySpan]?
         let networkSpan = children![0]
         let expectedTraceHeader = networkSpan.toTraceHeader().value()
         XCTAssertEqual(task.currentRequest?.allHTTPHeaderFields?["sentry-trace"] ?? "", expectedTraceHeader)

@@ -1,19 +1,19 @@
 #import "SentryDefines.h"
 #import "SentrySerializable.h"
-#import "SentrySpanContext.h"
-#import "SentrySpanProtocol.h"
+#import "BuzzSentrySpanContext.h"
+#import "BuzzSentrySpanProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class BuzzSentryTracer;
 
-@interface SentrySpan : NSObject <SentrySpan, SentrySerializable>
+@interface BuzzSentrySpan : NSObject <BuzzSentrySpan, SentrySerializable>
 SENTRY_NO_INIT
 
 /**
  * The context information of the span.
  */
-@property (nonatomic, readonly) SentrySpanContext *context;
+@property (nonatomic, readonly) BuzzSentrySpanContext *context;
 
 /**
  * The timestamp of which the span ended.
@@ -36,14 +36,14 @@ SENTRY_NO_INIT
 @property (nullable, nonatomic, readonly, weak) BuzzSentryTracer *tracer;
 
 /**
- * Init a SentrySpan with given transaction and context.
+ * Init a BuzzSentrySpan with given transaction and context.
  *
  * @param transaction The @c BuzzSentryTracer managing the transaction this span is associated with.
  * @param context This span context information.
  *
- * @return SentrySpan
+ * @return BuzzSentrySpan
  */
-- (instancetype)initWithTracer:(BuzzSentryTracer *)transaction context:(SentrySpanContext *)context;
+- (instancetype)initWithTracer:(BuzzSentryTracer *)transaction context:(BuzzSentrySpanContext *)context;
 
 @end
 

@@ -21,7 +21,7 @@
 #    import "SentryScope+Private.h"
 #    import "SentryScreenFrames.h"
 #    import "SentrySerialization.h"
-#    import "SentrySpanId.h"
+#    import "BuzzSentrySpanId.h"
 #    import "SentryTime.h"
 #    import "BuzzSentryTransaction.h"
 #    import "BuzzSentryTransactionContext.h"
@@ -64,7 +64,7 @@ parseBacktraceSymbolsFunctionName(const char *symbol)
 }
 
 std::mutex _gProfilerLock;
-NSMutableDictionary<SentrySpanId *, SentryProfiler *> *_gProfilersPerSpanID;
+NSMutableDictionary<BuzzSentrySpanId *, SentryProfiler *> *_gProfilersPerSpanID;
 SentryProfiler *_Nullable _gCurrentProfiler;
 
 NSString *
@@ -90,7 +90,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     SentryDebugImageProvider *_debugImageProvider;
     thread::TIDType _mainThreadID;
 
-    NSMutableArray<SentrySpanId *> *_spansInFlight;
+    NSMutableArray<BuzzSentrySpanId *> *_spansInFlight;
     NSMutableArray<BuzzSentryTransaction *> *_transactions;
     SentryProfilerTruncationReason _truncationReason;
     SentryScreenFrames *_frameInfo;
@@ -102,7 +102,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
     if (self == [SentryProfiler class]) {
-        _gProfilersPerSpanID = [NSMutableDictionary<SentrySpanId *, SentryProfiler *> dictionary];
+        _gProfilersPerSpanID = [NSMutableDictionary<BuzzSentrySpanId *, SentryProfiler *> dictionary];
     }
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
@@ -117,7 +117,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     SENTRY_LOG_DEBUG(@"Initialized new SentryProfiler %@", self);
     _debugImageProvider = [SentryDependencyContainer sharedInstance].debugImageProvider;
     _mainThreadID = ThreadHandle::current()->tid();
-    _spansInFlight = [NSMutableArray<SentrySpanId *> array];
+    _spansInFlight = [NSMutableArray<BuzzSentrySpanId *> array];
     _transactions = [NSMutableArray<BuzzSentryTransaction *> array];
     return self;
 }
@@ -125,7 +125,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
 #    pragma mark - Public
 
-+ (void)startForSpanID:(SentrySpanId *)spanID hub:(SentryHub *)hub
++ (void)startForSpanID:(BuzzSentrySpanId *)spanID hub:(SentryHub *)hub
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
     NSTimeInterval timeoutInterval = 30;
@@ -136,7 +136,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 #    endif
 }
 
-+ (void)startForSpanID:(SentrySpanId *)spanID
++ (void)startForSpanID:(BuzzSentrySpanId *)spanID
                    hub:(SentryHub *)hub
        timeoutInterval:(NSTimeInterval)timeoutInterval
 {
@@ -169,27 +169,27 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     }
 
     SENTRY_LOG_DEBUG(
-        @"Tracking span with ID %@ with profiler %@", spanID.sentrySpanIdString, _gCurrentProfiler);
+        @"Tracking span with ID %@ with profiler %@", spanID.BuzzSentrySpanIdString, _gCurrentProfiler);
     [_gCurrentProfiler->_spansInFlight addObject:spanID];
     _gProfilersPerSpanID[spanID] = _gCurrentProfiler;
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
 }
 
-+ (void)stopProfilingSpan:(id<SentrySpan>)span
++ (void)stopProfilingSpan:(id<BuzzSentrySpan>)span
 {
 #    if SENTRY_TARGET_PROFILING_SUPPORTED
     std::lock_guard<std::mutex> l(_gProfilerLock);
 
     if (_gCurrentProfiler == nil) {
         SENTRY_LOG_DEBUG(
-            @"No profiler tracking span with id %@", span.context.spanId.sentrySpanIdString);
+            @"No profiler tracking span with id %@", span.context.spanId.BuzzSentrySpanIdString);
         return;
     }
 
     [_gCurrentProfiler->_spansInFlight removeObject:span.context.spanId];
     if (_gCurrentProfiler->_spansInFlight.count == 0) {
         SENTRY_LOG_DEBUG(@"Stopping profiler %@ because span with id %@ was last being profiled.",
-            _gCurrentProfiler, span.context.spanId.sentrySpanIdString);
+            _gCurrentProfiler, span.context.spanId.BuzzSentrySpanIdString);
         [self stopProfilerForReason:SentryProfilerTruncationReasonNormal];
     }
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
@@ -203,7 +203,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     const auto spanID = transaction.trace.context.spanId;
     const auto profiler = _gProfilersPerSpanID[spanID];
     if (profiler == nil) {
-        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.sentrySpanIdString);
+        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.BuzzSentrySpanIdString);
         return;
     }
 
@@ -219,12 +219,12 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     const auto spanID = transaction.trace.context.spanId;
     SentryProfiler *profiler = _gProfilersPerSpanID[spanID];
     if (profiler == nil) {
-        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.sentrySpanIdString);
+        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.BuzzSentrySpanIdString);
         return;
     }
 
     SENTRY_LOG_DEBUG(@"Found profiler waiting for span with ID %@: %@",
-        transaction.trace.context.spanId.sentrySpanIdString, profiler);
+        transaction.trace.context.spanId.BuzzSentrySpanIdString, profiler);
     [profiler addTransaction:transaction];
 
     [self captureEnvelopeIfFinished:profiler spanID:spanID];
@@ -241,7 +241,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
 
 #    pragma mark - Private
 
-+ (void)captureEnvelopeIfFinished:(SentryProfiler *)profiler spanID:(SentrySpanId *)spanID
++ (void)captureEnvelopeIfFinished:(SentryProfiler *)profiler spanID:(BuzzSentrySpanId *)spanID
 {
     [_gProfilersPerSpanID removeObjectForKey:spanID];
     [profiler->_spansInFlight removeObject:spanID];

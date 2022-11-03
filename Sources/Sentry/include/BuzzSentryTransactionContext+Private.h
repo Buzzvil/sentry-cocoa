@@ -18,8 +18,8 @@ BuzzSentryTransactionContext (Private)
                   nameSource:(BuzzSentryTransactionNameSource)source
                    operation:(nonnull NSString *)operation
                      traceId:(SentryId *)traceId
-                      spanId:(SentrySpanId *)spanId
-                parentSpanId:(nullable SentrySpanId *)parentSpanId
+                      spanId:(BuzzSentrySpanId *)spanId
+                parentSpanId:(nullable BuzzSentrySpanId *)parentSpanId
                parentSampled:(BuzzSentrySampleDecision)parentSampled;
 
 @end

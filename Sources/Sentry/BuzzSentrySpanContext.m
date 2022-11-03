@@ -1,17 +1,17 @@
-#import "SentrySpanContext.h"
+#import "BuzzSentrySpanContext.h"
 #import "SentryId.h"
-#import "SentrySpanId.h"
+#import "BuzzSentrySpanId.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentrySpanContext () {
+BuzzSentrySpanContext () {
     NSMutableDictionary<NSString *, NSString *> *_tags;
 }
 
 @end
 
-@implementation SentrySpanContext
+@implementation BuzzSentrySpanContext
 
 - (instancetype)initWithOperation:(NSString *)operation
 {
@@ -21,15 +21,15 @@ SentrySpanContext () {
 - (instancetype)initWithOperation:(NSString *)operation sampled:(BuzzSentrySampleDecision)sampled
 {
     return [self initWithTraceId:[[SentryId alloc] init]
-                          spanId:[[SentrySpanId alloc] init]
+                          spanId:[[BuzzSentrySpanId alloc] init]
                         parentId:nil
                        operation:operation
                          sampled:sampled];
 }
 
 - (instancetype)initWithTraceId:(SentryId *)traceId
-                         spanId:(SentrySpanId *)spanId
-                       parentId:(nullable SentrySpanId *)parentId
+                         spanId:(BuzzSentrySpanId *)spanId
+                       parentId:(nullable BuzzSentrySpanId *)parentId
                       operation:(NSString *)operation
                         sampled:(BuzzSentrySampleDecision)sampled
 {
@@ -76,8 +76,8 @@ SentrySpanContext () {
 - (NSDictionary<NSString *, id> *)serialize
 {
     NSMutableDictionary *mutabledictionary = @{
-        @"type" : SentrySpanContext.type,
-        @"span_id" : self.spanId.sentrySpanIdString,
+        @"type" : BuzzSentrySpanContext.type,
+        @"span_id" : self.spanId.BuzzSentrySpanIdString,
         @"trace_id" : self.traceId.sentryIdString,
         @"op" : self.operation
     }
@@ -100,7 +100,7 @@ SentrySpanContext () {
     }
 
     if (self.parentSpanId != nil) {
-        [mutabledictionary setValue:self.parentSpanId.sentrySpanIdString forKey:@"parent_span_id"];
+        [mutabledictionary setValue:self.parentSpanId.BuzzSentrySpanIdString forKey:@"parent_span_id"];
     }
 
     if (self.status != kBuzzSentrySpanStatusUndefined) {

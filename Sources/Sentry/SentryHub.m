@@ -290,7 +290,7 @@ SentryHub ()
     return SentryId.empty;
 }
 
-- (id<SentrySpan>)startTransactionWithName:(NSString *)name operation:(NSString *)operation
+- (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name operation:(NSString *)operation
 {
     return [self startTransactionWithContext:[[BuzzSentryTransactionContext alloc]
                                                  initWithName:name
@@ -298,7 +298,7 @@ SentryHub ()
                                                     operation:operation]];
 }
 
-- (id<SentrySpan>)startTransactionWithName:(NSString *)name
+- (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name
                                 nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
 {
@@ -308,7 +308,7 @@ SentryHub ()
                                                                          operation:operation]];
 }
 
-- (id<SentrySpan>)startTransactionWithName:(NSString *)name
+- (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope
 {
@@ -319,7 +319,7 @@ SentryHub ()
                                  bindToScope:bindToScope];
 }
 
-- (id<SentrySpan>)startTransactionWithName:(NSString *)name
+- (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name
                                 nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope
@@ -331,12 +331,12 @@ SentryHub ()
                               bindToScope:bindToScope];
 }
 
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
 {
     return [self startTransactionWithContext:transactionContext customSamplingContext:@{}];
 }
 
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
 {
     return [self startTransactionWithContext:transactionContext
@@ -344,7 +344,7 @@ SentryHub ()
                        customSamplingContext:@{}];
 }
 
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
 {
     return [self startTransactionWithContext:transactionContext
@@ -352,7 +352,7 @@ SentryHub ()
                        customSamplingContext:customSamplingContext];
 }
 
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
 {
@@ -362,7 +362,7 @@ SentryHub ()
                        customSamplingContext:customSamplingContext];
 }
 
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
                               waitForChildren:(BOOL)waitForChildren
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
@@ -378,7 +378,7 @@ SentryHub ()
     SentryProfilesSamplerDecision *profilesSamplerDecision =
         [_profilesSampler sample:samplingContext tracesSamplerDecision:samplerDecision];
 
-    id<SentrySpan> tracer = [[BuzzSentryTracer alloc] initWithTransactionContext:transactionContext
+    id<BuzzSentrySpan> tracer = [[BuzzSentryTracer alloc] initWithTransactionContext:transactionContext
                                                                          hub:self
                                                      profilesSamplerDecision:profilesSamplerDecision
                                                              waitForChildren:waitForChildren];

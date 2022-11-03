@@ -1,5 +1,5 @@
 #import "SentryHub.h"
-#import "SentrySpan.h"
+#import "BuzzSentrySpan.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext.h"
 #import <XCTest/XCTest.h>
@@ -16,7 +16,7 @@
  */
 - (void)testSpanFinishesAfterTracerReleased_NoCrash_TracerIsNil
 {
-    SentrySpan *child;
+    BuzzSentrySpan *child;
     // To make sure the tracer is deallocated.
     @autoreleasepool {
         SentryHub *hub = [[SentryHub alloc] initWithClient:nil andScope:nil];

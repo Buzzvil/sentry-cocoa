@@ -1,6 +1,6 @@
 #import "SentryDefines.h"
 #import "SentryIntegrationProtocol.h"
-#import "SentrySpanProtocol.h"
+#import "BuzzSentrySpanProtocol.h"
 
 @class SentryEvent, BuzzSentryClient, SentryScope, SentrySession, SentryUser, SentryBreadcrumb,
     SentryId, SentryUserFeedback, SentryEnvelope, BuzzSentryTransactionContext;
@@ -66,7 +66,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithName:(NSString *)name
+- (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name
                                  operation:(NSString *)operation
     NS_SWIFT_NAME(startTransaction(name:operation:));
 
@@ -79,7 +79,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithName:(NSString *)name
+- (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope
     NS_SWIFT_NAME(startTransaction(name:operation:bindToScope:));
@@ -91,7 +91,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
     NS_SWIFT_NAME(startTransaction(transactionContext:));
 
 /**
@@ -102,7 +102,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
     NS_SWIFT_NAME(startTransaction(transactionContext:bindToScope:));
 
@@ -115,7 +115,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                                   bindToScope:(BOOL)bindToScope
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
     NS_SWIFT_NAME(startTransaction(transactionContext:bindToScope:customSamplingContext:));
@@ -128,7 +128,7 @@ SENTRY_NO_INIT
  *
  * @return The created transaction.
  */
-- (id<SentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
+- (id<BuzzSentrySpan>)startTransactionWithContext:(BuzzSentryTransactionContext *)transactionContext
                         customSamplingContext:(NSDictionary<NSString *, id> *)customSamplingContext
     NS_SWIFT_NAME(startTransaction(transactionContext:customSamplingContext:));
 

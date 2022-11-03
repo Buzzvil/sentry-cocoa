@@ -9,13 +9,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 BuzzSentryTransaction ()
 
-@property (nonatomic, strong) NSArray<id<SentrySpan>> *spans;
+@property (nonatomic, strong) NSArray<id<BuzzSentrySpan>> *spans;
 
 @end
 
 @implementation BuzzSentryTransaction
 
-- (instancetype)initWithTrace:(BuzzSentryTracer *)trace children:(NSArray<id<SentrySpan>> *)children
+- (instancetype)initWithTrace:(BuzzSentryTracer *)trace children:(NSArray<id<BuzzSentrySpan>> *)children
 {
     if (self = [super init]) {
         self.timestamp = trace.timestamp;
@@ -33,7 +33,7 @@ BuzzSentryTransaction ()
         [[NSMutableDictionary alloc] initWithDictionary:[super serialize]];
 
     NSMutableArray *serializedSpans = [[NSMutableArray alloc] init];
-    for (id<SentrySpan> span in self.spans) {
+    for (id<BuzzSentrySpan> span in self.spans) {
         [serializedSpans addObject:[span serialize]];
     }
     serializedData[@"spans"] = serializedSpans;

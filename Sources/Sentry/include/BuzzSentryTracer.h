@@ -1,4 +1,4 @@
-#import "SentrySpanProtocol.h"
+#import "BuzzSentrySpanProtocol.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -14,18 +14,18 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
  * Return the active span of given tracer.
  * This function is used to determine which span will be used to create a new child.
  */
-- (nullable id<SentrySpan>)activeSpanForTracer:(BuzzSentryTracer *)tracer;
+- (nullable id<BuzzSentrySpan>)activeSpanForTracer:(BuzzSentryTracer *)tracer;
 
 @end
 
-@interface BuzzSentryTracer : NSObject <SentrySpan>
+@interface BuzzSentryTracer : NSObject <BuzzSentrySpan>
 
 @property (nonatomic, strong) BuzzSentryTransactionContext *transactionContext;
 
 /**
  * The context information of the span.
  */
-@property (nonatomic, readonly) SentrySpanContext *context;
+@property (nonatomic, readonly) BuzzSentrySpanContext *context;
 
 /**
  * The timestamp of which the span ended.
@@ -59,12 +59,12 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
 /*
  The root span of this tracer.
  */
-@property (nonatomic, readonly) id<SentrySpan> rootSpan;
+@property (nonatomic, readonly) id<BuzzSentrySpan> rootSpan;
 
 /*
  All the spans that where created with this tracer but rootSpan.
  */
-@property (nonatomic, readonly) NSArray<id<SentrySpan>> *children;
+@property (nonatomic, readonly) NSArray<id<BuzzSentrySpan>> *children;
 
 /*
  * A delegate that provides extra information for the transaction.
@@ -133,7 +133,7 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
                                idleTimeout:(NSTimeInterval)idleTimeout
                       dispatchQueueWrapper:(SentryDispatchQueueWrapper *)dispatchQueueWrapper;
 
-- (id<SentrySpan>)startChildWithParentId:(SentrySpanId *)parentId
+- (id<BuzzSentrySpan>)startChildWithParentId:(BuzzSentrySpanId *)parentId
                                operation:(NSString *)operation
                              description:(nullable NSString *)description
     NS_SWIFT_NAME(startChild(parentId:operation:description:));
@@ -141,12 +141,12 @@ static NSTimeInterval const BuzzSentryTracerDefaultTimeout = 3.0;
 /**
  * A method to inform the tracer that a span finished.
  */
-- (void)spanFinished:(id<SentrySpan>)finishedSpan;
+- (void)spanFinished:(id<BuzzSentrySpan>)finishedSpan;
 
 /**
  * Get the tracer from a span.
  */
-+ (nullable BuzzSentryTracer *)getTracer:(id<SentrySpan>)span;
++ (nullable BuzzSentryTracer *)getTracer:(id<BuzzSentrySpan>)span;
 
 - (void)dispatchIdleTimeout;
 

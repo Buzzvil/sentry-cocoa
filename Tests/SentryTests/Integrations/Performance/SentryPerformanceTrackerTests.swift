@@ -270,7 +270,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
     func testActiveStackReturnNilChildSpan() {
         let sut = fixture.getSut()
         let activeSpans = Dynamic(sut).activeSpanStack as NSMutableArray?
-        activeSpans?.add(TestSentrySpan())
+        activeSpans?.add(TestBuzzSentrySpan())
                 
         let spanId = sut.startSpan(withName: fixture.someTransaction, operation: fixture.someOperation)
         

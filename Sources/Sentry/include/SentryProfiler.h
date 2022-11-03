@@ -1,6 +1,6 @@
 #import "SentryCompiler.h"
 #import "SentryProfilingConditionals.h"
-#import "SentrySpan.h"
+#import "BuzzSentrySpan.h"
 #import <Foundation/Foundation.h>
 
 #if SENTRY_HAS_UIKIT
@@ -10,7 +10,7 @@
 @class SentryProfilesSamplerDecision;
 @class SentryScreenFrames;
 @class SentryEnvelope;
-@class SentrySpanId;
+@class BuzzSentrySpanId;
 @class BuzzSentryTransaction;
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
@@ -50,13 +50,13 @@ SENTRY_EXTERN_C_END
  * Start the profiler, if it isn't already running, for the span with the provided ID. If it's
  * already running, it will track the new span as well.
  */
-+ (void)startForSpanID:(SentrySpanId *)spanID hub:(SentryHub *)hub;
++ (void)startForSpanID:(BuzzSentrySpanId *)spanID hub:(SentryHub *)hub;
 
 /**
  * Report that a span ended to the profiler so it can update bookkeeping and if it was the last
  * concurrent span being profiled, stops the profiler.
  */
-+ (void)stopProfilingSpan:(id<SentrySpan>)span;
++ (void)stopProfilingSpan:(id<BuzzSentrySpan>)span;
 
 /**
  * Certain transactions may be dropped by the SDK at the time they are ended, when we've already

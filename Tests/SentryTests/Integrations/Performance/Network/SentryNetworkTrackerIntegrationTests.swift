@@ -192,7 +192,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         dataTask.resume()
         wait(for: [expect], timeout: 5)
         
-        let children = Dynamic(transaction).children as [SentrySpan]?
+        let children = Dynamic(transaction).children as [BuzzSentrySpan]?
         
         XCTAssertEqual(children?.count, 1) //Span was created in task resume swizzle.
         let networkSpan = children![0]

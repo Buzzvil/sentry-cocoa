@@ -1,11 +1,11 @@
-#import "SentrySpan.h"
+#import "BuzzSentrySpan.h"
 #import "NSDate+SentryExtras.h"
 #import "NSDictionary+SentrySanitize.h"
 #import "SentryCurrentDate.h"
 #import "SentryLog.h"
 #import "BuzzSentryMeasurementValue.h"
 #import "SentryNoOpSpan.h"
-#import "SentrySpanId.h"
+#import "BuzzSentrySpanId.h"
 #import "SentryTime.h"
 #import "BuzzSentryTraceHeader.h"
 #import "BuzzSentryTracer.h"
@@ -13,20 +13,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentrySpan ()
+BuzzSentrySpan ()
 @end
 
-@implementation SentrySpan {
+@implementation BuzzSentrySpan {
     NSMutableDictionary<NSString *, id> *_data;
     NSMutableDictionary<NSString *, id> *_tags;
     BOOL _isFinished;
 }
 
-- (instancetype)initWithTracer:(BuzzSentryTracer *)tracer context:(SentrySpanContext *)context
+- (instancetype)initWithTracer:(BuzzSentryTracer *)tracer context:(BuzzSentrySpanContext *)context
 {
     if (self = [super init]) {
         SENTRY_LOG_DEBUG(
-            @"Starting span %@ with tracer %@", context.spanId.sentrySpanIdString, tracer);
+            @"Starting span %@ with tracer %@", context.spanId.BuzzSentrySpanIdString, tracer);
         _tracer = tracer;
         _context = context;
         self.startTimestamp = [SentryCurrentDate date];
@@ -37,12 +37,12 @@ SentrySpan ()
     return self;
 }
 
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
 {
     return [self startChildWithOperation:operation description:nil];
 }
 
-- (id<SentrySpan>)startChildWithOperation:(NSString *)operation
+- (id<BuzzSentrySpan>)startChildWithOperation:(NSString *)operation
                               description:(nullable NSString *)description
 {
     if (self.tracer == nil) {

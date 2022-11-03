@@ -1,16 +1,16 @@
 #import "SentryDefines.h"
 #import "SentrySerializable.h"
-#import "SentrySpanContext.h"
-#import "SentrySpanProtocol.h"
+#import "BuzzSentrySpanContext.h"
+#import "BuzzSentrySpanProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryNoOpSpan : NSObject <SentrySpan, SentrySerializable>
+@interface SentryNoOpSpan : NSObject <BuzzSentrySpan, SentrySerializable>
 SENTRY_NO_INIT
 
 + (instancetype)shared;
 
-@property (nonatomic, readonly) SentrySpanContext *context;
+@property (nonatomic, readonly) BuzzSentrySpanContext *context;
 @property (nullable, nonatomic, strong) NSDate *timestamp;
 @property (nullable, nonatomic, strong) NSDate *startTimestamp;
 @property (readonly) BOOL isFinished;

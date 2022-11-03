@@ -1,6 +1,6 @@
 #import "BuzzSentryTraceHeader.h"
 #import "SentryId.h"
-#import "SentrySpanId.h"
+#import "BuzzSentrySpanId.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize sampled = _sampled;
 
 - (instancetype)initWithTraceId:(SentryId *)traceId
-                         spanId:(SentrySpanId *)spanId
+                         spanId:(BuzzSentrySpanId *)spanId
                         sampled:(BuzzSentrySampleDecision)sampleDecision
 {
     if (self = [super init]) {
@@ -26,8 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 {
     return _sampled != kBuzzSentrySampleDecisionUndecided
         ? [NSString stringWithFormat:@"%@-%@-%i", _traceId.sentryIdString,
-                    _spanId.sentrySpanIdString, _sampled == kBuzzSentrySampleDecisionYes ? 1 : 0]
-        : [NSString stringWithFormat:@"%@-%@", _traceId.sentryIdString, _spanId.sentrySpanIdString];
+                    _spanId.BuzzSentrySpanIdString, _sampled == kBuzzSentrySampleDecisionYes ? 1 : 0]
+        : [NSString stringWithFormat:@"%@-%@", _traceId.sentryIdString, _spanId.BuzzSentrySpanIdString];
 }
 
 @end

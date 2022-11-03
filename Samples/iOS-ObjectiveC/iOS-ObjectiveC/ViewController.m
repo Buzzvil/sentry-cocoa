@@ -111,7 +111,7 @@ ViewController ()
 
 - (IBAction)captureTransaction:(id)sender
 {
-    __block id<SentrySpan> fakeTransaction = [SentrySDK startTransactionWithName:@"Some Transaction"
+    __block id<BuzzSentrySpan> fakeTransaction = [SentrySDK startTransactionWithName:@"Some Transaction"
                                                                        operation:@"some operation"];
 
     dispatch_after(

@@ -1,19 +1,19 @@
-#import "SentrySpanId.h"
+#import "BuzzSentrySpanId.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *const emptyUUIDString = @"0000000000000000";
 
 @interface
-SentrySpanId ()
+BuzzSentrySpanId ()
 
 @property (nonatomic, strong) NSString *value;
 
 @end
 
-@implementation SentrySpanId
+@implementation BuzzSentrySpanId
 
-static SentrySpanId *_empty = nil;
+static BuzzSentrySpanId *_empty = nil;
 
 - (instancetype)init
 {
@@ -31,7 +31,7 @@ static SentrySpanId *_empty = nil;
 {
     if (self = [super init]) {
         if (value.length != 16)
-            return [SentrySpanId empty];
+            return [BuzzSentrySpanId empty];
         value = value.lowercaseString;
 
         self.value = value;
@@ -40,14 +40,14 @@ static SentrySpanId *_empty = nil;
     return self;
 }
 
-- (NSString *)sentrySpanIdString;
+- (NSString *)BuzzSentrySpanIdString;
 {
     return self.value;
 }
 
 - (NSString *)description
 {
-    return [self sentrySpanIdString];
+    return [self BuzzSentrySpanIdString];
 }
 
 - (BOOL)isEqual:(id _Nullable)object
@@ -59,7 +59,7 @@ static SentrySpanId *_empty = nil;
         return NO;
     }
 
-    SentrySpanId *otherSentryID = (SentrySpanId *)object;
+    BuzzSentrySpanId *otherSentryID = (BuzzSentrySpanId *)object;
 
     return [self.value isEqual:otherSentryID.value];
 }
@@ -69,17 +69,17 @@ static SentrySpanId *_empty = nil;
     return [self.value hash];
 }
 
-+ (SentrySpanId *)empty
++ (BuzzSentrySpanId *)empty
 {
     if (nil == _empty) {
-        _empty = [[SentrySpanId alloc] initWithValue:emptyUUIDString];
+        _empty = [[BuzzSentrySpanId alloc] initWithValue:emptyUUIDString];
     }
     return _empty;
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
-    return [[SentrySpanId alloc] initWithValue:self.value];
+    return [[BuzzSentrySpanId alloc] initWithValue:self.value];
 }
 
 @end

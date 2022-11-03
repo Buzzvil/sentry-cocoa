@@ -1,7 +1,7 @@
 #import "SentryNSDataTracker.h"
 #import "BuzzSentryOptions.h"
 #import "SentrySDK.h"
-#import "SentrySpan.h"
+#import "BuzzSentrySpan.h"
 #import "SentrySwizzle.h"
 #import "BuzzSentryTracer.h"
 #import <XCTest/XCTest.h>
@@ -206,7 +206,7 @@
 
     block();
 
-    SentrySpan *ioSpan = parentTransaction.children.firstObject;
+    BuzzSentrySpan *ioSpan = parentTransaction.children.firstObject;
 
     XCTAssertEqual(parentTransaction.children.count, 1);
     XCTAssertEqual([ioSpan.data[@"file.size"] unsignedIntValue], someData.length);

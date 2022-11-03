@@ -310,7 +310,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 - (nullable BuzzSentryTraceContext *)getTraceStateWithEvent:(SentryEvent *)event
                                               withScope:(SentryScope *)scope
 {
-    id<SentrySpan> span;
+    id<BuzzSentrySpan> span;
     if ([event isKindOfClass:[BuzzSentryTransaction class]]) {
         span = [(BuzzSentryTransaction *)event trace];
     } else {

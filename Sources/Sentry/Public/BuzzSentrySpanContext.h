@@ -5,10 +5,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentryId, SentrySpanId;
+@class SentryId, BuzzSentrySpanId;
 
 NS_SWIFT_NAME(SpanContext)
-@interface SentrySpanContext : NSObject <SentrySerializable>
+@interface BuzzSentrySpanContext : NSObject <SentrySerializable>
 SENTRY_NO_INIT
 
 /**
@@ -19,12 +19,12 @@ SENTRY_NO_INIT
 /**
  * Span id.
  */
-@property (nonatomic, readonly) SentrySpanId *spanId;
+@property (nonatomic, readonly) BuzzSentrySpanId *spanId;
 
 /**
  * Id of a parent span.
  */
-@property (nullable, nonatomic, readonly) SentrySpanId *parentSpanId;
+@property (nullable, nonatomic, readonly) BuzzSentrySpanId *parentSpanId;
 
 /**
  * If trace is sampled.
@@ -85,8 +85,8 @@ SENTRY_NO_INIT
  * @return SentryContext
  */
 - (instancetype)initWithTraceId:(SentryId *)traceId
-                         spanId:(SentrySpanId *)spanId
-                       parentId:(nullable SentrySpanId *)parentId
+                         spanId:(BuzzSentrySpanId *)spanId
+                       parentId:(nullable BuzzSentrySpanId *)parentId
                       operation:(NSString *)operation
                         sampled:(BuzzSentrySampleDecision)sampled;
 

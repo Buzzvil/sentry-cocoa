@@ -3,7 +3,7 @@
 @interface
 SentryPerformanceTracker (Private)
 
-- (SentrySpanId *)startSpanWithName:(NSString *)name
+- (BuzzSentrySpanId *)startSpanWithName:(NSString *)name
                          nameSource:(BuzzSentryTransactionNameSource)source
                           operation:(NSString *)operation;
 
@@ -15,7 +15,7 @@ SentryPerformanceTracker (Private)
 - (void)measureSpanWithDescription:(NSString *)description
                         nameSource:(BuzzSentryTransactionNameSource)source
                          operation:(NSString *)operation
-                      parentSpanId:(SentrySpanId *)parentSpanId
+                      parentSpanId:(BuzzSentrySpanId *)parentSpanId
                            inBlock:(void (^)(void))block;
 
 @end

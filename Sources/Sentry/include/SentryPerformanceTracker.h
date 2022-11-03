@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SentrySpanId;
+@class BuzzSentrySpanId;
 
 /**
  * Tracks performance synchronizing span with its childs.
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return The span id.
  */
-- (SentrySpanId *)startSpanWithName:(NSString *)name operation:(NSString *)operation;
+- (BuzzSentrySpanId *)startSpanWithName:(NSString *)name operation:(NSString *)operation;
 
 /**
  * Activate the span with `spanId`
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param spanId Id of the span to activate
  * @param block Block to invoke while span is active
  */
-- (void)activateSpan:(SentrySpanId *)spanId duringBlock:(void (^)(void))block;
+- (void)activateSpan:(BuzzSentrySpanId *)spanId duringBlock:(void (^)(void))block;
 
 /**
  * Measure the given block execution.
@@ -64,13 +64,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)measureSpanWithDescription:(NSString *)description
                          operation:(NSString *)operation
-                      parentSpanId:(SentrySpanId *)parentSpanId
+                      parentSpanId:(BuzzSentrySpanId *)parentSpanId
                            inBlock:(void (^)(void))block;
 
 /**
  * Gets the active span id.
  */
-- (nullable SentrySpanId *)activeSpanId;
+- (nullable BuzzSentrySpanId *)activeSpanId;
 
 /**
  * Marks a span to be finished.
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param spanId Id of the span to finish.
  */
-- (void)finishSpan:(SentrySpanId *)spanId;
+- (void)finishSpan:(BuzzSentrySpanId *)spanId;
 
 /**
  * Marks a span to be finished with given status.
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param spanId Id of the span to finish.
  * @param status Span finish status.
  */
-- (void)finishSpan:(SentrySpanId *)spanId withStatus:(BuzzSentrySpanStatus)status;
+- (void)finishSpan:(BuzzSentrySpanId *)spanId withStatus:(BuzzSentrySpanStatus)status;
 
 /**
  * Checks if given span is waiting to be finished.
@@ -98,16 +98,16 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return A boolean value indicating whether the span still waiting to be finished.
  */
-- (BOOL)isSpanAlive:(SentrySpanId *)spanId;
+- (BOOL)isSpanAlive:(BuzzSentrySpanId *)spanId;
 
 /**
- * Return the SentrySpan associated with the given spanId.
+ * Return the BuzzSentrySpan associated with the given spanId.
  *
  * @param spanId Id of the span to return.
  *
- * @return SentrySpan
+ * @return BuzzSentrySpan
  */
-- (nullable id<SentrySpan>)getSpan:(SentrySpanId *)spanId;
+- (nullable id<BuzzSentrySpan>)getSpan:(BuzzSentrySpanId *)spanId;
 
 @end
 

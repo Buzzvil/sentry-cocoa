@@ -39,11 +39,11 @@ SentrySDK (Private)
 /**
  * Start a transaction with a name and a name source.
  */
-+ (id<SentrySpan>)startTransactionWithName:(NSString *)name
++ (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name
                                 nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation;
 
-+ (id<SentrySpan>)startTransactionWithName:(NSString *)name
++ (id<BuzzSentrySpan>)startTransactionWithName:(NSString *)name
                                 nameSource:(BuzzSentryTransactionNameSource)source
                                  operation:(NSString *)operation
                                bindToScope:(BOOL)bindToScope;

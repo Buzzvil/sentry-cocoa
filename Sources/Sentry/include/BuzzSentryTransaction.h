@@ -1,5 +1,5 @@
 #import "SentryEvent.h"
-#import "SentrySpanProtocol.h"
+#import "BuzzSentrySpanProtocol.h"
 #import "BuzzSentryTracer.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -12,7 +12,7 @@ SENTRY_NO_INIT
 
 @property (nonatomic, strong) BuzzSentryTracer *trace;
 
-- (instancetype)initWithTrace:(BuzzSentryTracer *)trace children:(NSArray<id<SentrySpan>> *)children;
+- (instancetype)initWithTrace:(BuzzSentryTracer *)trace children:(NSArray<id<BuzzSentrySpan>> *)children;
 
 @end
 

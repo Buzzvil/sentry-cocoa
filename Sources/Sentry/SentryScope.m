@@ -8,7 +8,7 @@
 #import "SentryLog.h"
 #import "SentryScopeObserver.h"
 #import "SentrySession.h"
-#import "SentrySpan.h"
+#import "BuzzSentrySpan.h"
 #import "BuzzSentryTracer.h"
 #import "BuzzSentryTransactionContext.h"
 #import "SentryUser.h"
@@ -138,14 +138,14 @@ SentryScope ()
     }
 }
 
-- (void)setSpan:(nullable id<SentrySpan>)span
+- (void)setSpan:(nullable id<BuzzSentrySpan>)span
 {
     @synchronized(_spanLock) {
         _span = span;
     }
 }
 
-- (void)useSpan:(SentrySpanCallback)callback
+- (void)useSpan:(BuzzSentrySpanCallback)callback
 {
     @synchronized(_spanLock) {
         callback(_span);
@@ -523,7 +523,7 @@ SentryScope ()
     }
 
     if (self.span != nil) {
-        id<SentrySpan> span;
+        id<BuzzSentrySpan> span;
         @synchronized(_spanLock) {
             span = self.span;
         }

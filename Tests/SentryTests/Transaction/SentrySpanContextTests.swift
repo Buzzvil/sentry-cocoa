@@ -1,6 +1,6 @@
 import XCTest
 
-class SentrySpanContextTests: XCTestCase {
+class BuzzSentrySpanContextTests: XCTestCase {
     let someOperation = "Some Operation"
     
     func testInit() {
@@ -11,7 +11,7 @@ class SentrySpanContextTests: XCTestCase {
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
         XCTAssertEqual(spanContext.traceId.sentryIdString.count, 32)
-        XCTAssertEqual(spanContext.spanId.sentrySpanIdString.count, 16)
+        XCTAssertEqual(spanContext.spanId.BuzzSentrySpanIdString.count, 16)
     }
     
     func testInitWithSampled() {
@@ -22,7 +22,7 @@ class SentrySpanContextTests: XCTestCase {
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
         XCTAssertEqual(spanContext.traceId.sentryIdString.count, 32)
-        XCTAssertEqual(spanContext.spanId.sentrySpanIdString.count, 16)
+        XCTAssertEqual(spanContext.spanId.BuzzSentrySpanIdString.count, 16)
     }
     
     func testInitWithTraceIdSpanIdParentIdSampled() {
@@ -52,13 +52,13 @@ class SentrySpanContextTests: XCTestCase {
         
         let data = spanContext.serialize()
         
-        XCTAssertEqual(data["span_id"] as? String, spanId.sentrySpanIdString)
+        XCTAssertEqual(data["span_id"] as? String, spanId.BuzzSentrySpanIdString)
         XCTAssertEqual(data["trace_id"] as? String, id.sentryIdString)
         XCTAssertEqual(data["type"] as? String, SpanContext.type)
         XCTAssertEqual(data["op"] as? String, someOperation)
         XCTAssertEqual(data["description"] as? String, spanContext.spanDescription)
         XCTAssertEqual(data["sampled"] as? String, "true")
-        XCTAssertEqual(data["parent_span_id"] as? String, parentId.sentrySpanIdString)
+        XCTAssertEqual(data["parent_span_id"] as? String, parentId.BuzzSentrySpanIdString)
         XCTAssertEqual(data["status"] as? String, "ok")
     }
     
@@ -136,7 +136,7 @@ class SentrySpanContextTests: XCTestCase {
     @available(OSX 10.12, *)
     @available(iOS 10.0, *)
     func testModifyingTagsFromMultipleThreads() {
-        let queue = DispatchQueue(label: "SentrySpanTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentrySpanTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
         
         let tagValue = "tag_value"

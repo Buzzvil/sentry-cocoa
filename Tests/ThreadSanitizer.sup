@@ -22,4 +22,4 @@ race:enableNetworkBreadcrumbs
 race:disable
 race:URLSessionDataTaskMock
 race:getOriginalImplementation
-race:SentrySpanContext
+race:BuzzSentrySpanContext
