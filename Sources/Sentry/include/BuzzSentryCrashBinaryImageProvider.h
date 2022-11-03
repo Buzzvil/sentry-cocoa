@@ -6,7 +6,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
   A wrapper around SentryCrash for testability.
  */
-@protocol SentryCrashBinaryImageProvider <NSObject>
+@protocol BuzzSentryCrashBinaryImageProvider <NSObject>
 
 - (NSInteger)getImageCount;
 

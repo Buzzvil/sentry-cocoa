@@ -1,7 +1,7 @@
 import Foundation
 
 @objc
-public class TestSentryCrashBinaryImageProvider: NSObject, SentryCrashBinaryImageProvider {
+public class TestBuzzSentryCrashBinaryImageProvider: NSObject, BuzzSentryCrashBinaryImageProvider {
     
     var binaryImage: [SentryCrashBinaryImage] = []
     public func getBinaryImage(_ index: Int) -> SentryCrashBinaryImage {

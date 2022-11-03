@@ -5,11 +5,11 @@ import XCTest
  * We still want to test it like this because you have to mess up the code in two
  * different places to break it.
  */
-class SentryCrashDefaultBinaryImageProviderTests: XCTestCase {
+class BuzzSentryCrashDefaultBinaryImageProviderTests: XCTestCase {
     
     private class Fixture {
-        func getSut() -> SentryCrashDefaultBinaryImageProvider {
-            SentryCrashDefaultBinaryImageProvider()
+        func getSut() -> BuzzSentryCrashDefaultBinaryImageProvider {
+            BuzzSentryCrashDefaultBinaryImageProvider()
         }
     }
 

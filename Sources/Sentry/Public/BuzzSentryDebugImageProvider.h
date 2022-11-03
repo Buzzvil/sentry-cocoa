@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Reserved for hybrid SDKs that the debug image list for symbolication.
  */
-@interface SentryDebugImageProvider : NSObject
+@interface BuzzSentryDebugImageProvider : NSObject
 
 - (instancetype)init;
 

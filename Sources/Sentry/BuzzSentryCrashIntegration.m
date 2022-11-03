@@ -1,5 +1,5 @@
 #import "BuzzSentryCrashIntegration.h"
-#import "SentryCrashInstallationReporter.h"
+#import "BuzzSentryCrashInstallationReporter.h"
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDispatchQueueWrapper.h"
 #import "BuzzSentryEvent.h"
@@ -22,7 +22,7 @@
 #endif
 
 static dispatch_once_t installationToken = 0;
-static SentryCrashInstallationReporter *installation = nil;
+static BuzzSentryCrashInstallationReporter *installation = nil;
 
 static NSString *const DEVICE_KEY = @"device";
 static NSString *const LOCALE_KEY = @"locale";
@@ -106,7 +106,7 @@ BuzzSentryCrashIntegration ()
                 [[BuzzSentryInAppLogic alloc] initWithInAppIncludes:self.options.inAppIncludes
                                                   inAppExcludes:self.options.inAppExcludes];
 
-            installation = [[SentryCrashInstallationReporter alloc]
+            installation = [[BuzzSentryCrashInstallationReporter alloc]
                 initWithInAppLogic:inAppLogic
                       crashWrapper:self.crashAdapter
                      dispatchQueue:self.dispatchQueueWrapper];
@@ -119,7 +119,7 @@ BuzzSentryCrashIntegration ()
         // We need to send the crashed event together with the crashed session in the same envelope
         // to have proper statistics in release health. To achieve this we need both synchronously
         // in the hub. The crashed event is converted from a SentryCrashReport to an event in
-        // SentryCrashReportSink and then passed to the SDK on a background thread. This process is
+        // BuzzSentryCrashReportSink and then passed to the SDK on a background thread. This process is
         // started with installing this integration. We need to end and delete the previous session
         // before being able to start a new session for the AutoSessionTrackingIntegration. The
         // BuzzSentryCrashIntegration is installed before the AutoSessionTrackingIntegration so there is

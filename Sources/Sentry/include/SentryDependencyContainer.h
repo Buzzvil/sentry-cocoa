@@ -3,7 +3,7 @@
 #import "BuzzSentryRandom.h"
 
 @class SentryAppStateManager, BuzzSentryCrashWrapper, SentryThreadWrapper, SentrySwizzleWrapper,
-    BuzzSentryDispatchQueueWrapper, SentryDebugImageProvider, BuzzSentryANRTracker,
+    BuzzSentryDispatchQueueWrapper, BuzzSentryDebugImageProvider, BuzzSentryANRTracker,
     SentryNSNotificationCenterWrapper;
 
 #if SENTRY_HAS_UIKIT
@@ -30,7 +30,7 @@ SENTRY_NO_INIT
 @property (nonatomic, strong) SentrySwizzleWrapper *swizzleWrapper;
 @property (nonatomic, strong) BuzzSentryDispatchQueueWrapper *dispatchQueueWrapper;
 @property (nonatomic, strong) SentryNSNotificationCenterWrapper *notificationCenterWrapper;
-@property (nonatomic, strong) SentryDebugImageProvider *debugImageProvider;
+@property (nonatomic, strong) BuzzSentryDebugImageProvider *debugImageProvider;
 @property (nonatomic, strong) BuzzSentryANRTracker *anrTracker;
 
 #if SENTRY_HAS_UIKIT

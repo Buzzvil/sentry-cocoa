@@ -5,7 +5,7 @@
 #import <SentryAppStateManager.h>
 #import <BuzzSentryClient+Private.h>
 #import <BuzzSentryCrashWrapper.h>
-#import <SentryDebugImageProvider.h>
+#import <BuzzSentryDebugImageProvider.h>
 #import <SentryDefaultCurrentDateProvider.h>
 #import <SentryDependencyContainer.h>
 #import <BuzzSentryDispatchQueueWrapper.h>
@@ -180,12 +180,12 @@ static NSObject *sentryDependencyContainerLock;
     return _swizzleWrapper;
 }
 
-- (SentryDebugImageProvider *)debugImageProvider
+- (BuzzSentryDebugImageProvider *)debugImageProvider
 {
     if (_debugImageProvider == nil) {
         @synchronized(sentryDependencyContainerLock) {
             if (_debugImageProvider == nil) {
-                _debugImageProvider = [[SentryDebugImageProvider alloc] init];
+                _debugImageProvider = [[BuzzSentryDebugImageProvider alloc] init];
             }
         }
     }

@@ -12,7 +12,7 @@ class BuzzSentryClientTest: XCTestCase {
         let transport: TestTransport
         let transportAdapter: TestTransportAdapter
         
-        let debugImageBuilder = SentryDebugImageProvider()
+        let debugImageBuilder = BuzzSentryDebugImageProvider()
         let threadInspector = TestThreadInspector.instance
         
         let session: BuzzSentrySession

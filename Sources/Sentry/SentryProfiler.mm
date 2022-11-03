@@ -5,7 +5,7 @@
 #    import "SentryBacktrace.hpp"
 #    import "BuzzSentryClient+Private.h"
 #    import "SentryCurrentDate.h"
-#    import "SentryDebugImageProvider.h"
+#    import "BuzzSentryDebugImageProvider.h"
 #    import "BuzzSentryDebugMeta.h"
 #    import "SentryDefines.h"
 #    import "SentryDependencyContainer.h"
@@ -87,7 +87,7 @@ profilerTruncationReasonName(SentryProfilerTruncationReason reason)
     uint64_t _endTimestamp;
     NSDate *_endDate;
     std::shared_ptr<SamplingProfiler> _profiler;
-    SentryDebugImageProvider *_debugImageProvider;
+    BuzzSentryDebugImageProvider *_debugImageProvider;
     thread::TIDType _mainThreadID;
 
     NSMutableArray<BuzzSentrySpanId *> *_spansInFlight;

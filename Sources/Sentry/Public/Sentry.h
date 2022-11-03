@@ -12,7 +12,7 @@ FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient.h"
 #import "SentryCrashExceptionApplication.h"
-#import "SentryDebugImageProvider.h"
+#import "BuzzSentryDebugImageProvider.h"
 #import "BuzzSentryDebugMeta.h"
 #import "SentryDefines.h"
 #import "BuzzSentryDsn.h"

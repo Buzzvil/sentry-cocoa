@@ -1,5 +1,4 @@
 #import "SentryCrash.h"
-#import "SentryCrashInstallation.h"
 #import "SentryDefines.h"
 #import <Foundation/Foundation.h>
 
@@ -7,14 +6,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SentryCrashInstallationReporter : SentryCrashInstallation
+@interface BuzzSentryCrashReportSink : NSObject <SentryCrashReportFilter>
 SENTRY_NO_INIT
 
 - (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic
                       crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
                      dispatchQueue:(BuzzSentryDispatchQueueWrapper *)dispatchQueue;
-
-- (void)sendAllReports;
 
 @end
 

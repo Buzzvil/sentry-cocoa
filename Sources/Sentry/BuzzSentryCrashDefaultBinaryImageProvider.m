@@ -1,9 +1,9 @@
-#import "SentryCrashDefaultBinaryImageProvider.h"
-#import "SentryCrashBinaryImageProvider.h"
+#import "BuzzSentryCrashDefaultBinaryImageProvider.h"
+#import "BuzzSentryCrashBinaryImageProvider.h"
 #import "SentryCrashDynamicLinker.h"
 #import <Foundation/Foundation.h>
 
-@implementation SentryCrashDefaultBinaryImageProvider
+@implementation BuzzSentryCrashDefaultBinaryImageProvider
 
 - (NSInteger)getImageCount
 {

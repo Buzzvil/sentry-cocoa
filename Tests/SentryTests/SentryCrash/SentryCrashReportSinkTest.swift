@@ -1,13 +1,13 @@
 import XCTest
 
-class SentryCrashReportSinkTests: BuzzSentrySDKIntegrationTestsBase {
+class BuzzSentryCrashReportSinkTests: BuzzSentrySDKIntegrationTestsBase {
     
     private class Fixture {
         let crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
         let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         
-        var sut: SentryCrashReportSink {
-            return SentryCrashReportSink(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: crashWrapper, dispatchQueue: dispatchQueue)
+        var sut: BuzzSentryCrashReportSink {
+            return BuzzSentryCrashReportSink(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: crashWrapper, dispatchQueue: dispatchQueue)
         }
     }
     

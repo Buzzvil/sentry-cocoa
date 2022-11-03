@@ -7,7 +7,7 @@
 #import "BuzzSentryCrashIntegration.h"
 #import "BuzzSentryCrashStackEntryMapper.h"
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryDebugImageProvider.h"
+#import "BuzzSentryDebugImageProvider.h"
 #import "SentryDefaultCurrentDateProvider.h"
 #import "SentryDependencyContainer.h"
 #import "BuzzSentryDsn.h"
@@ -57,7 +57,7 @@ BuzzSentryClient ()
 
 @property (nonatomic, strong) BuzzSentryTransportAdapter *transportAdapter;
 @property (nonatomic, strong) SentryFileManager *fileManager;
-@property (nonatomic, strong) SentryDebugImageProvider *debugImageProvider;
+@property (nonatomic, strong) BuzzSentryDebugImageProvider *debugImageProvider;
 @property (nonatomic, strong) BuzzSentryThreadInspector *threadInspector;
 @property (nonatomic, strong) id<BuzzSentryRandom> random;
 @property (nonatomic, strong)

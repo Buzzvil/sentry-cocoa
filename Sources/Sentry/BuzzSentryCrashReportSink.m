@@ -1,4 +1,4 @@
-#import "SentryCrashReportSink.h"
+#import "BuzzSentryCrashReportSink.h"
 #import "BuzzSentryAttachment.h"
 #import "BuzzSentryClient.h"
 #import "SentryCrash.h"
@@ -20,7 +20,7 @@ static const NSTimeInterval SENTRY_APP_START_CRASH_DURATION_THRESHOLD = 2.0;
 static const NSTimeInterval SENTRY_APP_START_CRASH_FLUSH_DURATION = 5.0;
 
 @interface
-SentryCrashReportSink ()
+BuzzSentryCrashReportSink ()
 
 @property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
@@ -28,7 +28,7 @@ SentryCrashReportSink ()
 
 @end
 
-@implementation SentryCrashReportSink
+@implementation BuzzSentryCrashReportSink
 
 - (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic
                       crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper

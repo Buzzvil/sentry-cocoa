@@ -77,7 +77,7 @@ class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
         let images = PrivateBuzzSentrySDKOnly.getDebugImages()
         
         // Only make sure we get some images. The actual tests are in
-        // SentryDebugImageProviderTests
+        // BuzzSentryDebugImageProviderTests
         XCTAssertGreaterThan(images.count, 100)
     }
     

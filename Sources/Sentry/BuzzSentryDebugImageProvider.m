@@ -1,5 +1,5 @@
-#import "SentryDebugImageProvider.h"
-#import "SentryCrashDefaultBinaryImageProvider.h"
+#import "BuzzSentryDebugImageProvider.h"
+#import "BuzzSentryCrashDefaultBinaryImageProvider.h"
 #import "SentryCrashDynamicLinker.h"
 #import "SentryCrashUUIDConversion.h"
 #import "BuzzSentryDebugMeta.h"
@@ -11,19 +11,19 @@
 #import <Foundation/Foundation.h>
 
 @interface
-SentryDebugImageProvider ()
+BuzzSentryDebugImageProvider ()
 
-@property (nonatomic, strong) id<SentryCrashBinaryImageProvider> binaryImageProvider;
+@property (nonatomic, strong) id<BuzzSentryCrashBinaryImageProvider> binaryImageProvider;
 
 @end
 
-@implementation SentryDebugImageProvider
+@implementation BuzzSentryDebugImageProvider
 
 - (instancetype)init
 {
 
-    SentryCrashDefaultBinaryImageProvider *provider =
-        [[SentryCrashDefaultBinaryImageProvider alloc] init];
+    BuzzSentryCrashDefaultBinaryImageProvider *provider =
+        [[BuzzSentryCrashDefaultBinaryImageProvider alloc] init];
 
     self = [self initWithBinaryImageProvider:provider];
 
@@ -31,7 +31,7 @@ SentryDebugImageProvider ()
 }
 
 /** Internal constructor for testing */
-- (instancetype)initWithBinaryImageProvider:(id<SentryCrashBinaryImageProvider>)binaryImageProvider
+- (instancetype)initWithBinaryImageProvider:(id<BuzzSentryCrashBinaryImageProvider>)binaryImageProvider
 {
     if (self = [super init]) {
         self.binaryImageProvider = binaryImageProvider;
@@ -81,7 +81,7 @@ SentryDebugImageProvider ()
 - (BuzzSentryDebugMeta *)fillDebugMetaFrom:(SentryCrashBinaryImage)image
 {
     BuzzSentryDebugMeta *debugMeta = [[BuzzSentryDebugMeta alloc] init];
-    debugMeta.uuid = [SentryDebugImageProvider convertUUID:image.uuid];
+    debugMeta.uuid = [BuzzSentryDebugImageProvider convertUUID:image.uuid];
     debugMeta.type = @"apple";
 
     if (image.vmAddress > 0) {

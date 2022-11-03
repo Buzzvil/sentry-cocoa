@@ -5,21 +5,21 @@ import XCTest
  * Some of the test parameters are copied from debugging
  * BuzzSentryCrashReportConverter.convertDebugMeta.
  */
-class SentryDebugImageProviderTests: XCTestCase {
+class BuzzSentryDebugImageProviderTests: XCTestCase {
     
     private class Fixture {
-        func getSut(images: [SentryCrashBinaryImage] = []) -> SentryDebugImageProvider {
-            let imageProvider = TestSentryCrashBinaryImageProvider()
+        func getSut(images: [SentryCrashBinaryImage] = []) -> BuzzSentryDebugImageProvider {
+            let imageProvider = TestBuzzSentryCrashBinaryImageProvider()
             imageProvider.imageCount = images.count
             imageProvider.binaryImage = images
-            return SentryDebugImageProvider(binaryImageProvider: imageProvider)
+            return BuzzSentryDebugImageProvider(binaryImageProvider: imageProvider)
         }
         
         func getTestImages() -> [SentryCrashBinaryImage] {
             let imageName1 = "dyld_sim"
-            let imageNameAsCharArray1 = SentryDebugImageProviderTests.stringToUIntCharArray(value: imageName1)
+            let imageNameAsCharArray1 = BuzzSentryDebugImageProviderTests.stringToUIntCharArray(value: imageName1)
             let uuidAsCharArray1: [UInt8] = [132, 186, 235, 218, 173, 26, 51, 244, 179, 93, 138, 69, 245, 218, 243, 34]
-            let image1 = SentryDebugImageProviderTests.createSentryCrashBinaryImage(
+            let image1 = BuzzSentryDebugImageProviderTests.createSentryCrashBinaryImage(
                 address: 4_386_213_888,
                 vmAddress: 140_734_563_811_328,
                 size: 352_256,
@@ -28,9 +28,9 @@ class SentryDebugImageProviderTests: XCTestCase {
             )
             
             let imageName2 = "UIKit"
-            let imageNameAsCharArray2 = SentryDebugImageProviderTests.stringToUIntCharArray(value: imageName2)
+            let imageNameAsCharArray2 = BuzzSentryDebugImageProviderTests.stringToUIntCharArray(value: imageName2)
             let uuidAsCharArray2: [UInt8] = [132, 186, 235, 218, 173, 26, 51, 244, 179, 93, 138, 69, 245, 218, 243, 34]
-            let image2 = SentryDebugImageProviderTests.createSentryCrashBinaryImage(
+            let image2 = BuzzSentryDebugImageProviderTests.createSentryCrashBinaryImage(
                 address: 5_386_213_888,
                 vmAddress: 240_734_563_811_328,
                 size: 1_352_256,
@@ -39,9 +39,9 @@ class SentryDebugImageProviderTests: XCTestCase {
             )
             
             let imageName3 = "CoreData"
-            let imageNameAsCharArray3 = SentryDebugImageProviderTests.stringToUIntCharArray(value: imageName3)
+            let imageNameAsCharArray3 = BuzzSentryDebugImageProviderTests.stringToUIntCharArray(value: imageName3)
             let uuidAsCharArray3: [UInt8] = [132, 186, 235, 218, 173, 26, 51, 244, 179, 93, 138, 69, 245, 218, 243, 34]
-            let image3 = SentryDebugImageProviderTests.createSentryCrashBinaryImage(
+            let image3 = BuzzSentryDebugImageProviderTests.createSentryCrashBinaryImage(
                 address: 6_386_213_888,
                 vmAddress: 340_734_563_811_328,
                 size: 900_256,
@@ -74,7 +74,7 @@ class SentryDebugImageProviderTests: XCTestCase {
     }
     
     func testImageVmAddressIsZero() {
-        let image = SentryDebugImageProviderTests.createSentryCrashBinaryImage(vmAddress: 0)
+        let image = BuzzSentryDebugImageProviderTests.createSentryCrashBinaryImage(vmAddress: 0)
         
         let sut = fixture.getSut(images: [image])
         let actual = sut.getDebugImages()
@@ -84,7 +84,7 @@ class SentryDebugImageProviderTests: XCTestCase {
     
     func testImageSize() {
         func testWith(value: UInt64) {
-            let image = SentryDebugImageProviderTests.createSentryCrashBinaryImage(size: value)
+            let image = BuzzSentryDebugImageProviderTests.createSentryCrashBinaryImage(size: value)
             let sut = fixture.getSut(images: [image])
             let actual = sut.getDebugImages()
             XCTAssertEqual(NSNumber(value: value), actual[0].imageSize)
@@ -97,7 +97,7 @@ class SentryDebugImageProviderTests: XCTestCase {
     
     func testImageAddress() {
         func testWith(value: UInt64, expected: String) {
-            let image = SentryDebugImageProviderTests.createSentryCrashBinaryImage(address: value)
+            let image = BuzzSentryDebugImageProviderTests.createSentryCrashBinaryImage(address: value)
             let sut = fixture.getSut(images: [image])
             let actual = sut.getDebugImages()
             

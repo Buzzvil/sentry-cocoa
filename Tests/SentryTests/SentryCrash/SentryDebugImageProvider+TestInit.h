@@ -1,10 +1,10 @@
-#import "SentryDebugImageProvider.h"
+#import "BuzzSentryDebugImageProvider.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryDebugImageProvider (TestInit)
-- (instancetype)initWithBinaryImageProvider:(id<SentryCrashBinaryImageProvider>)binaryImageProvider;
+BuzzSentryDebugImageProvider (TestInit)
+- (instancetype)initWithBinaryImageProvider:(id<BuzzSentryCrashBinaryImageProvider>)binaryImageProvider;
 
 @end
 

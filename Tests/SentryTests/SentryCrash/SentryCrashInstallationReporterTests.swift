@@ -2,16 +2,16 @@
 import XCTest
 
 @available(OSX 10.10, *)
-class SentryCrashInstallationReporterTests: XCTestCase {
+class BuzzSentryCrashInstallationReporterTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryCrashInstallationReporterTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryCrashInstallationReporterTests")
     
     private var testClient: TestClient!
-    private var sut: SentryCrashInstallationReporter!
+    private var sut: BuzzSentryCrashInstallationReporter!
     
     override func setUp() {
         super.setUp()
-        sut = SentryCrashInstallationReporter(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), dispatchQueue: TestBuzzSentryDispatchQueueWrapper())
+        sut = BuzzSentryCrashInstallationReporter(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), dispatchQueue: TestBuzzSentryDispatchQueueWrapper())
         sut.install()
         // Works only if SentryCrash is installed
         sentrycrash_deleteAllReports()
@@ -42,10 +42,10 @@ class SentryCrashInstallationReporterTests: XCTestCase {
     
     private func sdkStarted() {
         BuzzSentrySDK.start { options in
-            options.dsn = SentryCrashInstallationReporterTests.dsnAsString
+            options.dsn = BuzzSentryCrashInstallationReporterTests.dsnAsString
         }
         let options = Options()
-        options.dsn = SentryCrashInstallationReporterTests.dsnAsString
+        options.dsn = BuzzSentryCrashInstallationReporterTests.dsnAsString
         testClient = TestClient(options: options)!
         let hub = BuzzSentryHub(client: testClient, andScope: nil)
         BuzzSentrySDK.setCurrentHub(hub)

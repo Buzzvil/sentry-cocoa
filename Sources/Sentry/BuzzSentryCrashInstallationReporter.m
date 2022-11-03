@@ -1,14 +1,14 @@
-#import "SentryCrashInstallationReporter.h"
+#import "BuzzSentryCrashInstallationReporter.h"
 #import "SentryCrash.h"
 #import "SentryCrashInstallation+Private.h"
-#import "SentryCrashReportSink.h"
+#import "BuzzSentryCrashReportSink.h"
 #import "SentryDefines.h"
 #import "SentryLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface
-SentryCrashInstallationReporter ()
+BuzzSentryCrashInstallationReporter ()
 
 @property (nonatomic, strong) BuzzSentryInAppLogic *inAppLogic;
 @property (nonatomic, strong) BuzzSentryCrashWrapper *crashWrapper;
@@ -16,7 +16,7 @@ SentryCrashInstallationReporter ()
 
 @end
 
-@implementation SentryCrashInstallationReporter
+@implementation BuzzSentryCrashInstallationReporter
 
 - (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic
                       crashWrapper:(BuzzSentryCrashWrapper *)crashWrapper
@@ -32,7 +32,7 @@ SentryCrashInstallationReporter ()
 
 - (id<SentryCrashReportFilter>)sink
 {
-    return [[SentryCrashReportSink alloc] initWithInAppLogic:self.inAppLogic
+    return [[BuzzSentryCrashReportSink alloc] initWithInAppLogic:self.inAppLogic
                                                 crashWrapper:self.crashWrapper
                                                dispatchQueue:self.dispatchQueue];
 }
