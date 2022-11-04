@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-#import "Container+SentryDeepSearch.h"
+#import "Container+BuzzSentryDeepSearch.h"
 
 #pragma mark - Base functionality
 

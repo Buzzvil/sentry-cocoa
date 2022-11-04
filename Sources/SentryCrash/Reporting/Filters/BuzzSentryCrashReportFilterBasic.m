@@ -25,7 +25,7 @@
 //
 
 #import "BuzzSentryCrashReportFilterBasic.h"
-#import "Container+SentryDeepSearch.h"
+#import "Container+BuzzSentryDeepSearch.h"
 #import "NSError+BuzzSentrySimpleConstructor.h"
 #import "BuzzSentryCrashVarArgs.h"
 

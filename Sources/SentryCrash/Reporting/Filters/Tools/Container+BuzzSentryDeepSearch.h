@@ -58,7 +58,7 @@
  * Deep key search methods for NSDictionary.
  */
 @interface
-NSDictionary (SentryDeepSearch)
+NSDictionary (BuzzSentryDeepSearch)
 
 #pragma mark - Lookups
 
