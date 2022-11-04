@@ -191,7 +191,7 @@ BuzzSentryBreadcrumbTracker ()
                 crumb.type = @"navigation";
                 crumb.data = [BuzzSentryBreadcrumbTracker fetchInfoAboutViewController:self];
 
-                // Adding crumb via the SDK calls SentryBeforeBreadcrumbCallback
+                // Adding crumb via the SDK calls BuzzSentryBeforeBreadcrumbCallback
                 [BuzzSentrySDK addBreadcrumb:crumb];
                 [BuzzSentrySDK.currentHub configureScope:^(BuzzSentryScope *_Nonnull scope) {
                     [scope setExtraValue:crumb.data[@"screen"] forKey:@"__sentry_transaction"];

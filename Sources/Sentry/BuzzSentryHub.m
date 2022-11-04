@@ -484,7 +484,7 @@ BuzzSentryHub ()
     if (options.maxBreadcrumbs < 1) {
         return;
     }
-    SentryBeforeBreadcrumbCallback callback = [options beforeBreadcrumb];
+    BuzzSentryBeforeBreadcrumbCallback callback = [options beforeBreadcrumb];
     if (nil != callback) {
         crumb = callback(crumb);
     }

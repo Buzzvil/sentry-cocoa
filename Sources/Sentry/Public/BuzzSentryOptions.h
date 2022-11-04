@@ -93,13 +93,13 @@ NS_SWIFT_NAME(Options)
  * This block can be used to modify the event before it will be serialized and
  * sent
  */
-@property (nullable, nonatomic, copy) SentryBeforeSendEventCallback beforeSend;
+@property (nullable, nonatomic, copy) BuzzSentryBeforeSendEventCallback beforeSend;
 
 /**
  * This block can be used to modify the event before it will be serialized and
  * sent
  */
-@property (nullable, nonatomic, copy) SentryBeforeBreadcrumbCallback beforeBreadcrumb;
+@property (nullable, nonatomic, copy) BuzzSentryBeforeBreadcrumbCallback beforeBreadcrumb;
 
 /**
  * This gets called shortly after the initialization of the SDK when the last program execution
@@ -110,7 +110,7 @@ NS_SWIFT_NAME(Options)
  * terminates with a crash before the SDK can send the crash event. You can look into beforeSend if
  * you prefer a callback for every event.
  */
-@property (nullable, nonatomic, copy) SentryOnCrashedLastRunCallback onCrashedLastRun;
+@property (nullable, nonatomic, copy) BuzzSentryOnCrashedLastRunCallback onCrashedLastRun;
 
 /**
  * Array of integrations to install.

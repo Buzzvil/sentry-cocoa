@@ -28,7 +28,7 @@
 /**
  * Block used for returning after a request finished
  */
-typedef void (^SentryRequestFinished)(NSError *_Nullable error);
+typedef void (^BuzzSentryRequestFinished)(NSError *_Nullable error);
 
 /**
  * Block used for request operation finished, shouldDiscardEvent is YES if event
@@ -40,19 +40,19 @@ typedef void (^BuzzSentryRequestOperationFinished)(
  * Block can be used to mutate a breadcrumb before it's added to the scope.
  * To avoid adding the breadcrumb altogether, return nil instead.
  */
-typedef BuzzSentryBreadcrumb *_Nullable (^SentryBeforeBreadcrumbCallback)(
+typedef BuzzSentryBreadcrumb *_Nullable (^BuzzSentryBeforeBreadcrumbCallback)(
     BuzzSentryBreadcrumb *_Nonnull breadcrumb);
 
 /**
  * Block can be used to mutate event before its send.
  * To avoid sending the event altogether, return nil instead.
  */
-typedef BuzzSentryEvent *_Nullable (^SentryBeforeSendEventCallback)(BuzzSentryEvent *_Nonnull event);
+typedef BuzzSentryEvent *_Nullable (^BuzzSentryBeforeSendEventCallback)(BuzzSentryEvent *_Nonnull event);
 
 /**
  * A callback to be notified when the last program execution terminated with a crash.
  */
-typedef void (^SentryOnCrashedLastRunCallback)(BuzzSentryEvent *_Nonnull event);
+typedef void (^BuzzSentryOnCrashedLastRunCallback)(BuzzSentryEvent *_Nonnull event);
 
 /**
  * Block can be used to determine if an event should be queued and stored
@@ -60,7 +60,7 @@ typedef void (^SentryOnCrashedLastRunCallback)(BuzzSentryEvent *_Nonnull event);
  * this will only be called once the event is created and send manually. Once it
  * has been queued once it will be discarded if it fails again.
  */
-typedef BOOL (^SentryShouldQueueEvent)(
+typedef BOOL (^BuzzSentryShouldQueueEvent)(
     NSHTTPURLResponse *_Nullable response, NSError *_Nullable error);
 
 /**
