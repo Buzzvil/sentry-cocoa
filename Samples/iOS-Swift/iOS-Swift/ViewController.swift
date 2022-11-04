@@ -72,7 +72,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addBreadcrumb(_ sender: Any) {
-        let crumb = Breadcrumb(level: SentryLevel.info, category: "Debug")
+        let crumb = Breadcrumb(level: BuzzSentryLevel.info, category: "Debug")
         crumb.message = "tapped addBreadcrumb"
         crumb.type = "user"
         BuzzSentrySDK.addBreadcrumb(crumb: crumb)

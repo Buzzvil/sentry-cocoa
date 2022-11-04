@@ -18,7 +18,7 @@ BuzzSentryLog (TestInit)
 + (BOOL)isDebug;
 
 /** Internal and only needed for testing. */
-+ (SentryLevel)diagnosticLevel;
++ (BuzzSentryLevel)diagnosticLevel;
 
 @end
 

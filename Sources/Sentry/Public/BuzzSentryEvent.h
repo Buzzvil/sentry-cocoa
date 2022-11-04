@@ -39,9 +39,9 @@ NS_SWIFT_NAME(Event)
 @property (nonatomic, strong) NSDate *_Nullable startTimestamp;
 
 /**
- * SentryLevel of the event
+ * BuzzSentryLevel of the event
  */
-@property (nonatomic) enum SentryLevel level;
+@property (nonatomic) enum BuzzSentryLevel level;
 
 /**
  * Platform this will be used for symbolicating on the server should be "cocoa"
@@ -167,13 +167,13 @@ NS_SWIFT_NAME(Event)
 
 /**
  * Init an BuzzSentryEvent will set all needed fields by default
- * @param level SentryLevel
+ * @param level BuzzSentryLevel
  * @return BuzzSentryEvent
  */
-- (instancetype)initWithLevel:(enum SentryLevel)level NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLevel:(enum BuzzSentryLevel)level NS_DESIGNATED_INITIALIZER;
 
 /**
- * Initializes a BuzzSentryEvent with an NSError and sets the level to SentryLevelError.
+ * Initializes a BuzzSentryEvent with an NSError and sets the level to BuzzSentryLevelError.
  *
  * @param error The error of the event.
  *

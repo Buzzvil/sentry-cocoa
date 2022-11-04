@@ -69,7 +69,7 @@ ViewController ()
                                userInfo:@{ NSLocalizedDescriptionKey : @"This never happens." }];
     BuzzSentryId *eventId = [BuzzSentrySDK
           captureError:error
-        withScopeBlock:^(BuzzSentryScope *_Nonnull scope) { [scope setLevel:kSentryLevelFatal]; }];
+        withScopeBlock:^(BuzzSentryScope *_Nonnull scope) { [scope setLevel:kBuzzSentryLevelFatal]; }];
 
     BuzzSentryUserFeedback *userFeedback = [[BuzzSentryUserFeedback alloc] initWithEventId:eventId];
     userFeedback.comments = @"It broke on iOS-ObjectiveC. I don't know why, but this happens.";
@@ -101,7 +101,7 @@ ViewController ()
                                                       userInfo:nil];
 
     BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
-    [scope setLevel:kSentryLevelFatal];
+    [scope setLevel:kBuzzSentryLevelFatal];
     // !!!: By explicity just passing the scope, only the data in this scope object will be added to
     // the event; the global scope (calls to configureScope) will be ignored. If you do that, be
     // careful–a lot of useful info is lost. If you just want to mutate what's in the scope use the

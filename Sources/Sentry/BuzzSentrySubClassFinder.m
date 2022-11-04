@@ -69,7 +69,7 @@ BuzzSentrySubClassFinder ()
                 logWithMessage:[NSString stringWithFormat:@"The following UIViewControllers will "
                                                           @"generate automatic transactions: %@",
                                          [classesToSwizzle componentsJoinedByString:@", "]]
-                      andLevel:kSentryLevelDebug];
+                      andLevel:kBuzzSentryLevelDebug];
         }];
     }];
 }

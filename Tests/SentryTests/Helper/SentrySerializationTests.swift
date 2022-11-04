@@ -227,7 +227,7 @@ class BuzzSentrySerializationTests: XCTestCase {
     
     func testLevelFromEventData_WithGarbage() {
         let level = BuzzSentrySerialization.level(from: Fixture.invalidData)
-        XCTAssertEqual(SentryLevel.error, level)
+        XCTAssertEqual(BuzzSentryLevel.error, level)
     }
     
     func testAppStateWithValidData_ReturnsValidAppState() throws {

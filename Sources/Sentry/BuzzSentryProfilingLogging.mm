@@ -5,22 +5,22 @@
 namespace sentry {
 namespace profiling {
     namespace {
-        SentryLevel
+        BuzzSentryLevel
         sentryLevelFromLogLevel(LogLevel level)
         {
             switch (level) {
             case LogLevel::None:
-                return kSentryLevelNone;
+                return kBuzzSentryLevelNone;
             case LogLevel::Debug:
-                return kSentryLevelDebug;
+                return kBuzzSentryLevelDebug;
             case LogLevel::Info:
-                return kSentryLevelInfo;
+                return kBuzzSentryLevelInfo;
             case LogLevel::Warning:
-                return kSentryLevelWarning;
+                return kBuzzSentryLevelWarning;
             case LogLevel::Error:
-                return kSentryLevelError;
+                return kBuzzSentryLevelError;
             case LogLevel::Fatal:
-                return kSentryLevelFatal;
+                return kBuzzSentryLevelFatal;
             }
         }
     }

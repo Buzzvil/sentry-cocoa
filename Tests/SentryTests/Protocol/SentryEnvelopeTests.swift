@@ -24,7 +24,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
 
         var breadcrumb: Breadcrumb {
             get {
-                let crumb = Breadcrumb(level: SentryLevel.debug, category: "ui.lifecycle")
+                let crumb = Breadcrumb(level: BuzzSentryLevel.debug, category: "ui.lifecycle")
                 crumb.message = "first breadcrumb"
                 return crumb
             }
@@ -32,7 +32,7 @@ class BuzzSentryEnvelopeTests: XCTestCase {
 
         var event: Event {
             let event = Event()
-            event.level = SentryLevel.info
+            event.level = BuzzSentryLevel.info
             event.message = BuzzSentryMessage(formatted: "Don't do this")
             event.releaseName = "releaseName1.0.0"
             event.environment = "save the environment"

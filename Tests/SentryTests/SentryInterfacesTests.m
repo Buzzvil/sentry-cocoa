@@ -78,7 +78,7 @@
 - (void)testEvent
 {
     NSDate *date = [NSDate date];
-    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event.timestamp = date;
     event.environment = @"bla";
     event.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
@@ -94,7 +94,7 @@
     };
     XCTAssertEqualObjects([event serialize], serialized);
 
-    BuzzSentryEvent *event2 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event2 = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event2.timestamp = date;
     event2.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     NSDictionary *serialized2 = @{
@@ -106,7 +106,7 @@
     };
     XCTAssertEqualObjects([event2 serialize], serialized2);
 
-    BuzzSentryEvent *event3 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event3 = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event3.timestamp = date;
     event3.sdk = @{
         @"version" : @"0.15.2",
@@ -126,7 +126,7 @@
     };
     XCTAssertEqualObjects([event3 serialize], serialized3);
 
-    BuzzSentryEvent *event4 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event4 = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event4.timestamp = date;
     event4.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     event4.extra =
@@ -146,7 +146,7 @@
 {
     NSDate *date = [NSDate date];
 
-    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event.timestamp = date;
     event.extra = @{ @"__sentry_transaction" : @"yoyoyo" };
     event.sdk = @{
@@ -169,7 +169,7 @@
     };
     XCTAssertEqualObjects([event serialize], serialized);
 
-    BuzzSentryEvent *event3 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event3 = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event3.timestamp = date;
     event3.transaction = @"UIViewControllerTest";
     event3.sdk = @{
@@ -190,7 +190,7 @@
         @"timestamp" : @(date.timeIntervalSince1970)
     };
     XCTAssertEqualObjects([event3 serialize], serialized3);
-    BuzzSentryEvent *event4 = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event4 = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event4.timestamp = date;
     NSDate *testDate = [NSDate dateWithTimeIntervalSince1970:1582803326];
     NSURL *testURL = [NSURL URLWithString:@"https://sentry.io"];
@@ -230,7 +230,7 @@
 
 - (void)testSetDistToNil
 {
-    BuzzSentryEvent *eventEmptyDist = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *eventEmptyDist = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     eventEmptyDist.releaseName = @"abc";
     XCTAssertNil([[eventEmptyDist serialize] objectForKey:@"dist"]);
     XCTAssertEqualObjects([[eventEmptyDist serialize] objectForKey:@"release"], @"abc");
@@ -379,7 +379,7 @@
 
 - (void)testBreadcrumb
 {
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                              category:@"http"];
     XCTAssertTrue(crumb.level >= 0);
     XCTAssertNotNil(crumb.category);
@@ -392,7 +392,7 @@
     };
     XCTAssertEqualObjects([crumb serialize], serialized);
 
-    BuzzSentryBreadcrumb *crumb2 = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb2 = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                               category:@"http"];
     XCTAssertTrue(crumb2.level >= 0);
     XCTAssertNotNil(crumb2.category);

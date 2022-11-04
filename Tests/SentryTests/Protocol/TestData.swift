@@ -16,7 +16,7 @@ class TestData {
     
     static var crumb: Breadcrumb {
         let crumb = Breadcrumb()
-        crumb.level = SentryLevel.info
+        crumb.level = BuzzSentryLevel.info
         crumb.timestamp = timestamp
         crumb.type = "user"
         crumb.message = "Clicked something"
@@ -25,7 +25,7 @@ class TestData {
     }
     
     static var event: Event {
-        let event = Event(level: SentryLevel.info)
+        let event = Event(level: BuzzSentryLevel.info)
         
         event.breadcrumbs = [crumb]
         event.context = context
@@ -173,7 +173,7 @@ class TestData {
     }
     
     static var oomEvent: Event {
-        let event = Event(level: SentryLevel.fatal)
+        let event = Event(level: BuzzSentryLevel.fatal)
         let exception = Exception(value: BuzzSentryOutOfMemoryExceptionValue, type: BuzzSentryOutOfMemoryExceptionType)
         exception.mechanism = Mechanism(type: BuzzSentryOutOfMemoryMechanismType)
         event.exceptions = [exception]
@@ -194,7 +194,7 @@ class TestData {
         scope.setExtras(["extra1": "extra1", "extra2": "extra2"])
         scope.setFingerprint(["finger", "print"])
         
-        scope.setLevel(SentryLevel.fatal)
+        scope.setLevel(BuzzSentryLevel.fatal)
         
         let crumb1 = TestData.crumb
         crumb1.message = "Crumb 1"

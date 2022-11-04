@@ -10,7 +10,7 @@ class MyTestIntegration: BuzzSentryBaseIntegration {
 class BuzzSentryBaseIntegrationTests: XCTestCase {
     var logOutput: TestLogOutput!
     var oldDebug: Bool!
-    var oldLevel: SentryLevel!
+    var oldLevel: BuzzSentryLevel!
     var oldOutput: BuzzSentryLogOutput!
 
     override func setUp() {
@@ -18,7 +18,7 @@ class BuzzSentryBaseIntegrationTests: XCTestCase {
         oldDebug = BuzzSentryLog.isDebug()
         oldLevel = BuzzSentryLog.diagnosticLevel()
         oldOutput = BuzzSentryLog.logOutput()
-        BuzzSentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
+        BuzzSentryLog.configure(true, diagnosticLevel: BuzzSentryLevel.debug)
         logOutput = TestLogOutput()
         BuzzSentryLog.setLogOutput(logOutput)
     }

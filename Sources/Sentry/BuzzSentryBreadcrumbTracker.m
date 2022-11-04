@@ -83,7 +83,7 @@ BuzzSentryBreadcrumbTracker ()
                 usingBlock:^(NSNotification *notification) {
                     if (nil != [BuzzSentrySDK.currentHub getClient]) {
                         BuzzSentryBreadcrumb *crumb =
-                            [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelWarning
+                            [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelWarning
                                                            category:@"device.event"];
                         crumb.type = @"system";
                         crumb.data = @ { @"action" : @"LOW_MEMORY" };
@@ -100,7 +100,7 @@ BuzzSentryBreadcrumbTracker ()
                                                 usingBlock:^(NSNotification *notification) {
                                                     [self addBreadcrumbWithType:@"navigation"
                                                                    withCategory:@"app.lifecycle"
-                                                                      withLevel:kSentryLevelInfo
+                                                                      withLevel:kBuzzSentryLevelInfo
                                                                     withDataKey:@"state"
                                                                   withDataValue:@"background"];
                                                 }];
@@ -111,7 +111,7 @@ BuzzSentryBreadcrumbTracker ()
                                                 usingBlock:^(NSNotification *notification) {
                                                     [self addBreadcrumbWithType:@"navigation"
                                                                    withCategory:@"app.lifecycle"
-                                                                      withLevel:kSentryLevelInfo
+                                                                      withLevel:kBuzzSentryLevelInfo
                                                                     withDataKey:@"state"
                                                                   withDataValue:@"foreground"];
                                                 }];
@@ -120,7 +120,7 @@ BuzzSentryBreadcrumbTracker ()
 
 - (void)addBreadcrumbWithType:(NSString *)type
                  withCategory:(NSString *)category
-                    withLevel:(SentryLevel)level
+                    withLevel:(BuzzSentryLevel)level
                   withDataKey:(NSString *)key
                 withDataValue:(NSString *)value
 {
@@ -134,7 +134,7 @@ BuzzSentryBreadcrumbTracker ()
 
 - (void)addEnabledCrumb
 {
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                              category:@"started"];
     crumb.type = @"debug";
     crumb.message = @"Breadcrumb Tracking";
@@ -158,7 +158,7 @@ BuzzSentryBreadcrumbTracker ()
                 }
             }
 
-            BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+            BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                                      category:@"touch"];
             crumb.type = @"user";
             crumb.message = action;
@@ -186,7 +186,7 @@ BuzzSentryBreadcrumbTracker ()
     BuzzSentrySwizzleInstanceMethod(UIViewController.class, selector, SentrySWReturnType(void),
         SentrySWArguments(BOOL animated), SentrySWReplacement({
             if (nil != [BuzzSentrySDK.currentHub getClient]) {
-                BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+                BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                                          category:@"ui.lifecycle"];
                 crumb.type = @"navigation";
                 crumb.data = [BuzzSentryBreadcrumbTracker fetchInfoAboutViewController:self];

@@ -32,7 +32,7 @@ BuzzSentryFramesTrackingIntegration ()
     [BuzzSentryLog
         logWithMessage:
             @"NO UIKit -> BuzzSentryFramesTrackingIntegration will not track slow and frozen frames."
-              andLevel:kSentryLevelInfo];
+              andLevel:kBuzzSentryLevelInfo];
 
     return NO;
 #endif

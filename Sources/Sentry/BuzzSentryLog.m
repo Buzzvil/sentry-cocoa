@@ -10,23 +10,23 @@ NS_ASSUME_NONNULL_BEGIN
  * Enable per default to log initialization errors.
  */
 static BOOL isDebug = YES;
-static SentryLevel diagnosticLevel = kSentryLevelError;
+static BuzzSentryLevel diagnosticLevel = kBuzzSentryLevelError;
 static BuzzSentryLogOutput *logOutput;
 
-+ (void)configure:(BOOL)debug diagnosticLevel:(SentryLevel)level
++ (void)configure:(BOOL)debug diagnosticLevel:(BuzzSentryLevel)level
 {
     isDebug = debug;
     diagnosticLevel = level;
 }
 
-+ (void)logWithMessage:(NSString *)message andLevel:(SentryLevel)level
++ (void)logWithMessage:(NSString *)message andLevel:(BuzzSentryLevel)level
 {
     if (nil == logOutput) {
         logOutput = [[BuzzSentryLogOutput alloc] init];
     }
 
-    if (isDebug && level != kSentryLevelNone && level >= diagnosticLevel) {
-        [logOutput log:[NSString stringWithFormat:@"[Sentry] [%@] %@", nameForSentryLevel(level),
+    if (isDebug && level != kBuzzSentryLevelNone && level >= diagnosticLevel) {
+        [logOutput log:[NSString stringWithFormat:@"[Sentry] [%@] %@", nameForBuzzSentryLevel(level),
                                  message]];
     }
 }
@@ -50,7 +50,7 @@ static BuzzSentryLogOutput *logOutput;
 }
 
 // Internal and only needed for testing.
-+ (SentryLevel)diagnosticLevel
++ (BuzzSentryLevel)diagnosticLevel
 {
     return diagnosticLevel;
 }

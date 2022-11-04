@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     if (nil != error) {
         // We don't know what caused the serialization to fail.
-        BuzzSentryEvent *errorEvent = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelWarning];
+        BuzzSentryEvent *errorEvent = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelWarning];
 
         // Add some context to the event. We can only set simple properties otherwise we
         // risk that the conversion fails again.

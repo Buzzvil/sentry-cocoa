@@ -167,7 +167,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
 - (BuzzSentryId *)captureMessage:(NSString *)message withScope:(BuzzSentryScope *)scope
 {
-    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelInfo];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelInfo];
     event.message = [[BuzzSentryMessage alloc] initWithFormatted:message];
     return [self sendEvent:event withScope:scope alwaysAttachStacktrace:NO];
 }
@@ -194,7 +194,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
 
 - (BuzzSentryEvent *)buildExceptionEvent:(NSException *)exception
 {
-    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelError];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelError];
     BuzzSentryException *sentryException = [[BuzzSentryException alloc] initWithValue:exception.reason
                                                                          type:exception.name];
 
@@ -723,22 +723,22 @@ NSString *const kSentryDefaultEnvironment = @"production";
                   }];
 }
 
-- (NSString *)stringForPermissionStatus:(SentryPermissionStatus)status
+- (NSString *)stringForPermissionStatus:(BuzzSentryPermissionStatus)status
 {
     switch (status) {
-    case kSentryPermissionStatusUnknown:
+    case kBuzzSentryPermissionStatusUnknown:
         return @"unknown";
         break;
 
-    case kSentryPermissionStatusGranted:
+    case kBuzzSentryPermissionStatusGranted:
         return @"granted";
         break;
 
-    case kSentryPermissionStatusPartial:
+    case kBuzzSentryPermissionStatusPartial:
         return @"partial";
         break;
 
-    case kSentryPermissionStatusDenied:
+    case kBuzzSentryPermissionStatusDenied:
         return @"not_granted";
         break;
     }

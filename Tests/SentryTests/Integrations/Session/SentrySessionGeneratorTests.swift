@@ -102,7 +102,7 @@ class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
             // than the BuzzSentryCrashIntegration creating the event from the
             // crash report on a background thread.
             let crashEvent = Event()
-            crashEvent.level = SentryLevel.fatal
+            crashEvent.level = BuzzSentryLevel.fatal
             crashEvent.message = BuzzSentryMessage(formatted: "Crash for BuzzSentrySessionGeneratorTests")
             BuzzSentrySDK.captureCrash(crashEvent)
         }

@@ -432,7 +432,7 @@
     BuzzSentryEvent *event = [reportConverter convertReportToEvent];
     XCTAssertEqualObjects(event.breadcrumbs.firstObject.category, @"ui.lifecycle");
     XCTAssertEqualObjects(event.breadcrumbs.firstObject.type, @"navigation");
-    XCTAssertEqual(event.breadcrumbs.firstObject.level, kSentryLevelInfo);
+    XCTAssertEqual(event.breadcrumbs.firstObject.level, kBuzzSentryLevelInfo);
     XCTAssertEqualObjects(
         [event.breadcrumbs.firstObject.data objectForKey:@"screen"], @"UIInputWindowController");
 

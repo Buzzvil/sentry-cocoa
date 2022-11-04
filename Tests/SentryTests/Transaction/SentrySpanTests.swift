@@ -38,7 +38,7 @@ class BuzzSentrySpanTests: XCTestCase {
         super.setUp()
 
         logOutput = TestLogOutput()
-        BuzzSentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
+        BuzzSentryLog.configure(true, diagnosticLevel: BuzzSentryLevel.debug)
         BuzzSentryLog.setLogOutput(logOutput)
 
         fixture = Fixture()

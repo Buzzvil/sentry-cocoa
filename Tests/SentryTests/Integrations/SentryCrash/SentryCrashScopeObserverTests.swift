@@ -49,7 +49,7 @@ class BuzzSentryCrashScopeObserverTests: XCTestCase {
     
     func testLevel() {
         let sut = fixture.sut
-        let level = SentryLevel.fatal
+        let level = BuzzSentryLevel.fatal
         sut.setLevel(level)
 
         XCTAssertEqual("\"fatal\"", getScopeJson { $0.level })
@@ -57,8 +57,8 @@ class BuzzSentryCrashScopeObserverTests: XCTestCase {
 
     func testLevel_setToNone() {
         let sut = fixture.sut
-        sut.setLevel(SentryLevel.fatal)
-        sut.setLevel(SentryLevel.none)
+        sut.setLevel(BuzzSentryLevel.fatal)
+        sut.setLevel(BuzzSentryLevel.none)
 
         XCTAssertNil(getScopeJson { $0.level })
     }
@@ -272,7 +272,7 @@ class BuzzSentryCrashScopeObserverTests: XCTestCase {
         sut.setTags(fixture.tags)
         sut.setExtras(fixture.extras)
         sut.setFingerprint(fixture.fingerprint)
-        sut.setLevel(SentryLevel.fatal)
+        sut.setLevel(BuzzSentryLevel.fatal)
         sut.add(TestData.crumb)
         
         sut.clear()

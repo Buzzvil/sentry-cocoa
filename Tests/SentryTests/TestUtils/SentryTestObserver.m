@@ -33,7 +33,7 @@ SentryTestObserver ()
     [[XCTestObservationCenter sharedTestObservationCenter]
         addTestObserver:[[SentryTestObserver alloc] init]];
 #endif
-    [BuzzSentryLog configure:YES diagnosticLevel:kSentryLevelDebug];
+    [BuzzSentryLog configure:YES diagnosticLevel:kBuzzSentryLevelDebug];
 }
 
 - (instancetype)init
@@ -63,7 +63,7 @@ SentryTestObserver ()
 
 - (void)testCaseWillStart:(XCTestCase *)testCase
 {
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelDebug
                                                              category:@"test.started"];
     [crumb setMessage:testCase.name];
     // The tests might have a different time set

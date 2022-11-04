@@ -16,7 +16,7 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
         let context = ["context": ["c": "a"]]
         let tags = ["key": "value"]
         let extra = ["key": "value"]
-        let level = SentryLevel.info
+        let level = BuzzSentryLevel.info
         let ipAddress = "127.0.0.1"
         let transactionName = "Some Transaction"
         let transactionOperation = "Some Operation"
@@ -32,7 +32,7 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
             user.data = ["some": ["data": "data", "date": date]]
             
             breadcrumb = Breadcrumb()
-            breadcrumb.level = SentryLevel.info
+            breadcrumb.level = BuzzSentryLevel.info
             breadcrumb.timestamp = date
             breadcrumb.type = "user"
             breadcrumb.message = "Clicked something"
@@ -89,7 +89,7 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
         scope.setDist("")
         scope.setEnvironment("")
         scope.setFingerprint([])
-        scope.setLevel(SentryLevel.debug)
+        scope.setLevel(BuzzSentryLevel.debug)
         scope.clearBreadcrumbs()
         scope.add(TestData.fileAttachment)
         scope.span = fixture.transaction
@@ -440,7 +440,7 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
         let observer = fixture.observer
         sut.add(observer)
         
-        let level = SentryLevel.info
+        let level = BuzzSentryLevel.info
         sut.setLevel(level)
         
         XCTAssertEqual(level, observer.level)
@@ -511,8 +511,8 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
             self.fingerprint = fingerprint
         }
         
-        var level: SentryLevel?
-        func setLevel(_ level: SentryLevel) {
+        var level: BuzzSentryLevel?
+        func setLevel(_ level: BuzzSentryLevel) {
             self.level = level
         }
         
@@ -580,7 +580,7 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
         scope.setUser(self.fixture.user)
         scope.setDist("dist")
         scope.setEnvironment("env")
-        scope.setLevel(SentryLevel.debug)
+        scope.setLevel(BuzzSentryLevel.debug)
         
         scope.apply(to: BuzzSentrySession(releaseName: "1.0.0"))
         scope.apply(to: TestData.event, maxBreadcrumb: 5)

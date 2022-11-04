@@ -90,7 +90,7 @@ BuzzSentryUIEventTracker ()
                     logWithMessage:
                         [NSString stringWithFormat:@"BuzzSentryUIEventTracker finished transaction %@",
                                   currentActiveTransaction.transactionContext.name]
-                          andLevel:kSentryLevelDebug];
+                          andLevel:kBuzzSentryLevelDebug];
             }
 
             NSString *operation = [self getOperation:sender];
@@ -121,7 +121,7 @@ BuzzSentryUIEventTracker ()
                                                               @"started a new transaction with "
                                                               @"name: %@, bindToScope: %@",
                                              transactionName, bindToScope ? @"YES" : @"NO"]
-                          andLevel:kSentryLevelDebug];
+                          andLevel:kBuzzSentryLevelDebug];
             }];
 
             if ([[sender class] isSubclassOfClass:[UIView class]]) {

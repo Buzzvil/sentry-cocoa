@@ -92,7 +92,7 @@ BuzzSentrySystemEventBreadcrumbs ()
     NSMutableDictionary<NSString *, id> *batteryData = [self getBatteryStatus:notification.object];
     batteryData[@"action"] = @"BATTERY_STATE_CHANGE";
 
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                              category:@"device.event"];
     crumb.type = @"system";
     crumb.data = batteryData;
@@ -141,7 +141,7 @@ BuzzSentrySystemEventBreadcrumbs ()
 - (void)orientationChanged:(NSNotification *)notification
 {
     UIDevice *currentDevice = notification.object;
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                              category:@"device.orientation"];
 
     UIDeviceOrientation currentOrientation = currentDevice.orientation;
@@ -179,7 +179,7 @@ BuzzSentrySystemEventBreadcrumbs ()
 
 - (void)systemEventTriggered:(NSNotification *)notification
 {
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                              category:@"device.event"];
     crumb.type = @"system";
     crumb.data = @{ @"action" : notification.name };
@@ -225,7 +225,7 @@ BuzzSentrySystemEventBreadcrumbs ()
         storedTimezoneOffset = [self.fileManager readTimezoneOffset];
     }
 
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                              category:@"device.event"];
 
     NSInteger offset = self.currentDateProvider.timezoneOffset;

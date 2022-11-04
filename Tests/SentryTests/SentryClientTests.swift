@@ -139,7 +139,7 @@ class BuzzSentryClientTest: XCTestCase {
 
         eventId.assertIsNotEmpty()
         assertLastSentEvent { actual in
-            XCTAssertEqual(SentryLevel.info, actual.level)
+            XCTAssertEqual(BuzzSentryLevel.info, actual.level)
             XCTAssertEqual(fixture.message, actual.message)
 
             assertValidDebugMeta(actual: actual.debugMeta, forThreads: actual.threads)
@@ -154,7 +154,7 @@ class BuzzSentryClientTest: XCTestCase {
 
         eventId.assertIsNotEmpty()
         assertLastSentEvent { actual in
-            XCTAssertEqual(SentryLevel.info, actual.level)
+            XCTAssertEqual(BuzzSentryLevel.info, actual.level)
             XCTAssertEqual(fixture.message, actual.message)
             XCTAssertNil(actual.debugMeta)
             XCTAssertNil(actual.threads)
@@ -163,7 +163,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testCaptureEvent() {
-        let event = Event(level: SentryLevel.warning)
+        let event = Event(level: BuzzSentryLevel.warning)
         event.message = fixture.message
         let scope = Scope()
         let expectedTags = ["tagKey": "tagValue"]
@@ -186,7 +186,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testCaptureEventWithScope_SerializedTagsAndExtraShouldMatch() {
-        let event = Event(level: SentryLevel.warning)
+        let event = Event(level: BuzzSentryLevel.warning)
         event.message = fixture.message
         let scope = Scope()
         let expectedTags = ["tagKey": "tagValue"]
@@ -207,7 +207,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
         
     func testCaptureEventTypeTransactionDoesNotIncludeThreadAndDebugMeta() {
-        let event = Event(level: SentryLevel.warning)
+        let event = Event(level: BuzzSentryLevel.warning)
         event.message = fixture.message
         event.type = BuzzSentryEnvelopeItemTypeTransaction
         let scope = Scope()
@@ -358,7 +358,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testCaptureEventWithAttachStacktrace() {
-        let event = Event(level: SentryLevel.fatal)
+        let event = Event(level: BuzzSentryLevel.fatal)
         event.message = fixture.message
         let eventId = fixture.getSut(configureOptions: { options in
             options.attachStacktrace = true
@@ -621,10 +621,10 @@ class BuzzSentryClientTest: XCTestCase {
     }
 
     func testCaptureCrash_Permissions() {
-        fixture.permissionsObserver.internalLocationPermissionStatus = SentryPermissionStatus.granted
-        fixture.permissionsObserver.internalPushPermissionStatus = SentryPermissionStatus.granted
-        fixture.permissionsObserver.internalMediaLibraryPermissionStatus = SentryPermissionStatus.denied
-        fixture.permissionsObserver.internalPhotoLibraryPermissionStatus = SentryPermissionStatus.partial
+        fixture.permissionsObserver.internalLocationPermissionStatus = BuzzSentryPermissionStatus.granted
+        fixture.permissionsObserver.internalPushPermissionStatus = BuzzSentryPermissionStatus.granted
+        fixture.permissionsObserver.internalMediaLibraryPermissionStatus = BuzzSentryPermissionStatus.denied
+        fixture.permissionsObserver.internalPhotoLibraryPermissionStatus = BuzzSentryPermissionStatus.partial
 
         let event = TestData.event
         event.threads = nil
@@ -1208,7 +1208,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testCaptureEvent_traceInScope_sendTraceState() {
-        let event = Event(level: SentryLevel.warning)
+        let event = Event(level: BuzzSentryLevel.warning)
         event.message = fixture.message
         let scope = Scope()
         scope.span = fixture.trace
@@ -1222,7 +1222,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testCaptureEvent_traceInScope_dontSendTraceState() {
-        let event = Event(level: SentryLevel.warning)
+        let event = Event(level: BuzzSentryLevel.warning)
         event.message = fixture.message
         let scope = Scope()
         scope.span = BuzzSentryTracer()
@@ -1236,7 +1236,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     func testCaptureEvent_withAdditionalEnvelopeItem() {
-        let event = Event(level: SentryLevel.warning)
+        let event = Event(level: BuzzSentryLevel.warning)
         event.message = fixture.message
         
         let attachment = "{}"
@@ -1251,7 +1251,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     private func givenEventWithDebugMeta() -> Event {
-        let event = Event(level: SentryLevel.fatal)
+        let event = Event(level: BuzzSentryLevel.fatal)
         let debugMeta = DebugMeta()
         debugMeta.name = "Me"
         let debugMetas = [debugMeta]
@@ -1260,7 +1260,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     private func givenEventWithThreads() -> Event {
-        let event = Event(level: SentryLevel.fatal)
+        let event = Event(level: BuzzSentryLevel.fatal)
         let thread = Sentry.Thread(threadId: 1)
         thread.crashed = true
         let threads = [thread]
@@ -1311,7 +1311,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     private func assertValidErrorEvent(_ event: Event, _ error: NSError) {
-        XCTAssertEqual(SentryLevel.error, event.level)
+        XCTAssertEqual(BuzzSentryLevel.error, event.level)
         XCTAssertEqual(error, event.error as NSError?)
         
         guard let exceptions = event.exceptions else {
@@ -1339,7 +1339,7 @@ class BuzzSentryClientTest: XCTestCase {
     }
     
     private func assertValidExceptionEvent(_ event: Event) {
-        XCTAssertEqual(SentryLevel.error, event.level)
+        XCTAssertEqual(BuzzSentryLevel.error, event.level)
         XCTAssertEqual(exception.reason, event.exceptions!.first!.value)
         XCTAssertEqual(exception.name.rawValue, event.exceptions!.first!.type)
         assertValidDebugMeta(actual: event.debugMeta, forThreads: event.threads)

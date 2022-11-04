@@ -5,7 +5,7 @@
 
 @implementation BuzzSentryBreadcrumb
 
-- (instancetype)initWithLevel:(enum SentryLevel)level category:(NSString *)category
+- (instancetype)initWithLevel:(enum BuzzSentryLevel)level category:(NSString *)category
 {
     self = [super init];
     if (self) {
@@ -18,14 +18,14 @@
 
 - (instancetype)init
 {
-    return [self initWithLevel:kSentryLevelInfo category:@"default"];
+    return [self initWithLevel:kBuzzSentryLevelInfo category:@"default"];
 }
 
 - (NSDictionary<NSString *, id> *)serialize
 {
     NSMutableDictionary *serializedData = [NSMutableDictionary new];
 
-    [serializedData setValue:nameForSentryLevel(self.level) forKey:@"level"];
+    [serializedData setValue:nameForBuzzSentryLevel(self.level) forKey:@"level"];
     [serializedData setValue:[self.timestamp sentry_toIso8601String] forKey:@"timestamp"];
     [serializedData setValue:self.category forKey:@"category"];
     [serializedData setValue:self.type forKey:@"type"];

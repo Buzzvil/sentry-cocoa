@@ -15,7 +15,7 @@ BuzzSentryScope (Properties)
 @property (atomic, copy) NSString *_Nullable distString;
 @property (atomic, copy) NSString *_Nullable environmentString;
 @property (atomic, strong) NSArray<NSString *> *_Nullable fingerprintArray;
-@property (atomic) enum SentryLevel levelEnum;
+@property (atomic) enum BuzzSentryLevel levelEnum;
 @property (atomic) NSInteger maxBreadcrumbs;
 @property (atomic, strong) NSMutableArray<BuzzSentryAttachment *> *attachmentArray;
 

@@ -77,14 +77,14 @@ BuzzSentryCrashScopeObserver ()
         syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setFingerprint(bytes); }];
 }
 
-- (void)setLevel:(enum SentryLevel)level
+- (void)setLevel:(enum BuzzSentryLevel)level
 {
-    if (level == kSentryLevelNone) {
+    if (level == kBuzzSentryLevelNone) {
         sentrycrash_scopesync_setLevel(NULL);
         return;
     }
 
-    NSString *levelAsString = nameForSentryLevel(level);
+    NSString *levelAsString = nameForBuzzSentryLevel(level);
     NSData *json = [self toJSONEncodedCString:levelAsString];
 
     sentrycrash_scopesync_setLevel([json bytes]);

@@ -1,30 +1,30 @@
 import Sentry
 
 class TestBuzzSentryPermissionsObserver: BuzzSentryPermissionsObserver {
-    var internalPushPermissionStatus = SentryPermissionStatus.unknown
-    var internalLocationPermissionStatus = SentryPermissionStatus.unknown
-    var internalMediaLibraryPermissionStatus = SentryPermissionStatus.unknown
-    var internalPhotoLibraryPermissionStatus = SentryPermissionStatus.unknown
+    var internalPushPermissionStatus = BuzzSentryPermissionStatus.unknown
+    var internalLocationPermissionStatus = BuzzSentryPermissionStatus.unknown
+    var internalMediaLibraryPermissionStatus = BuzzSentryPermissionStatus.unknown
+    var internalPhotoLibraryPermissionStatus = BuzzSentryPermissionStatus.unknown
 
     override func startObserving() {
         // noop
     }
 
-    override var pushPermissionStatus: SentryPermissionStatus {
+    override var pushPermissionStatus: BuzzSentryPermissionStatus {
         get {
             return internalPushPermissionStatus
         }
         set {}
     }
 
-    override var locationPermissionStatus: SentryPermissionStatus {
+    override var locationPermissionStatus: BuzzSentryPermissionStatus {
         get {
             return internalLocationPermissionStatus
         }
         set {}
     }
 
-    override var photoLibraryPermissionStatus: SentryPermissionStatus {
+    override var photoLibraryPermissionStatus: BuzzSentryPermissionStatus {
         get {
             return internalPhotoLibraryPermissionStatus
         }

@@ -32,7 +32,7 @@ static int const SENTRY_BAGGAGE_MAX_SIZE = 8192;
  * Extract the level from data of an envelopte item containing an event. Default is the 'error'
  * level, see https://develop.sentry.dev/sdk/event-payloads/#optional-attributes
  */
-+ (SentryLevel)levelFromData:(NSData *)eventEnvelopeItemData;
++ (BuzzSentryLevel)levelFromData:(NSData *)eventEnvelopeItemData;
 
 @end
 

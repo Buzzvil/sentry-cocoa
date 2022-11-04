@@ -83,7 +83,7 @@ NS_SWIFT_NAME(Scope)
 /**
  * Sets the level in the scope
  */
-- (void)setLevel:(enum SentryLevel)level;
+- (void)setLevel:(enum BuzzSentryLevel)level;
 
 /**
  * Add a breadcrumb to the scope

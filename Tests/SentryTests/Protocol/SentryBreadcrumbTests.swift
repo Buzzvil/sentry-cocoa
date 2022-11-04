@@ -14,7 +14,7 @@ class BuzzSentryBreadcrumbTests: XCTestCase {
             date = Date(timeIntervalSince1970: 10)
             
             breadcrumb = Breadcrumb()
-            breadcrumb.level = SentryLevel.info
+            breadcrumb.level = BuzzSentryLevel.info
             breadcrumb.timestamp = date
             breadcrumb.category = category
             breadcrumb.type = "user"
@@ -55,7 +55,7 @@ class BuzzSentryBreadcrumbTests: XCTestCase {
     }
     
     func testNotIsEqual() {
-        testIsNotEqual { breadcrumb in breadcrumb.level = SentryLevel.error }
+        testIsNotEqual { breadcrumb in breadcrumb.level = BuzzSentryLevel.error }
         testIsNotEqual { breadcrumb in breadcrumb.category = "" }
         testIsNotEqual { breadcrumb in breadcrumb.timestamp = Date() }
         testIsNotEqual { breadcrumb in breadcrumb.type = "" }
@@ -74,7 +74,7 @@ class BuzzSentryBreadcrumbTests: XCTestCase {
         let actual = crumb.serialize()
         
         // Changing the original doesn't modify the serialized
-        crumb.level = SentryLevel.debug
+        crumb.level = BuzzSentryLevel.debug
         crumb.timestamp = nil
         crumb.category = ""
         crumb.type = ""

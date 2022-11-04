@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
  * https://github.com/getsentry/sentry-cocoa/issues/2065
  */
 
-@property (nonatomic) SentryPermissionStatus pushPermissionStatus;
-@property (nonatomic) SentryPermissionStatus locationPermissionStatus;
-@property (nonatomic) SentryPermissionStatus photoLibraryPermissionStatus;
+@property (nonatomic) BuzzSentryPermissionStatus pushPermissionStatus;
+@property (nonatomic) BuzzSentryPermissionStatus locationPermissionStatus;
+@property (nonatomic) BuzzSentryPermissionStatus photoLibraryPermissionStatus;
 
 - (void)startObserving;
 

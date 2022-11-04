@@ -122,21 +122,21 @@
 
 - (void)testValidDiagnosticLevel
 {
-    [self testDiagnosticlevelWith:@"none" expected:kSentryLevelNone];
-    [self testDiagnosticlevelWith:@"debug" expected:kSentryLevelDebug];
-    [self testDiagnosticlevelWith:@"info" expected:kSentryLevelInfo];
-    [self testDiagnosticlevelWith:@"warning" expected:kSentryLevelWarning];
-    [self testDiagnosticlevelWith:@"error" expected:kSentryLevelError];
-    [self testDiagnosticlevelWith:@"fatal" expected:kSentryLevelFatal];
+    [self testDiagnosticlevelWith:@"none" expected:kBuzzSentryLevelNone];
+    [self testDiagnosticlevelWith:@"debug" expected:kBuzzSentryLevelDebug];
+    [self testDiagnosticlevelWith:@"info" expected:kBuzzSentryLevelInfo];
+    [self testDiagnosticlevelWith:@"warning" expected:kBuzzSentryLevelWarning];
+    [self testDiagnosticlevelWith:@"error" expected:kBuzzSentryLevelError];
+    [self testDiagnosticlevelWith:@"fatal" expected:kBuzzSentryLevelFatal];
 }
 
 - (void)testInvalidDiagnosticLevel
 {
-    [self testDiagnosticlevelWith:@"fatala" expected:kSentryLevelDebug];
-    [self testDiagnosticlevelWith:@(YES) expected:kSentryLevelDebug];
+    [self testDiagnosticlevelWith:@"fatala" expected:kBuzzSentryLevelDebug];
+    [self testDiagnosticlevelWith:@(YES) expected:kBuzzSentryLevelDebug];
 }
 
-- (void)testDiagnosticlevelWith:(NSObject *)level expected:(SentryLevel)expected
+- (void)testDiagnosticlevelWith:(NSObject *)level expected:(BuzzSentryLevel)expected
 {
     BuzzSentryOptions *options = [self getValidOptions:@{ @"diagnosticLevel" : level }];
 
@@ -498,7 +498,7 @@
 {
     XCTAssertEqual(YES, options.enabled);
     XCTAssertEqual(NO, options.debug);
-    XCTAssertEqual(kSentryLevelDebug, options.diagnosticLevel);
+    XCTAssertEqual(kBuzzSentryLevelDebug, options.diagnosticLevel);
     XCTAssertNil(options.environment);
     XCTAssertNil(options.dist);
     XCTAssertEqual(defaultMaxBreadcrumbs, options.maxBreadcrumbs);

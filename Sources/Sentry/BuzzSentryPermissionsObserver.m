@@ -71,20 +71,20 @@ BuzzSentryPermissionsObserver () <CLLocationManagerDelegate>
 {
     switch (status) {
     case PHAuthorizationStatusNotDetermined:
-        self.photoLibraryPermissionStatus = kSentryPermissionStatusUnknown;
+        self.photoLibraryPermissionStatus = kBuzzSentryPermissionStatusUnknown;
         break;
 
     case PHAuthorizationStatusDenied:
     case PHAuthorizationStatusRestricted:
-        self.photoLibraryPermissionStatus = kSentryPermissionStatusDenied;
+        self.photoLibraryPermissionStatus = kBuzzSentryPermissionStatusDenied;
         break;
 
     case PHAuthorizationStatusLimited:
-        self.photoLibraryPermissionStatus = kSentryPermissionStatusPartial;
+        self.photoLibraryPermissionStatus = kBuzzSentryPermissionStatusPartial;
         break;
 
     case PHAuthorizationStatusAuthorized:
-        self.photoLibraryPermissionStatus = kSentryPermissionStatusGranted;
+        self.photoLibraryPermissionStatus = kBuzzSentryPermissionStatusGranted;
         break;
     }
 }
@@ -93,24 +93,24 @@ BuzzSentryPermissionsObserver () <CLLocationManagerDelegate>
 {
     switch (status) {
     case UNAuthorizationStatusNotDetermined:
-        self.pushPermissionStatus = kSentryPermissionStatusUnknown;
+        self.pushPermissionStatus = kBuzzSentryPermissionStatusUnknown;
         break;
 
     case UNAuthorizationStatusDenied:
-        self.pushPermissionStatus = kSentryPermissionStatusDenied;
+        self.pushPermissionStatus = kBuzzSentryPermissionStatusDenied;
         break;
 
     case UNAuthorizationStatusAuthorized:
-        self.pushPermissionStatus = kSentryPermissionStatusGranted;
+        self.pushPermissionStatus = kBuzzSentryPermissionStatusGranted;
         break;
 
     case UNAuthorizationStatusProvisional:
-        self.pushPermissionStatus = kSentryPermissionStatusPartial;
+        self.pushPermissionStatus = kBuzzSentryPermissionStatusPartial;
         break;
 
 #    if TARGET_OS_IOS
     case UNAuthorizationStatusEphemeral:
-        self.pushPermissionStatus = kSentryPermissionStatusPartial;
+        self.pushPermissionStatus = kBuzzSentryPermissionStatusPartial;
         break;
 #    endif
     }
@@ -121,21 +121,21 @@ BuzzSentryPermissionsObserver () <CLLocationManagerDelegate>
 {
     switch (status) {
     case kCLAuthorizationStatusNotDetermined:
-        self.locationPermissionStatus = kSentryPermissionStatusUnknown;
+        self.locationPermissionStatus = kBuzzSentryPermissionStatusUnknown;
         break;
 
     case kCLAuthorizationStatusDenied:
     case kCLAuthorizationStatusRestricted:
-        self.locationPermissionStatus = kSentryPermissionStatusDenied;
+        self.locationPermissionStatus = kBuzzSentryPermissionStatusDenied;
         break;
 
     case kCLAuthorizationStatusAuthorizedAlways:
-        self.locationPermissionStatus = kSentryPermissionStatusGranted;
+        self.locationPermissionStatus = kBuzzSentryPermissionStatusGranted;
         break;
 
 #if !TARGET_OS_OSX
     case kCLAuthorizationStatusAuthorizedWhenInUse:
-        self.locationPermissionStatus = kSentryPermissionStatusPartial;
+        self.locationPermissionStatus = kBuzzSentryPermissionStatusPartial;
         break;
 #endif
     }

@@ -7,9 +7,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BuzzSentryLog : NSObject
 SENTRY_NO_INIT
 
-+ (void)configure:(BOOL)debug diagnosticLevel:(SentryLevel)level;
++ (void)configure:(BOOL)debug diagnosticLevel:(BuzzSentryLevel)level;
 
-+ (void)logWithMessage:(NSString *)message andLevel:(SentryLevel)level;
++ (void)logWithMessage:(NSString *)message andLevel:(BuzzSentryLevel)level;
 
 @end
 
@@ -20,11 +20,11 @@ NS_ASSUME_NONNULL_END
                                             lastPathComponent] stringByDeletingPathExtension],     \
                                         __LINE__, [NSString stringWithFormat:__VA_ARGS__]]         \
                      andLevel:_SENTRY_LOG_LEVEL]
-#define SENTRY_LOG_DEBUG(...) SENTRY_LOG(kSentryLevelDebug, __VA_ARGS__)
-#define SENTRY_LOG_INFO(...) SENTRY_LOG(kSentryLevelInfo, __VA_ARGS__)
-#define SENTRY_LOG_WARN(...) SENTRY_LOG(kSentryLevelWarning, __VA_ARGS__)
-#define SENTRY_LOG_ERROR(...) SENTRY_LOG(kSentryLevelError, __VA_ARGS__)
-#define SENTRY_LOG_FATAL(...) SENTRY_LOG(kSentryLevelFatal, __VA_ARGS__)
+#define SENTRY_LOG_DEBUG(...) SENTRY_LOG(kBuzzSentryLevelDebug, __VA_ARGS__)
+#define SENTRY_LOG_INFO(...) SENTRY_LOG(kBuzzSentryLevelInfo, __VA_ARGS__)
+#define SENTRY_LOG_WARN(...) SENTRY_LOG(kBuzzSentryLevelWarning, __VA_ARGS__)
+#define SENTRY_LOG_ERROR(...) SENTRY_LOG(kBuzzSentryLevelError, __VA_ARGS__)
+#define SENTRY_LOG_FATAL(...) SENTRY_LOG(kBuzzSentryLevelFatal, __VA_ARGS__)
 
 /**
  * If `errno` is set to a non-zero value after `statement` finishes executing,

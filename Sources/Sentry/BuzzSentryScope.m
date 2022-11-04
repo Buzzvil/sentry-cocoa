@@ -60,9 +60,9 @@ BuzzSentryScope ()
 @property (atomic, strong) NSMutableArray<NSString *> *fingerprintArray;
 
 /**
- * SentryLevel of the event
+ * BuzzSentryLevel of the event
  */
-@property (atomic) enum SentryLevel levelEnum;
+@property (atomic) enum BuzzSentryLevel levelEnum;
 
 @property (atomic) NSInteger maxBreadcrumbs;
 
@@ -181,7 +181,7 @@ BuzzSentryScope ()
     self.userObject = nil;
     self.distString = nil;
     self.environmentString = nil;
-    self.levelEnum = kSentryLevelNone;
+    self.levelEnum = kBuzzSentryLevelNone;
 
     for (id<BuzzSentryScopeObserver> observer in self.observers) {
         [observer clear];
@@ -369,7 +369,7 @@ BuzzSentryScope ()
     }
 }
 
-- (void)setLevel:(enum SentryLevel)level
+- (void)setLevel:(enum BuzzSentryLevel)level
 {
     self.levelEnum = level;
 
@@ -418,9 +418,9 @@ BuzzSentryScope ()
         [serializedData setValue:[self fingerprints] forKey:@"fingerprint"];
     }
 
-    SentryLevel level = self.levelEnum;
-    if (level != kSentryLevelNone) {
-        [serializedData setValue:nameForSentryLevel(level) forKey:@"level"];
+    BuzzSentryLevel level = self.levelEnum;
+    if (level != kBuzzSentryLevelNone) {
+        [serializedData setValue:nameForBuzzSentryLevel(level) forKey:@"level"];
     }
     NSArray *crumbs = [self serializeBreadcrumbs];
     if (crumbs.count > 0) {
@@ -506,8 +506,8 @@ BuzzSentryScope ()
         event.environment = environment;
     }
 
-    SentryLevel level = self.levelEnum;
-    if (level != kSentryLevelNone) {
+    BuzzSentryLevel level = self.levelEnum;
+    if (level != kBuzzSentryLevelNone) {
         // We always want to set the level from the scope since this has
         // been set on purpose
         event.level = level;

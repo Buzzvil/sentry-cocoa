@@ -285,7 +285,7 @@ class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         XCTAssertEqual(1, fixture.client.captureCrashEventInvocations.count)
         let crashEvent = fixture.client.captureCrashEventInvocations.first?.event
         
-        XCTAssertEqual(SentryLevel.fatal, crashEvent?.level)
+        XCTAssertEqual(BuzzSentryLevel.fatal, crashEvent?.level)
         XCTAssertEqual([], crashEvent?.breadcrumbs)
         
         XCTAssertEqual(1, crashEvent?.exceptions?.count)

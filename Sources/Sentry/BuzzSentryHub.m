@@ -83,7 +83,7 @@ BuzzSentryHub ()
     if (nil == options || nil == options.releaseName) {
         [BuzzSentryLog
             logWithMessage:[NSString stringWithFormat:@"No option or release to start a session."]
-                  andLevel:kSentryLevelError];
+                  andLevel:kBuzzSentryLevelError];
         return;
     }
     @synchronized(_sessionLock) {
@@ -180,7 +180,7 @@ BuzzSentryHub ()
     if (nil != session) {
         BuzzSentryClient *client = _client;
 
-        if (client.options.diagnosticLevel == kSentryLevelDebug) {
+        if (client.options.diagnosticLevel == kBuzzSentryLevelDebug) {
             NSData *sessionData = [NSJSONSerialization dataWithJSONObject:[session serialize]
                                                                   options:0
                                                                     error:nil];
@@ -189,7 +189,7 @@ BuzzSentryHub ()
             [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"Capturing session with status: %@",
                                          sessionString]
-                      andLevel:kSentryLevelDebug];
+                      andLevel:kBuzzSentryLevelDebug];
         }
         [client captureSession:session];
     }
@@ -590,8 +590,8 @@ BuzzSentryHub ()
     for (BuzzSentryEnvelopeItem *item in items) {
         if ([item.header.type isEqualToString:BuzzSentryEnvelopeItemTypeEvent]) {
             // If there is no level the default is error
-            SentryLevel level = [BuzzSentrySerialization levelFromData:item.data];
-            if (level >= kSentryLevelError) {
+            BuzzSentryLevel level = [BuzzSentrySerialization levelFromData:item.data];
+            if (level >= kBuzzSentryLevelError) {
                 return YES;
             }
         }

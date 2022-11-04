@@ -13,7 +13,7 @@
 
 - (BuzzSentryBreadcrumb *)getBreadcrumb
 {
-    return [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug category:@"http"];
+    return [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelDebug category:@"http"];
 }
 
 - (void)testSetExtra
@@ -182,7 +182,7 @@
 
     [cloned setExtras:@{ @"aa" : @"b" }];
     [cloned setTags:@{ @"ab" : @"c" }];
-    [cloned addBreadcrumb:[[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
+    [cloned addBreadcrumb:[[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelDebug
                                                          category:@"http2"]];
     [cloned setUser:[[BuzzSentryUser alloc] initWithUserId:@"aid"]];
     [cloned setContextValue:@{ @"ae" : @"af" } forKey:@"myContext"];

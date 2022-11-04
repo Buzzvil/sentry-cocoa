@@ -45,7 +45,7 @@ BuzzSentryOptions ()
     if (self = [super init]) {
         self.enabled = YES;
         self.enableCrashHandler = YES;
-        self.diagnosticLevel = kSentryLevelDebug;
+        self.diagnosticLevel = kBuzzSentryLevelDebug;
         self.debug = NO;
         self.maxBreadcrumbs = defaultMaxBreadcrumbs;
         self.maxCacheItems = 30;
@@ -128,7 +128,7 @@ BuzzSentryOptions ()
         if (![self validateOptions:options didFailWithError:error]) {
             [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"Failed to initialize: %@", *error]
-                      andLevel:kSentryLevelError];
+                      andLevel:kBuzzSentryLevelError];
             return nil;
         }
     }
@@ -180,8 +180,8 @@ BuzzSentryOptions ()
     [self setBool:options[@"debug"] block:^(BOOL value) { self->_debug = value; }];
 
     if ([options[@"diagnosticLevel"] isKindOfClass:[NSString class]]) {
-        for (SentryLevel level = 0; level <= kSentryLevelFatal; level++) {
-            if ([nameForSentryLevel(level) isEqualToString:options[@"diagnosticLevel"]]) {
+        for (BuzzSentryLevel level = 0; level <= kBuzzSentryLevelFatal; level++) {
+            if ([nameForBuzzSentryLevel(level) isEqualToString:options[@"diagnosticLevel"]]) {
                 self.diagnosticLevel = level;
                 break;
             }

@@ -271,7 +271,7 @@ BuzzSentryNetworkTracker ()
         return;
     }
 
-    SentryLevel breadcrumbLevel = sessionTask.error != nil ? kSentryLevelError : kSentryLevelInfo;
+    BuzzSentryLevel breadcrumbLevel = sessionTask.error != nil ? kBuzzSentryLevelError : kBuzzSentryLevelInfo;
     BuzzSentryBreadcrumb *breadcrumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:breadcrumbLevel
                                                                   category:@"http"];
     breadcrumb.type = @"http";

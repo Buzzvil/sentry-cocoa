@@ -82,7 +82,7 @@ class BuzzSentrySDKTests: XCTestCase {
             options.maxBreadcrumbs = 0
         }
 
-        BuzzSentrySDK.addBreadcrumb(crumb: Breadcrumb(level: SentryLevel.warning, category: "test"))
+        BuzzSentrySDK.addBreadcrumb(crumb: Breadcrumb(level: BuzzSentryLevel.warning, category: "test"))
         let breadcrumbs = Dynamic(BuzzSentrySDK.currentHub().scope).breadcrumbArray as [Breadcrumb]?
         XCTAssertEqual(0, breadcrumbs?.count)
     }
@@ -91,7 +91,7 @@ class BuzzSentrySDKTests: XCTestCase {
         BuzzSentrySDK.start { options in
             options.dsn = BuzzSentrySDKTests.dsnAsString
             options.debug = true
-            options.diagnosticLevel = SentryLevel.debug
+            options.diagnosticLevel = BuzzSentryLevel.debug
             options.attachStacktrace = true
         }
         
@@ -103,7 +103,7 @@ class BuzzSentrySDKTests: XCTestCase {
         let options = hub.getClient()?.options
         XCTAssertNotNil(options)
         XCTAssertEqual(BuzzSentrySDKTests.dsnAsString, options?.dsn)
-        XCTAssertEqual(SentryLevel.debug, options?.diagnosticLevel)
+        XCTAssertEqual(BuzzSentryLevel.debug, options?.diagnosticLevel)
         XCTAssertEqual(true, options?.attachStacktrace)
         XCTAssertEqual(true, options?.enableAutoSessionTracking)
 

@@ -356,7 +356,7 @@ BuzzSentryFileManager ()
 {
     [BuzzSentryLog
         logWithMessage:[NSString stringWithFormat:@"Reading from session: %@", sessionFilePath]
-              andLevel:kSentryLevelDebug];
+              andLevel:kBuzzSentryLevelDebug];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSData *currentData = nil;
     @synchronized(self.currentSessionFilePath) {
@@ -447,7 +447,7 @@ BuzzSentryFileManager ()
         if (nil != error) {
             [BuzzSentryLog
                 logWithMessage:[NSString stringWithFormat:@"Failed to store app state %@", error]
-                      andLevel:kSentryLevelError];
+                      andLevel:kBuzzSentryLevelError];
         }
     }
 }
@@ -472,7 +472,7 @@ BuzzSentryFileManager ()
                 logWithMessage:[NSString
                                    stringWithFormat:
                                        @"Failed to move app state to previous app state: %@", error]
-                      andLevel:kSentryLevelError];
+                      andLevel:kBuzzSentryLevelError];
         }
     }
 }
@@ -521,7 +521,7 @@ BuzzSentryFileManager ()
         [BuzzSentryLog
             logWithMessage:[NSString stringWithFormat:@"Failed to delete app state from %@: %@",
                                      path, error]
-                  andLevel:kSentryLevelError];
+                  andLevel:kBuzzSentryLevelError];
     }
 }
 
@@ -575,7 +575,7 @@ BuzzSentryFileManager ()
             [BuzzSentryLog
                 logWithMessage:[NSString
                                    stringWithFormat:@"Failed to delete timezone offset %@", error]
-                      andLevel:kSentryLevelError];
+                      andLevel:kBuzzSentryLevelError];
         }
     }
 }

@@ -94,32 +94,32 @@ typedef NS_ENUM(NSInteger, BuzzSentryLogLevel) {
 /**
  * Sentry level
  */
-typedef NS_ENUM(NSUInteger, SentryLevel) {
+typedef NS_ENUM(NSUInteger, BuzzSentryLevel) {
     // Defaults to None which doesn't get serialized
-    kSentryLevelNone = 0,
+    kBuzzSentryLevelNone = 0,
     // Goes from Debug to Fatal so possible to: (level > Info) { .. }
-    kSentryLevelDebug = 1,
-    kSentryLevelInfo = 2,
-    kSentryLevelWarning = 3,
-    kSentryLevelError = 4,
-    kSentryLevelFatal = 5
+    kBuzzSentryLevelDebug = 1,
+    kBuzzSentryLevelInfo = 2,
+    kBuzzSentryLevelWarning = 3,
+    kBuzzSentryLevelError = 4,
+    kBuzzSentryLevelFatal = 5
 };
 
 /**
  * Permission status
  */
-typedef NS_ENUM(NSInteger, SentryPermissionStatus) {
-    kSentryPermissionStatusUnknown = 0,
-    kSentryPermissionStatusGranted,
-    kSentryPermissionStatusPartial,
-    kSentryPermissionStatusDenied
+typedef NS_ENUM(NSInteger, BuzzSentryPermissionStatus) {
+    kBuzzSentryPermissionStatusUnknown = 0,
+    kBuzzSentryPermissionStatusGranted,
+    kBuzzSentryPermissionStatusPartial,
+    kBuzzSentryPermissionStatusDenied
 };
 
 /**
  * Static internal helper to convert enum to string
  */
 static DEPRECATED_MSG_ATTRIBUTE(
-    "Use nameForSentryLevel() instead.") NSString *_Nonnull const SentryLevelNames[]
+    "Use nameForBuzzSentryLevel() instead.") NSString *_Nonnull const BuzzSentryLevelNames[]
     = {
           @"none",
           @"debug",

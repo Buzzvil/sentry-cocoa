@@ -55,7 +55,7 @@ BuzzSentryOutOfMemoryTracker ()
 
     [self.dispatchQueue dispatchAsyncWithBlock:^{
         if ([self.outOfMemoryLogic isOOM]) {
-            BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
+            BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelFatal];
             // Set to empty list so no breadcrumbs of the current scope are added
             event.breadcrumbs = @[];
 

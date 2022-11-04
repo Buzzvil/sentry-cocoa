@@ -560,7 +560,7 @@ class BuzzSentryHubTests: XCTestCase {
     func testCaptureEnvelope_WithEventWithError() {
         sut.startSession()
         
-        captureEventEnvelope(level: SentryLevel.error)
+        captureEventEnvelope(level: BuzzSentryLevel.error)
         
         assertSessionWithIncrementedErrorCountedAdded()
     }
@@ -568,7 +568,7 @@ class BuzzSentryHubTests: XCTestCase {
     func testCaptureEnvelope_WithEventWithFatal() {
         sut.startSession()
         
-        captureEventEnvelope(level: SentryLevel.fatal)
+        captureEventEnvelope(level: BuzzSentryLevel.fatal)
         
         assertSessionWithIncrementedErrorCountedAdded()
     }
@@ -596,7 +596,7 @@ class BuzzSentryHubTests: XCTestCase {
     }
     
     func testCaptureEnvelope_WithEventWithFatal_SessionNotStarted() {
-        captureEventEnvelope(level: SentryLevel.fatal)
+        captureEventEnvelope(level: BuzzSentryLevel.fatal)
         
         assertNoSessionAddedToCapturedEnvelope()
     }
@@ -604,14 +604,14 @@ class BuzzSentryHubTests: XCTestCase {
     func testCaptureEnvelope_WithEventWithWarning() {
         sut.startSession()
         
-        captureEventEnvelope(level: SentryLevel.warning)
+        captureEventEnvelope(level: BuzzSentryLevel.warning)
         
         assertNoSessionAddedToCapturedEnvelope()
     }
     
     func testCaptureEnvelope_WithClientNil() {
         sut.bindClient(nil)
-        captureEventEnvelope(level: SentryLevel.warning)
+        captureEventEnvelope(level: BuzzSentryLevel.warning)
         
         assertNoEnvelopesCaptured()
     }
@@ -653,7 +653,7 @@ class BuzzSentryHubTests: XCTestCase {
         group.waitWithTimeout()
     }
     
-    private func captureEventEnvelope(level: SentryLevel) {
+    private func captureEventEnvelope(level: BuzzSentryLevel) {
         let event = TestData.event
         event.level = level
         sut.capture(envelope: BuzzSentryEnvelope(event: event))

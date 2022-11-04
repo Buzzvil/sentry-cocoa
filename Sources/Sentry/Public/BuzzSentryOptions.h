@@ -36,7 +36,7 @@ NS_SWIFT_NAME(Options)
 /**
  * Minimum LogLevel to be used if debug is enabled. Default is debug.
  */
-@property (nonatomic, assign) SentryLevel diagnosticLevel;
+@property (nonatomic, assign) BuzzSentryLevel diagnosticLevel;
 
 /**
  * This property will be filled before the event is sent.

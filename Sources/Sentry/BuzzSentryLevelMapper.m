@@ -2,55 +2,55 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NSString *const kSentryLevelNameNone = @"none";
-NSString *const kSentryLevelNameDebug = @"debug";
-NSString *const kSentryLevelNameInfo = @"info";
-NSString *const kSentryLevelNameWarning = @"warning";
-NSString *const kSentryLevelNameError = @"error";
-NSString *const kSentryLevelNameFatal = @"fatal";
+NSString *const kBuzzSentryLevelNameNone = @"none";
+NSString *const kBuzzSentryLevelNameDebug = @"debug";
+NSString *const kBuzzSentryLevelNameInfo = @"info";
+NSString *const kBuzzSentryLevelNameWarning = @"warning";
+NSString *const kBuzzSentryLevelNameError = @"error";
+NSString *const kBuzzSentryLevelNameFatal = @"fatal";
 
-SentryLevel
+BuzzSentryLevel
 sentryLevelForString(NSString *string)
 {
-    if ([string isEqualToString:kSentryLevelNameNone]) {
-        return kSentryLevelNone;
+    if ([string isEqualToString:kBuzzSentryLevelNameNone]) {
+        return kBuzzSentryLevelNone;
     }
-    if ([string isEqualToString:kSentryLevelNameDebug]) {
-        return kSentryLevelDebug;
+    if ([string isEqualToString:kBuzzSentryLevelNameDebug]) {
+        return kBuzzSentryLevelDebug;
     }
-    if ([string isEqualToString:kSentryLevelNameInfo]) {
-        return kSentryLevelInfo;
+    if ([string isEqualToString:kBuzzSentryLevelNameInfo]) {
+        return kBuzzSentryLevelInfo;
     }
-    if ([string isEqualToString:kSentryLevelNameWarning]) {
-        return kSentryLevelWarning;
+    if ([string isEqualToString:kBuzzSentryLevelNameWarning]) {
+        return kBuzzSentryLevelWarning;
     }
-    if ([string isEqualToString:kSentryLevelNameError]) {
-        return kSentryLevelError;
+    if ([string isEqualToString:kBuzzSentryLevelNameError]) {
+        return kBuzzSentryLevelError;
     }
-    if ([string isEqualToString:kSentryLevelNameFatal]) {
-        return kSentryLevelFatal;
+    if ([string isEqualToString:kBuzzSentryLevelNameFatal]) {
+        return kBuzzSentryLevelFatal;
     }
 
     // Default is error, see https://develop.sentry.dev/sdk/event-payloads/#optional-attributes
-    return kSentryLevelError;
+    return kBuzzSentryLevelError;
 }
 
 NSString *
-nameForSentryLevel(SentryLevel level)
+nameForBuzzSentryLevel(BuzzSentryLevel level)
 {
     switch (level) {
-    case kSentryLevelNone:
-        return kSentryLevelNameNone;
-    case kSentryLevelDebug:
-        return kSentryLevelNameDebug;
-    case kSentryLevelInfo:
-        return kSentryLevelNameInfo;
-    case kSentryLevelWarning:
-        return kSentryLevelNameWarning;
-    case kSentryLevelError:
-        return kSentryLevelNameError;
-    case kSentryLevelFatal:
-        return kSentryLevelNameFatal;
+    case kBuzzSentryLevelNone:
+        return kBuzzSentryLevelNameNone;
+    case kBuzzSentryLevelDebug:
+        return kBuzzSentryLevelNameDebug;
+    case kBuzzSentryLevelInfo:
+        return kBuzzSentryLevelNameInfo;
+    case kBuzzSentryLevelWarning:
+        return kBuzzSentryLevelNameWarning;
+    case kBuzzSentryLevelError:
+        return kBuzzSentryLevelNameError;
+    case kBuzzSentryLevelFatal:
+        return kBuzzSentryLevelNameFatal;
     }
 }
 

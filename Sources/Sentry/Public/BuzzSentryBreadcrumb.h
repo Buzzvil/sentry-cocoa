@@ -11,7 +11,7 @@ NS_SWIFT_NAME(Breadcrumb)
 /**
  * Level of breadcrumb
  */
-@property (nonatomic) SentryLevel level;
+@property (nonatomic) BuzzSentryLevel level;
 
 /**
  * Category of bookmark, can be any string
@@ -42,11 +42,11 @@ NS_SWIFT_NAME(Breadcrumb)
 /**
  * Initializer for BuzzSentryBreadcrumb
  *
- * @param level SentryLevel
+ * @param level BuzzSentryLevel
  * @param category String
  * @return BuzzSentryBreadcrumb
  */
-- (instancetype)initWithLevel:(SentryLevel)level category:(NSString *)category;
+- (instancetype)initWithLevel:(BuzzSentryLevel)level category:(NSString *)category;
 - (instancetype)init;
 + (instancetype)new NS_UNAVAILABLE;
 

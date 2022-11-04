@@ -2,7 +2,7 @@ import XCTest
 
 class BuzzSentryLogTests: XCTestCase {
     var oldDebug: Bool!
-    var oldLevel: SentryLevel!
+    var oldLevel: BuzzSentryLevel!
     var oldOutput: BuzzSentryLogOutput!
 
     override func setUp() {
@@ -23,29 +23,29 @@ class BuzzSentryLogTests: XCTestCase {
         BuzzSentryLog.setLogOutput(logOutput)
         BuzzSentryLog.configure(true, diagnosticLevel: .error)
         
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.fatal)
-        BuzzSentryLog.log(withMessage: "1", andLevel: SentryLevel.error)
-        BuzzSentryLog.log(withMessage: "2", andLevel: SentryLevel.warning)
-        BuzzSentryLog.log(withMessage: "3", andLevel: SentryLevel.none)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.fatal)
+        BuzzSentryLog.log(withMessage: "1", andLevel: BuzzSentryLevel.error)
+        BuzzSentryLog.log(withMessage: "2", andLevel: BuzzSentryLevel.warning)
+        BuzzSentryLog.log(withMessage: "3", andLevel: BuzzSentryLevel.none)
         
         XCTAssertEqual(["[Sentry] [fatal] 0", "[Sentry] [error] 1"], logOutput.loggedMessages)
     }
     
     func testDefaultInitOfLogoutPut() {
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.error)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.error)
     }
     
     func testConfigureWithoutDebug_PrintsNothing() {
         let logOutput = TestLogOutput()
         BuzzSentryLog.setLogOutput(logOutput)
         
-        BuzzSentryLog.configure(false, diagnosticLevel: SentryLevel.none)
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.fatal)
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.error)
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.warning)
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.info)
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.debug)
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.none)
+        BuzzSentryLog.configure(false, diagnosticLevel: BuzzSentryLevel.none)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.fatal)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.error)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.warning)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.info)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.debug)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.none)
         
         XCTAssertEqual(0, logOutput.loggedMessages.count)
     }
@@ -54,13 +54,13 @@ class BuzzSentryLogTests: XCTestCase {
         let logOutput = TestLogOutput()
         BuzzSentryLog.setLogOutput(logOutput)
         
-        BuzzSentryLog.configure(true, diagnosticLevel: SentryLevel.none)
-        BuzzSentryLog.log(withMessage: "0", andLevel: SentryLevel.fatal)
-        BuzzSentryLog.log(withMessage: "1", andLevel: SentryLevel.error)
-        BuzzSentryLog.log(withMessage: "2", andLevel: SentryLevel.warning)
-        BuzzSentryLog.log(withMessage: "3", andLevel: SentryLevel.info)
-        BuzzSentryLog.log(withMessage: "4", andLevel: SentryLevel.debug)
-        BuzzSentryLog.log(withMessage: "5", andLevel: SentryLevel.none)
+        BuzzSentryLog.configure(true, diagnosticLevel: BuzzSentryLevel.none)
+        BuzzSentryLog.log(withMessage: "0", andLevel: BuzzSentryLevel.fatal)
+        BuzzSentryLog.log(withMessage: "1", andLevel: BuzzSentryLevel.error)
+        BuzzSentryLog.log(withMessage: "2", andLevel: BuzzSentryLevel.warning)
+        BuzzSentryLog.log(withMessage: "3", andLevel: BuzzSentryLevel.info)
+        BuzzSentryLog.log(withMessage: "4", andLevel: BuzzSentryLevel.debug)
+        BuzzSentryLog.log(withMessage: "5", andLevel: BuzzSentryLevel.none)
         
         XCTAssertEqual(["[Sentry] [fatal] 0",
                         "[Sentry] [error] 1",

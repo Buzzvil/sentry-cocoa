@@ -68,7 +68,7 @@ BuzzSentryBreadcrumbTracker (Private)
 {
     [BuzzSentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
 
-    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kSentryLevelInfo
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelInfo
                                                              category:@"testCategory"];
     crumb.type = @"testType";
     crumb.message = @"testMessage";
@@ -81,7 +81,7 @@ BuzzSentryBreadcrumbTracker (Private)
 {
     [BuzzSentrySDK startWithOptions:@{ @"dsn" : @"https://username:password@app.getsentry.com/12345" }];
 
-    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelFatal];
 
     event.timestamp = [NSDate date];
     event.message = [[BuzzSentryMessage alloc] initWithFormatted:@"testy test"];
@@ -102,31 +102,31 @@ BuzzSentryBreadcrumbTracker (Private)
 
 - (void)testLevelNames
 {
-    XCTAssertEqual(kSentryLevelNone, sentryLevelForString(kSentryLevelNameNone));
-    XCTAssertEqual(kSentryLevelDebug, sentryLevelForString(kSentryLevelNameDebug));
-    XCTAssertEqual(kSentryLevelInfo, sentryLevelForString(kSentryLevelNameInfo));
-    XCTAssertEqual(kSentryLevelWarning, sentryLevelForString(kSentryLevelNameWarning));
-    XCTAssertEqual(kSentryLevelError, sentryLevelForString(kSentryLevelNameError));
-    XCTAssertEqual(kSentryLevelFatal, sentryLevelForString(kSentryLevelNameFatal));
+    XCTAssertEqual(kBuzzSentryLevelNone, sentryLevelForString(kBuzzSentryLevelNameNone));
+    XCTAssertEqual(kBuzzSentryLevelDebug, sentryLevelForString(kBuzzSentryLevelNameDebug));
+    XCTAssertEqual(kBuzzSentryLevelInfo, sentryLevelForString(kBuzzSentryLevelNameInfo));
+    XCTAssertEqual(kBuzzSentryLevelWarning, sentryLevelForString(kBuzzSentryLevelNameWarning));
+    XCTAssertEqual(kBuzzSentryLevelError, sentryLevelForString(kBuzzSentryLevelNameError));
+    XCTAssertEqual(kBuzzSentryLevelFatal, sentryLevelForString(kBuzzSentryLevelNameFatal));
 
-    XCTAssertEqual(kSentryLevelError, sentryLevelForString(@"fdjsafdsa"),
+    XCTAssertEqual(kBuzzSentryLevelError, sentryLevelForString(@"fdjsafdsa"),
         @"Failed to map an unexpected string value to the default case.");
 
-    XCTAssertEqualObjects(kSentryLevelNameNone, nameForSentryLevel(kSentryLevelNone));
-    XCTAssertEqualObjects(kSentryLevelNameDebug, nameForSentryLevel(kSentryLevelDebug));
-    XCTAssertEqualObjects(kSentryLevelNameInfo, nameForSentryLevel(kSentryLevelInfo));
-    XCTAssertEqualObjects(kSentryLevelNameWarning, nameForSentryLevel(kSentryLevelWarning));
-    XCTAssertEqualObjects(kSentryLevelNameError, nameForSentryLevel(kSentryLevelError));
-    XCTAssertEqualObjects(kSentryLevelNameFatal, nameForSentryLevel(kSentryLevelFatal));
+    XCTAssertEqualObjects(kBuzzSentryLevelNameNone, nameForBuzzSentryLevel(kBuzzSentryLevelNone));
+    XCTAssertEqualObjects(kBuzzSentryLevelNameDebug, nameForBuzzSentryLevel(kBuzzSentryLevelDebug));
+    XCTAssertEqualObjects(kBuzzSentryLevelNameInfo, nameForBuzzSentryLevel(kBuzzSentryLevelInfo));
+    XCTAssertEqualObjects(kBuzzSentryLevelNameWarning, nameForBuzzSentryLevel(kBuzzSentryLevelWarning));
+    XCTAssertEqualObjects(kBuzzSentryLevelNameError, nameForBuzzSentryLevel(kBuzzSentryLevelError));
+    XCTAssertEqualObjects(kBuzzSentryLevelNameFatal, nameForBuzzSentryLevel(kBuzzSentryLevelFatal));
 }
 
 - (void)testLevelOrder
 {
-    XCTAssertGreaterThan(kSentryLevelFatal, kSentryLevelError);
-    XCTAssertGreaterThan(kSentryLevelError, kSentryLevelWarning);
-    XCTAssertGreaterThan(kSentryLevelWarning, kSentryLevelInfo);
-    XCTAssertGreaterThan(kSentryLevelInfo, kSentryLevelDebug);
-    XCTAssertGreaterThan(kSentryLevelDebug, kSentryLevelNone);
+    XCTAssertGreaterThan(kBuzzSentryLevelFatal, kBuzzSentryLevelError);
+    XCTAssertGreaterThan(kBuzzSentryLevelError, kBuzzSentryLevelWarning);
+    XCTAssertGreaterThan(kBuzzSentryLevelWarning, kBuzzSentryLevelInfo);
+    XCTAssertGreaterThan(kBuzzSentryLevelInfo, kBuzzSentryLevelDebug);
+    XCTAssertGreaterThan(kBuzzSentryLevelDebug, kBuzzSentryLevelNone);
 }
 
 - (void)testDateCategory

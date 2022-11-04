@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setFingerprint:(nullable NSArray<NSString *> *)fingerprint;
 
-- (void)setLevel:(enum SentryLevel)level;
+- (void)setLevel:(enum BuzzSentryLevel)level;
 
 - (void)addBreadcrumb:(BuzzSentryBreadcrumb *)crumb;
 

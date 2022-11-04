@@ -98,7 +98,7 @@ BuzzSentryCrashReportConverter ()
 - (BuzzSentryEvent *_Nullable)convertReportToEvent
 {
     @try {
-        BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelFatal];
+        BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelFatal];
         if ([self.report[@"report"][@"timestamp"] isKindOfClass:NSNumber.class]) {
             event.timestamp = [NSDate
                 dateWithTimeIntervalSince1970:[self.report[@"report"][@"timestamp"] integerValue]];
@@ -179,20 +179,20 @@ BuzzSentryCrashReportConverter ()
     return breadcrumbs;
 }
 
-- (SentryLevel)sentryLevelFromString:(NSString *)level
+- (BuzzSentryLevel)sentryLevelFromString:(NSString *)level
 {
     if ([level isEqualToString:@"fatal"]) {
-        return kSentryLevelFatal;
+        return kBuzzSentryLevelFatal;
     } else if ([level isEqualToString:@"warning"]) {
-        return kSentryLevelWarning;
+        return kBuzzSentryLevelWarning;
     } else if ([level isEqualToString:@"info"] || [level isEqualToString:@"log"]) {
-        return kSentryLevelInfo;
+        return kBuzzSentryLevelInfo;
     } else if ([level isEqualToString:@"debug"]) {
-        return kSentryLevelDebug;
+        return kBuzzSentryLevelDebug;
     } else if ([level isEqualToString:@"error"]) {
-        return kSentryLevelError;
+        return kBuzzSentryLevelError;
     }
-    return kSentryLevelError;
+    return kBuzzSentryLevelError;
 }
 
 - (NSArray *)rawStackTraceForThreadIndex:(NSInteger)threadIndex

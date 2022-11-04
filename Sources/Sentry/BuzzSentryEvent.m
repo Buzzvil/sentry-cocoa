@@ -27,10 +27,10 @@ BuzzSentryEvent ()
 
 - (instancetype)init
 {
-    return [self initWithLevel:kSentryLevelNone];
+    return [self initWithLevel:kBuzzSentryLevelNone];
 }
 
-- (instancetype)initWithLevel:(enum SentryLevel)level
+- (instancetype)initWithLevel:(enum BuzzSentryLevel)level
 {
     self = [super init];
     if (self) {
@@ -44,7 +44,7 @@ BuzzSentryEvent ()
 
 - (instancetype)initWithError:(NSError *)error
 {
-    self = [self initWithLevel:kSentryLevelError];
+    self = [self initWithLevel:kBuzzSentryLevelError];
     self.error = error;
     return self;
 }
@@ -62,8 +62,8 @@ BuzzSentryEvent ()
     }
                                               .mutableCopy;
 
-    if (self.level != kSentryLevelNone) {
-        [serializedData setValue:nameForSentryLevel(self.level) forKey:@"level"];
+    if (self.level != kBuzzSentryLevelNone) {
+        [serializedData setValue:nameForBuzzSentryLevel(self.level) forKey:@"level"];
     }
 
     [self addSimpleProperties:serializedData];

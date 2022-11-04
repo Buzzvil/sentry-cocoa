@@ -62,7 +62,7 @@ BuzzSentryANRTrackingIntegration ()
 
     NSArray<BuzzSentryThread *> *threads = [threadInspector getCurrentThreadsWithStackTrace];
 
-    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kSentryLevelError];
+    BuzzSentryEvent *event = [[BuzzSentryEvent alloc] initWithLevel:kBuzzSentryLevelError];
     BuzzSentryException *sentryException = [[BuzzSentryException alloc] initWithValue:message
                                                                          type:@"App Hanging"];
     sentryException.mechanism = [[BuzzSentryMechanism alloc] initWithType:@"AppHang"];

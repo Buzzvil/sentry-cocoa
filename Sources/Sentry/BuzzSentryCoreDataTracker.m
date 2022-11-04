@@ -36,12 +36,12 @@
                                          @"BuzzSentryCoreDataTracker automatically "
                                          @"started a new span with description: %@, operation: %@",
                                      fetchSpan.description, SENTRY_COREDATA_FETCH_OPERATION]
-                  andLevel:kSentryLevelDebug];
+                  andLevel:kBuzzSentryLevelDebug];
     } else {
         [BuzzSentryLog
             logWithMessage:
                 @"managedObjectContext:executeFetchRequest:error:originalImp: fetchSpan is nil."
-                  andLevel:kSentryLevelError];
+                  andLevel:kBuzzSentryLevelError];
     }
 
     NSArray *result = original(request, error);
@@ -81,7 +81,7 @@
                                                         @"started a new span with description: %@, "
                                                         @"operation: %@",
                                        fetchSpan.description, SENTRY_COREDATA_FETCH_OPERATION]
-                          andLevel:kSentryLevelDebug];
+                          andLevel:kBuzzSentryLevelDebug];
 
                 [fetchSpan setDataValue:operations forKey:@"operations"];
             }
