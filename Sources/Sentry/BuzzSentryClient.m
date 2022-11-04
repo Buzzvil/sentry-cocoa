@@ -644,7 +644,7 @@ NSString *const kSentryDefaultEnvironment = @"production";
         for (NSString *integration in BuzzSentrySDK.currentHub.installedIntegrationNames) {
             // Every integration starts with "Sentry" and ends with "Integration". To keep the
             // payload of the event small we remove both.
-            NSString *withoutSentry = [integration stringByReplacingOccurrencesOfString:@"Sentry"
+            NSString *withoutSentry = [integration stringByReplacingOccurrencesOfString:@"BuzzSentry"
                                                                              withString:@""];
             NSString *trimmed = [withoutSentry stringByReplacingOccurrencesOfString:@"Integration"
                                                                          withString:@""];
