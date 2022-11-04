@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import SwiftUI
 import XCTest
 

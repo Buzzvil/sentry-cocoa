@@ -2,7 +2,7 @@
 #import "BuzzSentryError.h"
 #import "BuzzSentrySDK.h"
 #import "BuzzSentrySDKInfo.h"
-#import "SentryTests-Swift.h"
+#import "BuzzSentryTests-Swift.h"
 #import <XCTest/XCTest.h>
 
 @interface BuzzSentryOptionsTest : XCTestCase
@@ -1051,10 +1051,10 @@
 
     [options addEntriesFromDictionary:dict];
 
-    BuzzSentryOptions *BuzzSentryOptions = [[BuzzSentryOptions alloc] initWithDict:options
-                                                      didFailWithError:&error];
+    BuzzSentryOptions *buzzSentryOptions = [[BuzzSentryOptions alloc] initWithDict:options
+                                                                  didFailWithError:&error];
     XCTAssertNil(error);
-    return BuzzSentryOptions;
+    return buzzSentryOptions;
 }
 
 - (void)testUrlSessionDelegate

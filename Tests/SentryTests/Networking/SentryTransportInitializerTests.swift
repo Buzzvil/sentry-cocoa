@@ -1,4 +1,4 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 class BuzzSentryTransportInitializerTests: XCTestCase {
@@ -22,7 +22,7 @@ class BuzzSentryTransportInitializerTests: XCTestCase {
     func testDefault() throws {
         let options = try Options(dict: ["dsn": BuzzSentryTransportInitializerTests.dsnAsString])
         
-        let result = TransportInitializer.initTransport(options, BuzzSentryFileManager: fileManager)
+        let result = TransportInitializer.initTransport(options, buzzSentryFileManager: fileManager)
         
         XCTAssertTrue(result.isKind(of: BuzzSentryHttpTransport.self))
     }

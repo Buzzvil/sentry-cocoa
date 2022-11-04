@@ -103,7 +103,7 @@ index 1eeafe7..f5f3dea 100644
  import Alamofire
  import Foundation
  import XCTest
-+import Sentry
++import BuzzSentry
 +
 +private var SentryInitialized = false
  

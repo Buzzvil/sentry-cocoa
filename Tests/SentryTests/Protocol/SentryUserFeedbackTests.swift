@@ -18,7 +18,7 @@ class BuzzSentryUserFeedbackTests: XCTestCase {
         
         let actual = userFeedback.serialize()
         
-        XCTAssertEqual(userFeedback.eventId.BuzzSentryIdString, actual["event_id"] as? String)
+        XCTAssertEqual(userFeedback.eventId.buzzSentryIdString, actual["event_id"] as? String)
         XCTAssertEqual(userFeedback.comments, actual["comments"] as? String)
         XCTAssertEqual(userFeedback.email, actual["email"] as? String)
         XCTAssertEqual(userFeedback.name, actual["name"] as? String)

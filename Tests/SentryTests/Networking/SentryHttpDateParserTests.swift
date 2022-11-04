@@ -1,4 +1,4 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 class BuzzSentryHttpDateParserTests: XCTestCase {

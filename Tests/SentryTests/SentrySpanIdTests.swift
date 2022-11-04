@@ -23,12 +23,12 @@ class BuzzSentrySpanIdTests: XCTestCase {
     func testInitWithUUID_ValidIdString() {
         let spanId = SpanId(uuid: fixture.uuid)
         
-        XCTAssertEqual(fixture.expectedUUIDV4String, spanId.BuzzSentrySpanIdString)
+        XCTAssertEqual(fixture.expectedUUIDV4String, spanId.buzzSentrySpanIdString)
     }
     
     func testDescriptionEqualsIdString() {
         let spanId = SpanId()
-        XCTAssertEqual(spanId.description, spanId.BuzzSentrySpanIdString)
+        XCTAssertEqual(spanId.description, spanId.buzzSentrySpanIdString)
     }
       
     func testInitWithUUIDV4String_ValidIdString() {

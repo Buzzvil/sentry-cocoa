@@ -1,5 +1,5 @@
 import Foundation
-import Sentry
+import BuzzSentry
 
 class SpanObserver: NSObject {
 

@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 
 class TestBuzzSentryUIDeviceWrapper: BuzzSentryUIDeviceWrapper {
 #if os(iOS)

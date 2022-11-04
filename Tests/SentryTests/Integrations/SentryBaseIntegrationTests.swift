@@ -1,8 +1,8 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 class MyTestIntegration: BuzzSentryBaseIntegration {
-    override func integrationOptions() -> SentryIntegrationOption {
+    override func integrationOptions() -> BuzzSentryIntegrationOption {
         return .integrationOptionEnableAutoSessionTracking
     }
 }

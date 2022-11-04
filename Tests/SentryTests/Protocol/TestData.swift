@@ -1,5 +1,5 @@
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-import Sentry
+import BuzzSentry
 import UIKit
 #endif
 
@@ -119,8 +119,8 @@ class TestData {
         return mechanismMeta
     }
     
-    static var thread: Sentry.Thread {
-        let thread = Sentry.Thread(threadId: 10)
+    static var thread: BuzzSentry.Thread {
+        let thread = BuzzSentry.Thread(threadId: 10)
         thread.crashed = false
         thread.current = true
         thread.name = "main"

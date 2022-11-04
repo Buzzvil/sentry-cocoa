@@ -1,4 +1,4 @@
-#import <Sentry/BuzzSentry.h>
+#import <BuzzSentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 #import "NSDate+BuzzSentryExtras.h"

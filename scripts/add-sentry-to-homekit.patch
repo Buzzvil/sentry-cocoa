@@ -31,7 +31,7 @@ index 8e0e35f4..3d34887d 100644
  import Shared
  import UIKit
  import XCGLogger
-+import Sentry
++import BuzzSentry
  
  let keychain = Constants.Keychain
  

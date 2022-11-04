@@ -1,5 +1,5 @@
 #import "BuzzSentrySerialization.h"
-#import <Sentry/BuzzSentry.h>
+#import <BuzzSentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 @interface BuzzSentrySerializationNilTests : XCTestCase

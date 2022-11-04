@@ -1,5 +1,5 @@
 import Foundation
-import Sentry
+import BuzzSentry
 
 /**
  * Stores the DSN to a file in the cache directory.

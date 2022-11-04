@@ -1,18 +1,18 @@
 import Foundation
 
 class TestClient: Client {
-    let BuzzSentryFileManager: BuzzSentryFileManager
+    let buzzSentryFileManager: BuzzSentryFileManager
     let queue = DispatchQueue(label: "TestClient", attributes: .concurrent)
 
     override init?(options: Options) {
-        BuzzSentryFileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+        buzzSentryFileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         super.init(options: options, permissionsObserver: TestBuzzSentryPermissionsObserver())
     }
 
     // Without this override we get a fatal error: use of unimplemented initializer
     // see https://stackoverflow.com/questions/28187261/ios-swift-fatal-error-use-of-unimplemented-initializer-init
     override init(options: Options, transportAdapter: BuzzSentryTransportAdapter, fileManager: BuzzSentryFileManager, threadInspector: BuzzSentryThreadInspector, random: BuzzSentryRandomProtocol, crashWrapper: BuzzSentryCrashWrapper, permissionsObserver: BuzzSentryPermissionsObserver, deviceWrapper: BuzzSentryUIDeviceWrapper, locale: Locale, timezone: TimeZone) {
-        BuzzSentryFileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+        buzzSentryFileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         super.init(
             options: options,
             transportAdapter: transportAdapter,
@@ -28,7 +28,7 @@ class TestClient: Client {
     }
 
     override func fileManager() -> BuzzSentryFileManager {
-        BuzzSentryFileManager
+        buzzSentryFileManager
     }
     
     var captureSessionInvocations = Invocations<BuzzSentrySession>()

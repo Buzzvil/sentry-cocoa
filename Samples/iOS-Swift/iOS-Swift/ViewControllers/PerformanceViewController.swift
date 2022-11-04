@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import UIKit
 
 class PerformanceViewController: UIViewController {

@@ -10,8 +10,8 @@ class BuzzSentrySpanContextTests: XCTestCase {
         XCTAssertEqual(spanContext.operation, someOperation)
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
-        XCTAssertEqual(spanContext.traceId.BuzzSentryIdString.count, 32)
-        XCTAssertEqual(spanContext.spanId.BuzzSentrySpanIdString.count, 16)
+        XCTAssertEqual(spanContext.traceId.buzzSentryIdString.count, 32)
+        XCTAssertEqual(spanContext.spanId.buzzSentrySpanIdString.count, 16)
     }
     
     func testInitWithSampled() {
@@ -21,8 +21,8 @@ class BuzzSentrySpanContextTests: XCTestCase {
         XCTAssertNil(spanContext.parentSpanId)
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
-        XCTAssertEqual(spanContext.traceId.BuzzSentryIdString.count, 32)
-        XCTAssertEqual(spanContext.spanId.BuzzSentrySpanIdString.count, 16)
+        XCTAssertEqual(spanContext.traceId.buzzSentryIdString.count, 32)
+        XCTAssertEqual(spanContext.spanId.buzzSentrySpanIdString.count, 16)
     }
     
     func testInitWithTraceIdSpanIdParentIdSampled() {
@@ -52,13 +52,13 @@ class BuzzSentrySpanContextTests: XCTestCase {
         
         let data = spanContext.serialize()
         
-        XCTAssertEqual(data["span_id"] as? String, spanId.BuzzSentrySpanIdString)
-        XCTAssertEqual(data["trace_id"] as? String, id.BuzzSentryIdString)
+        XCTAssertEqual(data["span_id"] as? String, spanId.buzzSentrySpanIdString)
+        XCTAssertEqual(data["trace_id"] as? String, id.buzzSentryIdString)
         XCTAssertEqual(data["type"] as? String, SpanContext.type)
         XCTAssertEqual(data["op"] as? String, someOperation)
         XCTAssertEqual(data["description"] as? String, spanContext.spanDescription)
         XCTAssertEqual(data["sampled"] as? String, "true")
-        XCTAssertEqual(data["parent_span_id"] as? String, parentId.BuzzSentrySpanIdString)
+        XCTAssertEqual(data["parent_span_id"] as? String, parentId.buzzSentrySpanIdString)
         XCTAssertEqual(data["status"] as? String, "ok")
     }
     

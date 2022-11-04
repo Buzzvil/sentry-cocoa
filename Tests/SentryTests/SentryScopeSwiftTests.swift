@@ -178,8 +178,8 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
               
         XCTAssertEqual(actual?.transaction, fixture.transactionName)
         XCTAssertEqual(trace?["op"] as? String, fixture.transactionOperation)
-        XCTAssertEqual(trace?["trace_id"] as? String, fixture.transaction.context.traceId.BuzzSentryIdString)
-        XCTAssertEqual(trace?["span_id"] as? String, fixture.transaction.context.spanId.BuzzSentrySpanIdString)
+        XCTAssertEqual(trace?["trace_id"] as? String, fixture.transaction.context.traceId.buzzSentryIdString)
+        XCTAssertEqual(trace?["span_id"] as? String, fixture.transaction.context.spanId.buzzSentrySpanIdString)
     }
     
     func testApplyToEvent_EventWithDist() {

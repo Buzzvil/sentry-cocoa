@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 class BuzzSentrySpanTests: XCTestCase {
@@ -137,8 +137,8 @@ class BuzzSentrySpanTests: XCTestCase {
         let spans = serializedData["spans"] as! [Any]
         let serializedChild = spans[0] as! [String: Any]
         
-        XCTAssertEqual(serializedChild["span_id"] as? String, childSpan.context.spanId.BuzzSentrySpanIdString)
-        XCTAssertEqual(serializedChild["parent_span_id"] as? String, span.context.spanId.BuzzSentrySpanIdString)
+        XCTAssertEqual(serializedChild["span_id"] as? String, childSpan.context.spanId.buzzSentrySpanIdString)
+        XCTAssertEqual(serializedChild["parent_span_id"] as? String, span.context.spanId.buzzSentrySpanIdString)
     }
     
     func testStartChildWithNameOperation() {
@@ -219,8 +219,8 @@ class BuzzSentrySpanTests: XCTestCase {
         span.finish()
         
         let serialization = span.serialize()
-        XCTAssertEqual(serialization["span_id"] as? String, span.context.spanId.BuzzSentrySpanIdString)
-        XCTAssertEqual(serialization["trace_id"] as? String, span.context.traceId.BuzzSentryIdString)
+        XCTAssertEqual(serialization["span_id"] as? String, span.context.spanId.buzzSentrySpanIdString)
+        XCTAssertEqual(serialization["trace_id"] as? String, span.context.traceId.buzzSentryIdString)
         XCTAssertEqual(serialization["timestamp"] as? TimeInterval, TestData.timestamp.timeIntervalSince1970)
         XCTAssertEqual(serialization["start_timestamp"] as? TimeInterval, TestData.timestamp.timeIntervalSince1970)
         XCTAssertEqual(serialization["type"] as? String, SpanContext.type)

@@ -1,6 +1,6 @@
 import Foundation
 import MetricKit
-import Sentry
+import BuzzSentry
 
 @available(iOS 14.0, *)
 class MetricKitManager: NSObject, MXMetricManagerSubscriber {

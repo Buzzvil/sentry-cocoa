@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 
 class TestBuzzSentryPermissionsObserver: BuzzSentryPermissionsObserver {
     var internalPushPermissionStatus = BuzzSentryPermissionStatus.unknown

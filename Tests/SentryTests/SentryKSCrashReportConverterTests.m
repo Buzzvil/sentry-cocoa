@@ -2,7 +2,7 @@
 #import "BuzzSentryCrashReportConverter.h"
 #import "BuzzSentryInAppLogic.h"
 #import "BuzzSentryMechanismMeta.h"
-#import <Sentry/BuzzSentry.h>
+#import <BuzzSentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
 @interface BuzzSentryCrashReportConverterTests : XCTestCase

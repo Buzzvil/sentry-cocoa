@@ -1,4 +1,4 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 class BuzzSentryIdTests: XCTestCase {
@@ -26,7 +26,7 @@ class BuzzSentryIdTests: XCTestCase {
     func testInitWithUUID_ValidIdString() {
         let BuzzSentryId = BuzzSentryId(uuid: fixture.uuid)
         
-        XCTAssertEqual(fixture.expectedUUIDV4String, BuzzSentryId.BuzzSentryIdString)
+        XCTAssertEqual(fixture.expectedUUIDV4String, BuzzSentryId.buzzSentryIdString)
     }
     
     func testInitWithUUIDString_ValidIdString() {

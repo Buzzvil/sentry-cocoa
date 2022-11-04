@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 class BuzzSentryTransportFactoryTests: XCTestCase {
@@ -18,7 +18,7 @@ class BuzzSentryTransportFactoryTests: XCTestCase {
         options.urlSessionDelegate = urlSessionDelegateSpy
         
         let fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
-        let transport = TransportInitializer.initTransport(options, BuzzSentryFileManager: fileManager)
+        let transport = TransportInitializer.initTransport(options, buzzSentryFileManager: fileManager)
         let requestManager = Dynamic(transport).requestManager.asObject as! BuzzSentryQueueableRequestManager
         
         let imgUrl = URL(string: "https://github.com")!
