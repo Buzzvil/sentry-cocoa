@@ -35,7 +35,7 @@ g_advanceCursor(__unused BuzzSentryCrashStackCursor *cursor)
 {
     BuzzSentryCrashLOG_WARN("No stack cursor has been set. For C++, this means that hooking "
                         "__cxa_throw() failed for some reason. Embedded frameworks can cause "
-                        "this: https://github.com/getsentry/BuzzSentryCrash/issues/205");
+                        "this: https://github.com/getsentry/SentryCrash/issues/205");
     return false;
 }
 
