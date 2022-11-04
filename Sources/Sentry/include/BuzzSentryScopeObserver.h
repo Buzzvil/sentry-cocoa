@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class BuzzSentryUser;
 
 /**
- * An observer to sync the scope to SentryCrash.
+ * An observer to sync the scope to BuzzSentryCrash.
  */
 @protocol BuzzSentryScopeObserver <NSObject>
 

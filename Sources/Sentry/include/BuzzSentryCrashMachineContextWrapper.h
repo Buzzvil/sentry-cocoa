@@ -1,24 +1,24 @@
-#import "SentryCrashMachineContext.h"
-#import "SentryCrashThread.h"
+#import "BuzzSentryCrashMachineContext.h"
+#import "BuzzSentryCrashThread.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** A wrapper around SentryCrashMachineContext for testability.
+/** A wrapper around BuzzSentryCrashMachineContext for testability.
  */
 @protocol BuzzSentryCrashMachineContextWrapper <NSObject>
 
-- (void)fillContextForCurrentThread:(struct SentryCrashMachineContext *)context;
+- (void)fillContextForCurrentThread:(struct BuzzSentryCrashMachineContext *)context;
 
-- (int)getThreadCount:(struct SentryCrashMachineContext *)context;
+- (int)getThreadCount:(struct BuzzSentryCrashMachineContext *)context;
 
-- (SentryCrashThread)getThread:(struct SentryCrashMachineContext *)context withIndex:(int)index;
+- (BuzzSentryCrashThread)getThread:(struct BuzzSentryCrashMachineContext *)context withIndex:(int)index;
 
-- (void)getThreadName:(const SentryCrashThread)thread
+- (void)getThreadName:(const BuzzSentryCrashThread)thread
             andBuffer:(char *const)buffer
          andBufLength:(int)bufLength;
 
-- (BOOL)isMainThread:(SentryCrashThread)thread;
+- (BOOL)isMainThread:(BuzzSentryCrashThread)thread;
 
 @end
 

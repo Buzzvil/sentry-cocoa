@@ -1,12 +1,12 @@
 #import "BuzzSentryCrashWrapper.h"
-#import "SentryCrash.h"
-#import "SentryCrashMonitor_AppState.h"
-#import "SentryCrashMonitor_System.h"
-#import "SentryHook.h"
+#import "BuzzSentryCrash.h"
+#import "BuzzSentryCrashMonitor_AppState.h"
+#import "BuzzSentryCrashMonitor_System.h"
+#import "BuzzSentryHook.h"
 #import <Foundation/Foundation.h>
-#import <SentryCrashCachedData.h>
-#import <SentryCrashDebug.h>
-#import <SentryCrashMonitor_System.h>
+#import <BuzzSentryCrashCachedData.h>
+#import <BuzzSentryCrashDebug.h>
+#import <BuzzSentryCrashMonitor_System.h>
 #include <mach/mach.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)crashedLastLaunch
 {
-    return SentryCrash.sharedInstance.crashedLastLaunch;
+    return BuzzSentryCrash.sharedInstance.crashedLastLaunch;
 }
 
 - (NSTimeInterval)durationFromCrashStateInitToLastCrash
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSTimeInterval)activeDurationSinceLastCrash
 {
-    return SentryCrash.sharedInstance.activeDurationSinceLastCrash;
+    return BuzzSentryCrash.sharedInstance.activeDurationSinceLastCrash;
 }
 
 - (BOOL)isBeingTraced
@@ -58,9 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)close
 {
-    SentryCrash *handler = [SentryCrash sharedInstance];
+    BuzzSentryCrash *handler = [BuzzSentryCrash sharedInstance];
     @synchronized(handler) {
-        [handler setMonitoring:SentryCrashMonitorTypeNone];
+        [handler setMonitoring:BuzzSentryCrashMonitorTypeNone];
         handler.onCrash = NULL;
     }
 
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     static NSDictionary *sharedInfo = nil;
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{ sharedInfo = SentryCrash.sharedInstance.systemInfo; });
+    dispatch_once(&onceToken, ^{ sharedInfo = BuzzSentryCrash.sharedInstance.systemInfo; });
     return sharedInfo;
 }
 

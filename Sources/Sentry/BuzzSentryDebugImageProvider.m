@@ -1,7 +1,7 @@
 #import "BuzzSentryDebugImageProvider.h"
 #import "BuzzSentryCrashDefaultBinaryImageProvider.h"
-#import "SentryCrashDynamicLinker.h"
-#import "SentryCrashUUIDConversion.h"
+#import "BuzzSentryCrashDynamicLinker.h"
+#import "BuzzSentryCrashUUIDConversion.h"
 #import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryHexAddressFormatter.h"
@@ -70,7 +70,7 @@ BuzzSentryDebugImageProvider ()
 
     NSInteger imageCount = [self.binaryImageProvider getImageCount];
     for (NSInteger i = 0; i < imageCount; i++) {
-        SentryCrashBinaryImage image = [self.binaryImageProvider getBinaryImage:i];
+        BuzzSentryCrashBinaryImage image = [self.binaryImageProvider getBinaryImage:i];
         BuzzSentryDebugMeta *debugMeta = [self fillDebugMetaFrom:image];
         [debugMetaArray addObject:debugMeta];
     }
@@ -78,7 +78,7 @@ BuzzSentryDebugImageProvider ()
     return debugMetaArray;
 }
 
-- (BuzzSentryDebugMeta *)fillDebugMetaFrom:(SentryCrashBinaryImage)image
+- (BuzzSentryDebugMeta *)fillDebugMetaFrom:(BuzzSentryCrashBinaryImage)image
 {
     BuzzSentryDebugMeta *debugMeta = [[BuzzSentryDebugMeta alloc] init];
     debugMeta.uuid = [BuzzSentryDebugImageProvider convertUUID:image.uuid];

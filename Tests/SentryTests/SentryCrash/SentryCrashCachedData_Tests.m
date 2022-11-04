@@ -1,5 +1,5 @@
 //
-//  SentryCrashCachedData_Tests.m
+//  BuzzSentryCrashCachedData_Tests.m
 //
 //  Copyright (c) 2012 Karl Stenerud. All rights reserved.
 //
@@ -24,13 +24,13 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashCachedData.h"
+#import "BuzzSentryCrashCachedData.h"
 #import "TestThread.h"
 
-@interface SentryCrashCachedData_Tests : XCTestCase
+@interface BuzzSentryCrashCachedData_Tests : XCTestCase
 @end
 
-@implementation SentryCrashCachedData_Tests
+@implementation BuzzSentryCrashCachedData_Tests
 
 - (void)testGetThreadName
 {

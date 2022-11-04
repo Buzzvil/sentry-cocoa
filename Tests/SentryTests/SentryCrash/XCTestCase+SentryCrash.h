@@ -1,5 +1,5 @@
 //
-//  SenTestCase+SentryCrash.h
+//  SenTestCase+BuzzSentryCrash.h
 //
 //  Created by Karl Stenerud on 2012-02-11.
 //
@@ -27,7 +27,7 @@
 #import <XCTest/XCTest.h>
 
 @interface
-XCTestCase (XCTestCase_SentryCrash)
+XCTestCase (XCTestCase_BuzzSentryCrash)
 
 - (NSString *)createTempPath;
 

@@ -5979,7 +5979,7 @@
                     {
                         "object_name": "SBClasses",
                         "object_addr": 4441198592,
-                        "symbol_name": "SBSentryCrashReportWriteCallback",
+                        "symbol_name": "SBBuzzSentryCrashReportWriteCallback",
                         "symbol_addr": 4441221913,
                         "instruction_addr": 4441221972
                     },

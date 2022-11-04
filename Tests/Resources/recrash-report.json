@@ -209,7 +209,7 @@
                 }
             },
             "index": 3,
-            "name": "SentryCrash Exception Handler (Primary)",
+            "name": "BuzzSentryCrash Exception Handler (Primary)",
             "crashed": true,
             "current_thread": true,
             "stack": {

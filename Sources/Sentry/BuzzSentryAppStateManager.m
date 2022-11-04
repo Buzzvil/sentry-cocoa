@@ -1,4 +1,4 @@
-#import "SentryCrashSysCtl.h"
+#import "BuzzSentryCrashSysCtl.h"
 #import "BuzzSentrySysctl.h"
 #import <Foundation/Foundation.h>
 #import <BuzzSentryAppState.h>

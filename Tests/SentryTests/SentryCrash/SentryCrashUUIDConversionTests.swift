@@ -1,7 +1,7 @@
 @testable import Sentry
 import XCTest
 
-class SentryCrashUUIDConversionTests: XCTestCase {
+class BuzzSentryCrashUUIDConversionTests: XCTestCase {
 
     /**
     * The test parameters are copied from real values during debugging

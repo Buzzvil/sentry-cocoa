@@ -301,7 +301,7 @@ SENTRY_NO_INIT
 + (void)endSession;
 
 /**
- * This forces a crash, useful to test the SentryCrash integration
+ * This forces a crash, useful to test the BuzzSentryCrash integration
  */
 + (void)crash;
 

@@ -11,11 +11,11 @@
 #    include <pthread.h>
 
 /**
- * SentryCrashMemory.h uses the restrict keyword, which is valid in C99 but
+ * BuzzSentryCrashMemory.h uses the restrict keyword, which is valid in C99 but
  * invalid in C++; we can use __restrict as an alternative.
  * */
 #    define restrict __restrict
-#    include "SentryCrashMemory.h"
+#    include "BuzzSentryCrashMemory.h"
 
 namespace sentry {
 namespace profiling {

@@ -1,5 +1,5 @@
 //
-//  SentryCrashFileUtils_Tests.m
+//  BuzzSentryCrashFileUtils_Tests.m
 //
 //  Created by Karl Stenerud on 2012-01-28.
 //
@@ -28,12 +28,12 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#import "SentryCrashFileUtils.h"
+#import "BuzzSentryCrashFileUtils.h"
 
-@interface SentryCrashFileUtils_Tests : FileBasedTestCase
+@interface BuzzSentryCrashFileUtils_Tests : FileBasedTestCase
 @end
 
-@implementation SentryCrashFileUtils_Tests
+@implementation BuzzSentryCrashFileUtils_Tests
 
 - (void)testReadBuffered_EmptyFile
 {
@@ -44,7 +44,7 @@
     NSString *fileContents = @"";
     NSString *expectedDataRead = @"";
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -65,7 +65,7 @@
     NSString *fileContents = @"12345";
     NSString *expectedDataRead = @"12345";
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -86,7 +86,7 @@
     NSString *fileContents = @"123456789";
     NSString *expectedDataRead = @"12345";
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -107,7 +107,7 @@
     NSString *fileContents = @"12345";
     NSString *expectedDataRead = @"12345";
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -128,7 +128,7 @@
     NSString *fileContents = @"1234567890abcdef";
     NSString *expectedDataRead = @"1234567890abcdef";
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -150,7 +150,7 @@
     int expectedBytesRead = (int)expectedDataRead.length;
     int bytesRead = dstBufferSize;
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -173,7 +173,7 @@
     int expectedBytesRead = (int)expectedDataRead.length;
     int bytesRead = dstBufferSize;
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -196,7 +196,7 @@
     int expectedBytesRead = (int)expectedDataRead.length;
     int bytesRead = dstBufferSize;
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -219,7 +219,7 @@
     int expectedBytesRead = (int)expectedDataRead.length;
     int bytesRead = dstBufferSize;
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -242,7 +242,7 @@
     int expectedBytesRead = (int)expectedDataRead.length;
     int bytesRead = dstBufferSize;
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -265,7 +265,7 @@
     int expectedBytesRead = (int)expectedDataRead.length;
     int bytesRead = dstBufferSize;
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -288,7 +288,7 @@
     int expectedBytesRead = (int)expectedDataRead.length;
     int bytesRead = dstBufferSize;
     char readBuffer[readBufferSize];
-    SentryCrashBufferedReader reader;
+    BuzzSentryCrashBufferedReader reader;
     NSString *path = [self generateFileWithString:fileContents];
     XCTAssertTrue(
         sentrycrashfu_openBufferedReader(&reader, path.UTF8String, readBuffer, readBufferSize));
@@ -307,7 +307,7 @@
     int writeSize = 5;
     NSString *fileContents = @"12345";
     char writeBuffer[writeBufferSize];
-    SentryCrashBufferedWriter writer;
+    BuzzSentryCrashBufferedWriter writer;
     NSString *path = [self generateTempFilePath];
     XCTAssertTrue(
         sentrycrashfu_openBufferedWriter(&writer, path.UTF8String, writeBuffer, writeBufferSize));
@@ -327,7 +327,7 @@
     int writeSize = 5;
     NSString *fileContents = @"12345";
     char writeBuffer[writeBufferSize];
-    SentryCrashBufferedWriter writer;
+    BuzzSentryCrashBufferedWriter writer;
     NSString *path = [self generateTempFilePath];
     XCTAssertTrue(
         sentrycrashfu_openBufferedWriter(&writer, path.UTF8String, writeBuffer, writeBufferSize));
@@ -348,7 +348,7 @@
     int writeSize = 10;
     NSString *fileContents = @"1234567890";
     char writeBuffer[writeBufferSize];
-    SentryCrashBufferedWriter writer;
+    BuzzSentryCrashBufferedWriter writer;
     NSString *path = [self generateTempFilePath];
     XCTAssertTrue(
         sentrycrashfu_openBufferedWriter(&writer, path.UTF8String, writeBuffer, writeBufferSize));
@@ -368,7 +368,7 @@
     int writeSize = 3;
     NSString *fileContents = @"123";
     char writeBuffer[writeBufferSize];
-    SentryCrashBufferedWriter writer;
+    BuzzSentryCrashBufferedWriter writer;
     NSString *path = [self generateTempFilePath];
     XCTAssertTrue(
         sentrycrashfu_openBufferedWriter(&writer, path.UTF8String, writeBuffer, writeBufferSize));

@@ -1,5 +1,5 @@
 //
-//  SentryCrashReportStore_Tests.m
+//  BuzzSentryCrashReportStore_Tests.m
 //
 //  Created by Karl Stenerud on 2012-02-05.
 //
@@ -25,15 +25,15 @@
 //
 
 #import "FileBasedTestCase.h"
-#import "XCTestCase+SentryCrash.h"
+#import "XCTestCase+BuzzSentryCrash.h"
 
-#import "SentryCrashReportStore.h"
+#import "BuzzSentryCrashReportStore.h"
 
 #include <inttypes.h>
 
-#define REPORT_PREFIX @"CrashReport-SentryCrashTest"
+#define REPORT_PREFIX @"CrashReport-BuzzSentryCrashTest"
 
-@interface SentryCrashReportStore_Tests : FileBasedTestCase
+@interface BuzzSentryCrashReportStore_Tests : FileBasedTestCase
 
 @property (nonatomic, readwrite, retain) NSString *appName;
 @property (nonatomic, readwrite, retain) NSString *reportStorePath;
@@ -41,7 +41,7 @@
 
 @end
 
-@implementation SentryCrashReportStore_Tests
+@implementation BuzzSentryCrashReportStore_Tests
 
 @synthesize appName = _appName;
 @synthesize reportStorePath = _reportStorePath;
@@ -94,7 +94,7 @@
 - (int64_t)writeCrashReportWithStringContents:(NSString *)contents
 {
     NSData *crashData = [contents dataUsingEncoding:NSUTF8StringEncoding];
-    char crashReportPath[SentryCrashCRS_MAX_PATH_LENGTH];
+    char crashReportPath[BuzzSentryCrashCRS_MAX_PATH_LENGTH];
     sentrycrashcrs_getNextCrashReportPath(crashReportPath);
     [crashData writeToFile:[NSString stringWithUTF8String:crashReportPath] atomically:YES];
     return [self getReportIDFromPath:[NSString stringWithUTF8String:crashReportPath]];
@@ -154,7 +154,7 @@
     [self prepareReportStoreWithPathEnd:@"testCrashReportCount1"];
     NSString *reportContents = @"Testing";
 
-    char crashReportPath[SentryCrashCRS_MAX_PATH_LENGTH];
+    char crashReportPath[BuzzSentryCrashCRS_MAX_PATH_LENGTH];
     sentrycrashcrs_getNextCrashReportPath(crashReportPath);
     NSString *pathToCrashReport = [NSString stringWithUTF8String:crashReportPath];
     NSError *someError;
@@ -246,7 +246,7 @@
     [self prepareReportStoreWithPathEnd:@"/ReportPath"];
     uint64_t reportId = 84568454541;
 
-    char attachmentsPath[SentryCrashCRS_MAX_PATH_LENGTH];
+    char attachmentsPath[BuzzSentryCrashCRS_MAX_PATH_LENGTH];
     sentrycrashcrs_getAttachmentsPath_forReportId(reportId, attachmentsPath);
 
     XCTAssertEqualObjects([NSString stringWithUTF8String:attachmentsPath],
@@ -261,10 +261,10 @@
 
     uint64_t reportId = 84568454541;
 
-    char reportPath[SentryCrashCRS_MAX_PATH_LENGTH];
+    char reportPath[BuzzSentryCrashCRS_MAX_PATH_LENGTH];
     sentrycrashcrs_getCrashReportPathById(reportId, reportPath);
 
-    char attachmentsPath[SentryCrashCRS_MAX_PATH_LENGTH];
+    char attachmentsPath[BuzzSentryCrashCRS_MAX_PATH_LENGTH];
     sentrycrashcrs_getAttachmentsPath_forReport(reportPath, attachmentsPath);
 
     XCTAssertEqualObjects([NSString stringWithUTF8String:attachmentsPath],
@@ -278,7 +278,7 @@
 
     [self prepareReportStoreWithPathEnd:@"/ReportPath"];
 
-    char firstReportPath[SentryCrashCRS_MAX_PATH_LENGTH];
+    char firstReportPath[BuzzSentryCrashCRS_MAX_PATH_LENGTH];
     sentrycrashcrs_getNextCrashReportPath(firstReportPath);
 
     // Unique Ids are created based on the time,
@@ -287,7 +287,7 @@
     [NSThread sleepForTimeInterval:1];
     [self prepareReportStoreWithPathEnd:@"/ReportPath"];
 
-    char secondReportPath[SentryCrashCRS_MAX_PATH_LENGTH];
+    char secondReportPath[BuzzSentryCrashCRS_MAX_PATH_LENGTH];
     sentrycrashcrs_getNextCrashReportPath(secondReportPath);
     XCTAssertNotEqualObjects([NSString stringWithUTF8String:firstReportPath],
         [NSString stringWithUTF8String:secondReportPath]);

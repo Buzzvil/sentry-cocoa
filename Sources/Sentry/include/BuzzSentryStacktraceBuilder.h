@@ -1,6 +1,6 @@
-#import "SentryCrashMachineContext.h"
-#import "SentryCrashStackCursor.h"
-#include "SentryCrashThread.h"
+#import "BuzzSentryCrashMachineContext.h"
+#import "BuzzSentryCrashStackCursor.h"
+#include "BuzzSentryCrashThread.h"
 #import "BuzzSentryDefines.h"
 #import <Foundation/Foundation.h>
 
@@ -8,7 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** Uses SentryCrash internally to retrieve the stacktrace.
+/** Uses BuzzSentryCrash internally to retrieve the stacktrace.
  */
 @interface BuzzSentryStacktraceBuilder : NSObject
 SENTRY_NO_INIT
@@ -29,10 +29,10 @@ SENTRY_NO_INIT
  * the same as the application that includes Sentry. In this case the full stacktrace is returned
  * without skipping frames.
  */
-- (BuzzSentryStacktrace *)buildStacktraceForThread:(SentryCrashThread)thread
-                                       context:(struct SentryCrashMachineContext *)context;
+- (BuzzSentryStacktrace *)buildStacktraceForThread:(BuzzSentryCrashThread)thread
+                                       context:(struct BuzzSentryCrashMachineContext *)context;
 
-- (BuzzSentryStacktrace *)buildStackTraceFromStackEntries:(SentryCrashStackEntry *)entries
+- (BuzzSentryStacktrace *)buildStackTraceFromStackEntries:(BuzzSentryCrashStackEntry *)entries
                                                amount:(unsigned int)amount;
 @end
 

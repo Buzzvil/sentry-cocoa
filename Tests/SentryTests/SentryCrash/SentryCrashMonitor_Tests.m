@@ -1,5 +1,5 @@
 //
-//  SentryCrashMonitor_Tests.m
+//  BuzzSentryCrashMonitor_Tests.m
 //
 //  Created by Karl Stenerud on 2013-03-09.
 //
@@ -26,18 +26,18 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashMonitor.h"
-#import "SentryCrashMonitorContext.h"
+#import "BuzzSentryCrashMonitor.h"
+#import "BuzzSentryCrashMonitorContext.h"
 
-@interface SentryCrashMonitor_Tests : XCTestCase
+@interface BuzzSentryCrashMonitor_Tests : XCTestCase
 @end
 
-@implementation SentryCrashMonitor_Tests
+@implementation BuzzSentryCrashMonitor_Tests
 
 - (void)testInstallUninstall
 {
-    sentrycrashcm_setActiveMonitors(SentryCrashMonitorTypeAll);
-    sentrycrashcm_setActiveMonitors(SentryCrashMonitorTypeNone);
+    sentrycrashcm_setActiveMonitors(BuzzSentryCrashMonitorTypeAll);
+    sentrycrashcm_setActiveMonitors(BuzzSentryCrashMonitorTypeNone);
 }
 
 - (void)testSuspendResumeThreads

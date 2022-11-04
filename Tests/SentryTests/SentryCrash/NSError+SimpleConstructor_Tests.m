@@ -26,7 +26,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "NSError+SentrySimpleConstructor.h"
+#import "NSError+BuzzSentrySimpleConstructor.h"
 
 @interface NSError_SimpleConstructor_Tests : XCTestCase
 @end

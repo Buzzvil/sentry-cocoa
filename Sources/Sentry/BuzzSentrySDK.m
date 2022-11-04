@@ -3,7 +3,7 @@
 #import "BuzzSentryAppStartMeasurement.h"
 #import "BuzzSentryBreadcrumb.h"
 #import "BuzzSentryClient+Private.h"
-#import "SentryCrash.h"
+#import "BuzzSentryCrash.h"
 #import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryHub+Private.h"
 #import "BuzzSentryLog.h"
@@ -348,7 +348,7 @@ static NSUInteger startInvocations;
 
 + (BOOL)crashedLastRun
 {
-    return SentryCrash.sharedInstance.crashedLastLaunch;
+    return BuzzSentryCrash.sharedInstance.crashedLastLaunch;
 }
 
 + (void)startSession

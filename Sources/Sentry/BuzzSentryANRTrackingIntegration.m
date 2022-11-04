@@ -1,7 +1,7 @@
 #import "BuzzSentryANRTrackingIntegration.h"
 #import "BuzzSentryANRTracker.h"
 #import "BuzzSentryClient+Private.h"
-#import "SentryCrashMachineContext.h"
+#import "BuzzSentryCrashMachineContext.h"
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDefaultCurrentDateProvider.h"
 #import "BuzzSentryDispatchQueueWrapper.h"

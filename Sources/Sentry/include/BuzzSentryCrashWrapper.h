@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** A wrapper around SentryCrash for testability.
+/** A wrapper around BuzzSentryCrash for testability.
  */
 @interface BuzzSentryCrashWrapper : NSObject
 SENTRY_NO_INIT
@@ -26,7 +26,7 @@ SENTRY_NO_INIT
 - (void)installAsyncHooks;
 
 /**
- * It's not really possible to close SentryCrash. Best we can do is to deactivate all the monitors,
+ * It's not really possible to close BuzzSentryCrash. Best we can do is to deactivate all the monitors,
  * clear the `onCrash` callback installed on the global handler, and a few more minor things.
  */
 - (void)close;

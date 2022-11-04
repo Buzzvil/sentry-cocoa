@@ -1,8 +1,8 @@
 #import "BuzzSentryCrashReportSink.h"
 #import "BuzzSentryAttachment.h"
 #import "BuzzSentryClient.h"
-#import "SentryCrash.h"
-#include "SentryCrashMonitor_AppState.h"
+#import "BuzzSentryCrash.h"
+#include "BuzzSentryCrashMonitor_AppState.h"
 #import "BuzzSentryCrashReportConverter.h"
 #import "BuzzSentryCrashWrapper.h"
 #import "BuzzSentryDefines.h"
@@ -43,7 +43,7 @@ BuzzSentryCrashReportSink ()
 }
 
 - (void)filterReports:(NSArray *)reports
-         onCompletion:(SentryCrashReportFilterCompletion)onCompletion
+         onCompletion:(BuzzSentryCrashReportFilterCompletion)onCompletion
 {
     NSTimeInterval durationFromCrashStateInitToLastCrash
         = self.crashWrapper.durationFromCrashStateInitToLastCrash;
@@ -61,7 +61,7 @@ BuzzSentryCrashReportSink ()
     }
 }
 
-- (void)sendReports:(NSArray *)reports onCompletion:(SentryCrashReportFilterCompletion)onCompletion
+- (void)sendReports:(NSArray *)reports onCompletion:(BuzzSentryCrashReportFilterCompletion)onCompletion
 {
     NSMutableArray *sentReports = [NSMutableArray new];
     for (NSDictionary *report in reports) {

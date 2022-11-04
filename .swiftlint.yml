@@ -3,7 +3,7 @@ excluded:
   - Pods
   - Utils/**/.build
   - DependencyManagerTests
-  - Sources/SentryCrash
+  - Sources/BuzzSentryCrash
   - vendor
   - test-server/.build/
   - Tests/Perf

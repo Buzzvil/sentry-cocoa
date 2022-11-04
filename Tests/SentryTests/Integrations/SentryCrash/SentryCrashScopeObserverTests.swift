@@ -20,13 +20,13 @@ class BuzzSentryCrashScopeObserverTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sentrycrash_scopesync_reset()
-        SentryCrash.sharedInstance().userInfo = nil
+        BuzzSentryCrash.sharedInstance().userInfo = nil
     }
     
     override func tearDown() {
         super.tearDown()
         sentrycrash_scopesync_reset()
-        SentryCrash.sharedInstance().userInfo = nil
+        BuzzSentryCrash.sharedInstance().userInfo = nil
     }
 
     func testUser() {
@@ -288,7 +288,7 @@ class BuzzSentryCrashScopeObserverTests: XCTestCase {
     }
     
     private func serialize(object: Any) -> String {
-        let serialized = try! SentryCrashJSONCodec.encode(object, options: SentryCrashJSONEncodeOptionSorted)
+        let serialized = try! BuzzSentryCrashJSONCodec.encode(object, options: BuzzSentryCrashJSONEncodeOptionSorted)
         return String(data: serialized, encoding: .utf8) ?? ""
     }
     

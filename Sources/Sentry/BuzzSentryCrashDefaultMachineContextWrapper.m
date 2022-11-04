@@ -1,10 +1,10 @@
 #import "BuzzSentryCrashDefaultMachineContextWrapper.h"
-#import "SentryCrashDynamicLinker.h"
-#import "SentryCrashMachineContext.h"
+#import "BuzzSentryCrashDynamicLinker.h"
+#import "BuzzSentryCrashMachineContext.h"
 #import "BuzzSentryCrashMachineContextWrapper.h"
-#import "SentryCrashStackCursor.h"
-#import "SentryCrashStackCursor_SelfThread.h"
-#import "SentryCrashThread.h"
+#import "BuzzSentryCrashStackCursor.h"
+#import "BuzzSentryCrashStackCursor_SelfThread.h"
+#import "BuzzSentryCrashThread.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryHexAddressFormatter.h"
 #import "BuzzSentryStacktrace.h"
@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SentryCrashThread mainThreadID;
+BuzzSentryCrashThread mainThreadID;
 
 @implementation BuzzSentryCrashDefaultMachineContextWrapper
 
@@ -25,30 +25,30 @@ SentryCrashThread mainThreadID;
     mainThreadID = pthread_mach_thread_np(pthread_self());
 }
 
-- (void)fillContextForCurrentThread:(struct SentryCrashMachineContext *)context
+- (void)fillContextForCurrentThread:(struct BuzzSentryCrashMachineContext *)context
 {
     sentrycrashmc_getContextForThread(sentrycrashthread_self(), context, true);
 }
 
-- (int)getThreadCount:(struct SentryCrashMachineContext *)context
+- (int)getThreadCount:(struct BuzzSentryCrashMachineContext *)context
 {
     return sentrycrashmc_getThreadCount(context);
 }
 
-- (SentryCrashThread)getThread:(struct SentryCrashMachineContext *)context withIndex:(int)index
+- (BuzzSentryCrashThread)getThread:(struct BuzzSentryCrashMachineContext *)context withIndex:(int)index
 {
-    SentryCrashThread thread = sentrycrashmc_getThreadAtIndex(context, index);
+    BuzzSentryCrashThread thread = sentrycrashmc_getThreadAtIndex(context, index);
     return thread;
 }
 
-- (void)getThreadName:(const SentryCrashThread)thread
+- (void)getThreadName:(const BuzzSentryCrashThread)thread
             andBuffer:(char *const)buffer
          andBufLength:(int)bufLength;
 {
     sentrycrashthread_getThreadName(thread, buffer, bufLength);
 }
 
-- (BOOL)isMainThread:(SentryCrashThread)thread
+- (BOOL)isMainThread:(BuzzSentryCrashThread)thread
 {
     return thread == mainThreadID;
 }

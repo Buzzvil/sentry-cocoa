@@ -14,7 +14,7 @@ parsers:
       macro: no
 
 ignore:
-  - "Sources/SentryCrash"
+  - "Sources/BuzzSentryCrash"
   - "Tests/SentryTests" 
 
 comment:

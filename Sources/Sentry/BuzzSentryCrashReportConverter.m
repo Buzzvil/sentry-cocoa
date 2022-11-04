@@ -1,7 +1,7 @@
 #import "BuzzSentryCrashReportConverter.h"
 #import "NSDate+BuzzSentryExtras.h"
 #import "BuzzSentryBreadcrumb.h"
-#import "SentryCrashStackCursor.h"
+#import "BuzzSentryCrashStackCursor.h"
 #import "BuzzSentryDebugMeta.h"
 #import "BuzzSentryEvent.h"
 #import "BuzzSentryException.h"
@@ -78,7 +78,7 @@ BuzzSentryCrashReportConverter ()
 - (void)initThreads:(NSArray<NSDictionary *> *)threads
 {
     if (nil != threads && [threads isKindOfClass:[NSArray class]]) {
-        // SentryCrash sometimes produces recrash_reports where an element of threads is a
+        // BuzzSentryCrash sometimes produces recrash_reports where an element of threads is a
         // NSString instead of a NSDictionary. When this happens we can't read the details of
         // the thread, but we have to discard it. Otherwise we would crash.
         NSPredicate *onlyNSDictionary = [NSPredicate predicateWithBlock:^BOOL(id object,
@@ -121,7 +121,7 @@ BuzzSentryCrashReportConverter ()
         event.user = [self convertUser];
         event.breadcrumbs = [self convertBreadcrumbs];
 
-        // The releaseName must be set on the userInfo of SentryCrash.sharedInstance
+        // The releaseName must be set on the userInfo of BuzzSentryCrash.sharedInstance
         event.releaseName = self.userContext[@"release"];
 
         // We want to set the release and dist to the version from the crash report
@@ -284,7 +284,7 @@ BuzzSentryCrashReportConverter ()
         NSDictionary *frameDictionary = [self rawStackTraceForThreadIndex:threadIndex][i];
         uintptr_t instructionAddress
             = (uintptr_t)[frameDictionary[@"instruction_addr"] unsignedLongLongValue];
-        if (instructionAddress == SentryCrashSC_ASYNC_MARKER) {
+        if (instructionAddress == BuzzSentryCrashSC_ASYNC_MARKER) {
             if (lastFrame != nil) {
                 lastFrame.stackStart = @(YES);
             }

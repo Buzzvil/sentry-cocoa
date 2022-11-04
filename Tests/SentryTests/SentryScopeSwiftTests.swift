@@ -266,7 +266,7 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
         XCTAssertEqual(0, scope.attachments.count)
     }
     
-    func testPeformanceOfSyncToSentryCrash() {
+    func testPeformanceOfSyncToBuzzSentryCrash() {
         let scope = fixture.scope
         scope.add(BuzzSentryCrashScopeObserver(maxBreadcrumbs: 100))
         
@@ -275,7 +275,7 @@ class BuzzSentryScopeSwiftTests: XCTestCase {
         }
     }
     
-    func testPeformanceOfSyncToSentryCrash_OneCrumb() {
+    func testPeformanceOfSyncToBuzzSentryCrash_OneCrumb() {
         let scope = fixture.scope
         scope.add(BuzzSentryCrashScopeObserver(maxBreadcrumbs: 100))
         

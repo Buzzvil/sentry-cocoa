@@ -1,5 +1,5 @@
 //
-//  SenTestCase+SentryCrash.m
+//  SenTestCase+BuzzSentryCrash.m
 //
 //  Created by Karl Stenerud on 2012-02-11.
 //
@@ -24,10 +24,10 @@
 // THE SOFTWARE.
 //
 
-#import "XCTestCase+SentryCrash.h"
+#import "XCTestCase+BuzzSentryCrash.h"
 
 @implementation
-XCTestCase (XCTestCase_SentryCrash)
+XCTestCase (XCTestCase_BuzzSentryCrash)
 
 - (NSString *)createTempPath
 {

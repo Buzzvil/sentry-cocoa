@@ -16,7 +16,7 @@ static NSString *const BuzzSentryDeviceContextAppMemoryKey = @"app_memory";
 /**
  * Needed for testing.
  */
-+ (void)sendAllSentryCrashReports;
++ (void)sendAllBuzzSentryCrashReports;
 
 @end
 

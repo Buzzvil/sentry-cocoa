@@ -25,7 +25,7 @@ class BuzzSentryCrashDefaultBinaryImageProviderTests: XCTestCase {
         for i in 0 ... imageCount {
             let actual = sut.getBinaryImage(i)
             
-            var expected = SentryCrashBinaryImage()
+            var expected = BuzzSentryCrashBinaryImage()
             sentrycrashdl_getBinaryImage(Int32(i), &expected)
             
             XCTAssertEqual(expected.uuid, actual.uuid)

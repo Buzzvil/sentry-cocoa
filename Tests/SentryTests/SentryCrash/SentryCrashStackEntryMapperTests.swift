@@ -14,7 +14,7 @@ class BuzzSentryCrashStackEntryMapperTests: XCTestCase {
     }
 
     func testSymbolAddress() {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         cursor.stackEntry.symbolAddress = 2_391_813_104
         
         let frame = sut.mapStackEntry(with: cursor)
@@ -23,7 +23,7 @@ class BuzzSentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     func testInstructionAddress() {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         cursor.stackEntry.address = 2_412_813_376
         
         let frame = sut.mapStackEntry(with: cursor)
@@ -32,14 +32,14 @@ class BuzzSentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     func testSymbolNameIsNull() {
-        let frame = sut.mapStackEntry(with: SentryCrashStackCursor())
+        let frame = sut.mapStackEntry(with: BuzzSentryCrashStackCursor())
         
         XCTAssertEqual("<redacted>", frame.function)
     }
 
     func testSymbolName() {
-        let symbolName = "-[SentryCrash symbolName]"
-        var cursor = SentryCrashStackCursor()
+        let symbolName = "-[BuzzSentryCrash symbolName]"
+        var cursor = BuzzSentryCrashStackCursor()
         
         let cString = symbolName.cString(using: String.Encoding.utf8)
         cString?.withUnsafeBufferPointer { bufferPointer in
@@ -57,7 +57,7 @@ class BuzzSentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     func testImageAddress () {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         cursor.stackEntry.imageAddress = 2_488_998_912
         
         let frame = sut.mapStackEntry(with: cursor)
@@ -71,7 +71,7 @@ class BuzzSentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     private func getFrameWithImageName(imageName: String) -> Frame {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         
         let cString = imageName.cString(using: String.Encoding.utf8)
         var result: Frame = Frame()

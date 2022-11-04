@@ -1,5 +1,5 @@
 #import "BuzzSentryCrashExceptionApplication.h"
-#import "SentryCrash.h"
+#import "BuzzSentryCrash.h"
 #import "BuzzSentrySDK.h"
 
 @implementation BuzzSentryCrashExceptionApplication
@@ -10,8 +10,8 @@
 {
     [[NSUserDefaults standardUserDefaults]
         registerDefaults:@{ @"NSApplicationCrashOnExceptions" : @YES }];
-    if (nil != SentryCrash.sharedInstance.uncaughtExceptionHandler && nil != exception) {
-        SentryCrash.sharedInstance.uncaughtExceptionHandler(exception);
+    if (nil != BuzzSentryCrash.sharedInstance.uncaughtExceptionHandler && nil != exception) {
+        BuzzSentryCrash.sharedInstance.uncaughtExceptionHandler(exception);
     }
     [super reportException:exception];
 }

@@ -2,8 +2,8 @@
 #import <Foundation/Foundation.h>
 #import <NSData+BuzzSentry.h>
 #import <BuzzSentryBreadcrumb.h>
-#import <SentryCrashJSONCodec.h>
-#import <SentryCrashJSONCodecObjC.h>
+#import <BuzzSentryCrashJSONCodec.h>
+#import <BuzzSentryCrashJSONCodecObjC.h>
 #import <BuzzSentryCrashScopeObserver.h>
 #import <BuzzSentryLog.h>
 #import <BuzzSentryScopeSyncC.h>
@@ -29,39 +29,39 @@ BuzzSentryCrashScopeObserver ()
 {
     [self syncScope:user
         serialize:^{ return [user serialize]; }
-        syncToSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setUser(bytes); }];
+        syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setUser(bytes); }];
 }
 
 - (void)setDist:(nullable NSString *)dist
 {
     [self syncScope:dist
         serialize:^{ return dist; }
-        syncToSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setDist(bytes); }];
+        syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setDist(bytes); }];
 }
 
 - (void)setEnvironment:(nullable NSString *)environment
 {
     [self syncScope:environment
         serialize:^{ return environment; }
-        syncToSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setEnvironment(bytes); }];
+        syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setEnvironment(bytes); }];
 }
 
 - (void)setContext:(nullable NSDictionary<NSString *, id> *)context
 {
     [self syncScope:context
-        syncToSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setContext(bytes); }];
+        syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setContext(bytes); }];
 }
 
 - (void)setExtras:(nullable NSDictionary<NSString *, id> *)extras
 {
     [self syncScope:extras
-        syncToSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setExtras(bytes); }];
+        syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setExtras(bytes); }];
 }
 
 - (void)setTags:(nullable NSDictionary<NSString *, NSString *> *)tags
 {
     [self syncScope:tags
-        syncToSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setTags(bytes); }];
+        syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setTags(bytes); }];
 }
 
 - (void)setFingerprint:(nullable NSArray<NSString *> *)fingerprint
@@ -74,7 +74,7 @@ BuzzSentryCrashScopeObserver ()
             }
             return result;
         }
-        syncToSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setFingerprint(bytes); }];
+        syncToBuzzSentryCrash:^(const void *bytes) { sentrycrash_scopesync_setFingerprint(bytes); }];
 }
 
 - (void)setLevel:(enum SentryLevel)level
@@ -111,7 +111,7 @@ BuzzSentryCrashScopeObserver ()
     sentrycrash_scopesync_clear();
 }
 
-- (void)syncScope:(NSDictionary *)dict syncToSentryCrash:(void (^)(const void *))syncToSentryCrash
+- (void)syncScope:(NSDictionary *)dict syncToBuzzSentryCrash:(void (^)(const void *))syncToBuzzSentryCrash
 {
     [self syncScope:dict
                 serialize:^{
@@ -121,21 +121,21 @@ BuzzSentryCrashScopeObserver ()
                     }
                     return result;
                 }
-        syncToSentryCrash:syncToSentryCrash];
+        syncToBuzzSentryCrash:syncToBuzzSentryCrash];
 }
 
 - (void)syncScope:(id)object
             serialize:(nullable id (^)(void))serialize
-    syncToSentryCrash:(void (^)(const void *))syncToSentryCrash
+    syncToBuzzSentryCrash:(void (^)(const void *))syncToBuzzSentryCrash
 {
     if (object == nil) {
-        syncToSentryCrash(NULL);
+        syncToBuzzSentryCrash(NULL);
         return;
     }
 
     id serialized = serialize();
     if (serialized == nil) {
-        syncToSentryCrash(NULL);
+        syncToBuzzSentryCrash(NULL);
         return;
     }
 
@@ -144,7 +144,7 @@ BuzzSentryCrashScopeObserver ()
         return;
     }
 
-    syncToSentryCrash([jsonEncodedCString bytes]);
+    syncToBuzzSentryCrash([jsonEncodedCString bytes]);
 }
 
 - (nullable NSData *)toJSONEncodedCString:(id)toSerialize
@@ -152,8 +152,8 @@ BuzzSentryCrashScopeObserver ()
     NSError *error = nil;
     NSData *json = nil;
     if (toSerialize != nil) {
-        json = [SentryCrashJSONCodec encode:toSerialize
-                                    options:SentryCrashJSONEncodeOptionSorted
+        json = [BuzzSentryCrashJSONCodec encode:toSerialize
+                                    options:BuzzSentryCrashJSONEncodeOptionSorted
                                       error:&error];
         if (error != nil) {
             SENTRY_LOG_ERROR(@"Could not serialize %@", error);

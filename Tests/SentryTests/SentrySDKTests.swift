@@ -154,7 +154,7 @@ class BuzzSentrySDKTests: XCTestCase {
     }
     
     func testCrashedLastRun() {
-        XCTAssertEqual(SentryCrash.sharedInstance().crashedLastLaunch, BuzzSentrySDK.crashedLastRun) 
+        XCTAssertEqual(BuzzSentryCrash.sharedInstance().crashedLastLaunch, BuzzSentrySDK.crashedLastRun) 
     }
     
     func testCaptureCrashEvent() {

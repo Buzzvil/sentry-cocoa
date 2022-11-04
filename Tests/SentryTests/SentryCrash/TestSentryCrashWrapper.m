@@ -1,5 +1,5 @@
 #import "TestBuzzSentryCrashWrapper.h"
-#import "SentryCrash.h"
+#import "BuzzSentryCrash.h"
 #import <Foundation/Foundation.h>
 
 @implementation TestBuzzSentryCrashWrapper

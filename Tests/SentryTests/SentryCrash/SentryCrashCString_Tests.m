@@ -1,5 +1,5 @@
 //
-//  SentryCrashCString_Tests.m
+//  BuzzSentryCrashCString_Tests.m
 //
 //  Created by Karl Stenerud on 2013-03-09.
 //
@@ -26,17 +26,17 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashCString.h"
+#import "BuzzSentryCrashCString.h"
 
-@interface SentryCrashCString_Tests : XCTestCase
+@interface BuzzSentryCrashCString_Tests : XCTestCase
 @end
 
-@implementation SentryCrashCString_Tests
+@implementation BuzzSentryCrashCString_Tests
 
 - (void)testNSString
 {
     NSString *expected = @"Expected";
-    SentryCrashCString *actual = [SentryCrashCString stringWithString:expected];
+    BuzzSentryCrashCString *actual = [BuzzSentryCrashCString stringWithString:expected];
     BOOL matches = strcmp([expected cStringUsingEncoding:NSUTF8StringEncoding], actual.bytes) == 0;
     XCTAssertTrue(matches, @"");
     XCTAssertEqual(actual.length, expected.length, @"");
@@ -46,7 +46,7 @@
 {
     const char *expected = "Expected";
     NSUInteger expectedLength = strlen(expected);
-    SentryCrashCString *actual = [SentryCrashCString stringWithCString:expected];
+    BuzzSentryCrashCString *actual = [BuzzSentryCrashCString stringWithCString:expected];
     BOOL matches = strcmp(expected, actual.bytes) == 0;
     XCTAssertTrue(matches, @"");
     XCTAssertEqual(actual.length, expectedLength, @"");
@@ -57,7 +57,7 @@
     const char *expected = "Expected";
     NSUInteger expectedLength = strlen(expected);
     NSData *source = [NSData dataWithBytes:expected length:expectedLength];
-    SentryCrashCString *actual = [SentryCrashCString stringWithData:source];
+    BuzzSentryCrashCString *actual = [BuzzSentryCrashCString stringWithData:source];
     BOOL matches = strcmp(expected, actual.bytes) == 0;
     XCTAssertTrue(matches, @"");
     XCTAssertEqual(actual.length, expectedLength, @"");
@@ -67,7 +67,7 @@
 {
     const char *expected = "Expected";
     NSUInteger expectedLength = strlen(expected);
-    SentryCrashCString *actual = [SentryCrashCString stringWithData:expected length:expectedLength];
+    BuzzSentryCrashCString *actual = [BuzzSentryCrashCString stringWithData:expected length:expectedLength];
     BOOL matches = strcmp(expected, actual.bytes) == 0;
     XCTAssertTrue(matches, @"");
     XCTAssertEqual(actual.length, expectedLength, @"");

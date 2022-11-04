@@ -1,13 +1,13 @@
 import XCTest
 
-class SentryCrashReportTests: XCTestCase {
+class BuzzSentryCrashReportTests: XCTestCase {
     
     private class Fixture {
         let testPath: String = NSString.path(withComponents: [NSTemporaryDirectory(), "SentryTest"])
         let reportPath: String
         
         init() {
-            reportPath = NSString.path(withComponents: [testPath, "SentryCrashReport.json"])
+            reportPath = NSString.path(withComponents: [testPath, "BuzzSentryCrashReport.json"])
         }
         
         var sut: BuzzSentryCrashScopeObserver {
@@ -64,7 +64,7 @@ class SentryCrashReportTests: XCTestCase {
     }
     
     private func writeCrashReport() {
-        var monitorContext = SentryCrash_MonitorContext()
+        var monitorContext = BuzzSentryCrash_MonitorContext()
         
         let api = sentrycrashcm_system_getAPI()
         api?.pointee.addContextualInfoToEvent(&monitorContext)
@@ -76,7 +76,7 @@ class SentryCrashReportTests: XCTestCase {
      * UserInfo is picked up by the crash report when writing a new report.
      */
     private func serializeToCrashReport(scope: Scope) {
-        SentryCrash.sharedInstance().userInfo = scope.serialize()
+        BuzzSentryCrash.sharedInstance().userInfo = scope.serialize()
     }
     
     private func deleteTestDir() {

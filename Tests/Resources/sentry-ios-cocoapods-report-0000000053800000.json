@@ -4556,7 +4556,7 @@
                     }
                 },
                 "index": 7,
-                "name": "SentryCrash Exception Handler (Secondary)",
+                "name": "BuzzSentryCrash Exception Handler (Secondary)",
                 "crashed": false,
                 "current_thread": false
             },
@@ -4627,7 +4627,7 @@
                     }
                 },
                 "index": 8,
-                "name": "SentryCrash Exception Handler (Primary)",
+                "name": "BuzzSentryCrash Exception Handler (Primary)",
                 "crashed": false,
                 "current_thread": false
             }

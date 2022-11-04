@@ -13,7 +13,7 @@ class BuzzSentryCrashInstallationReporterTests: XCTestCase {
         super.setUp()
         sut = BuzzSentryCrashInstallationReporter(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), dispatchQueue: TestBuzzSentryDispatchQueueWrapper())
         sut.install()
-        // Works only if SentryCrash is installed
+        // Works only if BuzzSentryCrash is installed
         sentrycrash_deleteAllReports()
     }
     
@@ -26,14 +26,14 @@ class BuzzSentryCrashInstallationReporterTests: XCTestCase {
     func testFaultyReportIsNotSentAndDeleted() throws {
         sdkStarted()
         
-        try givenStoredSentryCrashReport(resource: "Resources/Crash-faulty-report")
+        try givenStoredBuzzSentryCrashReport(resource: "Resources/Crash-faulty-report")
 
         sut.sendAllReports()
         
-        // We need to wait a bit until SentryCrash is finished processing reports.
+        // We need to wait a bit until BuzzSentryCrash is finished processing reports.
         // It is not optimal to block, but we would need to change the internals
-        // of SentryCrash a lot to be able to avoid this delay. As we would
-        // like to replace SentryCrash anyway it's not worth the effort right now.
+        // of BuzzSentryCrash a lot to be able to avoid this delay. As we would
+        // like to replace BuzzSentryCrash anyway it's not worth the effort right now.
         delayNonBlocking()
         
         assertNoEventsSent()

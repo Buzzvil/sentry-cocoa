@@ -173,15 +173,15 @@ import XCTest
 
 private class TestBuzzSentryStacktraceBuilder: BuzzSentryStacktraceBuilder {
     
-    var stackTraces = [SentryCrashThread: Stacktrace]()
-    override func buildStacktrace(forThread thread: SentryCrashThread, context: OpaquePointer) -> Stacktrace {
+    var stackTraces = [BuzzSentryCrashThread: Stacktrace]()
+    override func buildStacktrace(forThread thread: BuzzSentryCrashThread, context: OpaquePointer) -> Stacktrace {
         return stackTraces[thread] ?? Stacktrace(frames: [], registers: [:])
     }
         
 }
 
 private struct ThreadInfo {
-    var threadId: SentryCrashThread
+    var threadId: BuzzSentryCrashThread
     var name: String
 }
 
@@ -197,12 +197,12 @@ private class TestMachineContextWrapper: NSObject, BuzzSentryCrashMachineContext
     }
     
     var mockThreads: [ThreadInfo]?
-    func getThread(_ context: OpaquePointer, with index: Int32) -> SentryCrashThread {
+    func getThread(_ context: OpaquePointer, with index: Int32) -> BuzzSentryCrashThread {
         mockThreads?[Int(index)].threadId ?? 0
     }
     
     var threadName: String? = ""
-    func getThreadName(_ thread: SentryCrashThread, andBuffer buffer: UnsafeMutablePointer<Int8>, andBufLength bufLength: Int32) {
+    func getThreadName(_ thread: BuzzSentryCrashThread, andBuffer buffer: UnsafeMutablePointer<Int8>, andBufLength bufLength: Int32) {
         if let mocks = mockThreads, let index = mocks.firstIndex(where: { $0.threadId == thread }) {
             strcpy(buffer, mocks[index].name)
         } else if threadName != nil {
@@ -214,8 +214,8 @@ private class TestMachineContextWrapper: NSObject, BuzzSentryCrashMachineContext
         }
     }
     
-    var mainThread: SentryCrashThread?
-    func isMainThread(_ thread: SentryCrashThread) -> Bool {
+    var mainThread: BuzzSentryCrashThread?
+    func isMainThread(_ thread: BuzzSentryCrashThread) -> Bool {
         return thread == mainThread
     }
 }

@@ -1,5 +1,5 @@
 #import "BuzzSentrySysctl.h"
-#import "SentryCrashSysCtl.h"
+#import "BuzzSentryCrashSysCtl.h"
 #include <stdio.h>
 #include <time.h>
 

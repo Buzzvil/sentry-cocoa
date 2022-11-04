@@ -1,7 +1,7 @@
 #import "BuzzSentryStacktraceBuilder.h"
-#import "SentryCrashStackCursor.h"
-#import "SentryCrashStackCursor_MachineContext.h"
-#import "SentryCrashStackCursor_SelfThread.h"
+#import "BuzzSentryCrashStackCursor.h"
+#import "BuzzSentryCrashStackCursor_MachineContext.h"
+#import "BuzzSentryCrashStackCursor_SelfThread.h"
 #import "BuzzSentryCrashStackEntryMapper.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryFrameRemover.h"
@@ -26,13 +26,13 @@ BuzzSentryStacktraceBuilder ()
     return self;
 }
 
-- (BuzzSentryStacktrace *)retrieveStacktraceFromCursor:(SentryCrashStackCursor)stackCursor
+- (BuzzSentryStacktrace *)retrieveStacktraceFromCursor:(BuzzSentryCrashStackCursor)stackCursor
 {
     NSMutableArray<BuzzSentryFrame *> *frames = [NSMutableArray new];
     BuzzSentryFrame *frame = nil;
     while (stackCursor.advanceCursor(&stackCursor)) {
         if (stackCursor.symbolicate(&stackCursor)) {
-            if (stackCursor.stackEntry.address == SentryCrashSC_ASYNC_MARKER) {
+            if (stackCursor.stackEntry.address == BuzzSentryCrashSC_ASYNC_MARKER) {
                 if (frame != nil) {
                     frame.stackStart = @(YES);
                 }
@@ -56,14 +56,14 @@ BuzzSentryStacktraceBuilder ()
     return stacktrace;
 }
 
-- (BuzzSentryStacktrace *)buildStackTraceFromStackEntries:(SentryCrashStackEntry *)entries
+- (BuzzSentryStacktrace *)buildStackTraceFromStackEntries:(BuzzSentryCrashStackEntry *)entries
                                                amount:(unsigned int)amount
 {
     NSMutableArray<BuzzSentryFrame *> *frames = [[NSMutableArray alloc] initWithCapacity:amount];
     BuzzSentryFrame *frame = nil;
     for (int i = 0; i < amount; i++) {
-        SentryCrashStackEntry stackEntry = entries[i];
-        if (stackEntry.address == SentryCrashSC_ASYNC_MARKER) {
+        BuzzSentryCrashStackEntry stackEntry = entries[i];
+        if (stackEntry.address == BuzzSentryCrashSC_ASYNC_MARKER) {
             if (frame != nil) {
                 frame.stackStart = @(YES);
             }
@@ -82,11 +82,11 @@ BuzzSentryStacktraceBuilder ()
     return [[BuzzSentryStacktrace alloc] initWithFrames:framesReversed registers:@{}];
 }
 
-- (BuzzSentryStacktrace *)buildStacktraceForThread:(SentryCrashThread)thread
-                                       context:(struct SentryCrashMachineContext *)context
+- (BuzzSentryStacktrace *)buildStacktraceForThread:(BuzzSentryCrashThread)thread
+                                       context:(struct BuzzSentryCrashMachineContext *)context
 {
     sentrycrashmc_getContextForThread(thread, context, false);
-    SentryCrashStackCursor stackCursor;
+    BuzzSentryCrashStackCursor stackCursor;
     sentrycrashsc_initWithMachineContext(&stackCursor, MAX_STACKTRACE_LENGTH, context);
 
     return [self retrieveStacktraceFromCursor:stackCursor];
@@ -94,7 +94,7 @@ BuzzSentryStacktraceBuilder ()
 
 - (BuzzSentryStacktrace *)buildStacktraceForCurrentThread
 {
-    SentryCrashStackCursor stackCursor;
+    BuzzSentryCrashStackCursor stackCursor;
     // We don't need to skip any frames, because we filter out non sentry frames below.
     NSInteger framesToSkip = 0;
     sentrycrashsc_initSelfThread(&stackCursor, (int)framesToSkip);

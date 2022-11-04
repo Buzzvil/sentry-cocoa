@@ -1,7 +1,7 @@
 # ThreadSanitizer suppressions file
 # For syntax details, see https://github.com/google/sanitizers/wiki/ThreadSanitizerSuppressions
 
-# Races in SentryCrash
+# Races in BuzzSentryCrash
 race:sentrycrashccd_getThreadName
 race:sentrycrashccd_init
 race:updateThreadList

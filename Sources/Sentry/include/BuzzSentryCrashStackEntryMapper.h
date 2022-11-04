@@ -1,5 +1,5 @@
-#import "SentryCrashDynamicLinker.h"
-#import "SentryCrashStackCursor.h"
+#import "BuzzSentryCrashDynamicLinker.h"
+#import "BuzzSentryCrashStackCursor.h"
 #import "BuzzSentryDefines.h"
 #import <Foundation/Foundation.h>
 
@@ -13,19 +13,19 @@ SENTRY_NO_INIT
 - (instancetype)initWithInAppLogic:(BuzzSentryInAppLogic *)inAppLogic;
 
 /**
- * Maps the stackEntry of a SentryCrashStackCursor to BuzzSentryFrame.
+ * Maps the stackEntry of a BuzzSentryCrashStackCursor to BuzzSentryFrame.
  *
- * @param stackCursor An with SentryCrash initialized stackCursor. You can use for example
+ * @param stackCursor An with BuzzSentryCrash initialized stackCursor. You can use for example
  * sentrycrashsc_initSelfThread.
  */
-- (BuzzSentryFrame *)mapStackEntryWithCursor:(SentryCrashStackCursor)stackCursor;
+- (BuzzSentryFrame *)mapStackEntryWithCursor:(BuzzSentryCrashStackCursor)stackCursor;
 
 /**
- * Maps a SentryCrashStackEntry to BuzzSentryFrame.
+ * Maps a BuzzSentryCrashStackEntry to BuzzSentryFrame.
  *
  * @param stackEntry A stack entry retrieved from a thread.
  */
-- (BuzzSentryFrame *)sentryCrashStackEntryToBuzzSentryFrame:(SentryCrashStackEntry)stackEntry;
+- (BuzzSentryFrame *)sentryCrashStackEntryToBuzzSentryFrame:(BuzzSentryCrashStackEntry)stackEntry;
 
 @end
 

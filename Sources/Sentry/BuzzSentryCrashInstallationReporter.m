@@ -1,6 +1,6 @@
 #import "BuzzSentryCrashInstallationReporter.h"
-#import "SentryCrash.h"
-#import "SentryCrashInstallation+Private.h"
+#import "BuzzSentryCrash.h"
+#import "BuzzSentryCrashInstallation+Private.h"
 #import "BuzzSentryCrashReportSink.h"
 #import "BuzzSentryDefines.h"
 #import "BuzzSentryLog.h"
@@ -30,7 +30,7 @@ BuzzSentryCrashInstallationReporter ()
     return self;
 }
 
-- (id<SentryCrashReportFilter>)sink
+- (id<BuzzSentryCrashReportFilter>)sink
 {
     return [[BuzzSentryCrashReportSink alloc] initWithInAppLogic:self.inAppLogic
                                                 crashWrapper:self.crashWrapper
@@ -42,7 +42,7 @@ BuzzSentryCrashInstallationReporter ()
     [self sendAllReportsWithCompletion:NULL];
 }
 
-- (void)sendAllReportsWithCompletion:(SentryCrashReportFilterCompletion)onCompletion
+- (void)sendAllReportsWithCompletion:(BuzzSentryCrashReportFilterCompletion)onCompletion
 {
     [super
         sendAllReportsWithCompletion:^(NSArray *filteredReports, BOOL completed, NSError *error) {

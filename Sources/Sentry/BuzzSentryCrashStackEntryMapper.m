@@ -23,7 +23,7 @@ BuzzSentryCrashStackEntryMapper ()
     return self;
 }
 
-- (BuzzSentryFrame *)sentryCrashStackEntryToBuzzSentryFrame:(SentryCrashStackEntry)stackEntry
+- (BuzzSentryFrame *)sentryCrashStackEntryToBuzzSentryFrame:(BuzzSentryCrashStackEntry)stackEntry
 {
     BuzzSentryFrame *frame = [[BuzzSentryFrame alloc] init];
 
@@ -51,7 +51,7 @@ BuzzSentryCrashStackEntryMapper ()
     return frame;
 }
 
-- (BuzzSentryFrame *)mapStackEntryWithCursor:(SentryCrashStackCursor)stackCursor
+- (BuzzSentryFrame *)mapStackEntryWithCursor:(BuzzSentryCrashStackCursor)stackCursor
 {
     return [self sentryCrashStackEntryToBuzzSentryFrame:stackCursor.stackEntry];
 }

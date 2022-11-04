@@ -73,7 +73,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     }
     
     // Test for GH-581
-    func testReleaseNamePassedToSentryCrash() {
+    func testReleaseNamePassedToBuzzSentryCrash() {
         let releaseName = "1.0.0"
         let dist = "14G60"
         // The start of the SDK installs all integrations
@@ -82,20 +82,20 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
                                   "dist": dist]
         )
         
-        // To test this properly we need SentryCrash and BuzzSentryCrashIntegration installed and registered on the current hub of the SDK.
+        // To test this properly we need BuzzSentryCrash and BuzzSentryCrashIntegration installed and registered on the current hub of the SDK.
         
-        let instance = SentryCrash.sharedInstance()
+        let instance = BuzzSentryCrash.sharedInstance()
         let userInfo = (instance?.userInfo ?? ["": ""]) as Dictionary
         assertUserInfoField(userInfo: userInfo, key: "release", expected: releaseName)
         assertUserInfoField(userInfo: userInfo, key: "dist", expected: dist)
     }
     
-    func testContext_IsPassedToSentryCrash() {
+    func testContext_IsPassedToBuzzSentryCrash() {
         BuzzSentrySDK.start { options in
             options.dsn = BuzzSentryCrashIntegrationTests.dsnAsString
         }
         
-        let instance = SentryCrash.sharedInstance()
+        let instance = BuzzSentryCrash.sharedInstance()
         let userInfo = (instance?.userInfo ?? ["": ""]) as Dictionary
         let context = userInfo["context"] as? [String: Any]
         
@@ -270,7 +270,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         let (sut, hub) = givenSutWithGlobalHubAndCrashWrapper()
         sut.install(with: Options())
         
-        // Manually reset and enable the crash state because tearing down the global state in SentryCrash to achieve the same is complicated and doesn't really work.
+        // Manually reset and enable the crash state because tearing down the global state in BuzzSentryCrash to achieve the same is complicated and doesn't really work.
         let crashStatePath = String(cString: sentrycrashstate_filePath())
         let api = sentrycrashcm_appstate_getAPI()
         sentrycrashstate_initialize(crashStatePath)
@@ -286,12 +286,12 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         // Manually simulate a crash
         sentrycrashstate_notifyAppCrash()
         
-        try givenStoredSentryCrashReport(resource: "Resources/crash-report-1")
+        try givenStoredBuzzSentryCrashReport(resource: "Resources/crash-report-1")
         
         // Force reloading of crash state
         sentrycrashstate_initialize(sentrycrashstate_filePath())
         // Force sending all reports, because the crash reports are only sent once after first init.
-        BuzzSentryCrashIntegration.sendAllSentryCrashReports()
+        BuzzSentryCrashIntegration.sendAllBuzzSentryCrashReports()
         
         XCTAssertEqual(1, transport.flushInvocations.count)
         XCTAssertEqual(5.0, transport.flushInvocations.first)
@@ -356,7 +356,7 @@ class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
         if let actual = userInfo[key] as? String {
             XCTAssertEqual(expected, actual)
         } else {
-            XCTFail("\(key) not passed to SentryCrash.userInfo")
+            XCTFail("\(key) not passed to BuzzSentryCrash.userInfo")
         }
     }
     

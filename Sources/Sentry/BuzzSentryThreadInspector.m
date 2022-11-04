@@ -1,7 +1,7 @@
 #import "BuzzSentryThreadInspector.h"
-#import "SentryCrashStackCursor.h"
-#include "SentryCrashStackCursor_MachineContext.h"
-#include "SentryCrashSymbolicator.h"
+#import "BuzzSentryCrashStackCursor.h"
+#include "BuzzSentryCrashStackCursor_MachineContext.h"
+#include "BuzzSentryCrashSymbolicator.h"
 #import "BuzzSentryFrame.h"
 #import "BuzzSentryStacktrace.h"
 #import "BuzzSentryStacktraceBuilder.h"
@@ -17,19 +17,19 @@ BuzzSentryThreadInspector ()
 @end
 
 typedef struct {
-    SentryCrashThread thread;
-    SentryCrashStackEntry stackEntries[MAX_STACKTRACE_LENGTH];
+    BuzzSentryCrashThread thread;
+    BuzzSentryCrashStackEntry stackEntries[MAX_STACKTRACE_LENGTH];
     int stackLength;
 } BuzzSentryThreadInfo;
 
 // We need a C function to retrieve information from the stack trace in order to avoid
 // calling into not async-signal-safe code while there are suspended threads.
 unsigned int
-getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineContext *context,
-    SentryCrashStackEntry *buffer, unsigned int maxEntries)
+getStackEntriesFromThread(BuzzSentryCrashThread thread, struct BuzzSentryCrashMachineContext *context,
+    BuzzSentryCrashStackEntry *buffer, unsigned int maxEntries)
 {
     sentrycrashmc_getContextForThread(thread, context, false);
-    SentryCrashStackCursor stackCursor;
+    BuzzSentryCrashStackCursor stackCursor;
     sentrycrashsc_initWithMachineContext(&stackCursor, MAX_STACKTRACE_LENGTH, context);
 
     unsigned int entries = 0;
@@ -62,14 +62,14 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
 {
     NSMutableArray<BuzzSentryThread *> *threads = [NSMutableArray new];
 
-    SentryCrashMC_NEW_CONTEXT(context);
-    SentryCrashThread currentThread = sentrycrashthread_self();
+    BuzzSentryCrashMC_NEW_CONTEXT(context);
+    BuzzSentryCrashThread currentThread = sentrycrashthread_self();
 
     [self.machineContextWrapper fillContextForCurrentThread:context];
     int threadCount = [self.machineContextWrapper getThreadCount:context];
 
     for (int i = 0; i < threadCount; i++) {
-        SentryCrashThread thread = [self.machineContextWrapper getThread:context withIndex:i];
+        BuzzSentryCrashThread thread = [self.machineContextWrapper getThread:context withIndex:i];
         BuzzSentryThread *sentryThread = [[BuzzSentryThread alloc] initWithThreadId:@(i)];
 
         sentryThread.name = [self getThreadName:thread];
@@ -105,8 +105,8 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
     NSMutableArray<BuzzSentryThread *> *threads = [NSMutableArray new];
 
     @synchronized(self) {
-        SentryCrashMC_NEW_CONTEXT(context);
-        SentryCrashThread currentThread = sentrycrashthread_self();
+        BuzzSentryCrashMC_NEW_CONTEXT(context);
+        BuzzSentryCrashThread currentThread = sentrycrashthread_self();
 
         thread_act_array_t suspendedThreads = NULL;
         mach_msg_type_number_t numSuspendedThreads = 0;
@@ -162,7 +162,7 @@ getStackEntriesFromThread(SentryCrashThread thread, struct SentryCrashMachineCon
     return threads;
 }
 
-- (NSString *)getThreadName:(SentryCrashThread)thread
+- (NSString *)getThreadName:(BuzzSentryCrashThread)thread
 {
     char buffer[128];
     char *const pBuffer = buffer;

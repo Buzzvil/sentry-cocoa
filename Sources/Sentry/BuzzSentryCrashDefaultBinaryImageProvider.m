@@ -1,6 +1,6 @@
 #import "BuzzSentryCrashDefaultBinaryImageProvider.h"
 #import "BuzzSentryCrashBinaryImageProvider.h"
-#import "SentryCrashDynamicLinker.h"
+#import "BuzzSentryCrashDynamicLinker.h"
 #import <Foundation/Foundation.h>
 
 @implementation BuzzSentryCrashDefaultBinaryImageProvider
@@ -10,9 +10,9 @@
     return sentrycrashdl_imageCount();
 }
 
-- (SentryCrashBinaryImage)getBinaryImage:(NSInteger)index
+- (BuzzSentryCrashBinaryImage)getBinaryImage:(NSInteger)index
 {
-    SentryCrashBinaryImage image = { 0 };
+    BuzzSentryCrashBinaryImage image = { 0 };
     sentrycrashdl_getBinaryImage((int)index, &image);
     return image;
 }

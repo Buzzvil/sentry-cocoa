@@ -1,6 +1,6 @@
 #import "BuzzSentryViewHierarchyIntegration.h"
 #import "BuzzSentryAttachment.h"
-#import "SentryCrashC.h"
+#import "BuzzSentryCrashC.h"
 #import "BuzzSentryDependencyContainer.h"
 #import "BuzzSentryEvent+Private.h"
 #import "BuzzSentryHub+Private.h"

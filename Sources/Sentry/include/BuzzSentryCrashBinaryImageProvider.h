@@ -1,16 +1,16 @@
-#import "SentryCrashDynamicLinker.h"
+#import "BuzzSentryCrashDynamicLinker.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
-  A wrapper around SentryCrash for testability.
+  A wrapper around BuzzSentryCrash for testability.
  */
 @protocol BuzzSentryCrashBinaryImageProvider <NSObject>
 
 - (NSInteger)getImageCount;
 
-- (SentryCrashBinaryImage)getBinaryImage:(NSInteger)index;
+- (BuzzSentryCrashBinaryImage)getBinaryImage:(NSInteger)index;
 
 @end
 

@@ -1,16 +1,16 @@
 #import "FileBasedTestCase.h"
-#import "SentryCrash.h"
-#include "SentryCrashReportStore.h"
+#import "BuzzSentryCrash.h"
+#include "BuzzSentryCrashReportStore.h"
 
-@interface SentryCrashTests : FileBasedTestCase
+@interface BuzzSentryCrashTests : FileBasedTestCase
 
 @end
 
-@interface SentryCrash (private)
+@interface BuzzSentryCrash (private)
 - (NSArray *)getAttachmentPaths:(int64_t)reportID;
 @end
 
-@implementation SentryCrashTests
+@implementation BuzzSentryCrashTests
 
 - (void)tearDown
 {
@@ -23,7 +23,7 @@
 {
     [self initReport:12 withScreenshots:1];
 
-    SentryCrash *sentryCrash = [[SentryCrash alloc]
+    BuzzSentryCrash *sentryCrash = [[BuzzSentryCrash alloc]
         initWithBasePath:[self.tempPath stringByAppendingPathComponent:@"Reports"]];
     NSArray *files = [sentryCrash getAttachmentPaths:12];
 
@@ -37,7 +37,7 @@
 {
     [self initReport:12 withScreenshots:2];
 
-    SentryCrash *sentryCrash = [[SentryCrash alloc]
+    BuzzSentryCrash *sentryCrash = [[BuzzSentryCrash alloc]
         initWithBasePath:[self.tempPath stringByAppendingPathComponent:@"Reports"]];
     NSArray *files = [sentryCrash getAttachmentPaths:12];
     XCTAssertEqual(files.count, 2);
@@ -47,7 +47,7 @@
 {
     [self initReport:12 withScreenshots:0];
 
-    SentryCrash *sentryCrash = [[SentryCrash alloc]
+    BuzzSentryCrash *sentryCrash = [[BuzzSentryCrash alloc]
         initWithBasePath:[self.tempPath stringByAppendingPathComponent:@"Reports"]];
     NSArray *files = [sentryCrash getAttachmentPaths:12];
     XCTAssertEqual(files.count, 0);
@@ -55,7 +55,7 @@
 
 - (void)test_getScreenshots_NoDirectory
 {
-    SentryCrash *sentryCrash = [[SentryCrash alloc]
+    BuzzSentryCrash *sentryCrash = [[BuzzSentryCrash alloc]
         initWithBasePath:[self.tempPath stringByAppendingPathComponent:@"ReportsFake"]];
     NSArray *files = [sentryCrash getAttachmentPaths:12];
     XCTAssertEqual(files.count, 0);

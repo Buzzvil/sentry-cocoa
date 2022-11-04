@@ -118,7 +118,7 @@ BuzzSentryCrashIntegration ()
 
         // We need to send the crashed event together with the crashed session in the same envelope
         // to have proper statistics in release health. To achieve this we need both synchronously
-        // in the hub. The crashed event is converted from a SentryCrashReport to an event in
+        // in the hub. The crashed event is converted from a BuzzSentryCrashReport to an event in
         // BuzzSentryCrashReportSink and then passed to the SDK on a background thread. This process is
         // started with installing this integration. We need to end and delete the previous session
         // before being able to start a new session for the AutoSessionTrackingIntegration. The
@@ -131,16 +131,16 @@ BuzzSentryCrashIntegration ()
         // This is a pragmatic and not the most optimal place for this logic.
         [self.crashedSessionHandler endCurrentSessionAsCrashedWhenCrashOrOOM];
 
-        // We only need to send all reports on the first initialization of SentryCrash. If
+        // We only need to send all reports on the first initialization of BuzzSentryCrash. If
         // SenryCrash was deactivated there are no new reports to send. Furthermore, the
-        // g_reportsPath in SentryCrashReportsStore gets set when SentryCrash is installed. In
+        // g_reportsPath in BuzzSentryCrashReportsStore gets set when BuzzSentryCrash is installed. In
         // production usage, this path is not supposed to change. When testing, this path can
         // change, and therefore, the initial set g_reportsPath can be deleted. sendAllReports calls
-        // deleteAllReports, which fails it can't access g_reportsPath. We could fix SentryCrash or
+        // deleteAllReports, which fails it can't access g_reportsPath. We could fix BuzzSentryCrash or
         // just not call sendAllReports as it doesn't make sense to call it twice as described
         // above.
         if (canSendReports) {
-            [BuzzSentryCrashIntegration sendAllSentryCrashReports];
+            [BuzzSentryCrashIntegration sendAllBuzzSentryCrashReports];
         }
     };
     [self.dispatchQueueWrapper dispatchOnce:&installationToken block:block];
@@ -149,7 +149,7 @@ BuzzSentryCrashIntegration ()
 /**
  * Internal, only needed for testing.
  */
-+ (void)sendAllSentryCrashReports
++ (void)sendAllBuzzSentryCrashReports
 {
     [installation sendAllReports];
 }
@@ -176,15 +176,15 @@ BuzzSentryCrashIntegration ()
         NSMutableDictionary<NSString *, id> *userInfo =
             [[NSMutableDictionary alloc] initWithDictionary:[outerScope serialize]];
         // BuzzSentryCrashReportConverter.convertReportToEvent needs the release name and
-        // the dist of the BuzzSentryOptions in the UserInfo. When SentryCrash records a
-        // crash it writes the UserInfo into SentryCrashField_User of the report.
+        // the dist of the BuzzSentryOptions in the UserInfo. When BuzzSentryCrash records a
+        // crash it writes the UserInfo into BuzzSentryCrashField_User of the report.
         // BuzzSentryCrashReportConverter.initWithReport loads the contents of
-        // SentryCrashField_User into self.userContext and convertReportToEvent can map
+        // BuzzSentryCrashField_User into self.userContext and convertReportToEvent can map
         // the release name and dist to the BuzzSentryEvent. Fixes GH-581
         userInfo[@"release"] = self.options.releaseName;
         userInfo[@"dist"] = self.options.dist;
 
-        [SentryCrash.sharedInstance setUserInfo:userInfo];
+        [BuzzSentryCrash.sharedInstance setUserInfo:userInfo];
 
         [outerScope addObserver:self.scopeObserver];
     }];
@@ -224,7 +224,7 @@ BuzzSentryCrashIntegration ()
 
     NSDictionary *systemInfo = [crashWrapper systemInfo];
 
-    // SystemInfo should only be nil when SentryCrash has not been installed
+    // SystemInfo should only be nil when BuzzSentryCrash has not been installed
     if (systemInfo != nil && systemInfo.count != 0) {
         [osData setValue:systemInfo[@"osVersion"] forKey:@"build"];
         [osData setValue:systemInfo[@"kernelVersion"] forKey:@"kernel_version"];
@@ -233,7 +233,7 @@ BuzzSentryCrashIntegration ()
 
     [scope setContextValue:osData forKey:@"os"];
 
-    // SystemInfo should only be nil when SentryCrash has not been installed
+    // SystemInfo should only be nil when BuzzSentryCrash has not been installed
     if (systemInfo == nil || systemInfo.count == 0) {
         return;
     }

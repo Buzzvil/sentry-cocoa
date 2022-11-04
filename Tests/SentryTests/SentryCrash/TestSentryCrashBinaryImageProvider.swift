@@ -3,8 +3,8 @@ import Foundation
 @objc
 public class TestBuzzSentryCrashBinaryImageProvider: NSObject, BuzzSentryCrashBinaryImageProvider {
     
-    var binaryImage: [SentryCrashBinaryImage] = []
-    public func getBinaryImage(_ index: Int) -> SentryCrashBinaryImage {
+    var binaryImage: [BuzzSentryCrashBinaryImage] = []
+    public func getBinaryImage(_ index: Int) -> BuzzSentryCrashBinaryImage {
         binaryImage[Int(index)]
     }
     

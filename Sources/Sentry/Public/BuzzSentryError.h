@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, BuzzSentryError) {
     kBuzzSentryErrorUnknownError = -1,
     kBuzzSentryErrorInvalidDsnError = 100,
-    kBuzzSentryErrorSentryCrashNotInstalledError = 101,
+    kBuzzSentryErrorBuzzSentryCrashNotInstalledError = 101,
     kBuzzSentryErrorInvalidCrashReportError = 102,
     kBuzzSentryErrorCompressionError = 103,
     kBuzzSentryErrorJsonConversionError = 104,
