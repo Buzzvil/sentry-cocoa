@@ -46,6 +46,6 @@ class BuzzSentryBaseIntegrationTests: XCTestCase {
         options.enableAutoSessionTracking = false
         let result = sut.install(with: options)
         XCTAssertFalse(result)
-        XCTAssertFalse(logOutput.loggedMessages.filter({ $0.contains("Not going to enable SentryTests.MyTestIntegration because enableAutoSessionTracking is disabled.") }).isEmpty)
+        XCTAssertFalse(logOutput.loggedMessages.filter({ $0.contains("Not going to enable BuzzSentryTests.MyTestIntegration because enableAutoSessionTracking is disabled.") }).isEmpty)
     }
 }

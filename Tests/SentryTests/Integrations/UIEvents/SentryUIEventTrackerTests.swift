@@ -67,31 +67,31 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
     func test_NSObject_Transaction() {
         callExecuteAction(action: "method:", target: fixture.target, sender: NSObject(), event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.method", operation: operation)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.method", operation: operation)
     }
     
     func test_UIView_Transaction() {
         callExecuteAction(action: "method:", target: fixture.target, sender: UIView(), event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.method", operation: operation)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.method", operation: operation)
     }
     
     func testAction_WithNoArgument() {
         callExecuteAction(action: "method:", target: fixture.target, sender: fixture.button, event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.method", operation: operationClick)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.method", operation: operationClick)
     }
     
     func testAction_WithOneArgument() {
         callExecuteAction(action: "method:firstArgument:", target: fixture.target, sender: fixture.button, event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.method(firstArgument:)", operation: operationClick)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.method(firstArgument:)", operation: operationClick)
     }
     
     func testAction_WithThreeArguments() {
         callExecuteAction(action: "method:first:second:third:", target: fixture.target, sender: fixture.button, event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.method(first:second:third:)", operation: operationClick)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.method(first:second:third:)", operation: operationClick)
     }
     
     func test_UIViewWithAccessibilityIdentifier_UseAccessibilityIdentifier() {
@@ -109,19 +109,19 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
     func test_SubclassOfUIButton_CreatesTransaction() {
         callExecuteAction(action: action, target: fixture.target, sender: TestUIButton(), event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.\(expectedAction)", operation: operationClick)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.\(expectedAction)", operation: operationClick)
     }
     
     func test_UISegmentedControl_CreatesTransaction() {
         callExecuteAction(action: action, target: fixture.target, sender: UISegmentedControl(), event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.\(expectedAction)", operation: operationClick)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.\(expectedAction)", operation: operationClick)
     }
     
     func test_UIPageControl_CreatesTransaction() {
         callExecuteAction(action: action, target: fixture.target, sender: UISegmentedControl(), event: TestUIEvent())
         
-        assertTransaction(name: "SentryTests.FirstViewController.\(expectedAction)", operation: operationClick)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.\(expectedAction)", operation: operationClick)
     }
     
     func test_OnGoingUILoadTransaction_StartNewUIEventTransaction_NotBoundToScope() {
@@ -268,7 +268,7 @@ class BuzzSentryUIEventTrackerTests: XCTestCase {
     private func assertFinishesTransaction(_ transaction: BuzzSentryTracer, _ operation: String) {
         XCTAssertTrue(transaction.isFinished)
         XCTAssertEqual(.ok, transaction.context.status)
-        assertTransaction(name: "SentryTests.FirstViewController.\(expectedAction)", operation: operation)
+        assertTransaction(name: "BuzzSentryTests.FirstViewController.\(expectedAction)", operation: operation)
         
         let transactions = getInternalTransactions()
         XCTAssertEqual(1, transactions.count)

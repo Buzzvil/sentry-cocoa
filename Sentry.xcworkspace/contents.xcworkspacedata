@@ -10,9 +10,6 @@
       <FileRef
          location = "group:Samples/iOS-ObjectiveC/iOS-ObjectiveC.xcodeproj">
       </FileRef>
-      <FileRef
-         location = "group:Samples/iOS-Swift/iOS-Swift.xcodeproj">
-      </FileRef>
    </Group>
    <FileRef
       location = "group:/Users/damon/xcode/sentry-cocoa/BuzzSentry.xcodeproj">

@@ -158,6 +158,8 @@ class BuzzSentryFileIOTrackingIntegrationTests: XCTestCase {
         
         assertSpans(1, "file.read") {
             let data = try? NSData(contentsOfFile: jsonFile, options: .uncached)
+            let convertedString = String(data: data! as Data, encoding: String.Encoding.utf8)
+            print(convertedString!)
             XCTAssertEqual(data?.count, 341_431)
         }
     }

@@ -222,7 +222,6 @@
             stringWithFormat:@"%@ (%@)", filename,
             [NSByteCountFormatter stringFromByteCount:someData.length
                                            countStyle:NSByteCountFormatterCountStyleBinary]];
-
         XCTAssertEqualObjects(ioSpan.context.spanDescription, expectedString);
     }
 }

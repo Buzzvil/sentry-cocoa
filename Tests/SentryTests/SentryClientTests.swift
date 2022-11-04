@@ -6,7 +6,7 @@ import XCTest
 // move some of it to other classes.
 class BuzzSentryClientTest: XCTestCase {
     
-    private static let dsn = TestConstants.dsnAsString(username: "BuzzSentryClientTest")
+    private static let dsn = TestConstants.dsnAsString(username: "SentryClientTest")
 
     private class Fixture {
         let transport: TestTransport
