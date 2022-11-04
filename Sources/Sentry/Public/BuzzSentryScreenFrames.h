@@ -1,5 +1,5 @@
-#import "BuzzSentryDefines.h"
-#import "BuzzSentryProfilingConditionals.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
+#import <BuzzSentry/BuzzSentryProfilingConditionals.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

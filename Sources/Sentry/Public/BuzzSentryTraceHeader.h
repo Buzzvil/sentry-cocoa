@@ -1,5 +1,5 @@
-#import "BuzzSentryDefines.h"
-#import "BuzzSentrySampleDecision.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
+#import <BuzzSentry/BuzzSentrySampleDecision.h>
 
 @class BuzzSentryId, BuzzSentrySpanId;
 

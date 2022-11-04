@@ -1,4 +1,4 @@
-#import "BuzzSentryDefines.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
 
 @class BuzzSentryEnvelope, BuzzSentryDebugMeta, BuzzSentryAppStartMeasurement, BuzzSentryScreenFrames,
     BuzzSentryOptions;

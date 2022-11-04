@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-#import "BuzzSentryDefines.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
 
 @class BuzzSentryEvent, BuzzSentrySession, BuzzSentrySDKInfo, BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryAttachment,
     BuzzSentryTransaction, BuzzSentryTraceContext, BuzzSentryClientReport;

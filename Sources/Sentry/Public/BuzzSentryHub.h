@@ -1,6 +1,6 @@
-#import "BuzzSentryDefines.h"
-#import "BuzzSentryIntegrationProtocol.h"
-#import "BuzzSentrySpanProtocol.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
+#import <BuzzSentry/BuzzSentryIntegrationProtocol.h>
+#import <BuzzSentry/BuzzSentrySpanProtocol.h>
 
 @class BuzzSentryEvent, BuzzSentryClient, BuzzSentryScope, BuzzSentrySession, BuzzSentryUser, BuzzSentryBreadcrumb,
     BuzzSentryId, BuzzSentryUserFeedback, BuzzSentryEnvelope, BuzzSentryTransactionContext;

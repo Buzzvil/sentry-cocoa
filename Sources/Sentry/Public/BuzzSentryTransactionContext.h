@@ -1,5 +1,5 @@
-#import "BuzzSentrySampleDecision.h"
-#import "BuzzSentrySpanContext.h"
+#import <BuzzSentry/BuzzSentrySampleDecision.h>
+#import <BuzzSentry/BuzzSentrySpanContext.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -1,4 +1,4 @@
-#import "BuzzSentryDefines.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
 #import <Foundation/Foundation.h>
 
 @class BuzzSentryDebugMeta, BuzzSentryThread;

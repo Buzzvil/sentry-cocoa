@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-#import "BuzzSentryDefines.h"
-#import "BuzzSentryOptions.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
+#import <BuzzSentry/BuzzSentryOptions.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

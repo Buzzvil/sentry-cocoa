@@ -1,5 +1,5 @@
-#import "BuzzSentryDefines.h"
-#import "BuzzSentrySerializable.h"
+#import <BuzzSentry/BuzzSentryDefines.h>
+#import <BuzzSentry/BuzzSentrySerializable.h>
 
 @class BuzzSentryUser;
 
