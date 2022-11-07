@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NSString *const SentryServerVersionString = @"7";
-NSTimeInterval const SentryRequestTimeout = 15;
+NSTimeInterval const BuzzSentryRequestTimeout = 15;
 
 @interface
 BuzzSentryNSURLRequest ()
@@ -56,7 +56,7 @@ BuzzSentryNSURLRequest ()
     NSURL *apiURL = [dsn getStoreEndpoint];
     self = [super initWithURL:apiURL
                   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-              timeoutInterval:SentryRequestTimeout];
+              timeoutInterval:BuzzSentryRequestTimeout];
     if (self) {
         NSString *authHeader = newAuthHeader(dsn.url);
 
@@ -78,7 +78,7 @@ BuzzSentryNSURLRequest ()
     NSURL *apiURL = [dsn getEnvelopeEndpoint];
     self = [super initWithURL:apiURL
                   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-              timeoutInterval:SentryRequestTimeout];
+              timeoutInterval:BuzzSentryRequestTimeout];
     if (self) {
         NSString *authHeader = newAuthHeader(dsn.url);
 

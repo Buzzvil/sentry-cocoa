@@ -1,6 +1,21 @@
 #import "BuzzSentryTransactionContext.h"
+#include "BuzzSentryProfilingConditionals.h"
+#import "BuzzSentryThread.h"
+#include "BuzzSentryThreadHandle.hpp"
+#import "BuzzSentryTransactionContext+Private.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+static const auto kSentryDefaultSamplingDecision = kBuzzSentrySampleDecisionUndecided;
+
+@interface
+BuzzSentryTransactionContext ()
+
+#if SENTRY_TARGET_PROFILING_SUPPORTED
+@property (nonatomic, strong) BuzzSentryThread *threadInfo;
+#endif
+
+@end
 
 @implementation BuzzSentryTransactionContext
 
@@ -18,7 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
     if (self = [super initWithOperation:operation]) {
         _name = [NSString stringWithString:name];
         _nameSource = source;
-        self.parentSampled = false;
+        self.parentSampled = kSentryDefaultSamplingDecision;
+        [self getThreadInfo];
     }
     return self;
 }
@@ -41,7 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
     if (self = [super initWithOperation:operation sampled:sampled]) {
         _name = [NSString stringWithString:name];
         _nameSource = source;
-        self.parentSampled = false;
+        self.parentSampled = kSentryDefaultSamplingDecision;
+        [self getThreadInfo];
     }
     return self;
 }
@@ -74,13 +91,29 @@ NS_ASSUME_NONNULL_BEGIN
                                spanId:spanId
                              parentId:parentSpanId
                             operation:operation
-                              sampled:false]) {
+                              sampled:kSentryDefaultSamplingDecision]) {
         _name = [NSString stringWithString:name];
         _nameSource = source;
         self.parentSampled = parentSampled;
+        [self getThreadInfo];
     }
     return self;
 }
+
+- (void)getThreadInfo
+{
+#if SENTRY_TARGET_PROFILING_SUPPORTED
+    const auto threadID = sentry::profiling::ThreadHandle::current()->tid();
+    self.threadInfo = [[BuzzSentryThread alloc] initWithThreadId:@(threadID)];
+#endif
+}
+
+#if SENTRY_TARGET_PROFILING_SUPPORTED
+- (BuzzSentryThread *)sentry_threadInfo
+{
+    return self.threadInfo;
+}
+#endif
 
 @end
 

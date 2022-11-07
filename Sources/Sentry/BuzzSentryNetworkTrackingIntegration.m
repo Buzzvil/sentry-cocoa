@@ -25,7 +25,12 @@
         [BuzzSentryNetworkTracker.sharedInstance enableNetworkBreadcrumbs];
     }
 
-    if (shouldEnableNetworkTracking || options.enableNetworkBreadcrumbs) {
+    if (options.enableCaptureFailedRequests) {
+        [BuzzSentryNetworkTracker.sharedInstance enableCaptureFailedRequests];
+    }
+
+    if (shouldEnableNetworkTracking || options.enableNetworkBreadcrumbs
+        || options.enableCaptureFailedRequests) {
         [BuzzSentryNetworkTrackingIntegration swizzleURLSessionTask];
         return YES;
     } else {

@@ -313,21 +313,21 @@ private extension BuzzSentryProfilerSwiftTests {
         }
         XCTAssert(foundAtLeastOneNonEmptySample)
 
-        let transactions = profile["transactions"] as? [[String: String]]
+        let transactions = profile["transactions"] as? [[String: Any]]
         XCTAssertEqual(transactions!.count, numberOfTransactions)
         for transaction in transactions! {
-            XCTAssertEqual(fixture.transactionName, transaction["name"])
+            XCTAssertEqual(fixture.transactionName, transaction["name"] as! String)
             XCTAssertNotNil(transaction["id"])
             if let idString = transaction["id"] {
-                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: idString))
+                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: idString as! String))
             }
             XCTAssertNotNil(transaction["trace_id"])
             if let traceIDString = transaction["trace_id"] {
-                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: traceIDString))
+                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: traceIDString as! String))
             }
             XCTAssertNotNil(transaction["trace_id"])
             XCTAssertNotNil(transaction["relative_start_ns"])
-            XCTAssertNotNil(transaction["relative_end_ns"])
+            XCTAssertFalse((transaction["relative_end_ns"] as! NSString).isEqual(to: "0"))
             XCTAssertNotNil(transaction["active_thread_id"])
         }
 

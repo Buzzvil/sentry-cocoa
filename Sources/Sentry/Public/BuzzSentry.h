@@ -22,6 +22,7 @@ FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 #import <BuzzSentry/BuzzSentryEvent.h>
 #import <BuzzSentry/BuzzSentryException.h>
 #import <BuzzSentry/BuzzSentryFrame.h>
+#import <BuzzSentry/BuzzSentryHttpStatusCodeRange.h>
 #import <BuzzSentry/BuzzSentryHub.h>
 #import <BuzzSentry/BuzzSentryId.h>
 #import <BuzzSentry/BuzzSentryIntegrationProtocol.h>
@@ -31,6 +32,7 @@ FOUNDATION_EXPORT const unsigned char SentryVersionString[];
 #import <BuzzSentry/BuzzSentryMessage.h>
 #import <BuzzSentry/BuzzSentryNSError.h>
 #import <BuzzSentry/BuzzSentryOptions.h>
+#import <BuzzSentry/BuzzSentryRequest.h>
 #import <BuzzSentry/BuzzSentrySDK.h>
 #import <BuzzSentry/BuzzSentrySampleDecision.h>
 #import <BuzzSentry/BuzzSentrySamplingContext.h>

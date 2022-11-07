@@ -1,6 +1,7 @@
 #import "BuzzSentryOptions.h"
 #import "BuzzSentryANRTracker.h"
 #import "BuzzSentryDsn.h"
+#import "BuzzSentryHttpStatusCodeRange.h"
 #import "BuzzSentryLevelMapper.h"
 #import "BuzzSentryLog.h"
 #import "BuzzSentryMeta.h"
@@ -12,6 +13,7 @@ BuzzSentryOptions ()
 
 @property (nullable, nonatomic, copy, readonly) NSNumber *defaultSampleRate;
 @property (nullable, nonatomic, copy, readonly) NSNumber *defaultTracesSampleRate;
+
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 @property (nullable, nonatomic, copy, readonly) NSNumber *defaultProfilesSampleRate;
 @property (nonatomic, assign) BOOL enableProfiling_DEPRECATED_TEST_ONLY;
@@ -60,6 +62,7 @@ BuzzSentryOptions ()
         self.maxAttachmentSize = 20 * 1024 * 1024;
         self.sendDefaultPii = NO;
         self.enableAutoPerformanceTracking = YES;
+        self.enableCaptureFailedRequests = NO;
 #if SENTRY_HAS_UIKIT
         self.enableUIViewControllerTracking = YES;
         self.attachScreenshot = NO;
@@ -117,6 +120,12 @@ BuzzSentryOptions ()
                                                       options:NSRegularExpressionCaseInsensitive
                                                         error:NULL];
         self.tracePropagationTargets = @[ everythingAllowedRegex ];
+        self.failedRequestTargets = @[ everythingAllowedRegex ];
+
+        // defaults to 500 to 599
+        BuzzSentryHttpStatusCodeRange *defaultHttpStatusCodeRange =
+            [[BuzzSentryHttpStatusCodeRange alloc] initWithMin:500 max:599];
+        self.failedRequestStatusCodes = @[ defaultHttpStatusCodeRange ];
     }
     return self;
 }
@@ -146,6 +155,19 @@ BuzzSentryOptions ()
     }
 
     _tracePropagationTargets = tracePropagationTargets;
+}
+
+- (void)setFailedRequestTargets:(NSArray *)failedRequestTargets
+{
+    for (id targetCheck in failedRequestTargets) {
+        if (![targetCheck isKindOfClass:[NSRegularExpression class]]
+            && ![targetCheck isKindOfClass:[NSString class]]) {
+            SENTRY_LOG_WARN(@"Only instances of NSString and NSRegularExpression are supported "
+                            @"inside failedRequestTargets.");
+        }
+    }
+
+    _failedRequestTargets = failedRequestTargets;
 }
 
 - (void)setIntegrations:(NSArray<NSString *> *)integrations
@@ -270,6 +292,9 @@ BuzzSentryOptions ()
     [self setBool:options[@"enableAutoPerformanceTracking"]
             block:^(BOOL value) { self->_enableAutoPerformanceTracking = value; }];
 
+    [self setBool:options[@"enableCaptureFailedRequests"]
+            block:^(BOOL value) { self->_enableCaptureFailedRequests = value; }];
+
 #if SENTRY_HAS_UIKIT
     [self setBool:options[@"enableUIViewControllerTracking"]
             block:^(BOOL value) { self->_enableUIViewControllerTracking = value; }];
@@ -352,7 +377,15 @@ BuzzSentryOptions ()
         self.tracePropagationTargets = options[@"tracePropagationTargets"];
     }
 
-    // BuzzSentrySDKInfo already expects a dictionary with {"sdk": {"name": ..., "value": ...}}
+    if ([options[@"failedRequestStatusCodes"] isKindOfClass:[NSArray class]]) {
+        self.failedRequestStatusCodes = options[@"failedRequestStatusCodes"];
+    }
+
+    if ([options[@"failedRequestTargets"] isKindOfClass:[NSArray class]]) {
+        self.failedRequestTargets = options[@"failedRequestTargets"];
+    }
+
+    // SentrySdkInfo already expects a dictionary with {"sdk": {"name": ..., "value": ...}}
     // so we're passing the whole options object.
     // Note: we should remove this code once the hybrid SDKs move over to the new
     // PrivateBuzzSentrySDKOnly setter functions.

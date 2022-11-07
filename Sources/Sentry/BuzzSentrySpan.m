@@ -25,8 +25,8 @@ BuzzSentrySpan ()
 - (instancetype)initWithTracer:(BuzzSentryTracer *)tracer context:(BuzzSentrySpanContext *)context
 {
     if (self = [super init]) {
-        SENTRY_LOG_DEBUG(
-            @"Starting span %@ with tracer %@", context.spanId.BuzzSentrySpanIdString, tracer);
+        SENTRY_LOG_DEBUG(@"Created span %@ for trace ID %@", context.spanId.BuzzSentrySpanIdString,
+            tracer.context.traceId);
         _tracer = tracer;
         _context = context;
         self.startTimestamp = [BuzzSentryCurrentDate date];
@@ -128,6 +128,8 @@ BuzzSentrySpan ()
     _isFinished = YES;
     if (self.timestamp == nil) {
         self.timestamp = [BuzzSentryCurrentDate date];
+        SENTRY_LOG_DEBUG(@"Setting span timestamp: %@ at system time %llu", self.timestamp,
+            (unsigned long long)getAbsoluteTime());
     }
     if (self.tracer != nil) {
         [self.tracer spanFinished:self];

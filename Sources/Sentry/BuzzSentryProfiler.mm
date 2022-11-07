@@ -22,9 +22,11 @@
 #    import "BuzzSentryScreenFrames.h"
 #    import "BuzzSentrySerialization.h"
 #    import "BuzzSentrySpanId.h"
+#    import "BuzzSentryThread.h"
 #    import "BuzzSentryTime.h"
 #    import "BuzzSentryTransaction.h"
 #    import "BuzzSentryTransactionContext.h"
+#    import "BuzzSentryTransactionContext+Private.h"
 
 #    if defined(DEBUG)
 #        include <execinfo.h>
@@ -573,7 +575,6 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
 
     // populate info from all transactions that occurred while profiler was running
     auto transactionsInfo = [NSMutableArray array];
-    NSString *mainThreadID = [profile[@"profile"][@"samples"] firstObject][@"thread_id"];
     for (BuzzSentryTransaction *transaction in _transactions) {
         const auto relativeStart =
             [NSString stringWithFormat:@"%llu",
@@ -581,23 +582,36 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
                           ? 0
                           : (unsigned long long)(
                               [transaction.startTimestamp timeIntervalSinceDate:_startDate] * 1e9)];
-        const auto relativeEnd =
-            [NSString stringWithFormat:@"%llu",
-                      [transaction.timestamp compare:_endDate] == NSOrderedDescending
-                          ? profileDuration
-                          : (unsigned long long)(
-                              [transaction.timestamp timeIntervalSinceDate:_startDate] * 1e9)];
+
+        NSString *relativeEnd;
+        if ([transaction.timestamp compare:_endDate] == NSOrderedDescending) {
+            relativeEnd = [NSString stringWithFormat:@"%llu", profileDuration];
+        } else {
+            const auto profileStartToTransactionEnd_ns =
+                [transaction.timestamp timeIntervalSinceDate:_startDate] * 1e9;
+            if (profileStartToTransactionEnd_ns < 0) {
+                SENTRY_LOG_DEBUG(@"Transaction %@ ended before the profiler started, won't "
+                                 @"associate it with this profile.",
+                    transaction.trace.context.traceId.BuzzSentryIdString);
+                continue;
+            } else {
+                relativeEnd = [NSString
+                    stringWithFormat:@"%llu", (unsigned long long)profileStartToTransactionEnd_ns];
+            }
+        }
         [transactionsInfo addObject:@{
             @"id" : transaction.eventId.BuzzSentryIdString,
             @"trace_id" : transaction.trace.context.traceId.BuzzSentryIdString,
             @"name" : transaction.transaction,
             @"relative_start_ns" : relativeStart,
             @"relative_end_ns" : relativeEnd,
-            @"active_thread_id" :
-                mainThreadID // TODO: we are just using the main thread ID for all transactions to
-                             // fix a backend validation error, but this needs to be gathered from
-                             // transaction starts in their contexts and carried forward to here
+            @"active_thread_id" : [transaction.trace.transactionContext sentry_threadInfo].threadId
         }];
+    }
+
+    if (transactionsInfo.count == 0) {
+        SENTRY_LOG_DEBUG(@"No transactions to associate with this profile, will not upload.");
+        return;
     }
     profile[@"transactions"] = transactionsInfo;
 

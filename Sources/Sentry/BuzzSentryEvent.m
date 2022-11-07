@@ -10,6 +10,7 @@
 #import "BuzzSentryLevelMapper.h"
 #import "BuzzSentryMessage.h"
 #import "BuzzSentryMeta.h"
+#import "BuzzSentryRequest.h"
 #import "BuzzSentryStacktrace.h"
 #import "BuzzSentryThread.h"
 #import "BuzzSentryUser.h"
@@ -156,6 +157,10 @@ BuzzSentryEvent ()
             [serializedData setValue:@(self.timestamp.timeIntervalSince1970)
                               forKey:@"start_timestamp"];
         }
+    }
+
+    if (nil != self.request) {
+        [serializedData setValue:[self.request serialize] forKey:@"request"];
     }
 }
 

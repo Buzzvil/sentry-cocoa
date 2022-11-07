@@ -143,6 +143,8 @@ static BOOL appStartMeasurementRead;
           dispatchQueueWrapper:(nullable BuzzSentryDispatchQueueWrapper *)dispatchQueueWrapper
 {
     if (self = [super init]) {
+        SENTRY_LOG_DEBUG(
+            @"Starting transaction at system time %llu", (unsigned long long)getAbsoluteTime());
         self.rootSpan = [[BuzzSentrySpan alloc] initWithTracer:self context:transactionContext];
         self.transactionContext = transactionContext;
         _children = [[NSMutableArray alloc] init];
