@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryEnvelopeTests: XCTestCase {
+class BuzzSentryEnvelopeTests: XCTestCase {
     
     private class Fixture {
         let sdkVersion = "sdkVersion"
@@ -13,7 +13,7 @@ class SentryEnvelopeTests: XCTestCase {
         let dataTooBig: Data
         
         init() {
-            userFeedback = UserFeedback(eventId: SentryId())
+            userFeedback = UserFeedback(eventId: BuzzSentryId())
             userFeedback.comments = "It doesn't work!"
             userFeedback.email = "john@me.com"
             userFeedback.name = "John Me"
@@ -24,7 +24,7 @@ class SentryEnvelopeTests: XCTestCase {
 
         var breadcrumb: Breadcrumb {
             get {
-                let crumb = Breadcrumb(level: SentryLevel.debug, category: "ui.lifecycle")
+                let crumb = Breadcrumb(level: BuzzSentryLevel.debug, category: "ui.lifecycle")
                 crumb.message = "first breadcrumb"
                 return crumb
             }
@@ -32,8 +32,8 @@ class SentryEnvelopeTests: XCTestCase {
 
         var event: Event {
             let event = Event()
-            event.level = SentryLevel.info
-            event.message = SentryMessage(formatted: "Don't do this")
+            event.level = BuzzSentryLevel.info
+            event.message = BuzzSentryMessage(formatted: "Don't do this")
             event.releaseName = "releaseName1.0.0"
             event.environment = "save the environment"
             event.sdk = ["version": sdkVersion, "date": Date()]
@@ -42,7 +42,7 @@ class SentryEnvelopeTests: XCTestCase {
 
         var eventWithContinousSerializationFailure: Event {
             let event = EventSerializationFailure()
-            event.message = SentryMessage(formatted: "Failure")
+            event.message = BuzzSentryMessage(formatted: "Failure")
             event.releaseName = "release"
             event.environment = "environment"
             event.platform = "platform"
@@ -69,13 +69,13 @@ class SentryEnvelopeTests: XCTestCase {
         }
     }
 
-    private let defaultSdkInfo = SentrySdkInfo(name: SentryMeta.sdkName, andVersion: SentryMeta.versionString)
+    private let defaultSdkInfo = BuzzSentrySDKInfo(name: BuzzSentryMeta.sdkName, andVersion: BuzzSentryMeta.versionString)
     
-    func testSentryEnvelopeFromEvent() {
+    func testBuzzSentryEnvelopeFromEvent() {
         let event = Event()
         
-        let item = SentryEnvelopeItem(event: event)
-        let envelope = SentryEnvelope(id: event.eventId, singleItem: item)
+        let item = BuzzSentryEnvelopeItem(event: event)
+        let envelope = BuzzSentryEnvelope(id: event.eventId, singleItem: item)
         
         XCTAssertEqual(event.eventId, envelope.header.eventId)
         XCTAssertEqual(1, envelope.items.count)
@@ -86,16 +86,16 @@ class SentryEnvelopeTests: XCTestCase {
         assertJsonIsEqual(actual: json, expected: envelope.items[0].data)
     }
     
-    func testSentryEnvelopeWithExplicitInitMessages() {
+    func testBuzzSentryEnvelopeWithExplicitInitMessages() {
         let attachment = "{}"
         let data = attachment.data(using: .utf8)!
         
-        let itemHeader = SentryEnvelopeItemHeader(type: "attachment", length: UInt(data.count))
-        let item = SentryEnvelopeItem(header: itemHeader, data: data)
+        let itemHeader = BuzzSentryEnvelopeItemHeader(type: "attachment", length: UInt(data.count))
+        let item = BuzzSentryEnvelopeItem(header: itemHeader, data: data)
         
-        let envelopeId = SentryId()
-        let header = SentryEnvelopeHeader(id: envelopeId)
-        let envelope = SentryEnvelope(header: header, singleItem: item)
+        let envelopeId = BuzzSentryId()
+        let header = BuzzSentryEnvelopeHeader(id: envelopeId)
+        let envelope = BuzzSentryEnvelope(header: header, singleItem: item)
         
         XCTAssertEqual(envelopeId, envelope.header.eventId)
         XCTAssertEqual(1, envelope.items.count)
@@ -105,8 +105,8 @@ class SentryEnvelopeTests: XCTestCase {
         XCTAssertEqual(data, envelope.items[0].data)
     }
     
-    func testSentryEnvelopeWithExplicitInitMessagesMultipleItems() {
-        var items: [SentryEnvelopeItem] = []
+    func testBuzzSentryEnvelopeWithExplicitInitMessagesMultipleItems() {
+        var items: [BuzzSentryEnvelopeItem] = []
         let itemCount = 3
         var attachment = ""
         attachment += UUID().uuidString
@@ -114,13 +114,13 @@ class SentryEnvelopeTests: XCTestCase {
         for _ in 0..<itemCount {
             attachment += UUID().uuidString
             let data = attachment.data(using: .utf8)!
-            let itemHeader = SentryEnvelopeItemHeader(type: "attachment", length: UInt(data.count))
-            let item = SentryEnvelopeItem(header: itemHeader, data: data)
+            let itemHeader = BuzzSentryEnvelopeItemHeader(type: "attachment", length: UInt(data.count))
+            let item = BuzzSentryEnvelopeItem(header: itemHeader, data: data)
             items.append(item)
         }
 
-        let envelopeId = SentryId()
-        let envelope = SentryEnvelope(id: envelopeId, items: items)
+        let envelopeId = BuzzSentryId()
+        let envelope = BuzzSentryEnvelope(id: envelopeId, items: items)
 
         XCTAssertEqual(envelopeId, envelope.header.eventId)
         XCTAssertEqual(itemCount, envelope.items.count)
@@ -130,53 +130,53 @@ class SentryEnvelopeTests: XCTestCase {
         }
     }
     
-    func testInitSentryEnvelopeHeader_DefaultSdkInfoIsSet() {
-        XCTAssertEqual(defaultSdkInfo, SentryEnvelopeHeader(id: nil).sdkInfo)
+    func testInitBuzzSentryEnvelopeHeader_DefaultSdkInfoIsSet() {
+        XCTAssertEqual(defaultSdkInfo, BuzzSentryEnvelopeHeader(id: nil).sdkInfo)
     }
     
-    func testInitSentryEnvelopeHeader_IdAndSkInfoNil() {
-        let allNil = SentryEnvelopeHeader(id: nil, sdkInfo: nil, traceContext: nil)
+    func testInitBuzzSentryEnvelopeHeader_IdAndSkInfoNil() {
+        let allNil = BuzzSentryEnvelopeHeader(id: nil, sdkInfo: nil, traceContext: nil)
         XCTAssertNil(allNil.eventId)
         XCTAssertNil(allNil.sdkInfo)
         XCTAssertNil(allNil.traceContext)
     }
     
-    func testInitSentryEnvelopeHeader_IdAndTraceStateNil() {
-        let allNil = SentryEnvelopeHeader(id: nil, traceContext: nil)
+    func testInitBuzzSentryEnvelopeHeader_IdAndTraceStateNil() {
+        let allNil = BuzzSentryEnvelopeHeader(id: nil, traceContext: nil)
         XCTAssertNil(allNil.eventId)
         XCTAssertNotNil(allNil.sdkInfo)
         XCTAssertNil(allNil.traceContext)
     }
     
-    func testInitSentryEnvelopeHeader_SetIdAndSdkInfo() {
-        let eventId = SentryId()
-        let sdkInfo = SentrySdkInfo(name: "sdk", andVersion: "1.2.3-alpha.0")
+    func testInitBuzzSentryEnvelopeHeader_SetIdAndSdkInfo() {
+        let eventId = BuzzSentryId()
+        let sdkInfo = BuzzSentrySDKInfo(name: "sdk", andVersion: "1.2.3-alpha.0")
         
-        let envelopeHeader = SentryEnvelopeHeader(id: eventId, sdkInfo: sdkInfo, traceContext: nil)
+        let envelopeHeader = BuzzSentryEnvelopeHeader(id: eventId, sdkInfo: sdkInfo, traceContext: nil)
         XCTAssertEqual(eventId, envelopeHeader.eventId)
         XCTAssertEqual(sdkInfo, envelopeHeader.sdkInfo)
     }
     
-    func testInitSentryEnvelopeHeader_SetIdAndTraceState() {
-        let eventId = SentryId()
-        let traceContext = SentryTraceContext(trace: SentryId(), publicKey: "publicKey", releaseName: "releaseName", environment: "environment", transaction: "transaction", userSegment: nil, sampleRate: nil)
+    func testInitBuzzSentryEnvelopeHeader_SetIdAndTraceState() {
+        let eventId = BuzzSentryId()
+        let traceContext = BuzzSentryTraceContext(trace: BuzzSentryId(), publicKey: "publicKey", releaseName: "releaseName", environment: "environment", transaction: "transaction", userSegment: nil, sampleRate: nil)
         
-        let envelopeHeader = SentryEnvelopeHeader(id: eventId, traceContext: traceContext)
+        let envelopeHeader = BuzzSentryEnvelopeHeader(id: eventId, traceContext: traceContext)
         XCTAssertEqual(eventId, envelopeHeader.eventId)
         XCTAssertEqual(traceContext, envelopeHeader.traceContext)
     }
     
-    func testInitSentryEnvelopeWithSession_DefaultSdkInfoIsSet() {
-        let envelope = SentryEnvelope(session: SentrySession(releaseName: "1.1.1"))
+    func testInitBuzzSentryEnvelopeWithSession_DefaultSdkInfoIsSet() {
+        let envelope = BuzzSentryEnvelope(session: BuzzSentrySession(releaseName: "1.1.1"))
         
         XCTAssertEqual(defaultSdkInfo, envelope.header.sdkInfo)
     }
 
     func testInitWithEvent() throws {
         let event = fixture.event
-        let envelope = SentryEnvelope(event: event)
+        let envelope = BuzzSentryEnvelope(event: event)
 
-        let expectedData = try SentrySerialization.data(withJSONObject: event.serialize())
+        let expectedData = try BuzzSentrySerialization.data(withJSONObject: event.serialize())
 
         XCTAssertEqual(event.eventId, envelope.header.eventId)
         XCTAssertEqual(1, envelope.items.count)
@@ -187,7 +187,7 @@ class SentryEnvelopeTests: XCTestCase {
 
     func testInitWithEvent_SerializationFails_SendsEventWithSerializationFailure() {
         let event = fixture.eventWithContinousSerializationFailure
-        let envelope = SentryEnvelope(event: event)
+        let envelope = BuzzSentryEnvelope(event: event)
 
         XCTAssertEqual(1, envelope.items.count)
         XCTAssertNotNil(envelope.items.first?.data)
@@ -197,8 +197,8 @@ class SentryEnvelopeTests: XCTestCase {
             // Asserting the description of the message doesn't work properly, because
             // the serialization adds \n. Therefore, we only check for bits of the
             // the description. The actual description is tested in the tests for the
-            // SentryMessage
-            json.assertContains("JSON conversion error for event with message: '<SentryMessage: ", "message")
+            // BuzzSentryMessage
+            json.assertContains("JSON conversion error for event with message: '<BuzzSentryMessage: ", "message")
             json.assertContains("formatted = \(event.message?.formatted ?? "")", "message")
             
             json.assertContains("warning", "level")
@@ -212,7 +212,7 @@ class SentryEnvelopeTests: XCTestCase {
     func testInitWithUserFeedback() throws {
         let userFeedback = fixture.userFeedback
         
-        let envelope = SentryEnvelope(userFeedback: userFeedback)
+        let envelope = BuzzSentryEnvelope(userFeedback: userFeedback)
         XCTAssertEqual(userFeedback.eventId, envelope.header.eventId)
         XCTAssertEqual(defaultSdkInfo, envelope.header.sdkInfo)
         
@@ -221,7 +221,7 @@ class SentryEnvelopeTests: XCTestCase {
         XCTAssertEqual("user_report", item?.header.type)
         XCTAssertNotNil(item?.data)
         
-        let expectedData = try SentrySerialization.data(withJSONObject: userFeedback.serialize())
+        let expectedData = try BuzzSentrySerialization.data(withJSONObject: userFeedback.serialize())
 
         let actual = String(data: item?.data ?? Data(), encoding: .utf8)?.sorted()
         let expected = String(data: expectedData, encoding: .utf8)?.sorted()
@@ -231,7 +231,7 @@ class SentryEnvelopeTests: XCTestCase {
     func testInitWithDataAttachment() {
         let attachment = TestData.dataAttachment
         
-        let envelopeItem = SentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize)!
+        let envelopeItem = BuzzSentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize)!
         
         XCTAssertEqual("attachment", envelopeItem.header.type)
         XCTAssertEqual(UInt(attachment.data?.count ?? 0), envelopeItem.header.length)
@@ -244,7 +244,7 @@ class SentryEnvelopeTests: XCTestCase {
         
         let attachment = Attachment(path: fixture.path)
         
-        let envelopeItem = SentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize)!
+        let envelopeItem = BuzzSentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize)!
         
         XCTAssertEqual("attachment", envelopeItem.header.type)
         XCTAssertEqual(UInt(fixture.data?.count ?? 0), envelopeItem.header.length)
@@ -255,27 +255,27 @@ class SentryEnvelopeTests: XCTestCase {
     func testInitWithNonExistentFileAttachment() {
         let attachment = Attachment(path: fixture.path)
         
-        let envelopeItem = SentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize)
+        let envelopeItem = BuzzSentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize)
         
         XCTAssertNil(envelopeItem)
     }
     
     func testInitWithFileAttachment_MaxAttachmentSize() {
         writeDataToFile(data: fixture.dataAllowed)
-        XCTAssertNotNil(SentryEnvelopeItem(attachment: Attachment(path: fixture.path), maxAttachmentSize: fixture.maxAttachmentSize))
+        XCTAssertNotNil(BuzzSentryEnvelopeItem(attachment: Attachment(path: fixture.path), maxAttachmentSize: fixture.maxAttachmentSize))
         
         writeDataToFile(data: fixture.dataTooBig)
-        XCTAssertNil(SentryEnvelopeItem(attachment: Attachment(path: fixture.path), maxAttachmentSize: fixture.maxAttachmentSize))
+        XCTAssertNil(BuzzSentryEnvelopeItem(attachment: Attachment(path: fixture.path), maxAttachmentSize: fixture.maxAttachmentSize))
     }
     
     func testInitWithDataAttachment_MaxAttachmentSize() {
         let attachmentTooBig = Attachment(data: fixture.dataTooBig, filename: "")
         XCTAssertNil(
-            SentryEnvelopeItem(attachment: attachmentTooBig, maxAttachmentSize: fixture.maxAttachmentSize))
+            BuzzSentryEnvelopeItem(attachment: attachmentTooBig, maxAttachmentSize: fixture.maxAttachmentSize))
         
         let attachment = Attachment(data: fixture.dataAllowed, filename: "")
         XCTAssertNotNil(
-            SentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize))
+            BuzzSentryEnvelopeItem(attachment: attachment, maxAttachmentSize: fixture.maxAttachmentSize))
     }
     
     private func writeDataToFile(data: Data) {

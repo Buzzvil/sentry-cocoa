@@ -1,9 +1,9 @@
 import ObjectiveC
 import XCTest
 
-class SentryNetworkTrackerTests: XCTestCase {
+class BuzzSentryNetworkTrackerTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentrySessionTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentrySessionTrackerTests")
     private static let testURL = URL(string: "https://www.domain.com/api")!
     private static let transactionName = "TestTransaction"
     private static let transactionOperation = "Test"
@@ -14,21 +14,21 @@ class SentryNetworkTrackerTests: XCTestCase {
         let dateProvider = TestCurrentDateProvider()
         let options: Options
         let scope: Scope
-        let nsUrlRequest = NSURLRequest(url: SentryNetworkTrackerTests.testURL)
+        let nsUrlRequest = NSURLRequest(url: BuzzSentryNetworkTrackerTests.testURL)
         let client: TestClient!
         let hub: TestHub!
         
         init() {
             options = Options()
-            options.dsn = SentryNetworkTrackerTests.dsnAsString
+            options.dsn = BuzzSentryNetworkTrackerTests.dsnAsString
             sentryTask = URLSessionDataTaskMock(request: URLRequest(url: URL(string: options.dsn!)!))
             scope = Scope()
             client = TestClient(options: options)
             hub = TestHub(client: client, andScope: scope)
         }
         
-        func getSut() -> SentryNetworkTracker {
-            let result = SentryNetworkTracker.sharedInstance
+        func getSut() -> BuzzSentryNetworkTracker {
+            let result = BuzzSentryNetworkTracker.sharedInstance
             result.enableNetworkTracking()
             result.enableNetworkBreadcrumbs()
             result.enableCaptureFailedRequests()
@@ -42,7 +42,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         super.setUp()
         fixture = Fixture()
         
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
         CurrentDate.setCurrentDateProvider(fixture.dateProvider)
     }
     
@@ -128,7 +128,7 @@ class SentryNetworkTrackerTests: XCTestCase {
     }
     
     func testSDKOptionsNil() {
-        SentrySDK.setCurrentHub(nil)
+        BuzzSentrySDK.setCurrentHub(nil)
         
         let task = fixture.sentryTask
         let span = spanForTask(task: task)
@@ -151,8 +151,8 @@ class SentryNetworkTrackerTests: XCTestCase {
     func testCaptureRequestDuration() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let tracer = SentryTracer(transactionContext: TransactionContext(name: SentryNetworkTrackerTests.transactionName,
-                                                                         operation: SentryNetworkTrackerTests.transactionOperation),
+        let tracer = BuzzSentryTracer(transactionContext: TransactionContext(name: BuzzSentryNetworkTrackerTests.transactionName,
+                                                                         operation: BuzzSentryNetworkTrackerTests.transactionOperation),
                                   hub: nil,
                                   waitForChildren: true)
         fixture.scope.span = tracer
@@ -195,20 +195,20 @@ class SentryNetworkTrackerTests: XCTestCase {
         let task = createDataTask()
         let span = spanForTask(task: task)!
         
-        XCTAssertEqual(span.context.spanDescription, "GET \(SentryNetworkTrackerTests.testURL)")
+        XCTAssertEqual(span.context.spanDescription, "GET \(BuzzSentryNetworkTrackerTests.testURL)")
     }
     
     func testSpanDescriptionNameWithPost() {
         let task = createDataTask(method: "POST")
         let span = spanForTask(task: task)!
         
-        XCTAssertEqual(span.context.spanDescription, "POST \(SentryNetworkTrackerTests.testURL)")
+        XCTAssertEqual(span.context.spanDescription, "POST \(BuzzSentryNetworkTrackerTests.testURL)")
     }
     
     func testStatusForTaskRunning() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let status = Dynamic(sut).statusForSessionTask(task, state: URLSessionTask.State.running) as SentrySpanStatus?
+        let status = Dynamic(sut).statusForSessionTask(task, state: URLSessionTask.State.running) as BuzzSentrySpanStatus?
         XCTAssertEqual(status, .undefined)
     }
     
@@ -243,7 +243,7 @@ class SentryNetworkTrackerTests: XCTestCase {
     }
 
     func testTaskWithoutCurrentRequest() {
-        let request = URLRequest(url: SentryNetworkTrackerTests.testURL)
+        let request = URLRequest(url: BuzzSentryNetworkTrackerTests.testURL)
         let task = URLSessionUnsupportedTaskMock(request: request)
         let span = spanForTask(task: task)
 
@@ -293,7 +293,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         XCTAssertEqual(breadcrumb!.level, .info)
         XCTAssertEqual(breadcrumb!.type, "http")
         XCTAssertEqual(breadcrumbs!.count, 1)
-        XCTAssertEqual(breadcrumb!.data!["url"] as! String, SentryNetworkTrackerTests.testURL.absoluteString)
+        XCTAssertEqual(breadcrumb!.data!["url"] as! String, BuzzSentryNetworkTrackerTests.testURL.absoluteString)
         XCTAssertEqual(breadcrumb!.data!["method"] as! String, "GET")
         XCTAssertEqual(breadcrumb!.data!["status_code"] as! NSNumber, NSNumber(value: 200))
         XCTAssertEqual(breadcrumb!.data!["reason"] as! String, HTTPURLResponse.localizedString(forStatusCode: 200))
@@ -327,7 +327,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         XCTAssertEqual(breadcrumb!.category, "http")
         XCTAssertEqual(breadcrumb!.level, .info)
         XCTAssertEqual(breadcrumb!.type, "http")
-        XCTAssertEqual(breadcrumb!.data!["url"] as! String, SentryNetworkTrackerTests.testURL.absoluteString)
+        XCTAssertEqual(breadcrumb!.data!["url"] as! String, BuzzSentryNetworkTrackerTests.testURL.absoluteString)
         XCTAssertEqual(breadcrumb!.data!["method"] as! String, "GET")
     }
     
@@ -346,7 +346,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         XCTAssertEqual(breadcrumb!.level, .info)
         XCTAssertEqual(breadcrumb!.type, "http")
         XCTAssertEqual(breadcrumbs!.count, 1)
-        XCTAssertEqual(breadcrumb!.data!["url"] as! String, SentryNetworkTrackerTests.testURL.absoluteString)
+        XCTAssertEqual(breadcrumb!.data!["url"] as! String, BuzzSentryNetworkTrackerTests.testURL.absoluteString)
         XCTAssertEqual(breadcrumb!.data!["method"] as! String, "GET")
     }
     
@@ -390,7 +390,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         XCTAssertEqual(breadcrumb!.level, .error)
         XCTAssertEqual(breadcrumb!.type, "http")
         XCTAssertEqual(breadcrumbs!.count, 1)
-        XCTAssertEqual(breadcrumb!.data!["url"] as! String, SentryNetworkTrackerTests.testURL.absoluteString)
+        XCTAssertEqual(breadcrumb!.data!["url"] as! String, BuzzSentryNetworkTrackerTests.testURL.absoluteString)
         XCTAssertEqual(breadcrumb!.data!["method"] as! String, "GET")
         XCTAssertNil(breadcrumb!.data!["status_code"])
         XCTAssertNil(breadcrumb!.data!["reason"])
@@ -464,7 +464,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         let sut = fixture.getSut()
         let transaction = startTransaction()
         
-        let queue = DispatchQueue(label: "SentryNetworkTrackerTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentryNetworkTrackerTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
         
         for _ in 0...100_000 {
@@ -493,7 +493,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         let transaction = startTransaction()
         sut.urlSessionTaskResume(task)
         
-        let queue = DispatchQueue(label: "SentryNetworkTrackerTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentryNetworkTrackerTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
         
         for _ in 0...100_000 {
@@ -519,7 +519,7 @@ class SentryNetworkTrackerTests: XCTestCase {
     func testBaggageHeader() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let transaction = startTransaction() as! SentryTracer
+        let transaction = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
         let expectedBaggageHeader = transaction.traceContext.toBaggage().toHTTPHeader()
@@ -529,10 +529,10 @@ class SentryNetworkTrackerTests: XCTestCase {
     func testTraceHeader() {
         let sut = fixture.getSut()
         let task = createDataTask()
-        let transaction = startTransaction() as! SentryTracer
+        let transaction = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
-        let children = Dynamic(transaction).children as [SentrySpan]?
+        let children = Dynamic(transaction).children as [BuzzSentrySpan]?
         let networkSpan = children![0]
         let expectedTraceHeader = networkSpan.toTraceHeader().value()
         XCTAssertEqual(task.currentRequest?.allHTTPHeaderFields?["sentry-trace"] ?? "", expectedTraceHeader)
@@ -543,7 +543,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         sut.disable()
 
         let task = createDataTask()
-        _ = startTransaction() as! SentryTracer
+        _ = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
         XCTAssertNil(task.currentRequest?.allHTTPHeaderFields?["baggage"])
@@ -564,7 +564,7 @@ class SentryNetworkTrackerTests: XCTestCase {
 
         let sut = fixture.getSut()
         let task = createDataTask()
-        _ = startTransaction() as! SentryTracer
+        _ = startTransaction() as! BuzzSentryTracer
         sut.urlSessionTaskResume(task)
 
         XCTAssertNil(task.currentRequest?.allHTTPHeaderFields?["baggage"])
@@ -640,7 +640,7 @@ class SentryNetworkTrackerTests: XCTestCase {
 
         let headers = ["test": "test", "Cookie": "myCookie", "Set-Cookie": "myCookie"]
         let response = HTTPURLResponse(
-            url: SentryNetworkTrackerTests.testURL,
+            url: BuzzSentryNetworkTrackerTests.testURL,
             statusCode: 500,
             httpVersion: "1.1",
             headerFields: headers)!
@@ -727,7 +727,7 @@ class SentryNetworkTrackerTests: XCTestCase {
         task.state = state
     }
     
-    func assertStatus(status: SentrySpanStatus, state: URLSessionTask.State, response: URLResponse, configSut: ((SentryNetworkTracker) -> Void)? = nil) {
+    func assertStatus(status: BuzzSentrySpanStatus, state: URLSessionTask.State, response: URLResponse, configSut: ((BuzzSentryNetworkTracker) -> Void)? = nil) {
         let sut = fixture.getSut()
         configSut?(sut)
         
@@ -791,11 +791,11 @@ class SentryNetworkTrackerTests: XCTestCase {
     }
     
     private func startTransaction() -> Span {
-        return SentrySDK.startTransaction(name: SentryNetworkTrackerTests.transactionName, operation: SentryNetworkTrackerTests.transactionOperation, bindToScope: true)
+        return BuzzSentrySDK.startTransaction(name: BuzzSentryNetworkTrackerTests.transactionName, operation: BuzzSentryNetworkTrackerTests.transactionOperation, bindToScope: true)
     }
     
     private func createResponse(code: Int) -> URLResponse {
-        return HTTPURLResponse(url: SentryNetworkTrackerTests.testURL, statusCode: code, httpVersion: "1.1", headerFields: nil)!
+        return HTTPURLResponse(url: BuzzSentryNetworkTrackerTests.testURL, statusCode: code, httpVersion: "1.1", headerFields: nil)!
     }
     
     private func advanceTime(bySeconds: TimeInterval) {
@@ -808,25 +808,25 @@ class SentryNetworkTrackerTests: XCTestCase {
     }
     
     func createDataTask(method: String = "GET") -> URLSessionDataTaskMock {
-        var request = URLRequest(url: SentryNetworkTrackerTests.testURL)
+        var request = URLRequest(url: BuzzSentryNetworkTrackerTests.testURL)
         request.httpMethod = method
         return URLSessionDataTaskMock(request: request)
     }
     
     func createDownloadTask(method: String = "GET") -> URLSessionDownloadTaskMock {
-        var request = URLRequest(url: SentryNetworkTrackerTests.testURL)
+        var request = URLRequest(url: BuzzSentryNetworkTrackerTests.testURL)
         request.httpMethod = method
         return URLSessionDownloadTaskMock(request: request)
     }
     
     func createUploadTask(method: String = "GET") -> URLSessionUploadTaskMock {
-        var request = URLRequest(url: SentryNetworkTrackerTests.testURL)
+        var request = URLRequest(url: BuzzSentryNetworkTrackerTests.testURL)
         request.httpMethod = method
         return URLSessionUploadTaskMock(request: request)
     }
     
     func createStreamTask(method: String = "GET") -> URLSessionStreamTaskMock {
-        var request = URLRequest(url: SentryNetworkTrackerTests.testURL)
+        var request = URLRequest(url: BuzzSentryNetworkTrackerTests.testURL)
         request.httpMethod = method
         return URLSessionStreamTaskMock(request: request)
     }

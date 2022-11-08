@@ -1,7 +1,7 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
-class SentryCurrentDateTests: XCTestCase {
+class BuzzSentryCurrentDateTests: XCTestCase {
 
     func testSetNoCurrentDateProvider() {
         CurrentDate.setCurrentDateProvider(DefaultCurrentDateProvider.sharedInstance())

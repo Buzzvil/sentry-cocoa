@@ -27,7 +27,7 @@ extension Tracer {
             return
         }
 
-        SentrySDK.start { options in
+        BuzzSentrySDK.start { options in
             options.dsn = "https://fff20ae0c1d141fda99ba8bdedd0e9cd@o447951.ingest.sentry.io/6509889"
             options.debug = true
             options.sessionTrackingIntervalMillis = 5_000
@@ -41,7 +41,7 @@ extension Tracer {
             options.enableUserInteractionTracing = true
         }
 
-        SentrySDK.configureScope { scope in
+        BuzzSentrySDK.configureScope { scope in
             scope.setTag(value: setUpInDidFinishLaunching ? "didFinishLaunching" : "willFinishLaunching", key: "launch-method")
             scope.setTag(value: "\(ProcessInfo.processInfo.arguments.contains("--io.sentry.sample.trending-movies.launch-arg.efficient-implementation"))", key: "efficient-implementation")
         }
@@ -53,7 +53,7 @@ extension Tracer {
 extension Tracer {
     static func startTracing(interaction: String) {
         print("[TrendingMovies] starting trace with interaction name \(interaction)")
-        tracer.currentSpan = SentrySDK.startTransaction(name: interaction, operation: "sentry-movies-transaction")
+        tracer.currentSpan = BuzzSentrySDK.startTransaction(name: interaction, operation: "sentry-movies-transaction")
     }
 
     static func endTracing(interaction: String) {
@@ -67,7 +67,7 @@ extension Tracer {
 extension Tracer {
     static func startSpan(name: String) -> SpanHandle {
         print("[TrendingMovies] starting span \(name)")
-        let span = SentrySDK.startTransaction(name: name, operation: "trending-movies-profiling-integration")
+        let span = BuzzSentrySDK.startTransaction(name: name, operation: "trending-movies-profiling-integration")
         return SpanHandle(span: span)
     }
 
@@ -75,12 +75,12 @@ extension Tracer {
         var span: Span
 
         func annotate(key: String, value: String) {
-            print("[TrendingMovies] annotating span \(span.context.spanId.sentrySpanIdString), key \(key) and value \(value)")
+            print("[TrendingMovies] annotating span \(span.context.spanId.BuzzSentrySpanIdString), key \(key) and value \(value)")
             span.context.setTag(value: value, key: key)
         }
 
         func end() {
-            print("[TrendingMovies] ending span \(span.context.spanId.sentrySpanIdString)")
+            print("[TrendingMovies] ending span \(span.context.spanId.BuzzSentrySpanIdString)")
             span.finish()
         }
     }

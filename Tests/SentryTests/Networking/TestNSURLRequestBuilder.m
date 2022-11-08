@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface
 TestNSURLRequestBuilder ()
 
-@property (nonatomic, strong) SentryNSURLRequestBuilder *builder;
+@property (nonatomic, strong) BuzzSentryNSURLRequestBuilder *builder;
 @property (nonatomic, strong) NSError *error;
 
 @end
@@ -15,13 +15,13 @@ TestNSURLRequestBuilder ()
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.builder = [[SentryNSURLRequestBuilder alloc] init];
+        self.builder = [[BuzzSentryNSURLRequestBuilder alloc] init];
     }
     return self;
 }
 
-- (NSURLRequest *)createEnvelopeRequest:(SentryEnvelope *)envelope
-                                    dsn:(SentryDsn *)dsn
+- (NSURLRequest *)createEnvelopeRequest:(BuzzSentryEnvelope *)envelope
+                                    dsn:(BuzzSentryDsn *)dsn
                        didFailWithError:(NSError *_Nullable *_Nullable)error
 {
     NSURLRequest *request = [self.builder createEnvelopeRequest:envelope

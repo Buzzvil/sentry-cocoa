@@ -1,38 +1,38 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryAppStateManagerTests: XCTestCase {
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryOutOfMemoryTrackerTests")
-    private static let dsn = TestConstants.dsn(username: "SentryOutOfMemoryTrackerTests")
+class BuzzSentryAppStateManagerTests: XCTestCase {
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryOutOfMemoryTrackerTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryOutOfMemoryTrackerTests")
 
     private class Fixture {
 
         let options: Options
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         let currentDate = TestCurrentDateProvider()
 
         init() {
             options = Options()
-            options.dsn = SentryAppStateManagerTests.dsnAsString
+            options.dsn = BuzzSentryAppStateManagerTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
 
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }
 
-        func getSut() -> SentryAppStateManager {
-            return SentryAppStateManager(
+        func getSut() -> BuzzSentryAppStateManager {
+            return BuzzSentryAppStateManager(
                 options: options,
-                crashWrapper: TestSentryCrashWrapper.sharedInstance(),
+                crashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(),
                 fileManager: fileManager,
                 currentDateProvider: currentDate,
                 sysctl: TestSysctl(),
-                dispatchQueueWrapper: TestSentryDispatchQueueWrapper()
+                dispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper()
             )
         }
     }
 
     private var fixture: Fixture!
-    private var sut: SentryAppStateManager!
+    private var sut: BuzzSentryAppStateManager!
 
     override func setUp() {
         super.setUp()

@@ -1,6 +1,6 @@
-import Sentry
+import BuzzSentry
 
-class TestSentryUIDeviceWrapper: SentryUIDeviceWrapper {
+class TestBuzzSentryUIDeviceWrapper: BuzzSentryUIDeviceWrapper {
 #if os(iOS)
     var internalOrientation = UIDeviceOrientation.portrait
     var internalIsBatteryMonitoringEnabled = true

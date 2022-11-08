@@ -1,5 +1,5 @@
 #import "NSURLProtocolSwizzle.h"
-#import "SentrySwizzle.h"
+#import "BuzzSentrySwizzle.h"
 
 @implementation NSURLProtocolSwizzle
 
@@ -13,7 +13,7 @@
 
 + (void)swizzleURLProtocol
 {
-    SentrySwizzleClassMethod(NSURLProtocol.class, NSSelectorFromString(@"registerClass:"),
+    BuzzSentrySwizzleClassMethod(NSURLProtocol.class, NSSelectorFromString(@"registerClass:"),
         SentrySWReturnType(BOOL), SentrySWArguments(Class class), SentrySWReplacement({
             if (NSURLProtocolSwizzle.shared.registerCallback != nil)
                 NSURLProtocolSwizzle.shared.registerCallback(class);
@@ -21,7 +21,7 @@
             return SentrySWCallOriginal(class);
         }));
 
-    SentrySwizzleClassMethod(NSURLProtocol.class, NSSelectorFromString(@"unregisterClass:"),
+    BuzzSentrySwizzleClassMethod(NSURLProtocol.class, NSSelectorFromString(@"unregisterClass:"),
         SentrySWReturnType(void), SentrySWArguments(Class class), SentrySWReplacement({
             if (NSURLProtocolSwizzle.shared.unregisterCallback != nil)
                 NSURLProtocolSwizzle.shared.unregisterCallback(class);

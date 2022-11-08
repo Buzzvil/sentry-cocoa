@@ -1,19 +1,19 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 @available(OSX 10.10, *)
-class SentryCrashInstallationReporterTests: XCTestCase {
+class BuzzSentryCrashInstallationReporterTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryCrashInstallationReporterTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryCrashInstallationReporterTests")
     
     private var testClient: TestClient!
-    private var sut: SentryCrashInstallationReporter!
+    private var sut: BuzzSentryCrashInstallationReporter!
     
     override func setUp() {
         super.setUp()
-        sut = SentryCrashInstallationReporter(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: TestSentryCrashWrapper.sharedInstance(), dispatchQueue: TestSentryDispatchQueueWrapper())
+        sut = BuzzSentryCrashInstallationReporter(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), dispatchQueue: TestBuzzSentryDispatchQueueWrapper())
         sut.install()
-        // Works only if SentryCrash is installed
+        // Works only if BuzzSentryCrash is installed
         sentrycrash_deleteAllReports()
     }
     
@@ -26,14 +26,14 @@ class SentryCrashInstallationReporterTests: XCTestCase {
     func testFaultyReportIsNotSentAndDeleted() throws {
         sdkStarted()
         
-        try givenStoredSentryCrashReport(resource: "Resources/Crash-faulty-report")
+        try givenStoredBuzzSentryCrashReport(resource: "Resources/Crash-faulty-report")
 
         sut.sendAllReports()
         
-        // We need to wait a bit until SentryCrash is finished processing reports.
+        // We need to wait a bit until BuzzSentryCrash is finished processing reports.
         // It is not optimal to block, but we would need to change the internals
-        // of SentryCrash a lot to be able to avoid this delay. As we would
-        // like to replace SentryCrash anyway it's not worth the effort right now.
+        // of BuzzSentryCrash a lot to be able to avoid this delay. As we would
+        // like to replace BuzzSentryCrash anyway it's not worth the effort right now.
         delayNonBlocking()
         
         assertNoEventsSent()
@@ -41,14 +41,14 @@ class SentryCrashInstallationReporterTests: XCTestCase {
     }
     
     private func sdkStarted() {
-        SentrySDK.start { options in
-            options.dsn = SentryCrashInstallationReporterTests.dsnAsString
+        BuzzSentrySDK.start { options in
+            options.dsn = BuzzSentryCrashInstallationReporterTests.dsnAsString
         }
         let options = Options()
-        options.dsn = SentryCrashInstallationReporterTests.dsnAsString
+        options.dsn = BuzzSentryCrashInstallationReporterTests.dsnAsString
         testClient = TestClient(options: options)!
-        let hub = SentryHub(client: testClient, andScope: nil)
-        SentrySDK.setCurrentHub(hub)
+        let hub = BuzzSentryHub(client: testClient, andScope: nil)
+        BuzzSentrySDK.setCurrentHub(hub)
     }
     
     private func assertNoEventsSent() {

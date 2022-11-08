@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryAttachmentTests: XCTestCase {
+class BuzzSentryAttachmentTests: XCTestCase {
     
     private class Fixture {
         let defaultContentType = "application/octet-stream"

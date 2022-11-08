@@ -1,12 +1,12 @@
 import XCTest
 
-class SentrySysctlTests: XCTestCase {
+class BuzzSentrySysctlTests: XCTestCase {
     
-    private var sut: SentrySysctl!
+    private var sut: BuzzSentrySysctl!
     
     override func setUp() {
         super.setUp()
-        sut = SentrySysctl()
+        sut = BuzzSentrySysctl()
     }
 
     func testSystemBootTimestamp_IsInThePast() {

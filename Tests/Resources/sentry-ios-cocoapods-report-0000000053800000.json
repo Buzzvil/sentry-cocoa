@@ -3965,7 +3965,7 @@
                         {
                             "object_name": "Sentry",
                             "object_addr": 4384976896,
-                            "symbol_name": "__44-[SentryBreadcrumbTracker swizzleSendAction]_block_invoke_2",
+                            "symbol_name": "__44-[BuzzSentryBreadcrumbTracker swizzleSendAction]_block_invoke_2",
                             "symbol_addr": 4384997792,
                             "instruction_addr": 4384999315
                         },
@@ -4556,7 +4556,7 @@
                     }
                 },
                 "index": 7,
-                "name": "SentryCrash Exception Handler (Secondary)",
+                "name": "BuzzSentryCrash Exception Handler (Secondary)",
                 "crashed": false,
                 "current_thread": false
             },
@@ -4627,7 +4627,7 @@
                     }
                 },
                 "index": 8,
-                "name": "SentryCrash Exception Handler (Primary)",
+                "name": "BuzzSentryCrash Exception Handler (Primary)",
                 "crashed": false,
                 "current_thread": false
             }

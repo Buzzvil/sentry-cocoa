@@ -1,11 +1,11 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryUIViewControllerSwizzlingTests: XCTestCase {
+class BuzzSentryUIViewControllerSwizzlingTests: XCTestCase {
     
     private class Fixture {
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         let objcRuntimeWrapper = SentryTestObjCRuntimeWrapper()
         let subClassFinder: TestSubClassFinder
         
@@ -16,22 +16,22 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
         var options: Options {
             let options = Options()
             let imageName = String(
-                cString: class_getImageName(SentryUIViewControllerSwizzlingTests.self)!,
+                cString: class_getImageName(BuzzSentryUIViewControllerSwizzlingTests.self)!,
                 encoding: .utf8)! as NSString
             options.add(inAppInclude: imageName.lastPathComponent)
             return options
         }
         
-        var sut: SentryUIViewControllerSwizzling {
-            return SentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
+        var sut: BuzzSentryUIViewControllerSwizzling {
+            return BuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
         }
         
-        var sutWithDefaultObjCRuntimeWrapper: SentryUIViewControllerSwizzling {
-            return SentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: SentryDefaultObjCRuntimeWrapper.sharedInstance(), subClassFinder: subClassFinder)
+        var sutWithDefaultObjCRuntimeWrapper: BuzzSentryUIViewControllerSwizzling {
+            return BuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: BuzzSentryDefaultObjCRuntimeWrapper.sharedInstance(), subClassFinder: subClassFinder)
         }
         
-        var testableSut: TestSentryUIViewControllerSwizzling {
-            return TestSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
+        var testableSut: TestBuzzSentryUIViewControllerSwizzling {
+            return TestBuzzSentryUIViewControllerSwizzling(options: options, dispatchQueue: dispatchQueue, objcRuntimeWrapper: objcRuntimeWrapper, subClassFinder: subClassFinder)
         }
         
         var delegate: MockApplication.MockApplicationDelegate {
@@ -46,7 +46,7 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
     }
     
     override func tearDown() {
@@ -74,13 +74,13 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
     func testUIViewController_loadView_noTransactionBoundToScope() {
         let controller = UIViewController()
         controller.loadView()
-        XCTAssertNil(SentrySDK.span)
+        XCTAssertNil(BuzzSentrySDK.span)
     }
     
     func testViewControllerWithoutLoadView_TransactionBoundToScope() {
         let controller = TestViewController()
         controller.loadView()
-        XCTAssertNotNil(SentrySDK.span)
+        XCTAssertNotNil(BuzzSentrySDK.span)
     }
     
     func testViewControllerWithLoadView_TransactionBoundToScope() {
@@ -89,11 +89,11 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
         
         controller.loadView()
         
-        let span = SentrySDK.span
+        let span = BuzzSentrySDK.span
         XCTAssertNotNil(span)
         
         let transactionName = Dynamic(span).transactionContext.name.asString
-        let expectedTransactionName = SentryUIViewControllerSanitizer.sanitizeViewControllerName(controller)
+        let expectedTransactionName = BuzzSentryUIViewControllerSanitizer.sanitizeViewControllerName(controller)
         XCTAssertEqual(expectedTransactionName, transactionName)
     }
 
@@ -254,7 +254,7 @@ class SentryUIViewControllerSwizzlingTests: XCTestCase {
     }
 }
 
-class MockApplication: NSObject, SentryUIApplicationProtocol {
+class MockApplication: NSObject, BuzzSentryUIApplicationProtocol {
     class MockApplicationDelegate: NSObject, UIApplicationDelegate {
         var window: UIWindow?
         
@@ -297,7 +297,7 @@ class ObjectWithWindowsProperty: NSObject {
     }
 }
 
-class TestSentryUIViewControllerSwizzling: SentryUIViewControllerSwizzling {
+class TestBuzzSentryUIViewControllerSwizzling: BuzzSentryUIViewControllerSwizzling {
     
     var viewControllers = [UIViewController]()
     
@@ -306,7 +306,7 @@ class TestSentryUIViewControllerSwizzling: SentryUIViewControllerSwizzling {
     }
 }
 
-class TestSubClassFinder: SentrySubClassFinder {
+class TestSubClassFinder: BuzzSentrySubClassFinder {
     
     var invocations = Invocations<(imageName: String, block: (AnyClass) -> Void)>()
     override func actOnSubclassesOfViewController(inImage imageName: String, block: @escaping (AnyClass) -> Void) {

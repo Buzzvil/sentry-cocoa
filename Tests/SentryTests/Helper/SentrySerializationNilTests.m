@@ -1,22 +1,22 @@
-#import "SentrySerialization.h"
-#import <Sentry/Sentry.h>
+#import "BuzzSentrySerialization.h"
+#import <BuzzSentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
-@interface SentrySerializationNilTests : XCTestCase
+@interface BuzzSentrySerializationNilTests : XCTestCase
 
 @end
 
 /**
- * Actual tests are written in SentrySerializationTests.swift. This class only exists to test
+ * Actual tests are written in BuzzSentrySerializationTests.swift. This class only exists to test
  * passing nil values, which is not possible with Swift cause the compiler avoids it.
  */
-@implementation SentrySerializationNilTests
+@implementation BuzzSentrySerializationNilTests
 
-- (void)testSentryEnvelopeSerializerWithNilInput
+- (void)testBuzzSentryEnvelopeSerializerWithNilInput
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wnonnull"
-    XCTAssertNil([SentrySerialization envelopeWithData:nil]);
+    XCTAssertNil([BuzzSentrySerialization envelopeWithData:nil]);
 #pragma clang diagnostic pop
 }
 

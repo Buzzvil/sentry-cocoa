@@ -1,10 +1,10 @@
 import Foundation
 import XCTest
 
-extension SentryFileManager {
+extension BuzzSentryFileManager {
     
     /**
-     * Creates a file at the same path as SentryFileManager stores its files. When init on SentryFileManager is called the init is going to throw an error, because it can't create the internal folders.
+     * Creates a file at the same path as BuzzSentryFileManager stores its files. When init on BuzzSentryFileManager is called the init is going to throw an error, because it can't create the internal folders.
      */
     static func prepareInitError() {
         deleteInternalPath()
@@ -12,7 +12,7 @@ extension SentryFileManager {
             let data = "hello".data(using: .utf8)
             try data?.write(to: getInternalPath())
         } catch {
-            XCTFail("Couldn't create file for init error of SentryFileManager.")
+            XCTFail("Couldn't create file for init error of BuzzSentryFileManager.")
         }
     }
         
@@ -27,7 +27,7 @@ extension SentryFileManager {
         do {
             try FileManager.default.removeItem(at: getInternalPath())
         } catch {
-            XCTFail("Couldn't delete internal path of SentryFileManager.")
+            XCTFail("Couldn't delete internal path of BuzzSentryFileManager.")
         }
     }
     

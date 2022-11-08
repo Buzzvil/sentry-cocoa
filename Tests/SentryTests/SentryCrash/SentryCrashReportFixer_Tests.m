@@ -1,11 +1,11 @@
-#import "SentryCrashReportFixer.h"
+#import "BuzzSentryCrashReportFixer.h"
 #import <XCTest/XCTest.h>
 
-@interface SentryCrashReportFixer_Tests : XCTestCase
+@interface BuzzSentryCrashReportFixer_Tests : XCTestCase
 
 @end
 
-@implementation SentryCrashReportFixer_Tests
+@implementation BuzzSentryCrashReportFixer_Tests
 
 - (void)setUp
 {

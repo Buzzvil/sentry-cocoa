@@ -1,12 +1,12 @@
-#import "NSData+SentryCompression.h"
-#import <Sentry/Sentry.h>
+#import "NSData+BuzzSentryCompression.h"
+#import <BuzzSentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
-@interface SentryNSDataCompressionTests : XCTestCase
+@interface BuzzSentryNSDataCompressionTests : XCTestCase
 
 @end
 
-@implementation SentryNSDataCompressionTests
+@implementation BuzzSentryNSDataCompressionTests
 
 - (void)testCompress
 {

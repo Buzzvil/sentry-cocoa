@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import UIKit
 
 @main
@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let dsn = DSNStorage.shared.getDSN() ?? AppDelegate.defaultDSN
             DSNStorage.shared.saveDSN(dsn: dsn)
             
-            SentrySDK.start { options in
+            BuzzSentrySDK.start { options in
                 options.dsn = dsn
                 options.beforeSend = { event in
                     return event

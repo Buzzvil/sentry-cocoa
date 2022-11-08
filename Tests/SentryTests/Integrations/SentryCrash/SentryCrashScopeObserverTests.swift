@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryCrashScopeObserverTests: XCTestCase {
+class BuzzSentryCrashScopeObserverTests: XCTestCase {
     
     private class Fixture {
         let dist = "dist"
@@ -10,8 +10,8 @@ class SentryCrashScopeObserverTests: XCTestCase {
         let fingerprint = ["a", "b", "c"]
         let maxBreadcrumbs = 10
         
-        var sut: SentryCrashScopeObserver {
-            return SentryCrashScopeObserver(maxBreadcrumbs: maxBreadcrumbs)
+        var sut: BuzzSentryCrashScopeObserver {
+            return BuzzSentryCrashScopeObserver(maxBreadcrumbs: maxBreadcrumbs)
         }
     }
     
@@ -20,13 +20,13 @@ class SentryCrashScopeObserverTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sentrycrash_scopesync_reset()
-        SentryCrash.sharedInstance().userInfo = nil
+        BuzzSentryCrash.sharedInstance().userInfo = nil
     }
     
     override func tearDown() {
         super.tearDown()
         sentrycrash_scopesync_reset()
-        SentryCrash.sharedInstance().userInfo = nil
+        BuzzSentryCrash.sharedInstance().userInfo = nil
     }
 
     func testUser() {
@@ -49,7 +49,7 @@ class SentryCrashScopeObserverTests: XCTestCase {
     
     func testLevel() {
         let sut = fixture.sut
-        let level = SentryLevel.fatal
+        let level = BuzzSentryLevel.fatal
         sut.setLevel(level)
 
         XCTAssertEqual("\"fatal\"", getScopeJson { $0.level })
@@ -57,8 +57,8 @@ class SentryCrashScopeObserverTests: XCTestCase {
 
     func testLevel_setToNone() {
         let sut = fixture.sut
-        sut.setLevel(SentryLevel.fatal)
-        sut.setLevel(SentryLevel.none)
+        sut.setLevel(BuzzSentryLevel.fatal)
+        sut.setLevel(BuzzSentryLevel.none)
 
         XCTAssertNil(getScopeJson { $0.level })
     }
@@ -272,7 +272,7 @@ class SentryCrashScopeObserverTests: XCTestCase {
         sut.setTags(fixture.tags)
         sut.setExtras(fixture.extras)
         sut.setFingerprint(fixture.fingerprint)
-        sut.setLevel(SentryLevel.fatal)
+        sut.setLevel(BuzzSentryLevel.fatal)
         sut.add(TestData.crumb)
         
         sut.clear()
@@ -288,16 +288,16 @@ class SentryCrashScopeObserverTests: XCTestCase {
     }
     
     private func serialize(object: Any) -> String {
-        let serialized = try! SentryCrashJSONCodec.encode(object, options: SentryCrashJSONEncodeOptionSorted)
+        let serialized = try! BuzzSentryCrashJSONCodec.encode(object, options: BuzzSentryCrashJSONEncodeOptionSorted)
         return String(data: serialized, encoding: .utf8) ?? ""
     }
     
-    private func getCrashScope() -> SentryCrashScope {
+    private func getCrashScope() -> BuzzSentryCrashScope {
         let jsonPointer = sentrycrash_scopesync_getScope()
         return jsonPointer!.pointee
     }
     
-    private func getScopeJson(getField: (SentryCrashScope)-> UnsafeMutablePointer<CChar>?) -> String? {
+    private func getScopeJson(getField: (BuzzSentryCrashScope)-> UnsafeMutablePointer<CChar>?) -> String? {
         guard let scopePointer = sentrycrash_scopesync_getScope() else {
             return nil
         }

@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 // Although we only run this test above the below specified versions, we expect the
@@ -6,97 +6,97 @@ import XCTest
 @available(tvOS 10.0, *)
 @available(OSX 10.12, *)
 @available(iOS 10.0, *)
-class SentryHttpTransportTests: XCTestCase {
+class BuzzSentryHttpTransportTests: XCTestCase {
 
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryHttpTransportTests")
-    private static let dsn = TestConstants.dsn(username: "SentryHttpTransportTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryHttpTransportTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryHttpTransportTests")
 
     private class Fixture {
         let event: Event
-        let eventEnvelope: SentryEnvelope
-        let eventRequest: SentryNSURLRequest
-        let attachmentEnvelopeItem: SentryEnvelopeItem
-        let eventWithAttachmentRequest: SentryNSURLRequest
-        let eventWithSessionEnvelope: SentryEnvelope
-        let eventWithSessionRequest: SentryNSURLRequest
-        let session: SentrySession
-        let sessionEnvelope: SentryEnvelope
-        let sessionRequest: SentryNSURLRequest
+        let eventEnvelope: BuzzSentryEnvelope
+        let eventRequest: BuzzSentryNSURLRequest
+        let attachmentEnvelopeItem: BuzzSentryEnvelopeItem
+        let eventWithAttachmentRequest: BuzzSentryNSURLRequest
+        let eventWithSessionEnvelope: BuzzSentryEnvelope
+        let eventWithSessionRequest: BuzzSentryNSURLRequest
+        let session: BuzzSentrySession
+        let sessionEnvelope: BuzzSentryEnvelope
+        let sessionRequest: BuzzSentryNSURLRequest
         let currentDateProvider: TestCurrentDateProvider
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         let options: Options
         let requestManager: TestRequestManager
         let requestBuilder = TestNSURLRequestBuilder()
         let rateLimits: DefaultRateLimits
-        let dispatchQueueWrapper = TestSentryDispatchQueueWrapper()
-        let reachability = TestSentryReachability()
+        let dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
+        let reachability = TestBuzzSentryReachability()
         let flushTimeout: TimeInterval = 0.5
 
         let userFeedback: UserFeedback
-        let userFeedbackRequest: SentryNSURLRequest
+        let userFeedbackRequest: BuzzSentryNSURLRequest
         
-        let clientReport: SentryClientReport
-        let clientReportEnvelope: SentryEnvelope
-        let clientReportRequest: SentryNSURLRequest
+        let clientReport: BuzzSentryClientReport
+        let clientReportEnvelope: BuzzSentryEnvelope
+        let clientReportRequest: BuzzSentryNSURLRequest
         
-        let queue = DispatchQueue(label: "SentryHttpTransportTests", qos: .userInitiated, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentryHttpTransportTests", qos: .userInitiated, attributes: [.concurrent, .initiallyInactive])
 
         init() {
             currentDateProvider = TestCurrentDateProvider()
             CurrentDate.setCurrentDateProvider(currentDateProvider)
 
             event = Event()
-            event.message = SentryMessage(formatted: "Some message")
+            event.message = BuzzSentryMessage(formatted: "Some message")
 
-            eventRequest = buildRequest(SentryEnvelope(event: event))
+            eventRequest = buildRequest(BuzzSentryEnvelope(event: event))
             
-            attachmentEnvelopeItem = SentryEnvelopeItem(attachment: TestData.dataAttachment, maxAttachmentSize: 5 * 1_024 * 1_024)!
+            attachmentEnvelopeItem = BuzzSentryEnvelopeItem(attachment: TestData.dataAttachment, maxAttachmentSize: 5 * 1_024 * 1_024)!
 
-            eventEnvelope = SentryEnvelope(id: event.eventId, items: [SentryEnvelopeItem(event: event), attachmentEnvelopeItem])
+            eventEnvelope = BuzzSentryEnvelope(id: event.eventId, items: [BuzzSentryEnvelopeItem(event: event), attachmentEnvelopeItem])
             eventWithAttachmentRequest = buildRequest(eventEnvelope)
 
-            session = SentrySession(releaseName: "2.0.1")
-            sessionEnvelope = SentryEnvelope(id: nil, singleItem: SentryEnvelopeItem(session: session))
+            session = BuzzSentrySession(releaseName: "2.0.1")
+            sessionEnvelope = BuzzSentryEnvelope(id: nil, singleItem: BuzzSentryEnvelopeItem(session: session))
             sessionRequest = buildRequest(sessionEnvelope)
 
-            let items = [SentryEnvelopeItem(event: event), SentryEnvelopeItem(session: session)]
-            eventWithSessionEnvelope = SentryEnvelope(id: event.eventId, items: items)
+            let items = [BuzzSentryEnvelopeItem(event: event), BuzzSentryEnvelopeItem(session: session)]
+            eventWithSessionEnvelope = BuzzSentryEnvelope(id: event.eventId, items: items)
             eventWithSessionRequest = buildRequest(eventWithSessionEnvelope)
 
             options = Options()
-            options.dsn = SentryHttpTransportTests.dsnAsString
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
+            options.dsn = BuzzSentryHttpTransportTests.dsnAsString
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
 
             requestManager = TestRequestManager(session: URLSession(configuration: URLSessionConfiguration.ephemeral))
             rateLimits = DefaultRateLimits(retryAfterHeaderParser: RetryAfterHeaderParser(httpDateParser: HttpDateParser()), andRateLimitParser: RateLimitParser())
 
             userFeedback = TestData.userFeedback
-            userFeedbackRequest = buildRequest(SentryEnvelope(userFeedback: userFeedback))
+            userFeedbackRequest = buildRequest(BuzzSentryEnvelope(userFeedback: userFeedback))
             
-            let beforeSendTransaction = SentryDiscardedEvent(reason: .beforeSend, category: .transaction, quantity: 2)
-            let sampleRateTransaction = SentryDiscardedEvent(reason: .sampleRate, category: .transaction, quantity: 1)
-            let rateLimitBackoffError = SentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
+            let beforeSendTransaction = BuzzSentryDiscardedEvent(reason: .beforeSend, category: .transaction, quantity: 2)
+            let sampleRateTransaction = BuzzSentryDiscardedEvent(reason: .sampleRate, category: .transaction, quantity: 1)
+            let rateLimitBackoffError = BuzzSentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
             
-            clientReport = SentryClientReport(discardedEvents: [
+            clientReport = BuzzSentryClientReport(discardedEvents: [
                 beforeSendTransaction,
                 sampleRateTransaction,
                 rateLimitBackoffError
             ])
             
             let clientReportEnvelopeItems = [
-                SentryEnvelopeItem(event: event),
+                BuzzSentryEnvelopeItem(event: event),
                 attachmentEnvelopeItem,
-                SentryEnvelopeItem(clientReport: clientReport)
+                BuzzSentryEnvelopeItem(clientReport: clientReport)
             ]
-            clientReportEnvelope = SentryEnvelope(id: event.eventId, items: clientReportEnvelopeItems)
+            clientReportEnvelope = BuzzSentryEnvelope(id: event.eventId, items: clientReportEnvelopeItems)
             clientReportRequest = buildRequest(clientReportEnvelope)
 
             dispatchQueueWrapper.dispatchAfterExecutesBlock = true
         }
 
-        var sut: SentryHttpTransport {
+        var sut: BuzzSentryHttpTransport {
             get {
-                return SentryHttpTransport(
+                return BuzzSentryHttpTransport(
                     options: options,
                     fileManager: fileManager,
                     requestManager: requestManager,
@@ -110,13 +110,13 @@ class SentryHttpTransportTests: XCTestCase {
         }
     }
 
-    class func buildRequest(_ envelope: SentryEnvelope) -> SentryNSURLRequest {
-        let envelopeData = try! SentrySerialization.data(with: envelope)
-        return try! SentryNSURLRequest(envelopeRequestWith: SentryHttpTransportTests.dsn, andData: envelopeData)
+    class func buildRequest(_ envelope: BuzzSentryEnvelope) -> BuzzSentryNSURLRequest {
+        let envelopeData = try! BuzzSentrySerialization.data(with: envelope)
+        return try! BuzzSentryNSURLRequest(envelopeRequestWith: BuzzSentryHttpTransportTests.dsn, andData: envelopeData)
     }
 
     private var fixture: Fixture!
-    private var sut: SentryHttpTransport!
+    private var sut: BuzzSentryHttpTransport!
 
     override func setUp() {
         super.setUp()
@@ -156,7 +156,7 @@ class SentryHttpTransportTests: XCTestCase {
     }
 
     func testSendEventWhenSessionRateLimitActive() {
-        fixture.rateLimits.update(TestResponseFactory.createRateLimitResponse(headerValue: "1:\(SentryEnvelopeItemTypeSession):key"))
+        fixture.rateLimits.update(TestResponseFactory.createRateLimitResponse(headerValue: "1:\(BuzzSentryEnvelopeItemTypeSession):key"))
 
         sendEvent()
 
@@ -175,14 +175,14 @@ class SentryHttpTransportTests: XCTestCase {
     }
     
     func testSendEventWithFaultyNSUrlRequest() {
-        let envelope = SentryEnvelope(event: TestConstants.eventWithSerializationError)
+        let envelope = BuzzSentryEnvelope(event: TestConstants.eventWithSerializationError)
         sut.send(envelope: envelope)
 
         assertRequestsSent(requestCount: 1)
     }
     
     func testSendUserFeedback() {
-        let envelope = SentryEnvelope(userFeedback: fixture.userFeedback)
+        let envelope = BuzzSentryEnvelope(userFeedback: fixture.userFeedback)
         sut.send(envelope: envelope)
         waitForAllRequests()
 
@@ -203,14 +203,14 @@ class SentryHttpTransportTests: XCTestCase {
         assertEnvelopesStored(envelopeCount: 0)
 
         // Envelope with only session and client report is sent
-        let discardedError = SentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
-        let clientReport = SentryClientReport(discardedEvents: [discardedError])
+        let discardedError = BuzzSentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
+        let clientReport = BuzzSentryClientReport(discardedEvents: [discardedError])
         let envelopeItems = [
-            SentryEnvelopeItem(session: fixture.session),
-            SentryEnvelopeItem(clientReport: clientReport)
+            BuzzSentryEnvelopeItem(session: fixture.session),
+            BuzzSentryEnvelopeItem(clientReport: clientReport)
         ]
-        let envelope = SentryEnvelope(id: fixture.event.eventId, items: envelopeItems)
-        let request = SentryHttpTransportTests.buildRequest(envelope)
+        let envelope = BuzzSentryEnvelope(id: fixture.event.eventId, items: envelopeItems)
+        let request = BuzzSentryHttpTransportTests.buildRequest(envelope)
         XCTAssertEqual(request.httpBody, fixture.requestManager.requests.last?.httpBody)
     }
     
@@ -227,7 +227,7 @@ class SentryHttpTransportTests: XCTestCase {
 
     func testSendAllCachedEnvelopes() {
         givenNoInternetConnection()
-        let envelope = SentryEnvelope(session: SentrySession(releaseName: "1.9.0"))
+        let envelope = BuzzSentryEnvelope(session: BuzzSentrySession(releaseName: "1.9.0"))
         sendEnvelope(envelope: envelope)
         sendEnvelope()
 
@@ -308,7 +308,7 @@ class SentryHttpTransportTests: XCTestCase {
     func testSendEventWithRateLimitResponse() {
         fixture.requestManager.nextError = NSError(domain: "something", code: 12)
 
-        let response = givenRateLimitResponse(forCategory: SentryEnvelopeItemTypeSession)
+        let response = givenRateLimitResponse(forCategory: BuzzSentryEnvelopeItemTypeSession)
 
         sendEvent()
 
@@ -325,7 +325,7 @@ class SentryHttpTransportTests: XCTestCase {
     }
 
     func testSendEnvelopeWithRateLimitResponse() {
-        let response = givenRateLimitResponse(forCategory: SentryEnvelopeItemTypeSession)
+        let response = givenRateLimitResponse(forCategory: BuzzSentryEnvelopeItemTypeSession)
 
         sendEnvelope()
 
@@ -407,10 +407,10 @@ class SentryHttpTransportTests: XCTestCase {
         assertRequestsSent(requestCount: 5)
         assertEnvelopesStored(envelopeCount: 0)
 
-        let sessionEnvelope = SentryEnvelope(id: fixture.event.eventId, singleItem: SentryEnvelopeItem(session: fixture.session))
+        let sessionEnvelope = BuzzSentryEnvelope(id: fixture.event.eventId, singleItem: BuzzSentryEnvelopeItem(session: fixture.session))
 
-        let sessionData = try! SentrySerialization.data(with: sessionEnvelope)
-        let sessionRequest = try! SentryNSURLRequest(envelopeRequestWith: SentryHttpTransportTests.dsn, andData: sessionData)
+        let sessionData = try! BuzzSentrySerialization.data(with: sessionEnvelope)
+        let sessionRequest = try! BuzzSentryNSURLRequest(envelopeRequestWith: BuzzSentryHttpTransportTests.dsn, andData: sessionData)
 
         XCTAssertEqual(sessionRequest.httpBody, fixture.requestManager.requests.invocations[3].httpBody, "Envelope with only session item should be sent.")
     }
@@ -472,15 +472,15 @@ class SentryHttpTransportTests: XCTestCase {
     }
     
     func testEventRateLimited_RecordsLostEvent() {
-        let rateLimitBackoffError = SentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
-        let clientReport = SentryClientReport(discardedEvents: [rateLimitBackoffError])
+        let rateLimitBackoffError = BuzzSentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
+        let clientReport = BuzzSentryClientReport(discardedEvents: [rateLimitBackoffError])
         
         let clientReportEnvelopeItems = [
             fixture.attachmentEnvelopeItem,
-            SentryEnvelopeItem(clientReport: clientReport)
+            BuzzSentryEnvelopeItem(clientReport: clientReport)
         ]
-        let clientReportEnvelope = SentryEnvelope(id: fixture.event.eventId, items: clientReportEnvelopeItems)
-        let clientReportRequest = SentryHttpTransportTests.buildRequest(clientReportEnvelope)
+        let clientReportEnvelope = BuzzSentryEnvelope(id: fixture.event.eventId, items: clientReportEnvelopeItems)
+        let clientReportRequest = BuzzSentryHttpTransportTests.buildRequest(clientReportEnvelope)
         
         givenRateLimitResponse(forCategory: "error")
         sendEvent()
@@ -498,7 +498,7 @@ class SentryHttpTransportTests: XCTestCase {
         
         waitForAllRequests()
         
-        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: SentryDiscardedEvent]
+        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: BuzzSentryDiscardedEvent]
         XCTAssertNotNil(dict)
         XCTAssertEqual(2, dict?.count)
         
@@ -563,7 +563,7 @@ class SentryHttpTransportTests: XCTestCase {
         fixture.requestBuilder.shouldFailWithError = true
         sendEvent()
         
-        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: SentryDiscardedEvent]
+        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: BuzzSentryDiscardedEvent]
         XCTAssertNotNil(dict)
         XCTAssertEqual(1, dict?.count)
         
@@ -579,7 +579,7 @@ class SentryHttpTransportTests: XCTestCase {
         sendEvent()
         sendEvent()
         
-        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: SentryDiscardedEvent]
+        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: BuzzSentryDiscardedEvent]
         XCTAssertNotNil(dict)
         XCTAssertEqual(2, dict?.count)
         
@@ -818,7 +818,7 @@ class SentryHttpTransportTests: XCTestCase {
         sut.send(envelope: fixture.eventEnvelope)
     }
 
-    private func sendEnvelope(envelope: SentryEnvelope = TestConstants.envelope) {
+    private func sendEnvelope(envelope: BuzzSentryEnvelope = TestConstants.envelope) {
         sut.send(envelope: envelope)
         waitForAllRequests()
     }
@@ -830,7 +830,7 @@ class SentryHttpTransportTests: XCTestCase {
 
     private func assertRateLimitUpdated(response: HTTPURLResponse) {
         XCTAssertEqual(1, fixture.requestManager.requests.count)
-        XCTAssertTrue(fixture.rateLimits.isRateLimitActive(SentryDataCategory.session))
+        XCTAssertTrue(fixture.rateLimits.isRateLimitActive(BuzzSentryDataCategory.session))
     }
 
     private func assertRequestsSent(requestCount: Int) {
@@ -852,7 +852,7 @@ class SentryHttpTransportTests: XCTestCase {
     }
     
     private func assertClientReportStoredInMemory() {
-        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: SentryDiscardedEvent]
+        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: BuzzSentryDiscardedEvent]
         XCTAssertNotNil(dict)
         XCTAssertEqual(2, dict?.count)
         let event = dict?["error:network_error"]
@@ -862,7 +862,7 @@ class SentryHttpTransportTests: XCTestCase {
     }
     
     private func assertClientReportNotStoredInMemory() {
-        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: SentryDiscardedEvent]
+        let dict = Dynamic(sut).discardedEvents.asDictionary as? [String: BuzzSentryDiscardedEvent]
         XCTAssertNotNil(dict)
         XCTAssertEqual(0, dict?.count)
     }

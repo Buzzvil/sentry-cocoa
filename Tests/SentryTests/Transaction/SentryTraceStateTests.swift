@@ -1,31 +1,31 @@
 import XCTest
 
-class SentryTraceContextTests: XCTestCase {
+class BuzzSentryTraceContextTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentrySessionTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentrySessionTrackerTests")
     
     private class Fixture {
         let transactionName = "Some Transaction"
         let transactionOperation = "Some Operation"
         let options: Options
         let scope: Scope
-        let tracer: SentryTracer
+        let tracer: BuzzSentryTracer
         let userId = "SomeUserID"
         let userSegment = "Test Segment"
         let sampleRate = "0.45"
-        let traceId: SentryId
-        let publicKey = "SentrySessionTrackerTests"
-        let releaseName = "SentrySessionTrackerIntegrationTests"
+        let traceId: BuzzSentryId
+        let publicKey = "BuzzSentrySessionTrackerTests"
+        let releaseName = "BuzzSentrySessionTrackerIntegrationTests"
         let environment = "debug"
         
         init() {
             options = Options()
-            options.dsn = SentryTraceContextTests.dsnAsString
+            options.dsn = BuzzSentryTraceContextTests.dsnAsString
             options.releaseName = releaseName
             options.environment = environment
             options.sendDefaultPii = true
             
-            tracer = SentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
+            tracer = BuzzSentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
             
             scope = Scope()
             scope.setUser(User(userId: userId))
@@ -49,7 +49,7 @@ class SentryTraceContextTests: XCTestCase {
     }
     
     func testInit() {
-        let traceContext = SentryTraceContext(
+        let traceContext = BuzzSentryTraceContext(
             trace: fixture.traceId,
             publicKey: fixture.publicKey,
             releaseName: fixture.releaseName,
@@ -62,24 +62,24 @@ class SentryTraceContextTests: XCTestCase {
     }
     
     func testInitWithScopeOptions() {
-        let traceContext = SentryTraceContext(scope: fixture.scope, options: fixture.options)!
+        let traceContext = BuzzSentryTraceContext(scope: fixture.scope, options: fixture.options)!
         
         assertTraceState(traceContext: traceContext)
     }
     
     func testInitWithTracerScopeOptions() {
-        let traceContext = SentryTraceContext(tracer: fixture.tracer, scope: fixture.scope, options: fixture.options)
+        let traceContext = BuzzSentryTraceContext(tracer: fixture.tracer, scope: fixture.scope, options: fixture.options)
         assertTraceState(traceContext: traceContext!)
     }
     
     func testInitNil() {
         fixture.scope.span = nil
-        let traceContext = SentryTraceContext(scope: fixture.scope, options: fixture.options)
+        let traceContext = BuzzSentryTraceContext(scope: fixture.scope, options: fixture.options)
         XCTAssertNil(traceContext)
     }
     
     func test_toBaggage() {
-        let traceContext = SentryTraceContext(
+        let traceContext = BuzzSentryTraceContext(
             trace: fixture.traceId,
             publicKey: fixture.publicKey,
             releaseName: fixture.releaseName,
@@ -98,7 +98,7 @@ class SentryTraceContextTests: XCTestCase {
         XCTAssertEqual(baggage.sampleRate, fixture.sampleRate)
     }
         
-    func assertTraceState(traceContext: SentryTraceContext) {
+    func assertTraceState(traceContext: BuzzSentryTraceContext) {
         XCTAssertEqual(traceContext.traceId, fixture.traceId)
         XCTAssertEqual(traceContext.publicKey, fixture.publicKey)
         XCTAssertEqual(traceContext.releaseName, fixture.releaseName)

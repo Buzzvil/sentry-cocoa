@@ -1,13 +1,13 @@
 import CoreData
 import XCTest
 
-class SentryCoreDataTrackerTests: XCTestCase {
+class BuzzSentryCoreDataTrackerTests: XCTestCase {
     
     private class Fixture {
         let context = TestNSManagedObjectContext()
         
-        func getSut() -> SentryCoreDataTracker {
-            return SentryCoreDataTracker()
+        func getSut() -> BuzzSentryCoreDataTracker {
+            return BuzzSentryCoreDataTracker()
         }
 
         func testEntity() -> TestEntity {
@@ -233,8 +233,8 @@ class SentryCoreDataTrackerTests: XCTestCase {
         XCTAssertEqual(transaction.children[0].data!["read_count"] as? Int, 1)
     }
     
-    private func startTransaction() -> SentryTracer {
-        return SentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! SentryTracer
+    private func startTransaction() -> BuzzSentryTracer {
+        return BuzzSentrySDK.startTransaction(name: "TestTransaction", operation: "TestTransaction", bindToScope: true) as! BuzzSentryTracer
     }
     
 }

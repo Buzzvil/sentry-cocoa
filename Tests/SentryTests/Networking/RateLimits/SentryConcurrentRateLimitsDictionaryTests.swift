@@ -1,34 +1,34 @@
 import XCTest
 
-class SentryConcurrentRateLimitsDictionaryTests: XCTestCase {
+class BuzzSentryConcurrentRateLimitsDictionaryTests: XCTestCase {
     
     private var currentDateProvider: TestCurrentDateProvider!
-    private var sut: SentryConcurrentRateLimitsDictionary!
+    private var sut: BuzzSentryConcurrentRateLimitsDictionary!
     
     override func setUp() {
         super.setUp()
         currentDateProvider = TestCurrentDateProvider()
-        sut = SentryConcurrentRateLimitsDictionary()
+        sut = BuzzSentryConcurrentRateLimitsDictionary()
     }
     
     func testTwoRateLimit() {
         let dateA = self.currentDateProvider.date()
         let dateB = dateA.addingTimeInterval(TimeInterval(1))
-        sut.addRateLimit(SentryDataCategory.default, validUntil: dateA)
-        sut.addRateLimit(SentryDataCategory.error, validUntil: dateB)
-        XCTAssertEqual(dateA, self.sut.getRateLimit(for: SentryDataCategory.default))
-        XCTAssertEqual(dateB, self.sut.getRateLimit(for: SentryDataCategory.error))
+        sut.addRateLimit(BuzzSentryDataCategory.default, validUntil: dateA)
+        sut.addRateLimit(BuzzSentryDataCategory.error, validUntil: dateB)
+        XCTAssertEqual(dateA, self.sut.getRateLimit(for: BuzzSentryDataCategory.default))
+        XCTAssertEqual(dateB, self.sut.getRateLimit(for: BuzzSentryDataCategory.error))
     }
     
     func testOverridingRateLimit() {
         let dateA = self.currentDateProvider.date()
         let dateB = dateA.addingTimeInterval(TimeInterval(1))
         
-        sut.addRateLimit(SentryDataCategory.attachment, validUntil: dateA)
-        XCTAssertEqual(dateA, self.sut.getRateLimit(for: SentryDataCategory.attachment))
+        sut.addRateLimit(BuzzSentryDataCategory.attachment, validUntil: dateA)
+        XCTAssertEqual(dateA, self.sut.getRateLimit(for: BuzzSentryDataCategory.attachment))
 
-        sut.addRateLimit(SentryDataCategory.attachment, validUntil: dateB)
-        XCTAssertEqual(dateB, self.sut.getRateLimit(for: SentryDataCategory.attachment))
+        sut.addRateLimit(BuzzSentryDataCategory.attachment, validUntil: dateB)
+        XCTAssertEqual(dateB, self.sut.getRateLimit(for: BuzzSentryDataCategory.attachment))
     }
     // Although we only run this test above the below specified versions, we expect the
     // implementation to be thread safe
@@ -93,12 +93,12 @@ class SentryConcurrentRateLimitsDictionaryTests: XCTestCase {
     // Even if we don't run this test below OSX 10.12 we expect the actual
     // implementation to be thread safe.
     @available(OSX 10.12, *)
-    private func getCategory(rawValue: NSNumber) -> SentryDataCategory {
-        func failedToCreateCategory() -> SentryDataCategory {
+    private func getCategory(rawValue: NSNumber) -> BuzzSentryDataCategory {
+        func failedToCreateCategory() -> BuzzSentryDataCategory {
             XCTFail("Could not create category from \(rawValue)")
-            return SentryDataCategory.default
+            return BuzzSentryDataCategory.default
         }
         
-        return SentryDataCategory(rawValue: UInt(truncating: rawValue)) ?? failedToCreateCategory()
+        return BuzzSentryDataCategory(rawValue: UInt(truncating: rawValue)) ?? failedToCreateCategory()
     }
 }

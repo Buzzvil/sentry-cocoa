@@ -1,19 +1,19 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 #if os(iOS) || os(macOS) || targetEnvironment(macCatalyst)
-class SentryProfilerSwiftTests: XCTestCase {
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryProfilerSwiftTests")
+class BuzzSentryProfilerSwiftTests: XCTestCase {
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryProfilerSwiftTests")
 
     private class Fixture {
         lazy var options: Options = {
             let options = Options()
-            options.dsn = SentryProfilerSwiftTests.dsnAsString
+            options.dsn = BuzzSentryProfilerSwiftTests.dsnAsString
             return options
         }()
         lazy var client: TestClient! = TestClient(options: options)
-        lazy var hub: SentryHub = {
-            let hub = SentryHub(client: client, andScope: scope)
+        lazy var hub: BuzzSentryHub = {
+            let hub = BuzzSentryHub(client: client, andScope: scope)
             hub.bindClient(client)
             Dynamic(hub).tracesSampler.random = TestRandom(value: 1.0)
             Dynamic(hub).profilesSampler.random = TestRandom(value: 0.5)
@@ -30,16 +30,16 @@ class SentryProfilerSwiftTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentryTracer.resetAppStartMeasurementRead()
+        BuzzSentryTracer.resetAppStartMeasurementRead()
     }
 
     override func tearDown() {
         super.tearDown()
         clearTestState()
-        SentryTracer.resetAppStartMeasurementRead()
+        BuzzSentryTracer.resetAppStartMeasurementRead()
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-        SentryFramesTracker.sharedInstance().resetFrames()
-        SentryFramesTracker.sharedInstance().stop()
+        BuzzSentryFramesTracker.sharedInstance().resetFrames()
+        BuzzSentryFramesTracker.sharedInstance().stop()
 #endif
     }
 
@@ -196,7 +196,7 @@ class SentryProfilerSwiftTests: XCTestCase {
     }
 }
 
-private extension SentryProfilerSwiftTests {
+private extension BuzzSentryProfilerSwiftTests {
     /// Keep a thread busy over a long enough period of time (long enough for 3 samples) for the sampler to pick it up.
     func forceProfilerSample() {
         let str = "a"
@@ -274,7 +274,7 @@ private extension SentryProfilerSwiftTests {
         let releaseString = "\(version) (\(build))"
         XCTAssertEqual(profile["release"] as! String, releaseString)
 
-        XCTAssertNotEqual(SentryId.empty, SentryId(uuidString: profile["profile_id"] as! String))
+        XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: profile["profile_id"] as! String))
 
         let images = (profile["debug_meta"] as! [String: Any])["images"] as! [[String: Any]]
         XCTAssertFalse(images.isEmpty)
@@ -313,21 +313,21 @@ private extension SentryProfilerSwiftTests {
         }
         XCTAssert(foundAtLeastOneNonEmptySample)
 
-        let transactions = profile["transactions"] as? [[String: String]]
+        let transactions = profile["transactions"] as? [[String: Any]]
         XCTAssertEqual(transactions!.count, numberOfTransactions)
         for transaction in transactions! {
-            XCTAssertEqual(fixture.transactionName, transaction["name"])
+            XCTAssertEqual(fixture.transactionName, transaction["name"] as! String)
             XCTAssertNotNil(transaction["id"])
             if let idString = transaction["id"] {
-                XCTAssertNotEqual(SentryId.empty, SentryId(uuidString: idString))
+                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: idString as! String))
             }
             XCTAssertNotNil(transaction["trace_id"])
             if let traceIDString = transaction["trace_id"] {
-                XCTAssertNotEqual(SentryId.empty, SentryId(uuidString: traceIDString))
+                XCTAssertNotEqual(BuzzSentryId.empty, BuzzSentryId(uuidString: traceIDString as! String))
             }
             XCTAssertNotNil(transaction["trace_id"])
             XCTAssertNotNil(transaction["relative_start_ns"])
-            XCTAssertNotNil(transaction["relative_end_ns"])
+            XCTAssertFalse((transaction["relative_end_ns"] as! NSString).isEqual(to: "0"))
             XCTAssertNotNil(transaction["active_thread_id"])
         }
 
@@ -342,7 +342,7 @@ private extension SentryProfilerSwiftTests {
         }
     }
 
-    func assertProfilesSampler(expectedDecision: SentrySampleDecision, options: (Options) -> Void) {
+    func assertProfilesSampler(expectedDecision: BuzzSentrySampleDecision, options: (Options) -> Void) {
         let fixtureOptions = fixture.options
         fixtureOptions.tracesSampleRate = 1.0
         fixtureOptions.profilesSampler = { _ in

@@ -28,7 +28,7 @@ MACH_O_TYPE = mh_dylib
 FRAMEWORK_VERSION = A
 
 PRODUCT_NAME = Sentry
-CURRENT_PROJECT_VERSION = 7.29.0
+CURRENT_PROJECT_VERSION = 7.30.1
 INFOPLIST_FILE = Sources/Sentry/Info.plist
 PRODUCT_BUNDLE_IDENTIFIER = io.sentry.Sentry
 ALWAYS_SEARCH_USER_PATHS = NO
@@ -52,7 +52,7 @@ LD_RUNPATH_SEARCH_PATHS[sdk=appletv*] = $(inherited) @executable_path/Frameworks
 
 OTHER_LDFLAGS[sdk=watch*] = $(inherited) -framework WatchKit
 
-MODULEMAP_FILE = $(SRCROOT)/Sources/Sentry/Sentry.modulemap
+MODULEMAP_FILE = $(SRCROOT)/Sources/Sentry/BuzzSentry.modulemap
 //SWIFT_INCLUDE_PATHS = $(SRCROOT)/Sources/Sentry
 
 // SWIFT_VERSION is only recognized by Xcode 8 and higher.

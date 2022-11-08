@@ -1,6 +1,6 @@
 #import "ViewController.h"
 
-@import Sentry;
+@import BuzzSentry;
 
 @interface
 ViewController ()
@@ -14,28 +14,28 @@ ViewController ()
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    [SentrySDK configureScope:^(SentryScope *_Nonnull scope) {
+    [BuzzSentrySDK configureScope:^(BuzzSentryScope *_Nonnull scope) {
         [scope setEnvironment:@"debug"];
         [scope setTagValue:@"objc" forKey:@"language"];
         [scope setExtraValue:[NSString stringWithFormat:@"%@", self]
                       forKey:@"currentViewController"];
-        SentryUser *user = [[SentryUser alloc] initWithUserId:@"1"];
+        BuzzSentryUser *user = [[BuzzSentryUser alloc] initWithUserId:@"1"];
         user.email = @"tony@example.com";
         [scope setUser:user];
 
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Tongariro" ofType:@"jpg"];
-        [scope addAttachment:[[SentryAttachment alloc] initWithPath:path
+        [scope addAttachment:[[BuzzSentryAttachment alloc] initWithPath:path
                                                            filename:@"Tongariro.jpg"
                                                         contentType:@"image/jpeg"]];
 
-        [scope addAttachment:[[SentryAttachment alloc]
+        [scope addAttachment:[[BuzzSentryAttachment alloc]
                                  initWithData:[@"hello" dataUsingEncoding:NSUTF8StringEncoding]
                                      filename:@"log.txt"]];
     }];
     // Also works
-    SentryUser *user = [[SentryUser alloc] initWithUserId:@"1"];
+    BuzzSentryUser *user = [[BuzzSentryUser alloc] initWithUserId:@"1"];
     user.email = @"tony@example.com";
-    [SentrySDK setUser:user];
+    [BuzzSentrySDK setUser:user];
 
     // Load an image just for HTTP swizzling
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -48,14 +48,14 @@ ViewController ()
 
 - (IBAction)addBreadcrumb:(id)sender
 {
-    SentryBreadcrumb *crumb = [[SentryBreadcrumb alloc] init];
+    BuzzSentryBreadcrumb *crumb = [[BuzzSentryBreadcrumb alloc] init];
     crumb.message = @"tapped addBreadcrumb";
-    [SentrySDK addBreadcrumb:crumb];
+    [BuzzSentrySDK addBreadcrumb:crumb];
 }
 
 - (IBAction)captureMessage:(id)sender
 {
-    SentryId *eventId = [SentrySDK captureMessage:@"Yeah captured a message"];
+    BuzzSentryId *eventId = [BuzzSentrySDK captureMessage:@"Yeah captured a message"];
     // Returns eventId in case of successful processed event
     // otherwise emptyId
     NSLog(@"%@", eventId);
@@ -67,15 +67,15 @@ ViewController ()
         [[NSError alloc] initWithDomain:@"UserFeedbackErrorDomain"
                                    code:0
                                userInfo:@{ NSLocalizedDescriptionKey : @"This never happens." }];
-    SentryId *eventId = [SentrySDK
+    BuzzSentryId *eventId = [BuzzSentrySDK
           captureError:error
-        withScopeBlock:^(SentryScope *_Nonnull scope) { [scope setLevel:kSentryLevelFatal]; }];
+        withScopeBlock:^(BuzzSentryScope *_Nonnull scope) { [scope setLevel:kBuzzSentryLevelFatal]; }];
 
-    SentryUserFeedback *userFeedback = [[SentryUserFeedback alloc] initWithEventId:eventId];
+    BuzzSentryUserFeedback *userFeedback = [[BuzzSentryUserFeedback alloc] initWithEventId:eventId];
     userFeedback.comments = @"It broke on iOS-ObjectiveC. I don't know why, but this happens.";
     userFeedback.email = @"john@me.com";
     userFeedback.name = @"John Me";
-    [SentrySDK captureUserFeedback:userFeedback];
+    [BuzzSentrySDK captureUserFeedback:userFeedback];
 }
 
 - (IBAction)captureError:(id)sender
@@ -84,8 +84,8 @@ ViewController ()
         [[NSError alloc] initWithDomain:@"SampleErrorDomain"
                                    code:0
                                userInfo:@{ NSLocalizedDescriptionKey : @"Object does not exist" }];
-    [SentrySDK captureError:error
-             withScopeBlock:^(SentryScope *_Nonnull scope) {
+    [BuzzSentrySDK captureError:error
+             withScopeBlock:^(BuzzSentryScope *_Nonnull scope) {
                  // Changes in here will only be captured for this event
                  // The scope in this callback is a clone of the current scope
                  // It contains all data but mutations only influence the event
@@ -100,18 +100,18 @@ ViewController ()
                                                         reason:@"User clicked the button"
                                                       userInfo:nil];
 
-    SentryScope *scope = [[SentryScope alloc] init];
-    [scope setLevel:kSentryLevelFatal];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
+    [scope setLevel:kBuzzSentryLevelFatal];
     // !!!: By explicity just passing the scope, only the data in this scope object will be added to
     // the event; the global scope (calls to configureScope) will be ignored. If you do that, be
     // careful–a lot of useful info is lost. If you just want to mutate what's in the scope use the
     // callback, see: captureError.
-    [SentrySDK captureException:exception withScope:scope];
+    [BuzzSentrySDK captureException:exception withScope:scope];
 }
 
 - (IBAction)captureTransaction:(id)sender
 {
-    __block id<SentrySpan> fakeTransaction = [SentrySDK startTransactionWithName:@"Some Transaction"
+    __block id<BuzzSentrySpan> fakeTransaction = [BuzzSentrySDK startTransactionWithName:@"Some Transaction"
                                                                        operation:@"some operation"];
 
     dispatch_after(
@@ -121,7 +121,7 @@ ViewController ()
 
 - (IBAction)crash:(id)sender
 {
-    [SentrySDK crash];
+    [BuzzSentrySDK crash];
 }
 
 - (IBAction)asyncCrash:(id)sender
@@ -136,7 +136,7 @@ ViewController ()
 
 - (void)asyncCrash2
 {
-    dispatch_async(dispatch_get_main_queue(), ^{ [SentrySDK crash]; });
+    dispatch_async(dispatch_get_main_queue(), ^{ [BuzzSentrySDK crash]; });
 }
 
 - (IBAction)oomCrash:(id)sender

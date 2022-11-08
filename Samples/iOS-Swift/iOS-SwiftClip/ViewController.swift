@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import UIKit
 
 class ViewController: UIViewController {
@@ -9,7 +9,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func crash(_ sender: Any) {
-        SentrySDK.crash()
+        BuzzSentrySDK.crash()
     }
     
 }

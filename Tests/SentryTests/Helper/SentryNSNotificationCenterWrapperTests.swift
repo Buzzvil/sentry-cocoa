@@ -1,19 +1,19 @@
 import XCTest
 
-class SentryNSNotificationCenterWrapperTests: XCTestCase {
+class BuzzSentryNSNotificationCenterWrapperTests: XCTestCase {
     
-    private var sut: SentryNSNotificationCenterWrapper!
+    private var sut: BuzzSentryNSNotificationCenterWrapper!
     
     private var didBecomeActiveExpectation: XCTestExpectation!
     private var willResignActiveExpectation: XCTestExpectation!
     
-    private let didBecomeActiveNotification = SentryNSNotificationCenterWrapper.didBecomeActiveNotificationName
-    private let willResignActiveNotification = SentryNSNotificationCenterWrapper.willResignActiveNotificationName
+    private let didBecomeActiveNotification = BuzzSentryNSNotificationCenterWrapper.didBecomeActiveNotificationName
+    private let willResignActiveNotification = BuzzSentryNSNotificationCenterWrapper.willResignActiveNotificationName
     
     override func setUp() {
         super.setUp()
         
-        sut = SentryNSNotificationCenterWrapper()
+        sut = BuzzSentryNSNotificationCenterWrapper()
         
         didBecomeActiveExpectation = expectation(description: "didBecomeActive")
         willResignActiveExpectation = expectation(description: "willResignActive")

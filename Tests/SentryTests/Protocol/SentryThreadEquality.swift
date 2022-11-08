@@ -1,8 +1,8 @@
 import Foundation
 
-extension Sentry.Thread {
+extension BuzzSentry.Thread {
     open override func isEqual(_ object: Any?) -> Bool {
-        if  let other = object as? Sentry.Thread {
+        if  let other = object as? BuzzSentry.Thread {
             return  threadId == other.threadId &&
                 name == other.name &&
                 stacktrace == other.stacktrace &&
@@ -17,9 +17,9 @@ extension Sentry.Thread {
     }
 }
 
-extension Sentry.Stacktrace {
+extension BuzzSentry.Stacktrace {
     open override func isEqual(_ object: Any?) -> Bool {
-        if  let other = object as? Sentry.Stacktrace {
+        if  let other = object as? BuzzSentry.Stacktrace {
             return frames == other.frames &&
                 registers == other.registers
         } else {
@@ -32,9 +32,9 @@ extension Sentry.Stacktrace {
     }
 }
 
-extension Sentry.Frame {
+extension BuzzSentry.Frame {
     open override func isEqual(_ object: Any?) -> Bool {
-        if  let other = object as? Sentry.Frame {
+        if  let other = object as? BuzzSentry.Frame {
             return symbolAddress == other.symbolAddress &&
                 fileName == other.fileName &&
                 function == other.function &&

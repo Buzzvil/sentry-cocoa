@@ -1,10 +1,10 @@
 import XCTest
 
-class SentryPredicateDescriptorTests: XCTestCase {
+class BuzzSentryPredicateDescriptorTests: XCTestCase {
     
     private class Fixture {
-        func getSut() -> SentryPredicateDescriptor {
-            return SentryPredicateDescriptor()
+        func getSut() -> BuzzSentryPredicateDescriptor {
+            return BuzzSentryPredicateDescriptor()
         }
     }
     

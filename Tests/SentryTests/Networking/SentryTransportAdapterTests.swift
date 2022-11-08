@@ -1,7 +1,7 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
-class SentryTransportAdapterTests: XCTestCase {
+class BuzzSentryTransportAdapterTests: XCTestCase {
     
     private class Fixture {
 
@@ -10,15 +10,15 @@ class SentryTransportAdapterTests: XCTestCase {
         let faultyAttachment = Attachment(path: "")
         let attachment = Attachment(data: Data(), filename: "test.txt")
         
-        var sut: SentryTransportAdapter {
+        var sut: BuzzSentryTransportAdapter {
             get {
-                return SentryTransportAdapter(transport: transport, options: options)
+                return BuzzSentryTransportAdapter(transport: transport, options: options)
             }
         }
     }
 
     private var fixture: Fixture!
-    private var sut: SentryTransportAdapter!
+    private var sut: BuzzSentryTransportAdapter!
 
     override func setUp() {
         super.setUp()
@@ -30,14 +30,14 @@ class SentryTransportAdapterTests: XCTestCase {
     }
     
     func testSendEventWithSession_SendsCorrectEnvelope() throws {
-        let session = SentrySession(releaseName: "1.0.1")
+        let session = BuzzSentrySession(releaseName: "1.0.1")
         let event = TestData.event
         sut.send(event, session: session, attachments: [fixture.attachment])
         
-        let expectedEnvelope = SentryEnvelope(id: event.eventId, items: [
-            SentryEnvelopeItem(event: event),
-            SentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!,
-            SentryEnvelopeItem(session: session)
+        let expectedEnvelope = BuzzSentryEnvelope(id: event.eventId, items: [
+            BuzzSentryEnvelopeItem(event: event),
+            BuzzSentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!,
+            BuzzSentryEnvelopeItem(session: session)
         ])
         
         assertEnvelope(expected: expectedEnvelope)
@@ -47,9 +47,9 @@ class SentryTransportAdapterTests: XCTestCase {
         let event = TestData.event
         sut.send(event: event, attachments: [fixture.faultyAttachment, fixture.attachment])
         
-        let expectedEnvelope = SentryEnvelope(id: event.eventId, items: [
-            SentryEnvelopeItem(event: event),
-            SentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!
+        let expectedEnvelope = BuzzSentryEnvelope(id: event.eventId, items: [
+            BuzzSentryEnvelopeItem(event: event),
+            BuzzSentryEnvelopeItem(attachment: fixture.attachment, maxAttachmentSize: fixture.options.maxAttachmentSize)!
         ])
         
         assertEnvelope(expected: expectedEnvelope)
@@ -59,12 +59,12 @@ class SentryTransportAdapterTests: XCTestCase {
         let userFeedback = TestData.userFeedback
         sut.send(userFeedback: userFeedback)
         
-        let expectedEnvelope = SentryEnvelope(userFeedback: userFeedback)
+        let expectedEnvelope = BuzzSentryEnvelope(userFeedback: userFeedback)
         
         assertEnvelope(expected: expectedEnvelope)
     }
     
-    private func assertEnvelope(expected: SentryEnvelope) {
+    private func assertEnvelope(expected: BuzzSentryEnvelope) {
         XCTAssertEqual(1, fixture.transport.sentEnvelopes.count)
         let actual = fixture.transport.sentEnvelopes.first!
         XCTAssertNotNil(actual)
@@ -89,6 +89,6 @@ class SentryTransportAdapterTests: XCTestCase {
             XCTAssertTrue(containsData, "Envelope data with type:\(expectedHeader.type) doesn't match.")
         }
         
-        XCTAssertEqual(try SentrySerialization.data(with: expected), try SentrySerialization.data(with: actual))
+        XCTAssertEqual(try BuzzSentrySerialization.data(with: expected), try BuzzSentrySerialization.data(with: actual))
     }
 }

@@ -1,6 +1,6 @@
 import XCTest
 
-final class SentryMeasurementUnitTests: XCTestCase {
+final class BuzzSentryMeasurementUnitTests: XCTestCase {
 
     func testCustomUnit() {
         let unit = "custom"

@@ -1,17 +1,17 @@
 import XCTest
 
-class SentrySpanContextTests: XCTestCase {
+class BuzzSentrySpanContextTests: XCTestCase {
     let someOperation = "Some Operation"
     
     func testInit() {
         let spanContext = SpanContext(operation: someOperation)
-        XCTAssertEqual(spanContext.sampled, SentrySampleDecision.undecided)
+        XCTAssertEqual(spanContext.sampled, BuzzSentrySampleDecision.undecided)
         XCTAssertNil(spanContext.parentSpanId)
         XCTAssertEqual(spanContext.operation, someOperation)
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
-        XCTAssertEqual(spanContext.traceId.sentryIdString.count, 32)
-        XCTAssertEqual(spanContext.spanId.sentrySpanIdString.count, 16)
+        XCTAssertEqual(spanContext.traceId.buzzSentryIdString.count, 32)
+        XCTAssertEqual(spanContext.spanId.buzzSentrySpanIdString.count, 16)
     }
     
     func testInitWithSampled() {
@@ -21,12 +21,12 @@ class SentrySpanContextTests: XCTestCase {
         XCTAssertNil(spanContext.parentSpanId)
         XCTAssertNil(spanContext.spanDescription)
         XCTAssertEqual(spanContext.tags.count, 0)
-        XCTAssertEqual(spanContext.traceId.sentryIdString.count, 32)
-        XCTAssertEqual(spanContext.spanId.sentrySpanIdString.count, 16)
+        XCTAssertEqual(spanContext.traceId.buzzSentryIdString.count, 32)
+        XCTAssertEqual(spanContext.spanId.buzzSentrySpanIdString.count, 16)
     }
     
     func testInitWithTraceIdSpanIdParentIdSampled() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         
@@ -42,7 +42,7 @@ class SentrySpanContextTests: XCTestCase {
     }
     
     func testSerialization() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         
@@ -52,13 +52,13 @@ class SentrySpanContextTests: XCTestCase {
         
         let data = spanContext.serialize()
         
-        XCTAssertEqual(data["span_id"] as? String, spanId.sentrySpanIdString)
-        XCTAssertEqual(data["trace_id"] as? String, id.sentryIdString)
+        XCTAssertEqual(data["span_id"] as? String, spanId.buzzSentrySpanIdString)
+        XCTAssertEqual(data["trace_id"] as? String, id.buzzSentryIdString)
         XCTAssertEqual(data["type"] as? String, SpanContext.type)
         XCTAssertEqual(data["op"] as? String, someOperation)
         XCTAssertEqual(data["description"] as? String, spanContext.spanDescription)
         XCTAssertEqual(data["sampled"] as? String, "true")
-        XCTAssertEqual(data["parent_span_id"] as? String, parentId.sentrySpanIdString)
+        XCTAssertEqual(data["parent_span_id"] as? String, parentId.buzzSentrySpanIdString)
         XCTAssertEqual(data["status"] as? String, "ok")
     }
     
@@ -75,13 +75,13 @@ class SentrySpanContextTests: XCTestCase {
     }
 
     func testSamplerDecisionNames() {
-        XCTAssertEqual(kSentrySampleDecisionNameUndecided, nameForSentrySampleDecision(.undecided))
-        XCTAssertEqual(kSentrySampleDecisionNameNo, nameForSentrySampleDecision(.no))
-        XCTAssertEqual(kSentrySampleDecisionNameYes, nameForSentrySampleDecision(.yes))
+        XCTAssertEqual(kBuzzSentrySampleDecisionNameUndecided, nameForBuzzSentrySampleDecision(.undecided))
+        XCTAssertEqual(kBuzzSentrySampleDecisionNameNo, nameForBuzzSentrySampleDecision(.no))
+        XCTAssertEqual(kBuzzSentrySampleDecisionNameYes, nameForBuzzSentrySampleDecision(.yes))
     }
     
     func testSampledNoSerialization() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         
@@ -94,7 +94,7 @@ class SentrySpanContextTests: XCTestCase {
     }
     
     func testSampleUndecidedSerialization() {
-        let id = SentryId()
+        let id = BuzzSentryId()
         let spanId = SpanId()
         let parentId = SpanId()
         
@@ -136,7 +136,7 @@ class SentrySpanContextTests: XCTestCase {
     @available(OSX 10.12, *)
     @available(iOS 10.0, *)
     func testModifyingTagsFromMultipleThreads() {
-        let queue = DispatchQueue(label: "SentrySpanTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentrySpanTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
         
         let tagValue = "tag_value"

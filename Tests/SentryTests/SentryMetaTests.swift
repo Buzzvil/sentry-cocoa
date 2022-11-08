@@ -1,14 +1,14 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
-class SentryMetaTest: XCTestCase {
+class BuzzSentryMetaTest: XCTestCase {
     func testChangeVersion() {
-        SentryMeta.versionString = "0.0.1"
-        XCTAssertEqual(SentryMeta.versionString, "0.0.1")
+        BuzzSentryMeta.versionString = "0.0.1"
+        XCTAssertEqual(BuzzSentryMeta.versionString, "0.0.1")
     }
 
     func testChangeName() {
-        SentryMeta.sdkName = "test"
-        XCTAssertEqual(SentryMeta.sdkName, "test")
+        BuzzSentryMeta.sdkName = "test"
+        XCTAssertEqual(BuzzSentryMeta.sdkName, "test")
     }
 }

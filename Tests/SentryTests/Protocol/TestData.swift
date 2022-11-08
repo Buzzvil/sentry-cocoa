@@ -1,5 +1,5 @@
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-import Sentry
+import BuzzSentry
 import UIKit
 #endif
 
@@ -11,12 +11,12 @@ class TestData {
             (timestamp as NSDate).sentry_toIso8601String()
         }
     }
-    static let sdk = ["name": SentryMeta.sdkName, "version": SentryMeta.versionString]
+    static let sdk = ["name": BuzzSentryMeta.sdkName, "version": BuzzSentryMeta.versionString]
     static let context = ["context": ["c": "a", "date": timestamp]]
     
     static var crumb: Breadcrumb {
         let crumb = Breadcrumb()
-        crumb.level = SentryLevel.info
+        crumb.level = BuzzSentryLevel.info
         crumb.timestamp = timestamp
         crumb.type = "user"
         crumb.message = "Clicked something"
@@ -25,7 +25,7 @@ class TestData {
     }
     
     static var event: Event {
-        let event = Event(level: SentryLevel.info)
+        let event = Event(level: BuzzSentryLevel.info)
         
         event.breadcrumbs = [crumb]
         event.context = context
@@ -36,10 +36,10 @@ class TestData {
         event.extra = ["some": "extra"]
         event.fingerprint = ["fingerprint"]
         event.logger = "logger"
-        event.message = SentryMessage(formatted: "message")
+        event.message = BuzzSentryMessage(formatted: "message")
         event.modules = ["module": "1"]
         event.platform = "Apple"
-        event.releaseName = SentryMeta.versionString
+        event.releaseName = BuzzSentryMeta.versionString
         event.sdk = sdk
         event.serverName = "serverName"
         event.stacktrace = stacktrace
@@ -115,13 +115,13 @@ class TestData {
             "code_name": "BUS_NOOP"
         ]
         
-        mechanismMeta.error = SentryNSError(domain: "SentrySampleDomain", code: 1)
+        mechanismMeta.error = BuzzSentryNSError(domain: "SentrySampleDomain", code: 1)
         
         return mechanismMeta
     }
     
-    static var thread: Sentry.Thread {
-        let thread = Sentry.Thread(threadId: 10)
+    static var thread: BuzzSentry.Thread {
+        let thread = BuzzSentry.Thread(threadId: 10)
         thread.crashed = false
         thread.current = true
         thread.name = "main"
@@ -170,19 +170,19 @@ class TestData {
     
     static var someUUID = "12345678-1234-1234-1234-12344567890AB"
     
-    static var appState: SentryAppState {
-        return SentryAppState(releaseName: "1.0.0", osVersion: "14.4.1", vendorId: someUUID, isDebugging: false, systemBootTimestamp: timestamp)
+    static var appState: BuzzSentryAppState {
+        return BuzzSentryAppState(releaseName: "1.0.0", osVersion: "14.4.1", vendorId: someUUID, isDebugging: false, systemBootTimestamp: timestamp)
     }
     
     static var oomEvent: Event {
-        let event = Event(level: SentryLevel.fatal)
-        let exception = Exception(value: SentryOutOfMemoryExceptionValue, type: SentryOutOfMemoryExceptionType)
-        exception.mechanism = Mechanism(type: SentryOutOfMemoryMechanismType)
+        let event = Event(level: BuzzSentryLevel.fatal)
+        let exception = Exception(value: BuzzSentryOutOfMemoryExceptionValue, type: BuzzSentryOutOfMemoryExceptionType)
+        exception.mechanism = Mechanism(type: BuzzSentryOutOfMemoryMechanismType)
         event.exceptions = [exception]
         return event
     }
     
-    static func scopeWith(observer: SentryScopeObserver) -> Scope {
+    static func scopeWith(observer: BuzzSentryScopeObserver) -> Scope {
         let scope = Scope()
         scope.add(observer)
         
@@ -196,7 +196,7 @@ class TestData {
         scope.setExtras(["extra1": "extra1", "extra2": "extra2"])
         scope.setFingerprint(["finger", "print"])
         
-        scope.setLevel(SentryLevel.fatal)
+        scope.setLevel(BuzzSentryLevel.fatal)
         
         let crumb1 = TestData.crumb
         crumb1.message = "Crumb 1"
@@ -210,7 +210,7 @@ class TestData {
     }
     
     static var userFeedback: UserFeedback {
-        let userFeedback = UserFeedback(eventId: SentryId())
+        let userFeedback = UserFeedback(eventId: BuzzSentryId())
         userFeedback.comments = "It doesn't really"
         userFeedback.email = "john@me.com"
         userFeedback.name = "John Me"
@@ -221,8 +221,8 @@ class TestData {
         scope.setContext(value: TestData.context["context"]!, key: "context")
     }
     
-    static var request: SentryRequest {
-        let request = SentryRequest()
+    static var request: BuzzSentryRequest {
+        let request = BuzzSentryRequest()
         request.url = "https://sentry.io"
         request.fragment = "fragment"
         request.bodySize = 10
@@ -234,12 +234,12 @@ class TestData {
         return request
     }
     
-    static func getAppStartMeasurement(type: SentryAppStartType, appStartTimestamp: Date = TestData.timestamp) -> SentryAppStartMeasurement {
+    static func getAppStartMeasurement(type: BuzzSentryAppStartType, appStartTimestamp: Date = TestData.timestamp) -> BuzzSentryAppStartMeasurement {
         let appStartDuration = 0.5
         let main = appStartTimestamp.addingTimeInterval(0.15)
         let runtimeInit = appStartTimestamp.addingTimeInterval(0.05)
         let didFinishLaunching = appStartTimestamp.addingTimeInterval(0.3)
         
-        return SentryAppStartMeasurement(type: type, appStartTimestamp: appStartTimestamp, duration: appStartDuration, runtimeInitTimestamp: runtimeInit, moduleInitializationTimestamp: main, didFinishLaunchingTimestamp: didFinishLaunching)
+        return BuzzSentryAppStartMeasurement(type: type, appStartTimestamp: appStartTimestamp, duration: appStartDuration, runtimeInitTimestamp: runtimeInit, moduleInitializationTimestamp: main, didFinishLaunchingTimestamp: didFinishLaunching)
     }
 }

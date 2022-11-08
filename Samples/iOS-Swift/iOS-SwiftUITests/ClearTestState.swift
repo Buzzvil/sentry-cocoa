@@ -1,6 +1,6 @@
 import Foundation
-import Sentry
+import BuzzSentry
 
 func clearTestState() {
-    SentrySDK.close()
+    BuzzSentrySDK.close()
 }

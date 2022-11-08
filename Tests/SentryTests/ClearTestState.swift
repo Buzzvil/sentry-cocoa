@@ -1,28 +1,28 @@
 import Foundation
-import Sentry
+import BuzzSentry
 
 func clearTestState() {
-    SentrySDK.close()
-    SentrySDK.setCurrentHub(nil)
-    SentrySDK.crashedLastRunCalled = false
-    SentrySDK.startInvocations = 0
+    BuzzSentrySDK.close()
+    BuzzSentrySDK.setCurrentHub(nil)
+    BuzzSentrySDK.crashedLastRunCalled = false
+    BuzzSentrySDK.startInvocations = 0
     
-    PrivateSentrySDKOnly.onAppStartMeasurementAvailable = nil
-    PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = false
-    SentrySDK.setAppStartMeasurement(nil)
+    PrivateBuzzSentrySDKOnly.onAppStartMeasurementAvailable = nil
+    PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = false
+    BuzzSentrySDK.setAppStartMeasurement(nil)
     CurrentDate.setCurrentDateProvider(nil)
-    SentryNetworkTracker.sharedInstance.disable()
+    BuzzSentryNetworkTracker.sharedInstance.disable()
     
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-    let framesTracker = SentryFramesTracker.sharedInstance()
+    let framesTracker = BuzzSentryFramesTracker.sharedInstance()
     framesTracker.stop()
     framesTracker.resetFrames()
     
     setenv("ActivePrewarm", "0", 1)
-    SentryAppStartTracker.load()
+    BuzzSentryAppStartTracker.load()
     #endif
     
-    SentryDependencyContainer.reset()
-    Dynamic(SentryGlobalEventProcessor.shared()).removeAllProcessors()
-    SentrySwizzleWrapper.sharedInstance.removeAllCallbacks()
+    BuzzSentryDependencyContainer.reset()
+    Dynamic(BuzzSentryGlobalEventProcessor.shared()).removeAllProcessors()
+    BuzzSentrySwizzleWrapper.sharedInstance.removeAllCallbacks()
 }

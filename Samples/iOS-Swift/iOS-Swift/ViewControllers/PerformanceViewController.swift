@@ -1,4 +1,4 @@
-import Sentry
+import BuzzSentry
 import UIKit
 
 class PerformanceViewController: UIViewController {
@@ -67,10 +67,10 @@ private extension PerformanceViewController {
     }
 
     func startTest() {
-        SentrySDK.configureScope {
+        BuzzSentrySDK.configureScope {
             $0.setTag(value: "performance-benchmark", key: "uitest-type")
         }
-        transaction = SentrySDK.startTransaction(name: "io.sentry.benchmark.transaction", operation: "crunch-numbers")
+        transaction = BuzzSentrySDK.startTransaction(name: "io.sentry.benchmark.transaction", operation: "crunch-numbers")
         timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(doRandomWork), userInfo: nil, repeats: true)
         SentryBenchmarking.startBenchmark()
 
@@ -87,7 +87,7 @@ private extension PerformanceViewController {
         }
 
         guard let value = SentryBenchmarking.stopBenchmark() else {
-            SentrySDK.capture(error: NSError(domain: "io.sentry.benchmark.error", code: 1, userInfo: ["description": "Only one CPU sample was taken, can't calculate benchmark deltas."]))
+            BuzzSentrySDK.capture(error: NSError(domain: "io.sentry.benchmark.error", code: 1, userInfo: ["description": "Only one CPU sample was taken, can't calculate benchmark deltas."]))
             valueTextField.text = "nil"
             return
         }
@@ -95,7 +95,7 @@ private extension PerformanceViewController {
         valueTextField.isHidden = false
         valueTextField.text = "\(value)"
 
-        SentrySDK.configureScope {
+        BuzzSentrySDK.configureScope {
             $0.setContext(value: [
                 "percent-usage": value,
                 "device-model": UIDevice.current.model,

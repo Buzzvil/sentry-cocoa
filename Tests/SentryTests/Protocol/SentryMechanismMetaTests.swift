@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryMechanismMetaTests: XCTestCase {
+class BuzzSentryMechanismMetaTests: XCTestCase {
 
     func testSerialize() {
         let sut = TestData.mechanismMeta
@@ -18,7 +18,7 @@ class SentryMechanismMetaTests: XCTestCase {
             XCTFail("The serialization doesn't contain ns_error")
             return
         }
-        let nsError = expected.error! as SentryNSError
+        let nsError = expected.error! as BuzzSentryNSError
         XCTAssertEqual(nsError.domain, error["domain"] as? String)
         XCTAssertEqual(nsError.code, error["code"] as? Int)
         

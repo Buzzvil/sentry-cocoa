@@ -1,6 +1,6 @@
 import XCTest
 
-class PrivateSentrySDKOnlyTests: XCTestCase {
+class PrivateBuzzSentrySDKOnlyTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
@@ -9,10 +9,10 @@ class PrivateSentrySDKOnlyTests: XCTestCase {
 
     func testStoreEnvelope() {
         let client = TestClient(options: Options())
-        SentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
+        BuzzSentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
         
         let envelope = TestConstants.envelope
-        PrivateSentrySDKOnly.store(envelope)
+        PrivateBuzzSentrySDKOnly.store(envelope)
         
         XCTAssertEqual(1, client?.storedEnvelopeInvocations.count)
         XCTAssertEqual(envelope, client?.storedEnvelopeInvocations.first)
@@ -20,113 +20,113 @@ class PrivateSentrySDKOnlyTests: XCTestCase {
     
     func testCaptureEnvelope() {
         let client = TestClient(options: Options())
-        SentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
+        BuzzSentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
         
         let envelope = TestConstants.envelope
-        PrivateSentrySDKOnly.capture(envelope)
+        PrivateBuzzSentrySDKOnly.capture(envelope)
         
         XCTAssertEqual(1, client?.captureEnvelopeInvocations.count)
         XCTAssertEqual(envelope, client?.captureEnvelopeInvocations.first)
     }
 
     func testSetSdkName() {
-        let originalName = PrivateSentrySDKOnly.getSdkName()
+        let originalName = PrivateBuzzSentrySDKOnly.getSdkName()
         let name = "Some SDK name"
-        let originalVersion = SentryMeta.versionString
+        let originalVersion = BuzzSentryMeta.versionString
         XCTAssertNotEqual(originalVersion, "")
         
-        PrivateSentrySDKOnly.setSdkName(name)
-        XCTAssertEqual(SentryMeta.sdkName, name)
-        XCTAssertEqual(SentryMeta.versionString, originalVersion)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkName(), name)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkVersionString(), originalVersion)
+        PrivateBuzzSentrySDKOnly.setSdkName(name)
+        XCTAssertEqual(BuzzSentryMeta.sdkName, name)
+        XCTAssertEqual(BuzzSentryMeta.versionString, originalVersion)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkName(), name)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkVersionString(), originalVersion)
         
-        PrivateSentrySDKOnly.setSdkName(originalName)
-        XCTAssertEqual(SentryMeta.sdkName, originalName)
-        XCTAssertEqual(SentryMeta.versionString, originalVersion)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkName(), originalName)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkVersionString(), originalVersion)
+        PrivateBuzzSentrySDKOnly.setSdkName(originalName)
+        XCTAssertEqual(BuzzSentryMeta.sdkName, originalName)
+        XCTAssertEqual(BuzzSentryMeta.versionString, originalVersion)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkName(), originalName)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkVersionString(), originalVersion)
     }
     
     func testSetSdkNameAndVersion() {
-        let originalName = PrivateSentrySDKOnly.getSdkName()
-        let originalVersion = PrivateSentrySDKOnly.getSdkVersionString()
+        let originalName = PrivateBuzzSentrySDKOnly.getSdkName()
+        let originalVersion = PrivateBuzzSentrySDKOnly.getSdkVersionString()
         let name = "Some SDK name"
         let version = "1.2.3.4"
 
-        PrivateSentrySDKOnly.setSdkName(name, andVersionString: version)
-        XCTAssertEqual(SentryMeta.sdkName, name)
-        XCTAssertEqual(SentryMeta.versionString, version)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkName(), name)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkVersionString(), version)
+        PrivateBuzzSentrySDKOnly.setSdkName(name, andVersionString: version)
+        XCTAssertEqual(BuzzSentryMeta.sdkName, name)
+        XCTAssertEqual(BuzzSentryMeta.versionString, version)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkName(), name)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkVersionString(), version)
         
-        PrivateSentrySDKOnly.setSdkName(originalName, andVersionString: originalVersion)
-        XCTAssertEqual(SentryMeta.sdkName, originalName)
-        XCTAssertEqual(SentryMeta.versionString, originalVersion)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkName(), originalName)
-        XCTAssertEqual(PrivateSentrySDKOnly.getSdkVersionString(), originalVersion)
+        PrivateBuzzSentrySDKOnly.setSdkName(originalName, andVersionString: originalVersion)
+        XCTAssertEqual(BuzzSentryMeta.sdkName, originalName)
+        XCTAssertEqual(BuzzSentryMeta.versionString, originalVersion)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkName(), originalName)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.getSdkVersionString(), originalVersion)
         
     }
     
     func testEnvelopeWithData() throws {
         let itemData = "{}\n{\"length\":0,\"type\":\"attachment\"}\n".data(using: .utf8)!
-        XCTAssertNotNil(PrivateSentrySDKOnly.envelope(with: itemData))
+        XCTAssertNotNil(PrivateBuzzSentrySDKOnly.envelope(with: itemData))
     }
     
     func testGetDebugImages() {
-        let images = PrivateSentrySDKOnly.getDebugImages()
+        let images = PrivateBuzzSentrySDKOnly.getDebugImages()
         
         // Only make sure we get some images. The actual tests are in
-        // SentryDebugImageProviderTests
+        // BuzzSentryDebugImageProviderTests
         XCTAssertGreaterThan(images.count, 100)
     }
     
     func testGetAppStartMeasurement() {
         let appStartMeasurement = TestData.getAppStartMeasurement(type: .warm)
-        SentrySDK.setAppStartMeasurement(appStartMeasurement)
+        BuzzSentrySDK.setAppStartMeasurement(appStartMeasurement)
         
-        XCTAssertEqual(appStartMeasurement, PrivateSentrySDKOnly.appStartMeasurement)
+        XCTAssertEqual(appStartMeasurement, PrivateBuzzSentrySDKOnly.appStartMeasurement)
         
-        SentrySDK.setAppStartMeasurement(nil)
-        XCTAssertNil(PrivateSentrySDKOnly.appStartMeasurement)
+        BuzzSentrySDK.setAppStartMeasurement(nil)
+        XCTAssertNil(PrivateBuzzSentrySDKOnly.appStartMeasurement)
     }
     
     func testGetInstallationId() {
-        XCTAssertEqual(SentryInstallation.id(), PrivateSentrySDKOnly.installationID)
+        XCTAssertEqual(BuzzSentryInstallation.id(), PrivateBuzzSentrySDKOnly.installationID)
     }
     
     func testSendAppStartMeasurement() {
-        XCTAssertFalse(PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode)
+        XCTAssertFalse(PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode)
         
-        PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = true
-        XCTAssertTrue(PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode)
+        PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = true
+        XCTAssertTrue(PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode)
     }
 
     func testOptions() {
         let options = Options()
-        options.dsn = TestConstants.dsnAsString(username: "SentryFramesTrackingIntegrationTests")
+        options.dsn = TestConstants.dsnAsString(username: "BuzzSentryFramesTrackingIntegrationTests")
         let client = TestClient(options: options)
-        SentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
+        BuzzSentrySDK.setCurrentHub(TestHub(client: client, andScope: nil))
 
-        XCTAssertEqual(PrivateSentrySDKOnly.options, options)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.options, options)
     }
 
     func testDefaultOptions() {
-        XCTAssertNotNil(PrivateSentrySDKOnly.options)
-        XCTAssertNil(PrivateSentrySDKOnly.options.dsn)
-        XCTAssertEqual(PrivateSentrySDKOnly.options.enabled, true)
+        XCTAssertNotNil(PrivateBuzzSentrySDKOnly.options)
+        XCTAssertNil(PrivateBuzzSentrySDKOnly.options.dsn)
+        XCTAssertEqual(PrivateBuzzSentrySDKOnly.options.enabled, true)
     }
     
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     
     func testIsFramesTrackingRunning() {
-        XCTAssertFalse(PrivateSentrySDKOnly.isFramesTrackingRunning)
-        SentryFramesTracker.sharedInstance().start()
-        XCTAssertTrue(PrivateSentrySDKOnly.isFramesTrackingRunning)
+        XCTAssertFalse(PrivateBuzzSentrySDKOnly.isFramesTrackingRunning)
+        BuzzSentryFramesTracker.sharedInstance().start()
+        XCTAssertTrue(PrivateBuzzSentrySDKOnly.isFramesTrackingRunning)
     }
     
     func testGetFrames() {
-        let tracker = SentryFramesTracker.sharedInstance()
+        let tracker = BuzzSentryFramesTracker.sharedInstance()
         let displayLink = TestDiplayLinkWrapper()
         
         tracker.setDisplayLinkWrapper(displayLink)
@@ -138,7 +138,7 @@ class PrivateSentrySDKOnlyTests: XCTestCase {
         let normal = 100
         displayLink.givenFrames(slow, frozen, normal)
         
-        let currentFrames = PrivateSentrySDKOnly.currentScreenFrames
+        let currentFrames = PrivateBuzzSentrySDKOnly.currentScreenFrames
         XCTAssertEqual(UInt(slow + frozen + normal), currentFrames.total)
         XCTAssertEqual(UInt(frozen), currentFrames.frozen)
         XCTAssertEqual(UInt(slow), currentFrames.slow)

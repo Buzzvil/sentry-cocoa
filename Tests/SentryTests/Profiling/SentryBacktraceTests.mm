@@ -1,11 +1,11 @@
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
 #    import <XCTest/XCTest.h>
 
-#    import "SentryBacktrace.hpp"
-#    import "SentryThreadHandle.hpp"
+#    import "BuzzSentryBacktrace.hpp"
+#    import "BuzzSentryThreadHandle.hpp"
 
 #    import <cmath>
 #    import <dlfcn.h>
@@ -139,10 +139,10 @@ countof(Array &)
 }
 } // namespace
 
-@interface SentryBacktraceTests : XCTestCase
+@interface BuzzSentryBacktraceTests : XCTestCase
 @end
 
-@implementation SentryBacktraceTests
+@implementation BuzzSentryBacktraceTests
 
 - (void)testBacktrace
 {

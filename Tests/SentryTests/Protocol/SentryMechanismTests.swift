@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryMechanismTests: XCTestCase {
+class BuzzSentryMechanismTests: XCTestCase {
 
     func testSerialize() {
         let mechanism = TestData.mechanism
@@ -18,7 +18,7 @@ class SentryMechanismTests: XCTestCase {
         XCTAssertEqual(expected.helpLink, actual["help_link"] as? String)
 
         guard let something = (actual["data"] as? [String: Any])?["something"] as? [String: Any] else {
-            XCTFail("Serialized SentryMechanism doesn't contain something.")
+            XCTFail("Serialized BuzzSentryMechanism doesn't contain something.")
             return
         }
 

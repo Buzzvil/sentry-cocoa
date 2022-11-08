@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryHttpStatusCodeRangeTests: XCTestCase {
+class BuzzSentryHttpStatusCodeRangeTests: XCTestCase {
     
     func testWithinRange() {
         let range = HttpStatusCodeRange(min: 500, max: 599)

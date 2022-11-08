@@ -1,5 +1,5 @@
 //
-//  SentryCrashMonitor_Signal_Tests.m
+//  BuzzSentryCrashMonitor_Signal_Tests.m
 //
 //  Created by Karl Stenerud on 2013-01-26.
 //
@@ -26,17 +26,17 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashMonitorContext.h"
-#import "SentryCrashMonitor_Signal.h"
+#import "BuzzSentryCrashMonitorContext.h"
+#import "BuzzSentryCrashMonitor_Signal.h"
 
-@interface SentryCrashMonitor_Signal_Tests : XCTestCase
+@interface BuzzSentryCrashMonitor_Signal_Tests : XCTestCase
 @end
 
-@implementation SentryCrashMonitor_Signal_Tests
+@implementation BuzzSentryCrashMonitor_Signal_Tests
 
 - (void)testInstallAndRemove
 {
-    SentryCrashMonitorAPI *api = sentrycrashcm_signal_getAPI();
+    BuzzSentryCrashMonitorAPI *api = sentrycrashcm_signal_getAPI();
     api->setEnabled(true);
     XCTAssertTrue(api->isEnabled());
     [NSThread sleepForTimeInterval:0.1];
@@ -46,7 +46,7 @@
 
 - (void)testDoubleInstallAndRemove
 {
-    SentryCrashMonitorAPI *api = sentrycrashcm_signal_getAPI();
+    BuzzSentryCrashMonitorAPI *api = sentrycrashcm_signal_getAPI();
 
     api->setEnabled(true);
     XCTAssertTrue(api->isEnabled());

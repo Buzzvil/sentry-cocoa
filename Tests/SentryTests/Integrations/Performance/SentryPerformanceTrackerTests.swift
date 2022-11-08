@@ -1,8 +1,8 @@
 import XCTest
 
-class SentryPerformanceTrackerTests: XCTestCase {
+class BuzzSentryPerformanceTrackerTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryPerformanceTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryPerformanceTrackerTests")
     
     private class Fixture {
 
@@ -18,8 +18,8 @@ class SentryPerformanceTrackerTests: XCTestCase {
             hub = TestHub(client: client, andScope: scope)
         }
         
-        func getSut() -> SentryPerformanceTracker {
-            return  SentryPerformanceTracker()
+        func getSut() -> BuzzSentryPerformanceTracker {
+            return  BuzzSentryPerformanceTracker()
         }
     }
     
@@ -29,7 +29,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         super.setUp()
         
         fixture = Fixture()
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
     }
     
     override func tearDown() {
@@ -38,14 +38,14 @@ class SentryPerformanceTrackerTests: XCTestCase {
     }
     
     func testSingleton() {
-        XCTAssertEqual(SentryPerformanceTracker.shared(), SentryPerformanceTracker.shared())
+        XCTAssertEqual(BuzzSentryPerformanceTracker.shared(), BuzzSentryPerformanceTracker.shared())
     }
    
     func testStartSpan_CheckScopeSpan() {
         let sut = fixture.getSut()
         let spanId = startSpan(tracker: sut)
         
-        let transaction = sut.getSpan(spanId) as! SentryTracer
+        let transaction = sut.getSpan(spanId) as! BuzzSentryTracer
         
         let scopeSpan = fixture.scope.span
         
@@ -58,11 +58,11 @@ class SentryPerformanceTrackerTests: XCTestCase {
     func testStartSpan_ScopeAlreadyWithSpan() {
         let sut = fixture.getSut()
 
-        let firstTransaction = SentrySDK.startTransaction(name: fixture.someTransaction, operation: fixture.someOperation, bindToScope: true)
+        let firstTransaction = BuzzSentrySDK.startTransaction(name: fixture.someTransaction, operation: fixture.someOperation, bindToScope: true)
         let spanId = startSpan(tracker: sut)
                 
         let transaction = sut.getSpan(spanId)
-        let scopeSpan = SentrySDK.currentHub().scope.span
+        let scopeSpan = BuzzSentrySDK.currentHub().scope.span
         
         XCTAssert(scopeSpan !== transaction)
         XCTAssert(scopeSpan === firstTransaction)
@@ -70,11 +70,11 @@ class SentryPerformanceTrackerTests: XCTestCase {
     
     func testStartSpan_ScopeWithUIActionSpan_FinishesSpan() {
         let sut = fixture.getSut()
-        let firstTransaction = SentrySDK.startTransaction(name: fixture.someTransaction, operation: "ui.action", bindToScope: true)
+        let firstTransaction = BuzzSentrySDK.startTransaction(name: fixture.someTransaction, operation: "ui.action", bindToScope: true)
         let spanId = startSpan(tracker: sut)
                 
         let transaction = sut.getSpan(spanId)
-        let scopeSpan = SentrySDK.currentHub().scope.span
+        let scopeSpan = BuzzSentrySDK.currentHub().scope.span
         
         XCTAssert(scopeSpan === transaction)
         XCTAssert(scopeSpan !== firstTransaction)
@@ -225,7 +225,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         }
         
         sut.finishSpan(spanId)
-        let status = Dynamic(span).finishStatus as SentrySpanStatus?
+        let status = Dynamic(span).finishStatus as BuzzSentrySpanStatus?
         
         XCTAssertEqual(status!, .ok)
         XCTAssertTrue(span!.isFinished)
@@ -240,7 +240,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         
         sut.finishSpan(spanId, with: .ok)
         
-        let status = Dynamic(span).finishStatus as SentrySpanStatus?
+        let status = Dynamic(span).finishStatus as BuzzSentrySpanStatus?
         
         XCTAssertEqual(status!, .ok)
         XCTAssertTrue(span!.isFinished)
@@ -270,7 +270,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
     func testActiveStackReturnNilChildSpan() {
         let sut = fixture.getSut()
         let activeSpans = Dynamic(sut).activeSpanStack as NSMutableArray?
-        activeSpans?.add(TestSentrySpan())
+        activeSpans?.add(TestBuzzSentrySpan())
                 
         let spanId = sut.startSpan(withName: fixture.someTransaction, operation: fixture.someOperation)
         
@@ -285,7 +285,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         let spanId = startSpan(tracker: sut)
         sut.activateSpan(spanId) {
             
-            let queue = DispatchQueue(label: "SentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
+            let queue = DispatchQueue(label: "BuzzSentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
             let group = DispatchGroup()
             
             for _ in 0 ..< 5_000 {
@@ -311,7 +311,7 @@ class SentryPerformanceTrackerTests: XCTestCase {
         let spanId = startSpan(tracker: sut)
         sut.activateSpan(spanId) {
             
-            let queue = DispatchQueue(label: "SentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
+            let queue = DispatchQueue(label: "BuzzSentryPerformanceTrackerTests", attributes: [.concurrent, .initiallyInactive])
             let group = DispatchGroup()
             
             for _ in 0 ..< 50_000 {
@@ -333,17 +333,17 @@ class SentryPerformanceTrackerTests: XCTestCase {
         XCTAssertNil(sut.activeSpanId())
     }
     
-    private func getSpans(tracker: SentryPerformanceTracker) -> [SpanId: Span] {
+    private func getSpans(tracker: BuzzSentryPerformanceTracker) -> [SpanId: Span] {
         let result = Dynamic(tracker).spans as [SpanId: Span]?
         return result!
     }
     
-    private func getStack(tracker: SentryPerformanceTracker) -> [Span] {
+    private func getStack(tracker: BuzzSentryPerformanceTracker) -> [Span] {
         let result = Dynamic(tracker).activeSpanStack as [Span]?
         return result!
     }
     
-    private func startSpan(tracker: SentryPerformanceTracker) -> SpanId {
+    private func startSpan(tracker: BuzzSentryPerformanceTracker) -> SpanId {
         return tracker.startSpan(withName: fixture.someTransaction, operation: fixture.someOperation)
     }
         

@@ -1,26 +1,26 @@
 import Foundation
 
-public class TestTransportAdapter: SentryTransportAdapter {
+public class TestTransportAdapter: BuzzSentryTransportAdapter {
     
     public override func send(event: Event, attachments: [Attachment]) {
         self.send(event: event, traceContext: nil, attachments: attachments)
     }
     
-    public override func send(_ event: Event, session: SentrySession, attachments: [Attachment]) {
+    public override func send(_ event: Event, session: BuzzSentrySession, attachments: [Attachment]) {
         self.send(event, with: session, traceContext: nil, attachments: attachments)
     }
     
-    var sentEventsWithSessionTraceState = Invocations<(event: Event, session: SentrySession, traceContext: SentryTraceContext?, attachments: [Attachment])>()
-    public override func send(_ event: Event, with session: SentrySession, traceContext: SentryTraceContext?, attachments: [Attachment]) {
+    var sentEventsWithSessionTraceState = Invocations<(event: Event, session: BuzzSentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment])>()
+    public override func send(_ event: Event, with session: BuzzSentrySession, traceContext: BuzzSentryTraceContext?, attachments: [Attachment]) {
         sentEventsWithSessionTraceState.record((event, session, traceContext, attachments))
     }
     
-    var sendEventWithTraceStateInvocations = Invocations<(event: Event, traceContext: SentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem])>()
-    public override func send(event: Event, traceContext: SentryTraceContext?, attachments: [Attachment]) {
+    var sendEventWithTraceStateInvocations = Invocations<(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [BuzzSentryEnvelopeItem])>()
+    public override func send(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment]) {
         sendEventWithTraceStateInvocations.record((event, traceContext, attachments, []))
     }
     
-    public override func send(event: Event, traceContext: SentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [SentryEnvelopeItem]) {
+    public override func send(event: Event, traceContext: BuzzSentryTraceContext?, attachments: [Attachment], additionalEnvelopeItems: [BuzzSentryEnvelopeItem]) {
         sendEventWithTraceStateInvocations.record((event, traceContext, attachments, additionalEnvelopeItems))
     }
 

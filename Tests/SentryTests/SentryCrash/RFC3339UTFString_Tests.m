@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 //
 
-#import "SentryCrashDate.h"
+#import "BuzzSentryCrashDate.h"
 #import <XCTest/XCTest.h>
 
 @interface RFC3339DateTool_Tests : XCTestCase

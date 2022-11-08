@@ -1,53 +1,53 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
-class SentryDataCategoryMapperTests: XCTestCase {
+class BuzzSentryDataCategoryMapperTests: XCTestCase {
     func testEnvelopeItemType() {
-        XCTAssertEqual(.error, sentryDataCategoryForEnvelopItemType("event"))
-        XCTAssertEqual(.session, sentryDataCategoryForEnvelopItemType("session"))
-        XCTAssertEqual(.transaction, sentryDataCategoryForEnvelopItemType("transaction"))
-        XCTAssertEqual(.attachment, sentryDataCategoryForEnvelopItemType("attachment"))
-        XCTAssertEqual(.profile, sentryDataCategoryForEnvelopItemType("profile"))
-        XCTAssertEqual(.default, sentryDataCategoryForEnvelopItemType("unknown item type"))
+        XCTAssertEqual(.error, BuzzSentryDataCategoryForEnvelopItemType("event"))
+        XCTAssertEqual(.session, BuzzSentryDataCategoryForEnvelopItemType("session"))
+        XCTAssertEqual(.transaction, BuzzSentryDataCategoryForEnvelopItemType("transaction"))
+        XCTAssertEqual(.attachment, BuzzSentryDataCategoryForEnvelopItemType("attachment"))
+        XCTAssertEqual(.profile, BuzzSentryDataCategoryForEnvelopItemType("profile"))
+        XCTAssertEqual(.default, BuzzSentryDataCategoryForEnvelopItemType("unknown item type"))
     }
 
     func testMapIntegerToCategory() {
-        XCTAssertEqual(.all, sentryDataCategoryForNSUInteger(0))
-        XCTAssertEqual(.default, sentryDataCategoryForNSUInteger(1))
-        XCTAssertEqual(.error, sentryDataCategoryForNSUInteger(2))
-        XCTAssertEqual(.session, sentryDataCategoryForNSUInteger(3))
-        XCTAssertEqual(.transaction, sentryDataCategoryForNSUInteger(4))
-        XCTAssertEqual(.attachment, sentryDataCategoryForNSUInteger(5))
-        XCTAssertEqual(.userFeedback, sentryDataCategoryForNSUInteger(6))
-        XCTAssertEqual(.profile, sentryDataCategoryForNSUInteger(7))
-        XCTAssertEqual(.unknown, sentryDataCategoryForNSUInteger(8))
+        XCTAssertEqual(.all, BuzzSentryDataCategoryForNSUInteger(0))
+        XCTAssertEqual(.default, BuzzSentryDataCategoryForNSUInteger(1))
+        XCTAssertEqual(.error, BuzzSentryDataCategoryForNSUInteger(2))
+        XCTAssertEqual(.session, BuzzSentryDataCategoryForNSUInteger(3))
+        XCTAssertEqual(.transaction, BuzzSentryDataCategoryForNSUInteger(4))
+        XCTAssertEqual(.attachment, BuzzSentryDataCategoryForNSUInteger(5))
+        XCTAssertEqual(.userFeedback, BuzzSentryDataCategoryForNSUInteger(6))
+        XCTAssertEqual(.profile, BuzzSentryDataCategoryForNSUInteger(7))
+        XCTAssertEqual(.unknown, BuzzSentryDataCategoryForNSUInteger(8))
 
-        XCTAssertEqual(.unknown, sentryDataCategoryForNSUInteger(9), "Failed to map unknown category number to case .unknown")
+        XCTAssertEqual(.unknown, BuzzSentryDataCategoryForNSUInteger(9), "Failed to map unknown category number to case .unknown")
     }
     
     func testMapStringToCategory() {
-        XCTAssertEqual(.all, sentryDataCategoryForString(kSentryDataCategoryNameAll))
-        XCTAssertEqual(.default, sentryDataCategoryForString(kSentryDataCategoryNameDefault))
-        XCTAssertEqual(.error, sentryDataCategoryForString(kSentryDataCategoryNameError))
-        XCTAssertEqual(.session, sentryDataCategoryForString(kSentryDataCategoryNameSession))
-        XCTAssertEqual(.transaction, sentryDataCategoryForString(kSentryDataCategoryNameTransaction))
-        XCTAssertEqual(.attachment, sentryDataCategoryForString(kSentryDataCategoryNameAttachment))
-        XCTAssertEqual(.userFeedback, sentryDataCategoryForString(kSentryDataCategoryNameUserFeedback))
-        XCTAssertEqual(.profile, sentryDataCategoryForString(kSentryDataCategoryNameProfile))
-        XCTAssertEqual(.unknown, sentryDataCategoryForString(kSentryDataCategoryNameUnknown))
+        XCTAssertEqual(.all, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameAll))
+        XCTAssertEqual(.default, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameDefault))
+        XCTAssertEqual(.error, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameError))
+        XCTAssertEqual(.session, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameSession))
+        XCTAssertEqual(.transaction, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameTransaction))
+        XCTAssertEqual(.attachment, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameAttachment))
+        XCTAssertEqual(.userFeedback, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameUserFeedback))
+        XCTAssertEqual(.profile, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameProfile))
+        XCTAssertEqual(.unknown, BuzzSentryDataCategoryForString(kBuzzSentryDataCategoryNameUnknown))
 
-        XCTAssertEqual(.unknown, sentryDataCategoryForString("gdfagdfsa"), "Failed to map unknown category name to case .unknown")
+        XCTAssertEqual(.unknown, BuzzSentryDataCategoryForString("gdfagdfsa"), "Failed to map unknown category name to case .unknown")
     }
 
     func testMapCategoryToString() {
-        XCTAssertEqual(kSentryDataCategoryNameAll, nameForSentryDataCategory(.all))
-        XCTAssertEqual(kSentryDataCategoryNameDefault, nameForSentryDataCategory(.default))
-        XCTAssertEqual(kSentryDataCategoryNameError, nameForSentryDataCategory(.error))
-        XCTAssertEqual(kSentryDataCategoryNameSession, nameForSentryDataCategory(.session))
-        XCTAssertEqual(kSentryDataCategoryNameTransaction, nameForSentryDataCategory(.transaction))
-        XCTAssertEqual(kSentryDataCategoryNameAttachment, nameForSentryDataCategory(.attachment))
-        XCTAssertEqual(kSentryDataCategoryNameUserFeedback, nameForSentryDataCategory(.userFeedback))
-        XCTAssertEqual(kSentryDataCategoryNameProfile, nameForSentryDataCategory(.profile))
-        XCTAssertEqual(kSentryDataCategoryNameUnknown, nameForSentryDataCategory(.unknown))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameAll, nameForBuzzSentryDataCategory(.all))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameDefault, nameForBuzzSentryDataCategory(.default))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameError, nameForBuzzSentryDataCategory(.error))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameSession, nameForBuzzSentryDataCategory(.session))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameTransaction, nameForBuzzSentryDataCategory(.transaction))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameAttachment, nameForBuzzSentryDataCategory(.attachment))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameUserFeedback, nameForBuzzSentryDataCategory(.userFeedback))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameProfile, nameForBuzzSentryDataCategory(.profile))
+        XCTAssertEqual(kBuzzSentryDataCategoryNameUnknown, nameForBuzzSentryDataCategory(.unknown))
     }
 }

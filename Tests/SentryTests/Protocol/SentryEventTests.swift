@@ -1,7 +1,7 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
-class SentryEventTests: XCTestCase {
+class BuzzSentryEventTests: XCTestCase {
 
     func testInitWithLevel() {
         let dateProvider = TestCurrentDateProvider()
@@ -24,7 +24,7 @@ class SentryEventTests: XCTestCase {
         event.breadcrumbs?.append(TestData.crumb)
         event.context?["a"] = ["a": 0]
 
-        XCTAssertEqual(event.eventId.sentryIdString, actual["event_id"] as? String)
+        XCTAssertEqual(event.eventId.buzzSentryIdString, actual["event_id"] as? String)
         XCTAssertEqual(TestData.timestamp.timeIntervalSince1970, actual["timestamp"] as? TimeInterval)
         XCTAssertEqual("cocoa", actual["platform"] as? String)
         XCTAssertEqual("info", actual["level"] as? String)
@@ -81,11 +81,11 @@ class SentryEventTests: XCTestCase {
     func testSerializeWithExtraTransaction() {
         let event = TestData.event
         event.transaction = nil
-        let sentryTransaction = "trans"
-        event.extra?["__sentry_transaction"] = sentryTransaction
+        let BuzzSentryTransaction = "trans"
+        event.extra?["__sentry_transaction"] = BuzzSentryTransaction
         
         let actual = event.serialize()
-        XCTAssertEqual(sentryTransaction, actual["transaction"] as? String)
+        XCTAssertEqual(BuzzSentryTransaction, actual["transaction"] as? String)
     }
     
     func testSerializeWithoutBreadcrumbs() {

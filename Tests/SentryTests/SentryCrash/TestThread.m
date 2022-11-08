@@ -25,7 +25,7 @@
 //
 
 #import "TestThread.h"
-#import "SentryCrashThread.h"
+#import "BuzzSentryCrashThread.h"
 
 @implementation TestThread
 

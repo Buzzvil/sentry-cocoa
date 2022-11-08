@@ -26,7 +26,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "Container+SentryDeepSearch.h"
+#import "Container+BuzzSentryDeepSearch.h"
 
 @interface Container_DeepSearch_Tests : XCTestCase
 @end

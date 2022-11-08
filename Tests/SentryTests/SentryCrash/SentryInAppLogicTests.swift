@@ -1,12 +1,12 @@
 import XCTest
 
-class SentryInAppLogicTests: XCTestCase {
+class BuzzSentryInAppLogicTests: XCTestCase {
     
     private class Fixture {
         
-        func getSut(inAppIncludes: [String] = [], inAppExcludes: [String] = [] ) -> SentryInAppLogic {
+        func getSut(inAppIncludes: [String] = [], inAppExcludes: [String] = [] ) -> BuzzSentryInAppLogic {
             
-            return SentryInAppLogic(
+            return BuzzSentryInAppLogic(
                 inAppIncludes: inAppIncludes,
                 inAppExcludes: inAppExcludes
             )

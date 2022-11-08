@@ -1,5 +1,5 @@
 //
-//  SentryCrashString_Tests.m
+//  BuzzSentryCrashString_Tests.m
 //
 //  Created by Karl Stenerud on 2013-01-26.
 //
@@ -26,12 +26,12 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashString.h"
+#import "BuzzSentryCrashString.h"
 
-@interface SentryCrashString_Tests : XCTestCase
+@interface BuzzSentryCrashString_Tests : XCTestCase
 @end
 
-@implementation SentryCrashString_Tests
+@implementation BuzzSentryCrashString_Tests
 
 - (void)testExtractHexValue
 {

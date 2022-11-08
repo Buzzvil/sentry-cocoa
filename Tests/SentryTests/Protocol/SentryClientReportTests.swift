@@ -1,16 +1,16 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
-class SentryClientReportTests: XCTestCase {
+class BuzzSentryClientReportTests: XCTestCase {
 
     func testSerialize() {
         CurrentDate.setCurrentDateProvider(TestCurrentDateProvider())
         
-        let event1 = SentryDiscardedEvent(reason: .sampleRate, category: .transaction, quantity: 2)
-        let event2 = SentryDiscardedEvent(reason: .beforeSend, category: .transaction, quantity: 3)
-        let event3 = SentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
+        let event1 = BuzzSentryDiscardedEvent(reason: .sampleRate, category: .transaction, quantity: 2)
+        let event2 = BuzzSentryDiscardedEvent(reason: .beforeSend, category: .transaction, quantity: 3)
+        let event3 = BuzzSentryDiscardedEvent(reason: .rateLimitBackoff, category: .error, quantity: 1)
         
-        let report = SentryClientReport(discardedEvents: [event1, event2, event3])
+        let report = BuzzSentryClientReport(discardedEvents: [event1, event2, event3])
         
         let actual = report.serialize()
         

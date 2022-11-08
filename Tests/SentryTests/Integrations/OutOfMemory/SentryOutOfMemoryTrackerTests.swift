@@ -1,56 +1,56 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
+class BuzzSentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryOutOfMemoryTrackerTests")
-    private static let dsn = TestConstants.dsn(username: "SentryOutOfMemoryTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryOutOfMemoryTrackerTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryOutOfMemoryTrackerTests")
     
     private class Fixture {
         
         let options: Options
         let client: TestClient!
-        let crashWrapper: TestSentryCrashWrapper
-        let fileManager: SentryFileManager
+        let crashWrapper: TestBuzzSentryCrashWrapper
+        let fileManager: BuzzSentryFileManager
         let currentDate = TestCurrentDateProvider()
         let sysctl = TestSysctl()
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         
         init() {
             options = Options()
-            options.dsn = SentryOutOfMemoryTrackerTests.dsnAsString
+            options.dsn = BuzzSentryOutOfMemoryTrackerTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
             client = TestClient(options: options)
             
-            crashWrapper = TestSentryCrashWrapper.sharedInstance()
+            crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
             
-            let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: crashWrapper, andCurrentDateProvider: currentDate)
-            SentrySDK.setCurrentHub(hub)
+            let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: crashWrapper, andCurrentDateProvider: currentDate)
+            BuzzSentrySDK.setCurrentHub(hub)
             
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDate)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDate)
         }
         
-        func getSut() -> SentryOutOfMemoryTracker {
+        func getSut() -> BuzzSentryOutOfMemoryTracker {
             return getSut(fileManager: self.fileManager)
         }
         
-        func getSut(fileManager: SentryFileManager) -> SentryOutOfMemoryTracker {
-            let appStateManager = SentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: self.dispatchQueue)
-            let logic = SentryOutOfMemoryLogic(options: options, crashAdapter: crashWrapper, appStateManager: appStateManager)
-            return SentryOutOfMemoryTracker(options: options, outOfMemoryLogic: logic, appStateManager: appStateManager, dispatchQueueWrapper: dispatchQueue, fileManager: fileManager)
+        func getSut(fileManager: BuzzSentryFileManager) -> BuzzSentryOutOfMemoryTracker {
+            let appStateManager = BuzzSentryAppStateManager(options: options, crashWrapper: crashWrapper, fileManager: fileManager, currentDateProvider: currentDate, sysctl: sysctl, dispatchQueueWrapper: self.dispatchQueue)
+            let logic = BuzzSentryOutOfMemoryLogic(options: options, crashAdapter: crashWrapper, appStateManager: appStateManager)
+            return BuzzSentryOutOfMemoryTracker(options: options, outOfMemoryLogic: logic, appStateManager: appStateManager, dispatchQueueWrapper: dispatchQueue, fileManager: fileManager)
         }
     }
     
     private var fixture: Fixture!
-    private var sut: SentryOutOfMemoryTracker!
+    private var sut: BuzzSentryOutOfMemoryTracker!
     
     override func setUp() {
         super.setUp()
         
         fixture = Fixture()
         sut = fixture.getSut()
-        SentrySDK.startInvocations = 1
+        BuzzSentrySDK.startInvocations = 1
     }
     
     override func tearDown() {
@@ -68,7 +68,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         
         let actual = fixture.fileManager.readAppState()
         
-        let appState = SentryAppState(releaseName: fixture.options.releaseName ?? "", osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.sysctl.systemBootTimestamp)
+        let appState = BuzzSentryAppState(releaseName: fixture.options.releaseName ?? "", osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.sysctl.systemBootTimestamp)
         
         XCTAssertEqual(appState, actual)
         XCTAssertEqual(1, fixture.dispatchQueue.dispatchAsyncCalled)
@@ -96,7 +96,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
     }
 
     func testDifferentAppVersions_NoOOM() {
-        givenPreviousAppState(appState: SentryAppState(releaseName: "0.9.0", osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date()))
+        givenPreviousAppState(appState: BuzzSentryAppState(releaseName: "0.9.0", osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date()))
         
         sut.start()
         
@@ -104,7 +104,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
     }
     
     func testDifferentOSVersions_NoOOM() {
-        givenPreviousAppState(appState: SentryAppState(releaseName: fixture.options.releaseName ?? "", osVersion: "1.0.0", vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date()))
+        givenPreviousAppState(appState: BuzzSentryAppState(releaseName: fixture.options.releaseName ?? "", osVersion: "1.0.0", vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date()))
         
         sut.start()
         
@@ -112,7 +112,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
     }
     
     func testDifferentVendorId_NoOOM() {
-        givenPreviousAppState(appState: SentryAppState(releaseName: fixture.options.releaseName ?? "", osVersion: "1.0.0", vendorId: "0987654321", isDebugging: false, systemBootTimestamp: fixture.currentDate.date()))
+        givenPreviousAppState(appState: BuzzSentryAppState(releaseName: fixture.options.releaseName ?? "", osVersion: "1.0.0", vendorId: "0987654321", isDebugging: false, systemBootTimestamp: fixture.currentDate.date()))
         
         sut.start()
         
@@ -157,7 +157,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
     }
     
     func testCrashReport_NoOOM() {
-        let appState = SentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date())
+        let appState = BuzzSentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: TestData.someUUID, isDebugging: false, systemBootTimestamp: fixture.currentDate.date())
         givenPreviousAppState(appState: appState)
         fixture.crashWrapper.internalCrashedLastLaunch = true
         
@@ -182,7 +182,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         sut.start()
         goToForeground()
 
-        SentrySDK.startInvocations = 2
+        BuzzSentrySDK.startInvocations = 2
         sut.start()
         assertNoOOMSent()
     }
@@ -270,11 +270,11 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         XCTAssertEqual(1, fileManager.readPreviousAppStateInvocations.count)
     }
     
-    private func givenPreviousAppState(appState: SentryAppState) {
+    private func givenPreviousAppState(appState: BuzzSentryAppState) {
         fixture.fileManager.store(appState)
     }
     
-    private func update(appState: (SentryAppState) -> Void) {
+    private func update(appState: (BuzzSentryAppState) -> Void) {
         if let currentAppState = fixture.fileManager.readAppState() {
             appState(currentAppState)
             fixture.fileManager.store(currentAppState)
@@ -285,7 +285,7 @@ class SentryOutOfMemoryTrackerTests: NotificationCenterTestCase {
         XCTAssertEqual(1, fixture.client.captureCrashEventInvocations.count)
         let crashEvent = fixture.client.captureCrashEventInvocations.first?.event
         
-        XCTAssertEqual(SentryLevel.fatal, crashEvent?.level)
+        XCTAssertEqual(BuzzSentryLevel.fatal, crashEvent?.level)
         XCTAssertEqual([], crashEvent?.breadcrumbs)
         
         XCTAssertEqual(1, crashEvent?.exceptions?.count)

@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryEnvelopeRateLimitTests: XCTestCase {
+class BuzzSentryEnvelopeRateLimitTests: XCTestCase {
     
     private var rateLimits: TestRateLimits!
 // swiftlint:disable weak_delegate
@@ -27,69 +27,69 @@ class SentryEnvelopeRateLimitTests: XCTestCase {
     }
     
     func testLimitForErrorActive() {
-        rateLimits.rateLimits = [SentryDataCategory.error]
+        rateLimits.rateLimits = [BuzzSentryDataCategory.error]
         
         let envelope = getEnvelope()
         let actual = sut.removeRateLimitedItems(envelope)
         
         XCTAssertEqual(3, actual.items.count)
         for item in actual.items {
-            XCTAssertEqual(SentryEnvelopeItemTypeSession, item.header.type)
+            XCTAssertEqual(BuzzSentryEnvelopeItemTypeSession, item.header.type)
         }
         XCTAssertEqual(envelope.header, actual.header)
         
         XCTAssertEqual(3, delegate.envelopeItemsDropped.count)
-        let expected = [SentryDataCategory.error, SentryDataCategory.error, SentryDataCategory.error]
+        let expected = [BuzzSentryDataCategory.error, BuzzSentryDataCategory.error, BuzzSentryDataCategory.error]
         XCTAssertEqual(expected, delegate.envelopeItemsDropped.invocations)
     }
     
     func testLimitForSessionActive() {
-        rateLimits.rateLimits = [SentryDataCategory.session]
+        rateLimits.rateLimits = [BuzzSentryDataCategory.session]
         
         let envelope = getEnvelope()
         let actual = sut.removeRateLimitedItems(envelope)
         
         XCTAssertEqual(3, actual.items.count)
         for item in actual.items {
-            XCTAssertEqual(SentryEnvelopeItemTypeEvent, item.header.type)
+            XCTAssertEqual(BuzzSentryEnvelopeItemTypeEvent, item.header.type)
         }
         XCTAssertEqual(envelope.header, actual.header)
         
         XCTAssertEqual(3, delegate.envelopeItemsDropped.count)
-        let expected = [SentryDataCategory.session, SentryDataCategory.session, SentryDataCategory.session]
+        let expected = [BuzzSentryDataCategory.session, BuzzSentryDataCategory.session, BuzzSentryDataCategory.session]
         XCTAssertEqual(expected, delegate.envelopeItemsDropped.invocations)
     }
     
     func testLimitForCustomType() {
-        rateLimits.rateLimits = [SentryDataCategory.default]
-        var envelopeItems = [SentryEnvelopeItem]()
-        envelopeItems.append(SentryEnvelopeItem(event: Event()))
+        rateLimits.rateLimits = [BuzzSentryDataCategory.default]
+        var envelopeItems = [BuzzSentryEnvelopeItem]()
+        envelopeItems.append(BuzzSentryEnvelopeItem(event: Event()))
         
-        let envelopeHeader = SentryEnvelopeItemHeader(type: "customType", length: 10)
-        envelopeItems.append(SentryEnvelopeItem(header: envelopeHeader, data: Data()))
-        envelopeItems.append(SentryEnvelopeItem(header: envelopeHeader, data: Data()))
+        let envelopeHeader = BuzzSentryEnvelopeItemHeader(type: "customType", length: 10)
+        envelopeItems.append(BuzzSentryEnvelopeItem(header: envelopeHeader, data: Data()))
+        envelopeItems.append(BuzzSentryEnvelopeItem(header: envelopeHeader, data: Data()))
         
-        let envelope = SentryEnvelope(id: SentryId(), items: envelopeItems)
+        let envelope = BuzzSentryEnvelope(id: BuzzSentryId(), items: envelopeItems)
         
         let actual = sut.removeRateLimitedItems(envelope)
         
         XCTAssertEqual(1, actual.items.count)
-        XCTAssertEqual(SentryEnvelopeItemTypeEvent, actual.items[0].header.type)
+        XCTAssertEqual(BuzzSentryEnvelopeItemTypeEvent, actual.items[0].header.type)
     }
     
-    func getEnvelope() -> SentryEnvelope {
-        var envelopeItems = [SentryEnvelopeItem]()
+    func getEnvelope() -> BuzzSentryEnvelope {
+        var envelopeItems = [BuzzSentryEnvelopeItem]()
         for _ in 0...2 {
             let event = Event()
-            envelopeItems.append(SentryEnvelopeItem(event: event))
+            envelopeItems.append(BuzzSentryEnvelopeItem(event: event))
         }
         
         for _ in 0...2 {
-            let session = SentrySession(releaseName: "")
-            envelopeItems.append(SentryEnvelopeItem(session: session))
+            let session = BuzzSentrySession(releaseName: "")
+            envelopeItems.append(BuzzSentryEnvelopeItem(session: session))
         }
         
-        return SentryEnvelope(id: SentryId(), items: envelopeItems)
+        return BuzzSentryEnvelope(id: BuzzSentryId(), items: envelopeItems)
     }
     
 }

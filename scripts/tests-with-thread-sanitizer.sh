@@ -8,7 +8,7 @@ env NSUnbufferedIO=YES xcodebuild -workspace Sentry.xcworkspace -scheme Sentry -
     -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" \
     # The test works when having thread sanitizer not enabled, we have no clue why it fails, and threading issues will be caught
     # even when it is disabled.
-    -skip-testing:"Sentry/SentrySessionTestsSwift/testInitWithJson_IfJsonContainsWrongValues_SessionIsNil" \
+    -skip-testing:"Sentry/BuzzSentrySessionTestsSwift/testInitWithJson_IfJsonContainsWrongValues_SessionIsNil" \
     test | tee thread-sanitizer.log | xcpretty -t
 
 testStatus=$?

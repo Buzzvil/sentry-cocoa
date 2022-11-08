@@ -1,4 +1,4 @@
-#import "SentryDevice.h"
+#import "BuzzSentryDevice.h"
 #import <XCTest/XCTest.h>
 
 #define SENTRY_ASSERT_EQUAL(actualString, expectedString)                                          \
@@ -24,11 +24,11 @@
  * @seealso TargetConditionals.h has explanations and diagrams that show the relationships between
  * different @c TARGET_OS_... macros.
  */
-@interface SentryDeviceTests : XCTestCase
+@interface BuzzSentryDeviceTests : XCTestCase
 
 @end
 
-@implementation SentryDeviceTests
+@implementation BuzzSentryDeviceTests
 
 - (void)testCPUArchitecture
 {
