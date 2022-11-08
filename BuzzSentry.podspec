@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "BuzzSentry"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "Buzzvil Sentry client for cocoa"
   s.homepage     = "https://github.com/Buzzvil/sentry-cocoa"
   s.license      = "mit"
