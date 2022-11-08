@@ -640,7 +640,7 @@ class BuzzSentryNetworkTrackerTests: XCTestCase {
 
         let headers = ["test": "test", "Cookie": "myCookie", "Set-Cookie": "myCookie"]
         let response = HTTPURLResponse(
-            url: SentryNetworkTrackerTests.testURL,
+            url: BuzzSentryNetworkTrackerTests.testURL,
             statusCode: 500,
             httpVersion: "1.1",
             headerFields: headers)!

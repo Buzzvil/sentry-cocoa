@@ -560,8 +560,8 @@
 		7BF1F6AE282A4FE2006BD6AB /* SentryTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF1F6AD282A4FE2006BD6AB /* SentryTestObserver.m */; };
 		7BF536D124BDF3E7004FA6A2 /* SentryEnvelopeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF536D024BDF3E7004FA6A2 /* SentryEnvelopeTests.swift */; };
 		7BF536D424BEF255004FA6A2 /* SentryAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF536D324BEF255004FA6A2 /* SentryAssertions.swift */; };
-		7BF9EF722722A84800B5BBEF /* SentryClassRegistrator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF712722A84800B5BBEF /* SentryClassRegistrator.h */; };
-		7BF9EF742722A85B00B5BBEF /* SentryClassRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF732722A85B00B5BBEF /* SentryClassRegistrator.m */; };
+		7BF9EF722722A84800B5BBEF /* BuzzSentryClassRegistrator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF712722A84800B5BBEF /* BuzzSentryClassRegistrator.h */; };
+		7BF9EF742722A85B00B5BBEF /* BuzzSentryClassRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF732722A85B00B5BBEF /* BuzzSentryClassRegistrator.m */; };
 		7BF9EF762722B34700B5BBEF /* BuzzSentrySubClassFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF9EF752722B34700B5BBEF /* BuzzSentrySubClassFinder.h */; };
 		7BF9EF782722B35D00B5BBEF /* BuzzSentrySubClassFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF772722B35D00B5BBEF /* BuzzSentrySubClassFinder.m */; };
 		7BF9EF7A2722B58900B5BBEF /* SentrySubClassFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9EF792722B58900B5BBEF /* SentrySubClassFinderTests.swift */; };
@@ -1320,8 +1320,8 @@
 		7BF1F6AD282A4FE2006BD6AB /* SentryTestObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryTestObserver.m; sourceTree = "<group>"; };
 		7BF536D024BDF3E7004FA6A2 /* SentryEnvelopeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryEnvelopeTests.swift; sourceTree = "<group>"; };
 		7BF536D324BEF255004FA6A2 /* SentryAssertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryAssertions.swift; sourceTree = "<group>"; };
-		7BF9EF712722A84800B5BBEF /* SentryClassRegistrator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SentryClassRegistrator.h; sourceTree = "<group>"; };
-		7BF9EF732722A85B00B5BBEF /* SentryClassRegistrator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryClassRegistrator.m; sourceTree = "<group>"; };
+		7BF9EF712722A84800B5BBEF /* BuzzSentryClassRegistrator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuzzSentryClassRegistrator.h; sourceTree = "<group>"; };
+		7BF9EF732722A85B00B5BBEF /* BuzzSentryClassRegistrator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentryClassRegistrator.m; sourceTree = "<group>"; };
 		7BF9EF752722B34700B5BBEF /* BuzzSentrySubClassFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuzzSentrySubClassFinder.h; sourceTree = "<group>"; };
 		7BF9EF772722B35D00B5BBEF /* BuzzSentrySubClassFinder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuzzSentrySubClassFinder.m; sourceTree = "<group>"; };
 		7BF9EF792722B58900B5BBEF /* SentrySubClassFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentrySubClassFinderTests.swift; sourceTree = "<group>"; };
@@ -2704,8 +2704,8 @@
 				7B6D98EC24C703F8005502FA /* Async.swift */,
 				8E25C97425F8511A00DC215B /* TestRandom.swift */,
 				7BA1C51E2716DDB3005D75A4 /* Invocations.swift */,
-				7BF9EF712722A84800B5BBEF /* SentryClassRegistrator.h */,
-				7BF9EF732722A85B00B5BBEF /* SentryClassRegistrator.m */,
+				7BF9EF712722A84800B5BBEF /* BuzzSentryClassRegistrator.h */,
+				7BF9EF732722A85B00B5BBEF /* BuzzSentryClassRegistrator.m */,
 				7BF1F6AC282A4FC6006BD6AB /* SentryTestObserver.h */,
 				7BF1F6AD282A4FE2006BD6AB /* SentryTestObserver.m */,
 				7B72D23928D074BC0014798A /* TestExtensions.swift */,
@@ -3143,7 +3143,7 @@
 				7BD4BD4127EB0F0D0071F4FF /* BuzzSentryDiscardReason.h in Headers */,
 				D8AB40DB2806EC1900E5E9F7 /* BuzzSentryScreenshotIntegration.h in Headers */,
 				7B3B83722833832B0001FDEB /* BuzzSentrySpanOperations.h in Headers */,
-				7BF9EF722722A84800B5BBEF /* SentryClassRegistrator.h in Headers */,
+				7BF9EF722722A84800B5BBEF /* BuzzSentryClassRegistrator.h in Headers */,
 				63FE715520DA4C1100CDBAE8 /* BuzzSentryCrashStackCursor_MachineContext.h in Headers */,
 				15360CF02433A16D00112302 /* BuzzSentryInstallation.h in Headers */,
 				63FE714720DA4C1100CDBAE8 /* BuzzSentryCrashMachineContext.h in Headers */,
@@ -3529,7 +3529,7 @@
 				630436161EC0AD3100C4D3FA /* SentryNSDataCompressionTests.m in Sources */,
 				63FE722420DA66EC00CDBAE8 /* SentryCrashMonitor_NSException_Tests.m in Sources */,
 				7B5AB65D27E48E5200F1D1BA /* TestThreadInspector.swift in Sources */,
-				7BF9EF742722A85B00B5BBEF /* SentryClassRegistrator.m in Sources */,
+				7BF9EF742722A85B00B5BBEF /* BuzzSentryClassRegistrator.m in Sources */,
 				63B819141EC352A7002FDF4C /* SentryInterfacesTests.m in Sources */,
 				7B68345128F7EB3D00FB7064 /* SentryMeasurementUnitTests.swift in Sources */,
 				7B14089A248791660035403D /* SentryCrashStackEntryMapperTests.swift in Sources */,

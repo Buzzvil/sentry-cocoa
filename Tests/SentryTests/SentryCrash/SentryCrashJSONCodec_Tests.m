@@ -805,13 +805,13 @@ toString(NSData *data)
     NSString *expected = @"[null]";
     float nanValue = nanf("");
     id original = [NSArray arrayWithObjects:[NSNumber numberWithFloat:nanValue], nil];
-    NSString *jsonString = toString([SentryCrashJSONCodec encode:original
-                                                         options:SentryCrashJSONEncodeOptionSorted
+    NSString *jsonString = toString([BuzzSentryCrashJSONCodec encode:original
+                                                         options:BuzzSentryCrashJSONEncodeOptionSorted
                                                            error:&error]);
     XCTAssertNotNil(jsonString, @"");
     XCTAssertNil(error, @"");
     XCTAssertEqualObjects(jsonString, expected, @"");
-    id result = [SentryCrashJSONCodec decode:toData(jsonString) options:0 error:&error];
+    id result = [BuzzSentryCrashJSONCodec decode:toData(jsonString) options:0 error:&error];
     XCTAssertNotNil(result, @"");
     XCTAssertNil(error, @"");
     XCTAssertTrue([[result objectAtIndex:0] isKindOfClass:[NSNull class]]);
@@ -842,13 +842,13 @@ toString(NSData *data)
     double nanValue = nan("");
     id original = [NSArray arrayWithObjects:[NSNumber numberWithDouble:nanValue], nil];
 
-    NSString *jsonString = toString([SentryCrashJSONCodec encode:original
-                                                         options:SentryCrashJSONEncodeOptionSorted
+    NSString *jsonString = toString([BuzzSentryCrashJSONCodec encode:original
+                                                         options:BuzzSentryCrashJSONEncodeOptionSorted
                                                            error:&error]);
     XCTAssertNotNil(jsonString, @"");
     XCTAssertNil(error, @"");
     XCTAssertEqualObjects(jsonString, expected, @"");
-    id result = [SentryCrashJSONCodec decode:toData(jsonString) options:0 error:&error];
+    id result = [BuzzSentryCrashJSONCodec decode:toData(jsonString) options:0 error:&error];
     XCTAssertNotNil(result, @"");
     XCTAssertNil(error, @"");
     XCTAssertTrue([[result objectAtIndex:0] isKindOfClass:[NSNull class]]);

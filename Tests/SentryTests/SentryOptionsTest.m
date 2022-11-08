@@ -294,7 +294,7 @@
 
 - (void)testFailedRequestTargets
 {
-    SentryOptions *options =
+    BuzzSentryOptions *options =
         [self getValidOptions:@{ @"failedRequestTargets" : @[ @"localhost" ] }];
 
     XCTAssertEqual(options.failedRequestTargets.count, 1);
@@ -303,7 +303,7 @@
 
 - (void)testFailedRequestTargetsInvalidInstanceDoesntCrash
 {
-    SentryOptions *options = [self getValidOptions:@{ @"failedRequestTargets" : @[ @YES ] }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"failedRequestTargets" : @[ @YES ] }];
 
     XCTAssertEqual(options.failedRequestTargets.count, 1);
     XCTAssertEqual(options.failedRequestTargets[0], @YES);
@@ -318,7 +318,7 @@
 {
     BuzzSentryHttpStatusCodeRange *httpStatusCodeRange =
         [[BuzzSentryHttpStatusCodeRange alloc] initWithMin:400 max:599];
-    SentryOptions *options =
+    BuzzSentryOptions *options =
         [self getValidOptions:@{ @"failedRequestStatusCodes" : @[ httpStatusCodeRange ] }];
 
     XCTAssertEqual(options.failedRequestStatusCodes.count, 1);

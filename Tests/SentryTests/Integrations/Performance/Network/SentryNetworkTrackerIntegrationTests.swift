@@ -207,20 +207,20 @@ class BuzzSentryNetworkTrackerIntegrationTests: XCTestCase {
         fixture.options.enableCaptureFailedRequests = true
         startSDK()
 
-        XCTAssertFalse(SentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
+        XCTAssertFalse(BuzzSentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
     }
     
     func testCaptureFailedRequestsDisabled() {
         startSDK()
 
-        XCTAssertFalse(SentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
+        XCTAssertFalse(BuzzSentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
     }
     
     func testCaptureFailedRequestsEnabled() {
         fixture.options.enableCaptureFailedRequests = true
         startSDK()
 
-        XCTAssertTrue(SentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
+        XCTAssertTrue(BuzzSentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
     }
     
     func testGetCaptureFailedRequestsEnabled() {
@@ -240,7 +240,7 @@ class BuzzSentryNetworkTrackerIntegrationTests: XCTestCase {
 
         let session = URLSession(configuration: URLSessionConfiguration.default)
 
-        let dataTask = session.dataTask(with: SentryNetworkTrackerIntegrationTests.clientErrorTraceURL) { (_, _, _) in }
+        let dataTask = session.dataTask(with: BuzzSentryNetworkTrackerIntegrationTests.clientErrorTraceURL) { (_, _, _) in }
 
         dataTask.resume()
         wait(for: [expect], timeout: 5)

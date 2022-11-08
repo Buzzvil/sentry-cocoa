@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * To easier register classes to the Objective-C runtime from Swift.
  */
-@interface SentryClassRegistrator : NSObject
+@interface BuzzSentryClassRegistrator : NSObject
 
 + (void)registerClass:(NSString *)name;
 
