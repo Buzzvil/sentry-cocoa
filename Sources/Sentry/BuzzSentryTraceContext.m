@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary<NSString *, id> *)serialize
 {
     NSMutableDictionary *result =
-        @{ @"trace_id" : _traceId.BuzzSentryIdString, @"public_key" : _publicKey }.mutableCopy;
+        @{ @"trace_id" : _traceId.buzzSentryIdString, @"public_key" : _publicKey }.mutableCopy;
 
     if (_releaseName != nil) {
         [result setValue:_releaseName forKey:@"release"];

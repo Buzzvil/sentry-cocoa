@@ -18,7 +18,7 @@
 - (NSDictionary<NSString *, id> *)serialize
 {
     return @{
-        @"event_id" : self.eventId.BuzzSentryIdString,
+        @"event_id" : self.eventId.buzzSentryIdString,
         @"email" : self.email,
         @"name" : self.name,
         @"comments" : self.comments

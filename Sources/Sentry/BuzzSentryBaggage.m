@@ -42,7 +42,7 @@
     NSMutableDictionary *information
         = originalBaggage.mutableCopy ?: [[NSMutableDictionary alloc] init];
 
-    [information setValue:_traceId.BuzzSentryIdString forKey:@"sentry-trace_id"];
+    [information setValue:_traceId.buzzSentryIdString forKey:@"sentry-trace_id"];
     [information setValue:_publicKey forKey:@"sentry-public_key"];
 
     if (_releaseName != nil) {

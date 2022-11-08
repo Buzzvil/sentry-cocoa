@@ -77,8 +77,8 @@ BuzzSentrySpanContext () {
 {
     NSMutableDictionary *mutabledictionary = @{
         @"type" : BuzzSentrySpanContext.type,
-        @"span_id" : self.spanId.BuzzSentrySpanIdString,
-        @"trace_id" : self.traceId.BuzzSentryIdString,
+        @"span_id" : self.spanId.buzzSentrySpanIdString,
+        @"trace_id" : self.traceId.buzzSentryIdString,
         @"op" : self.operation
     }
                                                  .mutableCopy;
@@ -100,7 +100,7 @@ BuzzSentrySpanContext () {
     }
 
     if (self.parentSpanId != nil) {
-        [mutabledictionary setValue:self.parentSpanId.BuzzSentrySpanIdString forKey:@"parent_span_id"];
+        [mutabledictionary setValue:self.parentSpanId.buzzSentrySpanIdString forKey:@"parent_span_id"];
     }
 
     if (self.status != kBuzzSentrySpanStatusUndefined) {

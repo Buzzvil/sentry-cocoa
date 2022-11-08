@@ -15,7 +15,7 @@ AppDelegate ()
     // Override point for customization after application launch.
 
     [BuzzSentrySDK startWithConfigureOptions:^(BuzzSentryOptions *options) {
-        options.dsn = @"https://6cc9bae94def43cab8444a99e0031c28@o447951.ingest.sentry.io/5428557";
+        options.dsn = @"https://aef14cb82ad6405890fb7a536ba7f4fa@o4459.ingest.sentry.io/6261456";
         options.debug = YES;
         options.sessionTrackingIntervalMillis = 5000UL;
         // Sampling 100% - In Production you probably want to adjust this

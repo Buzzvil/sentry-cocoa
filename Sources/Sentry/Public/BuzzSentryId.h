@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns a 32 lowercase character hexadecimal string description of the BuzzSentryId, such as
  * "12c2d058d58442709aa2eca08bf20986".
  */
-@property (readonly, copy) NSString *BuzzSentryIdString;
+@property (readonly, copy) NSString *buzzSentryIdString;
 
 /**
  * A BuzzSentryId with an empty UUID "00000000000000000000000000000000".

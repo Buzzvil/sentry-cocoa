@@ -40,14 +40,14 @@ static BuzzSentrySpanId *_empty = nil;
     return self;
 }
 
-- (NSString *)BuzzSentrySpanIdString;
+- (NSString *)buzzSentrySpanIdString;
 {
     return self.value;
 }
 
 - (NSString *)description
 {
-    return [self BuzzSentrySpanIdString];
+    return [self buzzSentrySpanIdString];
 }
 
 - (BOOL)isEqual:(id _Nullable)object

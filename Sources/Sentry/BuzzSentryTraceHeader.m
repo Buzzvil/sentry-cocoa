@@ -25,9 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)value
 {
     return _sampled != kBuzzSentrySampleDecisionUndecided
-        ? [NSString stringWithFormat:@"%@-%@-%i", _traceId.BuzzSentryIdString,
-                    _spanId.BuzzSentrySpanIdString, _sampled == kBuzzSentrySampleDecisionYes ? 1 : 0]
-        : [NSString stringWithFormat:@"%@-%@", _traceId.BuzzSentryIdString, _spanId.BuzzSentrySpanIdString];
+        ? [NSString stringWithFormat:@"%@-%@-%i", _traceId.buzzSentryIdString,
+                    _spanId.buzzSentrySpanIdString, _sampled == kBuzzSentrySampleDecisionYes ? 1 : 0]
+        : [NSString stringWithFormat:@"%@-%@", _traceId.buzzSentryIdString, _spanId.buzzSentrySpanIdString];
 }
 
 @end

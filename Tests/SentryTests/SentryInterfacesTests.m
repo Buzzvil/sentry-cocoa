@@ -84,7 +84,7 @@
     event.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     event.extra = @{ @"__sentry_stacktrace" : @"f", @"date" : date };
     NSDictionary *serialized = @{
-        @"event_id" : [event.eventId BuzzSentryIdString],
+        @"event_id" : [event.eventId buzzSentryIdString],
         @"extra" : @ { @"date" : [date sentry_toIso8601String] },
         @"level" : @"info",
         @"environment" : @"bla",
@@ -98,7 +98,7 @@
     event2.timestamp = date;
     event2.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     NSDictionary *serialized2 = @{
-        @"event_id" : [event2.eventId BuzzSentryIdString],
+        @"event_id" : [event2.eventId buzzSentryIdString],
         @"level" : @"info",
         @"platform" : @"cocoa",
         @"sdk" : @ { @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString },
@@ -114,7 +114,7 @@
         @"integrations" : @[ @"sentry.cocoa" ]
     };
     NSDictionary *serialized3 = @{
-        @"event_id" : [event3.eventId BuzzSentryIdString],
+        @"event_id" : [event3.eventId buzzSentryIdString],
         @"level" : @"info",
         @"platform" : @"cocoa",
         @"sdk" : @ {
@@ -132,7 +132,7 @@
     event4.extra =
         @{ @"key" : @ { @1 : @"1", @2 : [NSDate dateWithTimeIntervalSince1970:1582803326.1235] } };
     NSDictionary *serialized4 = @{
-        @"event_id" : [event4.eventId BuzzSentryIdString],
+        @"event_id" : [event4.eventId buzzSentryIdString],
         @"extra" : @ { @"key" : @ { @"1" : @"1", @"2" : @"2020-02-27T11:35:26.124Z" } },
         @"level" : @"info",
         @"platform" : @"cocoa",
@@ -155,7 +155,7 @@
         @"integrations" : @[ @"sentry.cocoa" ]
     };
     NSDictionary *serialized = @{
-        @"event_id" : [event.eventId BuzzSentryIdString],
+        @"event_id" : [event.eventId buzzSentryIdString],
         @"level" : @"info",
         @"extra" : @ {},
         @"transaction" : @"yoyoyo",
@@ -178,7 +178,7 @@
         @"integrations" : @[ @"sentry.cocoa" ]
     };
     NSDictionary *serialized3 = @{
-        @"event_id" : [event3.eventId BuzzSentryIdString],
+        @"event_id" : [event3.eventId buzzSentryIdString],
         @"level" : @"info",
         @"transaction" : @"UIViewControllerTest",
         @"platform" : @"cocoa",
@@ -206,7 +206,7 @@
     };
     event4.sdk = @{ @"name" : @"sentry.cocoa", @"version" : BuzzSentryMeta.versionString };
     NSDictionary *serialized4 = @{
-        @"event_id" : [event4.eventId BuzzSentryIdString],
+        @"event_id" : [event4.eventId buzzSentryIdString],
         @"extra" : @ {
             @"key" : @ {
                 @"1" : @"1",

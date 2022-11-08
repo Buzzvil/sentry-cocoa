@@ -51,16 +51,16 @@ static BuzzSentryId *_empty = nil;
     }
 }
 
-- (NSString *)BuzzSentryIdString;
+- (NSString *)buzzSentryIdString;
 {
-    NSString *BuzzSentryIdString = [self.uuid.UUIDString stringByReplacingOccurrencesOfString:@"-"
+    NSString *buzzSentryIdString = [self.uuid.UUIDString stringByReplacingOccurrencesOfString:@"-"
                                                                                withString:@""];
-    return [BuzzSentryIdString lowercaseString];
+    return [buzzSentryIdString lowercaseString];
 }
 
 - (NSString *)description
 {
-    return [self BuzzSentryIdString];
+    return [self buzzSentryIdString];
 }
 
 - (BOOL)isEqual:(id _Nullable)object

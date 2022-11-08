@@ -263,7 +263,7 @@ static BOOL appStartMeasurementRead;
                                            sampled:_rootSpan.context.sampled];
     context.spanDescription = description;
 
-    SENTRY_LOG_DEBUG(@"Starting child span under %@", parentId.BuzzSentrySpanIdString);
+    SENTRY_LOG_DEBUG(@"Starting child span under %@", parentId.buzzSentrySpanIdString);
     BuzzSentrySpan *child = [[BuzzSentrySpan alloc] initWithTracer:self context:context];
     @synchronized(_children) {
         [_children addObject:child];

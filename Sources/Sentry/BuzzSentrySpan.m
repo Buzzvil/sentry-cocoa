@@ -25,7 +25,7 @@ BuzzSentrySpan ()
 - (instancetype)initWithTracer:(BuzzSentryTracer *)tracer context:(BuzzSentrySpanContext *)context
 {
     if (self = [super init]) {
-        SENTRY_LOG_DEBUG(@"Created span %@ for trace ID %@", context.spanId.BuzzSentrySpanIdString,
+        SENTRY_LOG_DEBUG(@"Created span %@ for trace ID %@", context.spanId.buzzSentrySpanIdString,
             tracer.context.traceId);
         _tracer = tracer;
         _context = context;

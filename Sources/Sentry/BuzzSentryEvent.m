@@ -57,7 +57,7 @@ BuzzSentryEvent ()
     }
 
     NSMutableDictionary *serializedData = @{
-        @"event_id" : self.eventId.BuzzSentryIdString,
+        @"event_id" : self.eventId.buzzSentryIdString,
         @"timestamp" : @(self.timestamp.timeIntervalSince1970),
         @"platform" : @"cocoa",
     }

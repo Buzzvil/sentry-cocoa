@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableData *envelopeData = [[NSMutableData alloc] init];
     NSMutableDictionary *serializedData = [NSMutableDictionary new];
     if (nil != envelope.header.eventId) {
-        [serializedData setValue:[envelope.header.eventId BuzzSentryIdString] forKey:@"event_id"];
+        [serializedData setValue:[envelope.header.eventId buzzSentryIdString] forKey:@"event_id"];
     }
 
     BuzzSentrySDKInfo *sdkInfo = envelope.header.sdkInfo;

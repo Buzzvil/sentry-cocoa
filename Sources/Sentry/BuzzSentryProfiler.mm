@@ -171,7 +171,7 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
     }
 
     SENTRY_LOG_DEBUG(
-        @"Tracking span with ID %@ with profiler %@", spanID.BuzzSentrySpanIdString, _gCurrentProfiler);
+        @"Tracking span with ID %@ with profiler %@", spanID.buzzSentrySpanIdString, _gCurrentProfiler);
     [_gCurrentProfiler->_spansInFlight addObject:spanID];
     _gProfilersPerSpanID[spanID] = _gCurrentProfiler;
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
@@ -184,14 +184,14 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
 
     if (_gCurrentProfiler == nil) {
         SENTRY_LOG_DEBUG(
-            @"No profiler tracking span with id %@", span.context.spanId.BuzzSentrySpanIdString);
+            @"No profiler tracking span with id %@", span.context.spanId.buzzSentrySpanIdString);
         return;
     }
 
     [_gCurrentProfiler->_spansInFlight removeObject:span.context.spanId];
     if (_gCurrentProfiler->_spansInFlight.count == 0) {
         SENTRY_LOG_DEBUG(@"Stopping profiler %@ because span with id %@ was last being profiled.",
-            _gCurrentProfiler, span.context.spanId.BuzzSentrySpanIdString);
+            _gCurrentProfiler, span.context.spanId.buzzSentrySpanIdString);
         [self stopProfilerForReason:BuzzSentryProfilerTruncationReasonNormal];
     }
 #    endif // SENTRY_TARGET_PROFILING_SUPPORTED
@@ -205,7 +205,7 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
     const auto spanID = transaction.trace.context.spanId;
     const auto profiler = _gProfilersPerSpanID[spanID];
     if (profiler == nil) {
-        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.BuzzSentrySpanIdString);
+        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.buzzSentrySpanIdString);
         return;
     }
 
@@ -221,12 +221,12 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
     const auto spanID = transaction.trace.context.spanId;
     BuzzSentryProfiler *profiler = _gProfilersPerSpanID[spanID];
     if (profiler == nil) {
-        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.BuzzSentrySpanIdString);
+        SENTRY_LOG_DEBUG(@"No profiler tracking span with id %@", spanID.buzzSentrySpanIdString);
         return;
     }
 
     SENTRY_LOG_DEBUG(@"Found profiler waiting for span with ID %@: %@",
-        transaction.trace.context.spanId.BuzzSentrySpanIdString, profiler);
+        transaction.trace.context.spanId.buzzSentrySpanIdString, profiler);
     [profiler addTransaction:transaction];
 
     [self captureEnvelopeIfFinished:profiler spanID:spanID];
@@ -520,7 +520,7 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
     };
 
     const auto profileID = [[BuzzSentryId alloc] init];
-    profile[@"profile_id"] = profileID.BuzzSentryIdString;
+    profile[@"profile_id"] = profileID.buzzSentryIdString;
     const auto profileDuration = getDurationNs(_startTimestamp, _endTimestamp);
     profile[@"duration_ns"] = [@(profileDuration) stringValue];
     profile[@"truncation_reason"] = profilerTruncationReasonName(_truncationReason);
@@ -592,7 +592,7 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
             if (profileStartToTransactionEnd_ns < 0) {
                 SENTRY_LOG_DEBUG(@"Transaction %@ ended before the profiler started, won't "
                                  @"associate it with this profile.",
-                    transaction.trace.context.traceId.BuzzSentryIdString);
+                    transaction.trace.context.traceId.buzzSentryIdString);
                 continue;
             } else {
                 relativeEnd = [NSString
@@ -600,8 +600,8 @@ profilerTruncationReasonName(BuzzSentryProfilerTruncationReason reason)
             }
         }
         [transactionsInfo addObject:@{
-            @"id" : transaction.eventId.BuzzSentryIdString,
-            @"trace_id" : transaction.trace.context.traceId.BuzzSentryIdString,
+            @"id" : transaction.eventId.buzzSentryIdString,
+            @"trace_id" : transaction.trace.context.traceId.buzzSentryIdString,
             @"name" : transaction.transaction,
             @"relative_start_ns" : relativeStart,
             @"relative_end_ns" : relativeEnd,

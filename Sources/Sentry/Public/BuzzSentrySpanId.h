@@ -28,7 +28,7 @@ NS_SWIFT_NAME(SpanId)
 /**
  * Returns the Span Id Value
  */
-@property (readonly, copy) NSString *BuzzSentrySpanIdString;
+@property (readonly, copy) NSString *buzzSentrySpanIdString;
 
 /**
  * A BuzzSentrySpanId with an empty Id "0000000000000000".
