@@ -10,13 +10,13 @@ jobs:
     name: Build app and test runner
     runs-on: macos-12
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
       - run: ./scripts/ci-select-xcode.sh 13.4.1
       - name: Install SentryCli
         run: brew install getsentry/tools/sentry-cli
       - name: Cache Carthage dependencies
         id: trendingmovies-carthage-cache
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         with:
           path: ./Samples/TrendingMovies/Carthage/Build
           key: trendingmovies-carthage-cache-key-${{ hashFiles('Samples/TrendingMovies/Cartfile.resolved') }}
@@ -25,7 +25,7 @@ jobs:
         run: cd Samples/TrendingMovies && carthage update --use-xcframeworks
       - name: Cache TrendingMovies App and dSYM build products
         id: cache-trending-movies-app
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         with:
           path: |
             DerivedData/Build/Products/Debug-iphoneos/TrendingMovies.app
@@ -33,7 +33,7 @@ jobs:
           key: trendingmovies-app-cache-key-${{ hashFiles('Samples/TrendingMovies/TrendingMovies/**') }}
       - name: Cache ProfileDataGenerator UI Test Runner App build product
         id: cache-profiledatagenerator-test-runner-app
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         with:
           path: |
             DerivedData/Build/Products/Debug-iphoneos/ProfileDataGeneratorUITest-Runner.app
@@ -62,7 +62,7 @@ jobs:
         run: |
           sentry-cli --auth-token ${{ secrets.SENTRY_AUTH_TOKEN }} upload-dif --org sentry-sdks --project trending-movies DerivedData/Build/Products/Debug-iphoneos/TrendingMovies.app.dSYM
       - name: Archiving DerivedData
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5  # v3
         with:
           name: data-generator-build-products
           path: |
@@ -79,8 +79,8 @@ jobs:
       matrix:
         suite: ['High-end device', 'Mid-range device']
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a  # v3
         with:
           name: data-generator-build-products
       - run: npm install -g saucectl@0.107.2
