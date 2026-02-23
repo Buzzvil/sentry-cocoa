@@ -22,10 +22,10 @@ jobs:
     name: Build test server
     runs-on: macos-12
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
       - name: Cache for Test Server
         id: cache_test_server
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         with:
           path: ./test-server/.build
           key: test-server-${{ hashFiles('./test-server') }}
@@ -44,7 +44,7 @@ jobs:
         run: cp $(swift build --show-bin-path -c release)/Run test-server-exec
 
       - name: Archiving DerivedData
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5  # v3
         with:
           name: test-server
           path: |
@@ -127,8 +127,8 @@ jobs:
             test-destination-os: 'latest'
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a  # v3
         with:
           name: test-server
       - name: Allow test-server to run
@@ -161,7 +161,7 @@ jobs:
         run: ./scripts/xcode-test.sh ${{matrix.platform}} ${{matrix.test-destination-os}} ${{matrix.xcode}} $GITHUB_REF_NAME
 
       - name: Archiving DerivedData Logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5  # v3
         if: failure()
         with:
           name: derived-data-${{matrix.platform}}-xcode-${{matrix.xcode}}-os-${{matrix.test-destination-os}}
@@ -169,7 +169,7 @@ jobs:
             /Users/runner/Library/Developer/Xcode/DerivedData/**/Logs/**
 
       - name: Archiving Raw Test Logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5  # v3
         if: ${{  failure() || cancelled() }}
         with:
           name: raw-test-output-${{matrix.platform}}-xcode-${{matrix.xcode}}-os-${{matrix.test-destination-os}}
@@ -195,10 +195,10 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
 
       - name: Cache for Test Server
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         id: cache_test_server
         with:
           path: ./test-server/.build
@@ -218,7 +218,7 @@ jobs:
         run: ./scripts/tests-with-thread-sanitizer.sh
 
       - name: Archiving Test Logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5  # v3
         with:
           path: thread-sanitizer.log
 
@@ -230,7 +230,7 @@ jobs:
         target: ['ios_swift', 'ios_objc', 'tvos_swift']
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
       - run: ./scripts/ci-select-xcode.sh
 
       # GitHub Actions sometimes fail to launch the UI tests. Therefore we retry
@@ -255,7 +255,7 @@ jobs:
             device: 'iPhone 8 (14.5)'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
       - run: ./scripts/ci-select-xcode.sh ${{matrix.xcode}}
 
       # GitHub Actions sometimes fail to launch the UI tests. Therefore we retry
@@ -272,7 +272,7 @@ jobs:
         target: ['ios_swift', 'ios_objc', 'tvos_swift']
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
 
       # GH action images don't have an iOS 12.4 simulator. Therefore we have to download and install the simulator manually.
       - name: Install iOS 12.4 simulator
@@ -291,7 +291,7 @@ jobs:
     runs-on: macos-12
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
       - run: ./scripts/ci-select-xcode.sh 13.4.1
 
       # GitHub Actions sometimes fail to launch the UI tests. Therefore we retry
