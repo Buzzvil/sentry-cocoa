@@ -25,14 +25,14 @@ jobs:
     name: Build app and test runner
     runs-on: macos-12
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
       - run: ./scripts/ci-select-xcode.sh
       - name: Install SentryCli
         run: brew install getsentry/tools/sentry-cli
       - run: git apply ./scripts/set-device-tests-environment.patch
       - name: Cache iOS-Swift App and dSYM build products
         id: ios-swift-cache
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         with:
           path: |
             DerivedData/Build/Products/Debug-iphoneos/iOS-Swift.app.dSYM
@@ -40,7 +40,7 @@ jobs:
           key: ios-swift-for-ui-testing-cache-key-${{ hashFiles('Samples/iOS-Swift/iOS-Swift/**') }}
       - name: Cache iOS-Swift UI Test Runner App build product
         id: ios-swift-benchmark-runner-cache
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         with:
           path: |
             DerivedData/Build/Products/Debug-iphoneos/PerformanceBenchmarks-Runner.app
@@ -67,7 +67,7 @@ jobs:
         run: |
           sentry-cli --auth-token ${{ secrets.SENTRY_AUTH_TOKEN }} upload-dif --org sentry-sdks --project sentry-cocoa DerivedData/Build/Products/Debug-iphoneos/iOS-Swift.app.dSYM
       - name: Archiving DerivedData
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5  # v3
         with:
           name: DerivedData-Xcode
           path: |
@@ -83,8 +83,8 @@ jobs:
       matrix:
         suite: ['High-end device', 'Mid-range device', 'Low-end device']
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a  # v3
         with:
           name: DerivedData-Xcode
       - run: npm install -g saucectl@0.107.2
@@ -99,9 +99,9 @@ jobs:
     runs-on: macos-12
     steps:
       - name: Git checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
       - run: ./scripts/ci-select-xcode.sh
-      - uses: actions/cache@v3
+      - uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c  # v3
         id: app-plain-cache
         with:
           path: Tests/Perf/test-app-plain.ipa
