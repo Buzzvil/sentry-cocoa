@@ -1,29 +1,29 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
-class SentryTransportInitializerTests: XCTestCase {
+class BuzzSentryTransportInitializerTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryTransportInitializerTests")
-    private static let dsn = TestConstants.dsn(username: "SentryTransportInitializerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryTransportInitializerTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryTransportInitializerTests")
     
-    private var fileManager: SentryFileManager!
+    private var fileManager: BuzzSentryFileManager!
     
     override func setUp() {
         super.setUp()
         do {
             let options = Options()
-            options.dsn = SentryTransportInitializerTests.dsnAsString
-            fileManager = try SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+            options.dsn = BuzzSentryTransportInitializerTests.dsnAsString
+            fileManager = try BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         } catch {
-            XCTFail("SentryDsn could not be created")
+            XCTFail("BuzzSentryDsn could not be created")
         }
     }
 
     func testDefault() throws {
-        let options = try Options(dict: ["dsn": SentryTransportInitializerTests.dsnAsString])
+        let options = try Options(dict: ["dsn": BuzzSentryTransportInitializerTests.dsnAsString])
         
-        let result = TransportInitializer.initTransport(options, sentryFileManager: fileManager)
+        let result = TransportInitializer.initTransport(options, buzzSentryFileManager: fileManager)
         
-        XCTAssertTrue(result.isKind(of: SentryHttpTransport.self))
+        XCTAssertTrue(result.isKind(of: BuzzSentryHttpTransport.self))
     }
 }

@@ -1,20 +1,20 @@
-#import "SentryOptions.h"
-#import "SentryError.h"
-#import "SentrySDK.h"
-#import "SentrySdkInfo.h"
-#import "SentryTests-Swift.h"
+#import "BuzzSentryOptions.h"
+#import "BuzzSentryError.h"
+#import "BuzzSentrySDK.h"
+#import "BuzzSentrySDKInfo.h"
+#import "BuzzSentryTests-Swift.h"
 #import <XCTest/XCTest.h>
 
-@interface SentryOptionsTest : XCTestCase
+@interface BuzzSentryOptionsTest : XCTestCase
 
 @end
 
-@implementation SentryOptionsTest
+@implementation BuzzSentryOptionsTest
 
 - (void)testEmptyDsn
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{} didFailWithError:&error];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{} didFailWithError:&error];
 
     [self assertDsnNil:options andError:error];
 }
@@ -22,49 +22,49 @@
 - (void)testInvalidDsnBoolean
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @YES }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @YES }
                                                 didFailWithError:&error];
 
     [self assertDsnNil:options andError:error];
 }
 
-- (void)assertDsnNil:(SentryOptions *)options andError:(NSError *)error
+- (void)assertDsnNil:(BuzzSentryOptions *)options andError:(NSError *)error
 {
     XCTAssertNil(options.parsedDsn);
     XCTAssertEqual(NO, options.debug);
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
 }
 
 - (void)testInvalidDsn
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
 - (void)testRelease
 {
-    SentryOptions *options = [self getValidOptions:@{ @"release" : @"abc" }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"release" : @"abc" }];
     XCTAssertEqualObjects(options.releaseName, @"abc");
 }
 
 - (void)testSetEmptyRelease
 {
-    SentryOptions *options = [self getValidOptions:@{ @"release" : @"" }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"release" : @"" }];
     XCTAssertEqualObjects(options.releaseName, @"");
 }
 
 - (void)testSetReleaseToNonString
 {
-    SentryOptions *options = [self getValidOptions:@{ @"release" : @2 }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"release" : @2 }];
     XCTAssertEqualObjects(options.releaseName, [self buildDefaultReleaseName]);
 }
 
 - (void)testNoReleaseSetUsesDefault
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertEqualObjects(options.releaseName, [self buildDefaultReleaseName]);
 }
 
@@ -77,7 +77,7 @@
 
 - (void)testEnvironment
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertNil(options.environment);
 
     options = [self getValidOptions:@{ @"environment" : @"xxx" }];
@@ -86,7 +86,7 @@
 
 - (void)testDist
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertNil(options.dist);
 
     options = [self getValidOptions:@{ @"dist" : @"hhh" }];
@@ -110,7 +110,7 @@
 - (void)testDebugWith:(NSObject *)debugValue expected:(BOOL)expectedDebugValue
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{
         @"dsn" : @"https://username:password@sentry.io/1",
         @"debug" : debugValue
     }
@@ -122,23 +122,23 @@
 
 - (void)testValidDiagnosticLevel
 {
-    [self testDiagnosticlevelWith:@"none" expected:kSentryLevelNone];
-    [self testDiagnosticlevelWith:@"debug" expected:kSentryLevelDebug];
-    [self testDiagnosticlevelWith:@"info" expected:kSentryLevelInfo];
-    [self testDiagnosticlevelWith:@"warning" expected:kSentryLevelWarning];
-    [self testDiagnosticlevelWith:@"error" expected:kSentryLevelError];
-    [self testDiagnosticlevelWith:@"fatal" expected:kSentryLevelFatal];
+    [self testDiagnosticlevelWith:@"none" expected:kBuzzSentryLevelNone];
+    [self testDiagnosticlevelWith:@"debug" expected:kBuzzSentryLevelDebug];
+    [self testDiagnosticlevelWith:@"info" expected:kBuzzSentryLevelInfo];
+    [self testDiagnosticlevelWith:@"warning" expected:kBuzzSentryLevelWarning];
+    [self testDiagnosticlevelWith:@"error" expected:kBuzzSentryLevelError];
+    [self testDiagnosticlevelWith:@"fatal" expected:kBuzzSentryLevelFatal];
 }
 
 - (void)testInvalidDiagnosticLevel
 {
-    [self testDiagnosticlevelWith:@"fatala" expected:kSentryLevelDebug];
-    [self testDiagnosticlevelWith:@(YES) expected:kSentryLevelDebug];
+    [self testDiagnosticlevelWith:@"fatala" expected:kBuzzSentryLevelDebug];
+    [self testDiagnosticlevelWith:@(YES) expected:kBuzzSentryLevelDebug];
 }
 
-- (void)testDiagnosticlevelWith:(NSObject *)level expected:(SentryLevel)expected
+- (void)testDiagnosticlevelWith:(NSObject *)level expected:(BuzzSentryLevel)expected
 {
-    SentryOptions *options = [self getValidOptions:@{ @"diagnosticLevel" : level }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"diagnosticLevel" : level }];
 
     XCTAssertEqual(expected, options.diagnosticLevel);
 }
@@ -159,7 +159,7 @@
 
 - (void)testEnabledWith:(NSObject *)enabledValue expected:(BOOL)expectedValue
 {
-    SentryOptions *options = [self getValidOptions:@{ @"enabled" : enabledValue }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"enabled" : enabledValue }];
 
     XCTAssertEqual(expectedValue, options.enabled);
 }
@@ -168,7 +168,7 @@
 {
     NSNumber *maxBreadcrumbs = @20;
 
-    SentryOptions *options = [self getValidOptions:@{ @"maxBreadcrumbs" : maxBreadcrumbs }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"maxBreadcrumbs" : maxBreadcrumbs }];
 
     XCTAssertEqual([maxBreadcrumbs unsignedIntValue], options.maxBreadcrumbs);
 }
@@ -195,14 +195,14 @@
 
 - (void)testDefaultMaxBreadcrumbs
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertEqual([@100 unsignedIntValue], options.maxBreadcrumbs);
 }
 
 - (void)testMaxBreadcrumbsGarbage
 {
-    SentryOptions *options = [self getValidOptions:@{ @"maxBreadcrumbs" : self }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"maxBreadcrumbs" : self }];
 
     XCTAssertEqual(100, options.maxBreadcrumbs);
 }
@@ -211,73 +211,73 @@
 {
     NSNumber *maxCacheItems = @20;
 
-    SentryOptions *options = [self getValidOptions:@{ @"maxCacheItems" : maxCacheItems }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"maxCacheItems" : maxCacheItems }];
 
     XCTAssertEqual([maxCacheItems unsignedIntValue], options.maxCacheItems);
 }
 
 - (void)testMaxCacheItemsGarbage
 {
-    SentryOptions *options = [self getValidOptions:@{ @"maxCacheItems" : self }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"maxCacheItems" : self }];
 
     XCTAssertEqual(30, options.maxCacheItems);
 }
 
 - (void)testDefaultMaxCacheItems
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertEqual([@30 unsignedIntValue], options.maxCacheItems);
 }
 
 - (void)testBeforeSend
 {
-    SentryBeforeSendEventCallback callback = ^(SentryEvent *event) { return event; };
-    SentryOptions *options = [self getValidOptions:@{ @"beforeSend" : callback }];
+    BuzzSentryBeforeSendEventCallback callback = ^(BuzzSentryEvent *event) { return event; };
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"beforeSend" : callback }];
 
     XCTAssertEqual(callback, options.beforeSend);
 }
 
 - (void)testDefaultBeforeSend
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertNil(options.beforeSend);
 }
 
 - (void)testGarbageBeforeSend_ReturnsNil
 {
-    SentryOptions *options = [self getValidOptions:@{ @"beforeSend" : @"fault" }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"beforeSend" : @"fault" }];
 
     XCTAssertNil(options.beforeSend);
 }
 
 - (void)testNSNullBeforeSend_ReturnsNil
 {
-    SentryOptions *options = [self getValidOptions:@{ @"beforeSend" : [NSNull null] }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"beforeSend" : [NSNull null] }];
 
     XCTAssertFalse([options.beforeSend isEqual:[NSNull null]]);
 }
 
 - (void)testBeforeBreadcrumb
 {
-    SentryBeforeBreadcrumbCallback callback
-        = ^(SentryBreadcrumb *breadcrumb) { return breadcrumb; };
-    SentryOptions *options = [self getValidOptions:@{ @"beforeBreadcrumb" : callback }];
+    BuzzSentryBeforeBreadcrumbCallback callback
+        = ^(BuzzSentryBreadcrumb *breadcrumb) { return breadcrumb; };
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"beforeBreadcrumb" : callback }];
 
     XCTAssertEqual(callback, options.beforeBreadcrumb);
 }
 
 - (void)testDefaultBeforeBreadcrumb
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertNil(options.beforeBreadcrumb);
 }
 
 - (void)testTracePropagationTargets
 {
-    SentryOptions *options =
+    BuzzSentryOptions *options =
         [self getValidOptions:@{ @"tracePropagationTargets" : @[ @"localhost" ] }];
 
     XCTAssertEqual(options.tracePropagationTargets.count, 1);
@@ -286,7 +286,7 @@
 
 - (void)testTracePropagationTargetsInvalidInstanceDoesntCrash
 {
-    SentryOptions *options = [self getValidOptions:@{ @"tracePropagationTargets" : @[ @YES ] }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"tracePropagationTargets" : @[ @YES ] }];
 
     XCTAssertEqual(options.tracePropagationTargets.count, 1);
     XCTAssertEqual(options.tracePropagationTargets[0], @YES);
@@ -294,7 +294,7 @@
 
 - (void)testFailedRequestTargets
 {
-    SentryOptions *options =
+    BuzzSentryOptions *options =
         [self getValidOptions:@{ @"failedRequestTargets" : @[ @"localhost" ] }];
 
     XCTAssertEqual(options.failedRequestTargets.count, 1);
@@ -303,7 +303,7 @@
 
 - (void)testFailedRequestTargetsInvalidInstanceDoesntCrash
 {
-    SentryOptions *options = [self getValidOptions:@{ @"failedRequestTargets" : @[ @YES ] }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"failedRequestTargets" : @[ @YES ] }];
 
     XCTAssertEqual(options.failedRequestTargets.count, 1);
     XCTAssertEqual(options.failedRequestTargets[0], @YES);
@@ -316,9 +316,9 @@
 
 - (void)testFailedRequestStatusCodes
 {
-    SentryHttpStatusCodeRange *httpStatusCodeRange =
-        [[SentryHttpStatusCodeRange alloc] initWithMin:400 max:599];
-    SentryOptions *options =
+    BuzzSentryHttpStatusCodeRange *httpStatusCodeRange =
+        [[BuzzSentryHttpStatusCodeRange alloc] initWithMin:400 max:599];
+    BuzzSentryOptions *options =
         [self getValidOptions:@{ @"failedRequestStatusCodes" : @[ httpStatusCodeRange ] }];
 
     XCTAssertEqual(options.failedRequestStatusCodes.count, 1);
@@ -328,7 +328,7 @@
 
 - (void)testGarbageBeforeBreadcrumb_ReturnsNil
 {
-    SentryOptions *options = [self getValidOptions:@{ @"beforeBreadcrumb" : @"fault" }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"beforeBreadcrumb" : @"fault" }];
 
     XCTAssertEqual(nil, options.beforeBreadcrumb);
 }
@@ -336,13 +336,13 @@
 - (void)testOnCrashedLastRun
 {
     __block BOOL onCrashedLastRunCalled = NO;
-    SentryOnCrashedLastRunCallback callback = ^(SentryEvent *event) {
+    BuzzSentryOnCrashedLastRunCallback callback = ^(BuzzSentryEvent *event) {
         onCrashedLastRunCalled = YES;
         XCTAssertNotNil(event);
     };
-    SentryOptions *options = [self getValidOptions:@{ @"onCrashedLastRun" : callback }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"onCrashedLastRun" : callback }];
 
-    options.onCrashedLastRun([[SentryEvent alloc] init]);
+    options.onCrashedLastRun([[BuzzSentryEvent alloc] init]);
 
     XCTAssertEqual(callback, options.onCrashedLastRun);
     XCTAssertTrue(onCrashedLastRunCalled);
@@ -350,14 +350,14 @@
 
 - (void)testDefaultOnCrashedLastRun
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertNil(options.onCrashedLastRun);
 }
 
 - (void)testGarbageOnCrashedLastRun_ReturnsNil
 {
-    SentryOptions *options = [self getValidOptions:@{ @"onCrashedLastRun" : @"fault" }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"onCrashedLastRun" : @"fault" }];
 
     XCTAssertNil(options.onCrashedLastRun);
 }
@@ -365,36 +365,36 @@
 - (void)testIntegrations
 {
     NSArray<NSString *> *integrations = @[ @"integration1", @"integration2" ];
-    SentryOptions *options = [self getValidOptions:@{ @"integrations" : integrations }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"integrations" : integrations }];
 
     [self assertArrayEquals:integrations actual:options.integrations];
 }
 
 - (void)testDefaultIntegrations
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
-    XCTAssertTrue([[SentryOptions defaultIntegrations] isEqualToArray:options.integrations],
+    XCTAssertTrue([[BuzzSentryOptions defaultIntegrations] isEqualToArray:options.integrations],
         @"Default integrations are not set correctly");
 }
 
 - (void)testSampleRateWithDict
 {
     NSNumber *sampleRate = @0.1;
-    SentryOptions *options = [self getValidOptions:@{ @"sampleRate" : sampleRate }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"sampleRate" : sampleRate }];
     XCTAssertEqual(sampleRate, options.sampleRate);
 }
 
 - (void)testSampleRate_SetToNil
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.sampleRate = nil;
     XCTAssertNil(options.sampleRate);
 }
 
 - (void)testSampleRateLowerBound
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.sampleRate = @0.5;
 
     NSNumber *sampleRateLowerBound = @0;
@@ -410,7 +410,7 @@
 
 - (void)testSampleRateUpperBound
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.sampleRate = @0.5;
 
     NSNumber *upperBound = @1;
@@ -426,7 +426,7 @@
 
 - (void)testSampleRateNotSet
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertEqual(@1, options.sampleRate);
 }
@@ -444,7 +444,7 @@
 - (void)testSessionTrackingIntervalMillis
 {
     NSNumber *sessionTracking = @2000;
-    SentryOptions *options =
+    BuzzSentryOptions *options =
         [self getValidOptions:@{ @"sessionTrackingIntervalMillis" : sessionTracking }];
 
     XCTAssertEqual([sessionTracking unsignedIntValue], options.sessionTrackingIntervalMillis);
@@ -452,7 +452,7 @@
 
 - (void)testDefaultSessionTrackingIntervalMillis
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertEqual([@30000 unsignedIntValue], options.sessionTrackingIntervalMillis);
 }
@@ -474,14 +474,14 @@
 
 - (void)testEmptyConstructorSetsDefaultValues
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     XCTAssertNil(options.parsedDsn);
     [self assertDefaultValues:options];
 }
 
 - (void)testNSNull_SetsDefaultValue
 {
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{
         @"dsn" : [NSNull null],
         @"enabled" : [NSNull null],
         @"debug" : [NSNull null],
@@ -530,11 +530,11 @@
     [self assertDefaultValues:options];
 }
 
-- (void)assertDefaultValues:(SentryOptions *)options
+- (void)assertDefaultValues:(BuzzSentryOptions *)options
 {
     XCTAssertEqual(YES, options.enabled);
     XCTAssertEqual(NO, options.debug);
-    XCTAssertEqual(kSentryLevelDebug, options.diagnosticLevel);
+    XCTAssertEqual(kBuzzSentryLevelDebug, options.diagnosticLevel);
     XCTAssertNil(options.environment);
     XCTAssertNil(options.dist);
     XCTAssertEqual(defaultMaxBreadcrumbs, options.maxBreadcrumbs);
@@ -543,7 +543,7 @@
     XCTAssertNil(options.beforeSend);
     XCTAssertNil(options.beforeBreadcrumb);
     XCTAssertNil(options.onCrashedLastRun);
-    XCTAssertTrue([[SentryOptions defaultIntegrations] isEqualToArray:options.integrations],
+    XCTAssertTrue([[BuzzSentryOptions defaultIntegrations] isEqualToArray:options.integrations],
         @"Default integrations are not set correctly");
     XCTAssertEqual(@1, options.sampleRate);
     XCTAssertEqual(YES, options.enableAutoSessionTracking);
@@ -579,7 +579,7 @@
 
     XCTAssertEqual(NO, options.enableCaptureFailedRequests);
 
-    SentryHttpStatusCodeRange *range = options.failedRequestStatusCodes[0];
+    BuzzSentryHttpStatusCodeRange *range = options.failedRequestStatusCodes[0];
     XCTAssertEqual(500, range.min);
     XCTAssertEqual(599, range.max);
 
@@ -594,19 +594,19 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    XCTAssertEqual(SentryMeta.sdkName, options.sdkInfo.name);
-    XCTAssertEqual(SentryMeta.versionString, options.sdkInfo.version);
+    XCTAssertEqual(BuzzSentryMeta.sdkName, options.sdkInfo.name);
+    XCTAssertEqual(BuzzSentryMeta.versionString, options.sdkInfo.version);
 #pragma clang diagnostic pop
 }
 
 - (void)testSetValidDsn
 {
     NSString *dsnAsString = @"https://username:password@sentry.io/1";
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.dsn = dsnAsString;
     options.enabled = NO;
 
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:dsnAsString didFailWithError:nil];
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:dsnAsString didFailWithError:nil];
 
     XCTAssertEqual(dsnAsString, options.dsn);
     XCTAssertTrue([dsn.url.absoluteString isEqualToString:options.parsedDsn.url.absoluteString]);
@@ -615,7 +615,7 @@
 
 - (void)testSetNilDsn
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
 
     [options setDsn:nil];
     XCTAssertNil(options.dsn);
@@ -625,7 +625,7 @@
 
 - (void)testSetInvalidValidDsn
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
 
     [options setDsn:@"https://username:passwordsentry.io/1"];
     XCTAssertNil(options.dsn);
@@ -637,9 +637,9 @@
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    SentryOptions *options = [[SentryOptions alloc] init];
-    XCTAssertEqual(SentryMeta.sdkName, options.sdkInfo.name);
-    XCTAssertEqual(SentryMeta.versionString, options.sdkInfo.version);
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
+    XCTAssertEqual(BuzzSentryMeta.sdkName, options.sdkInfo.name);
+    XCTAssertEqual(BuzzSentryMeta.versionString, options.sdkInfo.version);
 #pragma clang diagnostic pop
 }
 
@@ -648,8 +648,8 @@
     NSDictionary *dict = @{ @"name" : @"custom.sdk", @"version" : @"1.2.3-alpha.0" };
 
     NSError *error = nil;
-    SentryOptions *options =
-        [[SentryOptions alloc] initWithDict:@{ @"sdk" : dict, @"dsn" : @"https://a:b@c.d/1" }
+    BuzzSentryOptions *options =
+        [[BuzzSentryOptions alloc] initWithDict:@{ @"sdk" : dict, @"dsn" : @"https://a:b@c.d/1" }
                            didFailWithError:&error];
 
     XCTAssertNil(error);
@@ -660,19 +660,19 @@
     XCTAssertEqual(dict[@"version"], options.sdkInfo.version);
 #pragma clang diagnostic pop
 
-    NSDictionary *info = [[NSBundle bundleForClass:[SentryClient class]] infoDictionary];
+    NSDictionary *info = [[NSBundle bundleForClass:[BuzzSentryClient class]] infoDictionary];
     NSString *version = [NSString stringWithFormat:@"%@", info[@"CFBundleShortVersionString"]];
-    SentryMeta.versionString = version;
+    BuzzSentryMeta.versionString = version;
 }
 
 - (void)testSetCustomSdkName
 {
     NSDictionary *dict = @{ @"name" : @"custom.sdk" };
-    NSString *originalVersion = SentryMeta.versionString;
+    NSString *originalVersion = BuzzSentryMeta.versionString;
 
     NSError *error = nil;
-    SentryOptions *options =
-        [[SentryOptions alloc] initWithDict:@{ @"sdk" : dict, @"dsn" : @"https://a:b@c.d/1" }
+    BuzzSentryOptions *options =
+        [[BuzzSentryOptions alloc] initWithDict:@{ @"sdk" : dict, @"dsn" : @"https://a:b@c.d/1" }
                            didFailWithError:&error];
 
     XCTAssertNil(error);
@@ -681,19 +681,19 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     XCTAssertEqual(dict[@"name"], options.sdkInfo.name);
     // version stays unchanged
-    XCTAssertEqual(SentryMeta.versionString, options.sdkInfo.version);
-    XCTAssertEqual(SentryMeta.versionString, originalVersion);
+    XCTAssertEqual(BuzzSentryMeta.versionString, options.sdkInfo.version);
+    XCTAssertEqual(BuzzSentryMeta.versionString, originalVersion);
 #pragma clang diagnostic pop
 }
 
 - (void)testSetCustomSdkVersion
 {
     NSDictionary *dict = @{ @"version" : @"1.2.3-alpha.0" };
-    NSString *originalName = SentryMeta.sdkName;
+    NSString *originalName = BuzzSentryMeta.sdkName;
 
     NSError *error = nil;
-    SentryOptions *options =
-        [[SentryOptions alloc] initWithDict:@{ @"sdk" : dict, @"dsn" : @"https://a:b@c.d/1" }
+    BuzzSentryOptions *options =
+        [[BuzzSentryOptions alloc] initWithDict:@{ @"sdk" : dict, @"dsn" : @"https://a:b@c.d/1" }
                            didFailWithError:&error];
 
     XCTAssertNil(error);
@@ -702,26 +702,26 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     XCTAssertEqual(dict[@"version"], options.sdkInfo.version);
     // name stays unchanged
-    XCTAssertEqual(SentryMeta.sdkName, options.sdkInfo.name);
-    XCTAssertEqual(SentryMeta.sdkName, originalName);
+    XCTAssertEqual(BuzzSentryMeta.sdkName, options.sdkInfo.name);
+    XCTAssertEqual(BuzzSentryMeta.sdkName, originalName);
 #pragma clang diagnostic pop
 
-    NSDictionary *info = [[NSBundle bundleForClass:[SentryClient class]] infoDictionary];
+    NSDictionary *info = [[NSBundle bundleForClass:[BuzzSentryClient class]] infoDictionary];
     NSString *version = [NSString stringWithFormat:@"%@", info[@"CFBundleShortVersionString"]];
-    SentryMeta.versionString = version;
+    BuzzSentryMeta.versionString = version;
 }
 
 - (void)testMaxAttachmentSize
 {
     NSNumber *maxAttachmentSize = @21;
-    SentryOptions *options = [self getValidOptions:@{ @"maxAttachmentSize" : maxAttachmentSize }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"maxAttachmentSize" : maxAttachmentSize }];
 
     XCTAssertEqual([maxAttachmentSize unsignedIntValue], options.maxAttachmentSize);
 }
 
 - (void)testDefaultMaxAttachmentSize
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertEqual(20 * 1024 * 1024, options.maxAttachmentSize);
 }
@@ -755,7 +755,7 @@
 - (void)testIdleTimeout
 {
     NSNumber *idleTimeout = @2.1;
-    SentryOptions *options = [self getValidOptions:@{ @"idleTimeout" : idleTimeout }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"idleTimeout" : idleTimeout }];
 
     XCTAssertEqual([idleTimeout doubleValue], options.idleTimeout);
 }
@@ -769,7 +769,7 @@
 
 - (void)testDefaultAppHangsTimeout
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertEqual(2, options.appHangTimeoutInterval);
 }
 
@@ -785,28 +785,28 @@
 
 - (void)testTracesSampleRate
 {
-    SentryOptions *options = [self getValidOptions:@{ @"tracesSampleRate" : @0.1 }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"tracesSampleRate" : @0.1 }];
 
     XCTAssertEqual(options.tracesSampleRate.doubleValue, 0.1);
 }
 
 - (void)testDefaultTracesSampleRate
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertNil(options.tracesSampleRate);
 }
 
 - (void)testTracesSampleRate_SetToNil
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.tracesSampleRate = nil;
     XCTAssertNil(options.tracesSampleRate);
 }
 
 - (void)testTracesSampleRateLowerBound
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.tracesSampleRate = @0.5;
 
     NSNumber *lowerBound = @0;
@@ -822,7 +822,7 @@
 
 - (void)testTracesSampleRateUpperBound
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.tracesSampleRate = @0.5;
 
     NSNumber *lowerBound = @1;
@@ -843,53 +843,53 @@
 
 - (void)testTracesSampler
 {
-    SentryTracesSamplerCallback sampler = ^(SentrySamplingContext *context) {
+    BuzzSentryTracesSamplerCallback sampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @1.0;
     };
 
-    SentryOptions *options = [self getValidOptions:@{ @"tracesSampler" : sampler }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"tracesSampler" : sampler }];
 
-    SentrySamplingContext *context = [[SentrySamplingContext alloc] init];
+    BuzzSentrySamplingContext *context = [[BuzzSentrySamplingContext alloc] init];
     XCTAssertEqual(options.tracesSampler(context), @1.0);
 }
 
 - (void)testDefaultTracesSampler
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertNil(options.tracesSampler);
 }
 
 - (void)testGarbageTracesSampler_ReturnsNil
 {
-    SentryOptions *options = [self getValidOptions:@{ @"tracesSampler" : @"fault" }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"tracesSampler" : @"fault" }];
     XCTAssertNil(options.tracesSampler);
 }
 
 - (void)testIsTracingEnabled_NothingSet_IsDisabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     XCTAssertFalse(options.isTracingEnabled);
 }
 
 - (void)testIsTracingEnabled_TracesSampleRateSetToZero_IsDisabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.tracesSampleRate = @0.00;
     XCTAssertFalse(options.isTracingEnabled);
 }
 
 - (void)testIsTracingEnabled_TracesSampleRateSet_IsEnabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.tracesSampleRate = @0.01;
     XCTAssertTrue(options.isTracingEnabled);
 }
 
 - (void)testIsTracingEnabled_TracesSamplerSet_IsEnabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
-    options.tracesSampler = ^(SentrySamplingContext *context) {
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
+    options.tracesSampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @0.0;
     };
@@ -904,28 +904,28 @@
 
 - (void)testProfilesSampleRate
 {
-    SentryOptions *options = [self getValidOptions:@{ @"profilesSampleRate" : @0.1 }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"profilesSampleRate" : @0.1 }];
 
     XCTAssertEqual(options.profilesSampleRate.doubleValue, 0.1);
 }
 
 - (void)testDefaultProfilesSampleRate
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
 
     XCTAssertNil(options.profilesSampleRate);
 }
 
 - (void)testProfilesSampleRate_SetToNil
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.profilesSampleRate = nil;
     XCTAssertNil(options.profilesSampleRate);
 }
 
 - (void)testProfilesSampleRateLowerBound
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.profilesSampleRate = @0.5;
 
     NSNumber *lowerBound = @0;
@@ -941,7 +941,7 @@
 
 - (void)testProfilesSampleRateUpperBound
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.profilesSampleRate = @0.5;
 
     NSNumber *lowerBound = @1;
@@ -957,28 +957,28 @@
 
 - (void)testIsProfilingEnabled_NothingSet_IsDisabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     XCTAssertFalse(options.isProfilingEnabled);
 }
 
 - (void)testIsProfilingEnabled_ProfilesSampleRateSetToZero_IsDisabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.profilesSampleRate = @0.00;
     XCTAssertFalse(options.isProfilingEnabled);
 }
 
 - (void)testIsProfilingEnabled_ProfilesSampleRateSet_IsEnabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
     options.profilesSampleRate = @0.01;
     XCTAssertTrue(options.isProfilingEnabled);
 }
 
 - (void)testIsProfilingEnabled_ProfilesSamplerSet_IsEnabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
-    options.profilesSampler = ^(SentrySamplingContext *context) {
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
+    options.profilesSampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @0.0;
     };
@@ -987,7 +987,7 @@
 
 - (void)testIsProfilingEnabled_EnableProfilingSet_IsEnabled
 {
-    SentryOptions *options = [[SentryOptions alloc] init];
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] init];
 #    pragma clang diagnostic push
 #    pragma clang diagnostic ignored "-Wdeprecated-declarations"
     options.enableProfiling = YES;
@@ -1002,26 +1002,26 @@
 
 - (void)testProfilesSampler
 {
-    SentryTracesSamplerCallback sampler = ^(SentrySamplingContext *context) {
+    BuzzSentryTracesSamplerCallback sampler = ^(BuzzSentrySamplingContext *context) {
         XCTAssertNotNil(context);
         return @1.0;
     };
 
-    SentryOptions *options = [self getValidOptions:@{ @"profilesSampler" : sampler }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"profilesSampler" : sampler }];
 
-    SentrySamplingContext *context = [[SentrySamplingContext alloc] init];
+    BuzzSentrySamplingContext *context = [[BuzzSentrySamplingContext alloc] init];
     XCTAssertEqual(options.profilesSampler(context), @1.0);
 }
 
 - (void)testDefaultProfilesSampler
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertNil(options.profilesSampler);
 }
 
 - (void)testGarbageProfilesSampler_ReturnsNil
 {
-    SentryOptions *options = [self getValidOptions:@{ @"profilesSampler" : @"fault" }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"profilesSampler" : @"fault" }];
     XCTAssertNil(options.profilesSampler);
 }
 #endif
@@ -1030,7 +1030,7 @@
 {
     NSArray<NSString *> *expected = @[ @"iOS-Swift", @"BusinessLogic" ];
     NSArray *inAppIncludes = @[ @"iOS-Swift", @"BusinessLogic", @1 ];
-    SentryOptions *options = [self getValidOptions:@{ @"inAppIncludes" : inAppIncludes }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"inAppIncludes" : inAppIncludes }];
 
     NSString *bundleExecutable = [self getBundleExecutable];
     if (nil != bundleExecutable) {
@@ -1042,7 +1042,7 @@
 
 - (void)testAddInAppIncludes
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     [options addInAppInclude:@"App"];
 
     NSArray<NSString *> *expected = @[ @"App" ];
@@ -1062,7 +1062,7 @@
 
 - (void)testDefaultInAppIncludes
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertEqualObjects([self getDefaultInAppIncludes], options.inAppIncludes);
 }
 
@@ -1071,25 +1071,25 @@
     NSArray<NSString *> *expected = @[ @"Sentry" ];
     NSArray *inAppExcludes = @[ @"Sentry", @2 ];
 
-    SentryOptions *options = [self getValidOptions:@{ @"inAppExcludes" : inAppExcludes }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"inAppExcludes" : inAppExcludes }];
 
     XCTAssertEqualObjects(expected, options.inAppExcludes);
 }
 
 - (void)testAddInAppExcludes
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     [options addInAppExclude:@"App"];
     XCTAssertEqualObjects(@[ @"App" ], options.inAppExcludes);
 }
 
 - (void)testDefaultInAppExcludes
 {
-    SentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
     XCTAssertEqualObjects(@[], options.inAppExcludes);
 }
 
-- (SentryOptions *)getValidOptions:(NSDictionary<NSString *, id> *)dict
+- (BuzzSentryOptions *)getValidOptions:(NSDictionary<NSString *, id> *)dict
 {
     NSError *error = nil;
 
@@ -1098,31 +1098,31 @@
 
     [options addEntriesFromDictionary:dict];
 
-    SentryOptions *sentryOptions = [[SentryOptions alloc] initWithDict:options
-                                                      didFailWithError:&error];
+    BuzzSentryOptions *buzzSentryOptions = [[BuzzSentryOptions alloc] initWithDict:options
+                                                                  didFailWithError:&error];
     XCTAssertNil(error);
-    return sentryOptions;
+    return buzzSentryOptions;
 }
 
 - (void)testUrlSessionDelegate
 {
     id<NSURLSessionDelegate> urlSessionDelegate = [[UrlSessionDelegateSpy alloc] init];
 
-    SentryOptions *options = [self getValidOptions:@{ @"urlSessionDelegate" : urlSessionDelegate }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ @"urlSessionDelegate" : urlSessionDelegate }];
 
     XCTAssertNotNil(options.urlSessionDelegate);
 }
 
 - (void)testSdkInfoChanges
 {
-    SentryOptions *options = [self getValidOptions:@{}];
-    SentryMeta.sdkName = @"new name";
-    SentryMeta.versionString = @"0.0.6";
+    BuzzSentryOptions *options = [self getValidOptions:@{}];
+    BuzzSentryMeta.sdkName = @"new name";
+    BuzzSentryMeta.versionString = @"0.0.6";
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    XCTAssertEqual(options.sdkInfo.name, SentryMeta.sdkName);
-    XCTAssertEqual(options.sdkInfo.version, SentryMeta.versionString);
+    XCTAssertEqual(options.sdkInfo.name, BuzzSentryMeta.sdkName);
+    XCTAssertEqual(options.sdkInfo.version, BuzzSentryMeta.versionString);
 #pragma clang diagnostic pop
 }
 
@@ -1140,7 +1140,7 @@
 - (void)testBooleanField:(NSString *)property defaultValue:(BOOL)defaultValue
 {
     // Opposite of default
-    SentryOptions *options = [self getValidOptions:@{ property : @(!defaultValue) }];
+    BuzzSentryOptions *options = [self getValidOptions:@{ property : @(!defaultValue) }];
     XCTAssertEqual(!defaultValue, [self getProperty:property of:options]);
 
     // Default
@@ -1152,7 +1152,7 @@
     XCTAssertEqual(NO, [self getProperty:property of:options]);
 }
 
-- (BOOL)getProperty:(NSString *)property of:(SentryOptions *)options
+- (BOOL)getProperty:(NSString *)property of:(BuzzSentryOptions *)options
 {
     SEL selector = NSSelectorFromString(property);
     NSAssert(

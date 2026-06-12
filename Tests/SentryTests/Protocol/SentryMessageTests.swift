@@ -1,18 +1,18 @@
 import XCTest
 
-class SentryMessageTests: XCTestCase {
+class BuzzSentryMessageTests: XCTestCase {
     
     private class Fixture {
         let stringMaxCount = 8_192
         let maximumCount: String
         let tooLong: String
-        let message: SentryMessage
+        let message: BuzzSentryMessage
         
         init() {
             maximumCount = String(repeating: "a", count: stringMaxCount)
             tooLong = String(repeating: "a", count: stringMaxCount + 1)
             
-            message = SentryMessage(formatted: "A message my params")
+            message = BuzzSentryMessage(formatted: "A message my params")
             message.message = "A message %s %s"
             message.params = ["my", "params"]
         }
@@ -22,16 +22,16 @@ class SentryMessageTests: XCTestCase {
     private let fixture = Fixture()
     
     func testTruncateFormatted() {
-        let message = SentryMessage(formatted: "aaaaa")
+        let message = BuzzSentryMessage(formatted: "aaaaa")
         XCTAssertEqual(5, message.formatted.count)
         
-        XCTAssertEqual(fixture.stringMaxCount, SentryMessage(formatted: fixture.maximumCount).formatted.count)
+        XCTAssertEqual(fixture.stringMaxCount, BuzzSentryMessage(formatted: fixture.maximumCount).formatted.count)
         
-        XCTAssertEqual(fixture.stringMaxCount, SentryMessage(formatted: fixture.tooLong).formatted.count)
+        XCTAssertEqual(fixture.stringMaxCount, BuzzSentryMessage(formatted: fixture.tooLong).formatted.count)
     }
     
     func testTruncateMessage() {
-        let message = SentryMessage(formatted: "")
+        let message = BuzzSentryMessage(formatted: "")
         message.message = "aaaaa %s"
         
         XCTAssertEqual(8, message.message?.count)
@@ -58,7 +58,7 @@ class SentryMessageTests: XCTestCase {
         
         let actual = message.description
         
-        let beginning = String(format: "<SentryMessage: %p, ", message)
+        let beginning = String(format: "<BuzzSentryMessage: %p, ", message)
         let expected = "\(beginning){\n    formatted = \"\(message.formatted)\";\n    message = \"\(message.message ?? "")\";\n    params =     (\n        my,\n        params\n    );\n}>"
         XCTAssertEqual(expected, actual)
     }
@@ -70,7 +70,7 @@ class SentryMessageTests: XCTestCase {
         
         let actual = message.description
         
-        let beginning = String(format: "<SentryMessage: %p, ", message)
+        let beginning = String(format: "<BuzzSentryMessage: %p, ", message)
         let expected = "\(beginning){\n    formatted = \"\(message.formatted)\";\n}>"
         XCTAssertEqual(expected, actual)
     }

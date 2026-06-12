@@ -1,7 +1,7 @@
 import Foundation
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class TestSentryScreenshot: SentryScreenshot {
+class TestBuzzSentryScreenshot: BuzzSentryScreenshot {
     
     var result: [Data]?
         

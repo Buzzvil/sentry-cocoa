@@ -1,14 +1,14 @@
 import Foundation
 import XCTest
 
-class SentryDiscardReasonMapperTests: XCTestCase {
+class BuzzSentryDiscardReasonMapperTests: XCTestCase {
     func testMapReasonToName() {
-        XCTAssertEqual(kSentryDiscardReasonNameBeforeSend, nameForSentryDiscardReason(.beforeSend))
-        XCTAssertEqual(kSentryDiscardReasonNameEventProcessor, nameForSentryDiscardReason(.eventProcessor))
-        XCTAssertEqual(kSentryDiscardReasonNameSampleRate, nameForSentryDiscardReason(.sampleRate))
-        XCTAssertEqual(kSentryDiscardReasonNameNetworkError, nameForSentryDiscardReason(.networkError))
-        XCTAssertEqual(kSentryDiscardReasonNameQueueOverflow, nameForSentryDiscardReason(.queueOverflow))
-        XCTAssertEqual(kSentryDiscardReasonNameCacheOverflow, nameForSentryDiscardReason(.cacheOverflow))
-        XCTAssertEqual(kSentryDiscardReasonNameRateLimitBackoff, nameForSentryDiscardReason(.rateLimitBackoff))
+        XCTAssertEqual(kBuzzSentryDiscardReasonNameBeforeSend, nameForBuzzSentryDiscardReason(.beforeSend))
+        XCTAssertEqual(kBuzzSentryDiscardReasonNameEventProcessor, nameForBuzzSentryDiscardReason(.eventProcessor))
+        XCTAssertEqual(kBuzzSentryDiscardReasonNameSampleRate, nameForBuzzSentryDiscardReason(.sampleRate))
+        XCTAssertEqual(kBuzzSentryDiscardReasonNameNetworkError, nameForBuzzSentryDiscardReason(.networkError))
+        XCTAssertEqual(kBuzzSentryDiscardReasonNameQueueOverflow, nameForBuzzSentryDiscardReason(.queueOverflow))
+        XCTAssertEqual(kBuzzSentryDiscardReasonNameCacheOverflow, nameForBuzzSentryDiscardReason(.cacheOverflow))
+        XCTAssertEqual(kBuzzSentryDiscardReasonNameRateLimitBackoff, nameForBuzzSentryDiscardReason(.rateLimitBackoff))
     }
 }

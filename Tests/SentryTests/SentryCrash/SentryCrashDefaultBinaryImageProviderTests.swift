@@ -1,15 +1,15 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 /** The tests are basically a duplication of the implementation of the actual class.
  * We still want to test it like this because you have to mess up the code in two
  * different places to break it.
  */
-class SentryCrashDefaultBinaryImageProviderTests: XCTestCase {
+class BuzzSentryCrashDefaultBinaryImageProviderTests: XCTestCase {
     
     private class Fixture {
-        func getSut() -> SentryCrashDefaultBinaryImageProvider {
-            SentryCrashDefaultBinaryImageProvider()
+        func getSut() -> BuzzSentryCrashDefaultBinaryImageProvider {
+            BuzzSentryCrashDefaultBinaryImageProvider()
         }
     }
 
@@ -25,7 +25,7 @@ class SentryCrashDefaultBinaryImageProviderTests: XCTestCase {
         for i in 0 ... imageCount {
             let actual = sut.getBinaryImage(i)
             
-            var expected = SentryCrashBinaryImage()
+            var expected = BuzzSentryCrashBinaryImage()
             sentrycrashdl_getBinaryImage(Int32(i), &expected)
             
             XCTAssertEqual(expected.uuid, actual.uuid)

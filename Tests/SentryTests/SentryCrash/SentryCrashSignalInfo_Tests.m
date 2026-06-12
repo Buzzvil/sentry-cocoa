@@ -1,5 +1,5 @@
 //
-//  SentryCrashSignalInfo_Tests.m
+//  BuzzSentryCrashSignalInfo_Tests.m
 //
 //  Created by Karl Stenerud on 2012-03-03.
 //
@@ -26,12 +26,12 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashSignalInfo.h"
+#import "BuzzSentryCrashSignalInfo.h"
 
-@interface SentryCrashSignalInfo_Tests : XCTestCase
+@interface BuzzSentryCrashSignalInfo_Tests : XCTestCase
 @end
 
-@implementation SentryCrashSignalInfo_Tests
+@implementation BuzzSentryCrashSignalInfo_Tests
 
 - (void)testSignalName
 {

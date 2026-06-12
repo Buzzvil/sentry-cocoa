@@ -1,10 +1,10 @@
 import XCTest
 
-class SentryNSURLSessionTaskSearchTests: XCTestCase {
+class BuzzSentryNSURLSessionTaskSearchTests: XCTestCase {
 
     // We need to know whether Apple changes the NSURLSessionTask implementation.
      func test_URLSessionTask_ByIosVersion() {
-        let classes = SentryNSURLSessionTaskSearch.urlSessionTaskClassesToTrack()
+        let classes = BuzzSentryNSURLSessionTaskSearch.urlSessionTaskClassesToTrack()
         
         XCTAssertEqual(classes.count, 1)
         if #available(iOS 14, tvOS 14, *) {

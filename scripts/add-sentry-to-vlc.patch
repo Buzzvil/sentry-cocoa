@@ -18,7 +18,7 @@ index 2c1fc802..21495fd7 100644
  
  #import "VLCAppDelegate.h"
  #import "VLC-Swift.h"
-+#import <Sentry/Sentry.h>
++#import <BuzzSentry/BuzzSentry.h>
  
  @interface VLCAppDelegate ()
  {
@@ -26,7 +26,7 @@ index 2c1fc802..21495fd7 100644
  
  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
  {
-+    [SentrySDK startWithConfigureOptions:^(SentryOptions *options) {
++    [BuzzSentrySDK startWithConfigureOptions:^(BuzzSentryOptions *options) {
 +        options.dsn = @"https://6cc9bae94def43cab8444a99e0031c28@o447951.ingest.sentry.io/5428557";
 +        options.environment = @"integration-tests";
 +        options.tracesSampleRate = @1.0;

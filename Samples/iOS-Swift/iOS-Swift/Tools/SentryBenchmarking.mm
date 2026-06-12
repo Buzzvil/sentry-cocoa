@@ -11,7 +11,7 @@
 #define SENTRY_BENCHMARKING_THREAD_NAME "io.sentry.benchmark.sampler-thread"
 
 namespace {
-/// @note: Implementation ported from @c SentryThreadHandle.hpp .
+/// @note: Implementation ported from @c BuzzSentryThreadHandle.hpp .
 NSDictionary<NSString *, NSArray<NSNumber *> *> *
 cpuInfoByThread()
 {

@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryStacktraceTests: XCTestCase {
+class BuzzSentryStacktraceTests: XCTestCase {
 
     func testSerialize() {
         let stacktrace = TestData.stacktrace

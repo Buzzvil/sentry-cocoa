@@ -1,4 +1,4 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)

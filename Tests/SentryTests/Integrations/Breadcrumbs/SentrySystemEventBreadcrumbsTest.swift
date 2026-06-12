@@ -1,39 +1,39 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
-class SentrySystemEventBreadcrumbsTest: XCTestCase {
+class BuzzSentrySystemEventBreadcrumbsTest: XCTestCase {
     
     // This feature only works on iOS
     #if os(iOS)
     
     private class Fixture {
         let options: Options
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         var currentDateProvider = TestCurrentDateProvider()
 
         init() {
             options = Options()
-            options.dsn = TestConstants.dsnAsString(username: "SentrySystemEventBreadcrumbsTest")
-            options.releaseName = "SentrySessionTrackerIntegrationTests"
+            options.dsn = TestConstants.dsnAsString(username: "BuzzSentrySystemEventBreadcrumbsTest")
+            options.releaseName = "BuzzSentrySessionTrackerIntegrationTests"
             options.sessionTrackingIntervalMillis = 10_000
             options.environment = "debug"
 
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: currentDateProvider)
         }
 
-        func getSut(scope: Scope, currentDevice: UIDevice? = UIDevice.current) -> SentrySystemEventBreadcrumbs {
+        func getSut(scope: Scope, currentDevice: UIDevice? = UIDevice.current) -> BuzzSentrySystemEventBreadcrumbs {
             let client = Client(options: self.options)
-            let hub = SentryHub(client: client, andScope: scope)
-            SentrySDK.setCurrentHub(hub)
+            let hub = BuzzSentryHub(client: client, andScope: scope)
+            BuzzSentrySDK.setCurrentHub(hub)
 
-            let systemEvents = SentrySystemEventBreadcrumbs(fileManager: fileManager, andCurrentDateProvider: currentDateProvider)!
+            let systemEvents = BuzzSentrySystemEventBreadcrumbs(fileManager: fileManager, andCurrentDateProvider: currentDateProvider)!
             systemEvents.start(currentDevice)
             return systemEvents
         }
     }
 
     private let fixture = Fixture()
-    private var sut: SentrySystemEventBreadcrumbs!
+    private var sut: BuzzSentrySystemEventBreadcrumbs!
     
     internal class MyUIDevice: UIDevice {
         private var _batteryLevel: Float

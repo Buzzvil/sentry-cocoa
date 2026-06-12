@@ -1,36 +1,36 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
+class BuzzSentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
     
     private class Fixture {
         let options = Options()
-        let fileManager: SentryFileManager
+        let fileManager: BuzzSentryFileManager
         
         init() {
             options.tracesSampleRate = 0.1
             options.tracesSampler = { _ in return 0 } 
-            options.dsn = TestConstants.dsnAsString(username: "SentryAppStartTrackingIntegrationTests")
+            options.dsn = TestConstants.dsnAsString(username: "BuzzSentryAppStartTrackingIntegrationTests")
             
-            fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+            fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         }
     }
     
     private var fixture: Fixture!
-    private var sut: SentryAppStartTrackingIntegration!
+    private var sut: BuzzSentryAppStartTrackingIntegration!
     
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentrySDK.setAppStartMeasurement(nil)
-        sut = SentryAppStartTrackingIntegration()
+        BuzzSentrySDK.setAppStartMeasurement(nil)
+        sut = BuzzSentryAppStartTrackingIntegration()
     }
 
     override func tearDown() {
         super.tearDown()
         fixture.fileManager.deleteAppState()
-        PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = false
-        SentrySDK.setAppStartMeasurement(nil)
+        PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = false
+        BuzzSentrySDK.setAppStartMeasurement(nil)
         sut.stop()
     }
     
@@ -39,7 +39,7 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNotNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNotNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testNoSampleRate_DoesNotUpdatesAppState() {
@@ -50,11 +50,11 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testHybridSDKModeEnabled_DoesUpdatesAppState() {
-        PrivateSentrySDKOnly.appStartMeasurementHybridSDKMode = true
+        PrivateBuzzSentrySDKOnly.appStartMeasurementHybridSDKMode = true
         
         let options = fixture.options
         options.tracesSampleRate = 0.0
@@ -63,7 +63,7 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNotNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNotNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testOnlyAppStartMeasuringEnabled_DoesNotUpdatesAppState() {
@@ -74,7 +74,7 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func testAutoPerformanceTrackingDisabled_DoesNotUpdatesAppState() {
@@ -84,7 +84,7 @@ class SentryAppStartTrackingIntegrationTests: NotificationCenterTestCase {
         
         uiWindowDidBecomeVisible()
         
-        XCTAssertNil(SentrySDK.getAppStartMeasurement())
+        XCTAssertNil(BuzzSentrySDK.getAppStartMeasurement())
     }
     
     func test_PerformanceTrackingDisabled() {

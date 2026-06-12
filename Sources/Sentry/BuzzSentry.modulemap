@@ -1,0 +1,6 @@
+framework module BuzzSentry {
+    umbrella header "BuzzSentry.h"
+
+    export *
+    module * { export * }
+}

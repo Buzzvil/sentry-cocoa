@@ -1,0 +1,24 @@
+#import "BuzzSentryDataCategory.h"
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameAll;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameDefault;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameError;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameSession;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameTransaction;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameAttachment;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameUserFeedback;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameProfile;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDataCategoryNameUnknown;
+
+BuzzSentryDataCategory BuzzSentryDataCategoryForNSUInteger(NSUInteger value);
+
+BuzzSentryDataCategory BuzzSentryDataCategoryForString(NSString *value);
+
+BuzzSentryDataCategory BuzzSentryDataCategoryForEnvelopItemType(NSString *itemType);
+
+NSString *nameForBuzzSentryDataCategory(BuzzSentryDataCategory category);
+
+NS_ASSUME_NONNULL_END

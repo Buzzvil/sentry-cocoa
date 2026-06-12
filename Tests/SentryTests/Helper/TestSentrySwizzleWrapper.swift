@@ -1,10 +1,10 @@
 import Foundation
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class TestSentrySwizzleWrapper: SentrySwizzleWrapper {
+class TestBuzzSentrySwizzleWrapper: BuzzSentrySwizzleWrapper {
     
-    var callbacks = [String: SentrySwizzleSendActionCallback]()
+    var callbacks = [String: BuzzSentrySwizzleSendActionCallback]()
         
-    override func swizzleSendAction(_ callback: @escaping SentrySwizzleSendActionCallback, forKey key: String) {
+    override func swizzleSendAction(_ callback: @escaping BuzzSentrySwizzleSendActionCallback, forKey key: String) {
         callbacks[key] = callback
     }
 

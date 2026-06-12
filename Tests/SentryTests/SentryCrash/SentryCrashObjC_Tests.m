@@ -1,5 +1,5 @@
 //
-//  SentryCrashObjC_Tests.m
+//  BuzzSentryCrashObjC_Tests.m
 //
 //  Created by Karl Stenerud on 2012-08-30.
 //
@@ -27,7 +27,7 @@
 #import <XCTest/XCTest.h>
 #import <objc/runtime.h>
 
-#import "SentryCrashObjC.h"
+#import "BuzzSentryCrashObjC.h"
 
 @interface SomeObjCClass : NSObject {
     int someIvar;
@@ -52,10 +52,10 @@
 
 @end
 
-@interface SentryCrashObjC_Tests : XCTestCase
+@interface BuzzSentryCrashObjC_Tests : XCTestCase
 @end
 
-@implementation SentryCrashObjC_Tests
+@implementation BuzzSentryCrashObjC_Tests
 
 static NSArray *g_test_strings;
 
@@ -116,15 +116,15 @@ static NSArray *g_test_strings;
     pointer >>= 9;
     pointer <<= 8;
     void *ptr = (void *)pointer;
-    SentryCrashObjCType type = sentrycrashobjc_objectType(ptr);
-    XCTAssertEqual(type, SentryCrashObjCTypeUnknown, @"Type was %d", type);
+    BuzzSentryCrashObjCType type = sentrycrashobjc_objectType(ptr);
+    XCTAssertEqual(type, BuzzSentryCrashObjCTypeUnknown, @"Type was %d", type);
 }
 
 - (void)testObjectTypeNullPtr
 {
     void *ptr = NULL;
-    SentryCrashObjCType type = sentrycrashobjc_objectType(ptr);
-    XCTAssertEqual(type, SentryCrashObjCTypeUnknown, @"Type was %d", type);
+    BuzzSentryCrashObjCType type = sentrycrashobjc_objectType(ptr);
+    XCTAssertEqual(type, BuzzSentryCrashObjCTypeUnknown, @"Type was %d", type);
 }
 
 - (void)testObjectTypeCorrupt
@@ -134,16 +134,16 @@ static NSArray *g_test_strings;
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     objcClass.isa = (__bridge Class)((void *)-1);
 #pragma clang diagnostic pop
-    SentryCrashObjCType type = sentrycrashobjc_objectType(&objcClass);
-    XCTAssertEqual(type, SentryCrashObjCTypeUnknown, @"Type was %d", type);
+    BuzzSentryCrashObjCType type = sentrycrashobjc_objectType(&objcClass);
+    XCTAssertEqual(type, BuzzSentryCrashObjCTypeUnknown, @"Type was %d", type);
 }
 
 - (void)testObjectTypeClass
 {
-    Class cls = [SentryCrashObjC_Tests class];
+    Class cls = [BuzzSentryCrashObjC_Tests class];
     void *clsPtr = (__bridge void *)cls;
-    SentryCrashObjCType type = sentrycrashobjc_objectType(clsPtr);
-    XCTAssertTrue(type == SentryCrashObjCTypeClass, @"Type was %d", type);
+    BuzzSentryCrashObjCType type = sentrycrashobjc_objectType(clsPtr);
+    XCTAssertTrue(type == BuzzSentryCrashObjCTypeClass, @"Type was %d", type);
 }
 
 - (void)testStringIsValid3
@@ -551,7 +551,7 @@ static NSArray *g_test_strings;
 - (void)testUntrackedClassIsValid
 {
     void *classPtr = (__bridge void *)[SomeObjCClass class];
-    bool isValid = sentrycrashobjc_objectType(classPtr) == SentryCrashObjCTypeClass;
+    bool isValid = sentrycrashobjc_objectType(classPtr) == BuzzSentryCrashObjCTypeClass;
     XCTAssertTrue(isValid, @"Not a class");
 }
 
@@ -605,7 +605,7 @@ static NSArray *g_test_strings;
 - (void)testIvarList
 {
     void *classPtr = (__bridge void *)[SomeObjCClass class];
-    SentryCrashObjCIvar ivars[10];
+    BuzzSentryCrashObjCIvar ivars[10];
     int ivarCount = sentrycrashobjc_ivarList(classPtr, ivars, sizeof(ivars) / sizeof(*ivars));
     const char *expectedIvar1Name = "someIvar";
     const char *expectedIvar1Type = "i";
@@ -628,7 +628,7 @@ static NSArray *g_test_strings;
 - (void)testIvarListTruncated
 {
     void *classPtr = (__bridge void *)[SomeObjCClass class];
-    SentryCrashObjCIvar ivars[1];
+    BuzzSentryCrashObjCIvar ivars[1];
     int ivarCount = sentrycrashobjc_ivarList(classPtr, ivars, sizeof(ivars) / sizeof(*ivars));
     const char *expectedIvar1Name = "someIvar";
     const char *expectedIvar1Type = "i";
@@ -652,7 +652,7 @@ static NSArray *g_test_strings;
 - (void)testIvarNamed
 {
     void *classPtr = (__bridge void *)[SomeObjCClass class];
-    SentryCrashObjCIvar ivar;
+    BuzzSentryCrashObjCIvar ivar;
     bool found = sentrycrashobjc_ivarNamed(classPtr, "someIvar", &ivar);
     XCTAssertTrue(found, @"");
     const char *expectedIvarName = "someIvar";
@@ -666,7 +666,7 @@ static NSArray *g_test_strings;
 - (void)testIvarNamedNotFound
 {
     void *classPtr = (__bridge void *)[SomeObjCClass class];
-    SentryCrashObjCIvar ivar;
+    BuzzSentryCrashObjCIvar ivar;
     bool found = sentrycrashobjc_ivarNamed(classPtr, "blahblahh", &ivar);
     XCTAssertFalse(found, @"");
 

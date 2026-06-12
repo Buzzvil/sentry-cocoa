@@ -1,17 +1,17 @@
 import XCTest
 
-    class SentryThreadInspectorTests: XCTestCase {
+    class BuzzSentryThreadInspectorTests: XCTestCase {
     
     private class Fixture {
         var testMachineContextWrapper = TestMachineContextWrapper()
-        var stacktraceBuilder = TestSentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
+        var stacktraceBuilder = TestBuzzSentryStacktraceBuilder(crashStackEntryMapper: BuzzSentryCrashStackEntryMapper(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: [])))
         
-        func getSut(testWithRealMachineConextWrapper: Bool = false) -> SentryThreadInspector {
+        func getSut(testWithRealMachineConextWrapper: Bool = false) -> BuzzSentryThreadInspector {
             
-            let machineContextWrapper = testWithRealMachineConextWrapper ? SentryCrashDefaultMachineContextWrapper() : testMachineContextWrapper as SentryCrashMachineContextWrapper
-            let stacktraceBuilder = testWithRealMachineConextWrapper ? SentryStacktraceBuilder(crashStackEntryMapper: SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: []))) : self.stacktraceBuilder
+            let machineContextWrapper = testWithRealMachineConextWrapper ? BuzzSentryCrashDefaultMachineContextWrapper() : testMachineContextWrapper as BuzzSentryCrashMachineContextWrapper
+            let stacktraceBuilder = testWithRealMachineConextWrapper ? BuzzSentryStacktraceBuilder(crashStackEntryMapper: BuzzSentryCrashStackEntryMapper(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []))) : self.stacktraceBuilder
             
-            return SentryThreadInspector(
+            return BuzzSentryThreadInspector(
                 stacktraceBuilder: stacktraceBuilder,
                 andMachineContextWrapper: machineContextWrapper
             )
@@ -40,7 +40,7 @@ import XCTest
     
     @available(macOS 10.12, iOS 10.0, tvOS 10.0, *)
     func testStacktraceHasFrames_forEveryThread_withStitchAsyncOn() {
-        SentrySDK.start { $0.stitchAsyncCode = true }
+        BuzzSentrySDK.start { $0.stitchAsyncCode = true }
         assertStackForEveryThread()
     }
     
@@ -171,21 +171,21 @@ import XCTest
     }
 }
 
-private class TestSentryStacktraceBuilder: SentryStacktraceBuilder {
+private class TestBuzzSentryStacktraceBuilder: BuzzSentryStacktraceBuilder {
     
-    var stackTraces = [SentryCrashThread: Stacktrace]()
-    override func buildStacktrace(forThread thread: SentryCrashThread, context: OpaquePointer) -> Stacktrace {
+    var stackTraces = [BuzzSentryCrashThread: Stacktrace]()
+    override func buildStacktrace(forThread thread: BuzzSentryCrashThread, context: OpaquePointer) -> Stacktrace {
         return stackTraces[thread] ?? Stacktrace(frames: [], registers: [:])
     }
         
 }
 
 private struct ThreadInfo {
-    var threadId: SentryCrashThread
+    var threadId: BuzzSentryCrashThread
     var name: String
 }
 
-private class TestMachineContextWrapper: NSObject, SentryCrashMachineContextWrapper {
+private class TestMachineContextWrapper: NSObject, BuzzSentryCrashMachineContextWrapper {
         
     func fillContext(forCurrentThread context: OpaquePointer) {
         // Do nothing
@@ -197,12 +197,12 @@ private class TestMachineContextWrapper: NSObject, SentryCrashMachineContextWrap
     }
     
     var mockThreads: [ThreadInfo]?
-    func getThread(_ context: OpaquePointer, with index: Int32) -> SentryCrashThread {
+    func getThread(_ context: OpaquePointer, with index: Int32) -> BuzzSentryCrashThread {
         mockThreads?[Int(index)].threadId ?? 0
     }
     
     var threadName: String? = ""
-    func getThreadName(_ thread: SentryCrashThread, andBuffer buffer: UnsafeMutablePointer<Int8>, andBufLength bufLength: Int32) {
+    func getThreadName(_ thread: BuzzSentryCrashThread, andBuffer buffer: UnsafeMutablePointer<Int8>, andBufLength bufLength: Int32) {
         if let mocks = mockThreads, let index = mocks.firstIndex(where: { $0.threadId == thread }) {
             strcpy(buffer, mocks[index].name)
         } else if threadName != nil {
@@ -214,8 +214,8 @@ private class TestMachineContextWrapper: NSObject, SentryCrashMachineContextWrap
         }
     }
     
-    var mainThread: SentryCrashThread?
-    func isMainThread(_ thread: SentryCrashThread) -> Bool {
+    var mainThread: BuzzSentryCrashThread?
+    func isMainThread(_ thread: BuzzSentryCrashThread) -> Bool {
         return thread == mainThread
     }
 }

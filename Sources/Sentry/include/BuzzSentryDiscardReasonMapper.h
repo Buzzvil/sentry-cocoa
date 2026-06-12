@@ -1,0 +1,16 @@
+#import "BuzzSentryDiscardReason.h"
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+FOUNDATION_EXPORT NSString *const kBuzzSentryDiscardReasonNameBeforeSend;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDiscardReasonNameEventProcessor;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDiscardReasonNameSampleRate;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDiscardReasonNameNetworkError;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDiscardReasonNameQueueOverflow;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDiscardReasonNameCacheOverflow;
+FOUNDATION_EXPORT NSString *const kBuzzSentryDiscardReasonNameRateLimitBackoff;
+
+NSString *nameForBuzzSentryDiscardReason(BuzzSentryDiscardReason reason);
+
+NS_ASSUME_NONNULL_END

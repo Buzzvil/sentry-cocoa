@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryAppStateTests: XCTestCase {
+class BuzzSentryAppStateTests: XCTestCase {
 
     func testSerialize() {
         let appState = TestData.appState
@@ -29,7 +29,7 @@ class SentryAppStateTests: XCTestCase {
             "is_anr_ongoing": appState.isANROngoing
         ] as [String: Any]
         
-        let actual = SentryAppState(jsonObject: dict)
+        let actual = BuzzSentryAppState(jsonObject: dict)
         
         XCTAssertEqual(appState, actual)
     }
@@ -61,7 +61,7 @@ class SentryAppStateTests: XCTestCase {
         let date = Date(timeIntervalSince1970: 0.1)
         let expectedDate = Date(timeIntervalSince1970: 0)
         
-        let sut = SentryAppState(releaseName: "", osVersion: "", vendorId: "", isDebugging: false, systemBootTimestamp: date)
+        let sut = BuzzSentryAppState(releaseName: "", osVersion: "", vendorId: "", isDebugging: false, systemBootTimestamp: date)
         
         XCTAssertEqual(expectedDate, sut.systemBootTimestamp)
     }
@@ -70,6 +70,6 @@ class SentryAppStateTests: XCTestCase {
         let expected = TestData.appState
         var serialized = expected.serialize()
         setValue(&serialized)
-        XCTAssertNil(SentryAppState(jsonObject: serialized))
+        XCTAssertNil(BuzzSentryAppState(jsonObject: serialized))
     }
 }

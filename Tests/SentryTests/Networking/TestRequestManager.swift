@@ -19,7 +19,7 @@ public class TestRequestManager: NSObject, RequestManager {
     }
     
     var responseDelay = 0.0
-    public func add( _ request: URLRequest, completionHandler: SentryRequestOperationFinished? = nil) {
+    public func add( _ request: URLRequest, completionHandler: BuzzSentryRequestOperationFinished? = nil) {
         
         requests.record(request)
         

@@ -1,6 +1,6 @@
 import Foundation
 
-extension SentryCoreDataMiddleware {
+extension BuzzSentryCoreDataMiddleware {
     
     func fetchManagedObjectContext<T>(_ context: NSManagedObjectContext, request: NSFetchRequest<T>, originalImp: (NSFetchRequest<T>, NSErrorPointer) -> [T]?) throws -> [Any] {
         

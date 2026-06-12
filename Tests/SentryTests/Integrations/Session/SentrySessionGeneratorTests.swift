@@ -1,11 +1,11 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 /**
 * This isn't an actual test. It sends Sessions to the Sentry, but doesn't verify if they arrive there.
 */
 @available(OSX 10.10, *)
-class SentrySessionGeneratorTests: NotificationCenterTestCase {
+class BuzzSentrySessionGeneratorTests: NotificationCenterTestCase {
     
     struct Sessions {
         var healthy = 0
@@ -15,11 +15,11 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
         var abnormal = 0
     }
     
-    private var sentryCrash: TestSentryCrashWrapper!
-    private var autoSessionTrackingIntegration: SentryAutoSessionTrackingIntegration!
-    private var crashIntegration: SentryCrashIntegration!
+    private var sentryCrash: TestBuzzSentryCrashWrapper!
+    private var autoSessionTrackingIntegration: BuzzSentryAutoSessionTrackingIntegration!
+    private var crashIntegration: BuzzSentryCrashIntegration!
     private var options: Options!
-    private var fileManager: SentryFileManager!
+    private var fileManager: BuzzSentryFileManager!
     
     override func setUp() {
         super.setUp()
@@ -32,13 +32,13 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
         
         options.sessionTrackingIntervalMillis = 1
         
-        // We want to start and stop the SentryAutoSessionTrackingIntegration ourselves so we can send crashed and abnormal sessions.
+        // We want to start and stop the BuzzSentryAutoSessionTrackingIntegration ourselves so we can send crashed and abnormal sessions.
         options.integrations = Options.defaultIntegrations().filter { (name) -> Bool in
-            return name != "SentryAutoSessionTrackingIntegration"
+            return name != "BuzzSentryAutoSessionTrackingIntegration"
         }
         
         do {
-            fileManager = try SentryFileManager(options: options, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
+            fileManager = try BuzzSentryFileManager(options: options, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
             
             fileManager.deleteCurrentSession()
             fileManager.deleteCrashedSession()
@@ -84,7 +84,7 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
             // increment error count
             // We use the current date for the error message to generate new
             // issues for the release.
-            SentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error \(i) for \(Date())"]))
+            BuzzSentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error \(i) for \(Date())"]))
             goToBackground()
             goToForeground()
             // sends one errored session
@@ -99,17 +99,17 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
             goToForeground()
             
             // Almost always the AutoSessionTrackingIntegration is faster
-            // than the SentryCrashIntegration creating the event from the
+            // than the BuzzSentryCrashIntegration creating the event from the
             // crash report on a background thread.
             let crashEvent = Event()
-            crashEvent.level = SentryLevel.fatal
-            crashEvent.message = SentryMessage(formatted: "Crash for SentrySessionGeneratorTests")
-            SentrySDK.captureCrash(crashEvent)
+            crashEvent.level = BuzzSentryLevel.fatal
+            crashEvent.message = BuzzSentryMessage(formatted: "Crash for BuzzSentrySessionGeneratorTests")
+            BuzzSentrySDK.captureCrash(crashEvent)
         }
         sentryCrash.internalCrashedLastLaunch = false
         
         #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-        let appState = SentryAppState(releaseName: options.releaseName!, osVersion: UIDevice.current.systemVersion, vendorId: "12345678-1234-1234-1234-1234567890AB", isDebugging: false, systemBootTimestamp: Date())
+        let appState = BuzzSentryAppState(releaseName: options.releaseName!, osVersion: UIDevice.current.systemVersion, vendorId: "12345678-1234-1234-1234-1234567890AB", isDebugging: false, systemBootTimestamp: Date())
         appState.isActive = true
         fileManager.store(appState)
         
@@ -121,7 +121,7 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
             autoSessionTrackingIntegration.install(with: options)
             goToForeground()
             
-            SentrySDK.captureCrash(TestData.oomEvent)
+            BuzzSentrySDK.captureCrash(TestData.oomEvent)
         }
         fileManager.deleteAppState()
         #endif
@@ -141,17 +141,17 @@ class SentrySessionGeneratorTests: NotificationCenterTestCase {
     
     private func startSdk() {
         
-        SentrySDK.start(options: options)
+        BuzzSentrySDK.start(options: options)
         
-        sentryCrash = TestSentryCrashWrapper.sharedInstance()
-        let client = SentrySDK.currentHub().getClient()
-        let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
-        SentrySDK.setCurrentHub(hub)
+        sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
+        let client = BuzzSentrySDK.currentHub().getClient()
+        let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: DefaultCurrentDateProvider.sharedInstance())
+        BuzzSentrySDK.setCurrentHub(hub)
         
-        crashIntegration = SentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestSentryDispatchQueueWrapper())
+        crashIntegration = BuzzSentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: TestBuzzSentryDispatchQueueWrapper())
         crashIntegration.install(with: options)
         
-        autoSessionTrackingIntegration = SentryAutoSessionTrackingIntegration()
+        autoSessionTrackingIntegration = BuzzSentryAutoSessionTrackingIntegration()
         autoSessionTrackingIntegration.install(with: options)
     }
     

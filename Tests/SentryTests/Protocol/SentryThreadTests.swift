@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryThreadTests: XCTestCase {
+class BuzzSentryThreadTests: XCTestCase {
 
     func testSerialize() {
         let thread = TestData.thread

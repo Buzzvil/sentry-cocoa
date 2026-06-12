@@ -1,5 +1,5 @@
 //
-//  SentryCrashMonitor_AppState_Tests.m
+//  BuzzSentryCrashMonitor_AppState_Tests.m
 //
 //  Created by Karl Stenerud on 2012-02-05.
 //
@@ -25,14 +25,14 @@
 //
 
 #import "FileBasedTestCase.h"
-#import "XCTestCase+SentryCrash.h"
+#import "XCTestCase+BuzzSentryCrash.h"
 
-#import "SentryCrashMonitor_AppState.h"
+#import "BuzzSentryCrashMonitor_AppState.h"
 
-@interface SentryCrashMonitor_AppState_Tests : FileBasedTestCase
+@interface BuzzSentryCrashMonitor_AppState_Tests : FileBasedTestCase
 @end
 
-@implementation SentryCrashMonitor_AppState_Tests
+@implementation BuzzSentryCrashMonitor_AppState_Tests
 
 - (void)tearDown
 {
@@ -46,14 +46,14 @@
 {
     NSString *stateFile = [self.tempPath stringByAppendingPathComponent:@"state.json"];
     sentrycrashstate_initialize([stateFile cStringUsingEncoding:NSUTF8StringEncoding]);
-    sentrycrashcm_setActiveMonitors(SentryCrashMonitorTypeNone);
-    sentrycrashcm_setActiveMonitors(SentryCrashMonitorTypeApplicationState);
+    sentrycrashcm_setActiveMonitors(BuzzSentryCrashMonitorTypeNone);
+    sentrycrashcm_setActiveMonitors(BuzzSentryCrashMonitorTypeApplicationState);
 }
 
 - (void)testInitRelaunch
 {
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
 
     XCTAssertTrue(context.applicationIsInForeground);
     XCTAssertFalse(context.applicationIsActive);
@@ -94,13 +94,13 @@
 - (void)testInitCrash
 {
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
 
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppCrash();
-    SentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointC.applicationIsInForeground == checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpointC.applicationIsActive == checkpoint0.applicationIsActive);
@@ -155,7 +155,7 @@
     [jsonData writeToFile:stateFile atomically:true];
 
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
 
     XCTAssertTrue(context.applicationIsInForeground);
     XCTAssertFalse(context.applicationIsActive);
@@ -196,7 +196,7 @@
     [jsonData writeToFile:stateFile atomically:true];
 
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
 
     XCTAssertTrue(context.applicationIsInForeground);
     XCTAssertFalse(context.applicationIsActive);
@@ -231,14 +231,14 @@
 - (void)testActRelaunch
 {
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
 
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppActive(true);
 
-    SentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpoint1.applicationIsInForeground == checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpoint1.applicationIsActive != checkpoint0.applicationIsActive);
@@ -288,11 +288,11 @@
     [self initializeCrashState];
     usleep(1);
     sentrycrashstate_notifyAppActive(true);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppCrash();
-    SentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointC.applicationIsInForeground == checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpointC.applicationIsActive == checkpoint0.applicationIsActive);
@@ -316,7 +316,7 @@
     XCTAssertEqual(checkpointC.durationFromCrashStateInitToLastCrash, 0.0);
 
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
 
     XCTAssertTrue(context.applicationIsInForeground);
     XCTAssertFalse(context.applicationIsActive);
@@ -341,11 +341,11 @@
     [self initializeCrashState];
     usleep(1);
     sentrycrashstate_notifyAppActive(true);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppActive(false);
-    SentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpoint1.applicationIsInForeground == checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpoint1.applicationIsActive != checkpoint0.applicationIsActive);
@@ -371,7 +371,7 @@
 
     usleep(1);
     [self initializeCrashState];
-    SentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointR.applicationIsInForeground);
     XCTAssertFalse(checkpointR.applicationIsActive);
@@ -394,16 +394,16 @@
 - (void)testActDeactCrash
 {
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
     usleep(1);
     sentrycrashstate_notifyAppActive(true);
     usleep(1);
     sentrycrashstate_notifyAppActive(false);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppCrash();
-    SentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointC.applicationIsInForeground == checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpointC.applicationIsActive == checkpoint0.applicationIsActive);
@@ -454,11 +454,11 @@
     sentrycrashstate_notifyAppActive(true);
     usleep(1);
     sentrycrashstate_notifyAppActive(false);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppInForeground(false);
-    SentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpoint1.applicationIsInForeground != checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpoint1.applicationIsActive == checkpoint0.applicationIsActive);
@@ -484,7 +484,7 @@
 
     usleep(1);
     [self initializeCrashState];
-    SentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointR.applicationIsInForeground);
     XCTAssertFalse(checkpointR.applicationIsActive);
@@ -512,13 +512,13 @@
     sentrycrashstate_notifyAppActive(false);
     usleep(1);
     sentrycrashstate_notifyAppInForeground(false);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
     usleep(1);
     sentrycrashstate_notifyAppTerminate();
 
     usleep(1);
     [self initializeCrashState];
-    SentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointR.applicationIsInForeground);
     XCTAssertFalse(checkpointR.applicationIsActive);
@@ -541,18 +541,18 @@
 - (void)testActDeactBGCrash
 {
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
     usleep(1);
     sentrycrashstate_notifyAppActive(true);
     usleep(1);
     sentrycrashstate_notifyAppActive(false);
     usleep(1);
     sentrycrashstate_notifyAppInForeground(false);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppCrash();
-    SentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointC.applicationIsInForeground == checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpointC.applicationIsActive == checkpoint0.applicationIsActive);
@@ -605,11 +605,11 @@
     usleep(1);
     sentrycrashstate_notifyAppInForeground(false);
     usleep(1);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppInForeground(true);
-    SentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint1 = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpoint1.applicationIsInForeground != checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpoint1.applicationIsActive == checkpoint0.applicationIsActive);
@@ -634,7 +634,7 @@
 
     usleep(1);
     [self initializeCrashState];
-    SentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointR = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointR.applicationIsInForeground);
     XCTAssertFalse(checkpointR.applicationIsActive);
@@ -657,7 +657,7 @@
 - (void)testActDeactBGFGCrash
 {
     [self initializeCrashState];
-    SentryCrash_AppState context = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState context = *sentrycrashstate_currentState();
     usleep(1);
     sentrycrashstate_notifyAppActive(true);
     usleep(1);
@@ -666,11 +666,11 @@
     sentrycrashstate_notifyAppInForeground(false);
     usleep(1);
     sentrycrashstate_notifyAppInForeground(true);
-    SentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpoint0 = *sentrycrashstate_currentState();
 
     usleep(1);
     sentrycrashstate_notifyAppCrash();
-    SentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
+    BuzzSentryCrash_AppState checkpointC = *sentrycrashstate_currentState();
 
     XCTAssertTrue(checkpointC.applicationIsInForeground == checkpoint0.applicationIsInForeground);
     XCTAssertTrue(checkpointC.applicationIsActive == checkpoint0.applicationIsActive);

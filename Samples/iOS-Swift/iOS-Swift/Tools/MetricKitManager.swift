@@ -1,6 +1,6 @@
 import Foundation
 import MetricKit
-import Sentry
+import BuzzSentry
 
 @available(iOS 14.0, *)
 class MetricKitManager: NSObject, MXMetricManagerSubscriber {
@@ -21,7 +21,7 @@ class MetricKitManager: NSObject, MXMetricManagerSubscriber {
             attachments.append(attachment)
         }
         
-        SentrySDK.capture(message: "MetricKit received MXMetricPayload.") { scope in
+        BuzzSentrySDK.capture(message: "MetricKit received MXMetricPayload.") { scope in
             attachments.forEach { scope.add($0) }
         }
     }
@@ -33,7 +33,7 @@ class MetricKitManager: NSObject, MXMetricManagerSubscriber {
             attachments.append(attachment)
         }
         
-        SentrySDK.capture(message: "MetricKit received MXDiagnosticPayload.") { scope in
+        BuzzSentrySDK.capture(message: "MetricKit received MXDiagnosticPayload.") { scope in
             attachments.forEach { scope.add($0) }
         }
     }

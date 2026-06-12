@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
+class BuzzSentryANRTrackingIntegrationTests: BuzzSentrySDKIntegrationTestsBase {
     
     private class Fixture {
         let options: Options
@@ -15,7 +15,7 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
     }
     
     private var fixture: Fixture!
-    private var sut: SentryANRTrackingIntegration!
+    private var sut: BuzzSentryANRTrackingIntegration!
     
     override var options: Options {
         self.fixture.options
@@ -46,7 +46,7 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
         let options = Options()
         options.enableAppHangTracking = false
         
-        sut = SentryANRTrackingIntegration()
+        sut = BuzzSentryANRTrackingIntegration()
         let result = sut.install(with: options)
 
         XCTAssertFalse(result)
@@ -57,7 +57,7 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
         options.enableAppHangTracking = true
         options.appHangTimeoutInterval = 0
         
-        sut = SentryANRTrackingIntegration()
+        sut = BuzzSentryANRTrackingIntegration()
         let result = sut.install(with: options)
         
         XCTAssertFalse(result)
@@ -101,24 +101,24 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
     private func givenInitializedTracker(isBeingTraced: Bool = false) {
         givenSdkWithHub()
         self.crashWrapper.internalIsBeingTraced = isBeingTraced
-        sut = SentryANRTrackingIntegration()
+        sut = BuzzSentryANRTrackingIntegration()
         sut.install(with: self.options)
     }
     
     private func setUpThreadInspector() {
         let threadInspector = TestThreadInspector.instance
         
-        let frame1 = Sentry.Frame()
+        let frame1 = BuzzSentry.Frame()
         frame1.function = "Second_frame_function"
         
-        let thread1 = Sentry.Thread(threadId: 0)
+        let thread1 = BuzzSentry.Thread(threadId: 0)
         thread1.stacktrace = Stacktrace(frames: [frame1], registers: [:])
         thread1.current = true
         
-        let frame2 = Sentry.Frame()
+        let frame2 = BuzzSentry.Frame()
         frame2.function = "main"
         
-        let thread2 = Sentry.Thread(threadId: 1)
+        let thread2 = BuzzSentry.Thread(threadId: 1)
         thread2.stacktrace = Stacktrace(frames: [frame2], registers: [:])
         thread2.current = false
         
@@ -127,6 +127,6 @@ class SentryANRTrackingIntegrationTests: SentrySDKIntegrationTestsBase {
             thread1
         ]
         
-        SentrySDK.currentHub().getClient()?.threadInspector = threadInspector
+        BuzzSentrySDK.currentHub().getClient()?.threadInspector = threadInspector
     }
 }

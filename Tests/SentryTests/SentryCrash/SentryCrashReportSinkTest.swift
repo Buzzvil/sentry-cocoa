@@ -1,13 +1,13 @@
 import XCTest
 
-class SentryCrashReportSinkTests: SentrySDKIntegrationTestsBase {
+class BuzzSentryCrashReportSinkTests: BuzzSentrySDKIntegrationTestsBase {
     
     private class Fixture {
-        let crashWrapper = TestSentryCrashWrapper.sharedInstance()
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         
-        var sut: SentryCrashReportSink {
-            return SentryCrashReportSink(inAppLogic: SentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: crashWrapper, dispatchQueue: dispatchQueue)
+        var sut: BuzzSentryCrashReportSink {
+            return BuzzSentryCrashReportSink(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: []), crashWrapper: crashWrapper, dispatchQueue: dispatchQueue)
         }
     }
     
@@ -26,7 +26,7 @@ class SentryCrashReportSinkTests: SentrySDKIntegrationTestsBase {
     }
     
     func testFilterReports_CopyHubScope() {
-        SentrySDK.currentHub().scope.setEnvironment("testFilterReports_CopyHubScope")
+        BuzzSentrySDK.currentHub().scope.setEnvironment("testFilterReports_CopyHubScope")
         
         let expect = expectation(description: "Callback Called")
         
@@ -108,7 +108,7 @@ class SentryCrashReportSinkTests: SentrySDKIntegrationTestsBase {
     }
     
     private func getTestClient() -> TestClient {
-        let client = SentrySDK.currentHub().getClient() as? TestClient
+        let client = BuzzSentrySDK.currentHub().getClient() as? TestClient
         
         if client == nil {
             XCTFail("Hub Client is not a `TestClient`")

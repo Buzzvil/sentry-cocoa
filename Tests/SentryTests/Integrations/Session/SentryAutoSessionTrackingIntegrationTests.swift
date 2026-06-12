@@ -1,9 +1,9 @@
 import XCTest
 
-class SentryAutoSessionTrackingIntegrationTests: XCTestCase {
+class BuzzSentryAutoSessionTrackingIntegrationTests: XCTestCase {
 
     func test_AutoSessionTrackingEnabled_TrackerInitialized() {
-        let sut = SentryAutoSessionTrackingIntegration()
+        let sut = BuzzSentryAutoSessionTrackingIntegration()
         sut.install(with: Options())
         
         XCTAssertNotNil(Dynamic(sut).tracker.asAnyObject)
@@ -13,7 +13,7 @@ class SentryAutoSessionTrackingIntegrationTests: XCTestCase {
         let options = Options()
         options.enableAutoSessionTracking = false
         
-        let sut = SentryAutoSessionTrackingIntegration()
+        let sut = BuzzSentryAutoSessionTrackingIntegration()
         let result = sut.install(with: options)
         
         XCTAssertFalse(result)

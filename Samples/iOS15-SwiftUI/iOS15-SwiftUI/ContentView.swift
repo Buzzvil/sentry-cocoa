@@ -11,7 +11,7 @@ struct ContentView: View {
     
     func captureErrorAsync() async {
         let error = NSError(domain: "SampleErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Object does not exist"])
-        SentrySDK.capture(error: error)
+        BuzzSentrySDK.capture(error: error)
     }
     
     var body: some View {

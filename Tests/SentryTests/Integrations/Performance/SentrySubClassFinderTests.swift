@@ -2,7 +2,7 @@ import ObjectiveC
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentrySubClassFinderTests: XCTestCase {
+class BuzzSentrySubClassFinderTests: XCTestCase {
     
     private class Fixture {
         lazy var runtimeWrapper: SentryTestObjCRuntimeWrapper = {
@@ -26,8 +26,8 @@ class SentrySubClassFinderTests: XCTestCase {
             }
         }
         
-        var sut: SentrySubClassFinder {
-            return SentrySubClassFinder(dispatchQueue: SentryDispatchQueueWrapper(), objcRuntimeWrapper: runtimeWrapper)
+        var sut: BuzzSentrySubClassFinder {
+            return BuzzSentrySubClassFinder(dispatchQueue: BuzzSentryDispatchQueueWrapper(), objcRuntimeWrapper: runtimeWrapper)
         }
     }
     
@@ -58,7 +58,7 @@ class SentrySubClassFinderTests: XCTestCase {
     }
   
     func testGettingSublcasses_DoesNotCallInitializer() {
-        let sut = SentrySubClassFinder(dispatchQueue: TestSentryDispatchQueueWrapper(), objcRuntimeWrapper: fixture.runtimeWrapper)
+        let sut = BuzzSentrySubClassFinder(dispatchQueue: TestBuzzSentryDispatchQueueWrapper(), objcRuntimeWrapper: fixture.runtimeWrapper)
         
         var actual: [AnyClass] = []
         sut.actOnSubclassesOfViewController(inImage: fixture.imageName) { subClass in

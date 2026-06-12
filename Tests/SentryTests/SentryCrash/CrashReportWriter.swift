@@ -1,7 +1,7 @@
 import XCTest
 
 extension XCTestCase {
-    func givenStoredSentryCrashReport(resource: String) throws {
+    func givenStoredBuzzSentryCrashReport(resource: String) throws {
         let jsonPath = Bundle(for: type(of: self)).path(forResource: resource, ofType: "json")
         let jsonData = try Data(contentsOf: URL(fileURLWithPath: jsonPath ?? ""))
         jsonData.withUnsafeBytes { ( bytes: UnsafeRawBufferPointer) -> Void in

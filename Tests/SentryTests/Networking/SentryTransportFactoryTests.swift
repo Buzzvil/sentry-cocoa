@@ -1,9 +1,9 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
-class SentryTransportFactoryTests: XCTestCase {
+class BuzzSentryTransportFactoryTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryTransportFactoryTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryTransportFactoryTests")
 
     func testIntegration_UrlSessionDelegate_PassedToRequestManager() {
         let urlSessionDelegateSpy = UrlSessionDelegateSpy()
@@ -14,12 +14,12 @@ class SentryTransportFactoryTests: XCTestCase {
         }
         
         let options = Options()
-        options.dsn = SentryTransportFactoryTests.dsnAsString
+        options.dsn = BuzzSentryTransportFactoryTests.dsnAsString
         options.urlSessionDelegate = urlSessionDelegateSpy
         
-        let fileManager = try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
-        let transport = TransportInitializer.initTransport(options, sentryFileManager: fileManager)
-        let requestManager = Dynamic(transport).requestManager.asObject as! SentryQueueableRequestManager
+        let fileManager = try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+        let transport = TransportInitializer.initTransport(options, buzzSentryFileManager: fileManager)
+        let requestManager = Dynamic(transport).requestManager.asObject as! BuzzSentryQueueableRequestManager
         
         let imgUrl = URL(string: "https://github.com")!
         let request = URLRequest(url: imgUrl)

@@ -1,10 +1,10 @@
-import Sentry
+import BuzzSentry
 import SwiftUI
 import XCTest
 
-class SentryNetworkTrackerIntegrationTests: XCTestCase {
+class BuzzSentryNetworkTrackerIntegrationTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryNetworkTrackerIntegrationTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryNetworkTrackerIntegrationTests")
     private static let testBaggageURL = URL(string: "http://localhost:8080/echo-baggage-header")!
     private static let testTraceURL = URL(string: "http://localhost:8080/echo-sentry-trace")!
     private static let clientErrorTraceURL = URL(string: "http://localhost:8080/http-client-error")!
@@ -17,7 +17,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         
         init() {
             options = Options()
-            options.dsn = SentryNetworkTrackerIntegrationTests.dsnAsString
+            options.dsn = BuzzSentryNetworkTrackerIntegrationTests.dsnAsString
             options.tracesSampleRate = 1.0
         }
     }
@@ -85,19 +85,19 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         fixture.options.enableSwizzling = false
         startSDK()
         
-        XCTAssertFalse(SentryNetworkTracker.sharedInstance.isNetworkBreadcrumbEnabled)
+        XCTAssertFalse(BuzzSentryNetworkTracker.sharedInstance.isNetworkBreadcrumbEnabled)
     }
     
     func testBreadcrumbDisabled() {
         fixture.options.enableNetworkBreadcrumbs = false
         startSDK()
         
-        XCTAssertFalse(SentryNetworkTracker.sharedInstance.isNetworkBreadcrumbEnabled)
+        XCTAssertFalse(BuzzSentryNetworkTracker.sharedInstance.isNetworkBreadcrumbEnabled)
     }
     
     func testBreadcrumbEnabled() {
         startSDK()
-        XCTAssertTrue(SentryNetworkTracker.sharedInstance.isNetworkBreadcrumbEnabled)
+        XCTAssertTrue(BuzzSentryNetworkTracker.sharedInstance.isNetworkBreadcrumbEnabled)
     }
     
     /**
@@ -112,7 +112,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         customConfiguration.protocolClasses?.insert(BlockAllRequestsProtocol.self, at: 0)
         let session = URLSession(configuration: customConfiguration)
         
-        let dataTask = session.dataTask(with: SentryNetworkTrackerIntegrationTests.testBaggageURL) { (_, _, error) in
+        let dataTask = session.dataTask(with: BuzzSentryNetworkTrackerIntegrationTests.testBaggageURL) { (_, _, error) in
             
             if let error = (error as NSError?) {
                 XCTAssertEqual(BlockAllRequestsProtocol.error.domain, error.domain)
@@ -133,7 +133,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         let expect = expectation(description: "Callback Expectation")
         let session = URLSession(configuration: URLSessionConfiguration.default)
         
-        let dataTask = session.dataTask(with: SentryNetworkTrackerIntegrationTests.testBaggageURL) { (_, _, _) in
+        let dataTask = session.dataTask(with: BuzzSentryNetworkTrackerIntegrationTests.testBaggageURL) { (_, _, _) in
             expect.fulfill()
         }
         
@@ -145,18 +145,18 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         
         wait(for: [expect], timeout: 5)
         
-        let scope = SentrySDK.currentHub().scope
+        let scope = BuzzSentrySDK.currentHub().scope
         let breadcrumbs = Dynamic(scope).breadcrumbArray as [Breadcrumb]?
         XCTAssertEqual(1, breadcrumbs?.count)
     }
     
     func testGetRequest_SpanCreatedAndBaggageHeaderAdded_disabled() {
         startSDK()
-        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! SentryTracer
+        let transaction = BuzzSentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
         let expect = expectation(description: "Request completed")
         let session = URLSession(configuration: URLSessionConfiguration.default)
 
-        let dataTask = session.dataTask(with: SentryNetworkTrackerIntegrationTests.testBaggageURL) { (data, _, _) in
+        let dataTask = session.dataTask(with: BuzzSentryNetworkTrackerIntegrationTests.testBaggageURL) { (data, _, _) in
             let response = String(data: data ?? Data(), encoding: .utf8) ?? ""
             
             let expectedBaggageHeader = transaction.traceContext.toBaggage().toHTTPHeader()
@@ -174,18 +174,18 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         let networkSpan = children![0]
         XCTAssertTrue(networkSpan.isFinished) //Span was finished in task setState swizzle.
         XCTAssertEqual(SENTRY_NETWORK_REQUEST_OPERATION, networkSpan.context.operation)
-        XCTAssertEqual("GET \(SentryNetworkTrackerIntegrationTests.testBaggageURL)", networkSpan.context.spanDescription)
+        XCTAssertEqual("GET \(BuzzSentryNetworkTrackerIntegrationTests.testBaggageURL)", networkSpan.context.spanDescription)
         
         XCTAssertEqual("200", networkSpan.tags["http.status_code"])
     }
 
     func testGetRequest_CompareSentryTraceHeader() {
         startSDK()
-        let transaction = SentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! SentryTracer
+        let transaction = BuzzSentrySDK.startTransaction(name: "Test Transaction", operation: "TEST", bindToScope: true) as! BuzzSentryTracer
         let expect = expectation(description: "Request completed")
         let session = URLSession(configuration: URLSessionConfiguration.default)
         var response: String?
-        let dataTask = session.dataTask(with: SentryNetworkTrackerIntegrationTests.testTraceURL) { (data, _, _) in
+        let dataTask = session.dataTask(with: BuzzSentryNetworkTrackerIntegrationTests.testTraceURL) { (data, _, _) in
             response = String(data: data ?? Data(), encoding: .utf8) ?? ""
             expect.fulfill()
         }
@@ -193,7 +193,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         dataTask.resume()
         wait(for: [expect], timeout: 5)
 
-        let children = Dynamic(transaction).children as [SentrySpan]?
+        let children = Dynamic(transaction).children as [BuzzSentrySpan]?
 
         XCTAssertEqual(children?.count, 1) //Span was created in task resume swizzle.
         let networkSpan = children![0]
@@ -207,20 +207,20 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
         fixture.options.enableCaptureFailedRequests = true
         startSDK()
 
-        XCTAssertFalse(SentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
+        XCTAssertFalse(BuzzSentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
     }
     
     func testCaptureFailedRequestsDisabled() {
         startSDK()
 
-        XCTAssertFalse(SentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
+        XCTAssertFalse(BuzzSentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
     }
     
     func testCaptureFailedRequestsEnabled() {
         fixture.options.enableCaptureFailedRequests = true
         startSDK()
 
-        XCTAssertTrue(SentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
+        XCTAssertTrue(BuzzSentryNetworkTracker.sharedInstance.isCaptureFailedRequestsEnabled)
     }
     
     func testGetCaptureFailedRequestsEnabled() {
@@ -240,7 +240,7 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
 
         let session = URLSession(configuration: URLSessionConfiguration.default)
 
-        let dataTask = session.dataTask(with: SentryNetworkTrackerIntegrationTests.clientErrorTraceURL) { (_, _, _) in }
+        let dataTask = session.dataTask(with: BuzzSentryNetworkTrackerIntegrationTests.clientErrorTraceURL) { (_, _, _) in }
 
         dataTask.resume()
         wait(for: [expect], timeout: 5)
@@ -264,15 +264,15 @@ class SentryNetworkTrackerIntegrationTests: XCTestCase {
     }
         
     private func startSDK() {
-        SentrySDK.start(options: self.fixture.options)
+        BuzzSentrySDK.start(options: self.fixture.options)
     }
     
-    private func startTransactionBoundToScope() -> SentryTracer {
-        return SentrySDK.startTransaction(name: "Test", operation: "test", bindToScope: true) as! SentryTracer
+    private func startTransactionBoundToScope() -> BuzzSentryTracer {
+        return BuzzSentrySDK.startTransaction(name: "Test", operation: "test", bindToScope: true) as! BuzzSentryTracer
     }
     
     private func assertRemovedIntegration(_ options: Options) {
-        let sut = SentryNetworkTrackingIntegration()
+        let sut = BuzzSentryNetworkTrackingIntegration()
         let result = sut.install(with: options)
         
         XCTAssertFalse(result)

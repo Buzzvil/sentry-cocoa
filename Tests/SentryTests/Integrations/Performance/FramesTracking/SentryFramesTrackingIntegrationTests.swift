@@ -1,23 +1,23 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryFramesTrackingIntegrationTests: XCTestCase {
+class BuzzSentryFramesTrackingIntegrationTests: XCTestCase {
 
     private class Fixture {
         let options = Options()
         let displayLink = TestDiplayLinkWrapper()
         
         init() {
-            options.dsn = TestConstants.dsnAsString(username: "SentryFramesTrackingIntegrationTests")
+            options.dsn = TestConstants.dsnAsString(username: "BuzzSentryFramesTrackingIntegrationTests")
         }
         
-        var sut: SentryFramesTrackingIntegration {
-            return SentryFramesTrackingIntegration()
+        var sut: BuzzSentryFramesTrackingIntegration {
+            return BuzzSentryFramesTrackingIntegration()
         }
     }
     
     private let fixture = Fixture()
-    private var sut: SentryFramesTrackingIntegration!
+    private var sut: BuzzSentryFramesTrackingIntegration!
     
     override func setUp() {
         super.setUp()
@@ -25,7 +25,7 @@ class SentryFramesTrackingIntegrationTests: XCTestCase {
     }
     
     override func tearDown() {
-        PrivateSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = false
+        PrivateBuzzSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = false
         super.tearDown()
     }
     
@@ -63,7 +63,7 @@ class SentryFramesTrackingIntegrationTests: XCTestCase {
     }
     
     func test_HybridSDKEnables_MeasureFrames() {
-        PrivateSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = true
+        PrivateBuzzSentrySDKOnly.framesTrackingMeasurementHybridSDKMode = true
         
         let options = fixture.options
         options.enableAutoPerformanceTracking = false
@@ -75,7 +75,7 @@ class SentryFramesTrackingIntegrationTests: XCTestCase {
     func testUninstall() {
         sut.install(with: fixture.options)
         
-        SentryFramesTracker.sharedInstance().setDisplayLinkWrapper(fixture.displayLink)
+        BuzzSentryFramesTracker.sharedInstance().setDisplayLinkWrapper(fixture.displayLink)
         
         sut.uninstall()
         

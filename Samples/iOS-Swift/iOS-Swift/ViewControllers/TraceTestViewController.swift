@@ -1,5 +1,5 @@
 import Foundation
-import Sentry
+import BuzzSentry
 import UIKit
 
 class TraceTestViewController: UIViewController {
@@ -24,7 +24,7 @@ class TraceTestViewController: UIViewController {
         let dataTask = session.dataTask(with: imgUrl) { (data, _, error) in
             DispatchQueue.main.async {
                 if let err = error {
-                    SentrySDK.capture(error: err)
+                    BuzzSentrySDK.capture(error: err)
                 } else if let image = data {
                     self.imageView.image = UIImage(data: image)
                     self.appendLifeCycleStep("GET https://sentry-brand.storage.googleapis.com/sentry-logo-black.png")

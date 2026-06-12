@@ -1,12 +1,12 @@
-#import "TestSentryCrashWrapper.h"
-#import "SentryCrash.h"
+#import "TestBuzzSentryCrashWrapper.h"
+#import "BuzzSentryCrash.h"
 #import <Foundation/Foundation.h>
 
-@implementation TestSentryCrashWrapper
+@implementation TestBuzzSentryCrashWrapper
 
 + (instancetype)sharedInstance
 {
-    TestSentryCrashWrapper *instance = [[self alloc] init];
+    TestBuzzSentryCrashWrapper *instance = [[self alloc] init];
     instance.internalActiveDurationSinceLastCrash = NO;
     instance.internalDurationFromCrashStateInitToLastCrash = 0;
     instance.internalActiveDurationSinceLastCrash = 0;

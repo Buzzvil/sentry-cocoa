@@ -1,54 +1,54 @@
 import XCTest
 
-class SentryCrashIntegrationTests: NotificationCenterTestCase {
+class BuzzSentryCrashIntegrationTests: NotificationCenterTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentryCrashIntegrationTests")
-    private static let dsn = TestConstants.dsn(username: "SentryCrashIntegrationTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentryCrashIntegrationTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentryCrashIntegrationTests")
     
     private class Fixture {
         
         let currentDateProvider = TestCurrentDateProvider()
-        let dispatchQueueWrapper = TestSentryDispatchQueueWrapper()
-        let hub: SentryHub
+        let dispatchQueueWrapper = TestBuzzSentryDispatchQueueWrapper()
+        let hub: BuzzSentryHub
         let options: Options
-        let sentryCrash: TestSentryCrashWrapper
+        let sentryCrash: TestBuzzSentryCrashWrapper
         
         init() {
-            sentryCrash = TestSentryCrashWrapper.sharedInstance()
+            sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
             sentryCrash.internalActiveDurationSinceLastCrash = 5.0
             sentryCrash.internalCrashedLastLaunch = true
             
             options = Options()
-            options.dsn = SentryCrashIntegrationTests.dsnAsString
+            options.dsn = BuzzSentryCrashIntegrationTests.dsnAsString
             options.releaseName = TestData.appState.releaseName
             
-            let client = Client(options: options, permissionsObserver: TestSentryPermissionsObserver())
+            let client = Client(options: options, permissionsObserver: TestBuzzSentryPermissionsObserver())
             hub = TestHub(client: client, andScope: nil)
         }
         
-        var session: SentrySession {
-            let session = SentrySession(releaseName: "1.0.0")
+        var session: BuzzSentrySession {
+            let session = BuzzSentrySession(releaseName: "1.0.0")
             session.incrementErrors()
             
             return session
         }
         
-        var fileManager: SentryFileManager {
-            return try! SentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
+        var fileManager: BuzzSentryFileManager {
+            return try! BuzzSentryFileManager(options: options, andCurrentDateProvider: TestCurrentDateProvider())
         }
         
-        func getSut() -> SentryCrashIntegration {
+        func getSut() -> BuzzSentryCrashIntegration {
             return getSut(crashWrapper: sentryCrash)
         }
         
-        func getSut(crashWrapper: SentryCrashWrapper) -> SentryCrashIntegration {
-            return SentryCrashIntegration(crashAdapter: crashWrapper, andDispatchQueueWrapper: dispatchQueueWrapper)
+        func getSut(crashWrapper: BuzzSentryCrashWrapper) -> BuzzSentryCrashIntegration {
+            return BuzzSentryCrashIntegration(crashAdapter: crashWrapper, andDispatchQueueWrapper: dispatchQueueWrapper)
         }
         
-        var sutWithoutCrash: SentryCrashIntegration {
+        var sutWithoutCrash: BuzzSentryCrashIntegration {
             let crash = sentryCrash
             crash.internalCrashedLastLaunch = false
-            return SentryCrashIntegration(crashAdapter: crash, andDispatchQueueWrapper: dispatchQueueWrapper)
+            return BuzzSentryCrashIntegration(crashAdapter: crash, andDispatchQueueWrapper: dispatchQueueWrapper)
         }
     }
     
@@ -73,29 +73,29 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     }
     
     // Test for GH-581
-    func testReleaseNamePassedToSentryCrash() {
+    func testReleaseNamePassedToBuzzSentryCrash() {
         let releaseName = "1.0.0"
         let dist = "14G60"
         // The start of the SDK installs all integrations
-        SentrySDK.start(options: ["dsn": SentryCrashIntegrationTests.dsnAsString,
+        BuzzSentrySDK.start(options: ["dsn": BuzzSentryCrashIntegrationTests.dsnAsString,
                                   "release": releaseName,
                                   "dist": dist]
         )
         
-        // To test this properly we need SentryCrash and SentryCrashIntegration installed and registered on the current hub of the SDK.
+        // To test this properly we need BuzzSentryCrash and BuzzSentryCrashIntegration installed and registered on the current hub of the SDK.
         
-        let instance = SentryCrash.sharedInstance()
+        let instance = BuzzSentryCrash.sharedInstance()
         let userInfo = (instance?.userInfo ?? ["": ""]) as Dictionary
         assertUserInfoField(userInfo: userInfo, key: "release", expected: releaseName)
         assertUserInfoField(userInfo: userInfo, key: "dist", expected: dist)
     }
     
-    func testContext_IsPassedToSentryCrash() {
-        SentrySDK.start { options in
-            options.dsn = SentryCrashIntegrationTests.dsnAsString
+    func testContext_IsPassedToBuzzSentryCrash() {
+        BuzzSentrySDK.start { options in
+            options.dsn = BuzzSentryCrashIntegrationTests.dsnAsString
         }
         
-        let instance = SentryCrash.sharedInstance()
+        let instance = BuzzSentryCrash.sharedInstance()
         let userInfo = (instance?.userInfo ?? ["": ""]) as Dictionary
         let context = userInfo["context"] as? [String: Any]
         
@@ -104,17 +104,17 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     
     func testSystemInfoIsEmpty() {
         let scope = Scope()
-        SentryCrashIntegration.enrichScope(scope, crashWrapper: TestSentryCrashWrapper.sharedInstance())
+        BuzzSentryCrashIntegration.enrichScope(scope, crashWrapper: TestBuzzSentryCrashWrapper.sharedInstance())
         
         // We don't worry about the actual values
         // This is an edge case where the user doesn't use the
-        // SentryCrashIntegration. Just make sure to not crash.
+        // BuzzSentryCrashIntegration. Just make sure to not crash.
         XCTAssertFalse(scope.contextDictionary.allValues.isEmpty)
     }
     
     func testEndSessionAsCrashed_WithCurrentSession() {
         let expectedCrashedSession = givenCrashedSession()
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
         
         advanceTime(bySeconds: 10)
         
@@ -127,11 +127,11 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     func testEndSessionAsCrashed_WhenOOM_WithCurrentSession() {
         givenOOMAppState()
-        SentrySDK.startInvocations = 1
+        BuzzSentrySDK.startInvocations = 1
         
         let expectedCrashedSession = givenCrashedSession()
         
-        SentrySDK.setCurrentHub(fixture.hub)
+        BuzzSentrySDK.setCurrentHub(fixture.hub)
         advanceTime(bySeconds: 10)
         
         let sut = fixture.sutWithoutCrash
@@ -172,7 +172,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         
         let sentryCrash = fixture.sentryCrash
         sentryCrash.internalCrashedLastLaunch = false
-        let sut = SentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: fixture.dispatchQueueWrapper)
+        let sut = BuzzSentryCrashIntegration(crashAdapter: sentryCrash, andDispatchQueueWrapper: fixture.dispatchQueueWrapper)
         sut.install(with: Options())
         
         let fileManager = fixture.fileManager
@@ -244,7 +244,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         
         sut.install(with: Options())
         
-        SentrySDK.configureScope { scope in
+        BuzzSentrySDK.configureScope { scope in
             scope.removeContext(key: "device")
         }
         
@@ -270,7 +270,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         let (sut, hub) = givenSutWithGlobalHubAndCrashWrapper()
         sut.install(with: Options())
         
-        // Manually reset and enable the crash state because tearing down the global state in SentryCrash to achieve the same is complicated and doesn't really work.
+        // Manually reset and enable the crash state because tearing down the global state in BuzzSentryCrash to achieve the same is complicated and doesn't really work.
         let crashStatePath = String(cString: sentrycrashstate_filePath())
         let api = sentrycrashcm_appstate_getAPI()
         sentrycrashstate_initialize(crashStatePath)
@@ -286,12 +286,12 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         // Manually simulate a crash
         sentrycrashstate_notifyAppCrash()
         
-        try givenStoredSentryCrashReport(resource: "Resources/crash-report-1")
+        try givenStoredBuzzSentryCrashReport(resource: "Resources/crash-report-1")
         
         // Force reloading of crash state
         sentrycrashstate_initialize(sentrycrashstate_filePath())
         // Force sending all reports, because the crash reports are only sent once after first init.
-        SentryCrashIntegration.sendAllSentryCrashReports()
+        BuzzSentryCrashIntegration.sendAllBuzzSentryCrashReports()
         
         XCTAssertEqual(1, transport.flushInvocations.count)
         XCTAssertEqual(5.0, transport.flushInvocations.first)
@@ -301,14 +301,14 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         api?.pointee.setEnabled(false)
     }
     
-    private func givenCurrentSession() -> SentrySession {
+    private func givenCurrentSession() -> BuzzSentrySession {
         // serialize sets the timestamp
-        let session = SentrySession(jsonObject: fixture.session.serialize())!
+        let session = BuzzSentrySession(jsonObject: fixture.session.serialize())!
         fixture.fileManager.storeCurrentSession(session)
         return session
     }
     
-    private func givenCrashedSession() -> SentrySession {
+    private func givenCrashedSession() -> BuzzSentrySession {
         let session = givenCurrentSession()
         session.endCrashed(withTimestamp: fixture.currentDateProvider.date().addingTimeInterval(5))
         
@@ -317,31 +317,31 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
     
     #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     private func givenOOMAppState() {
-        let appState = SentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: UIDevice.current.identifierForVendor?.uuidString ?? "", isDebugging: false, systemBootTimestamp: fixture.currentDateProvider.date())
+        let appState = BuzzSentryAppState(releaseName: TestData.appState.releaseName, osVersion: UIDevice.current.systemVersion, vendorId: UIDevice.current.identifierForVendor?.uuidString ?? "", isDebugging: false, systemBootTimestamp: fixture.currentDateProvider.date())
         appState.isActive = true
         fixture.fileManager.store(appState)
         fixture.fileManager.moveAppStateToPreviousAppState()
     }
     #endif
     
-    private func givenSutWithGlobalHub() -> (SentryCrashIntegration, SentryHub) {
+    private func givenSutWithGlobalHub() -> (BuzzSentryCrashIntegration, BuzzSentryHub) {
         let sut = fixture.getSut()
         let hub = fixture.hub
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
 
         return (sut, hub)
     }
     
-    private func givenSutWithGlobalHubAndCrashWrapper() -> (SentryCrashIntegration, SentryHub) {
-        let sut = fixture.getSut(crashWrapper: SentryCrashWrapper.sharedInstance())
+    private func givenSutWithGlobalHubAndCrashWrapper() -> (BuzzSentryCrashIntegration, BuzzSentryHub) {
+        let sut = fixture.getSut(crashWrapper: BuzzSentryCrashWrapper.sharedInstance())
         let hub = fixture.hub
-        SentrySDK.setCurrentHub(hub)
+        BuzzSentrySDK.setCurrentHub(hub)
 
         return (sut, hub)
     }
     
     private func setLocaleToGlobalScope(locale: String) {
-        SentrySDK.configureScope { scope in
+        BuzzSentrySDK.configureScope { scope in
             guard var device = scope.contextDictionary["device"] as? [String: Any] else {
                 XCTFail("No device found on context.")
                 return
@@ -356,13 +356,13 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         if let actual = userInfo[key] as? String {
             XCTAssertEqual(expected, actual)
         } else {
-            XCTFail("\(key) not passed to SentryCrash.userInfo")
+            XCTFail("\(key) not passed to BuzzSentryCrash.userInfo")
         }
     }
     
-    private func assertCrashedSessionStored(expected: SentrySession) {
+    private func assertCrashedSessionStored(expected: BuzzSentrySession) {
         let crashedSession = fixture.fileManager.readCrashedSession()
-        XCTAssertEqual(SentrySessionStatus.crashed, crashedSession?.status)
+        XCTAssertEqual(BuzzSentrySessionStatus.crashed, crashedSession?.status)
         XCTAssertEqual(expected, crashedSession)
         XCTAssertNil(fixture.fileManager.readCurrentSession())
     }
@@ -397,7 +397,7 @@ class SentryCrashIntegrationTests: NotificationCenterTestCase {
         XCTAssertEqual(Locale.autoupdatingCurrent.identifier, device["locale"] as? String)
     }
     
-    private func assertLocaleOnHub(locale: String, hub: SentryHub) {
+    private func assertLocaleOnHub(locale: String, hub: BuzzSentryHub) {
         let context = hub.scope.contextDictionary as? [String: Any] ?? ["": ""]
         
         guard let device = context["device"] as? [String: Any] else {

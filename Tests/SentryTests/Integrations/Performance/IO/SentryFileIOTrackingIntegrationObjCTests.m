@@ -1,12 +1,12 @@
-#import "SentryNSDataTracker.h"
-#import "SentryOptions.h"
-#import "SentrySDK.h"
-#import "SentrySpan.h"
-#import "SentrySwizzle.h"
-#import "SentryTracer.h"
+#import "BuzzSentryNSDataTracker.h"
+#import "BuzzSentryOptions.h"
+#import "BuzzSentrySDK.h"
+#import "BuzzSentrySpan.h"
+#import "BuzzSentrySwizzle.h"
+#import "BuzzSentryTracer.h"
 #import <XCTest/XCTest.h>
 
-@interface SentryFileIOTrackingIntegrationObjCTests : XCTestCase
+@interface BuzzSentryFileIOTrackingIntegrationObjCTests : XCTestCase
 
 @end
 
@@ -14,7 +14,7 @@
  * Not all NSData methods have an equivalent in Swift.
  * These tests assure NSData methods are working properly.
  */
-@implementation SentryFileIOTrackingIntegrationObjCTests {
+@implementation BuzzSentryFileIOTrackingIntegrationObjCTests {
     NSString *filePath;
     NSURL *fileUrl;
     NSData *someData;
@@ -48,7 +48,7 @@
     someData = [@"SOME DATA" dataUsingEncoding:NSUTF8StringEncoding];
     [someData writeToFile:filePath atomically:true];
 
-    [SentrySDK startWithConfigureOptions:^(SentryOptions *_Nonnull options) {
+    [BuzzSentrySDK startWithConfigureOptions:^(BuzzSentryOptions *_Nonnull options) {
         options.enableAutoPerformanceTracking = YES;
         options.enableFileIOTracking = YES;
         options.tracesSampleRate = @1;
@@ -61,7 +61,7 @@
     if (deleteFileDirectory) {
         [NSFileManager.defaultManager removeItemAtURL:fileDirectory error:nil];
     }
-    [SentrySDK close];
+    [BuzzSentrySDK close];
 }
 
 - (void)test_dataWithContentsOfFile
@@ -200,13 +200,13 @@
 
 - (void)assertTransactionForOperation:(NSString *)operation block:(void (^)(void))block
 {
-    SentryTracer *parentTransaction = [SentrySDK startTransactionWithName:@"Transaction"
+    BuzzSentryTracer *parentTransaction = [BuzzSentrySDK startTransactionWithName:@"Transaction"
                                                                 operation:@"Test"
                                                               bindToScope:YES];
 
     block();
 
-    SentrySpan *ioSpan = parentTransaction.children.firstObject;
+    BuzzSentrySpan *ioSpan = parentTransaction.children.firstObject;
 
     XCTAssertEqual(parentTransaction.children.count, 1);
     XCTAssertEqual([ioSpan.data[@"file.size"] unsignedIntValue], someData.length);
@@ -222,7 +222,6 @@
             stringWithFormat:@"%@ (%@)", filename,
             [NSByteCountFormatter stringFromByteCount:someData.length
                                            countStyle:NSByteCountFormatterCountStyleBinary]];
-
         XCTAssertEqualObjects(ioSpan.context.spanDescription, expectedString);
     }
 }

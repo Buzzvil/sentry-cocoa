@@ -4,7 +4,7 @@ preReleaseCommand: bash ./scripts/bump.sh
 targets:
   - name: github
   - name: cocoapods
-    specPath: Sentry.podspec
+    specPath: BuzzSentry.podspec
   - name: registry
     sdks:
       cocoapods:sentry-cocoa:

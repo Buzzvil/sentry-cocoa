@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 7.30.1
+
+### Fixes
+
+- Fix issue with invalid profiles uploading (#2358 and #2359)
+
+## 7.30.0
 
 ### Features
 

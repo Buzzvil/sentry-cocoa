@@ -1,0 +1,40 @@
+#import "BuzzSentryCoreDataTrackingIntegration.h"
+#import "BuzzSentryCoreDataSwizzling.h"
+#import "BuzzSentryCoreDataTracker.h"
+#import "BuzzSentryLog.h"
+#import "BuzzSentryNSDataSwizzling.h"
+#import "BuzzSentryOptions.h"
+
+@interface
+BuzzSentryCoreDataTrackingIntegration ()
+
+@property (nonatomic, strong) BuzzSentryCoreDataTracker *tracker;
+
+@end
+
+@implementation BuzzSentryCoreDataTrackingIntegration
+
+- (BOOL)installWithOptions:(BuzzSentryOptions *)options
+{
+    if (![super installWithOptions:options]) {
+        return NO;
+    }
+
+    self.tracker = [[BuzzSentryCoreDataTracker alloc] init];
+    [BuzzSentryCoreDataSwizzling.sharedInstance startWithMiddleware:self.tracker];
+
+    return YES;
+}
+
+- (BuzzSentryIntegrationOption)integrationOptions
+{
+    return kIntegrationOptionEnableAutoPerformanceTracking | kIntegrationOptionEnableSwizzling
+        | kIntegrationOptionIsTracingEnabled | kIntegrationOptionEnableCoreDataTracking;
+}
+
+- (void)uninstall
+{
+    [BuzzSentryCoreDataSwizzling.sharedInstance stop];
+}
+
+@end

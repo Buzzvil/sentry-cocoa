@@ -7,11 +7,11 @@ class ViewController: NSViewController {
         let crumb = Breadcrumb(level: SentryLevel.info, category: "Debug")
         crumb.message = "tapped addBreadcrumb"
         crumb.type = "user"
-        SentrySDK.addBreadcrumb(crumb: crumb)
+        BuzzSentrySDK.addBreadcrumb(crumb: crumb)
     }
     
     @IBAction func captureMessage(_ sender: Any) {    
-        let eventId = SentrySDK.capture(message: "Yeah captured a message")
+        let eventId = BuzzSentrySDK.capture(message: "Yeah captured a message")
         // Returns eventId in case of successfull processed event
         // otherwise nil
         print("\(String(describing: eventId))")
@@ -20,7 +20,7 @@ class ViewController: NSViewController {
     @IBAction func captureUserFeedback(_ sender: Any) {
         let error = NSError(domain: "UserFeedbackErrorDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "This never happens."])
 
-        let eventId = SentrySDK.capture(error: error) { scope in
+        let eventId = BuzzSentrySDK.capture(error: error) { scope in
             scope.setLevel(.fatal)
         }
         
@@ -28,7 +28,7 @@ class ViewController: NSViewController {
         userFeedback.comments = "It broke on macOS-Swift. I don't know why, but this happens."
         userFeedback.email = "john@me.com"
         userFeedback.name = "John Me"
-        SentrySDK.capture(userFeedback: userFeedback)
+        BuzzSentrySDK.capture(userFeedback: userFeedback)
     }
 
     @IBAction func crashOnException(_ sender: Any) {
@@ -38,14 +38,14 @@ class ViewController: NSViewController {
     }
     
     @IBAction func captureTransaction(_ sender: Any) {
-        let transaction = SentrySDK.startTransaction(name: "Some Transaction", operation: "some operation")
+        let transaction = BuzzSentrySDK.startTransaction(name: "Some Transaction", operation: "some operation")
         DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0.4...0.6), execute: {
             transaction.finish()
         })
     }
     
     @IBAction func sentryCrash(_ sender: Any) {
-        SentrySDK.crash()
+        BuzzSentrySDK.crash()
     }
     
     @IBAction func cppException(_ sender: Any) {
@@ -67,7 +67,7 @@ class ViewController: NSViewController {
     
     func asyncCrash2() {
         DispatchQueue.main.async {
-            SentrySDK.crash()
+            BuzzSentrySDK.crash()
         }
     }
 }

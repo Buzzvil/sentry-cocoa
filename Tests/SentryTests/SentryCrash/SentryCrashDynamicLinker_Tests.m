@@ -1,5 +1,5 @@
 //
-//  SentryCrashDynamicLinker_Tests.m
+//  BuzzSentryCrashDynamicLinker_Tests.m
 //
 //  Created by Karl Stenerud on 2013-10-02.
 //
@@ -27,12 +27,12 @@
 #import <XCTest/XCTest.h>
 #include <mach-o/dyld.h>
 
-#import "SentryCrashDynamicLinker.h"
+#import "BuzzSentryCrashDynamicLinker.h"
 
-@interface SentryCrashDynamicLinker_Tests : XCTestCase
+@interface BuzzSentryCrashDynamicLinker_Tests : XCTestCase
 @end
 
-@implementation SentryCrashDynamicLinker_Tests
+@implementation BuzzSentryCrashDynamicLinker_Tests
 
 - (void)testImageUUID
 {

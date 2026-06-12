@@ -11,12 +11,12 @@ struct TestConstants {
         return "https://\(username):password@app.getsentry.com/12345"
     }
     
-    static func dsn(username: String) -> SentryDsn {
-        var dsn: SentryDsn?
+    static func dsn(username: String) -> BuzzSentryDsn {
+        var dsn: BuzzSentryDsn?
         do {
-            dsn = try SentryDsn(string: self.dsnAsString(username: username))
+            dsn = try BuzzSentryDsn(string: self.dsnAsString(username: username))
         } catch {
-            XCTFail("SentryDsn could not be created")
+            XCTFail("BuzzSentryDsn could not be created")
         }
 
         // The test fails if the dsn could not be created
@@ -25,14 +25,14 @@ struct TestConstants {
     
     static var eventWithSerializationError: Event {
         let event = Event()
-        event.message = SentryMessage(formatted: "")
+        event.message = BuzzSentryMessage(formatted: "")
         event.sdk = ["event": Event()]
         return event
     }
     
-    static var envelope: SentryEnvelope {
+    static var envelope: BuzzSentryEnvelope {
         let event = Event()
-        let envelopeItem = SentryEnvelopeItem(event: event)
-        return SentryEnvelope(id: event.eventId, singleItem: envelopeItem)
+        let envelopeItem = BuzzSentryEnvelopeItem(event: event)
+        return BuzzSentryEnvelope(id: event.eventId, singleItem: envelopeItem)
     }
 }

@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryFrameTests: XCTestCase {
+class BuzzSentryFrameTests: XCTestCase {
 
     func testSerialize() {
         let frame = TestData.frame

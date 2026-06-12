@@ -1,20 +1,20 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryScreenshotIntegrationTests: XCTestCase {
+class BuzzSentryScreenshotIntegrationTests: XCTestCase {
     
     private class Fixture {
-        let screenshot: TestSentryScreenshot
+        let screenshot: TestBuzzSentryScreenshot
         
         init() {
-            let testScreenShot = TestSentryScreenshot()
+            let testScreenShot = TestBuzzSentryScreenshot()
             testScreenShot.result = [Data(count: 10)]
             screenshot = testScreenShot
         }
         
-        func getSut() -> SentryScreenshotIntegration {
-            let result = SentryScreenshotIntegration()
+        func getSut() -> BuzzSentryScreenshotIntegration {
+            let result = BuzzSentryScreenshotIntegration()
             return result
         }
     }
@@ -25,7 +25,7 @@ class SentryScreenshotIntegrationTests: XCTestCase {
         super.setUp()
         fixture = Fixture()
         
-        SentryDependencyContainer.sharedInstance().screenshot = fixture.screenshot
+        BuzzSentryDependencyContainer.sharedInstance().screenshot = fixture.screenshot
     }
     
     override func tearDown() {
@@ -34,22 +34,22 @@ class SentryScreenshotIntegrationTests: XCTestCase {
     }
 
     func test_attachScreenshot_disabled() {
-        SentrySDK.start { $0.attachScreenshot = false }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
+        BuzzSentrySDK.start { $0.attachScreenshot = false }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
         XCTAssertFalse(sentrycrash_hasSaveScreenshotCallback())
     }
     
     func test_attachScreenshot_enabled() {
-        SentrySDK.start { $0.attachScreenshot = true }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
+        BuzzSentrySDK.start { $0.attachScreenshot = true }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
         XCTAssertTrue(sentrycrash_hasSaveScreenshotCallback())
     }
     
     func test_uninstall() {
-        SentrySDK.start { $0.attachScreenshot = true }
-        SentrySDK.close()
+        BuzzSentrySDK.start { $0.attachScreenshot = true }
+        BuzzSentrySDK.close()
         
-        XCTAssertNil(SentrySDK.currentHub().getClient()?.attachmentProcessors)
+        XCTAssertNil(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors)
         XCTAssertFalse(sentrycrash_hasSaveScreenshotCallback())
     }
     

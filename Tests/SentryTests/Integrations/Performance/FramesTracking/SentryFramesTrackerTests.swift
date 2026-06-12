@@ -1,7 +1,7 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryFramesTrackerTests: XCTestCase {
+class BuzzSentryFramesTrackerTests: XCTestCase {
     
     private class Fixture {
         
@@ -10,11 +10,11 @@ class SentryFramesTrackerTests: XCTestCase {
         
         init() {
             displayLinkWrapper = TestDiplayLinkWrapper()
-            queue = DispatchQueue(label: "SentryFramesTrackerTests", qos: .background, attributes: [.concurrent])
+            queue = DispatchQueue(label: "BuzzSentryFramesTrackerTests", qos: .background, attributes: [.concurrent])
         }
         
-        lazy var sut: SentryFramesTracker = {
-            return SentryFramesTracker(displayLinkWrapper: displayLinkWrapper)
+        lazy var sut: BuzzSentryFramesTracker = {
+            return BuzzSentryFramesTracker(displayLinkWrapper: displayLinkWrapper)
         }()
     }
     
@@ -104,7 +104,7 @@ class SentryFramesTrackerTests: XCTestCase {
     }
 }
 
-private extension SentryFramesTrackerTests {
+private extension BuzzSentryFramesTrackerTests {
     func assert(slow: UInt? = nil, frozen: UInt? = nil, total: UInt? = nil) {
         let currentFrames = fixture.sut.currentFrames
         if let total = total {

@@ -6,7 +6,7 @@ import XCTest
 class TestViewController: UIViewController {
 }
 
-class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
+class BuzzSentryUIViewControllerPerformanceTrackerTests: XCTestCase {
 
     let loadView = "loadView"
     let viewWillLoad = "viewWillLoad"
@@ -26,24 +26,24 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
         var options: Options {
             let options = Options()
             let imageName = String(
-                cString: class_getImageName(SentryUIViewControllerSwizzlingTests.self)!,
+                cString: class_getImageName(BuzzSentryUIViewControllerSwizzlingTests.self)!,
                 encoding: .utf8)! as NSString
             options.add(inAppInclude: imageName.lastPathComponent)
             return options
         }
         
         let viewController = TestViewController()
-        let tracker = SentryPerformanceTracker()
+        let tracker = BuzzSentryPerformanceTracker()
         let dateProvider = TestCurrentDateProvider()
         
         var viewControllerName: String!
                 
-        func getSut() -> SentryUIViewControllerPerformanceTracker {
+        func getSut() -> BuzzSentryUIViewControllerPerformanceTracker {
             CurrentDate.setCurrentDateProvider(dateProvider)
             
-            viewControllerName = SentryUIViewControllerSanitizer.sanitizeViewControllerName(viewController)
+            viewControllerName = BuzzSentryUIViewControllerSanitizer.sanitizeViewControllerName(viewController)
         
-            let result = SentryUIViewControllerPerformanceTracker.shared
+            let result = BuzzSentryUIViewControllerPerformanceTracker.shared
             Dynamic(result).tracker = self.tracker
             
             return result
@@ -55,7 +55,7 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         fixture = Fixture()
-        SentrySDK.start(options: fixture.options)
+        BuzzSentrySDK.start(options: fixture.options)
     }
 
     override func tearDown() {
@@ -64,7 +64,7 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
     }
     
     func testUILifeCycle_ViewDidAppear() {
-        assertUILifeCycle(finishStatus: SentrySpanStatus.ok) { sut, viewController, tracker, callbackExpectation, transactionSpan in
+        assertUILifeCycle(finishStatus: BuzzSentrySpanStatus.ok) { sut, viewController, tracker, callbackExpectation, transactionSpan in
             sut.viewControllerViewDidAppear(viewController) {
                 let blockSpan = self.getStack(tracker).last!
                 XCTAssertEqual(blockSpan.context.parentSpanId, transactionSpan.context.spanId)
@@ -83,7 +83,7 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
     func testUILifeCycle_NoViewDidAppear_OnlyViewWillDisappear() {
         // Don't call viewDidAppear on purpose.
 
-        assertUILifeCycle(finishStatus: SentrySpanStatus.cancelled) { sut, viewController, tracker, callbackExpectation, transactionSpan in
+        assertUILifeCycle(finishStatus: BuzzSentrySpanStatus.cancelled) { sut, viewController, tracker, callbackExpectation, transactionSpan in
             sut.viewControllerViewWillDisappear(viewController) {
                 let blockSpan = self.getStack(tracker).last!
                 XCTAssertEqual(blockSpan.context.parentSpanId, transactionSpan.context.spanId)
@@ -93,7 +93,7 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
         }
     }
 
-    private func assertUILifeCycle(finishStatus: SentrySpanStatus, lifecycleEndingMethod: (SentryUIViewControllerPerformanceTracker, UIViewController, SentryPerformanceTracker, XCTestExpectation, Span) -> Void) {
+    private func assertUILifeCycle(finishStatus: BuzzSentrySpanStatus, lifecycleEndingMethod: (BuzzSentryUIViewControllerPerformanceTracker, UIViewController, BuzzSentryPerformanceTracker, XCTestExpectation, Span) -> Void) {
         let sut = fixture.getSut()
         let viewController = fixture.viewController
         let tracker = fixture.tracker
@@ -112,8 +112,8 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
             XCTAssertEqual(blockSpan.context.spanDescription, self.loadView)
             callbackExpectation.fulfill()
         }
-        XCTAssertEqual((transactionSpan as! SentryTracer?)!.transactionContext.name, fixture.viewControllerName)
-        XCTAssertEqual((transactionSpan as! SentryTracer?)!.transactionContext.nameSource, .component)
+        XCTAssertEqual((transactionSpan as! BuzzSentryTracer?)!.transactionContext.name, fixture.viewControllerName)
+        XCTAssertEqual((transactionSpan as! BuzzSentryTracer?)!.transactionContext.nameSource, .component)
         XCTAssertFalse(transactionSpan.isFinished)
 
         sut.viewControllerViewDidLoad(viewController) {
@@ -449,15 +449,15 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
         let secondController = TestViewController()
         let tracker = fixture.tracker
 
-        var firstTransaction: SentryTracer!
-        var secondTransaction: SentryTracer!
+        var firstTransaction: BuzzSentryTracer!
+        var secondTransaction: BuzzSentryTracer!
 
         sut.viewControllerViewDidLoad(firstController) {
-            firstTransaction = self.getStack(tracker).first as? SentryTracer
+            firstTransaction = self.getStack(tracker).first as? BuzzSentryTracer
         }
 
         sut.viewControllerViewDidLoad(secondController) {
-            secondTransaction = self.getStack(tracker).first as? SentryTracer
+            secondTransaction = self.getStack(tracker).first as? BuzzSentryTracer
         }
 
         //Callback methods intentionally left blank from now on
@@ -503,17 +503,17 @@ class SentryUIViewControllerPerformanceTrackerTests: XCTestCase {
         XCTAssertEqual(duration, expectedDuration)
     }
     
-    private func assertTrackerIsEmpty(_ tracker: SentryPerformanceTracker) {
+    private func assertTrackerIsEmpty(_ tracker: BuzzSentryPerformanceTracker) {
         XCTAssertEqual(0, getStack(tracker).count)
         XCTAssertEqual(0, getSpans(tracker).count)
     }
 
-    private func getStack(_ tracker: SentryPerformanceTracker) -> [Span] {
+    private func getStack(_ tracker: BuzzSentryPerformanceTracker) -> [Span] {
         let result = Dynamic(tracker).activeSpanStack as [Span]?
         return result!
     }
 
-    private func getSpans(_ tracker: SentryPerformanceTracker) -> [SpanId: Span] {
+    private func getSpans(_ tracker: BuzzSentryPerformanceTracker) -> [SpanId: Span] {
         let result = Dynamic(tracker).spans as [SpanId: Span]?
         return result!
     }

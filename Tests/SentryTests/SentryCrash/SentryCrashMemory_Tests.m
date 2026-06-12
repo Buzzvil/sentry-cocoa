@@ -26,13 +26,13 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashMemory.h"
+#import "BuzzSentryCrashMemory.h"
 #import "TestThread.h"
 
-@interface SentryCrashMemory_Tests : XCTestCase
+@interface BuzzSentryCrashMemory_Tests : XCTestCase
 @end
 
-@implementation SentryCrashMemory_Tests
+@implementation BuzzSentryCrashMemory_Tests
 
 - (void)testCopyMem
 {

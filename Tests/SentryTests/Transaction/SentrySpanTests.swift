@@ -1,7 +1,7 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
-class SentrySpanTests: XCTestCase {
+class BuzzSentrySpanTests: XCTestCase {
     private var logOutput: TestLogOutput!
     private var fixture: Fixture!
 
@@ -13,7 +13,7 @@ class SentrySpanTests: XCTestCase {
         let extraValue = "extra_value"
         let options: Options
         let currentDateProvider = TestCurrentDateProvider()
-        let tracer = SentryTracer()
+        let tracer = BuzzSentryTracer()
 
         init() {
             options = Options()
@@ -28,7 +28,7 @@ class SentrySpanTests: XCTestCase {
         }
         
         func getSut(client: Client) -> Span {
-            let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: TestSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDateProvider)
+            let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: TestBuzzSentryCrashWrapper.sharedInstance(), andCurrentDateProvider: currentDateProvider)
             return hub.startTransaction(name: someTransaction, operation: someOperation)
         }
         
@@ -38,8 +38,8 @@ class SentrySpanTests: XCTestCase {
         super.setUp()
 
         logOutput = TestLogOutput()
-        SentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
-        SentryLog.setLogOutput(logOutput)
+        BuzzSentryLog.configure(true, diagnosticLevel: BuzzSentryLevel.debug)
+        BuzzSentryLog.setLogOutput(logOutput)
 
         fixture = Fixture()
         CurrentDate.setCurrentDateProvider(fixture.currentDateProvider)
@@ -67,7 +67,7 @@ class SentrySpanTests: XCTestCase {
         XCTAssertEqual(lastEvent.transaction, fixture.someTransaction)
         XCTAssertEqual(lastEvent.timestamp, TestData.timestamp)
         XCTAssertEqual(lastEvent.startTimestamp, TestData.timestamp)
-        XCTAssertEqual(lastEvent.type, SentryEnvelopeItemTypeTransaction)
+        XCTAssertEqual(lastEvent.type, BuzzSentryEnvelopeItemTypeTransaction)
     }
     
     func testFinish_Custom_Timestamp() {
@@ -89,11 +89,11 @@ class SentrySpanTests: XCTestCase {
         XCTAssertEqual(lastEvent.transaction, fixture.someTransaction)
         XCTAssertEqual(lastEvent.timestamp, finishDate)
         XCTAssertEqual(lastEvent.startTimestamp, TestData.timestamp)
-        XCTAssertEqual(lastEvent.type, SentryEnvelopeItemTypeTransaction)
+        XCTAssertEqual(lastEvent.type, BuzzSentryEnvelopeItemTypeTransaction)
     }
 
     func testFinishSpanWithDefaultTimestamp() {
-        let span = SentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
+        let span = BuzzSentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
         span.finish()
 
         XCTAssertEqual(span.startTimestamp, TestData.timestamp)
@@ -103,7 +103,7 @@ class SentrySpanTests: XCTestCase {
     }
 
     func testFinishSpanWithCustomTimestamp() {
-        let span = SentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
+        let span = BuzzSentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
         span.timestamp = Date(timeIntervalSince1970: 123)
         span.finish()
 
@@ -137,8 +137,8 @@ class SentrySpanTests: XCTestCase {
         let spans = serializedData["spans"] as! [Any]
         let serializedChild = spans[0] as! [String: Any]
         
-        XCTAssertEqual(serializedChild["span_id"] as? String, childSpan.context.spanId.sentrySpanIdString)
-        XCTAssertEqual(serializedChild["parent_span_id"] as? String, span.context.spanId.sentrySpanIdString)
+        XCTAssertEqual(serializedChild["span_id"] as? String, childSpan.context.spanId.buzzSentrySpanIdString)
+        XCTAssertEqual(serializedChild["parent_span_id"] as? String, span.context.spanId.buzzSentrySpanIdString)
     }
     
     func testStartChildWithNameOperation() {
@@ -219,8 +219,8 @@ class SentrySpanTests: XCTestCase {
         span.finish()
         
         let serialization = span.serialize()
-        XCTAssertEqual(serialization["span_id"] as? String, span.context.spanId.sentrySpanIdString)
-        XCTAssertEqual(serialization["trace_id"] as? String, span.context.traceId.sentryIdString)
+        XCTAssertEqual(serialization["span_id"] as? String, span.context.spanId.buzzSentrySpanIdString)
+        XCTAssertEqual(serialization["trace_id"] as? String, span.context.traceId.buzzSentryIdString)
         XCTAssertEqual(serialization["timestamp"] as? TimeInterval, TestData.timestamp.timeIntervalSince1970)
         XCTAssertEqual(serialization["start_timestamp"] as? TimeInterval, TestData.timestamp.timeIntervalSince1970)
         XCTAssertEqual(serialization["type"] as? String, SpanContext.type)
@@ -242,7 +242,7 @@ class SentrySpanTests: XCTestCase {
     }
 
     func testSanitizeDataSpan() {
-        let span = SentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
+        let span = BuzzSentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
 
         span.setExtra(value: Date(timeIntervalSince1970: 10), key: "date")
         span.finish()
@@ -262,7 +262,7 @@ class SentrySpanTests: XCTestCase {
     func testMergeTagsInSerialization() {
         let context = SpanContext(operation: fixture.someOperation)
         context.setTag(value: fixture.someTransaction, key: fixture.extraKey)
-        let span = SentrySpan(tracer: fixture.tracer, context: context)
+        let span = BuzzSentrySpan(tracer: fixture.tracer, context: context)
         
         let originalSerialization = span.serialize()
         XCTAssertEqual((originalSerialization["tags"] as! Dictionary)[fixture.extraKey], fixture.someTransaction)
@@ -296,7 +296,7 @@ class SentrySpanTests: XCTestCase {
     }
     
     func testTraceHeaderUndecided() {
-        let span = SentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
+        let span = BuzzSentrySpan(tracer: fixture.tracer, context: SpanContext(operation: fixture.someOperation, sampled: .undecided))
         let header = span.toTraceHeader()
         
         XCTAssertEqual(header.traceId, span.context.traceId)
@@ -306,7 +306,7 @@ class SentrySpanTests: XCTestCase {
     }
     
     func testSetExtra_ForwardsToSetData() {
-        let sut = SentrySpan(tracer: fixture.tracer, context: SpanContext(operation: "test"))
+        let sut = BuzzSentrySpan(tracer: fixture.tracer, context: SpanContext(operation: "test"))
         sut.setExtra(value: 0, key: "key")
         
         XCTAssertEqual(["key": 0], sut.data as! [String: Int])
@@ -316,24 +316,24 @@ class SentrySpanTests: XCTestCase {
         // Span has a weak reference to tracer. If we don't keep a reference
         // to the tracer ARC will deallocate the tracer.
         let sutGenerator: () -> Span = {
-            let tracer = SentryTracer()
-            return SentrySpan(tracer: tracer, context: SpanContext(operation: ""))
+            let tracer = BuzzSentryTracer()
+            return BuzzSentrySpan(tracer: tracer, context: SpanContext(operation: ""))
         }
         
         let sut = sutGenerator()
 
         let actual = sut.startChild(operation: fixture.someOperation)
-        XCTAssertTrue(SentryNoOpSpan.shared() === actual)
+        XCTAssertTrue(BuzzSentryNoOpSpan.shared() === actual)
         
         let actualWithDescription = sut.startChild(operation: fixture.someOperation, description: fixture.someDescription)
-        XCTAssertTrue(SentryNoOpSpan.shared() === actualWithDescription)
+        XCTAssertTrue(BuzzSentryNoOpSpan.shared() === actualWithDescription)
     }
     
     @available(tvOS 10.0, *)
     @available(OSX 10.12, *)
     @available(iOS 10.0, *)
     func testModifyingExtraFromMultipleThreads() {
-        let queue = DispatchQueue(label: "SentrySpanTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentrySpanTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
                 
         let span = fixture.getSut()
@@ -363,23 +363,23 @@ class SentrySpanTests: XCTestCase {
     }
 
     func testSpanStatusNames() {
-        XCTAssertEqual(nameForSentrySpanStatus(.undefined), kSentrySpanStatusNameUndefined)
-        XCTAssertEqual(nameForSentrySpanStatus(.ok), kSentrySpanStatusNameOk)
-        XCTAssertEqual(nameForSentrySpanStatus(.deadlineExceeded), kSentrySpanStatusNameDeadlineExceeded)
-        XCTAssertEqual(nameForSentrySpanStatus(.unauthenticated), kSentrySpanStatusNameUnauthenticated)
-        XCTAssertEqual(nameForSentrySpanStatus(.permissionDenied), kSentrySpanStatusNamePermissionDenied)
-        XCTAssertEqual(nameForSentrySpanStatus(.notFound), kSentrySpanStatusNameNotFound)
-        XCTAssertEqual(nameForSentrySpanStatus(.resourceExhausted), kSentrySpanStatusNameResourceExhausted)
-        XCTAssertEqual(nameForSentrySpanStatus(.invalidArgument), kSentrySpanStatusNameInvalidArgument)
-        XCTAssertEqual(nameForSentrySpanStatus(.unimplemented), kSentrySpanStatusNameUnimplemented)
-        XCTAssertEqual(nameForSentrySpanStatus(.unavailable), kSentrySpanStatusNameUnavailable)
-        XCTAssertEqual(nameForSentrySpanStatus(.internalError), kSentrySpanStatusNameInternalError)
-        XCTAssertEqual(nameForSentrySpanStatus(.unknownError), kSentrySpanStatusNameUnknownError)
-        XCTAssertEqual(nameForSentrySpanStatus(.cancelled), kSentrySpanStatusNameCancelled)
-        XCTAssertEqual(nameForSentrySpanStatus(.alreadyExists), kSentrySpanStatusNameAlreadyExists)
-        XCTAssertEqual(nameForSentrySpanStatus(.failedPrecondition), kSentrySpanStatusNameFailedPrecondition)
-        XCTAssertEqual(nameForSentrySpanStatus(.aborted), kSentrySpanStatusNameAborted)
-        XCTAssertEqual(nameForSentrySpanStatus(.outOfRange), kSentrySpanStatusNameOutOfRange)
-        XCTAssertEqual(nameForSentrySpanStatus(.dataLoss), kSentrySpanStatusNameDataLoss)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.undefined), kBuzzSentrySpanStatusNameUndefined)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.ok), kBuzzSentrySpanStatusNameOk)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.deadlineExceeded), kBuzzSentrySpanStatusNameDeadlineExceeded)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.unauthenticated), kBuzzSentrySpanStatusNameUnauthenticated)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.permissionDenied), kBuzzSentrySpanStatusNamePermissionDenied)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.notFound), kBuzzSentrySpanStatusNameNotFound)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.resourceExhausted), kBuzzSentrySpanStatusNameResourceExhausted)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.invalidArgument), kBuzzSentrySpanStatusNameInvalidArgument)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.unimplemented), kBuzzSentrySpanStatusNameUnimplemented)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.unavailable), kBuzzSentrySpanStatusNameUnavailable)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.internalError), kBuzzSentrySpanStatusNameInternalError)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.unknownError), kBuzzSentrySpanStatusNameUnknownError)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.cancelled), kBuzzSentrySpanStatusNameCancelled)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.alreadyExists), kBuzzSentrySpanStatusNameAlreadyExists)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.failedPrecondition), kBuzzSentrySpanStatusNameFailedPrecondition)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.aborted), kBuzzSentrySpanStatusNameAborted)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.outOfRange), kBuzzSentrySpanStatusNameOutOfRange)
+        XCTAssertEqual(nameForBuzzSentrySpanStatus(.dataLoss), kBuzzSentrySpanStatusNameDataLoss)
     }
 }

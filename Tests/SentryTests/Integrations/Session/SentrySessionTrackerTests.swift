@@ -1,30 +1,30 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
-class SentrySessionTrackerTests: XCTestCase {
+class BuzzSentrySessionTrackerTests: XCTestCase {
     
-    private static let dsnAsString = TestConstants.dsnAsString(username: "SentrySessionTrackerTests")
-    private static let dsn = TestConstants.dsn(username: "SentrySessionTrackerTests")
+    private static let dsnAsString = TestConstants.dsnAsString(username: "BuzzSentrySessionTrackerTests")
+    private static let dsn = TestConstants.dsn(username: "BuzzSentrySessionTrackerTests")
     
     private class Fixture {
         
         let options: Options
         let currentDateProvider = TestCurrentDateProvider()
         let client: TestClient!
-        let sentryCrash: TestSentryCrashWrapper
+        let sentryCrash: TestBuzzSentryCrashWrapper
 
         let notificationCenter = TestNSNotificationCenterWrapper()
         
         init() {
             options = Options()
-            options.dsn = SentrySessionTrackerTests.dsnAsString
-            options.releaseName = "SentrySessionTrackerIntegrationTests"
+            options.dsn = BuzzSentrySessionTrackerTests.dsnAsString
+            options.releaseName = "BuzzSentrySessionTrackerIntegrationTests"
             options.sessionTrackingIntervalMillis = 10_000
             options.environment = "debug"
             
             client = TestClient(options: options)
             
-            sentryCrash = TestSentryCrashWrapper.sharedInstance()
+            sentryCrash = TestBuzzSentryCrashWrapper.sharedInstance()
         }
         
         func getSut() -> SessionTracker {
@@ -32,12 +32,12 @@ class SentrySessionTrackerTests: XCTestCase {
         }
         
         func setNewHubToSDK() {
-            let hub = SentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: currentDateProvider)
-            SentrySDK.setCurrentHub(hub)
+            let hub = BuzzSentryHub(client: client, andScope: nil, andCrashWrapper: self.sentryCrash, andCurrentDateProvider: currentDateProvider)
+            BuzzSentrySDK.setCurrentHub(hub)
         }
     }
     
-    private var fileManager: SentryFileManager!
+    private var fileManager: BuzzSentryFileManager!
     
     private var fixture: Fixture!
     private var sut: SessionTracker!
@@ -51,7 +51,7 @@ class SentrySessionTrackerTests: XCTestCase {
         
         CurrentDate.setCurrentDateProvider(fixture.currentDateProvider)
         
-        fileManager = try! SentryFileManager(options: fixture.options, andCurrentDateProvider: fixture.currentDateProvider)
+        fileManager = try! BuzzSentryFileManager(options: fixture.options, andCurrentDateProvider: fixture.currentDateProvider)
         fileManager.deleteCurrentSession()
         fileManager.deleteCrashedSession()
         fileManager.deleteTimestampLastInForeground()
@@ -193,7 +193,7 @@ class SentrySessionTrackerTests: XCTestCase {
         fixture.setNewHubToSDK()
         
         sut.start()
-        assertSessionSent(started: sessionStartTime, duration: 0, status: SentrySessionStatus.abnormal)
+        assertSessionSent(started: sessionStartTime, duration: 0, status: BuzzSentrySessionStatus.abnormal)
     }
     
     func testTerminateWithoutCallingTerminateNotification() {
@@ -210,7 +210,7 @@ class SentrySessionTrackerTests: XCTestCase {
         fixture.setNewHubToSDK()
         
         sut.start()
-        assertSessionSent(started: sessionStartTime, duration: 5, status: SentrySessionStatus.exited)
+        assertSessionSent(started: sessionStartTime, duration: 5, status: BuzzSentrySessionStatus.exited)
     }
     
     func testForegroundWithError() {
@@ -404,7 +404,7 @@ class SentrySessionTrackerTests: XCTestCase {
     }
     
     private func captureError() {
-        SentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Object does not exist"]))
+        BuzzSentrySDK.capture(error: NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Object does not exist"]))
     }
     
     private func crashInForeground() {
@@ -445,7 +445,7 @@ class SentrySessionTrackerTests: XCTestCase {
             let session = fixture.client.captureSessionInvocations.invocations[endSessionIndex]
             XCTAssertFalse(session.flagInit?.boolValue ?? false)
             XCTAssertEqual(started, session.started)
-            XCTAssertEqual(SentrySessionStatus.exited.description, session.status.description)
+            XCTAssertEqual(BuzzSentrySessionStatus.exited.description, session.status.description)
             XCTAssertEqual(errors, session.errors)
             XCTAssertEqual(started.addingTimeInterval(TimeInterval(truncating: duration)), session.timestamp)
             XCTAssertEqual(duration, session.duration)
@@ -455,7 +455,7 @@ class SentrySessionTrackerTests: XCTestCase {
         }
     }
     
-    private func assertSessionSent(started: Date, duration: NSNumber, status: SentrySessionStatus) {
+    private func assertSessionSent(started: Date, duration: NSNumber, status: BuzzSentrySessionStatus) {
 
         let endSessionIndex = fixture.client.captureSessionInvocations.count - 1
 
@@ -467,7 +467,7 @@ class SentrySessionTrackerTests: XCTestCase {
         }
     }
     
-    private func assertSession(session: SentrySession, started: Date, status: SentrySessionStatus, duration: NSNumber) {
+    private func assertSession(session: BuzzSentrySession, started: Date, status: BuzzSentrySessionStatus, duration: NSNumber) {
         XCTAssertFalse(session.flagInit?.boolValue ?? false)
         XCTAssertEqual(started, session.started)
         XCTAssertEqual(status.description, session.status.description)
@@ -485,7 +485,7 @@ class SentrySessionTrackerTests: XCTestCase {
         if let session = fixture.client.captureSessionInvocations.last {
             XCTAssertTrue(session.flagInit?.boolValue ?? false)
             XCTAssertEqual(sessionStarted, session.started)
-            XCTAssertEqual(SentrySessionStatus.ok.description, session.status.description)
+            XCTAssertEqual(BuzzSentrySessionStatus.ok.description, session.status.description)
             XCTAssertEqual(0, session.errors)
             XCTAssertNil(session.timestamp)
             XCTAssertNil(session.duration)
@@ -495,7 +495,7 @@ class SentrySessionTrackerTests: XCTestCase {
         }
     }
     
-    private func assertSessionFields(session: SentrySession) {
+    private func assertSessionFields(session: BuzzSentrySession) {
         XCTAssertNotNil(session.sessionId)
         XCTAssertNotNil(session.distinctId)
         XCTAssertEqual(fixture.options.environment, session.environment)
@@ -540,19 +540,19 @@ class SentrySessionTrackerTests: XCTestCase {
         sut = fixture.getSut()
         let sessionStartTime = fixture.currentDateProvider.date()
         
-        // SentryCrashIntegration stores the crashed session to the disk. We emulate
+        // BuzzSentryCrashIntegration stores the crashed session to the disk. We emulate
         // the result here.
-        let crashedSession = SentrySession(releaseName: "1.0.0")
+        let crashedSession = BuzzSentrySession(releaseName: "1.0.0")
         crashedSession.environment = fixture.options.environment
         advanceTime(bySeconds: 5)
         crashedSession.endCrashed(withTimestamp: fixture.currentDateProvider.date())
         fileManager.storeCrashedSession(crashedSession)
         
         sut.start()
-        SentrySDK.captureCrash(Event())
+        BuzzSentrySDK.captureCrash(Event())
         
         if let session = fixture.client.captureCrashEventWithSessionInvocations.last?.session {
-            assertSession(session: session, started: sessionStartTime, status: SentrySessionStatus.crashed, duration: 5)
+            assertSession(session: session, started: sessionStartTime, status: BuzzSentrySessionStatus.crashed, duration: 5)
         } else {
             XCTFail("No session sent with event.")
         }
@@ -562,10 +562,10 @@ class SentrySessionTrackerTests: XCTestCase {
         XCTAssertEqual(4, notificationNames.count)
         
         XCTAssertEqual([
-            SentryNSNotificationCenterWrapper.didBecomeActiveNotificationName,
+            BuzzSentryNSNotificationCenterWrapper.didBecomeActiveNotificationName,
             NSNotification.Name(rawValue: SentryHybridSdkDidBecomeActiveNotificationName),
-            SentryNSNotificationCenterWrapper.willResignActiveNotificationName,
-            SentryNSNotificationCenterWrapper.willTerminateNotificationName
+            BuzzSentryNSNotificationCenterWrapper.willResignActiveNotificationName,
+            BuzzSentryNSNotificationCenterWrapper.willTerminateNotificationName
         ], notificationNames)
     }
 }

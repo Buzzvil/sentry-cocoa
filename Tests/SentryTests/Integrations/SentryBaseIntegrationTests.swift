@@ -1,41 +1,41 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
-class MyTestIntegration: SentryBaseIntegration {
-    override func integrationOptions() -> SentryIntegrationOption {
+class MyTestIntegration: BuzzSentryBaseIntegration {
+    override func integrationOptions() -> BuzzSentryIntegrationOption {
         return .integrationOptionEnableAutoSessionTracking
     }
 }
 
-class SentryBaseIntegrationTests: XCTestCase {
+class BuzzSentryBaseIntegrationTests: XCTestCase {
     var logOutput: TestLogOutput!
     var oldDebug: Bool!
-    var oldLevel: SentryLevel!
-    var oldOutput: SentryLogOutput!
+    var oldLevel: BuzzSentryLevel!
+    var oldOutput: BuzzSentryLogOutput!
 
     override func setUp() {
         super.setUp()
-        oldDebug = SentryLog.isDebug()
-        oldLevel = SentryLog.diagnosticLevel()
-        oldOutput = SentryLog.logOutput()
-        SentryLog.configure(true, diagnosticLevel: SentryLevel.debug)
+        oldDebug = BuzzSentryLog.isDebug()
+        oldLevel = BuzzSentryLog.diagnosticLevel()
+        oldOutput = BuzzSentryLog.logOutput()
+        BuzzSentryLog.configure(true, diagnosticLevel: BuzzSentryLevel.debug)
         logOutput = TestLogOutput()
-        SentryLog.setLogOutput(logOutput)
+        BuzzSentryLog.setLogOutput(logOutput)
     }
 
     override func tearDown() {
         super.tearDown()
-        SentryLog.configure(oldDebug, diagnosticLevel: oldLevel)
-        SentryLog.setLogOutput(oldOutput)
+        BuzzSentryLog.configure(oldDebug, diagnosticLevel: oldLevel)
+        BuzzSentryLog.setLogOutput(oldOutput)
     }
 
     func testIntegrationName() {
-        let sut = SentryBaseIntegration()
-        XCTAssertEqual(sut.integrationName(), "SentryBaseIntegration")
+        let sut = BuzzSentryBaseIntegration()
+        XCTAssertEqual(sut.integrationName(), "BuzzSentryBaseIntegration")
     }
 
     func testInstall() {
-        let sut = SentryBaseIntegration()
+        let sut = BuzzSentryBaseIntegration()
         let result = sut.install(with: .init())
         XCTAssertTrue(result)
     }
@@ -46,6 +46,6 @@ class SentryBaseIntegrationTests: XCTestCase {
         options.enableAutoSessionTracking = false
         let result = sut.install(with: options)
         XCTAssertFalse(result)
-        XCTAssertFalse(logOutput.loggedMessages.filter({ $0.contains("Not going to enable SentryTests.MyTestIntegration because enableAutoSessionTracking is disabled.") }).isEmpty)
+        XCTAssertFalse(logOutput.loggedMessages.filter({ $0.contains("Not going to enable BuzzSentryTests.MyTestIntegration because enableAutoSessionTracking is disabled.") }).isEmpty)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SentryCrashMach_Tests.m
+//  BuzzSentryCrashMach_Tests.m
 //
 //  Created by Karl Stenerud on 2012-03-03.
 //
@@ -26,14 +26,14 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashMach.h"
+#import "BuzzSentryCrashMach.h"
 #include <mach/exception_types.h>
 #include <mach/kern_return.h>
 
-@interface SentryCrashMach_Tests : XCTestCase
+@interface BuzzSentryCrashMach_Tests : XCTestCase
 @end
 
-@implementation SentryCrashMach_Tests
+@implementation BuzzSentryCrashMach_Tests
 
 - (void)testExceptionName
 {

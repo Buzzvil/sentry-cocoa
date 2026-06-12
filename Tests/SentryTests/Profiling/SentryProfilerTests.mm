@@ -1,15 +1,15 @@
-#import "SentryProfilingConditionals.h"
+#import "BuzzSentryProfilingConditionals.h"
 
 #if SENTRY_TARGET_PROFILING_SUPPORTED
 
-#    import "SentryProfiler.h"
+#    import "BuzzSentryProfiler.h"
 #    import <XCTest/XCTest.h>
 #    import <execinfo.h>
 
-@interface SentryProfilerTests : XCTestCase
+@interface BuzzSentryProfilerTests : XCTestCase
 @end
 
-@implementation SentryProfilerTests
+@implementation BuzzSentryProfilerTests
 
 - (void)testParseFunctionNameWithFixedInput
 {
@@ -30,19 +30,19 @@
 
     const auto symbols = backtrace_symbols(buffer, nptrs);
     XCTAssertEqualObjects(parseBacktraceSymbolsFunctionName(symbols[0]),
-        @"-[SentryProfilerTests testParseFunctionNameWithBacktraceSymbolsInput]");
+        @"-[BuzzSentryProfilerTests testParseFunctionNameWithBacktraceSymbolsInput]");
 }
 
 - (void)testProfilerCanBeInitializedOnMainThread
 {
-    XCTAssertNotNil([[SentryProfiler alloc] init]);
+    XCTAssertNotNil([[BuzzSentryProfiler alloc] init]);
 }
 
 - (void)testProfilerCanBeInitializedOffMainThread
 {
     const auto expectation = [self expectationWithDescription:@"background initializing profiler"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^{
-        XCTAssertNotNil([[SentryProfiler alloc] init]);
+        XCTAssertNotNil([[BuzzSentryProfiler alloc] init]);
         [expectation fulfill];
     });
     [self waitForExpectationsWithTimeout:1.0

@@ -1,5 +1,5 @@
 //
-//  SentryCrashCPU_Tests.m
+//  BuzzSentryCrashCPU_Tests.m
 //
 //  Created by Karl Stenerud on 2012-03-03.
 //
@@ -26,16 +26,16 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashCPU.h"
-#import "SentryCrashMachineContext.h"
+#import "BuzzSentryCrashCPU.h"
+#import "BuzzSentryCrashMachineContext.h"
 #import "TestThread.h"
 
 #import <mach/mach.h>
 
-@interface SentryCrashCPU_Tests : XCTestCase
+@interface BuzzSentryCrashCPU_Tests : XCTestCase
 @end
 
-@implementation SentryCrashCPU_Tests
+@implementation BuzzSentryCrashCPU_Tests
 
 - (void)testCPUState
 {
@@ -46,7 +46,7 @@
     kr = thread_suspend(thread.thread);
     XCTAssertTrue(kr == KERN_SUCCESS, @"");
 
-    SentryCrashMC_NEW_CONTEXT(machineContext);
+    BuzzSentryCrashMC_NEW_CONTEXT(machineContext);
     sentrycrashmc_getContextForThread(thread.thread, machineContext, NO);
     sentrycrashcpu_getState(machineContext);
 

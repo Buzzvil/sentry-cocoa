@@ -1,31 +1,31 @@
-#import "SentryDsn.h"
-#import "SentryError.h"
-#import "SentryMeta.h"
-#import "SentryNSURLRequest.h"
-#import <Sentry/Sentry.h>
+#import "BuzzSentryDsn.h"
+#import "BuzzSentryError.h"
+#import "BuzzSentryMeta.h"
+#import "BuzzSentryNSURLRequest.h"
+#import <BuzzSentry/BuzzSentry.h>
 #import <XCTest/XCTest.h>
 
-@interface SentryDsnTests : XCTestCase
+@interface BuzzSentryDsnTests : XCTestCase
 
 @end
 
-@implementation SentryDsnTests
+@implementation BuzzSentryDsnTests
 
 - (void)testMissingUsernamePassword
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"https://sentry.io" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
 - (void)testDsnHeaderUsernameAndPassword
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@sentry.io/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@sentry.io/1"
                                       didFailWithError:&error];
-    SentryNSURLRequest *request = [[SentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
+    BuzzSentryNSURLRequest *request = [[BuzzSentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
                                                                               andData:[NSData data]
                                                                      didFailWithError:&error];
 
@@ -34,7 +34,7 @@
                        @"sentry_version=7,sentry_client=sentry.cocoa/"
                        @"%@,sentry_timestamp=%@,sentry_key=username,sentry_"
                        @"secret=password",
-        SentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
+        BuzzSentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
 
     XCTAssertEqualObjects(request.allHTTPHeaderFields[@"X-Sentry-Auth"], authHeader);
     XCTAssertNil(error);
@@ -43,9 +43,9 @@
 - (void)testDsnHeaderUsername
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username@sentry.io/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username@sentry.io/1"
                                       didFailWithError:&error];
-    SentryNSURLRequest *request = [[SentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
+    BuzzSentryNSURLRequest *request = [[BuzzSentryNSURLRequest alloc] initStoreRequestWithDsn:dsn
                                                                               andData:[NSData data]
                                                                      didFailWithError:&error];
 
@@ -53,7 +53,7 @@
         initWithFormat:@"Sentry "
                        @"sentry_version=7,sentry_client=sentry.cocoa/"
                        @"%@,sentry_timestamp=%@,sentry_key=username",
-        SentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
+        BuzzSentryMeta.versionString, @((NSInteger)[[NSDate date] timeIntervalSince1970])];
 
     XCTAssertEqualObjects(request.allHTTPHeaderFields[@"X-Sentry-Auth"], authHeader);
     XCTAssertNil(error);
@@ -62,42 +62,42 @@
 - (void)testMissingScheme
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"sentry.io" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"sentry.io" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
 - (void)testMissingHost
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"http:///1" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"http:///1" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
 - (void)testUnsupportedProtocol
 {
     NSError *error = nil;
-    SentryOptions *options = [[SentryOptions alloc] initWithDict:@{ @"dsn" : @"ftp://sentry.io/1" }
+    BuzzSentryOptions *options = [[BuzzSentryOptions alloc] initWithDict:@{ @"dsn" : @"ftp://sentry.io/1" }
                                                 didFailWithError:&error];
-    XCTAssertEqual(kSentryErrorInvalidDsnError, error.code);
+    XCTAssertEqual(kBuzzSentryErrorInvalidDsnError, error.code);
     XCTAssertNil(options);
 }
 
 - (void)testDsnUrl
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:&error];
 
     XCTAssertEqualObjects(
         [[dsn getStoreEndpoint] absoluteString], @"https://getsentry.net/api/1/store/");
     XCTAssertNil(error);
 
-    SentryDsn *dsn2 =
-        [[SentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
+    BuzzSentryDsn *dsn2 =
+        [[BuzzSentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
                          didFailWithError:&error];
 
     XCTAssertEqualObjects(
@@ -108,15 +108,15 @@
 - (void)testGetEnvelopeUrl
 {
     NSError *error = nil;
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:&error];
 
     XCTAssertEqualObjects(
         [[dsn getEnvelopeEndpoint] absoluteString], @"https://getsentry.net/api/1/envelope/");
     XCTAssertNil(error);
 
-    SentryDsn *dsn2 =
-        [[SentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
+    BuzzSentryDsn *dsn2 =
+        [[BuzzSentryDsn alloc] initWithString:@"https://username:password@sentry.io/foo/bar/baz/1"
                          didFailWithError:&error];
 
     XCTAssertEqualObjects([[dsn2 getEnvelopeEndpoint] absoluteString],
@@ -126,7 +126,7 @@
 
 - (void)testGetStoreDsnCachesResult
 {
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:nil];
 
     XCTAssertNotNil([dsn getStoreEndpoint]);
@@ -136,7 +136,7 @@
 
 - (void)testGetEnvelopeDsnCachesResult
 {
-    SentryDsn *dsn = [[SentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
+    BuzzSentryDsn *dsn = [[BuzzSentryDsn alloc] initWithString:@"https://username:password@getsentry.net/1"
                                       didFailWithError:nil];
 
     XCTAssertNotNil([dsn getEnvelopeEndpoint]);

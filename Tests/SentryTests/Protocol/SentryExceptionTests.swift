@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryExceptionTests: XCTestCase {
+class BuzzSentryExceptionTests: XCTestCase {
 
     func testSerialize() {
         let exception = TestData.exception

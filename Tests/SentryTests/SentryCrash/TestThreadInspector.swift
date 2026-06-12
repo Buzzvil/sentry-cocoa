@@ -1,22 +1,22 @@
 import Foundation
 
-class TestThreadInspector: SentryThreadInspector {
+class TestThreadInspector: BuzzSentryThreadInspector {
     
-    var allThreads: [Sentry.Thread]?
+    var allThreads: [BuzzSentry.Thread]?
     
     static var instance: TestThreadInspector {
         // We need something to pass to the super initializer, because the empty initializer has been marked unavailable.
-        let inAppLogic = SentryInAppLogic(inAppIncludes: [], inAppExcludes: [])
-        let crashStackEntryMapper = SentryCrashStackEntryMapper(inAppLogic: inAppLogic)
-        let stacktraceBuilder = SentryStacktraceBuilder(crashStackEntryMapper: crashStackEntryMapper)
-        return TestThreadInspector(stacktraceBuilder: stacktraceBuilder, andMachineContextWrapper: SentryCrashDefaultMachineContextWrapper())
+        let inAppLogic = BuzzSentryInAppLogic(inAppIncludes: [], inAppExcludes: [])
+        let crashStackEntryMapper = BuzzSentryCrashStackEntryMapper(inAppLogic: inAppLogic)
+        let stacktraceBuilder = BuzzSentryStacktraceBuilder(crashStackEntryMapper: crashStackEntryMapper)
+        return TestThreadInspector(stacktraceBuilder: stacktraceBuilder, andMachineContextWrapper: BuzzSentryCrashDefaultMachineContextWrapper())
     }
     
-    override func getCurrentThreads() -> [Sentry.Thread] {
+    override func getCurrentThreads() -> [BuzzSentry.Thread] {
         return allThreads ?? [TestData.thread]
     }
 
-    override func getCurrentThreadsWithStackTrace() -> [Sentry.Thread] {
+    override func getCurrentThreadsWithStackTrace() -> [BuzzSentry.Thread] {
         return allThreads ?? [TestData.thread]
     }
 

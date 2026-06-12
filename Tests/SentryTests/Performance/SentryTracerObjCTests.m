@@ -1,14 +1,14 @@
-#import "SentryHub.h"
-#import "SentrySpan.h"
-#import "SentryTracer.h"
-#import "SentryTransactionContext.h"
+#import "BuzzSentryHub.h"
+#import "BuzzSentrySpan.h"
+#import "BuzzSentryTracer.h"
+#import "BuzzSentryTransactionContext.h"
 #import <XCTest/XCTest.h>
 
-@interface SentryTracerObjCTests : XCTestCase
+@interface BuzzSentryTracerObjCTests : XCTestCase
 
 @end
 
-@implementation SentryTracerObjCTests
+@implementation BuzzSentryTracerObjCTests
 
 /**
  * This test makes sure that the span has a weak reference to the tracer and doesn't call the
@@ -16,13 +16,13 @@
  */
 - (void)testSpanFinishesAfterTracerReleased_NoCrash_TracerIsNil
 {
-    SentrySpan *child;
+    BuzzSentrySpan *child;
     // To make sure the tracer is deallocated.
     @autoreleasepool {
-        SentryHub *hub = [[SentryHub alloc] initWithClient:nil andScope:nil];
-        SentryTransactionContext *context =
-            [[SentryTransactionContext alloc] initWithOperation:@""];
-        SentryTracer *tracer = [[SentryTracer alloc] initWithTransactionContext:context
+        BuzzSentryHub *hub = [[BuzzSentryHub alloc] initWithClient:nil andScope:nil];
+        BuzzSentryTransactionContext *context =
+            [[BuzzSentryTransactionContext alloc] initWithOperation:@""];
+        BuzzSentryTracer *tracer = [[BuzzSentryTracer alloc] initWithTransactionContext:context
                                                                             hub:hub
                                                         profilesSamplerDecision:nil
                                                                 waitForChildren:YES];

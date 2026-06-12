@@ -14,20 +14,20 @@ let package = Package(
             path: "Sources",
             sources: [
                 "Sentry/",
-                "SentryCrash/"
+                "BuzzSentryCrash/"
             ],
             publicHeadersPath: "Sentry/Public/",
             cxxSettings: [
                 .define("GCC_ENABLE_CPP_EXCEPTIONS", to: "YES"),
                 .headerSearchPath("Sentry/include"),
                 .headerSearchPath("Sentry/Public"),
-                .headerSearchPath("SentryCrash/Installations"),
-                .headerSearchPath("SentryCrash/Recording"),
-                .headerSearchPath("SentryCrash/Recording/Monitors"),
-                .headerSearchPath("SentryCrash/Recording/Tools"),
-                .headerSearchPath("SentryCrash/Reporting/Filters"),
-                .headerSearchPath("SentryCrash/Reporting/Filters/Tools"),
-                .headerSearchPath("SentryCrash/Reporting/Tools")
+                .headerSearchPath("BuzzSentryCrash/Installations"),
+                .headerSearchPath("BuzzSentryCrash/Recording"),
+                .headerSearchPath("BuzzSentryCrash/Recording/Monitors"),
+                .headerSearchPath("BuzzSentryCrash/Recording/Tools"),
+                .headerSearchPath("BuzzSentryCrash/Reporting/Filters"),
+                .headerSearchPath("BuzzSentryCrash/Reporting/Filters/Tools"),
+                .headerSearchPath("BuzzSentryCrash/Reporting/Tools")
             ],
             linkerSettings: [
                 .linkedLibrary("z"),

@@ -49,7 +49,7 @@ Once daily and for every PR via [Github action](../.github/workflows/benchmarkin
 
 - Run the procedure 20 times, then assert that the 90th percentile remains under 5% so we can be alerted via CI if it spikes.
     - Sauce Labs allows relaxing the timeout for a suite of tests and for a `XCTestCase` subclass' collection of test case methods, but each test case in the suite must run in less than 15 minutes. 20 trials takes too long, so we split it up into multiple test cases, each running a subset of the trials. 
-    - This is done by dynamically generating test case methods in `SentrySDKPerformanceBenchmarkTests`, which is necessarily written in Objective-C since this is not possible to do in Swift tests. By doing this dynamically, we can easily fine tune how we split up the work to account for changes in the test duration or in constraints on how things run in Sauce Labs etc.
+    - This is done by dynamically generating test case methods in `BuzzSentrySDKPerformanceBenchmarkTests`, which is necessarily written in Objective-C since this is not possible to do in Swift tests. By doing this dynamically, we can easily fine tune how we split up the work to account for changes in the test duration or in constraints on how things run in Sauce Labs etc.
 
 ## Auto UI Performance Class Overview
 
@@ -114,12 +114,12 @@ Related links:
 
 - https://github.com/getsentry/sentry-cocoa/pull/1751
 
-### Custom SentryHttpStatusCodeRange type instead of NSRange
+### Custom BuzzSentryHttpStatusCodeRange type instead of NSRange
 
 Date: October 24th 2022
 Contributors: @marandaneto, @brustolin and @philipphofmann
 
-We decided not to use the `NSRange` type for the `failedRequestStatusCodes` property of the `SentryNetworkTracker` class because it's not compatible with the specification, which requires the type to be a range of `from` -> `to` integers. The `NSRange` type is a range of `location` -> `length` integers. We decided to use a custom type instead of `NSRange` to avoid confusion. The custom type is called `SentryHttpStatusCodeRange`.
+We decided not to use the `NSRange` type for the `failedRequestStatusCodes` property of the `SentryNetworkTracker` class because it's not compatible with the specification, which requires the type to be a range of `from` -> `to` integers. The `NSRange` type is a range of `location` -> `length` integers. We decided to use a custom type instead of `NSRange` to avoid confusion. The custom type is called `BuzzSentryHttpStatusCodeRange`.
 
 ### Manually installing iOS 12 simulators
 

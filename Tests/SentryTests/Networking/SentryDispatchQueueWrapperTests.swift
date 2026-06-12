@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryDispatchQueueWrapperTests: XCTestCase {
+class BuzzSentryDispatchQueueWrapperTests: XCTestCase {
 
     func testDispatchOnce() {
         var a = 0
@@ -9,7 +9,7 @@ class SentryDispatchQueueWrapperTests: XCTestCase {
         var secondWasCalled = false
         var thirdWasCalled = false
         
-        let sut = SentryDispatchQueueWrapper()
+        let sut = BuzzSentryDispatchQueueWrapper()
         sut.dispatchOnce(&a) {
             firstWasCalled = true
         }

@@ -1,4 +1,4 @@
-class TestSentryReachability: SentryReachability {
+class TestBuzzSentryReachability: BuzzSentryReachability {
     var block: SentryConnectivityChangeBlock?
 
     override func monitorURL(_ URL: URL, usingCallback block: @escaping SentryConnectivityChangeBlock) {

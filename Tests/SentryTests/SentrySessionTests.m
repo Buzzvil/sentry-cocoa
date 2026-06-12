@@ -1,21 +1,21 @@
-#import "SentrySession.h"
+#import "BuzzSentrySession.h"
 #import <XCTest/XCTest.h>
 
-@interface SentrySessionTests : XCTestCase
+@interface BuzzSentrySessionTests : XCTestCase
 
 @end
 
-@implementation SentrySessionTests
+@implementation BuzzSentrySessionTests
 
 - (void)testInitDefaultValues
 {
-    SentrySession *session = [[SentrySession alloc] initWithReleaseName:@"1.0.0"];
+    BuzzSentrySession *session = [[BuzzSentrySession alloc] initWithReleaseName:@"1.0.0"];
     XCTAssertNotNil(session.sessionId);
     XCTAssertEqual(1, session.sequence);
     XCTAssertEqual(0, session.errors);
     XCTAssertTrue(session.flagInit);
     XCTAssertNotNil(session.started);
-    XCTAssertEqual(kSentrySessionStatusOk, session.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusOk, session.status);
     XCTAssertNotNil(session.distinctId);
 
     XCTAssertNil(session.timestamp);
@@ -26,9 +26,9 @@
 
 - (void)testSerializeDefaultValues
 {
-    SentrySession *expected = [[SentrySession alloc] initWithReleaseName:@"1.0.0"];
+    BuzzSentrySession *expected = [[BuzzSentrySession alloc] initWithReleaseName:@"1.0.0"];
     NSDictionary<NSString *, id> *json = [expected serialize];
-    SentrySession *actual = [[SentrySession alloc] initWithJSONObject:json];
+    BuzzSentrySession *actual = [[BuzzSentrySession alloc] initWithJSONObject:json];
 
     XCTAssertTrue([expected.sessionId isEqual:actual.sessionId]);
     XCTAssertEqual(expected.sequence, actual.sequence);
@@ -51,12 +51,12 @@
 
 - (void)testSerializeExtraFieldsEndedSessionWithNilStatus
 {
-    SentrySession *expected = [[SentrySession alloc] initWithReleaseName:@"io.sentry@5.0.0-test"];
+    BuzzSentrySession *expected = [[BuzzSentrySession alloc] initWithReleaseName:@"io.sentry@5.0.0-test"];
     NSDate *timestamp = [NSDate date];
     [expected endSessionExitedWithTimestamp:timestamp];
     expected.environment = @"prod";
     NSDictionary<NSString *, id> *json = [expected serialize];
-    SentrySession *actual = [[SentrySession alloc] initWithJSONObject:json];
+    BuzzSentrySession *actual = [[BuzzSentrySession alloc] initWithJSONObject:json];
 
     XCTAssertTrue([expected.sessionId isEqual:actual.sessionId]);
     XCTAssertEqual(expected.sequence, actual.sequence);
@@ -77,11 +77,11 @@
 
 - (void)testSerializeErrorIncremented
 {
-    SentrySession *expected = [[SentrySession alloc] initWithReleaseName:@""];
+    BuzzSentrySession *expected = [[BuzzSentrySession alloc] initWithReleaseName:@""];
     [expected incrementErrors];
     [expected endSessionExitedWithTimestamp:[NSDate date]];
     NSDictionary<NSString *, id> *json = [expected serialize];
-    SentrySession *actual = [[SentrySession alloc] initWithJSONObject:json];
+    BuzzSentrySession *actual = [[BuzzSentrySession alloc] initWithJSONObject:json];
 
     XCTAssertTrue([expected.sessionId isEqual:actual.sessionId]);
     XCTAssertEqual(expected.sequence, actual.sequence);
@@ -100,39 +100,39 @@
 
 - (void)testAbnormalSession
 {
-    SentrySession *expected = [[SentrySession alloc] initWithReleaseName:@""];
+    BuzzSentrySession *expected = [[BuzzSentrySession alloc] initWithReleaseName:@""];
     XCTAssertEqual(0, expected.errors);
-    XCTAssertEqual(kSentrySessionStatusOk, expected.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusOk, expected.status);
     XCTAssertEqual(1, expected.sequence);
     [expected incrementErrors];
     XCTAssertEqual(1, expected.errors);
-    XCTAssertEqual(kSentrySessionStatusOk, expected.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusOk, expected.status);
     XCTAssertEqual(2, expected.sequence);
     [expected endSessionAbnormalWithTimestamp:[NSDate date]];
     XCTAssertEqual(1, expected.errors);
-    XCTAssertEqual(kSentrySessionStatusAbnormal, expected.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusAbnormal, expected.status);
     XCTAssertEqual(3, expected.sequence);
 }
 
 - (void)testCrashedSession
 {
-    SentrySession *expected = [[SentrySession alloc] initWithReleaseName:@""];
+    BuzzSentrySession *expected = [[BuzzSentrySession alloc] initWithReleaseName:@""];
     XCTAssertEqual(1, expected.sequence);
-    XCTAssertEqual(kSentrySessionStatusOk, expected.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusOk, expected.status);
     [expected endSessionCrashedWithTimestamp:[NSDate date]];
-    XCTAssertEqual(kSentrySessionStatusCrashed, expected.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusCrashed, expected.status);
     XCTAssertEqual(2, expected.sequence);
 }
 
 - (void)testExitedSession
 {
-    SentrySession *expected = [[SentrySession alloc] initWithReleaseName:@""];
+    BuzzSentrySession *expected = [[BuzzSentrySession alloc] initWithReleaseName:@""];
     XCTAssertEqual(0, expected.errors);
-    XCTAssertEqual(kSentrySessionStatusOk, expected.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusOk, expected.status);
     XCTAssertEqual(1, expected.sequence);
     [expected endSessionExitedWithTimestamp:[NSDate date]];
     XCTAssertEqual(0, expected.errors);
-    XCTAssertEqual(kSentrySessionStatusExited, expected.status);
+    XCTAssertEqual(kBuzzSentrySessionStatusExited, expected.status);
     XCTAssertEqual(2, expected.sequence);
 }
 

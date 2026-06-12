@@ -1,5 +1,5 @@
 //
-//  SentryCrashLogger_Tests.m
+//  BuzzSentryCrashLogger_Tests.m
 //
 //  Created by Karl Stenerud on 2013-01-26.
 //
@@ -24,18 +24,18 @@
 // THE SOFTWARE.
 //
 
-#import "XCTestCase+SentryCrash.h"
+#import "XCTestCase+BuzzSentryCrash.h"
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashLogger.h"
+#import "BuzzSentryCrashLogger.h"
 
-@interface SentryCrashLogger_Tests : XCTestCase
+@interface BuzzSentryCrashLogger_Tests : XCTestCase
 
 @property (nonatomic, readwrite, retain) NSString *tempDir;
 
 @end
 
-@implementation SentryCrashLogger_Tests
+@implementation BuzzSentryCrashLogger_Tests
 
 @synthesize tempDir = _tempDir;
 
@@ -52,46 +52,46 @@
 
 - (void)testLogError
 {
-    SentryCrashLOG_ERROR(@"TEST");
+    BuzzSentryCrashLOG_ERROR(@"TEST");
 }
 
 - (void)testLogErrorNull
 {
     NSString *str = nil;
-    SentryCrashLOG_ERROR(str);
+    BuzzSentryCrashLOG_ERROR(str);
 }
 
 - (void)testLogAlways
 {
-    SentryCrashLOG_ALWAYS(@"TEST");
+    BuzzSentryCrashLOG_ALWAYS(@"TEST");
 }
 
 - (void)testLogAlwaysNull
 {
     NSString *str = nil;
-    SentryCrashLOG_ALWAYS(str);
+    BuzzSentryCrashLOG_ALWAYS(str);
 }
 
 - (void)testLogBasicError
 {
-    SentryCrashLOGBASIC_ERROR(@"TEST");
+    BuzzSentryCrashLOGBASIC_ERROR(@"TEST");
 }
 
 - (void)testLogBasicErrorNull
 {
     NSString *str = nil;
-    SentryCrashLOGBASIC_ERROR(str);
+    BuzzSentryCrashLOGBASIC_ERROR(str);
 }
 
 - (void)testLogBasicAlways
 {
-    SentryCrashLOGBASIC_ALWAYS(@"TEST");
+    BuzzSentryCrashLOGBASIC_ALWAYS(@"TEST");
 }
 
 - (void)testLogBasicAlwaysNull
 {
     NSString *str = nil;
-    SentryCrashLOGBASIC_ALWAYS(str);
+    BuzzSentryCrashLOGBASIC_ALWAYS(str);
 }
 
 - (void)testSetLogFilename
@@ -99,7 +99,7 @@
     NSString *expected = @"TEST";
     NSString *logFileName = [self.tempDir stringByAppendingPathComponent:@"log.txt"];
     sentrycrashlog_setLogFilename([logFileName UTF8String], true);
-    SentryCrashLOGBASIC_ALWAYS(expected);
+    BuzzSentryCrashLOGBASIC_ALWAYS(expected);
     sentrycrashlog_setLogFilename(nil, true);
 
     NSError *error = nil;
@@ -110,7 +110,7 @@
     result = [[result componentsSeparatedByString:@"\x0a"] objectAtIndex:0];
     XCTAssertEqualObjects(result, expected, @"");
 
-    SentryCrashLOGBASIC_ALWAYS(@"blah blah");
+    BuzzSentryCrashLOGBASIC_ALWAYS(@"blah blah");
     result = [NSString stringWithContentsOfFile:logFileName
                                        encoding:NSUTF8StringEncoding
                                           error:&error];

@@ -1,20 +1,20 @@
-import Sentry
+import BuzzSentry
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryViewHierarchyIntegrationTests: XCTestCase {
+class BuzzSentryViewHierarchyIntegrationTests: XCTestCase {
 
     private class Fixture {
-        let viewHierarchy: TestSentryViewHierarchy
+        let viewHierarchy: TestBuzzSentryViewHierarchy
 
         init() {
-            let testViewHierarchy = TestSentryViewHierarchy()
+            let testViewHierarchy = TestBuzzSentryViewHierarchy()
             testViewHierarchy.result = ["view hierarchy"]
             viewHierarchy = testViewHierarchy
         }
 
-        func getSut() -> SentryViewHierarchyIntegration {
-            let result = SentryViewHierarchyIntegration()
+        func getSut() -> BuzzSentryViewHierarchyIntegration {
+            let result = BuzzSentryViewHierarchyIntegration()
             return result
         }
     }
@@ -25,7 +25,7 @@ class SentryViewHierarchyIntegrationTests: XCTestCase {
         super.setUp()
         fixture = Fixture()
 
-        SentryDependencyContainer.sharedInstance().viewHierarchy = fixture.viewHierarchy
+        BuzzSentryDependencyContainer.sharedInstance().viewHierarchy = fixture.viewHierarchy
     }
 
     override func tearDown() {
@@ -34,21 +34,21 @@ class SentryViewHierarchyIntegrationTests: XCTestCase {
     }
 
     func test_attachViewHierarchy_disabled() {
-        SentrySDK.start { $0.attachViewHierarchy = false }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
+        BuzzSentrySDK.start { $0.attachViewHierarchy = false }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 0)
         XCTAssertFalse(sentrycrash_hasSaveViewHierarchyCallback())
     }
 
     func test_attachViewHierarchy_enabled() {
-        SentrySDK.start { $0.attachViewHierarchy = true }
-        XCTAssertEqual(SentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
+        BuzzSentrySDK.start { $0.attachViewHierarchy = true }
+        XCTAssertEqual(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors.count, 1)
         XCTAssertTrue(sentrycrash_hasSaveViewHierarchyCallback())
     }
 
     func test_uninstall() {
-        SentrySDK.start { $0.attachViewHierarchy = true }
-        SentrySDK.close()
-        XCTAssertNil(SentrySDK.currentHub().getClient()?.attachmentProcessors)
+        BuzzSentrySDK.start { $0.attachViewHierarchy = true }
+        BuzzSentrySDK.close()
+        XCTAssertNil(BuzzSentrySDK.currentHub().getClient()?.attachmentProcessors)
         XCTAssertFalse(sentrycrash_hasSaveViewHierarchyCallback())
     }
 

@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        SentrySDK.start { options in
+        BuzzSentrySDK.start { options in
             options.dsn = "https://6cc9bae94def43cab8444a99e0031c28@o447951.ingest.sentry.io/5428557"
             options.debug = true
             options.sessionTrackingIntervalMillis = 5_000
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             options.enableAppHangTracking = true
         }
         
-        SentrySDK.configureScope { scope in
+        BuzzSentrySDK.configureScope { scope in
             if let path = Bundle.main.path(forResource: "Tongariro", ofType: "jpg") {
                 scope.add(Attachment(path: path, filename: "Tongariro.jpg", contentType: "image/jpeg"))
             }

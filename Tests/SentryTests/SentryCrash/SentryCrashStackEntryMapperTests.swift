@@ -1,20 +1,20 @@
-@testable import Sentry
+@testable import BuzzSentry
 import XCTest
 
 /** Some of the test parameters are copied during debbuging a working implementation.
  */
-class SentryCrashStackEntryMapperTests: XCTestCase {
+class BuzzSentryCrashStackEntryMapperTests: XCTestCase {
     
     private let bundleExecutable: String = "iOS-Swift"
-    private var sut: SentryCrashStackEntryMapper!
+    private var sut: BuzzSentryCrashStackEntryMapper!
     
     override func setUp() {
         super.setUp()
-        sut = SentryCrashStackEntryMapper(inAppLogic: SentryInAppLogic(inAppIncludes: [bundleExecutable], inAppExcludes: []))
+        sut = BuzzSentryCrashStackEntryMapper(inAppLogic: BuzzSentryInAppLogic(inAppIncludes: [bundleExecutable], inAppExcludes: []))
     }
 
     func testSymbolAddress() {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         cursor.stackEntry.symbolAddress = 2_391_813_104
         
         let frame = sut.mapStackEntry(with: cursor)
@@ -23,7 +23,7 @@ class SentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     func testInstructionAddress() {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         cursor.stackEntry.address = 2_412_813_376
         
         let frame = sut.mapStackEntry(with: cursor)
@@ -32,14 +32,14 @@ class SentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     func testSymbolNameIsNull() {
-        let frame = sut.mapStackEntry(with: SentryCrashStackCursor())
+        let frame = sut.mapStackEntry(with: BuzzSentryCrashStackCursor())
         
         XCTAssertEqual("<redacted>", frame.function)
     }
 
     func testSymbolName() {
-        let symbolName = "-[SentryCrash symbolName]"
-        var cursor = SentryCrashStackCursor()
+        let symbolName = "-[BuzzSentryCrash symbolName]"
+        var cursor = BuzzSentryCrashStackCursor()
         
         let cString = symbolName.cString(using: String.Encoding.utf8)
         cString?.withUnsafeBufferPointer { bufferPointer in
@@ -57,7 +57,7 @@ class SentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     func testImageAddress () {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         cursor.stackEntry.imageAddress = 2_488_998_912
         
         let frame = sut.mapStackEntry(with: cursor)
@@ -71,7 +71,7 @@ class SentryCrashStackEntryMapperTests: XCTestCase {
     }
     
     private func getFrameWithImageName(imageName: String) -> Frame {
-        var cursor = SentryCrashStackCursor()
+        var cursor = BuzzSentryCrashStackCursor()
         
         let cString = imageName.cString(using: String.Encoding.utf8)
         var result: Frame = Frame()

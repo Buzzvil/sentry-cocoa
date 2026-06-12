@@ -1,6 +1,6 @@
 import XCTest
 
-extension SentrySwizzleWrapper {
+extension BuzzSentrySwizzleWrapper {
     
     static func hasItems() -> Bool {
         guard let result = Dynamic(self).hasCallbacks as Bool? else {
@@ -12,7 +12,7 @@ extension SentrySwizzleWrapper {
     
 }
 
-class SentrySwizzleWrapperTests: XCTestCase {
+class BuzzSentrySwizzleWrapperTests: XCTestCase {
     
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
     
@@ -22,7 +22,7 @@ class SentrySwizzleWrapperTests: XCTestCase {
     }
     
     private var fixture: Fixture!
-    private var sut: SentrySwizzleWrapper!
+    private var sut: BuzzSentrySwizzleWrapper!
     
     @objc
     func someMethod() {
@@ -33,7 +33,7 @@ class SentrySwizzleWrapperTests: XCTestCase {
         super.setUp()
         
         fixture = Fixture()
-        sut = SentrySwizzleWrapper.sharedInstance
+        sut = BuzzSentrySwizzleWrapper.sharedInstance
     }
     
     override func tearDown() {
@@ -109,7 +109,7 @@ class SentrySwizzleWrapperTests: XCTestCase {
     }
     
     private func sendActionCalled() {
-        Dynamic(SentrySwizzleWrapper.self).sendActionCalled(#selector(someMethod), target: nil, sender: nil, event: self.fixture.event)
+        Dynamic(BuzzSentrySwizzleWrapper.self).sendActionCalled(#selector(someMethod), target: nil, sender: nil, event: self.fixture.event)
     }
 
 #endif

@@ -1,31 +1,31 @@
-#import "SentryBreadcrumb.h"
-#import "SentryClient+Private.h"
-#import "SentryScope+Private.h"
-#import "SentryScope.h"
-#import "SentryUser.h"
+#import "BuzzSentryBreadcrumb.h"
+#import "BuzzSentryClient+Private.h"
+#import "BuzzSentryScope+Private.h"
+#import "BuzzSentryScope.h"
+#import "BuzzSentryUser.h"
 #import <XCTest/XCTest.h>
 
-@interface SentryScopeTests : XCTestCase
+@interface BuzzSentryScopeTests : XCTestCase
 
 @end
 
-@implementation SentryScopeTests
+@implementation BuzzSentryScopeTests
 
-- (SentryBreadcrumb *)getBreadcrumb
+- (BuzzSentryBreadcrumb *)getBreadcrumb
 {
-    return [[SentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug category:@"http"];
+    return [[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelDebug category:@"http"];
 }
 
 - (void)testSetExtra
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setExtras:@{ @"c" : @"d" }];
     XCTAssertEqualObjects([[scope serialize] objectForKey:@"extra"], @{ @"c" : @"d" });
 }
 
 - (void)testRemoveExtra
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setExtraValue:@1 forKey:@"A"];
     [scope setExtraValue:@2 forKey:@"B"];
     [scope setExtraValue:@3 forKey:@"C"];
@@ -40,15 +40,15 @@
 - (void)testBreadcrumbOlderReplacedByNewer
 {
     NSUInteger expectedMaxBreadcrumb = 1;
-    SentryScope *scope = [[SentryScope alloc] initWithMaxBreadcrumbs:expectedMaxBreadcrumb];
-    SentryBreadcrumb *crumb1 = [[SentryBreadcrumb alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] initWithMaxBreadcrumbs:expectedMaxBreadcrumb];
+    BuzzSentryBreadcrumb *crumb1 = [[BuzzSentryBreadcrumb alloc] init];
     [crumb1 setMessage:@"crumb 1"];
     [scope addBreadcrumb:crumb1];
     NSDictionary<NSString *, id> *scope1 = [scope serialize];
     NSArray *scope1Crumbs = [scope1 objectForKey:@"breadcrumbs"];
     XCTAssertEqual(expectedMaxBreadcrumb, [scope1Crumbs count]);
 
-    SentryBreadcrumb *crumb2 = [[SentryBreadcrumb alloc] init];
+    BuzzSentryBreadcrumb *crumb2 = [[BuzzSentryBreadcrumb alloc] init];
     [crumb2 setMessage:@"crumb 2"];
     [scope addBreadcrumb:crumb2];
     NSDictionary<NSString *, id> *scope2 = [scope serialize];
@@ -58,9 +58,9 @@
 
 - (void)testDefaultMaxCapacity
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     for (int i = 0; i < 2000; ++i) {
-        [scope addBreadcrumb:[[SentryBreadcrumb alloc] init]];
+        [scope addBreadcrumb:[[BuzzSentryBreadcrumb alloc] init]];
     }
 
     NSDictionary<NSString *, id> *scopeSerialized = [scope serialize];
@@ -72,7 +72,7 @@
 {
     NSDictionary<NSString *, NSString *> *excpected = @{ @"A" : @"1", @"B" : @"2", @"C" : @"" };
 
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setTagValue:@"1" forKey:@"A"];
     [scope setTagValue:@"overwriteme" forKey:@"B"];
     [scope setTagValue:@"2" forKey:@"B"];
@@ -89,7 +89,7 @@
 
 - (void)testRemoveTag
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setTagValue:@"1" forKey:@"A"];
     [scope setTagValue:@"2" forKey:@"B"];
 
@@ -101,8 +101,8 @@
 
 - (void)testSetUser
 {
-    SentryScope *scope = [[SentryScope alloc] init];
-    SentryUser *user = [[SentryUser alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
+    BuzzSentryUser *user = [[BuzzSentryUser alloc] init];
 
     [user setUserId:@"123"];
     [scope setUser:user];
@@ -116,7 +116,7 @@
 
 - (void)testSetContextValueForKey
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setContextValue:@{ @"AA" : @1 } forKey:@"A"];
     [scope setContextValue:@{ @"BB" : @"2" } forKey:@"B"];
 
@@ -127,7 +127,7 @@
 
 - (void)testRemoveContextForKey
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setContextValue:@{ @"AA" : @1 } forKey:@"A"];
     [scope setContextValue:@{ @"BB" : @"2" } forKey:@"B"];
 
@@ -140,7 +140,7 @@
 
 - (void)testDistSerializes
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     NSString *expectedDist = @"dist-1.0";
     [scope setDist:expectedDist];
     XCTAssertEqualObjects([[scope serialize] objectForKey:@"dist"], expectedDist);
@@ -148,7 +148,7 @@
 
 - (void)testEnvironmentSerializes
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     NSString *expectedEnvironment = kSentryDefaultEnvironment;
     [scope setEnvironment:expectedEnvironment];
     XCTAssertEqualObjects([[scope serialize] objectForKey:@"environment"], expectedEnvironment);
@@ -156,7 +156,7 @@
 
 - (void)testClearBreadcrumb
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope clearBreadcrumbs];
     [scope addBreadcrumb:[self getBreadcrumb]];
     [scope clearBreadcrumbs];
@@ -165,11 +165,11 @@
 
 - (void)testInitWithScope
 {
-    SentryScope *scope = [[SentryScope alloc] init];
+    BuzzSentryScope *scope = [[BuzzSentryScope alloc] init];
     [scope setExtras:@{ @"a" : @"b" }];
     [scope setTags:@{ @"b" : @"c" }];
     [scope addBreadcrumb:[self getBreadcrumb]];
-    [scope setUser:[[SentryUser alloc] initWithUserId:@"id"]];
+    [scope setUser:[[BuzzSentryUser alloc] initWithUserId:@"id"]];
     [scope setContextValue:@{ @"e" : @"f" } forKey:@"myContext"];
     [scope setDist:@"456"];
     [scope setEnvironment:@"789"];
@@ -177,14 +177,14 @@
 
     NSMutableDictionary *snapshot = [scope serialize].mutableCopy;
 
-    SentryScope *cloned = [[SentryScope alloc] initWithScope:scope];
+    BuzzSentryScope *cloned = [[BuzzSentryScope alloc] initWithScope:scope];
     XCTAssertEqualObjects(snapshot, [cloned serialize]);
 
     [cloned setExtras:@{ @"aa" : @"b" }];
     [cloned setTags:@{ @"ab" : @"c" }];
-    [cloned addBreadcrumb:[[SentryBreadcrumb alloc] initWithLevel:kSentryLevelDebug
+    [cloned addBreadcrumb:[[BuzzSentryBreadcrumb alloc] initWithLevel:kBuzzSentryLevelDebug
                                                          category:@"http2"]];
-    [cloned setUser:[[SentryUser alloc] initWithUserId:@"aid"]];
+    [cloned setUser:[[BuzzSentryUser alloc] initWithUserId:@"aid"]];
     [cloned setContextValue:@{ @"ae" : @"af" } forKey:@"myContext"];
     [cloned setDist:@"a456"];
     [cloned setEnvironment:@"a789"];

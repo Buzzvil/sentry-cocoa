@@ -1,9 +1,9 @@
 import XCTest
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
-class SentryANRTrackerTests: XCTestCase, SentryANRTrackerDelegate {
+class BuzzSentryANRTrackerTests: XCTestCase, BuzzSentryANRTrackerDelegate {
     
-    private var sut: SentryANRTracker!
+    private var sut: BuzzSentryANRTracker!
     private var fixture: Fixture!
     private var anrDetectedExpectation: XCTestExpectation!
     private var anrStoppedExpectation: XCTestExpectation!
@@ -12,12 +12,12 @@ class SentryANRTrackerTests: XCTestCase, SentryANRTrackerDelegate {
     private class Fixture {
         let timeoutInterval: TimeInterval = 5
         let currentDate = TestCurrentDateProvider()
-        let crashWrapper: TestSentryCrashWrapper
-        let dispatchQueue = TestSentryDispatchQueueWrapper()
+        let crashWrapper: TestBuzzSentryCrashWrapper
+        let dispatchQueue = TestBuzzSentryDispatchQueueWrapper()
         let threadWrapper = SentryTestThreadWrapper()
         
         init() {
-            crashWrapper = TestSentryCrashWrapper.sharedInstance()
+            crashWrapper = TestBuzzSentryCrashWrapper.sharedInstance()
         }
     }
     
@@ -30,7 +30,7 @@ class SentryANRTrackerTests: XCTestCase, SentryANRTrackerDelegate {
         
         fixture = Fixture()
         
-        sut = SentryANRTracker(
+        sut = BuzzSentryANRTracker(
             timeoutInterval: fixture.timeoutInterval,
             currentDateProvider: fixture.currentDate,
             crashWrapper: fixture.crashWrapper,
@@ -63,7 +63,7 @@ class SentryANRTrackerTests: XCTestCase, SentryANRTrackerDelegate {
             return false
         }
         
-        let secondListener = SentryANRTrackerTestDelegate()
+        let secondListener = BuzzSentryANRTrackerTestDelegate()
         sut.addListener(secondListener)
         
         start()
@@ -132,7 +132,7 @@ class SentryANRTrackerTests: XCTestCase, SentryANRTrackerDelegate {
     }
     
     func testClear_StopsReportingANRs() {
-        let secondListener = SentryANRTrackerTestDelegate()
+        let secondListener = BuzzSentryANRTrackerTestDelegate()
         secondListener.anrDetectedExpectation.isInverted = true
         anrDetectedExpectation.isInverted = true
         
@@ -166,7 +166,7 @@ class SentryANRTrackerTests: XCTestCase, SentryANRTrackerDelegate {
     }
 }
 
-class SentryANRTrackerTestDelegate: NSObject, SentryANRTrackerDelegate {
+class BuzzSentryANRTrackerTestDelegate: NSObject, BuzzSentryANRTrackerDelegate {
     
     let anrDetectedExpectation = XCTestExpectation(description: "Test Delegate ANR Detection")
     let anrStoppedExpectation  = XCTestExpectation(description: "Test Delegate ANR Stopped")

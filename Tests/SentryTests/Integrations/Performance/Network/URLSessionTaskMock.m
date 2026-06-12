@@ -1,5 +1,5 @@
 #import "URLSessionTaskMock.h"
-#import "SentryCurrentDate.h"
+#import "BuzzSentryCurrentDate.h"
 
 @implementation URLSessionDataTaskMock {
     NSURLRequest *_request;
@@ -49,7 +49,7 @@
 
 - (void)resume
 {
-    _resumeDate = SentryCurrentDate.date;
+    _resumeDate = BuzzSentryCurrentDate.date;
 }
 
 - (int64_t)countOfBytesSent

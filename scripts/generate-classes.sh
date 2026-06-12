@@ -50,7 +50,7 @@ do
             deleteDSN$i()
             try dsn.write(to: dsnFile, atomically: true, encoding: .utf8)
         } catch {
-            SentrySDK.capture(error: error)
+            BuzzSentrySDK.capture(error: error)
         }
     }
     
@@ -61,7 +61,7 @@ do
                 return try String(contentsOfFile: dsnFile.path)
             }
         } catch {
-            SentrySDK.capture(error: error)
+            BuzzSentrySDK.capture(error: error)
         }
         
         return nil
@@ -75,7 +75,7 @@ do
                 try fileManager.removeItem(at: dsnFile)
             }
         } catch {
-            SentrySDK.capture(error: error)
+            BuzzSentrySDK.capture(error: error)
         }
     }
     }" >> $dsnStorage

@@ -25,7 +25,7 @@
 //
 
 #import "FileBasedTestCase.h"
-#import "XCTestCase+SentryCrash.h"
+#import "XCTestCase+BuzzSentryCrash.h"
 
 @implementation FileBasedTestCase
 

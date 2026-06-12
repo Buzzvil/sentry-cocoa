@@ -2379,21 +2379,21 @@
                         {
                             "object_name": "SentrySwift",
                             "object_addr": 4298162176,
-                            "symbol_name": "_TToFC11SentrySwift12SentryClient9sendEventfTCS_5Event8finishedGSqFSbT___T_",
+                            "symbol_name": "_TToFC11SentrySwift12BuzzSentryClient9sendEventfTCS_5Event8finishedGSqFSbT___T_",
                             "symbol_addr": 4298401200,
                             "instruction_addr": 4298401412
                         },
                         {
                             "object_name": "SentrySwift",
                             "object_addr": 4298162176,
-                            "symbol_name": "_TTSf4g_n_g_n___TFC11SentrySwift12SentryClient12captureEventfTCS_5Event19useClientPropertiesSb9completedGSqFSbT___T_",
+                            "symbol_name": "_TTSf4g_n_g_n___TFC11SentrySwift12BuzzSentryClient12captureEventfTCS_5Event19useClientPropertiesSb9completedGSqFSbT___T_",
                             "symbol_addr": 4298448804,
                             "instruction_addr": 4298450324
                         },
                         {
                             "object_name": "SentrySwift",
                             "object_addr": 4298162176,
-                            "symbol_name": "_TFFC11SentrySwift12SentryClient12captureEventFCS_5EventT_U_FT_T_",
+                            "symbol_name": "_TFFC11SentrySwift12BuzzSentryClient12captureEventFCS_5EventT_U_FT_T_",
                             "symbol_addr": 4298421620,
                             "instruction_addr": 4298421748
                         },
@@ -2414,14 +2414,14 @@
                         {
                             "object_name": "SentrySwift",
                             "object_addr": 4298162176,
-                            "symbol_name": "_TTSf4g_n___TFC11SentrySwift12SentryClient12captureEventfCS_5EventT_",
+                            "symbol_name": "_TTSf4g_n___TFC11SentrySwift12BuzzSentryClient12captureEventfCS_5EventT_",
                             "symbol_addr": 4298448332,
                             "instruction_addr": 4298448684
                         },
                         {
                             "object_name": "SentrySwift",
                             "object_addr": 4298162176,
-                            "symbol_name": "_TToFC11SentrySwift12SentryClient12captureEventfCS_5EventT_",
+                            "symbol_name": "_TToFC11SentrySwift12BuzzSentryClient12captureEventfCS_5EventT_",
                             "symbol_addr": 4298421788,
                             "instruction_addr": 4298421832
                         },
@@ -2876,14 +2876,14 @@
                         {
                             "object_name": "SentrySwift",
                             "object_addr": 4298162176,
-                            "symbol_name": "_TTSf4g_g_d___TFC11SentrySwift12SentryClient15reportExceptionfT5errorCSo7NSError10stacktraceGSaP___T_",
+                            "symbol_name": "_TTSf4g_g_d___TFC11SentrySwift12BuzzSentryClient15reportExceptionfT5errorCSo7NSError10stacktraceGSaP___T_",
                             "symbol_addr": 4298447948,
                             "instruction_addr": 4298448252
                         },
                         {
                             "object_name": "SentrySwift",
                             "object_addr": 4298162176,
-                            "symbol_name": "_TToFC11SentrySwift12SentryClient15reportExceptionfT5errorCSo7NSError10stacktraceGSaP___T_",
+                            "symbol_name": "_TToFC11SentrySwift12BuzzSentryClient15reportExceptionfT5errorCSo7NSError10stacktraceGSaP___T_",
                             "symbol_addr": 4298420164,
                             "instruction_addr": 4298420288
                         },
@@ -3804,10 +3804,10 @@
                 "code": 0
             },
             "address": 0,
-            "reason": "Error: SentryClient: Test throw error",
+            "reason": "Error: BuzzSentryClient: Test throw error",
             "type": "user",
             "user_reported": {
-                "name": "Error: SentryClient: Test throw error",
+                "name": "Error: BuzzSentryClient: Test throw error",
                 "language": "react-native",
                 "line_of_code": "",
                 "backtrace": [

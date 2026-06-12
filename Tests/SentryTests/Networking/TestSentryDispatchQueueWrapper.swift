@@ -1,6 +1,6 @@
 import Foundation
 
-class TestSentryDispatchQueueWrapper: SentryDispatchQueueWrapper {
+class TestBuzzSentryDispatchQueueWrapper: BuzzSentryDispatchQueueWrapper {
     
     var dispatchAsyncCalled = 0
     var dispatchAfterExecutesBlock = false

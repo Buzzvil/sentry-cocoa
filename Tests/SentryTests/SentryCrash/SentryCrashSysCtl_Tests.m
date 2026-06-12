@@ -1,5 +1,5 @@
 //
-//  SentryCrashSysCtl_Tests.m
+//  BuzzSentryCrashSysCtl_Tests.m
 //
 //  Created by Karl Stenerud on 2013-01-26.
 //
@@ -26,12 +26,12 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SentryCrashSysCtl.h"
+#import "BuzzSentryCrashSysCtl.h"
 
-@interface SentryCrashSysCtl_Tests : XCTestCase
+@interface BuzzSentryCrashSysCtl_Tests : XCTestCase
 @end
 
-@implementation SentryCrashSysCtl_Tests
+@implementation BuzzSentryCrashSysCtl_Tests
 
 - (void)testSysCtlInt32
 {

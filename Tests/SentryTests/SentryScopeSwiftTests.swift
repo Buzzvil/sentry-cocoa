@@ -1,6 +1,6 @@
 import XCTest
 
-class SentryScopeSwiftTests: XCTestCase {
+class BuzzSentryScopeSwiftTests: XCTestCase {
 
     private class Fixture {
         let user: User
@@ -16,7 +16,7 @@ class SentryScopeSwiftTests: XCTestCase {
         let context = ["context": ["c": "a"]]
         let tags = ["key": "value"]
         let extra = ["key": "value"]
-        let level = SentryLevel.info
+        let level = BuzzSentryLevel.info
         let ipAddress = "127.0.0.1"
         let transactionName = "Some Transaction"
         let transactionOperation = "Some Operation"
@@ -32,7 +32,7 @@ class SentryScopeSwiftTests: XCTestCase {
             user.data = ["some": ["data": "data", "date": date]]
             
             breadcrumb = Breadcrumb()
-            breadcrumb.level = SentryLevel.info
+            breadcrumb.level = BuzzSentryLevel.info
             breadcrumb.timestamp = date
             breadcrumb.type = "user"
             breadcrumb.message = "Clicked something"
@@ -54,9 +54,9 @@ class SentryScopeSwiftTests: XCTestCase {
             scope.add(TestData.fileAttachment)
             
             event = Event()
-            event.message = SentryMessage(formatted: "message")
+            event.message = BuzzSentryMessage(formatted: "message")
             
-            transaction = SentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
+            transaction = BuzzSentryTracer(transactionContext: TransactionContext(name: transactionName, operation: transactionOperation), hub: nil)
         }
         
         var observer: TestScopeObserver {
@@ -89,7 +89,7 @@ class SentryScopeSwiftTests: XCTestCase {
         scope.setDist("")
         scope.setEnvironment("")
         scope.setFingerprint([])
-        scope.setLevel(SentryLevel.debug)
+        scope.setLevel(BuzzSentryLevel.debug)
         scope.clearBreadcrumbs()
         scope.add(TestData.fileAttachment)
         scope.span = fixture.transaction
@@ -178,8 +178,8 @@ class SentryScopeSwiftTests: XCTestCase {
               
         XCTAssertEqual(actual?.transaction, fixture.transactionName)
         XCTAssertEqual(trace?["op"] as? String, fixture.transactionOperation)
-        XCTAssertEqual(trace?["trace_id"] as? String, fixture.transaction.context.traceId.sentryIdString)
-        XCTAssertEqual(trace?["span_id"] as? String, fixture.transaction.context.spanId.sentrySpanIdString)
+        XCTAssertEqual(trace?["trace_id"] as? String, fixture.transaction.context.traceId.buzzSentryIdString)
+        XCTAssertEqual(trace?["span_id"] as? String, fixture.transaction.context.spanId.buzzSentrySpanIdString)
     }
     
     func testApplyToEvent_EventWithDist() {
@@ -266,18 +266,18 @@ class SentryScopeSwiftTests: XCTestCase {
         XCTAssertEqual(0, scope.attachments.count)
     }
     
-    func testPeformanceOfSyncToSentryCrash() {
+    func testPeformanceOfSyncToBuzzSentryCrash() {
         let scope = fixture.scope
-        scope.add(SentryCrashScopeObserver(maxBreadcrumbs: 100))
+        scope.add(BuzzSentryCrashScopeObserver(maxBreadcrumbs: 100))
         
         self.measure {
             modifyScope(scope: scope)
         }
     }
     
-    func testPeformanceOfSyncToSentryCrash_OneCrumb() {
+    func testPeformanceOfSyncToBuzzSentryCrash_OneCrumb() {
         let scope = fixture.scope
-        scope.add(SentryCrashScopeObserver(maxBreadcrumbs: 100))
+        scope.add(BuzzSentryCrashScopeObserver(maxBreadcrumbs: 100))
         
         modifyScope(scope: scope)
         
@@ -293,7 +293,7 @@ class SentryScopeSwiftTests: XCTestCase {
     @available(OSX 10.12, *)
     @available(iOS 10.0, *)
     func testModifyingFromMultipleThreads() {
-        let queue = DispatchQueue(label: "SentryScopeTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
+        let queue = DispatchQueue(label: "BuzzSentryScopeTests", qos: .userInteractive, attributes: [.concurrent, .initiallyInactive])
         let group = DispatchGroup()
         
         let scope = fixture.scope
@@ -440,7 +440,7 @@ class SentryScopeSwiftTests: XCTestCase {
         let observer = fixture.observer
         sut.add(observer)
         
-        let level = SentryLevel.info
+        let level = BuzzSentryLevel.info
         sut.setLevel(level)
         
         XCTAssertEqual(level, observer.level)
@@ -480,7 +480,7 @@ class SentryScopeSwiftTests: XCTestCase {
         XCTAssertEqual(2, observer.clearInvocations)
     }
     
-    class TestScopeObserver: NSObject, SentryScopeObserver {
+    class TestScopeObserver: NSObject, BuzzSentryScopeObserver {
         var tags: [String: String]?
         func setTags(_ tags: [String: String]?) {
             self.tags = tags
@@ -511,8 +511,8 @@ class SentryScopeSwiftTests: XCTestCase {
             self.fingerprint = fingerprint
         }
         
-        var level: SentryLevel?
-        func setLevel(_ level: SentryLevel) {
+        var level: BuzzSentryLevel?
+        func setLevel(_ level: BuzzSentryLevel) {
             self.level = level
         }
         
@@ -550,7 +550,7 @@ class SentryScopeSwiftTests: XCTestCase {
         scope.clearBreadcrumbs()
         scope.add(self.fixture.breadcrumb)
         
-        scope.apply(to: SentrySession(releaseName: "1.0.0"))
+        scope.apply(to: BuzzSentrySession(releaseName: "1.0.0"))
         
         scope.setFingerprint(nil)
         scope.setFingerprint(["finger", "print"])
@@ -580,9 +580,9 @@ class SentryScopeSwiftTests: XCTestCase {
         scope.setUser(self.fixture.user)
         scope.setDist("dist")
         scope.setEnvironment("env")
-        scope.setLevel(SentryLevel.debug)
+        scope.setLevel(BuzzSentryLevel.debug)
         
-        scope.apply(to: SentrySession(releaseName: "1.0.0"))
+        scope.apply(to: BuzzSentrySession(releaseName: "1.0.0"))
         scope.apply(to: TestData.event, maxBreadcrumb: 5)
         
         scope.serialize()
